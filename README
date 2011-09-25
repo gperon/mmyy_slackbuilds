@@ -1,1 +1,18 @@
-Some Slackware slackbuilds
+Giorgio Peron's SlackBuild Projects
+giorgio.peron@gmail.com
+
+they are here, working or not
+
+** PUBLISHED @ SlackBuilds.org **
+  blender - copied and modified from slackbuilds.org
+  jenkins - copied and modified from https://github.com/vbatts/SlackBuilds/tree/master/projects/jenkins
+  nexus - Maven repository manager
+ 
+** STABLE **
+  cudatoolkit - NVidia CUDA Toolkit 
+  jboss-as - JBoss Application Server
+  mypaint - Graphics application
+  makehuman - Generate 3D humanoid models
+ 
+** TESTING/BROKEN **
+  -

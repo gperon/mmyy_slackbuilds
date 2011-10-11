@@ -20,9 +20,13 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# OpenCL C++ bindings (optional). Strangely, they are not included with CUDA Toolkit,
+# but in case you use C++, they could make your code much more redable. 
+# It can be downloaded from http://www.khronos.org/registry/cl/api/1.1/cl.hpp
+
 PRGNAM=cudatoolkit
 VERSION=${VERSION:-4.0.17}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 
@@ -40,8 +44,14 @@ OUTPUT=${OUTPUT:-/tmp}
 set -e
 
 if [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64" 
+  WRONGLIBDIRSUFFIX="" 
+  CUDAARCH="64"
   break
 elif [ "$ARCH" = "i386" ]; then
+  LIBDIRSUFFIX=""
+  WRONGLIBDIRSUFFIX="64" 
+  CUDAARCH="32"
   break
 else
   printf "\n\n$ARCH is not supported... \n"
@@ -53,15 +63,10 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
-if [ "$ARCH" = "x86_64" ]; then
-chmod +x $CWD/$PRGNAM\_$VERSION\_linux_64_fedora13.run
-$CWD/$PRGNAM\_$VERSION\_linux_64_fedora13.run -- --prefix=$TMP/$PRGNAM-$VERSION 
-break
-elif [ "$ARCH" = "i386" ]; then
-chmod +x $CWD/$PRGNAM\_$VERSION\_linux_32_fedora13.run  
-$CWD/$PRGNAM\_$VERSION\_linux_32_fedora13.run -- --prefix=$TMP/$PRGNAM-$VERSION 
-break
-fi
+
+chmod +x $CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora13.run
+$CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora13.run -- --prefix=$TMP/$PRGNAM-$VERSION
+
 cd $PRGNAM-$VERSION
 chown -R root:root .
 
@@ -72,40 +77,32 @@ rm -rf doc
 
 # Now move everything else
 mkdir -p $PKG/usr/share/cuda
-mv * $PKG/usr/share/cuda
+mv * $PKG/usr/share/cuda/
 
-# Put library in the standard place
-if [ "$ARCH" = "x86_64" ]; then
-  mkdir -p $PKG/usr/lib64
-  mv $PKG/usr/share/cuda/lib64 $PKG/usr/
-  rm -rf $PKG/usr/share/cuda/lib 
-  break
-elif [ "$ARCH" = "i386" ]; then
-  mkdir -p $PKG/usr/lib
-  mv $PKG/usr/share/cuda/lib $PKG/usr/
-  rm -rf $PKG/usr/share/cuda/lib64 
-  break
-fi
+# Put libraries in the standard place
+mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
+mv $PKG/usr/share/cuda/lib${LIBDIRSUFFIX} $PKG/usr
+rm -rf $PKG/usr/share/cuda/lib${WRONGLIBDIRSUFFIX}
+# Link the shared libraries into /usr/lib:
+( cd $PKG/usr/lib${LIBDIRSUFFIX}
+  for file in ../share/cuda/computeprof/bin/*.so* ; do
+    ln -sf $file .
+  done
+)
 
-# Put binary in the standard place
+# Put binaries in the standard place
 mkdir -p $PKG/usr/bin
 mv $PKG/usr/share/cuda/bin $PKG/usr/
 cd $PKG/usr/bin
-if [ "$ARCH" = "x86_64" ]; then
-  ln -s ../share/cuda/open64/bin/nvopencc nvopencc
-  break
-elif [ "$ARCH" = "i386" ]; then
-  ln -s ../share/cuda/open32/bin/nvopencc nvopencc
-  break
-fi
-
+ln -s ../share/cuda/open$CUDAARCH/bin/nvopencc nvopencc
+ln -s ../share/cuda/computeprof/bin/computeprof computeprof
+chmod 0755 $PKG/usr/bin/*
 
 # Put include in the standard place
 mkdir -p $PKG/usr/include/cuda
 mv $PKG/usr/share/cuda/include/* $PKG/usr/include/cuda
 rm -rf $PKG/usr/share/cuda/include 
-
-chmod 0755 $PKG/usr/bin/*
+cat $CWD/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

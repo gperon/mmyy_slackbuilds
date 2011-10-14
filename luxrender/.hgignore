@@ -1,0 +1,26 @@
+^CMakeFiles
+^CMakeCache
+^Makefile
+^cmake_install.cmake
+^config.h
+^liblux.a
+^luxconsole
+^luxrender
+^luxlex
+^luxparse
+^luxmerger
+^luxcomp
+^pylux
+^doc/html
+^doxygen/doxygen.conf
+^doxygen.conf
+syntax: glob
+*.directory
+*.cdtproject
+*.cproject
+*.project
+moc_*.cxx
+ui_*.h
+qrc_*.cxx
+*-hxx.cpp
+*~

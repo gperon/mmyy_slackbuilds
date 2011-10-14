@@ -13,6 +13,7 @@ they are here, working or not
   jboss-as - JBoss Application Server
   mypaint - Graphics application
   makehuman - Generate 3D humanoid models
- 
+  FreeImage - Image library
+
 ** TESTING/BROKEN **
-  -
+  luxrender - 

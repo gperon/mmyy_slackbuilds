@@ -95,6 +95,7 @@ mkdir -p $PKG/usr/share/$PRGNAM/{resources,scenes}
 cp bin/* $PKG/usr/share/$PRGNAM
 cp -r samples/luxmark/resources $PKG/usr/share/$PRGNAM
 cp -r scenes $PKG/usr/share/$PRGNAM
+cp -r samples/luxmark/scenes $PKG/usr/share/$PRGNAM
 
 mkdir -p $PKG/usr/bin
 cat > $PKG/usr/bin/luxmark << EOF

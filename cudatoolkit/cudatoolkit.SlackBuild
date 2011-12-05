@@ -26,7 +26,7 @@
 
 PRGNAM=cudatoolkit
 VERSION=${VERSION:-4.0.17}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-3}
 TAG=${TAG:-_SBo}
 
 
@@ -102,7 +102,11 @@ chmod 0755 $PKG/usr/bin/*
 mkdir -p $PKG/usr/include/cuda
 mv $PKG/usr/share/cuda/include/* $PKG/usr/include/cuda
 rm -rf $PKG/usr/share/cuda/include 
-cat $CWD/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp
+
+# add OpenCL C++ bindings and patch host_config.h and nvcc.profile
+cat $CWD/files/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp
+cat $CWD/files/host_config.h > $PKG/usr/include/cuda/host_config.h
+cat $CWD/files/nvcc.profile > $PKG/usr/bin/nvcc.profile
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

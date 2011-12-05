@@ -7,13 +7,14 @@ they are here, working or not
   blender - copied and modified from slackbuilds.org
   jenkins - copied and modified from https://github.com/vbatts/SlackBuilds/tree/master/projects/jenkins
   nexus - Maven repository manager
- 
-** STABLE **
   cudatoolkit - NVidia CUDA Toolkit 
   jboss-as - JBoss Application Server
+ 
+** STABLE **
   mypaint - Graphics application
   makehuman - Generate 3D humanoid models
   FreeImage - Image library
+  digikam - photo management application (copied and modified from slackbuilds.org)
 
 ** TESTING/BROKEN **
   luxrender - unbiased rendering engine

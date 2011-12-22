@@ -1,0 +1,102 @@
+#!/bin/sh
+
+# Slackware build script for openjdk
+
+# Copyright 2011  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PRGNAM=openjdk
+VERSION=${VERSION:-1.7.0_b147}
+ZIPVERSION=${ZIPVERSION:-7-fcs-src-b147-27_jun_2011}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+# Automatically determine the architecture we're building on:
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+# Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64"
+else
+  LIBDIRSUFFIX=""
+fi
+
+set -e # Exit on most errors
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+unzip $CWD/$PRGNAM-$ZIPVERSION.zip
+mv $PRGNAM $PRGNAM-$VERSION
+cd $PRGNAM-$VERSION
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+export LANG=C ALT_BOOTDIR=/usr/lib$LIBDIRSUFFIX/java ALT_OUTPUTDIR=$TMP/$PRGNAM-$VERSION/build JAVA_HOME=
+make sanity
+make ALLOW_DOWNLOADS=true
+
+mkdir -p $PKG/etc/profile.d
+for file in $(ls $CWD/profile.d/*) ; do
+  cat $file | sed -e "s#lib/$PRGNAM#lib${LIBDIRSUFFIX}/$PRGNAM#" \
+    > $PKG/etc/profile.d/$(basename $file)
+done
+mkdir -p $PKG/usr/lib$LIBDIRSUFFIX/$PRGNAM
+cd $TMP/$PRGNAM-$VERSION/build/j2sdk-image
+mv -t $PKG/usr/lib$LIBDIRSUFFIX/$PRGNAM * 
+chown -R root.root $PKG
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cd $PKG
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/ASSEMBLY_EXCEPTION $PKG/usr/doc/$PRGNAM-$VERSION/ASSEMBLY_EXCEPTION
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/LICENSE $PKG/usr/doc/$PRGNAM-$VERSION/LICENSE
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/release $PKG/usr/doc/$PRGNAM-$VERSION/release
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/src.zip $PKG/usr/doc/$PRGNAM-$VERSION/src.zip
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/THIRTY_PARTY_README $PKG/usr/doc/$PRGNAM-$VERSION/THIRTY_PARTY_README
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/sample $PKG/usr/doc/$PRGNAM-$VERSION/sample
+ln -sf usr/lib$LIBDIRSUFFIX/$PRGNAM/demo $PKG/usr/doc/$PRGNAM-$VERSION/demo
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+# We ship the package unmodified, so we do not compress manpages.
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

@@ -65,6 +65,7 @@ rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
 chmod +x $CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora13.run
+#yes yes | sh $CWD/jdk-${VERSION}-linux-${JAVA_ARCH}.bin || exit 1
 $CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora13.run -- --prefix=$TMP/$PRGNAM-$VERSION
 
 cd $PRGNAM-$VERSION

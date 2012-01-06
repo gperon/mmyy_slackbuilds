@@ -77,6 +77,8 @@ for file in $(ls $CWD/profile.d/*) ; do
   cat $file | sed -e "s#lib/$PRGNAM#lib${LIBDIRSUFFIX}/$PRGNAM#" \
     > $PKG/etc/profile.d/$(basename $file)
 done
+chmod +x $PKG/etc/profile.d/*
+
 mkdir -p $PKG/usr/lib$LIBDIRSUFFIX/$PRGNAM
 cd $TMP/$PRGNAM-$VERSION/build/j2sdk-image
 mv -t $PKG/usr/lib$LIBDIRSUFFIX/$PRGNAM * 

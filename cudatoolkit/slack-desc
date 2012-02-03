@@ -6,14 +6,14 @@
 # customary to leave one space after the ':'.
 
            |-----handy-ruler------------------------------------------------------|
-cudatoolkit: CUDA Toolkit
-cudatoolkit: 
+cudatoolkit: CUDA Toolkit (NVIDIA's parallel computing architecture)
+cudatoolkit:
 cudatoolkit: CUDA is NVIDIA's parallel computing architecture. It enables dramatic
-cudatoolkit: increases in computing performance by harnessing the power of 
+cudatoolkit: increases in computing performance by harnessing the power of
 cudatoolkit: the GPU.
 cudatoolkit:
-cudatoolkit:
-cudatoolkit:
-cudatoolkit:
 cudatoolkit: Homepage http://www.nvidia.com/object/cuda_home_new.html
+cudatoolkit:
+cudatoolkit:
+cudatoolkit:
 cudatoolkit:

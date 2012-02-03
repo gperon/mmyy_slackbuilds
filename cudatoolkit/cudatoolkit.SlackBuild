@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2008-2011  Giorgio Peron Campodarsego, PD, Italy
+# Copyright 2008-2012  Giorgio Peron Campodarsego, PD, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,8 +25,8 @@
 # It can be downloaded from http://www.khronos.org/registry/cl/api/1.1/cl.hpp
 
 PRGNAM=cudatoolkit
-VERSION=${VERSION:-4.0.17}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-4.1.28}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 
@@ -64,9 +64,8 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
-chmod +x $CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora13.run
-#yes yes | sh $CWD/jdk-${VERSION}-linux-${JAVA_ARCH}.bin || exit 1
-$CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora13.run -- --prefix=$TMP/$PRGNAM-$VERSION
+chmod +x $CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora14.run
+$CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora14.run -- --prefix=$TMP/$PRGNAM-$VERSION
 
 cd $PRGNAM-$VERSION
 chown -R root:root .
@@ -84,19 +83,13 @@ mv * $PKG/usr/share/cuda/
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
 mv $PKG/usr/share/cuda/lib${LIBDIRSUFFIX} $PKG/usr
 rm -rf $PKG/usr/share/cuda/lib${WRONGLIBDIRSUFFIX}
-# Link the shared libraries into /usr/lib:
-( cd $PKG/usr/lib${LIBDIRSUFFIX}
-  for file in ../share/cuda/computeprof/bin/*.so* ; do
-    ln -sf $file .
-  done
-)
 
 # Put binaries in the standard place
 mkdir -p $PKG/usr/bin
 mv $PKG/usr/share/cuda/bin $PKG/usr/
 cd $PKG/usr/bin
-ln -s ../share/cuda/open$CUDAARCH/bin/nvopencc nvopencc
-ln -s ../share/cuda/computeprof/bin/computeprof computeprof
+ln -sf ../share/cuda/open$CUDAARCH/bin/nvopencc nvopencc
+ln -sf ../share/cuda/libnvvp/nvvp nvvp
 chmod 0755 $PKG/usr/bin/*
 
 # Put include in the standard place
@@ -106,7 +99,6 @@ rm -rf $PKG/usr/share/cuda/include
 
 # add OpenCL C++ bindings and patch host_config.h and nvcc.profile
 cat $CWD/files/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp
-cat $CWD/files/host_config.h > $PKG/usr/include/cuda/host_config.h
 cat $CWD/files/nvcc.profile > $PKG/usr/bin/nvcc.profile
 
 mkdir -p $PKG/install

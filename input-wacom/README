@@ -1,0 +1,5 @@
+This kernel driver package is to support Wacom devices on kernels 2.6.26 and later.
+For serial ISDV4 devices, an utility, inputattach, is provided to map the driver to a
+logical port for user land to access. Please refer to the README under inputattach
+for details.
+

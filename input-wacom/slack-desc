@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+       |-----handy-ruler------------------------------------------------------|
+input-wacom: input-wacom (Kernel driver for Wacom)
+input-wacom:
+input-wacom: This kernel driver package is to support Wacom devices on
+input-wacom: kernels 2.6.26 and later. For serial ISDV4 devices, an utility, 
+input-wacom: inputattach, is provided to map the driver to a
+input-wacom: logical port for user land to access. 
+input-wacom:
+input-wacom: http://linuxwacom.sourceforge.net
+input-wacom:
+input-wacom:
+input-wacom:

@@ -1,0 +1,6 @@
+This package provides the X.Org X11 driver for Wacom and Wacom-like tablets.
+It obsoletes the linuxwacom driver and supports X server versions 1.7 and
+higher. Server versions lower than 1.7 may be supported by this driver, but
+users are encouraged to use the old linuxwacom driver instead.
+
+Requires input-wacom package

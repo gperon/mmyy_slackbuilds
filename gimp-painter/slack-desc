@@ -14,6 +14,6 @@ gimp: image manipulation, painting, processing, and rendering tools.  The
 gimp: GIMP's open design and extensible architecture make for a very
 gimp: powerful end product for photo and image retouching, web graphics
 gimp: design, or digital illustration.
-gimp: This package contains the path for painter, see
+gimp: This package contains the patch for painter, see
 gimp: http://sourceforge.jp/projects/gimp-painter
 gimp:

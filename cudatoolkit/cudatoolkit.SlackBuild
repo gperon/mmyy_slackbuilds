@@ -100,6 +100,7 @@ rm -rf $PKG/usr/share/cuda/include
 # add OpenCL C++ bindings and patch host_config.h and nvcc.profile
 cat $CWD/files/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp
 cat $CWD/files/nvcc.profile > $PKG/usr/bin/nvcc.profile
+cat $CWD/files/host_config.h > $PKG/usr/include/cuda/host_config.h
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

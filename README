@@ -19,6 +19,7 @@ they are here, working or not
   xf86-input-wacom - X11 driver for Wacom
   gimp-painter - GIMP for Painter
   Alchemy - sketching tool
+  wacomtablet - KCM Wacom Tablet
 
 ** TESTING/BROKEN **
   luxrender - unbiased rendering engine

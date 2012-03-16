@@ -115,6 +115,7 @@ cp -a \
    ln -s /usr/share/gtk-doc/html/$i $i-html ; 
   done
 )
+cat $CWD/$PRGNAM.slackbuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.slackbuild
 
 # If there's a ChangeLog, installing at least part of the recent history
 # is useful, but don't let it get totally out of control:
@@ -123,7 +124,6 @@ if [ -r ChangeLog ]; then
   cat ChangeLog | head -n 1000 > $DOCSDIR/ChangeLog
   touch -r ChangeLog $DOCSDIR/ChangeLog
 fi
-
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
 

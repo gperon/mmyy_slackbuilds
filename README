@@ -20,6 +20,11 @@ they are here, working or not
   gimp-painter - GIMP for Painter
   Alchemy - sketching tool
   wacomtablet - KCM Wacom Tablet
+  flightgear - an open-source flight simulator project
+  flightgear-data - flight simulator data
+  simgear - a set of open-source 3d simulation libraries
+  fgrun - a graphical front-end for FlightGear
+    
 
 ** TESTING/BROKEN **
   luxrender - unbiased rendering engine

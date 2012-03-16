@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|' on
+# the right side marks the last column you can put a character in.  You must make
+# exactly 11 lines for the formatting to be correct.  It's also customary to
+# leave one space after the ':'.
+
+               |-----handy-ruler------------------------------------------------------|
+flightgear-data: flightgear-data (data for the FlightGear simulator)
+flightgear-data: 
+flightgear-data: Includes Textures, models, data, aircraft, sample scenery, and
+flightgear-data: config files.
+flightgear-data:
+flightgear-data:
+flightgear-data:
+flightgear-data:
+flightgear-data:
+flightgear-data: http://www.flightgear.org/
+flightgear-data:

@@ -26,7 +26,7 @@
 
 PRGNAM=cudatoolkit
 VERSION=${VERSION:-4.1.28}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 
@@ -82,20 +82,35 @@ mv * $PKG/usr/share/cuda/
 # Put libraries in the standard place
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
 mv $PKG/usr/share/cuda/lib${LIBDIRSUFFIX} $PKG/usr
+cd $PKG/usr/share/cuda
+ln -sf ../../lib${LIBDIRSUFFIX} lib${LIBDIRSUFFIX}
+cd -
 rm -rf $PKG/usr/share/cuda/lib${WRONGLIBDIRSUFFIX}
 
 # Put binaries in the standard place
 mkdir -p $PKG/usr/bin
-mv $PKG/usr/share/cuda/bin $PKG/usr/
+mv $PKG/usr/share/cuda/bin/* $PKG/usr/bin
+cd $PKG/usr/share/cuda/bin
+for f in \
+ bin2c cuda-gdb cuda-memcheck cudafe cudafe++ cuobjdump fatbin fatbinary filehash nvcc nvcc.profile nvvp ptxas
+do
+echo $f
+ln -sf ../../../bin/$f $f 
+done
+cd -
 cd $PKG/usr/bin
 ln -sf ../share/cuda/open$CUDAARCH/bin/nvopencc nvopencc
 ln -sf ../share/cuda/libnvvp/nvvp nvvp
+ln -sf ../share/cuda/nvvm/cicc cicc
 chmod 0755 $PKG/usr/bin/*
 
 # Put include in the standard place
 mkdir -p $PKG/usr/include/cuda
 mv $PKG/usr/share/cuda/include/* $PKG/usr/include/cuda
-rm -rf $PKG/usr/share/cuda/include 
+rm -rf $PKG/usr/share/cuda/include
+cd $PKG/usr/share/cuda/
+ln -sf ../../include/cuda include
+cd -
 
 # add OpenCL C++ bindings and patch host_config.h and nvcc.profile
 cat $CWD/files/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp

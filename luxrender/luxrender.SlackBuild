@@ -2,7 +2,7 @@
 
 # Slackware build script for luxrender
 
-# Copyright 2011  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
+# Copyright 2012  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,11 +24,11 @@
  
 
 PRGNAM=luxrender
-VERSION=${VERSION:-0.9dev}
+VERSION=${VERSION:-1.0RC1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCVERSION=lux-3a99f95342b9
-LUXRAYSRCVERSION=luxrays-1d977620b1c5
+SRCVERSION=lux-0488d0d3ad0a
+LUXRAYSRCVERSION=luxrays-396d39b06aa6
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
@@ -82,12 +82,31 @@ find . \
 sed -i "/project(LuxRays)/ a\
 set(BUILD_LUXMARK on)" CMakeLists.txt
 sed -i "s:${OPENCL_ROOT}/include:/usr/include/cuda:g" cmake/Packages/FindOpenCL.cmake
+sed -i "/set(SLG_VERSION_MINOR 0devel5)/ a\
+set(CMAKE_CXX_FLAGS_RELEASE \"-lpthread\")" samples/smallluxgpu2/CMakeLists.txt
+sed -i "/set(LUXMARK_VERSION_MINOR 0)/ a\
+set(CMAKE_CXX_FLAGS_RELEASE \"-lpthread\")" samples/luxmark/CMakeLists.txt
 
-cmake ./
+
+# luxmark moc files
+cd samples/luxmark
+moc aboutdialog.h -o moc_aboutdialog.cxx
+moc hardwaretree.h -o moc_hardwaretree.cxx
+moc luxmarkapp.h -o moc_luxmarkapp.cxx
+moc mainwindow.h -o moc_mainwindow.cxx
+moc resultdialog.h -o moc_resultdialog.cxx
+moc submitdialog.h -o moc_submitdialog.cxx
+cd -
+
+cmake ./ \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_MODULE_LINKER_FLAGS="-L /lib64 -l pthread" \
+    -DCMAKE_BUILD_TYPE=Release 
 
 # compile luxrays
 make -j8 luxrays
-make -j8 slg
+make -j8 slg2
 make -j8 luxmark
 
 # manual installation
@@ -95,6 +114,10 @@ mkdir -p $PKG/usr/share/$PRGNAM/{resources,scenes}
 cp bin/* $PKG/usr/share/$PRGNAM
 cp -r samples/luxmark/resources $PKG/usr/share/$PRGNAM
 cp -r scenes $PKG/usr/share/$PRGNAM
+# fix problem on test in luxmark
+cd $PKG/usr/share/$PRGNAM/scenes
+ln -sf classroom room
+cd -
 cp -r samples/luxmark/scenes $PKG/usr/share/$PRGNAM
 
 mkdir -p $PKG/usr/bin
@@ -104,10 +127,10 @@ cd /usr/share/luxrender
 ./luxmark >/dev/null 2>&1
 EOF
 chmod +x $PKG/usr/bin/luxmark
-cat > $PKG/usr/bin/slg << EOF
+cat > $PKG/usr/bin/slg2 << EOF
 #!/bin/sh
 cd /usr/share/luxrender
-./slg >/dev/null 2>&1
+./slg2 >/dev/null 2>&1
 EOF
 chmod +x $PKG/usr/bin/slg
 

@@ -26,7 +26,7 @@
 # Modified by Giorgio Peron giorgio.peron@gmail.com
 
 PRGNAM=digikam
-VERSION=${VERSION:-2.6.0-beta3}
+VERSION=${VERSION:-2.6.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

@@ -9,7 +9,8 @@ they are here, working or not
   nexus - Maven repository manager
   cudatoolkit - NVidia CUDA Toolkit 
   jboss-as - JBoss Application Server
- 
+  Alchemy - sketching tool
+   
 ** STABLE **
   mypaint - Graphics application
   makehuman - Generate 3D humanoid models
@@ -18,12 +19,12 @@ they are here, working or not
   input-wacom - kernel driver for Wacom 
   xf86-input-wacom - X11 driver for Wacom
   gimp-painter - GIMP for Painter
-  Alchemy - sketching tool
   wacomtablet - KCM Wacom Tablet
   flightgear - an open-source flight simulator project
   flightgear-data - flight simulator data
   simgear - a set of open-source 3d simulation libraries
   fgrun - a graphical front-end for FlightGear
+  kdenlive - a free and open-source video editor
     
 
 ** TESTING/BROKEN **

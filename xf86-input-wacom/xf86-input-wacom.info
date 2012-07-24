@@ -1,8 +1,9 @@
 PRGNAM="xf86-input-wacom"
-VERSION="0.13.0"
+VERSION="0.16.0"
 HOMEPAGE="http://linuxwacom.sourceforge.net"
-DOWNLOAD="http://freefr.dl.sourceforge.net/project/linuxwacom/xf86-input-wacom/xf86-input-wacom-0.13.0.tar.bz2"
-MD5SUM="4a426535989e84c4161e3607ea851654"
+DOWNLOAD="http://freefr.dl.sourceforge.net/project/linuxwacom/xf86-input-wacom/xf86-input-wacom-0.16y
+.0.tar.bz2"
+MD5SUM="aeee2bd339c825a9b1215df6a2e5e50b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 MAINTAINER="Giorgio Peron"

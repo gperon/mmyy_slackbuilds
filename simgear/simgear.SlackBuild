@@ -24,7 +24,7 @@
 
 
 PRGNAM=simgear
-VERSION=${VERSION:-2.6.0}
+VERSION=${VERSION:-2.8.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -89,7 +89,7 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS COPYING ChangeLog NEWS README* Thanks TODO \
+  AUTHORS COPYING INSTALL ChangeLog NEWS README* Thanks version \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

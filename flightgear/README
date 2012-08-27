@@ -1,5 +1,5 @@
 The FlightGear flight simulator project is an open-source, multi-platform,
 cooperative flight simulator development project.
 
-Requires SimGear(2.6.0), plib(1.8.4), OpenSceneGraph(3.0.0), OpenAL to compile and FlightGear-data to play.
+Requires SimGear(2.8.0), plib(1.8.4), OpenSceneGraph(3.0.0), OpenAL to compile and FlightGear-data to play.
 

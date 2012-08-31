@@ -25,7 +25,7 @@
 # It can be downloaded from http://www.khronos.org/registry/cl/api/1.1/cl.hpp
 
 PRGNAM=cudatoolkit
-VERSION=${VERSION:-4.1.28}
+VERSION=${VERSION:-4.2.9}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 

@@ -24,11 +24,11 @@
  
 
 PRGNAM=luxrender
-VERSION=${VERSION:-1.0RC1}
+VERSION=${VERSION:-1.0RC4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCVERSION=lux-0488d0d3ad0a
-LUXRAYSRCVERSION=luxrays-396d39b06aa6
+SRCVERSION=lux-0b4c3e188707
+LUXRAYSRCVERSION=luxrays-752ba5c422e0
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
@@ -80,8 +80,9 @@ find . \
 
 # fix some make files
 sed -i "/project(LuxRays)/ a\
-set(BUILD_LUXMARK on)" CMakeLists.txt
-sed -i "s:${OPENCL_ROOT}/include:/usr/include/cuda:g" cmake/Packages/FindOpenCL.cmake
+SET(BUILD_LUXMARK on)" CMakeLists.txt
+sed -i "/# Lookup user provide path first/ a\
+SET(OPENCL_ROOT /usr/share/cuda)" cmake/Packages/FindOpenCL.cmake
 sed -i "/set(SLG_VERSION_MINOR 0devel5)/ a\
 set(CMAKE_CXX_FLAGS_RELEASE \"-lpthread\")" samples/smallluxgpu2/CMakeLists.txt
 sed -i "/set(LUXMARK_VERSION_MINOR 0)/ a\
@@ -101,7 +102,6 @@ cd -
 cmake ./ \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_MODULE_LINKER_FLAGS="-L /lib64 -l pthread" \
     -DCMAKE_BUILD_TYPE=Release 
 
 # compile luxrays
@@ -115,9 +115,9 @@ cp bin/* $PKG/usr/share/$PRGNAM
 cp -r samples/luxmark/resources $PKG/usr/share/$PRGNAM
 cp -r scenes $PKG/usr/share/$PRGNAM
 # fix problem on test in luxmark
-cd $PKG/usr/share/$PRGNAM/scenes
-ln -sf classroom room
-cd -
+#cd $PKG/usr/share/$PRGNAM/scenes
+#ln -sf classroom room
+#cd -
 cp -r samples/luxmark/scenes $PKG/usr/share/$PRGNAM
 
 mkdir -p $PKG/usr/bin
@@ -132,7 +132,7 @@ cat > $PKG/usr/bin/slg2 << EOF
 cd /usr/share/luxrender
 ./slg2 >/dev/null 2>&1
 EOF
-chmod +x $PKG/usr/bin/slg
+chmod +x $PKG/usr/bin/slg2
 
 cd $TMP/$SRCVERSION
 chown -R root:root .
@@ -145,7 +145,7 @@ find . \
 # # fix some make files
 sed -i "/##########################      Find LuxRays       ##########################/ a\
 SET(LuxRays_HOME $TMP/$LUXRAYSRCVERSION)"  cmake/Dependencies.cmake
-sed -i "s:SET(OPENCL_ROOT /usr/src/opencl-sdk):SET(OPENCL_ROOT /usr/include/cuda):g" cmake/Dependencies.cmake
+sed -i "s:SET(OPENCL_ROOT /usr/src/opencl-sdk):SET(OPENCL_ROOT /usr/share/cuda):g" cmake/Dependencies.cmake
 sed -i "s:ADD_DEFINITIONS(-O3 -msse2 -mfpmath=sse -ftree-vectorize -funroll-loops -Wall -fPIC -DHAVE_PTHREAD_H):ADD_DEFINITIONS(-O3 -msse2 -mfpmath=sse -ftree-vectorize -funroll-loops -Wall -fPIC -DHAVE_PTHREAD_H -l png14):g" CMakeLists.txt
 
 cmake ./
@@ -157,6 +157,9 @@ make install DESTDIR=$PKG
 # /usr/local? no, thanks
 cp -r $PKG/usr/local/* $PKG/usr  
 rm -rf $PKG/usr/local
+
+# copy pylux.so
+cp pylux.so $PKG/usr/lib$LIBDIRSUFFIX/
 
 # Strip binaries and libraries.
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

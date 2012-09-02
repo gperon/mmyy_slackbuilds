@@ -8,3 +8,4 @@ SlackBuild script. Examples:
 # groupadd -g 252 nexus
 # useradd -u 252 -s /bin/sh -d /dev/null -g nexus nexus
 
+Nexus requires JRE or openJRE

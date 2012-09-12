@@ -54,7 +54,7 @@ mkdir -p $PKG $OUTPUT
 cd $PKG
 
 mkdir -p $PKG/usr/share/$PRGNAM
-cp $CWD/$PRGNAM.war $PKG/usr/share/$PRGNAM/$PRGNAM.war
+cp $CWD/$PRGNAM.zip $PKG/usr/share/$PRGNAM/$PRGNAM.war
 
 mkdir -p $PKG/usr/bin
 cat $CWD/files/jenkins.bin.sh > $PKG/usr/bin/jenkins

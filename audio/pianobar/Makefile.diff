@@ -1,0 +1,18 @@
+diff -ru pianobar-2011.07.09-orig/Makefile pianobar-2011.07.09/Makefile
+--- pianobar-2011.07.09-orig/Makefile	2011-07-09 04:40:54.000000000 -0400
++++ pianobar-2011.07.09/Makefile	2011-07-09 23:23:28.000000000 -0400
+@@ -7,13 +7,7 @@
+ MANDIR:=${PREFIX}/share/man
+ DYNLINK:=0
+ 
+-# Respect environment variables set by user; does not work with :=
+-ifeq (${CFLAGS},)
+-	CFLAGS=-O2 -DNDEBUG
+-endif
+-ifeq (${CC},cc)
+-	CC=c99
+-endif
++CFLAGS+=-std=c99 -O2 -DNDEBUG
+ 
+ PIANOBAR_DIR=src
+ PIANOBAR_SRC=\

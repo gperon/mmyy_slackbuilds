@@ -1,0 +1,4 @@
+KLU is a sparse LU factorization algorithm well-suited for use in circuit
+simulation.
+
+This package is part of SuiteSparse.

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+   |-----handy-ruler------------------------------------------------------|
+xfe: X File Explorer (xfe)
+xfe:
+xfe: Xfe is a Microsoft Explorer-like file manager for X. It is based on
+xfe: the popular, but discontinued, X Win Commander, originally developed
+xfe: by Maxim Baranov.
+xfe:
+xfe: Xfe aims to be the file manager of choice for all light-thinking
+xfe: UNIX addicts!
+xfe:
+xfe: Homepage: http://roland65.free.fr/xfe/
+xfe:

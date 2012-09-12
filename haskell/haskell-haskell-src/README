@@ -1,0 +1,5 @@
+Facilities for manipulating Haskell source code: an abstract syntax,
+lexer, parser, and pretty-printer.
+
+After uninstalling, run this command to unregister the package from
+the ghc package database:   ghc-pkg recache

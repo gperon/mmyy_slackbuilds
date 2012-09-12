@@ -1,0 +1,69 @@
+#!/bin/sh
+ 
+# Slackware build script for perl-xml-libxml
+
+# Written by Murat D. Kadirov <banderols@gmail.com>
+
+PRGNAM=perl-xml-libxml
+VERSION=2.0004
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+SRCNAM=XML-LibXML
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $SRCNAM-$VERSION
+tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
+cd $SRCNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+perl Makefile.PL \
+  SKIP_SAX_INSTALL=1 \
+  PREFIX=/usr \
+  INSTALLDIRS=vendor \
+  INSTALLVENDORMAN1DIR=/usr/man/man1 \
+  INSTALLVENDORMAN3DIR=/usr/man/man3
+make
+make test
+make install DESTDIR=$PKG
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
+find $PKG -name "perllocal.pod" -o -name ".packlist"  -o -name "*.bs"  | xargs rm -f || true
+
+find $PKG -depth -type d -empty -delete || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  Changes LICENSE README \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+chmod 644 $PKG/usr/doc/$PRGNAM-$VERSION/*
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

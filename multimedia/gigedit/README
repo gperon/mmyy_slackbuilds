@@ -1,0 +1,4 @@
+Gigedit is an instrument editor for gig files. Gig files are
+used by software samplers such as LinuxSampler and GigaStudio.
+
+liblscp and linuxsampler are optional dependencies.

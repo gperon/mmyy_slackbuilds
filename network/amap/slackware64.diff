@@ -1,0 +1,116 @@
+diff -Naur amap-5.4.orig/Makefile.am amap-5.4/Makefile.am
+--- amap-5.4.orig/Makefile.am	2011-04-20 17:10:17.000000000 +0200
++++ amap-5.4/Makefile.am	2011-09-01 12:12:49.312257079 +0200
+@@ -1,13 +1,13 @@
+ CC=gcc
+-LIB=-lpcre -L./pcre-3.9/ -I./pcre-3.9/
+-OPT=-O2
++LIB=-lpcre
++OPT=-O2 -fPIC
+ OPT_DEBUG=-ggdb -Wall -lefence
+ BINDIR=/bin
+-DATADIR=/etc
++DATADIR=/lib64/amap
+ MANDIR=/man/man1
+ SCRIPTS=appdefs.trig appdefs.resp appdefs.rpc
+ MANPAGE=amap.1
+-all:	pcre strip
++all:	strip
+ 
+ pcre:
+ 	cd pcre-3.9 && make
+@@ -34,15 +34,15 @@
+ 	$(CC) $(OPT_DEBUG) -o amapcrap amapcrap.c $(XLIBS) $(XLIBPATHS) $(XIPATHS) $(XDEFINES)
+ 
+ install:	all
+-	@echo Installing to $(PREFIX), change this by running ./configure --prefix=path
+-	-mkdir -vp $(PREFIX)$(BINDIR) 2> /dev/null
+-	-mkdir -vp $(PREFIX)$(DATADIR) 2> /dev/null
+-	-mkdir -vp $(PREFIX)$(MANDIR) 2> /dev/null
+-	-test -e amap.exe || cp -f amap amap6 amapcrap $(PREFIX)$(BINDIR)
+-	-test -e amap.exe && cp -f amap.exe amapcrap.exe $(PREFIX)$(BINDIR) || echo
+-	-cp -f $(SCRIPTS) $(PREFIX)$(DATADIR)
+-	-cp -f $(MANPAGE) $(PREFIX)$(MANDIR)
+-	-test $(PREFIX)$(BINDIR)/amap6 || cd $(PREFIX)$(BINDIR) && ln -s amap amap6
++	@echo Installing to $(DESTDIR)$(PREFIX), change this by running ./configure --prefix=path
++	-mkdir -vp $(DESTDIR)$(PREFIX)$(BINDIR) 2> /dev/null
++	-mkdir -vp $(DESTDIR)$(PREFIX)$(DATADIR) 2> /dev/null
++	-mkdir -vp $(DESTDIR)$(PREFIX)$(MANDIR) 2> /dev/null
++	-test -e amap.exe || cp -f amap amap6 amapcrap $(DESTDIR)$(PREFIX)$(BINDIR)
++	-test -e amap.exe && cp -f amap.exe amapcrap.exe $(DESTDIR)$(PREFIX)$(BINDIR) || echo
++	-cp -f $(SCRIPTS) $(DESTDIR)$(PREFIX)$(DATADIR)
++	-cp -f $(MANPAGE) $(DESTDIR)$(PREFIX)$(MANDIR)
++	-test $(DESTDIR)$(PREFIX)$(BINDIR)/amap6 || cd $(DESTDIR)$(PREFIX)$(BINDIR) && ln -s amap amap6
+ 
+ clean:	
+ 	cd pcre-3.9 && make clean
+diff -Naur amap-5.4.orig/amap-inc.h amap-5.4/amap-inc.h
+--- amap-5.4.orig/amap-inc.h	2011-04-20 17:10:17.000000000 +0200
++++ amap-5.4/amap-inc.h	2011-09-01 11:58:42.686496429 +0200
+@@ -20,7 +20,7 @@
+ #include <errno.h>
+ #include <sys/resource.h>
+ #include <sys/wait.h>
+-#include "pcre-3.9/pcre.h"
++#include <pcre.h>
+ #ifdef OPENSSL
+  #include <openssl/ssl.h>
+  #include <openssl/err.h>
+diff -Naur amap-5.4.orig/amap-lib.c amap-5.4/amap-lib.c
+--- amap-5.4.orig/amap-lib.c	2011-04-20 17:10:17.000000000 +0200
++++ amap-5.4/amap-lib.c	2011-09-01 12:03:02.962916159 +0200
+@@ -306,7 +306,7 @@
+       strcpy(file_name, AMAP_PREFIX);
+       if (file_name[strlen(file_name) - 1] != '/')
+         strcat(file_name, "/");
+-      strcat(file_name, "etc/");
++      strcat(file_name, "lib64/amap/");
+       strcat(file_name, AMAP_DEFAULT_FILENAME);
+       strcat(file_name, extension);
+       f = fopen(file_name, "r");
+@@ -2058,9 +2058,9 @@
+   if (opt->update) {
+     printf("Running Online Update for fingerprints, connecting to %s\n", AMAP_RESOURCE);
+     if (opt->filename == NULL) {
+-      opt->filename = malloc(strlen(AMAP_PREFIX) + 5 + strlen(AMAP_DEFAULT_FILENAME) + 2);
++      opt->filename = malloc(strlen(AMAP_PREFIX) + 12 + strlen(AMAP_DEFAULT_FILENAME) + 2);
+       strcpy(opt->filename, AMAP_PREFIX);
+-      strcat(opt->filename, "/etc/");
++      strcat(opt->filename, "/lib64/amap/");
+       strcat(opt->filename, AMAP_DEFAULT_FILENAME);
+     }
+     opt->file_log = malloc(strlen(opt->filename) + 6);
+diff -Naur amap-5.4.orig/configure amap-5.4/configure
+--- amap-5.4.orig/configure	2011-04-20 17:10:17.000000000 +0200
++++ amap-5.4/configure	2011-09-01 12:11:31.478192814 +0200
+@@ -152,17 +152,6 @@
+     XLIBS="$XLIBS -lresolv"
+ fi
+ 
+-for i in /usr/man /usr/share/man /usr/local/man /usr/local/share/man ; do
+-  if [ -d $i ]; then
+-    MANDIR=$i
+-  fi
+-done
+-if [ "X" = "X$MANDIR" ]; then
+-  MANDIR="/usr/local/man"
+-fi
+-echo "Manual page will be install to: $MANDIR"
+-echo
+-
+ if [ -d /usr/kerberos/include ]; then
+   XIPATHS="$XIPATHS -I/usr/kerberos/include"
+ fi
+@@ -172,7 +161,11 @@
+ else
+     PREFIX="/usr/local"
+ fi
+-echo "Amap will be installed into .../bin and .../etc of: $PREFIX"
++
++# fix mandir
++MANDIR=$PREFIX/man
++
++echo "Amap will be installed into $PREFIX/bin $PREFIX/lib64/amap and $PREFIX/man"
+ echo "  (change this by running ./configure --prefix=path)"
+ echo
+ 

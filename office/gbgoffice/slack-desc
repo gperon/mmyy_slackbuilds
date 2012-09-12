@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+         |-----handy-ruler------------------------------------------------------|
+gbgoffice: gbgoffice (Bgoffice dictionary frontend)
+gbgoffice:
+gbgoffice: The GTK BG Office assistant (Gbgoffice) is part of the Bulgarian
+gbgoffice: Office project (Bgoffice). Gbgoffice provides an easy to use GTK+
+gbgoffice: interface for the Bgoffice dictionaries. It supports all five of
+gbgoffice: them: 1) Dual Bulgarian English dictionary; 2) Dictionary of
+gbgoffice: computer terms; 3) Dialect dictionary; 4) Polytechnical English
+gbgoffice: Bulgarian dictionary; 5) Thesaurus;
+gbgoffice:
+gbgoffice: Home: http://gbgoffice.info/
+gbgoffice:

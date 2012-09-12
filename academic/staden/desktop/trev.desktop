@@ -1,0 +1,7 @@
+[Desktop Entry]
+Categories=Education;
+Exec=trev
+Icon=trev
+Name=Staden Package TREV
+StartupNotify=false
+Type=Application

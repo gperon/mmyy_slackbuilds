@@ -1,0 +1,7 @@
+Rar is a powerful tool for processing RAR archives.
+
+This is a shareware program.  If you would like to continue using RAR
+after 40 days, you will have to purchase a license.  See license.txt
+in the docs directory for more details.
+
+To include unrar in the package, run the script with UNRAR=yes

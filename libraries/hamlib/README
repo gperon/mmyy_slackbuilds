@@ -1,0 +1,5 @@
+hamlib (the ham radio control libraries)
+
+hamlib is a development effort to provide a consistent interface
+for programmers wanting to incorporate radio controls in their
+programs.

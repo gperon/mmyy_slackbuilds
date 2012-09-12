@@ -1,0 +1,3 @@
+perl-Date-Calc provides perl modules for Gregorian calendar date calculations.
+
+perl-Date-Calc is required for pflogsumm.

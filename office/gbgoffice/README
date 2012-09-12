@@ -1,0 +1,13 @@
+The GTK BG Office assistant (Gbgoffice) is part of the Bulgarian
+Office project (Bgoffice). Gbgoffice provides an easy to use GTK+
+interface for the Bgoffice dictionaries. It supports all five of them:
+
+1) Dual Bulgarian English dictionary
+2) Dictionary of computer terms
+3) Dialect dictionary ;)
+4) Polytechnical English Bulgarian dictionary
+5) Thesaurus
+
+After gbgoffice is installed, you need full-pack for the dictionaries.
+
+NOTE: If you use KDE, you may want kbgoffice (QT4 interface) instead.

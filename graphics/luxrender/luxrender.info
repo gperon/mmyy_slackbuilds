@@ -5,6 +5,6 @@ DOWNLOAD="http://src.luxrender.net/luxrays/archive/fc535d8299bd.tar.bz2 http://s
 MD5SUM="70bf532f680cf2578d56cc89d66dc715 70bf532f680cf2578d56cc89d66dc715"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
+REQUIRES=""
 MAINTAINER="Giorgio Peron"
 EMAIL="giorgio.peron@gmail.com"
-APPROVED=""

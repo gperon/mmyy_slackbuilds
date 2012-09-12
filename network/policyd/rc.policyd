@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# /etc/rc.d/rc.policyd
+#
+# start/stop/restart Policy daemon for Postfix
+# 
+# The PIDFILE is setup in the config file. Default is /var/run/policyd.pid
+# If you change the location in the config file then it **needs** to be 
+# changed here too.
+
+PIDFILE="/var/run/policyd.pid"
+CONFIG="/etc/policyd.conf"
+
+policyd_start() {
+  if [ -x /etc/rc.d/rc.policyd ]; then
+	if [ -f $PIDFILE ]; then
+		echo "Policy daemon seems to be running with PID: $(cat $PIDFILE)"
+	else
+		if [ -r "$CONFIG" ]; then
+			echo "Starting Policy daemon"
+	    		/usr/bin/policyd -c $CONFIG
+		else
+			echo "$CONFIG is missing or unreadable.  Exiting..."
+			exit 1
+		fi
+	fi
+  fi
+}
+
+policyd_stop() {
+	if [ -f $PIDFILE ]; then
+		echo "Stopping Policy daemon"
+		/bin/kill $(cat $PIDFILE)
+  		rm -f $PIDFILE
+	else
+		echo "Policy daemon is not running..."
+		exit 1
+	fi
+}
+
+policyd_restart() {
+  policyd_stop
+  sleep 2
+  policyd_start
+}
+
+case "$1" in
+'start')
+	policyd_start
+  ;;
+'stop')
+	policyd_stop
+  ;;
+'restart')
+	policyd_restart
+  ;;
+*)
+	echo "USAGE: $0 start|stop|restart"
+	exit 1
+  ;;
+esac
+

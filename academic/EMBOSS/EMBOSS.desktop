@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Education;
+Comment=Bioinformatics suite
+Exec=runJemboss.sh
+Icon=EMBOSS.png
+Name=EMBOSS
+StartupNotify=false
+Type=Application
+GenericName=

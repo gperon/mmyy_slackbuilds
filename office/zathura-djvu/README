@@ -1,0 +1,4 @@
+zathura-djvu (zathura support for DjVu format documents)
+
+The zathura-djvu plugin adds DjVu support to zathura by using the
+djvulibre library.

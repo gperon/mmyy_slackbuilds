@@ -1,0 +1,7 @@
+The xmonad-contrib library collects third party tiling algorithms,
+hooks, configurations, scripts, and other extensions to xmonad.
+
+The 'scripts' directory is copied to xmonad-contrib doc directory.
+
+After uninstalling, run this command to unregister the package from
+the ghc package database:   ghc-pkg recache

@@ -1,0 +1,139 @@
+#!/bin/sh
+
+# Slackware build script for cherokee
+
+# Written by Pablo Hernan Saro (pablosaro@gmail.com)
+
+PRGNAM=cherokee
+VERSION=${VERSION:-1.2.101}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+# Set the WWW root directory
+WWWROOT=${WWWROOT:-/var/www/htdocs-cherokee}
+
+# Set the WWW user/group - defaulted to root, but dedicated ones are better
+WWWUSER=${WWWUSER:-cherokee}
+WWWGROUP=${WWWGROUP:-cherokee}
+
+# Enable/Disable IPv6 support
+IPV6=${IPV6:-no}
+
+# Enable/Disable Cherokee-admin installation
+ADMIN=${ADMIN:-yes}
+
+# Add/Remove MySQL client library support
+MYSQL=${MYSQL:-yes}
+
+# Enable/Disable trace facility (debugging options)
+TRACE=${TRACE:-no}
+
+if [ ! "$(grep "$WWWGROUP" /etc/group)" ]; then
+  printf "\n         The \"$WWWGROUP\" group you choose is not available. Create one with
+
+         groupadd -g 299 $WWWGROUP
+
+         (see http://slackbuilds.org/uid_gid.txt for current reccomendations - if any)\n\n"
+  exit 1
+elif [ ! "$(grep "$WWWUSER" /etc/passwd)" ] ; then
+  printf "\n         The \"$WWWUSER\" user you choose is not available. Create one with
+
+         useradd -u 299 -g $WWWGROUP -d ${WWWROOT} $WWWUSER
+
+         (see http://slackbuilds.org/uid_gid.txt for current reccomendations - if any)\n\n"
+  exit 1
+fi
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# Apply all the patches in $CWD/patches (thanks Gentoo)
+for patch in $CWD/patches/* ; do
+  patch -p1 < $patch
+done
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --build=$ARCH-slackware-linux \
+  --with-wwwroot=$WWWROOT \
+  --with-wwwuser=$WWWUSER \
+  --with-wwwgroup=$WWWGROUP \
+  --with-mysql=$MYSQL \
+  --enable-ipv6=$IPV6 \
+  --enable-admin=$ADMIN \
+  --disable-pam \
+  --enable-trace=$TRACE
+
+make
+make install DESTDIR=$PKG
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
+mkdir -p $PKG/var/log/cherokee
+chown -R $WWWUSER:$WWWGROUP $PKG/var/log/cherokee
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  AUTHORS COPYING ChangeLog NEWS README \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+install -D -m 0755 $CWD/rc.$PRGNAM $PKG/etc/rc.d/rc.$PRGNAM.new
+mv $PKG/etc/cherokee/cherokee.conf $PKG/etc/cherokee/cherokee.conf.new
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

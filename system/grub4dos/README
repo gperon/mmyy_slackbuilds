@@ -1,0 +1,20 @@
+GRUB4DOS is a universal boot loader based on GNU GRUB, with bugfixes 
+and new features such as built-in BIOS disk emulation, ATAPI CDROM
+driver, and Chinese support. It can be loaded from DOS/LINUX,
+via Windows boot manager/syslinux/lilo, or from MBR/CD.
+
+To package the Chinese version, run the script like this:
+CHINESE="yes" ./grub4dos.SlackBuild
+
+You can chainload Grub4dos from LILO with an entry like:
+image = /boot/grub.exe
+  label = Grub4dos
+
+Read the Grub4dos guide for information on installing/using Grub4dos:
+http://diddy.boot-land.net/grub4dos/Grub4dos.htm
+
+Note: bootlace.com is a 32-Bit binary.
+It will not run on a pure x86_64 system
+
+Note2: Though grub4dos has ext4 support, its MBR code CANNOT load
+grldr (The main boot loader file) from an ext4 partition.

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Icon=chemtool
+Type=Application
+Categories=Graphics;
+Exec=chemtool
+MimeType=application/x-chemtool;
+Name=ChemTool
+Comment=Molecule Drawing Program

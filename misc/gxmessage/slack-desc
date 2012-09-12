@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+         |-----handy-ruler------------------------------------------------------|
+gxmessage: gxmessage (GTK xmessage clone)
+gxmessage:
+gxmessage: Gxmessage is an xmessage clone for GTK based desktops. Gxmessage
+gxmessage: pops up a dialog window, displays a given message or question, then
+gxmessage: waits for the user's response. That response is returned as the
+gxmessage: program's exit code. Because gxmessage is a drop-in alternative to
+gxmessage: xmessage, gxmessage accepts any option xmessage would, and returns
+gxmessage: the same exit codes.
+gxmessage:
+gxmessage: Homepage:
+gxmessage:   http://homepages.ihug.co.nz/~trmusson/programs.html#gxmessage

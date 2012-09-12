@@ -1,0 +1,9 @@
+Bashrun provides a powerful application launcher by running a
+specialized bash session in a small terminal window, conveniently
+providing bash features like tab-completion and history.  Additional
+features include user configurable rules for automatically launching
+certain commands in a new terminal window, looking up manual and
+info pages, performing dict and google queries, defining bookmarks
+for webpages or piping command output to the clipboard.
+
+This can use xdotool, zenity, or kdialog if installed.

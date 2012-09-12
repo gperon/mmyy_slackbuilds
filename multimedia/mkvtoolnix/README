@@ -1,0 +1,13 @@
+MKVToolnix is a set of tools to create, alter and inspect Matroska
+(and WebM) files. With these tools one can:
+
+* Get information about Matroska files (mkvinfo) * Extract tracks/data
+from Matroska files (mkvextract) * Create Matroska files from other
+media files (mkvmerge) * Modify properties of existing Matroska files
+(mkvpropedit)
+
+Note: this comes with internal versions of libembl and libmatroska.
+Configure will use the internal versions if it fails to find them
+installed in the system.
+
+Interested parties can build QT version of GUI by passing QTGUI=yes

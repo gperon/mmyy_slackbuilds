@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# HAProxy daemon control script.
+# Written for Slackware Linux by Cherife Li <cherife-#-dotimes.com>.
+
+BIN=/usr/sbin/haproxy
+CONF=/etc/haproxy/haproxy.cfg
+PID=/var/run/haproxy.pid
+
+case "$1" in
+  check)
+    echo "Checking HAProxy configuration file..."
+    $BIN -f $CONF -cV
+    ;;
+  start)
+    echo "Starting HAProxy..."
+    $BIN -f $CONF -D -p $PID
+    ;;
+  stop)
+    echo "Shutting down HAProxy..."
+    kill -TERM `cat $PID`
+    rm -f $PID &> /dev/null
+    ;;
+  restart)
+    stop
+    sleep 2
+    start
+    ;;
+  *)
+    echo "usage `basename $0` {check|start|stop|restart}"
+esac

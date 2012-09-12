@@ -1,0 +1,64 @@
+CBSTOOLS: The CBSTOOLS package is a set of wrappers to selected
+applications from the CBS group in Denmark.
+
+CLUSTALOMEGA: A wrapper for the clustal omega application.
+
+DOMAINATRIX: The DOMAINATRIX programs were developed by Jon Ison and
+colleagues at MRC HGMP for their protein domain research. They are
+included as an EMBASSY package as a work in progress.
+
+DOMALIGN: The DOMALIGN programs were developed by Jon Ison and
+colleagues at MRC HGMP for their protein domain research. They are
+included as an EMBASSY package as a work in progress.
+
+DOMSEARCH: The DOMSEARCH programs were developed by Jon Ison and
+colleagues at MRC HGMP for their protein domain research. They are
+included as an EMBASSY package as a work in progress.
+
+EMNU: The EMNU package is a simple EMBOSS menu system written by Gary
+Williams at HGMP.
+
+ESIM4: The ESIM4 package is an EMBOSS conversion of the SIM4 package
+from Liliana Florea.
+
+HMMER: A suite of application wrappers to the original hmmer v2.3.2
+applications written by Sean Eddy. hmmer v2.3.2 must be installed on
+the same system as EMBOSS and the location of the hmmer executables
+must be defined in your path for EMBASSY HMMER to work.
+
+IPRSCAN: The IPRSCAN package is a wrapper for the interproscan
+program.
+
+MEME: The EMBASSY MEME package contains 'wrapper' applications
+providing an EMBOSS-style interface to the applications in the
+original MEME package version 4.0.0 developed by Timothy L. Bailey.
+
+MIRA: The MIRA package is a fragment assembly program from Bastien
+Chevreux. The program was converted to EMBOSS by Alan Bleasby as two
+applications, one for EST assembly and one for shotgun fragment
+assembly
+
+MSE: The MSE package is a multiple sequence editor. The program was
+contributed to the EMBOSS package by the author, Will Gilbert, as one
+of the first EMBASSY programs.
+
+MYEMBOSS: A package for your own software developments.
+
+MYEMBOSSDEMO: The MYEMBOSSDEMO package contains example applications
+using EMBOSS data types
+
+PHYLIPNEW: The PHYLIPNEW programs are EMBOSS conversions of the
+programs in Joe Felsenstein's PHYLIP package, version 3.69.
+
+SIGNATURE: The SIGNATURE programs were developed by Jon Ison and
+colleagues at MRC HGMP for their protein domain research. They are
+included as an EMBASSY package as a work in progress.
+
+STRUCTURE: The STRUCTURE programs were developed by Jon Ison and
+colleagues at MRC HGMP for their protein domain research. They are
+included as an EMBASSY package as a work in progress.
+
+TOPO: The TOPO package is a graphics program to display membrane
+protein topology by Susan Jean Johns.
+
+VIENNA: These programs are adapted from the VIENNA RNA package.

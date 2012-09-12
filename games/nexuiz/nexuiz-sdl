@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /usr/share/games/nexuiz
+exec sh nexuiz-linux-sdl.sh

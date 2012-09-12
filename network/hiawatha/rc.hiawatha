@@ -1,0 +1,79 @@
+#!/bin/sh
+
+# Start/stop/restart the hiawatha web server
+# Copyright (c) 2009-2012 Antonio Hernández Blas <hba.nihilismus@gmail.com>
+
+#
+#            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+#                    Version 2, December 2004
+#
+# Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+#
+# Everyone is permitted to copy and distribute verbatim or modified
+# copies of this license document, and changing it is allowed as long
+# as the name is changed.
+#
+#            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+#   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+#
+#  0. You just DO WHAT THE FUCK YOU WANT TO.
+#
+
+CONF='/etc/hiawatha'
+CMMD="/usr/sbin/hiawatha -c $CONF"
+
+hiawatha_start() {
+  if [ -x /usr/sbin/hiawatha ]; then
+    if [ -d $CONF ]; then
+      PIDOF=$(pgrep -f "$CMMD")
+      if [ ! -z "$PIDOF" ]; then
+        echo "Error, hiawatha is already running."
+      else
+        echo "Starting hiawatha:  $CMMD"
+        $CMMD
+      fi
+    else
+      echo "Error, directory $CONF does not exist."
+    fi
+  fi
+}
+
+hiawatha_stop() {
+  PIDOF=$(pgrep -f "$CMMD")
+  if [ -z "$PIDOF" ]; then
+    echo "Error, hiawatha is not running."
+  else
+    echo "Stoping hiawatha:  /bin/kill -s TERM $PIDOF"
+    /bin/kill -s TERM $PIDOF
+  fi
+}
+
+hiawatha_status() {
+  PIDOF=$(pgrep -f "$CMMD")
+  if [ ! -z "$PIDOF" ]; then
+    echo "hiawatha is running."
+  else
+    echo "hiawatha is not running."
+  fi
+}
+
+case $1 in
+  start)
+    hiawatha_start
+  ;;
+  stop)
+    hiawatha_stop
+  ;;
+  restart)
+    hiawatha_stop
+    sleep 3
+    hiawatha_start
+  ;;
+  status)
+    hiawatha_status
+  ;;
+  *)
+    echo "Usage $0 {start|stop|restart|status}"
+    exit 1
+  ;;
+esac

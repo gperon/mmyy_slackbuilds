@@ -1,0 +1,4 @@
+millennium-plugins (LADSPA audio effects plugins)
+
+Included plugins: limiter, diode-ladder filter, saturation,
+quantization/dithering.

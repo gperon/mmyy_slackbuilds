@@ -1,0 +1,21 @@
+The Gnome Chemistry Utils (gchemutils) is a collection of libraries,
+programs and plugins that are useful for chemists and science students.
+
+Six programs are avaible:
+1) A 2D chemical editor (GChemPaint)
+2) A 3D molecular structure viewer (GChem3Viewer)
+3) A Crystal structure viewer (GCrystal)
+4) A Chemical calculator (GChemCalc)
+5) A Spectrum viewer (GSpectrum)
+6) A periodic table of the elements application (GChemTable)
+
+Three plugins for external programs are included:
+1) A GOffice plugin allows embedding GChemPaint supported files in
+   programs supporting the GOffice component framework
+2) A Gnumeric plugin provides a molar mass function for the spreadsheet
+3) A Mozilla plugin allows embedding 2D, 3D and crystal structures as
+   well as spectra in web pages
+
+NOTE: For building the Mozilla plugin, make sure you have Seamonkey
+installed. The Mozilla plugin might not be very stable, so if you want
+to prevent it from building, pass MOZILLA=NO to the script.

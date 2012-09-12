@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# Slackware build script for rar
+# Written by Steven Pledger <spledger91@yahoo.com>
+
+# Modifed for new rar version with x64 support by Ozan Türkyılmaz ozan.turkyilmaz@gmail.com
+
+PRGNAM=rar
+VERSION=${VERSION:-4.0.1b1}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+case "$( uname -m )" in
+  i?86) ARCH=i386 ;;
+  arm*) ARCH=arm ;;
+     *) ARCH=$( uname -m ) ;;
+esac
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+# Include unrar in the package
+UNRAR=${UNRAR:-no} # disabled by default since unrar is available on SBo
+
+set -e
+
+if [ "$ARCH" = "x86_64" ]; then
+   LIBDIRSUFFIX="64"
+   x64FIX="x64-"
+elif [ "$ARCH" = "i386" ]; then
+   ARCH=i386
+   LIBDIRSUFFIX=""
+else
+   printf "\n$ARCH is not supported...\n\n" ; exit 1
+fi
+
+rm -rf $TMP/$PRGNAM $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+tar xvf $CWD/${PRGNAM}linux-$x64FIX$VERSION.tar.gz
+cd $PRGNAM
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+mkdir -p $PKG/usr/bin
+install -m 0755 rar $PKG/usr/bin
+
+mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
+install -m 0755 default.sfx $PKG/usr/lib${LIBDIRSUFFIX}
+
+if [ "$UNRAR" != "no" ]; then
+  install -m 0755 unrar $PKG/usr/bin
+fi
+
+mkdir -p $PKG/etc
+cat rarfiles.lst > $PKG/etc/rarfiles.lst.new
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  readme.txt whatsnew.txt license.txt rar.txt order.htm technote.txt \
+    $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+      |-----handy-ruler------------------------------------------------------|
+splint: Splint (Secure Programming Lint)
+splint:
+splint: Splint is a tool for statically checking C programs for security
+splint: vulnerabilities and coding mistakes.
+splint:
+splint: Splint is developed and maintained by the Secure Programming Group
+splint: at the University of Virginia Department of Computer Science. David
+splint: Evans is the project leader and the primary developer of Splint.
+splint:
+splint:
+splint:

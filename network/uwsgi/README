@@ -1,0 +1,15 @@
+uWSGI is a fast, self-healing and developer/sysadmin-friendly
+application container server coded in pure C.  Born as a WSGI-only
+server, over time it has evolved in a complete stack for
+networked/clustered web applications, implementing message/object
+passing, caching, RPC and process management.  It uses the uwsgi (all
+lowercase; included by default in Nginx and Cherokee web servers)
+protocol for all the networking/interprocess communications.
+
+uWSGI is designed to be fully modular.  This means that different
+plugins can be used in order to add compatibility with tons of different
+technology on top of the same core.
+
+This script builds plugins for Python 2.x, Python 3.x (optional, pass
+PYTHON3=yes to enable; requires python3 to be installed), Perl PSGI, and
+Ruby Rack.

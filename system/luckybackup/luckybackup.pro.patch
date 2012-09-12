@@ -1,0 +1,22 @@
+--- luckybackup.pro~	2011-02-09 10:35:01.000000000 +0100
++++ luckybackup.pro	2011-05-04 10:11:06.239216721 +0200
+@@ -20,16 +20,16 @@
+ pixmap.path = /usr/share/pixmaps
+ pixmap.files = menu/luckybackup.xpm menu/luckybackup.png
+ 
+-documentation.path = /usr/share/doc/luckybackup
++documentation.path = /usr/doc/luckybackup-PROGVERSION
+ documentation.files = manual
+ 
+-manpage.path = /usr/share/man/man8
++manpage.path = /usr/man/man8
+ manpage.files = manpage/luckybackup.8.gz
+ 
+ translations.path = /usr/share/luckybackup
+ translations.files = translations
+ 
+-license.path = /usr/share/doc/luckybackup
++license.path = /usr/doc/luckybackup-PROGVERSION
+ license.files = license
+ 
+ INSTALLS += target menu debianmenu pixmap documentation manpage translations license

@@ -1,0 +1,35 @@
+diff -Nur libofa-0.9.3.orig//examples/example.cpp libofa-0.9.3/examples/example.cpp
+--- libofa-0.9.3.orig//examples/example.cpp	2006-05-10 13:05:37.000000000 -0500
++++ libofa-0.9.3/examples/example.cpp	2010-05-21 00:41:32.566411537 -0500
+@@ -9,6 +9,9 @@
+ 
+ #include "protocol.h"
+ 
++#include <string.h>
++#include <stdio.h>
++ 
+ AudioData* loadWaveFile(char *file);
+ AudioData* loadDataUsingLAME(char *file);
+ 
+diff -Nur libofa-0.9.3.orig//examples/protocol.cpp libofa-0.9.3/examples/protocol.cpp
+--- libofa-0.9.3.orig//examples/protocol.cpp	2006-05-10 13:05:42.000000000 -0500
++++ libofa-0.9.3/examples/protocol.cpp	2010-05-21 00:41:21.948412917 -0500
+@@ -8,6 +8,7 @@
+ -------------------------------------------------------------------*/
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <cstring>
+ #include <string>
+ #include <map>
+ #include <expat.h>
+diff -Nur libofa-0.9.3.orig//lib/signal_op.cpp libofa-0.9.3/lib/signal_op.cpp
+--- libofa-0.9.3.orig//lib/signal_op.cpp	2006-05-10 13:01:12.000000000 -0500
++++ libofa-0.9.3/lib/signal_op.cpp	2010-05-21 00:41:21.948412917 -0500
+@@ -12,6 +12,7 @@
+ // DATE CREATED: 1/12/06
+ 
+ 
++#include <cstdlib>
+ #include <math.h>
+ #include "signal_op.h"
+ #include "AFLIB/aflibConverter.h"

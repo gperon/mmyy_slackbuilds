@@ -1,0 +1,11 @@
+pekwm: Lightweight window manager for X
+pekwm: 
+pekwm: pekwm is a window manager that once up on a time was based 
+pekwm: on the aewm++ window manager, but it has evolved enough that it 
+pekwm: no longer resembles aewm++ at all. It has a much expanded 
+pekwm: feature-set, including window grouping (similar to ion, pwm, 
+pekwm: or fluxbox), autoproperties, xinerama, keygrabber that supports 
+pekwm: keychains, and much more. 
+pekwm: 
+pekwm: Website: http://pekwm.org/projects/pekwm
+pekwm: License: GNU General Public License (v2)

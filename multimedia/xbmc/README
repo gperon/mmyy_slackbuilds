@@ -1,0 +1,26 @@
+XBMC is an award winning media center application for Linux, Mac OS X,
+Windows and XBox. The ultimate hub for all your media, XBMC is easy to
+use, looks slick, and has a large helpful community.  XBMC supports
+viewing and playing a vast library of audio, video and image formats.
+XBMC has a sophisticated library management system that allows you to
+organize all your media to give you quick and immediate access.
+
+Optional dependencies are: libcec, pulseaudio, libbluray, libnfs,
+libdvdcss, vobcopy, lirc, cwiid, pybluez, id3lib, libvdpau, rtmpdump,
+libmicrohttpd, libva, avahi, ffmpeg
+
+Optional: afpfs-ng is also an optional build time requirement but
+doesn't get picked up by xbmc due to lack of afpfs-ng header files.
+
+Optional: libcrystalhd and shairpoint (not available at slackbuilds.org)
+
+Below are some paramaters that can be passed to the slackbuild to turn
+on some optional components.
+
+EXT_FFMPEG=yes|no (Default is no), requires ffmpeg
+USE_WII=yes|no (Default is no), requires cwiid and pybluez
+WEBSERVER=yes|no (Default is no), requires libmicrohttpd
+
+Note: The use of external ffmpeg is discouraged by the XBMC developers.
+A patch is provided so XBMC can be built against newer ffmpeg. However,
+this patch is NOT fully tested.

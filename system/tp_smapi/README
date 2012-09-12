@@ -1,0 +1,18 @@
+tp_smapi (SMAPI BIOS access for ThinkPad Laptops)
+
+ThinkPad laptops include a proprietary interface called SMAPI BIOS 
+(System Management Application Program Interface) which provides some
+hardware control functionality that is not accessible by other means.
+
+WARNING: 
+This driver uses undocumented features and direct hardware access.
+It thus cannot be guaranteed to work, and may cause arbitrary damage
+(especially to models on which it wasn't tested). 
+
+NOTES:
+* The source code of this package is from a tp_smapi fork:
+https://github.com/evgeni/tp_smapi
+
+* It's highly recommended to read the following links:
+http://www.thinkwiki.org/wiki/Tp_smapi
+http://wiki.archlinux.org/index.php/Tp_smapi

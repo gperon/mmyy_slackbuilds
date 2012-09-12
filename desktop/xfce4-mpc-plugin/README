@@ -1,0 +1,7 @@
+xfce4-mpc-plugin is a simple Musicpd client plugin for the Xfce panel.
+
+Features include:
+- next/stop/play/pause/previous buttons
+- current status/playing track when mouse passes over the plugin
+- decrease/increase volume with mousewheel
+- toggle random/repeat in right-click menu

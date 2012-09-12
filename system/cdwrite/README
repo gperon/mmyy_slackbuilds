@@ -1,0 +1,8 @@
+cdwrite is a console shell for reading, writing, and copying audio CDs
+as well as for creating and writing ISO images on CD media and data or
+ISO images on DVD media.  It can also encode WAV files or audio CDs to
+MP3, OGG, or FLAC files, using optionally CDDB data and setting tags.
+
+The cdwrite shell requires several additional packages for full
+functionality.  After the installation of the shell follow
+README.Slackware document from /usr/doc/cdwrite-* directory.

@@ -1,0 +1,20 @@
+Geany is a text editor using the GTK2 toolkit with basic features of an
+integrated development environment. It was developed to provide a
+small and fast IDE, which has only a few dependencies from other
+packages. It supports many filetypes and has some nice features. 
+
+If you need the GTK Symbol completion tags (removed in Geany 0.16), get 
+them (and other tag-files) from: http://download.geany.org/contrib/tags/
+
+the easiest way to download them all is:
+
+    lftp -c "open http://download.geany.org/contrib/; mirror tags"
+
+The first option is to put them in $CWD at the time you build the 
+package. Then tell the SlackBuild to include support for tags:
+
+    TAGS=yes ./geany.SlackBuild
+
+The second option is to download them and and place them in the
+~/.config/geany/tags/ directory.  You will then need to restart 
+Geany for this to take effect.

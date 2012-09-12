@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+    |-----handy-ruler------------------------------------------------------|
+btpd: btpd (The BitTorrent Protocol Daemon)
+btpd:
+btpd: Btpd is a utility for sharing files over the BitTorrent network
+btpd: protocol. It runs in daemon mode, thus needing no controlling
+btpd: terminal or gui. Instead, the daemon is controlled by btcli, its
+btpd: command line utility, or other programs capable of sending commands
+btpd: and queries on the control socket.
+btpd:
+btpd: Homepage: http://github.com/btpd/btpd
+btpd:
+btpd:

@@ -1,0 +1,105 @@
+#!/bin/sh
+
+# Slackware build script for xerces-c
+
+# Copyright 2012 Robert Allen <slacker@slaphappygeeks.com>
+# All rights reserved
+# Including Creator Endowed Unalienable Rights
+#
+# This script is placed into the public domain by the author
+
+PRGNAM=xerces-c
+VERSION=3.1.1
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+##############################################################################
+# WITHSAMPLES=1 will install samples to /usr/share/xerces-c-.../samples/
+# WITHDOCS=1 will install HTML docs to /usr/share/xerces-c-.../manual/
+WITHSAMPLES=${WITHSAMPLES:-0}
+WITHDOCS=${WITHDOCS:-0}
+##############################################################################
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+  BITS=32
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+  BITS=32
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+  BITS=64
+fi
+
+set -eu
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --mandir=/usr/man \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --disable-static \
+  --build=$ARCH-slackware-linux
+
+make -j1
+make install DESTDIR=$PKG
+
+if [ "$WITHSAMPLES" = "1" ]; then
+  find samples/ -type d -name '.deps' -exec rm -r '{}' \+
+  find samples/ -type d -name '.libs' -exec rm -r '{}' \+
+  find samples/ -type f -name '.dirstamp' -exec rm '{}' \+
+  find samples/ -type f -name 'Makefile*' -exec rm '{}' \+
+  find samples/ -type f -name '*.o' -exec rm '{}' \+
+  mkdir -p $PKG/usr/share/$PRGNAM-$VERSION/samples
+  mv $PKG/usr/bin $PKG/usr/share/$PRGNAM-$VERSION/samples
+  cp -a samples/data samples/src  $PKG/usr/share/$PRGNAM-$VERSION/samples
+else
+  rm -rf $PKG/usr/bin
+fi
+
+if [ "$WITHDOCS" = "1" ]; then
+  mkdir -p $PKG/usr/share/$PRGNAM-$VERSION/manual
+  cp -rf doc/html/* $PKG/usr/share/$PRGNAM-$VERSION/manual/.
+fi
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CREDITS README KEYS LICENSE NOTICE \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

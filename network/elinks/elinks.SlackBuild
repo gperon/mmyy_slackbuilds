@@ -1,0 +1,97 @@
+#!/bin/sh
+
+# Slackware build script for elinks
+
+# Written by Brian Muramatsu (btmura@gmail.com)
+# Thanks to dadexter@sekurity.com for help with this.
+
+# Modified by the SlackBuilds.org project
+
+PRGNAM=elinks
+VERSION=0.11.5
+BUILD=${BUILD:-2}
+TAG=${TAG:-_SBo}
+
+# Automatically determine the architecture we're building on:
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i386" ]; then
+  SLKCFLAGS="-O2 -march=i386 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP || exit 1
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2 || exit 1
+cd $PRGNAM-$VERSION || exit 1
+chown -R root:root . 
+chmod -R u+w,go+r-w,a-s .
+
+CFLAGS="$SLKCFLAGS" \
+  ./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --with-guile \
+  --enable-cgi \
+  --enable-nntp \
+  --enable-html-highlight \
+  --enable-finger \
+  --enable-bittorrent \
+  --enable-exmode \
+  --enable-88-colors \
+  --enable-256-colors \
+  || exit 1
+
+make || exit 1
+make install DESTDIR=$PKG || exit 1
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a ABOUT-NLS AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README SITES \
+  THANKS TODO doc $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/doc/$PRGNAM-$VERSION/doc/man
+find $PKG/usr/doc -name "Makefile*" -exec rm -f {} \;
+find $PKG/usr/doc -type f -exec chmod 644 {} \;
+
+# The locale.alias file is part of the glibc package; let's not clobber it
+rm -f $PKG/usr/share/locale/locale.alias
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# Move man pages to their proper location.
+mv $PKG/usr/share/man $PKG/usr
+( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $(find . -type l) ; do ln -s $(readlink $i).gz $i.gz ; rm $i ; done
+) 
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

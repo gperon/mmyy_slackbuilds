@@ -1,0 +1,4 @@
+The goal of the mozplugger project is to provide a minimalist, clean,
+ and stable general purpose Mozilla plugin module that allows the
+user to embed and launch their favorite application to handle the 
+various different types of media found on the Internet.

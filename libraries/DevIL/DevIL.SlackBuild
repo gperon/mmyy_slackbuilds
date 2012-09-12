@@ -1,0 +1,94 @@
+#!/bin/sh
+
+# Slackware build script for DevIL
+# Written by Phil Warner <pc_warner@yahoo.com>
+# Modified by Robby Workman <rworkman@slackbuilds.org>
+
+PRGNAM=DevIL
+VERSION=${VERSION:-1.6.8}
+PKG_VERSION=${VERSION}_rc2
+BUILD=${BUILD:-3}
+TAG=${TAG:-_SBo}
+
+# Automatically determine the architecture we're building on:
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+set -e
+
+rm -rf $PKG 
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP 
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$(echo $PKG_VERSION | tr _ -).tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# Fixes a libpng 1.4 problem.
+patch -p1 < $CWD/patches/devil-1.6.8-libpng14.patch
+
+# Fix the typo that prevents building with Allegro
+# Also patch files to change (ILvoid) to (void) in order to
+# fix issues with gcc 4.2.
+# Thanks to David Somero for the heads up on this.
+patch -p1 < $CWD/patches/ILvoid_fix_1.diff
+patch -p1 < $CWD/patches/ILvoid_fix_2.diff
+# There is a space in the filename's path, so we have to cd into 
+# the offending directory before patching.
+( cd cpp\ wrapper
+  patch < $CWD/patches/ILvoid_fix_3.diff
+)
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --build=$ARCH-slackware-linux
+
+force_arch="$ARCH" make
+make install DESTDIR=$PKG
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS COPYING CREDITS ChangeLog INSTALL Libraries.txt \
+  NEWS README README.unix TODO $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$PKG_VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

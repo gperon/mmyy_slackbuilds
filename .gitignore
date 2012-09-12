@@ -9,3 +9,4 @@
 .directory
 *.war
 gimp-painter/*.diff
+.directory

@@ -1,0 +1,7 @@
+GRAMPS is a genealogy program for Linux and other UNIX-like systems. GRAMPS
+stands for Genealogical Research and Analysis Management Programming System.
+GRAMPS helps you track your family tree.  It allows you to store, edit, and
+research genealogical data.
+
+GRAMPS can also use libgnomeprint, graphviz, inkscape, and freefont
+if they are installed.

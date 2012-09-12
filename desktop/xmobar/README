@@ -1,0 +1,5 @@
+Xmobar was designed to work with the xmonad Window Manager.
+
+It was inspired by the Ion3 status bar, and supports similar features,
+like dynamic color management, output templates, and extensibility
+through plugins.

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+     |-----handy-ruler------------------------------------------------------|
+uwsgi: uwsgi (fast web application server)
+uwsgi:
+uwsgi: uWSGI is a fast, self-healing, developer/sysadmin-friendly application
+uwsgi: server coded in pure C.  Born as a WSGI-only server, over time it has
+uwsgi: evolved in a complete stack for networked/clustered web applications,
+uwsgi: implementing message/object passing, caching, RPC and process
+uwsgi: management.  It is designed to be fully modular.
+uwsgi:
+uwsgi: Homepage: http://projects.unbit.it/uwsgi/
+uwsgi:
+uwsgi:

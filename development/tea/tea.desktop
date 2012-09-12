@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Type=Application
+Name=tea
+Comment=Text Editor
+Icon=tea_icon_v2
+Exec=tea
+Terminal=false
+Categories=Utility;TextEditor;
+StartupNotify=true

@@ -1,0 +1,115 @@
+#!/bin/sh
+
+# Slackware build script for tuxnes
+# Written by Kyle Guinn <elyk03@gmail.com>
+# Updated slightly by B. Watson <yalhcru@gmail.com>, with permission
+
+PRGNAM=tuxnes
+VERSION=0.75
+BUILD=${BUILD:-2}
+TAG=${TAG:-_SBo}
+
+# Automatically determine the architecture we're building on:
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+else
+  cat <<EOF
+$PRGNAM is partly written in x86 assembly language, therefore cannot
+be built on the current architecture of "$ARCH".
+
+Supported ARCH settings are "i486" and "i686".
+EOF
+  exit 1
+fi
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+# __FUNCTION__ is now a variable instead of a static string/macro in GCC 3.4+.
+# Replace __FUNCTION__ with the actual function names where it appears.
+patch -p0 < $CWD/patches/emu.c.patch
+
+# Regenerate the build system so that it will support $CFLAGS.
+patch -p0 < $CWD/patches/configure.in.patch
+rm acconfig.h install-sh missing mkinstalldirs
+aclocal
+autoheader
+automake -a
+autoconf
+
+CFLAGS="$SLKCFLAGS -fno-strict-aliasing" \
+./configure \
+  --prefix=/usr \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --with-x \
+  --build=$ARCH-slackware-linux
+
+make
+make install-strip DESTDIR=$PKG
+
+# If the gtuxnes source tarball exists, install that too.
+# http://www.sourcefiles.org/Emulators/Videogames/gtuxnes-0.75.tar.gz
+( cd $TMP
+  PRGNAM=gtuxnes
+  VERSION=0.75
+  if [ -e $CWD/$PRGNAM-$VERSION.tar.gz ]; then
+    rm -rf $PRGNAM-$VERSION
+    tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+    cd $PRGNAM-$VERSION
+    chown -R root:root .
+    chmod -R u+w,go+r-w,a-s .
+
+    # Patch the Makefile to support $CFLAGS
+    patch -p0 < $CWD/patches/Makefile.patch
+    CFLAGS="$SLKCFLAGS" make
+    install -s -m0755 -oroot -groot $PRGNAM $PKG/usr/bin
+
+    # Icon by Deleket (Jojo Mendoza), downloaded from:
+    # http://www.iconarchive.com/show/gaming-icons-by-deleket/Nintendo-NES-icon.html
+    mkdir -p $PKG/usr/share/pixmaps
+    cat $CWD/$PRGNAM.png > $PKG/usr/share/pixmaps/$PRGNAM.png
+
+    mkdir -p $PKG/usr/share/applications
+    cat $CWD/$PRGNAM.desktop > $PKG/usr/share/applications/$PRGNAM.desktop
+
+    mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+    cp -a AUTHORS CHANGES COPYING README TODO \
+      $PKG/usr/doc/$PRGNAM-$VERSION
+  fi
+) || exit 1
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS BUGS CHANGES COPYING ChangeLog NEWS README THANKS \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

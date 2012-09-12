@@ -1,0 +1,10 @@
+An open source solution to make a movie out of still pictures, 
+stills can be of any resolution (highest preferably for best 
+results). The output also could be of any resolution, from a 
+small video for youtube to a full HD (or more if you know what 
+you're doing). Since we now can make JPGs for ffmpeg and 
+mencoder as well as PPMs for encodedv this application could 
+also be called; stills2mpeg 
+
+ffmpeg is an optional dependency (it can use the already
+present mencoder).  

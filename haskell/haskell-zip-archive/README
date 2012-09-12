@@ -1,0 +1,5 @@
+This is a library for Haskell programs. It provides functions for
+creating, modifying, and extracting files from zip archives.
+
+After uninstalling, run the following command to unregister the package
+from the ghc package database: ghc-pkg recache

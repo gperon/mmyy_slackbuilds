@@ -1,0 +1,18 @@
+aMule is a multiplatform ed2k client, fork of the eMule client, using the
+wxWidgets class library. It was originally forked from the xMule project,
+which in turn was forked from the lMule project. This is turn was the
+first fork of eMule to run nativly on Linux and other Unix-like systems.
+
+libupnp is a optional dependency.
+
+You can build optimal features of aMule with following variables;
+
+DAEMON=yes Creates amuled
+CMD=yes Creates commandline client
+WEBSERVER=yes Creates webserver for remote control
+ALC=yes Creates aLinkCreator GUI version
+ALCC=yes Creates aLinkCreator CLI version
+XAS=yes Installs xChat statistic plugin
+GEOIP=yes Builds with GeoIP library support (needs GeoIP)
+MMAP=yes Uses mmap
+OPTIMIZE=no Don't use code optimizations

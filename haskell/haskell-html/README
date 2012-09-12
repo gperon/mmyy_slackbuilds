@@ -1,0 +1,5 @@
+This package contains a combinator library for constructing HTML
+documents in Haskell.
+
+After uninstalling, run this command to unregister the package from
+the ghc package database:   ghc-pkg recache

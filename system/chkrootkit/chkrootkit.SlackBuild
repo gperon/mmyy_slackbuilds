@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# Slackware build script for chkrootkit
+
+# Copyright 2007-2009  Michiel van Wessem, Manchester, United Kingdom
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PRGNAM=chkrootkit
+VERSION=${VERSION:-0.49}
+BUILD=${BUILD:-2}
+TAG=${TAG:-_SBo}
+
+# Automatically determine the architecture we're building on:
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -e 
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+if [ "$ARCH" = "i486" ]; then
+    sed -i 's#-DHAVE_LASTLOG_H#-O2 -march=i486 -mtune=i686#' Makefile
+    LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+    sed -i 's#-DHAVE_LASTLOG_H#-O2 -march=i686 -mtune=i686#' Makefile
+    LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+    sed -i 's#-DHAVE_LASTLOG_H#-O2 -fPIC#' Makefile
+    LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+SCFLAGS="$SLKCFLAGS" make
+# Lets make our own fancy make install
+DESTDIR=$PKG/usr/lib${LIBDIRSUFFIX}/chkrootkit/bin
+mkdir -p $DESTDIR
+for BINPRG in $(ls -l | grep "rwx\|\-x" | grep -v "\." | awk '{ print $9 }'); do
+    install -m 0755 $BINPRG $DESTDIR
+done
+
+# Thanks to Erik Jan Tromp (alphageek) for the suggestion on this
+# Install a wrapper script
+mkdir -p $PKG/usr/sbin
+cat << EOF > $PKG/usr/sbin/chkrootkit
+#!/bin/sh
+PRGNAM=chkrootkit
+PRGDIR=/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/bin
+cd \$PRGDIR && exec ./$PRGNAM \$*
+EOF
+chmod 0755 $PKG/usr/sbin/$PRGNAM
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a ACKNOWLEDGMENTS COPYRIGHT README* chkrootkit.lsm \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

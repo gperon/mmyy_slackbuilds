@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Ophcrack
+Exec=ophcrack
+Icon=ophcrack
+Type=Application
+Terminal=false
+Comment=Microsoft Windows password cracker
+Comment[fr]=Casseur de mot de passe Microsoft Windows
+Comment[eo]=Pasvorto Malkoda
+Categories=System;Utility;

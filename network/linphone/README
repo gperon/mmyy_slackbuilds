@@ -1,0 +1,8 @@
+Linphone is an audio and video Internet phone with GTK+ and
+console interfaces. It uses the SIP protocol, and is compatible
+with most SIP clients and gateways. It uses various audio and
+video codecs such as Speex, GSM, G711, ilbc, Theora, H263-1998,
+MPEG4, and snow.
+
+For video support you need the optional dependency ffmpeg.
+To enable support for video just pass VIDEO=yes to the script.

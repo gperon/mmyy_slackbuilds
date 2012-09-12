@@ -1,0 +1,15 @@
+Privoxy is a web proxy  with advanced filtering capabilities for 
+protecting privacy, modifying web page data, managing cookies, 
+controlling access, and removing ads, banners, pop-ups and other 
+obnoxious Internet junk. Privoxy has a very flexible configuration 
+and can be customized to suit individual needs and tastes. 
+Privoxy has application for both stand-alone systems and multi-user 
+networks.
+
+Before executing the script, you will need to create 
+a privoxy user and group.  To do that, run the following commands:
+
+groupadd -g 206 privoxy
+useradd -u 206 -g 206 -c "Web Proxy" -d /dev/null -s /bin/false privoxy
+
+See README.SLACKWARE for setup information.

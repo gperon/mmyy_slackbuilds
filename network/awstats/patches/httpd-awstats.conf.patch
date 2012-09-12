@@ -1,0 +1,44 @@
+--- tools/httpd_conf.orig	2010-10-23 19:51:54.680793559 -0500
++++ tools/httpd_conf	2010-10-23 20:05:01.614053640 -0500
+@@ -1,29 +1,23 @@
+-#
+-# Content of this file, with correct values, can be automatically added to
+-# your Apache server by using the AWStats configure.pl tool.
+-#
+-
+-
+-# If using Windows and Perl ActiveStat, this is to enable Perl script as CGI.
+-#ScriptInterpreterSource registry
+-
++# Modified by Nishant Limbachia <nishant _AT_ mnspace _DOT_ net>
++# Modified on Oct 23, 2010
++# 1. Fixup paths for SlackBuilds.org
++# 2. Tighten default access mode
+ 
+ #
+ # Directives to add to your Apache conf file to allow use of AWStats as a CGI.
+-# Note that path "/usr/local/awstats/" must reflect your AWStats install path.
+ #
+-Alias /awstatsclasses "/usr/local/awstats/wwwroot/classes/"
+-Alias /awstatscss "/usr/local/awstats/wwwroot/css/"
+-Alias /awstatsicons "/usr/local/awstats/wwwroot/icon/"
+-ScriptAlias /awstats/ "/usr/local/awstats/wwwroot/cgi-bin/"
+-
++Alias /awstatsclasses "@DOCROOT@/awstats/wwwroot/classes/"
++Alias /awstatscss "@DOCROOT@/awstats/wwwroot/css/"
++Alias /awstatsicons "@DOCROOT@/awstats/wwwroot/icon/"
++ScriptAlias /awstats/ "@DOCROOT@/awstats/wwwroot/cgi-bin/"
+ 
+ #
+ # This is to permit URL access to scripts/files in AWStats directory.
+ #
+-<Directory "/usr/local/awstats/wwwroot">
++<Directory "@DOCROOT@/awstats/wwwroot">
+     Options None
+     AllowOverride None
+-    Order allow,deny
+-    Allow from all
++    Order deny,allow
++    Deny from all
++    Allow from localhost
+ </Directory>

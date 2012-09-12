@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=eclipse
+Name=Eclipse
+GenericName=Eclipse Classic
+Comment=Eclipse Classic
+Icon=eclipse
+StartupNotify=true
+Categories=Qt;KDE;GNOME;Development;

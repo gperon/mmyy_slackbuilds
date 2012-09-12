@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+     |-----handy-ruler------------------------------------------------------|
+xmms2: XMMS2 (XMMS2 music player)
+xmms2:
+xmms2: XMMS2 is the next generation of XMMS.  The XMMS2 team is committed
+xmms2: to producing a better music player, while diligently maintaining a
+xmms2: robust and flexible design.  The goal is to make the system easy
+xmms2: for developers to maintain and integrate with.  In terms of the
+xmms2: listening experience, XMMS2 makes it possible for anyone to easily
+xmms2: manage their music collection and to interact with it in a
+xmms2: flexible manner.
+xmms2:
+xmms2:

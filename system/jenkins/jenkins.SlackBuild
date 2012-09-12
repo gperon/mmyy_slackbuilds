@@ -54,7 +54,7 @@ mkdir -p $PKG $OUTPUT
 cd $PKG
 
 mkdir -p $PKG/usr/share/$PRGNAM
-cp $CWD/$PRGNAM.zip $PKG/usr/share/$PRGNAM/$PRGNAM.war
+cp $CWD/$PRGNAM.war $PKG/usr/share/$PRGNAM/$PRGNAM.war
 
 mkdir -p $PKG/usr/bin
 cat $CWD/files/jenkins.bin.sh > $PKG/usr/bin/jenkins
@@ -78,6 +78,9 @@ touch $PKG/var/log/jenkins/jenkins.log.new
 touch $PKG/var/log/jenkins/jenkins_console.log.new
 chown -R jenkins.jenkins $PKG/var/log/jenkins
 
+# We can't depend on this directory persisting across reboots, since /var/run
+# is often on tmpfs (or even linked to /run), so we'll create this in the
+# init script's start() function too...   --rworkman
 mkdir -p $PKG/var/run/jenkins
 chown jenkins:jenkins $PKG/var/run/jenkins
 

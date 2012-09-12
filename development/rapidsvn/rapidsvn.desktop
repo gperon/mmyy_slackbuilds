@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=RapidSVN
+GenericName=SVN Client
+Comment=A GUI Client for Subversion
+Type=Application
+Exec=rapidsvn
+Icon=rapidsvn
+Categories=GTK;GNOME;Development;

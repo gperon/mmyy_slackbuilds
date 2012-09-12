@@ -1,0 +1,16 @@
+xmonad is a dynamically tiling X11 window manager that is written
+and configured in Haskell. In a normal WM, you spend half your time
+aligning and searching for windows. xmonad makes work easier, by
+automating this.
+
+After installing, use 'xwmconfig' command to reselect xmonad as window
+manager, either as root to do system-wide selection or as normal user
+to do user-specific selection.
+
+To get you started, the most basic key bindings are:
+	mod-shift-return   Launch xterm
+	mod-shift-q        Quit xmonad
+For a guided tour, see http://www.xmonad.org/tour.html
+
+After uninstalling, run this command to unregister the package from
+the ghc package database:   ghc-pkg recache

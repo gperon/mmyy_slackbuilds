@@ -1,0 +1,100 @@
+#!/bin/sh
+
+# Slackware build script for smbldap-tools
+
+# Copyright (c) 2009-2011  Chris Walker <kris240376@gmail.com> 
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above
+#   copyright notice, this list of conditions and the following disclaimer
+#   in the documentation and/or other materials provided with the
+#   distribution.
+# * Neither the name of the {company} nor the names of its
+#   contributors may be used to endorse or promote products derived from
+#   this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PRGNAM=smbldap-tools
+VERSION=0.9.7
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+ARCH=noarch
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -e
+
+rm -rf $TMP/$PRGNAM-$VERSION $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .   
+
+PERLDIR=$(perl -V:installvendorlib | cut -d\' -f2)
+
+./configure \
+  --prefix=/usr \
+  --localstatedir=/var \
+  --sysconfdir=/etc \
+  --mandir=/usr/man \
+  --with-perl-libdir=$PERLDIR
+
+make
+make DESTDIR=$PKG install
+
+# Install smbldap-tools config files
+mkdir -p $PKG/etc/smbldap-tools
+cat smbldap.conf > $PKG/etc/smbldap-tools/smbldap.conf.new
+cat smbldap_bind.conf > $PKG/etc/smbldap-tools/smbldap_bind.conf.new
+
+# Install man pages
+mkdir -p $PKG/usr/man/man8
+install -o root -g root -m 644 *.8 $PKG/usr/man/man8
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+install -o root -g root -m 644 \
+  CONTRIBUTORS COPYING ChangeLog FILES INFRA INSTALL README TODO \
+  doc/smbldap-tools.pdf doc/smbldap-tools.html $CWD/$PRGNAM.SlackBuild \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/conf
+install -o root -g root -m 644 \
+  doc/slapd.conf.example doc/smb.conf.example doc/smb.conf.tmpl \
+  doc/smb.smbldap.conf.example doc/smb.smbldap.conf.tmpl \
+  $PKG/usr/doc/$PRGNAM-$VERSION/conf
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/migration_scripts
+install -o root -g root -m 755 \
+  doc/migration_scripts/* \
+  $PKG/usr/doc/$PRGNAM-$VERSION/migration_scripts
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc 
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

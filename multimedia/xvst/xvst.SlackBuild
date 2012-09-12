@@ -1,0 +1,106 @@
+#!/bin/sh
+
+# Slackware build script for xvst
+
+# Written by Larry Hajali <larryhaja[at]gmail[dot]com>
+
+PRGNAM=xvst
+VERSION=${VERSION:-2.4.1}
+BUILD=${BUILD:-2}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+else
+  SLKCFLAGS="-O2"
+fi
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+mkdir $PRGNAM-$VERSION
+cd $PRGNAM-$VERSION
+unzip $CWD/xVST_${VERSION//\./_}_src.zip
+# Xvst hasn't had a stable release in a couple years.
+# However, the developer(s) have updated the plugins in svn.
+# Add PLUGINS=yes to the slackbuild to download the updated
+# plugins/translations.
+if [ "${PLUGINS:-no}" == "yes" ]; then
+  svn export --force https://xviservicethief.svn.sourceforge.net/svnroot/xviservicethief/trunk/resources/services \
+    resources/services
+  svn export --force https://xviservicethief.svn.sourceforge.net/svnroot/xviservicethief/trunk/resources/translations/definitions \
+    resources/translations/definitions
+fi
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# Change file from DOS to Unix, change path for plugins and language files
+# and make translations.
+sed -i 's/\r//g' "how to compile.txt"
+sed -i "s|getApplicationPath()\ +\ \"|\"/usr/share/$PRGNAM|g" src/options.cpp
+lrelease resources/translations/*.ts
+rm -f resources/translations/template_for_new_translations.qm
+
+# Fix to compile against gcc 4.7.x.
+patch -p1 < $CWD/gcc-4.7.patch
+
+qmake -set build_mode dynamic_build
+qmake PREFIX=/usr -o Makefile xVideoServiceThief.pro
+make \
+  CFLAGS="-pipe $SLKCFLAGS -Wall -W -D_REENTRANT \$(DEFINES)" \
+  CXXFLAGS="-pipe $SLKCFLAGS -Wall -W -D_REENTRANT \$(DEFINES)"
+
+# Install program and corresponding files.
+install -D -m 0755 bin/$PRGNAM $PKG/usr/bin/$PRGNAM
+mkdir -p $PKG/usr/share/$PRGNAM/{plugins,languages}
+find resources/services -name "*.js" \
+  -exec cp -dpR {} $PKG/usr/share/$PRGNAM/plugins \;
+install -m 0644 resources/translations/*.qm \
+  $PKG/usr/share/$PRGNAM/languages
+install -m 0644 resources/translations/definitions/*.language \
+  $PKG/usr/share/$PRGNAM/languages
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/share/{applications,pixmaps}
+install -m 0644 $CWD/$PRGNAM.desktop $PKG/usr/share/applications
+install -m 0644 resources/images/InformationLogo.png \
+  $PKG/usr/share/pixmaps/$PRGNAM.png
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  *.txt resources/changelog.txt \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

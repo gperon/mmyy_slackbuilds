@@ -1,0 +1,4 @@
+This is the GNOME Virtual File System, currently used as one of the
+foundations of the Nautilus file manager.
+
+avahi is an optional dependency.

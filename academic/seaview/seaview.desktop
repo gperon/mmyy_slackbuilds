@@ -1,0 +1,7 @@
+[Desktop Entry]
+Categories=Education;
+Exec=seaview
+Icon=seaview
+Name=SeaView
+StartupNotify=false
+Type=Application

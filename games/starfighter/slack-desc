@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|' on
+# the right side marks the last column you can put a character in.  You must make
+# exactly 11 lines for the formatting to be correct.  It's also customary to
+# leave one space after the ':'.
+
+           |-----handy-ruler------------------------------------------------------|
+starfighter: starfighter (Project Starfighter game)
+starfighter:
+starfighter: An old school 2D shoot 'em up. In the game you take on the role of a
+starfighter: rebel pilot called Chris, who is attempting to overthrow a military
+starfighter: corporation called Weapco. Weapco has seized control of the known
+starfighter: universe and currently rules it with an iron fist. Chris can no
+starfighter: longer stand back and watch as millions of people suffer and die. He
+starfighter: steals an experimental craft known as "Firefly" and begins his
+starfighter: mission to fight his way to Sol, freeing key systems along the way.
+starfighter: The game opens with Chris attempting to escape a Weapco patrol.
+starfighter: http://sourceforge.net/projects/pr-starfighter/?source=directory

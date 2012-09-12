@@ -1,0 +1,136 @@
+#!/bin/sh
+
+# Slackware build script for zathura
+
+# Copyright 2010  Binh Nguyen <binhnguyen@fastmail.fm>
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Updated 20120312 by B. Watson <yalhcru@gmail.com>:
+# - Updated for v0.1.1, including poppler plugin
+# - Restore missing .desktop file and AUTHORS doc
+# - Add an icon
+# - Include generated man pages
+# - fix homepage URL
+
+# Updated 20120721 by B. Watson <yalhcru@gmail.com>:
+# - Updated for v0.2.0
+# - generated man pages now included by upstream, get rid of ours
+
+PRGNAM=zathura
+VERSION=${VERSION:-0.2.0}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+set -eu
+
+# zathura no longer includes PDF support in the core. Instead it uses
+# plugins. This build includes the default PDF plugin, without which zathura
+# completely useless.
+PLUGIN=$PRGNAM-pdf-poppler
+PLUGINVER=${PLUGINVER:-$VERSION}
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+sed -i "s/-pedantic/$SLKCFLAGS/" config.mk
+
+make LIBDIR=/usr/lib$LIBDIRSUFFIX
+make install LIBDIR=/usr/lib$LIBDIRSUFFIX MANPREFIX=/usr/man DESTDIR=$PKG RSTTOMAN=""
+gzip $PKG/usr/man/man?/*.?
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS LICENSE README $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+# Now build the plugin.
+cd $TMP
+# Hack, lets #include <zathura/document.h> in pdf.h work with an uninstalled
+# copy of zathura by saying "-I.."
+rm -f $PRGNAM
+ln -s $PRGNAM-$VERSION $PRGNAM
+
+rm -rf $PLUGIN-$PLUGINVER
+tar xvf $CWD/$PLUGIN-$PLUGINVER.tar.gz
+cd $PLUGIN-$PLUGINVER
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# ZATHURA_VERSION_CHECK=0 shouldn't be required :(
+
+sed -i "s/-fPIC/$SLKCFLAGS/" config.mk
+make install \
+  ZATHURA_INC=-I.. \
+  PLUGINDIR=/usr/lib$LIBDIRSUFFIX/$PRGNAM \
+  DESTDIR=$PKG \
+  ZATHURA_VERSION_CHECK=0
+strip $PKG/usr/lib$LIBDIRSUFFIX/$PRGNAM/*.so
+
+# icon converted from https://pwmt.org/img/fav.ico
+mkdir -p $PKG/usr/share/pixmaps
+cat $CWD/$PRGNAM.png > $PKG/usr/share/pixmaps/$PRGNAM.png
+echo "Icon=$PRGNAM" >> $PKG/usr/share/applications/$PRGNAM.desktop
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+       |-----handy-ruler------------------------------------------------------|
+cdwrite: cdwrite (CD/DVD reading and writing and MP3/OGG/FLAC encoding shell)
+cdwrite:
+cdwrite: cdwrite is a console shell for reading, writing, and copying audio
+cdwrite: CDs as well as for creating and writing ISO images on CD media and
+cdwrite: data or ISO images on DVD media.  It can also encode WAV files or
+cdwrite: audio CDs to MP3, OGG, or FLAC files, using optionally CDDB data and
+cdwrite: setting tags.
+cdwrite:
+cdwrite: The cdwrite shell requires a lot of the additional packages for full
+cdwrite: functionality.  After the installation of the shell follow
+cdwrite: README.Slackware document from /usr/doc/cdwrite-* directory.

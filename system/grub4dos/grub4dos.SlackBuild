@@ -1,0 +1,74 @@
+#!/bin/sh
+
+# Slackware build script for grub4dos
+
+# Written by Steven Pledger <spledger91@yahoo.com>
+
+PRGNAM=grub4dos
+VERSION=${VERSION:-0.4.5b_2011_02_20}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+TARVERSION=$(echo $VERSION | tr '_' '-')
+SRCVERSION=$(echo $VERSION | cut -f1 -d_ )
+
+# Now using the precompiled binary since Grub4dos doesn't build on other archs anyway
+ARCH="i386"
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+# Package Chinese version
+CHINESE="${CHINESE:-no}"
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$SRCVERSION
+# Guess they're using 7-zip archives now.
+#unzip $CWD/$PRGNAM-$TARVERSION.zip
+7z x $CWD/$PRGNAM-$TARVERSION.7z
+cd $PRGNAM-$SRCVERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# bootlace.com is a hybrid DOS/Linux executable for installing grub4dos to MBR/PBR
+mkdir -p $PKG/usr/sbin
+install -m 0755 bootlace.com $PKG/usr/sbin
+
+# grldr is the main bootloader file
+# grub.exe is a modified version of grldr that can be loaded just like a Linux kernel
+mkdir -p $PKG/usr/lib/$PRGNAM
+if [ "$CHINESE" = "yes" ]; then
+  cp -a chinese/grldr chinese/grub.exe $PKG/usr/lib/$PRGNAM
+else
+  cp -a grldr grub.exe $PKG/usr/lib/$PRGNAM
+fi
+
+# This file is needed to savedefault menu entry
+cp -a default $PKG/usr/lib/$PRGNAM
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  COPYING README_GRUB4DOS.txt ChangeLog_GRUB4DOS.txt ChangeLog_chenall.txt \
+  Get_Source_of_This_Build.txt \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat menu.lst > $PKG/usr/doc/$PRGNAM-$VERSION/menu.lst.SAMPLE
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

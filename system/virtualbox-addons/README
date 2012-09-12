@@ -1,0 +1,8 @@
+This is the userspace part of the VirtualBox Guest Additions.
+Together with virtualbox-kernel-addons they enable shared folders,
+shared clipboard, etcetera, inside your Slackware guest machines.
+
+See README.SLACKWARE for setup information.
+
+This package is intended to be used on GUEST / VIRTUAL MACHINES running
+Slackware, NOT the host system.

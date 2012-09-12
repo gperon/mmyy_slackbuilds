@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Exim's spool directory
+SPOOL=/var/spool/exim
+
+# Check for spool and the tidydb utility
+test -d $SPOOL -a -x /usr/sbin/exim_tidydb || exit
+
+# Tidy up the contents of the hints databases
+find $SPOOL/db -type f \! -name '*.lockfile' -printf '%f\0' \
+  | xargs -0 -I {} -n 1 -r su exim -s /bin/sh -c \
+  "/usr/sbin/exim_tidydb -t 7d $SPOOL {} > /dev/null"

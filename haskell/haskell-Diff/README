@@ -1,0 +1,4 @@
+Basic implementation of the standard O(ND) diff algorithm.
+
+After uninstalling, run this command to unregister the package from
+the ghc package database:   ghc-pkg recache

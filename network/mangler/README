@@ -1,0 +1,5 @@
+Mangler is an open source VOIP client capable of connecting to
+Ventrilo 3.x servers. It is capable of performing almost all
+standard user functionality found in a Windows Ventrilo client.
+
+Optional dependencies include espeak, g15tools, and celt.

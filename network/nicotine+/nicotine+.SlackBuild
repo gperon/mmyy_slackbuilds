@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Slackware build script for nicotine+
+# Originally written by Iskar Enev <iskar.enev[@]gmail.com>
+# Modified by the SlackBuilds.org project
+# Maintained as of version 1.2.16 by Audrius Kažukauskas <audrius@neutrino.lt>
+
+PRGNAM=nicotine+
+VERSION=${VERSION:-1.2.16}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -eu
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar -xjvf $CWD/$PRGNAM-$VERSION.tar.bz2
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+python setup.py install --root=$PKG
+
+mv $PKG/usr/share/man $PKG/usr
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
+( cd $PKG/usr/bin ; ln -sf nicotine.py nicotine )
+
+# Let's use the larger icon to ensure proper scaling.
+sed -i 's/Icon=nicotine-plus/Icon=nicotine-plus-96px/' \
+  $PKG/usr/share/applications/nicotine.desktop
+rm -f $PKG/usr/share/pixmaps/*
+cp -a files/nicotine-plus-96px.png $PKG/usr/share/pixmaps
+
+mkdir -p $PKG/usr/doc
+cp -a COPYING $PKG/usr/share/nicotine/documentation
+mv $PKG/usr/share/nicotine/documentation $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

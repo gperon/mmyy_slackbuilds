@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+        |-----handy-ruler------------------------------------------------------|
+nitrogen: nitrogen (X background setter) 
+nitrogen:
+nitrogen: - Multihead and Xinerama aware
+nitrogen: - Can recall most recently set wallpaper (great for startup)
+nitrogen: - Uses freedesktop.org standard for thumbnails
+nitrogen: - Can set Gnome background
+nitrogen: - Command line options for script accessibility
+nitrogen: - Inofify monitoring of browse directory
+nitrogen: - Lazy loading of thumbnails conserves memory
+nitrogen: - Can automatically determine best mode (centered, scaled, or
+nitrogen:   tiled)

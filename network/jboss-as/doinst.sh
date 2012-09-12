@@ -22,20 +22,6 @@ preserve_perms() {
   config $NEW
 }
 
-configall(){
-	for i in  *
-	do
-		if test -f $i
-		then
-			config $i
-		elif test -d $i
-		then
-			cd $i
-			configall
-			cd ..
-		fi
-	done
-}
 # Keep same perms on rc.jboss-as.new:
 preserve_perms  etc/rc.d/rc.jboss-as.new
 

@@ -1,0 +1,5 @@
+perl-Net-Daemon (perl extension for portable daemons)
+
+Net::Daemon is an abstract base class for implementing portable
+server applications in a very simple way.
+It offers methods for the most common tasks a daemon needs.

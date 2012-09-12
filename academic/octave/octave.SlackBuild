@@ -1,0 +1,107 @@
+#!/bin/sh
+
+# Slackware build script for octave
+# Written by Kyle Guinn <elyk03@gmail.com>
+
+PRGNAM="octave"
+VERSION=${VERSION:-3.4.2}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+DOCS="AUTHORS BUGS COPYING ChangeLog INSTALL* NEWS README"
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+# Default to use ImageMagick (shipped with Slackware) instead of
+# GraphicsMagick so that octave will have at least some sort of image
+# reading capabilities.  ImageMagick limits images to 16bpp, but if you're
+# running a multilib environment, it might be easier to accept this limit
+# rather than to compile GraphicsMagick.  (thanks to Joni Martikainen)
+WITH_MAGICK=${WITH_MAGICK:-ImageMagick} # alternatively, "GraphicsMagick"
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+cd $PRGNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-st .
+
+# Several configure checks look for headers in the 'amd' directory
+# instead of 'cxsparse', 'camd', 'colamd', and 'ccolamd' directories
+# as liboctave/oct-sparse.h expects.  Fix the typos and reconfigure.
+# Note that camd.h doesn't appear to be included anywhere, but is used
+# to determine if the CAMD library is present.
+sed -i -e 's| amd/cs\.h| cxsparse/cs.h|' \
+       -e 's| amd/camd\.h| camd/camd.h|' \
+       -e 's| amd/colamd\.h| colamd/colamd.h|' \
+       -e 's| amd/ccolamd\.h| ccolamd/ccolamd.h|' configure.ac
+autoreconf -vif
+# If you have amd.h in some non-default location (e.g. /usr/include/amd/amd.h)
+# now the check for umfpack.h will fail because umfpack.h includes "amd.h"
+# instead of "amd/amd.h".  The --with-amd-includedir option below fixes this.
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+FFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --infodir=/usr/info \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --enable-shared \
+  --disable-static \
+  --enable-strict-warning-flags \
+  --with-magick=$WITH_MAGICK \
+  --with-amd-includedir=/usr/include/amd \
+  --build=$ARCH-slackware-linux
+
+make
+make install-strip DESTDIR=$PKG
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+
+rm -f $PKG/usr/info/dir
+gzip -9 $PKG/usr/info/*.info*
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

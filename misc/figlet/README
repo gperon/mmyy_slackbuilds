@@ -1,0 +1,4 @@
+FIGlet is a program for making large letters out of ordinary text
+
+This contains the standard distribution fonts but more are available
+from the homepage. Fonts should be untarred into /usr/share/figlet/

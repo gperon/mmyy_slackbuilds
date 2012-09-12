@@ -1,0 +1,7 @@
+pthsem is an extended version of the GNU Pth, a user mode
+multi threading library, with added support for semaphores.
+This package can be installed in parallel with a normal pth,
+which is included in Slackware.
+
+Project page:
+http://www.auto.tuwien.ac.at/~mkoegler/index.php/pth

@@ -1,0 +1,162 @@
+#!/bin/sh
+
+# Slackware build script for Openbox
+
+# Copyright 2006-2010 Chess Griffin <chess@chessgriffin.com>
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Modifications for KDE and GNOME xinitrc scripts and Slackware 12.1
+# KDM session fixes by Phillip Warner <pc_warner@yahoo.com>
+
+# Currently maintained by Robby Workman <rw@rlworkman.net>
+
+PRGNAM=openbox
+VERSION=${VERSION:-3.5.0}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+# Set these to "YES" if you want your package to include a xinitrc file
+# for running Openbox in KDE or GNOME, respectively.
+# Otherwise, you can add the xinitrc files manually to /etc/X11/xinit and
+# the openbox-kde-session and openbox-gnome-session files to /usr/bin.
+# The files can be found under /usr/doc/openbox
+# Don't forget to make them executable if you copy them from /usr/doc!
+#
+# This can be specified on the command line when calling the build script:
+#   KXINIT=YES ./openbox.SlackBuild
+KXINIT=${KXINIT:-NO}
+GXINIT=${GXINIT:-NO}
+
+DOCS="AUTHORS CHANGELOG COMPLIANCE COPYING README"
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --enable-startup-notification \
+  --build=$ARCH-slackware-linux \
+  --host=$ARCH-slackware-linux
+
+make
+make install DESTDIR=$PKG
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+
+# Add xinitrc.openbox so that openbox will show up as an option in xwmconfig
+install -D -m 0755 $CWD/xinitrc.openbox $PKG/etc/X11/xinit/xinitrc.openbox
+
+# Add xinitrc.openbox-session so that openbox-session will show up as an option in xwmconfig
+install -D -m 0755 $CWD/xinitrc.openbox-session $PKG/etc/X11/xinit/xinitrc.openbox-session
+
+# Optionally install xinitrc scripts for running Openbox in KDE or GNOME
+# Move the scripts from /usr/bin if the xinitrc scripts are not installed.
+if [ "$KXINIT" == "YES" ]; then
+	install -D -m 0755 $CWD/xinitrc.kde-openbox $PKG/etc/X11/xinit/xinitrc.kde-openbox
+else
+	cat $PKG/usr/bin/openbox-kde-session > $PKG/usr/share/doc/$PRGNAM/openbox-kde-session
+	rm -vf $PKG/usr/bin/openbox-kde-session
+fi
+if [ "$GXINIT" == "YES" ]; then
+	install -D -m 0755 $CWD/xinitrc.gnome-openbox $PKG/etc/X11/xinit/xinitrc.gnome-openbox
+else
+	cat $PKG/usr/bin/openbox-gnome-session > $PKG/usr/share/doc/$PRGNAM/openbox-gnome-session
+	rm -vf $PKG/usr/bin/openbox-gnome-session
+fi
+
+# Change name of openbox.desktop KDM session file so it corresponds to openbox-session
+( cd $PKG/usr/share/xsessions
+  mv openbox.desktop openbox-session.desktop
+  sed -i "s/Name=Openbox/Name=Openbox-Session/" openbox-session.desktop
+)
+
+# Create symlinks to KDM session desktop files so KDM will use them
+mkdir -p $PKG/usr/share/apps/kdm/sessions
+( cd $PKG/usr/share/apps/kdm/sessions
+  for i in $PKG/usr/share/xsessions/openbox*.desktop ; do
+  	ln -s /usr/share/xsessions/$(basename $i) $(basename $i) ;
+  done
+)
+
+mkdir -p $PKG/usr/doc
+mv $PKG/usr/share/doc/$PRGNAM $PKG/usr/doc/$PRGNAM-$VERSION
+rmdir $PKG/usr/share/doc
+cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/xinit
+for i in $CWD/xinitrc.*openbox* ; do
+	cat $i > $PKG/usr/doc/$PRGNAM-$VERSION/xinit/$(basename $i) ;
+done
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+( cd $PKG/usr/doc ; ln -s $PRGNAM-$VERSION $PRGNAM )
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

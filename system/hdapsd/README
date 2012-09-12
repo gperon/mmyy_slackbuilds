@@ -1,0 +1,10 @@
+This is a disk protection user-space daemon for IBM/Lenovo ThinkPads.
+It monitors the acceleration values through the HDAPS interface and
+automatically initiates disk head parking if a fall or sliding of the
+laptop is detected. 
+
+Be sure to see README.SLACKWARE for usage information.
+
+Recommended readings:
+http://www.thinkwiki.org/wiki/HDAPS
+http://wiki.archlinux.org/index.php/HDAPS

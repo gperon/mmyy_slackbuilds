@@ -1,0 +1,44 @@
+PRGNAM="EMBASSY"
+VERSION="6.5.7"
+HOMEPAGE="http://emboss.sourceforge.net/embassy/"
+DOWNLOAD="ftp://emboss.open-bio.org/pub/EMBOSS/CBSTOOLS-1.0.0.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/CLUSTALOMEGA-0.2.0.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/DOMAINATRIX-0.1.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/DOMALIGN-0.1.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/DOMSEARCH-0.1.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/EMNU-1.05.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/ESIM4-1.0.0.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/HMMER-2.3.2.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/IPRSCAN-4.3.1.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/MEME-4.7.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/MSE-3.0.0.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/MYEMBOSS-6.5.1.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/MYEMBOSSDEMO-6.5.0.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/PHYLIPNEW-3.69.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/SIGNATURE-0.1.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/STRUCTURE-0.1.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/TOPO-2.0.650.tar.gz \
+	ftp://emboss.open-bio.org/pub/EMBOSS/VIENNA-1.7.2.650.tar.gz"
+MD5SUM="4913776ee5ff93ae839762107f8d8bc8 \
+f24967741eb2fe9c3bccd6458276e127 \
+d7539f6ee6f25bb401ffad2802441010 \
+079a6371390201fa39f19c25cce8d5ba \
+5fd0e943f4db9f9ea008eabd68dc60e7 \
+6e0b7ac797554c52f413d23e5781e71b \
+2ca9069bf9c87697bf52c77b25a659d7 \
+d82017cc68ce3d381e8cc6dcfd68f39e \
+81720978302afc8d855b316651be5b2a \
+4d2dac5a2d66ad43552271be81c1cd1b \
+3b26ecbdf8032680f1de148f5d91d776 \
+54e9ca4dadd0b988f8964f886c6f026c \
+f3cb3421a79e7e6466686628de346b20 \
+488d117d32a391a9b53c60260595e67b \
+361773a6f1b0b862f5cbf3d4d3ee1fa0 \
+40afa99f995f34275005b76f8b05c337 \
+5a0b0c478cece42cc564599b91f9c1cf \
+633c16e28818b0dc4d3ae084a7beae56"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="EMBOSS"
+MAINTAINER="Petar Petrov"
+EMAIL="ppetrov@paju.oulu.fi"

@@ -1,0 +1,5 @@
+Provides high level and low level interfaces for network client and
+server programming in Haskell.  Also URI interface is included.
+
+After uninstalling, run this command to unregister the package from
+the ghc package database:   ghc-pkg recache

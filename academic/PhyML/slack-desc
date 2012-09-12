@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+     |-----handy-ruler------------------------------------------------------|
+PhyML: PhyML (Phylogenetic estimation using Maximum Likelihood)
+PhyML:
+PhyML: PhyML is a software that estimates maximum likelihood phylogenies
+PhyML: from alignments of nucleotide or amino acid sequences. It provides a
+PhyML: wide range of options that were designed to facilitate standard
+PhyML: phylogenetic analyses.
+PhyML:
+PhyML: References: /usr/doc/PhyML-$VERSION/References
+PhyML: Home: http://code.google.com/p/phyml/
+PhyML:
+PhyML:

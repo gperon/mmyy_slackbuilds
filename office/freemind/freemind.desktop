@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Exec=freemind
+TryExec=freemind
+Icon=freemind
+Terminal=false
+Name=FreeMind
+GenericName=FreeMind
+Comment=Mind Mapping Tool
+Categories=Office;
+Type=Application
+MimeType=application/x-freemind;
+StartupNotify=true

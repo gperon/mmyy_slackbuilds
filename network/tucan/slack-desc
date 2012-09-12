@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|' on
+# the right side marks the last column you can put a character in.  You must make
+# exactly 11 lines for the formatting to be correct.  It's also customary to
+# leave one space after the ':'.
+
+     |-----handy-ruler------------------------------------------------------|
+tucan: Tucan (download and upload manager)
+tucan:
+tucan: Tucan Manager is a free file sharing application designed for 1-Click
+tucan: Hosters. Fast and lightweight, Tucan is fully open-source and
+tucan: compatible with Windows, GNU/Linux, and MacOSX.
+tucan:
+tucan: http://www.tucaneando.com/
+tucan:
+tucan:
+tucan:
+tucan:

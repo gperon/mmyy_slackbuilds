@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# koules.kde
+# Wrapper script to launch koules from a KDE shortcut
+# Author: B. Watson (yalhcru@gmail.com)
+
+# If the GUI launcher can't run (probably because Tcl/Tk isn't
+# installed), just start the game with default options.
+
+# This script used to use artsdsp to make the dumb old OSS sound code
+# in the game play nice with KDE's sound server. Apparently this is no
+# longer necessary in KDE 4 (at least, it seems to work for me without it).
+
+koules-launcher || koules

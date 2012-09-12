@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# Slackware build script for Eduke32 HRP (High Res Pack)
+
+# Written by B. Watson (yalhcru@gmail.com)
+
+PRGNAM=eduke32_hires_pack
+VERSION=${VERSION:-4.0_321}
+ARCH=noarch
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+VERMAJOR=$( echo $VERSION | cut -d_ -f1 )
+VERMINOR=$( echo $VERSION | cut -d_ -f2 )
+ZIPFILE="dn3d_hrp-${VERMAJOR}(${VERMINOR}).zip"
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+mkdir $PRGNAM-$VERSION
+cd $PRGNAM-$VERSION
+unzip $CWD/$ZIPFILE
+chown -R root:root .
+find . -type d | xargs chmod 755
+find . -type f | xargs chmod 644
+
+mkdir -p $PKG/usr/share/games/eduke32 
+mv autoload $PKG/usr/share/games/eduke32/autoload
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+# If they have the music pack, include that too
+if [ -r $CWD/eduke32_mus.zip ]; then
+  unzip $CWD/eduke32_mus.zip music_readme.txt
+  cat music_readme.txt > $PKG/usr/doc/$PRGNAM-$VERSION/music_readme.txt
+  cat $CWD/eduke32_mus.zip > \
+    $PKG/usr/share/games/eduke32/autoload/duke3d.grp/eduke32_mus.zip
+fi
+
+cp *.txt $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/README > $PKG/usr/doc/$PRGNAM-$VERSION/README
+
+# De-windows-ize the docs
+sed -i -s -e "s/\\x92/'/g" \
+          -e 's/\x96/-/g' \
+          -e 's/\r//g' \
+          $PKG/usr/doc/$PRGNAM-$VERSION/*.txt
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

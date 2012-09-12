@@ -1,0 +1,19 @@
+--- cbpolicyd.orig	2010-11-30 12:03:52.815487946 -0600
++++ cbpolicyd	2010-11-30 12:05:04.310762746 -0600
+@@ -53,13 +53,13 @@
+ 
+ 
+ 	# Set defaults
+-	$cfg->{'config_file'} = "/etc/cluebringer.conf";
++	$cfg->{'config_file'} = "/etc/policyd2.conf";
+ 
+ 	$server->{'timeout'} = 120;
+ 	$server->{'background'} = "yes";
+-	$server->{'pid_file'} = "/var/run/cbpolicyd.pid";
++	$server->{'pid_file'} = "/var/run/policyd2.pid";
+ 	$server->{'log_level'} = 2;
+-	$server->{'log_file'} = "/var/log/cbpolicyd.log";
++	$server->{'log_file'} = "/var/log/policyd2.log";
+ 
+ 	$server->{'host'} = "*";
+ 	$server->{'port'} = 10031;

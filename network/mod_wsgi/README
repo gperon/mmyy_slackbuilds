@@ -1,0 +1,11 @@
+mod_wsgi is a simple to use Apache module which can host any
+Python application which supports the Python WSGI interface.
+The module would be suitable for use in hosting high performance
+production web sites as well as your average personal sites
+running on commodity web hosting services.
+
+All major Python web frameworks/applications support mod_wsgi;
+that means Django, Pylons, Turbogears, etcetera...
+
+You'll need to add the following line to your /etc/httpd/httpd.conf file:
+  Include /etc/httpd/extra/mod_wsgi.conf

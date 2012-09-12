@@ -1,0 +1,4 @@
+UnRTF is a command-line program written in C which converts 
+documents in Rich Text (.rtf) format to HTML, LaTeX, PostScript,
+and other formats. Converting to HTML, it supports a number of 
+features of Rich Text Format.

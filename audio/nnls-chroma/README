@@ -1,0 +1,10 @@
+nnls-chroma is an open source Vamp plugin library for harmony and chord
+extraction with some features aimed at amateur musicians, and some at
+music information retrieval researchers.  It contains the Chordino,
+NNLS Chroma and Tuning plugins described below. Their main features are:
+
+* Chordino: a simple, no frills chord transcription method based on NNLS
+Chroma features,
+* NNLS Chroma: high-quality chroma features for harmony visualisation
+or further processing,
+* Tuning: an estimate of the 'concert pitch' tuning.

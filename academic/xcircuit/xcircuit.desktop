@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=xcircuit
+Name=xcircuit
+GenericName=Circuit drawing program
+Icon=xcircuit
+Terminal=false
+Categories=Qt;KDE;Graphics;Development;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Schism Tracker
+GenericName=Impulse Tracker Clone
+Exec=schismtracker
+Icon=/usr/share/pixmaps/schism-icon-48.png
+Type=Application
+Categories=AudioVideo;AudioVideoEditing;

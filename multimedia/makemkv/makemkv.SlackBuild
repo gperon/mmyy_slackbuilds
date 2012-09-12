@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# Slackware build script for MakeMKV
+
+# Written by T3slider <t3slider@gmail.com>
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PRGNAM=makemkv
+VERSION=${VERSION:-1.7.6}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "x86_64" ]; then
+  ARCHDIR=amd64
+  LIBDIRSUFFIX="64"
+else
+  ARCH="i486"
+  ARCHDIR=i386
+  LIBDIRSUFFIX=""
+fi
+# Note: MakeMKV now includes a mips32 binary, but since there is no official
+# MIPS Slackware port I'm ignoring it unless someone complains. Still no ARM
+# version.
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+# Build the open source component first...
+rm -rf ${PRGNAM}-oss-${VERSION}
+tar xvf $CWD/${PRGNAM}-oss-${VERSION}.tar.gz
+cd ${PRGNAM}-oss-${VERSION}
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# The makefile looks good now, but we'll define LIBDIR...
+make -f makefile.linux
+make -f makefile.linux install LIBDIR="\${PREFIX}/lib${LIBDIRSUFFIX}" DESTDIR=$PKG
+
+# Now extract/copy the closed source component...
+cd $TMP
+rm -rf ${PRGNAM}-bin-${VERSION}
+tar xvf $CWD/${PRGNAM}-bin-${VERSION}.tar.gz
+cd ${PRGNAM}-bin-${VERSION}
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# The makefile now supports DESTDIR so it's easier to use it. This is just
+# removing the mandatory interactive EULA agreement which might confuse
+# SlackBuild users (check the README which tells you to read the EULA anyway...)
+sed -i "s/^\(install:\).*/\1/" makefile.linux
+
+# We will not leave CPU detection up to the makefile here just in case...
+make -f makefile.linux install ARCH=$ARCHDIR ARCH_OK=1 DESTDIR=$PKG
+
+# Remove the 32-bit mmdtsdec binary on 64-bit systems. The author of MakeMKV
+# claims that this will work on 64-bit systems as well -- see here.
+# http://www.makemkv.com/dtshd/
+# This is however a 32-bit binary linking to /lib/ld-linux.so.2 which will not
+# work on pure Slackware64. makemkvcon may do some clever things to get around
+# this on 64-bit systems but right now audio transcoding is crashing even for
+# DTS-HD core audio, so I cannot test it.
+if [ "$ARCH" = "x86_64" ]; then
+  rm -f $PKG/usr/bin/mmdtsdec
+fi
+
+find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  src/eula_en_linux.txt \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

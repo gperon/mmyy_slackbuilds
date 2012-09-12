@@ -1,0 +1,8 @@
+amrwb - AMR Wide Band Speech Codec
+
+This is library is an effort to link against the amrwb-codec,
+standardized by the 3GPP, and used in modern mobile-phones
+when recording video or speech, for example.
+
+The library itself is actually just a wrapper around the original code
+released by 3GPP.

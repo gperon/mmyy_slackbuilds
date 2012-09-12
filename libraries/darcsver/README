@@ -1,0 +1,3 @@
+darcsver generate a version number from darcs history.
+
+This package does NOT require darcs :)

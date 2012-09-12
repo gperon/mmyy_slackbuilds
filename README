@@ -30,3 +30,14 @@ they are here, working or not
 ** TESTING/BROKEN **
   luxrender - unbiased rendering engine
   openjdk - Open Java Development Kit is a free and open source implementation of the Java  programming language. 
+
+This repository is a clone and hacking of git://slackbuilds.org/slackbuilds 
+
+See http://slackbuilds.org/howto/ for instructions on 
+how to use the contents of this directory.
+
+Access is also available via:
+ rsync://slackbuilds.org/slackbuilds
+ git://slackbuilds.org/slackbuilds
+ http://slackbuilds.org/gitweb/
+ ftp://slackbuilds.org/

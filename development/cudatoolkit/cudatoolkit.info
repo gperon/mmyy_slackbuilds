@@ -5,6 +5,6 @@ DOWNLOAD="http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/cuda
 MD5SUM="4ef372799a4343a3d9929b5334e1a723"
 DOWNLOAD_x86_64="http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/cudatoolkit_4.2.9_linux_64_fedora14.run"
 MD5SUM_x86_64="98ce3eeeef330aaa07323dbaeafd2e1b"
+REQUIRES="nvidia-driver nvidia-kernel jdk"
 MAINTAINER="Giorgio Peron"
 EMAIL="giorgio.peron@gmail.com"
-APPROVED=""

@@ -1,0 +1,22 @@
+Netbeans - Free and Open-Source IDE for Java Development and More.
+
+The NetBeans IDE is a free, Open-Source Integrated Development
+Environment for software developers. The IDE runs on many platforms
+including Windows, Linux, Solaris, and the MacOS. The NetBeans IDE
+provides developers with all the tools they need to create
+professional cross-platform desktop, enterprise, web and mobile
+applications.
+
+NOTES:
+  To use an specified locale you should execute netbeans as:
+	netbeans --locale $LANGOPT
+  where $LANGOPT can be 'ja','zh:CN' or 'pt:BR', default is english.
+
+  If you want to make this a default option for netbeans, then add it
+  into the line #6(netbeans_default_options) in the file
+	/opt/netbeans/etc/netbeans.conf
+
+  To use an alternative bundle you can set BUNDLE variable:
+  $ BUNDLE=javaee ./netbeans.SlackBuild
+
+GlassFish and Apache Tomcat are not available in this package.

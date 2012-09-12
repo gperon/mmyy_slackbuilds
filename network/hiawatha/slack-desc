@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+        |-----handy-ruler------------------------------------------------------|
+hiawatha: Hiawatha (A secure and advanced webserver)
+hiawatha:
+hiawatha: Hiawatha is a webserver for Unix and has been built with security
+hiawatha: in mind. This resulted in a highly secure webserver, in both code
+hiawatha: and features.
+hiawatha:
+hiawatha: Hiawatha supports many web and HTTP features such as
+hiawatha: CGI/FastCGI, HTTP authentication, virtual host support, request
+hiawatha: pipelining, keep alive connections, URL rewriting and many more.
+hiawatha:
+hiawatha: Homepage: http://www.hiawatha-webserver.org

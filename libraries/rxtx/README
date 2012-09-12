@@ -1,0 +1,8 @@
+RXTX is a Java library providing serial and parallel port communication.
+
+To build RXTX requires the jdk package (available in Slackware's extra/
+directory).
+
+If you are upgrading from rxtx-2.0_7pre2, please note that the javacomm
+package is no longer required and should be uninstalled before building
+rxtx-2.2pre2.

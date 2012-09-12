@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|' on
+# the right side marks the last column you can put a character in.  You must make
+# exactly 11 lines for the formatting to be correct.  It's also customary to
+# leave one space after the ':'.
+
+   |-----handy-ruler------------------------------------------------------|
+rar: rar (processes RAR files)
+rar:
+rar: Rar is a powerful tool for processing RAR archives.
+rar:
+rar: Homepage: http://www.rarlab.com
+rar:
+rar: This is a shareware program.  You must buy a license
+rar: from Rar Labs if you want to keep using rar.
+rar:
+rar:
+rar:

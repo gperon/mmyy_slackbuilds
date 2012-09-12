@@ -1,0 +1,6 @@
+mksh is a successor to the Public Domain Korn Shell (pdksh)
+
+Pass STATIC=yes to the script to create a static build.
+
+Pass DIET=yes to the script in order to use dietlibc (this
+requires the optional dependency dietlibc)

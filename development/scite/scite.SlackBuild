@@ -1,0 +1,85 @@
+#!/bin/sh
+# Slackware build script for SciTE
+# Written by Iskar Enev <iskar.enev[@]gmail.com>
+# v2.27: Some modifications by Jens Weber <jens@tuxane.com>
+# v3.02: (jw) Some more changes, see README.Slackware and changelog
+# v3.20: (jw) little changes, see README.Slackware and changelog
+
+PRGNAM=scite
+VERSION=3.20
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+HELPBROWSER=mozilla
+
+
+if [ "$ARCH" = "i486" ]; then
+   LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+    LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+    LIBDIRSUFFIX="64"
+else
+    LIBDIRSUFFIX=""
+fi
+
+set -eu
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf scite/ scintilla/
+tar xvf $CWD/${PRGNAM}$(echo $VERSION | tr -d .).tgz
+chown -R root:root scite/ scintilla/
+chmod -R u+w,go+r-w,a-s scite/ scintilla/
+
+cd $TMP/scintilla
+make -C gtk prefix=/usr
+
+cd $TMP/scite
+sed -i "s%xdg-open%$HELPBROWSER%g" src/Embedded.properties
+sed -i "s%xdg-open%$HELPBROWSER%g" src/SciTEGlobal.properties
+make -C gtk prefix=/usr
+make -C gtk install DESTDIR=$PKG
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+( cd $PKG/usr/bin ; ln -sf SciTE scite )
+
+mkdir -p $PKG/usr/share/scite
+mkdir -p $PKG/usr/man/man1
+cat doc/scite.1 | gzip -9c > $PKG/usr/man/man1/scite.1.gz
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/html
+cp -a README License.txt  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/config/SciTEGlobal.properties.new >> $PKG/usr/doc/$PRGNAM-$VERSION/SciTEGlobal.properties.new
+cat $CWD/config/SciTEUser.properties.new >> $PKG/usr/doc/$PRGNAM-$VERSION/SciTEUser.properties.new
+cat $CWD/config/changelog >> $PKG/usr/doc/$PRGNAM-$VERSION/changelog
+cat $CWD/config/README.Slackware >> $PKG/usr/doc/$PRGNAM-$VERSION/README.Slackware
+
+
+for i in $PKG/usr/share/scite/*.html $PKG/usr/share/scite/*.png ; do
+  ln -s /usr/share/scite/$(basename $i) \
+        $PKG/usr/doc/$PRGNAM-$VERSION/html/$(basename $i) ;
+done
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

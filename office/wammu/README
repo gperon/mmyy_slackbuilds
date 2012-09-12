@@ -1,0 +1,4 @@
+Mobile phone manager using Gammu as it's backend. It works with any
+phone Gammu supports - many Nokias, Siemens, Alcatel, ...
+
+pybluez is an optional dependency (for bluetooth support).

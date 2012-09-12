@@ -1,6 +1,7 @@
 #!/bin/sh
 # Slackware build script for fgrun
 # Written by Diego Pantano <poplin.dp@gmail.com>
+
 # Copyright 2012  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
 # All rights reserved.
 #

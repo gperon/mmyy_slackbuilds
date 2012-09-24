@@ -3,6 +3,7 @@
 *.tar.gz.asc
 *.bz2
 *.tbz2
+*.tgz
 *.zip
 *.run
 *~

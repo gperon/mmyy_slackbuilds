@@ -1,4 +1,4 @@
-#Files mentioned in this file will be ignored by git
+# Files mentioned in this file will be ignored by git
 *.tar.gz
 *.tar.gz.asc
 *.bz2
@@ -6,6 +6,9 @@
 *.tgz
 *.zip
 *.run
+*.tar.bz2
+*.tar.xz
+*.txz
 *~
 .directory
 *.war

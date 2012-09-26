@@ -3,8 +3,8 @@
 # Slackware build script for octave
 # Written by Kyle Guinn <elyk03@gmail.com>
 
-PRGNAM="octave"
-VERSION=${VERSION:-3.4.2}
+PRGNAM=octave
+VERSION=${VERSION:-3.6.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

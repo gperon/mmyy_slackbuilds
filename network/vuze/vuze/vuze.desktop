@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Categories=Java;Network;FileTransfer;P2P
+Comment=Multimedia Bittorrent Client 
+Exec=vuze %f
+GenericName=Multimedia Bittorrent Client
+Icon=vuze.png
+MimeType=application/x-bittorrent
+Name=Vuze
+Type=Application

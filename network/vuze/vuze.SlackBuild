@@ -4,7 +4,7 @@
 # Written by Chris Lawrence <selivanow@gmail.com>
 
 PRGNAM=vuze
-VERSION=${VERSION:-4604}
+VERSION=${VERSION:-4720}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -24,20 +24,22 @@ set -e
 
 if [ "$ARCH" = "x86_64" ]; then
   LIBDIRSUFFIX="64"
-  ARCHIVE=Vuze_${VERSION}_linux-$ARCH.tar.bz2
 else
   ARCH=i486
   LIBDIRSUFFIX=""
-  ARCHIVE=Vuze_${VERSION}_linux.tar.bz2
 fi
 
 rm -rf $PKG
 mkdir -p $TMP $PKG/usr/lib${LIBDIRSUFFIX} $PKG/usr/bin $OUTPUT
-tar xvf $CWD/$ARCHIVE -C $PKG/usr/lib${LIBDIRSUFFIX}
+tar xvf $CWD/Vuze_${VERSION}_linux.tar.bz2 -C $PKG/usr/lib${LIBDIRSUFFIX}
 
 # Set PROGRAM_DIR and MOZILLA_FIVE_HOME in the azureus program script
-sed "s%@LIBDIR@%/usr/lib${LIBDIRSUFFIX}%g" $CWD/vuze-set_paths.diff | \
-    patch -p1 -d $PKG/usr/lib${LIBDIRSUFFIX}/vuze
+#sed "s%@LIBDIR@%/usr/lib${LIBDIRSUFFIX}%g" $CWD/vuze-set_paths.diff | \
+#    patch -p1 -d $PKG/usr/lib${LIBDIRSUFFIX}/vuze
+    
+cd $PKG/usr/lib${LIBDIRSUFFIX}/$PRGNAM
+sed -i "s%JAVA_PROGRAM_DIR=\"\"%JAVA_PROGRAM_DIR=\"/usr/lib${LIBDIRSUFFIX}/java/bin/\"%g" vuze
+sed -i "s%JAVA_PROGRAM_DIR=\"\"%JAVA_PROGRAM_DIR=\"/usr/lib${LIBDIRSUFFIX}/java/bin/\"%g" azureus
 
 # Create two new symlinks in /usr/bin
 ( cd $PKG/usr/bin
@@ -46,7 +48,7 @@ sed "s%@LIBDIR@%/usr/lib${LIBDIRSUFFIX}%g" $CWD/vuze-set_paths.diff | \
 )
 
 mkdir -p $PKG/usr/share/{applications,pixmaps}
-cat $CWD/vuze.desktop > $PKG/usr/share/applications/vuze.desktop
+mv $PKG/usr/lib${LIBDIRSUFFIX}/vuze/vuze.desktop $PKG/usr/share/applications/
 mv $PKG/usr/lib${LIBDIRSUFFIX}/vuze/*.png $PKG/usr/share/pixmaps
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
@@ -57,7 +59,6 @@ cp -a\
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Clean up some cruft.
-rm $PKG/usr/lib${LIBDIRSUFFIX}/vuze/vuze.desktop
 rm $PKG/usr/lib${LIBDIRSUFFIX}/vuze/*.txt
 rm $PKG/usr/lib${LIBDIRSUFFIX}/vuze/*.log
 

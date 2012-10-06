@@ -28,7 +28,18 @@ VERSION=${VERSION:-1.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 SRCVERSION=luxblend25-502aef7e3657
-BLENDER_VERSION=2.63
+#BLENDER_VERSION=2.63
+blender_version()
+{
+	
+	BLENDER_HEADER=`blender --version 2>&1 | head -n 1`
+	BLENDER_IMPL=`echo ${BLENDER_HEADER} | cut -f1 -d' '`
+	if [ "$BLENDER_IMPL" = "Blender" ] ; then
+		BLENDER_VERSION=`echo ${BLENDER_HEADER} | sed "s/Blender \(.*\) (\(.*\))/\1/"`
+	        return 0
+	fi
+}
+blender_version
 
 BLENDER_PLUGIN_DIR=/opt/blender/$BLENDER_VERSION/scripts/addons
 

@@ -1,4 +1,5 @@
 Giorgio Peron's SlackBuild Projects
+slackbuilds repository for slackware-current
 giorgio.peron@gmail.com
 
 they are here, working or not
@@ -16,8 +17,8 @@ they are here, working or not
   makehuman - Generate 3D humanoid models
   FreeImage - Image library
   digikam - photo management application (copied and modified from slackbuilds.org)
-  input-wacom - kernel driver for Wacom 
-  xf86-input-wacom - X11 driver for Wacom
+  input-wacom - kernel driver for Wacom (already present in kernel) 
+  xf86-input-wacom - X11 driver for Wacom (already present in official slackware)
   gimp-painter - GIMP for Painter
   wacomtablet - KCM Wacom Tablet
   flightgear - an open-source flight simulator project
@@ -25,13 +26,26 @@ they are here, working or not
   simgear - a set of open-source 3d simulation libraries
   fgrun - a graphical front-end for FlightGear
   kdenlive - a free and open-source video editor
-    
-
-** TESTING/BROKEN **
-  luxrender - unbiased rendering engine
+  luxrender - unbiased rendering engine  
   openjdk - Open Java Development Kit is a free and open source implementation of the Java  programming language. 
 
-This repository is a clone and hacking of git://slackbuilds.org/slackbuilds 
+** TESTING/BROKEN **
+  ---
+
+
+this is a unofficial fork of master branch from slackbuilds.org's
+git repository (http://slackbuilds.org/cgit/slackbuilds/).
+
+here I put my unofficial mods to their slackbuilds to run on
+slackware-current with sbopkg (http://www.sbopkg.org).
+
+Check https://github.com/Ponce/slackbuilds/wiki for additional informations.
+
+See https://github.com/Ponce/slackbuilds/wiki/configuring-the-current-repository-with-sbopkg
+for instructions on how to use this repository with sbopkg.
+
+original README from slackbuilds.org follows:
+---------------------------------------------
 
 See http://slackbuilds.org/howto/ for instructions on 
 how to use the contents of this directory.

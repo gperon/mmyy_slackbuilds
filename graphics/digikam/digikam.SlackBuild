@@ -79,7 +79,7 @@ cd build
     -DSYSCONF_INSTALL_DIR=/etc/kde \
     -DCMAKE_VERBOSE_MAKEFILE:BOOL="TRUE" \
     -DCMAKE_BUILD_TYPE=Release ..
-  make j7
+  make -j7
   make install DESTDIR=$PKG
 cd ..
 

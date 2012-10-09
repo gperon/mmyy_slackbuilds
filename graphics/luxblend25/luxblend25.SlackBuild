@@ -24,11 +24,10 @@
  
 
 PRGNAM=luxblend25
-VERSION=${VERSION:-1.0}
+VERSION=${VERSION:-1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCVERSION=luxblend25-502aef7e3657
-#BLENDER_VERSION=2.63
+SRCVERSION=luxblend25-3a928b723b29
 blender_version()
 {
 	

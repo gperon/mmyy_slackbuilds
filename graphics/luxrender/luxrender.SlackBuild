@@ -170,9 +170,9 @@ cp -a \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
-mkdir -p $PKG/share/{pixmaps,applications}
-cat $CWD/files/luxrender.svg> $PKG/share/pixmaps/luxrender.svg
-cat $CWD/files/luxrender.desktop> $PKG/share/applications/luxrender.desktop
+mkdir -p $PKG/usr/share/{pixmaps,applications}
+cat $CWD/files/luxrender.svg> $PKG/usr/share/pixmaps/luxrender.svg
+cat $CWD/files/luxrender.desktop> $PKG/usr/share/applications/luxrender.desktop
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

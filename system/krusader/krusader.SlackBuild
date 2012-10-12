@@ -24,8 +24,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=krusader
-VERSION=${VERSION:-2.3.0_beta1}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-2.4.0_beta2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 SRCVER="$(printf $VERSION | tr _ -)"
@@ -76,9 +76,9 @@ find . \
 
 # add xz archive support
 # https://bugs.kde.org/show_bug.cgi?id=254615
-patch -p1 -i $CWD/krusader-xz.patch
+#patch -p1 -i $CWD/krusader-xz.patch
 # add gcc-4.7 patch
-patch -p1 -i $CWD/krusader-2.4.0_beta1-gcc47.patch
+#patch -p1 -i $CWD/krusader-2.4.0_beta1-gcc47.patch
 
 mkdir -p build
 cd build

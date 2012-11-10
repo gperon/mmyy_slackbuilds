@@ -25,7 +25,7 @@
 
 
 PRGNAM=makehuman
-VERSION=${VERSION:-1.0.0-alpha6}
+VERSION=${VERSION:-1.0a7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -64,15 +64,13 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e # Exit on most errors
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-#rm -rf $PRGNAM-$VERSION
 rm -rf $PRGNAM
-tar xjvf $CWD/$PRGNAM$VERSION-linux-$ARCH1.tbz2
-#cd $PRGNAM-$VERSION
+tar xjvf $CWD/$PRGNAM-$VERSION-python27-$ARCH1.tbz2
 cd $PRGNAM
 chown -R root:root .
 find . \
@@ -82,20 +80,15 @@ find . \
  -exec chmod 644 {} \;
 
 scons
-#scons prefix=$PKG/usr install
 mkdir -p $PKG/usr/bin
 mkdir -p $PKG/usr/share/makehuman
 cp -a \
   main.py \
   makehuman \
   mh_icon.bmp \
-  proxy.cfg \
   setup.nsi \
   $PKG/usr/share/makehuman
 cp -r $TMP/$PRGNAM/apps $PKG/usr/share/makehuman
-cp -r $TMP/$PRGNAM/backgrounds $PKG/usr/share/makehuman
-mkdir -p $PKG/usr/share/makehuman/bin/linux/$BINDIRSUFFIX
-cp -r $TMP/$PRGNAM/bin/linux/$BINDIRSUFFIX/makehuman $PKG/usr/share/makehuman/bin/linux/$BINDIRSUFFIX
 cp -r $CWD/makehuman.sh $PKG/usr/bin/makehuman
 chmod +x $PKG/usr/bin/makehuman
 cp -r $TMP/$PRGNAM/core $PKG/usr/share/makehuman
@@ -103,21 +96,15 @@ cp -r $TMP/$PRGNAM/data $PKG/usr/share/makehuman
 cp -r $TMP/$PRGNAM/etc $PKG/usr/share/makehuman
 cp -r $TMP/$PRGNAM/importers $PKG/usr/share/makehuman
 cp -r $TMP/$PRGNAM/plugins $PKG/usr/share/makehuman
-cp -r $TMP/$PRGNAM/pythonmodules $PKG/usr/share/makehuman
 cp -r $TMP/$PRGNAM/shared $PKG/usr/share/makehuman
 cp -r $TMP/$PRGNAM/utils $PKG/usr/share/makehuman
+cp -r $TMP/$PRGNAM/tools $PKG/usr/share/makehuman
 mkdir -p $PKG/usr/share/applications
 cp -r $CWD/makehuman.desktop $PKG/usr/share/applications
 
-# Strip binaries and libraries - this can be done with 'make install-strip'
-# in many source trees, and that's usually acceptable, if not, use this:
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# Copy program documentation into the package
-# The included documentation varies from one application to another, so be sure
-# to adjust your script as needed
-# Also, include the SlackBuild script in the documentation directory
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
   license.txt \
@@ -125,14 +112,9 @@ cp -a \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
-# Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
-# Make the package; be sure to leave it in $OUTPUT
-# If package symlinks need to be created during install *before*
-# your custom contents of doinst.sh runs, then add the -p switch to
-# the makepkg command below -- see makepkg(8) for details
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if test -d ~/.blender/scripts; then 
   # Scripts dir is ready to be installed in
   cd ~/.blender/scripts

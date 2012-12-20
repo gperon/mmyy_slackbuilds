@@ -21,8 +21,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=flash-player-plugin
-VERSION=11.2.202.238
-BUILD=${BUILD:-1}
+VERSION=11.2.202.243
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 VERS_MAJ=$(printf $VERSION | cut -d. -f1)
@@ -53,7 +53,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 
-tar xf $CWD/install_flash_player_${VERS_MAJ}_linux.${ARCH}.tar.gz -C $PKG
+tar xf $CWD/install_flash_player_${VERS_MAJ}_linux_${ARCH}.tar.gz -C $PKG
 
 if ! strings $PKG/libflashplayer.so | grep -wq "^${VERSION}$" 2>/dev/null ; then
   printf "\n\tThis script is written for version $VERSION of the plugin,\n"
@@ -65,6 +65,10 @@ fi
 
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
 mv $PKG/libflashplayer.so $PKG/usr/lib${LIBDIRSUFFIX}/mozilla/plugins
+
+if [ "$ARCH" = "x86_64" ]; then
+  rm -rf $PKG/usr/lib
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv $PKG/readme.txt $PKG/usr/doc/$PRGNAM-$VERSION

@@ -1,3 +1,380 @@
+Wed Dec 12 02:47:28 UTC 2012
+academic/R: Updated for version 2.15.2
+academic/convertall: Added (unit conversion tool).
+academic/kile: Updated for version 2.1.3
+academic/scilab: Updated for version 5.4.0, cleanups.
+academic/xephem: Fixed wrong version in .info file
+audio/aeolus: Fix download link format in .info-file.
+audio/gvolwheel: Updated for version 1.0
+audio/ocp: Fixed MD5SUM
+audio/xmms-wma: Added (support for WMA V1/V2 in XMMS)
+desktop/i3: Fixed link for KDM.
+desktop/lxmed: Added. (LXDE Menu Editor)
+desktop/uwm: Fixed bug in menu
+desktop/wmbackground: Added (wmaker backgrounds changer).
+desktop/wminfo: Updated for version 4.0.0.
+desktop/wmphoto+: Updated for version 1.1.1, cleanups.
+desktop/xmms-status-plugin: Added (provides a status docklet)
+development/Cython: Updated for version 0.17.1
+development/arduino: Updated for version 1.0.2
+development/argouml: Fixed typo in homepage URL
+development/avr-binutils: Updated for version 2.23.1
+development/gambas3: Updated for version 3.3.4, cleanups.
+development/google-appengine-gosdk: Mark as unmaintained.
+development/google-appengine-pysdk: Mark as unmaintained.
+development/netbeans: Updated for version 7.2.1
+development/pd-psql: Added (postgresql addon for pd).
+development/squirrel-sql: Updated for version 3.4.0
+development/trac: Updated for version 1.0, cleanups.
+development/valgrind: Updated for version 3.8.1
+games/Domination: Updated for version 1.1.1.2.
+games/UrbanTerror: Mark as unmaintained.
+games/d1x-rebirth: Updated for version 0.57.3.
+games/d2x-rebirth: Updated for version 0.57.3.
+games/darkplaces: Added a option to honor $SLKFLAGS
+games/freedroidrpg: Updated for version 0.15.1.
+games/meandmyshadow: Updated for version 0.4.
+games/moon-buggy: Added. (Simple character graphics game)
+games/njam: Added (The most addictive free pacman-like game)
+games/wesnoth: Updated for version 1.10.5
+games/xonotic: Default to xonotic-glx over xonotix-sdl
+games/xye: Updated for version 0.12.1
+graphics/baires: Added (Batch image resizer)
+graphics/kim4: Added (KDE4 image manipulation).
+graphics/kphotoalbum: Updated for version 4.3.
+graphics/kuickshow: Added (image viewer for kde)
+graphics/osgEarth: Added (Terrain rendering toolkit).
+graphics/qrencode: Updated for version 3.4.1
+graphics/tgif-QPL: Updated for version 4.2.5
+graphics/xbmbrowser: Added (xbm and xpm browser)
+graphics/yagf: Updated for version 0.9.2.
+ham/hamlib: Updated for version 1.2.15 and moved from libraries
+ham/xlog: Moved from libraries
+libraries/DirectFB: Added (library for Linux framebuffer devices)
+libraries/enca: Updated for version 1.14.
+libraries/gdl: Added (GNOME Docking Library)
+libraries/genshi: Changed REQUIRES to distribute
+libraries/gtksourceview3: Added (GTK+ framework code editing)
+libraries/libaacs: Updated for version 0.5.0.
+libraries/libbluray: Updated for version 0.2.3.
+libraries/libevent: Updated for version 2.0.21
+libraries/libnetfilter_acct: Updated for version 1.0.1.
+libraries/libnetfilter_conntrack: Updated for version 1.0.2.
+libraries/libnfnetlink: Updated for version 1.0.1.
+libraries/libpst: Updated for version 0.6.55
+libraries/librelp: Updated for version 1.0.1
+libraries/libvdpau: Updated for version 0.5.
+libraries/libx86emu: Updated for version 1.3
+libraries/lksctp-tools: Added (linux kernel SCTP tools).
+libraries/miniupnpc: Updated for version 1.7.
+libraries/ocaml-findlib: Add ocaml to REQUIRES.
+libraries/opencv: Updated for version 2.4.3
+libraries/tinyxml: Remove jdk as a required dependency
+libraries/xapian-core: Updated for version 1.2.12
+libraries/xine-plugin: Added (Embedded stream playback plugin)
+libraries/yajl: New maintainer and fixed download
+misc/asterixInspector: Added (viever for EUROCONTROL ASTERIX files)
+misc/solunar: Added (utility displaying sun- and moon-related data)
+multimedia/ProjectX: Added. (DVB demux tool)
+multimedia/backlite: Added (DVD backup utility).
+multimedia/flash-player-plugin: Don't include /usr/lib directory on x86_64.
+multimedia/gmidimonitor: Added (shows MIDI events)
+multimedia/jlscp: Added (Java Linux Sampler Control Protocol).
+multimedia/k9copy: Added (a Linux DVD shrink).
+multimedia/w_scan: Updated for version 20121111
+multimedia/xvid4conf: Fixed homepage and download link.
+network/LOIC: Renamed from loic and updated for version 1.0.7.42.
+network/bitcoin: Added. (P2P electronic cash system)
+network/dillo: Updated for version 3.0.2.
+network/gophernicus: Added (gopher server).
+network/hexchat: Added (XChat fork)
+network/ip2location-c: Renamed from C-IP2Location.
+network/ipv6calc: Updated for version 0.93.1.
+network/mumble: Use the bundled celt versions.
+network/murmur: Fixed CFLAGS and REQUIRES.
+network/node: Updated for version 0.8.14
+network/opera: Updated for version 12.11.
+network/teamviewer: Updated for version 7.0.9377
+network/wuala: Updated for version 0.3_4
+network/xinetd: Updated for version 2.3.15.
+office/ProjectLibre: Updated for version 1.5.1
+office/focuswriter: Updated for version 1.4.0
+office/gummi: Updated for version 0.6.5.
+office/lcal: Updated SlackBuild script license
+office/myrulib: Updated for version 0.29.11.
+office/notmuch: Updated for version 0.14.
+office/pcal: Updated for version 4.11.0
+office/qpdfview: Added (Document Viewer).
+office/scribus: Updated for version 1.4.1
+office/task: Updated for version 2.1.2
+office/texmaker: Updated for version 3.5.2.
+office/texstudio: Updated for version 2.5.1
+office/vym: Updated for version 2.2.4
+office/xpad: Updated for version 4.1
+perl/perl-File-Tail: Added (read continously updated files)
+perl/perl-Statistics-Descriptive: Updated for version 3.0604
+python/MarkupSafe: Changed REQUIRES to distribute
+python/Pyro4: Updated for version 4.16
+python/cssselect: Added (CSS3 selectors parser).
+python/dnspython: Updated for version 1.10.0
+python/dulwich: Updated for version 0.8.5
+python/hg-git: Updated for version 0.3.4.
+python/pep8: Updated for version 1.3.3
+python/pip: Updated for version 1.2.1
+python/python-distutils-extra: Updated for version 2.37.
+python/python-distutils-extra: Updated formatting of slack-desc
+python/python-poppler-qt4: Added (Python bindings to poppler-qt4)
+python/python-sh: Added (subprocess interface for Python)
+system/burp: Updated for version 1.3.18.
+system/davfs2: Updated for version 1.4.7
+system/diit: Added (steganography tool).
+system/dump: Updated for version 0.4b44
+system/haveged: Added (A simple entropy daemon)
+system/iotop: Updated for version 0.4.4
+system/kcm_touchpad: Fix appear again as a tab in 'Input Devices'
+system/keylaunch: Added (bind commands to a hot key)
+system/krusader: Updated for version 2.4.0_beta3
+system/lbrate: Added (extract CP/M LBR archives)
+system/lilyterm: Added (terminal emulator for X).
+system/linux-libertine-fonts: Added (Linux Libertine fonts)
+system/linuxconsoletools: Updated for version 1.4.4.
+system/mucommander: Updated for version 0.9.0
+system/multitail: Updated for version 5.2.10
+system/nilfs-utils: Updated for version 2.1.4
+system/nomarch: Added (extract '.arc' archives)
+system/nvidia-driver: Don't create unneeded $libdir/vdpau/
+system/nvidia-driver: Updated for version 310.19.
+system/nvidia-kernel: Updated for version 310.19.
+system/openstego: Added (steganography tool).
+system/plan9port: Added (Plan 9 from User Space).
+system/postgresql: Updated for version 9.2.1.
+system/prelink: Updated for version 20111012
+system/redis: Updated for version 2.6.5
+system/rsyslog: Updated for version 5.8.13
+system/virt-viewer: Updated for version 0.5.4.
+system/wavemon: Added (Wavemon 802.11 monitor)
+system/wine: Updated for version 1.5.13.
+system/wmconfig: Updated for version 1.3.6
++--------------------------+
+Sat Nov 24 20:52:44 UTC 2012
+audio/cmus: Updated for version 2.5.0.
+desktop/gnome-themes-standard: Added (themes for the gnome desktop).
+desktop/gtk-engines-unico: Added (theme engine for GTK+3).
+desktop/rss-guard: Updated for version 1.1.2.
+desktop/spectrwm: Updated for version 2.1.0.
+development/avr8-gnu-toolchain: Added (AVR 8-bit GNU Toolchain).
+development/quilt: Updated for version 0.60 (+new maintainer)
+games/openttd: Updated for version 1.2.3.
+games/tong: Added (action game combining tetris and pong).
+libraries/libass: Updated for version 0.10.1.
+libraries/libbsd: Updated for version 0.4.2.
+libraries/libetpan: Updated for version 1.1.
+libraries/libfm: Updated for version 1.1.0.
+libraries/libgee: Updated for version 0.6.6.1.
+libraries/tbb: Updated for version 4.1u1.
+multimedia/dvdstyler: Updated for version 2.3.4.
+multimedia/smplayer: Updated for version 0.8.1.
+multimedia/smtube: Added (small youtube browser)
+multimedia/totem: Added (GNOME Movie Player).
+network/claws-mail-extra-plugins: Updated for version 3.9.0.
+network/claws-mail: Updated for version 3.9.0.
+network/opera: Updated for version 12.10.
+network/sieve-connect: Updated for version 0.83.
+network/ssmtp: Added (simple MTA that forwards to a smarthost).
+network/youtube-dl: Updated for version 2012.10.09.
+python/pypy: Added (implementation of Python written in Python)
+python/python3: Updated for version 3.3.0.
+system/adobe-source-code-pro-font: Added (adobe monospace font).
+system/adobe-source-sans-pro-font: Added (adobe-source sans font).
+system/atop: Updated for version 2.0_1.
+system/freefont: Updated for version 20120503.
+system/kc: Updated for version 2.1.6.
+system/ksh-openbsd: Added (OpenBSD's pdksh ported to Linux)
+system/pcmanfm: Updated for version 1.1.0.
+system/pmount: Updated for version 0.9.23.
+system/qtfm: Updated for version 5.5.
+system/rxvt-unicode: Added "--enable-256-color" to configure
++--------------------------+
+Sun Nov 18 11:36:25 UTC 2012
+audio/mp3splt-gtk: Added --docdir configure parameter.
+audio/qmmp: Updated for version 0.6.3.
+desktop/enlightenment: Updated for version 0.17.0_alpha2.
+development/casperjs: Fix download link.
+development/gedit: Adjust gconf schema installation.
+development/phantomjs: Fix gold related build errors.
+libraries/e_dbus: Updated for version 1.7.1.
+libraries/ecore: Updated for version 1.7.1.
+libraries/edje: Updated for version 1.7.1.
+libraries/eet: Updated for version 1.7.1.
+libraries/efreet: Updated for version 1.7.1.
+libraries/eina: Updated for version 1.7.1.
+libraries/eio: Added. (Enlightenment DR17 I/O Library)
+libraries/embryo: Updated for version 1.7.1.
+libraries/evas: Updated for version 1.7.1.
+libraries/liblrdf: Fix download link.
+libraries/libmp3splt: Added --docdir configure parameter.
+libraries/slv2: Fix dependency information.
+libraries/stfl: Fixed install directory for python.
+misc/dos2unix: Updated for version 6.0.2.
+multimedia/gst-plugins-bad: Note optional dependencies in README.
+multimedia/gst-plugins-ugly: Note optional dependencies in README.
+network/knemo: Updated for version 0.7.5.
+network/qupzilla: Updated for version 1.3.5.
+perl/perl-Authen-SASL: Updated for version 2.16.
+python/distribute: Updated for version 0.6.30.
++--------------------------+
+Sun Nov  4 15:41:50 UTC 2012
+academic/maxima: Updated for version 5.27.0.
+academic/smath-studio: Updated for version 0.95.4594.
+audio/alsa-tools: Updated for version 1.0.26.1.
+audio/cd-discid: Updated for version 1.3.1.
+audio/gmpc-plugins: Fixed homepage.
+audio/gmpc: Fixed homepage.
+audio/lv2dynparam1: Fixed download link.
+audio/lxmusic: Noted the xmms2 dependency in REQUIRES.
+audio/mac: Fixed download link.
+audio/zynjacku: Fixed download link.
+business/gnucash: Changed optional dep. from webkit to webkitgtk.
+desktop/enlightenment: Updated for version 0.16.999.76819.
+desktop/gtk-kde4: Updated for version 0.9.5, mark as unmaintained.
+desktop/razorqt: Updated for version 0.5.1.
+desktop/root-tail: Fixed download link.
+desktop/vwm: Fixed download link and forced -j1.
+desktop/x-tile: Updated for version 2.5.
+development/apache-maven: Fixed download.
+development/blassic: Fixed download link.
+development/django: Fixed download link.
+development/dpkg: Updated for version 1.16.8.
+development/gprolog: Fixed download link.
+development/jdk: Updated for version 7u9
+development/premake: Added lua to REQUIRES.
+development/tkcvs: Fixed download link.
+development/trac: Fixed download link.
+development/xtruss: Updated for version r9490.
+games/abuse: Fixed download link.
+games/fortune_firefly: Fixed download link.
+graphics/gimp-registry-plugins: Updated Smart Sep. Sharpen filter.
+graphics/picasa: Removed (no linux support anymore).
+graphics/teighafileconverter: Updated for version 3.7.0.
+graphics/teighaviewer: Updated for version 3.7.0.
+libraries/alsa-plugins: Updated for version 1.0.26.
+libraries/argparse: Removed.
+libraries/dietlibc: Fixed download link.
+libraries/e_dbus: Updated for version 1.7.0.
+libraries/ecore: Updated for version 1.7.0.
+libraries/edje: Updated for version 1.7.0.
+libraries/eet: Updated for version 1.7.0.
+libraries/eeze: Removed at request of maintainer.
+libraries/efreet: Updated for version 1.7.0.
+libraries/eina: Updated for version 1.7.0.
+libraries/embryo: Updated for version 1.7.0.
+libraries/evas: Updated for version 1.7.0.
+libraries/fltk2: Fixed download link.
+libraries/gssdp: Updated for version 0.12.2.1.
+libraries/libdockapp: Fixed download link.
+libraries/libedit: Fixed download link.
+libraries/libmikmod: Updated for version 3.2.0.
+libraries/libpseudo: Fixed download link.
+libraries/libstatgrab: Added (system statistics library).
+libraries/libva: Fixed download link and homepage.
+libraries/libviper: Fixed download link.
+libraries/ocaml-camomile: Added a patch to install a missing lib.
+libraries/qt3: Fixed build (removed invalid hunk from patch)
+libraries/vdpau-video: Fixed download link and md5sum.
+libraries/xalan: Fixed download link.
+libraries/yajl: Updated for version 2.0.4.
+misc/rsibreak: Fixed download link.
+multimedia/exaile: Don't note webkit as optional dependency.
+multimedia/mediatomb: Fix building with libmp4v2.
+multimedia/rosa-media-player: Fixed download link.
+multimedia/wxcam: Added xvidcore to REQUIRES.
+network/C-IP2Location: New upstream tarball for the same version.
+network/clamav-unofficial-sigs: Fixed download link.
+network/claws-mail-extra-plugins: Small README change.
+network/exim: Updated for version 4.80.1.
+network/flvstreamer: Fixed download link.
+network/hamachi: Fixed download links.
+network/httping: Updated for version 1.5.4.
+network/maildrop: Fixed download link.
+network/modsecurity-apache: Updated for version 2.6.8.
+network/mysecureshell: Updated for version 1.25.
+network/nikto: Fixed download link.
+network/ntop: Fix dependency list in .info file
+network/pdnsd: Fixed download link and homepage.
+network/quassel: Don't note webkit as optional dependency.
+network/sparkleshare: Fixed download link and md5sum.
+network/ttdnsd: Fixed download link.
+network/ucspi-ssl: Fixed download link.
+network/xl2tpd: Fixed download link.
+office/hevea: Fixed download link.
+office/texlive: Add a note re obtaining svn checkout
+python/pystatsd: Fixed dep info.
+python/python-oauth2: Added distribute to REQUIRES.
+python/python-openid: Fixed download link.
+python/pyutil: Fixed dep info.
+python/tweepy: Added distribute to REQUIRES.
+ruby/rubygems-update: Fixed .info file.
+system/acpitool: Updated for version 0.5.1, cleanups.
+system/apache-cassandra: Fixed download link.
+system/apache-tomcat: Fix default java options.
+system/bulk_extractor: Updated for version 1.3.
+system/clamav: Fixed logging location of freshclam in rc.clamav.
+system/dstat: Updated for version 0.7.2.
+system/gparted: Updated for version 0.14.0.
+system/ipheth-pair: Removed (sources no more available).
+system/ksplice: Fixed download link.
+system/microcode_ctl: Fixed download link.
+system/pigz: Updated for version 2.2.5.
++--------------------------+
+Thu Oct 18 21:37:57 UTC 2012
+desktop/bashrun2: Fixed typo
+desktop/xfce4-sensors-plugin: Fixed VERSION in .info file
+multimedia/flash-player-plugin: Updated for version 11.2.202.243.
+office/texlive: Fixed banner text in configure
++--------------------------+
+Sun Oct  7 22:27:34 UTC 2012
+Revert "system/xen: Added (updated to version 4.2.0 from 13.37 repo)"
++--------------------------+
+Sun Oct  7 14:21:03 UTC 2012
+Files on server need to be mode 644.
+audio/abcde: Mark as unmaintained.
+audio/cd-discid: Mark as unmaintained.
+business/gnucash: Updated for version 2.4.11.
+business/skrooge: Updated to version 1.3.3
+desktop/pekwm: Mark as unmaintained.
+desktop/subtle: Fix consolekit xinitrc, cleanups.
+development/apache-ant: Updated for version 1.8.4
+development/gprolog: Mark as unmaintained.
+development/jdk: Fixed homepage link.
+development/polyml: Mark as unmaintained.
+games/fortune-dharma: Updated for version 1.2
+graphics/goocanvas: Change maintainer.
+graphics/pinta: Fixed REQUIRES + Updated for version 1.4.
+libraries/frei0r: Cleanup of redundant docs.
+libraries/gmtk: Minor fix to the README.
+libraries/imagick: New maintainer.
+libraries/libofx: Fix building with gcc 4.7.
+libraries/newt: Updated for version 0.52.14 and fixed some CFLAGS.
+libraries/xerces: Updated for version 2.11.0
+multimedia/gst-plugins-farsight: Remove requirement of openjpeg.
+multimedia/mlt: Autodetect which swig bindings to build.
+multimedia/mythplugins: Updated for version 0.26.0
+multimedia/mythtv: Updated for version 0.26.0
+multimedia/openshot: Updated for version 1.4.3, cleanups.
+network/centerim: Removed.
+network/strongswan: Mark as unmaintained.
+office/grisbi: Fix typo in slack-desc and README.
+office/mupdf: Fix building against openjpeg.
+python/pygoocanvas: Change maintainer.
+ruby/rubygems-update: Updated for version 1.8.24
+system/avermedia-a867: Removed leftover patches.
+system/bacula-client: Fixed dep info.
+system/mksh: Fixed REQUIRES
+system/rar: Updated for version 4.2.0.
+system/spacefm: Noted optional dep udevil in README.
+system/udevil: Updated for version 0.3.3.
+system/xen: Added (updated to version 4.2.0 from 13.37 repo)
++--------------------------+
 Tue Oct  2 18:25:39 UTC 2012
 We're running a bit later than usual on getting ready for the new release 
   this time, but we think you'll agree that it was worth the wait for us

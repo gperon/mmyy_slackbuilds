@@ -2,7 +2,7 @@
 
 # Slackware build script for luxblend25
 
-# Copyright 2012  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
+# Copyright 2013  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,14 +24,13 @@
  
 
 PRGNAM=luxblend25
-VERSION=${VERSION:-1.1}
+VERSION=${VERSION:-1.2RC}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCVERSION=luxblend25-3a928b723b29
+SRCVERSION=luxblend25-69829cedcf07
 blender_version()
 {
-	
-	BLENDER_HEADER=`blender --version 2>&1 | head -n 1`
+	BLENDER_HEADER=`/opt/blender/blender --version 2>&1 | head -n 1`
 	BLENDER_IMPL=`echo ${BLENDER_HEADER} | cut -f1 -d' '`
 	if [ "$BLENDER_IMPL" = "Blender" ] ; then
 		BLENDER_VERSION=`echo ${BLENDER_HEADER} | sed "s/Blender \(.*\) (\(.*\))/\1/"`

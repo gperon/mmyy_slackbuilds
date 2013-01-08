@@ -25,9 +25,12 @@
 # Modified by Niklas "Nille" Åkerström to use cmake since thats what the
 # project will use in the future.   No additional license terms added
 
+# Modified by Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
+# for version 2.6.1
+
 PRGNAM=avidemux
-VERSION=${VERSION:-2.5.6}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-2.6.1}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -69,25 +72,27 @@ cd $PRGNAM-$VERSION
 chown -R root:root .
 chmod -R a-s,u+w,go+r-w .
 
-if [ "$ARCH" = "x86_64" ]; then
-  # Some paths are incorrectly hardcoded to "lib":
-  sed -i -e "s/Dir=\"lib\"/Dir=\"lib${LIBDIRSUFFIX}\"/" $(grep -lr 'Dir="lib"' .)
-fi
+# if [ "$ARCH" = "x86_64" ]; then
+#   # Some paths are incorrectly hardcoded to "lib":
+#   sed -i -e "s/Dir=\"lib\"/Dir=\"lib${LIBDIRSUFFIX}\"/" $(grep -lr 'Dir="lib"' .)
+# fi
 
 # Cut away jobs number from the MAKEFLAGS
-MAKEFLAGS=$(echo "$MAKEFLAGS" | sed "s/-j[0-999]//g")
+#MAKEFLAGS=$(echo "$MAKEFLAGS" | sed "s/-j[0-999]//g")
 
-mkdir build
-cd build
+# mkdir build
+# cd build
+# 
+#   CFLAGS="$SLKCFLAGS" \
+#   CXXFLAGS="$SLKCFLAGS" \
+#   cmake . \
+#     -DCMAKE_INSTALL_PREFIX:STRING="/usr" \
+#     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+#     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+#     -DCMAKE_VERBOSE_MAKEFILE:BOOL="TRUE" \
+#     -DLIB_SUFFIX:STRING="$LIBDIRSUFFIX" ..
 
-  CFLAGS="$SLKCFLAGS" \
-  CXXFLAGS="$SLKCFLAGS" \
-  cmake . \
-    -DCMAKE_INSTALL_PREFIX:STRING="/usr" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL="TRUE" \
-    -DLIB_SUFFIX:STRING="$LIBDIRSUFFIX" ..
+bash bootStrap.bash --tgz --with-cli
 
 # Here are some valid options for cmake to build or not build against a dep
 # (for those who aren't very familiar with cmake)
@@ -120,26 +125,29 @@ cd build
 #	gtk || -DNO_GTK:BOOL=
 #	qt4 || -DNO_QT4:BOOL=
 
-  make -j1
-  make DESTDIR=$PKG install/strip
-cd ..
+#   make -j1
+#   make DESTDIR=$PKG install/strip
+# cd ..
 
-mkdir -p build_plugins
-cd build_plugins
-  cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DMAN_INSTALL_DIR=/usr/man \
-    -DSYSCONF_INSTALL_DIR=/etc \
-    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
-    -DAVIDEMUX_SOURCE_DIR=$(cd .. ; pwd) \
-    -DAVIDEMUX_CORECONFIG_DIR=$(cd .. ; pwd)/build/config \
-    -DAVIDEMUX_INSTALL_PREFIX=$(cd .. ; pwd)/build \
-    ../plugins
-  make -j1
-  make DESTDIR=$PKG install/strip
-cd -
+# mkdir -p build_plugins
+# cd build_plugins
+#   cmake \
+#     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+#     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+#     -DCMAKE_INSTALL_PREFIX=/usr \
+#     -DMAN_INSTALL_DIR=/usr/man \
+#     -DSYSCONF_INSTALL_DIR=/etc \
+#     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
+#     -DAVIDEMUX_SOURCE_DIR=$(cd .. ; pwd) \
+#     -DAVIDEMUX_CORECONFIG_DIR=$(cd .. ; pwd)/build/config \
+#     -DAVIDEMUX_INSTALL_PREFIX=$(cd .. ; pwd)/build \
+#     ../plugins
+#   make -j1
+#   make DESTDIR=$PKG install/strip
+# cd -
+
+mkdir -p $PKG/usr
+cp -R install/usr/* $PKG/usr/
 
 mkdir -p $PKG/usr/man/man1
 cat man/avidemux.1 | gzip -9c > $PKG/usr/man/man1/avidemux.1.gz
@@ -165,7 +173,7 @@ convert avidemux_icon.png -resize 48x48 \
   ${PKG}/usr/share/icons/hicolor/48x48/apps/avidemux.png
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING README TODO \
+cp -a AUTHORS COPYING README License* \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
@@ -175,4 +183,3 @@ cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
-

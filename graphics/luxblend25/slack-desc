@@ -8,11 +8,11 @@
           |-----handy-ruler------------------------------------------------------|
 luxblend25: LuxBlend25 (LuxRender's interface for Blender 2.6x)
 luxblend25:
-luxblend25: LuxRender is a physically based and unbiased rendering engine. 
-luxblend25: Based on state of the art algorithms, LuxRender simulates the flow of
-luxblend25: light according to physical equations, thus producing realistic
+luxblend25: LuxBlend25 is the LuxRender's interface and export script for
+luxblend25: Blender 2.6x.
+luxblend25: Based on state of the art algorithms, LuxRender simulates the flow
+luxblend25: of light according to physical equations, thus producing realistic
 luxblend25: images of photographic quality.
-luxblend25:
 luxblend25:
 luxblend25: http://www.luxrender.net/
 luxblend25:

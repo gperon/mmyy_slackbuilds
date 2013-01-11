@@ -9,11 +9,11 @@
 luxrender: LuxRender (rendering engine)
 luxrender:
 luxrender: LuxRender is a physically based and unbiased rendering engine. 
-luxrender: Based on state of the art algorithms, LuxRender simulates the flow of
-luxrender: light according to physical equations, thus producing realistic
+luxrender: Based on state of the art algorithms, LuxRender simulates the flow
+luxrender: of light according to physical equations, thus producing realistic
 luxrender: images of photographic quality.
 luxrender:
-luxrender:
 luxrender: http://www.luxrender.net/
+luxrender:
 luxrender:
 luxrender:

@@ -1,15 +1,17 @@
 #!/bin/sh
 
-# Slackware build script for Tome
+# Slackware build script for ToME
 
 # Written by David Melik <dchmelik @ gmail dot com>.
-# with help from a friend.
+# with help from some friends.
 # Partly based on Marshall Scott's Angband SlackBuild.
 
 PRGNAM=tome
-VERSION=${VERSION:-235}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-v2.3.11_ah}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
+
+SRCVER=$(echo $VERSION | tr _ -)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -43,9 +45,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION-src
-tar xvf $CWD/$PRGNAM-$VERSION-src.tar.bz2
-cd $PRGNAM-$VERSION-src
+rm -rf tome2-tome2
+tar xvf $CWD/tome2-tome2-$SRCVER.tar.gz
+cd tome2-tome2
 chown -R root:root .
 find . \
  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -53,38 +55,38 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-# make use of our CFLAGS
-sed -i "s/-O1/$SLKCFLAGS/g" src/makefile.std
-
-cd src
-  make \
-    -f makefile.std \
-    BINDIR=/usr/games \
-    LIBDIR=/var/games/tome
-
-  make \
-    -f makefile.std \
-    BINDIR=/usr/games \
-    LIBDIR=/var/games/tome \
-    DESTDIR=$PKG \
-    install
+mkdir -p build
+cd build
+  cmake \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr/share/games/$PRGNAM \
+    -DLIB_SUFFIX=/var/games/$PRGNAM \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DSYSTEM_INSTALL:BOOL=true ..
+  make
+  make install DESTDIR=$PKG
 cd -
 
-# We'll kill the "delete.me" files in the package; probably these are left so
-# that lesser package management tools don't choke on empty directories
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
+
+install -m 0755 $CWD/$PRGNAM.sh $PKG/usr/share/games/$PRGNAM/bin/$PRGNAM.sh
+mkdir -p $PKG/usr/games
+ln -fs /usr/share/games/$PRGNAM/bin/$PRGNAM.sh $PKG/usr/games/$PRGNAM
+
 find $PKG -name "delete.me" | xargs rm -f
 find $PKG -name ".cvsignore" | xargs rm -f
 
-# Now let's prevent upgrades from clobbering any existing datafiles
-mv $PKG/var/games/tome/apex/scores.raw \
-  $PKG/var/games/tome/apex/scores.raw.new
-
-mkdir -p $PKG/usr/share/{applications,pixmaps}
-cp $CWD/tome.png $PKG/usr/share/pixmaps
-cp $CWD/tome.desktop $PKG/usr/share/applications
+install -m 0644 -D $CWD/$PRGNAM.png \
+  $PKG/usr/share/pixmaps/$PRGNAM.png
+install -m 0644 -D $CWD/$PRGNAM.desktop \
+  $PKG/usr/share/applications/$PRGNAM.desktop
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a changes.txt credits.txt $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a BUGS.txt changes.txt credits.txt \
+  $PKG/usr/share/games/$PRGNAM/lib/$PRGNAM/help \
+  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

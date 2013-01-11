@@ -22,9 +22,11 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Currently maintained by Dugan Chen
 
 PRGNAM=adobe-source-code-pro-font
-VERSION=${VERSION:-1.010}
+VERSION=${VERSION:-1.013}
 SRC=SourceCodePro_FontsOnly-${VERSION}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -49,8 +51,6 @@ chmod -R u+w,go+r-w,a-s .
 
 mkdir -p $PKG/usr/share/fonts/OTF/
 cp OTF/*.otf $PKG/usr/share/fonts/OTF/
-mkdir -p $PKG/usr/share/fonts/TTF/
-cp TTF/*.ttf $PKG/usr/share/fonts/TTF/
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a LICENSE.txt ReadMe.html SourceCodeProReadMe.html $PKG/usr/doc/$PRGNAM-$VERSION

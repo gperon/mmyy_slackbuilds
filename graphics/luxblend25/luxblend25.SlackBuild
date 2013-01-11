@@ -30,6 +30,7 @@ TAG=${TAG:-_SBo}
 SRCVERSION=luxblend25-69829cedcf07
 blender_version()
 {
+	
 	BLENDER_HEADER=`/opt/blender/blender --version 2>&1 | head -n 1`
 	BLENDER_IMPL=`echo ${BLENDER_HEADER} | cut -f1 -d' '`
 	if [ "$BLENDER_IMPL" = "Blender" ] ; then
@@ -86,7 +87,6 @@ find . \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
-
 
 # manual installation
 mkdir -p $PKG/$BLENDER_PLUGIN_DIR/

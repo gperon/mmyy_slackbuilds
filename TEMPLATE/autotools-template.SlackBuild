@@ -2,19 +2,33 @@
 
 # Slackware build script for <appname>
 
-# Written by (your name) (your contact information)
-
-# (add license information here if you desire; otherwise,
-# all submissions are considered to be in the public domain)
-# Some licenses may incorporate the "Written by" information
-# above, and if so, that line can be omitted
-# We strongly suggest *not* using GPL for scripts, as it requires
-# a copy of the GPL to be distributed with it.  Since the GPL
-# itself is longer than any build script will be, this just doesn't
-# make good sense...
+# Copyright <year> <you> <where you live>
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # |-----------------------------------------------------------------| #
 # REMOVE THIS ENTIRE BLOCK OF TEXT #
+#
+# A license is required, and we strongly suggest you use the above
+# BSD/MIT style license. We DO NOT accept "Public Domain" scripts.
+# Public domain is not valid in some countries, and no license is
+# worse than a "bad" license in those countries.
 #
 # This template is not meant to be a 'cut and paste' script to
 # enable any random user to make a working package.  While

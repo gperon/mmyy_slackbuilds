@@ -4,5 +4,8 @@ It handles your RAW files as well as your bitmap files
 16 bit processing pipe with gimp workflow integration 
 and batch mode.
 
-Photivo requires GraphicsMagick is compiled with configure option 
---with-quantum-depth=16
+Photivo requires GraphicsMagick to be compiled with
+the configure option "--with-quantum-depth=16": this is
+enabled by default in the latest GraphicsMagick build
+script, so if you have problem starting photivo be sure
+to have the latest version.

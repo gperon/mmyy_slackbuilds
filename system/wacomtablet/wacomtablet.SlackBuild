@@ -23,9 +23,11 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=wacomtablet
-VERSION=${VERSION:-1.3.7-2}
+VERSION=${VERSION:-1.3.7_2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+
+SRCVERSION=$(printf $VERSION | tr _ -)
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
@@ -60,9 +62,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/114856-$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf $PRGNAM-$SRCVERSION
+tar xvf $CWD/114856-$PRGNAM-$SRCVERSION.tar.gz
+cd $PRGNAM-$SRCVERSION
 chown -R root:root .
 find . \
  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -72,15 +74,13 @@ find . \
 
 mkdir build
 cd build
-cmake ../ -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` -DCMAKE_BUILD_TYPE=release
-make -j7
-make install DESTDIR=$PKG
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=release ..
+  make
+  make install DESTDIR=$PKG
+cd ..
 
-cd -
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/
-cp -a \
-    AUTHORS COPYING README \
-    $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS COPYING README $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

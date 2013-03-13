@@ -7,7 +7,7 @@
 #
 
 PRGNAM=etherpad-lite
-VERSION=${VERSION:-1.2.3}
+VERSION=${VERSION:-1.2.7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -17,7 +17,6 @@ ETHERPAD_UID=${ETHERPAD_UID:-264}
 ETHERPAD_GROUP=${ETHERPAD_GROUP:-etherpad}
 ETHERPAD_GID=${ETHERPAD_GID:-264}
 
-# Set arch
 ARCH=noarch
 
 CWD=$(pwd)
@@ -48,7 +47,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvf $CWD/$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find . \
@@ -64,14 +63,12 @@ cp -a * $PKG/var/$PRGNAM
 chown -R $ETHERPAD_USER:$ETHERPAD_GROUP $PKG/var/$PRGNAM
 
 mkdir -p $PKG/var/log/$PRGNAM
-touch $PKG/var/log/$PRGNAM/etherpad.log
-touch $PKG/var/log/$PRGNAM/error.log
-chown -R $ETHERPAD_USER:$ETHERPAD_GROUP $PKG/var/log/$PRGNAM
+chown $ETHERPAD_USER:$ETHERPAD_GROUP $PKG/var/log/$PRGNAM
 
 mkdir -p $PKG/etc/rc.d $PKG/etc/$PRGNAM
-install -D -m 0755 $CWD/rc.etherpad-lite $PKG/etc/rc.d/rc.etherpad-lite
+install -D -m 0755 $CWD/rc.etherpad-lite $PKG/etc/rc.d/rc.etherpad-lite.new
 cat settings.json.template > $PKG/etc/$PRGNAM/settings.json.template
-cat settings.json.template > $PKG/etc/$PRGNAM/settings.json
+cat settings.json.template > $PKG/etc/$PRGNAM/settings.json.new
 
 mkdir -p $PKG/srv
 ln -sf /var/$PRGNAM $PKG/srv/$PRGNAM
@@ -83,6 +80,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

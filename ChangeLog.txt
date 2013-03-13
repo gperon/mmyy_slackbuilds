@@ -1,3 +1,370 @@
+Mon Mar  4 22:30:59 UTC 2013
+academic/gpredict: New maintainer
+audio/muse: Kill badness in doinst.sh
+audio/volwheel: Set MAINTAINER to "nobody" (abandoned)
+desktop/obmenu: Set MAINTAINER to "nobody" (abandoned)
+desktop/openbox-themes: Set MAINTAINER to "nobody" (abandoned)
+desktop/stalonetray: Set MAINTAINER to "nobody" (abandoned)
+desktop/xmobar: Updated for version 0.16.
+desktop/xmonad: Updated for version 0.11.
+development/alex: Updated for version 3.0.4.
+development/darcs: Updated for version 2.8.4.
+development/gforth: Added (GNU Forth interpreter)
+development/happy: Updated for version 1.18.10.
+development/nose: Updated for version 1.2.1.
+development/setuptools-git: Updated for version 1.0b1.
+development/zope.interface: Updated for version 4.0.4.
+development/zope.testing: Updated for version 4.1.2.
+games/darkplaces: Updated for version 20130301.
+games/gtkballs: Set MAINTAINER to "nobody" (abandoned)
+games/lightyears: New maintainer
+games/tuxkart: New maintainer
+games/warzone2100: Updated for version 3.1.0.
+graphics/gallery3: Added (web-based photo album organizer)
+graphics/shutter: Set MAINTAINER to "nobody" (abandoned)
+graphics/ufraw: Updated for version 0.19.
+haskell/ghc: Updated for version 7.6.2.
+haskell/haskell-Diff: Updated for version 0.3.0.
+haskell/haskell-GLURaw: Updated for version 1.3.0.0.
+haskell/haskell-GLUT: Updated for version 2.3.1.0.
+haskell/haskell-HTTP: Updated for version 4000.2.8.
+haskell/haskell-HUnit: Updated for version 1.2.5.1.
+haskell/haskell-MonadCatchIO-mtl: Updated for version 0.3.0.5.
+haskell/haskell-OpenGL: Updated for version 2.6.0.1.
+haskell/haskell-OpenGLRaw: Updated for version 1.3.0.0.
+haskell/haskell-QuickCheck: Updated for version 2.5.1.1.
+haskell/haskell-X11: Updated for version 1.6.0.2.
+haskell/haskell-ansi-terminal: Updated for version 0.6.
+haskell/haskell-ansi-wl-pprint: Updated for version 0.6.6.
+haskell/haskell-base64-bytestring: Updated for version 1.0.0.1.
+haskell/haskell-blaze-html: Updated for version 0.5.1.3.
+haskell/haskell-blaze-markup: Updated for version 0.5.1.4.
+haskell/haskell-bmp: Updated for version 1.2.3.4.
+haskell/haskell-cgi: Updated for version 3001.1.8.3.
+haskell/haskell-citeproc-hs: Updated for version 0.3.7.
+haskell/haskell-data-default: Added (types with a default value)
+haskell/haskell-dataenc: Updated for version 0.14.0.5.
+haskell/haskell-digest: Updated for version 0.0.1.2.
+haskell/haskell-editline: Updated for version 0.2.1.1.
+haskell/haskell-extensible-exceptions: Added (Extensible exceptions)
+haskell/haskell-ghc-paths: Updated for version 0.1.0.9.
+haskell/haskell-gloss: Updated for version 1.7.8.2.
+haskell/haskell-hashed-storage: Updated for version 0.5.10.
+haskell/haskell-haskeline: Updated for version 0.7.0.3.
+haskell/haskell-highlighting-kate: Updated for version 0.5.3.7.
+haskell/haskell-hinotify: Updated for version 0.3.5.
+haskell/haskell-json: Updated for version 0.7.
+haskell/haskell-mmap: Updated for version 0.5.8.
+haskell/haskell-mtl: Updated for version 2.1.2.
+haskell/haskell-network: Updated for version 2.4.1.2.
+haskell/haskell-pandoc-types: Updated for version 1.10.
+haskell/haskell-primitive: Updated for version 0.5.0.1.
+haskell/haskell-regex-pcre-builtin: Updated for ver 0.94.4.5.8.31.
+haskell/haskell-stm: Updated for version 2.4.2.
+haskell/haskell-syb: Updated for version 0.3.7.
+haskell/haskell-tagsoup: Updated for version 0.12.8.
+haskell/haskell-tar: Updated for version 0.4.0.1.
+haskell/haskell-temporary: Updated for version 1.1.2.4.
+haskell/haskell-terminfo: Updated for version 0.3.2.5.
+haskell/haskell-test-framework-hunit: Updated for version 0.3.0.
+haskell/haskell-test-framework-quickcheck2: Updated for ver 0.3.0.1.
+haskell/haskell-test-framework: Updated for version 0.8.
+haskell/haskell-texmath: Updated for version 0.6.1.3.
+haskell/haskell-text: Updated for version 0.11.2.3.
+haskell/haskell-vector: Updated for version 0.10.0.1.
+haskell/haskell-zip-archive: Updated for version 0.1.3.3.
+haskell/haskell-zlib: Updated for version 0.5.4.0.
+haskell/hscolour: Updated for version 1.20.3.
+haskell/xmonad-contrib: Updated for version 0.11.
+libraries/FormEncode: Updated for version 1.2.6.
+libraries/GLee: New maintainer
+libraries/SQLObject: Updated for version 1.3.2.
+libraries/ZConfig: Updated for version 3.0.2.
+libraries/decorator: Updated for version 3.4.0.
+libraries/freealut: fixed download link
+libraries/geos: Updated for version 3.3.8.
+libraries/libpqxx: fix typo in find line
+libraries/libssh2: Updated for version 1.4.3.
+libraries/opencv: Updated for version 2.4.4.
+libraries/quesoglc: New maintainer
+libraries/xawplus: Fix to makefile patch (fixed include directories)
+libraries/zc.lockfile: Updated for version 1.1.0.
+libraries/zdaemon: Updated for version 4.0.0a1.
+libraries/zope.component: Updated for version 4.0.2.
+libraries/zope.configuration: Updated for version 4.0.2.
+libraries/zope.event: Updated for version 4.0.2.
+libraries/zope.hookable: Updated for version 4.0.1.
+libraries/zope.i18nmessageid: Updated for version 4.0.2.
+libraries/zope.location: Updated for version 4.0.1.
+libraries/zope.proxy: Updated for version 4.1.1.
+libraries/zope.schema: Updated for version 4.2.2.
+libraries/zope.security: Updated for version 4.0.0a4.
+misc/gprename: Set MAINTAINER to "nobody" (abandoned)
+multimedia/flash-player-plugin: Updated for version 11.2.202.273.
+multimedia/realplayer: Set MAINTAINER to "nobody" (abandoned)
+network/framework: Removed (obsolete - use metasploit)
+network/gtorrentviewer: Set MAINTAINER to "nobody" (abandoned)
+network/imageshack-uploader: Set MAINTAINER to "nobody" (abandoned)
+network/rssh: Updated for version 2.3.4.
+network/shibboleth-sp: Added (Shibboleth Service Provider)
+network/zabbix_agentd: Updated for version 1.8.16.
+network/zabbix_proxy: Updated for version 1.8.16.
+network/zabbix_server: Updated for version 1.8.16.
+office/adobe-reader: Updated for version 9.5.4.
+perl/perl-File-HomeDir: Updated for version 1.00.
+perl/perl-Sort-Naturally: Updated for version 1.03.
+python/lxml: Updated for version 3.1.0.
+python/subvertpy: Updated for version 0.9.0.
+system/artwiz-aleczapka: Reworked (split cursor font out)
+system/artwiz-cursor: Added (futuristic mouse cursor for X11)
+system/bochs: fix wrong --enable-sb16 parameter
+system/postgis: Updated for version 2.0.3.
+system/xen: kill obsolete udev rules
++--------------------------+
+Mon Feb 25 04:55:27 UTC 2013
+academic/gwyddion: Updated for version 2.31.
+academic/osm2pgsql: Added (convert OpenStreetMap data to PostGIS)
+accessibility/ruvim: Added (Russian language pack for Vim)
+audio/alsa-tools: Fixed udev rules (s,BUS,SUBSYSTEMS,g)
+audio/lmms: Pass proper libdir to cmake
+desktop/transset-df: Removed (obsolete)
+desktop/trayer-srg: Added (GTK2-based systray for UNIX desktop)
+development/eclipse: Updated for version 4.2.1.
+development/kforth: Added (A Forth programming language and environment)
+development/monodevelop-database: Updated for version 3.0.6.
+development/monodevelop-debugger-gdb: Updated for version 3.0.6.
+development/monodevelop: Updated for version 3.0.6.
+development/netbeans: Updated for version 7.3.
+development/qt-creator: Updated for version 2.6.2.
+development/scite: Updated for version 3.24.
+graphics/evolus-pencil: Tweak permissions setting
+graphics/gthumb: Remove obsolete configure flags
+graphics/inkscape: Updated for version 0.48.4.
+graphics/zbar: Added (bar code reader)
+libraries/jbig2dec: Fixed download link
+libraries/libmicrohttpd: Updated for version 0.9.25.
+libraries/libnova: Added (Celestial Mechanics, Astrometry, and Astrodynamics Library)
+libraries/libpqxx: Added (C++ client API for PostgreSQL)
+libraries/ltm: Added (LibTomMath library)
+libraries/php-pdo_dblib: Added (php pdo_dblib extension)
+libraries/podofo: Updated for version 0.9.2.
+libraries/tbb: Updated for version 4.1u2.
+misc/rsnapshot: Fixed version refs in README
+misc/zyGrib: Updated for version 6.1.2.
+multimedia/dirac: Pedantic fix to comment in dirac.SlackBuild
+multimedia/makemkv: Updated for version 1.8.0.
+network/bitcoin: Updated for version 0.8.0.
+network/dovecot: Noted dovenull user/group requirements
+network/etherpad-lite: Don't clobber system configs/logs on upgrade
+network/etherpad-lite: Updated for version 1.2.7.
+network/knemo: Updated for version 0.7.6.
+network/postfix: Use full path and add status() to init script
+network/skype: Updated for version 4.1.0.20.
+office/convertlit: Added (converts .lit files to .epub)
+office/texlive: Clarified README wrt building
+office/wyrd: Don't clobber config file on package upgrades
+office/wyrd: Updated for version 1.4.6.
+python/pyquery: Updated for version 1.2.4.
+system/bacula-client: Updated for version 5.2.13.
+system/bacula: Updated for version 5.2.13.
+system/cups-bjnp: Added (CUPS backend using the BJNP protocol)
+system/man-pages-ru: Added (Russian man pages)
+system/ms-sys: Added (writes Microsoft compatible boot records)
+system/unetbootin: Updated for version 583.
+system/wacomtablet: Added (KDE Wacom Tablet)
++--------------------------+
+Sat Feb 23 04:30:38 UTC 2013
+academic/jugglinglab: Added (create/animate juggling patterns)
+audio/SuperCollider: Updated for version 3.6.2.
+audio/alsamodularsynth: Added (realtime modular synthesizer)
+audio/sunvox: Added (Modular synthesizer, sampler, and sequencer/tracker)
+desktop/cairo-dock-plugins: Updated for version 3.1.2.
+desktop/cairo-dock: Updated for version 3.1.2.
+desktop/faenza-icon-theme: Correct MD5SUM in .info file
+desktop/slock: Updated for version 1.1.
+desktop/thunar-media-tags-plugin: Fixed taglib linkage
+development/JSONObject: Removed UTF-8 BOM.
+development/THE: Included a symlink: $bindir/nthe <-- $bindir/the
+development/anjuta: Fixed dep information (+itstool)
+development/jdk: Updated for version 7u15.
+dot.gitignore: Ignore .swp files
+games/playonlinux: Fixed dep info (imagick-->php-imagick)
+graphics/draftsight: Updated for version 1.2.265.
+graphics/screencloud: Added (Easy to use screenshot tool)
+graphics/teighafileconverter: Updated for version 3.8.1.
+graphics/teighaviewer: Updated for version 3.8.1.
+libraries/bullet: Added (physics library)
+libraries/libvdpau: Updated for version 0.6.
+libraries/libxkbcommon: Added (library to handle keyboard descriptions)
+libraries/opensaml: Added (FOSS Implementation of OASIS SAML)
+multimedia/devede: Updated for version 3.23.0.
+multimedia/gpodder3: Removed (replaced by gpodder)
+multimedia/gpodder: Updated for version 3.4.0.
+multimedia/xbmc: Updated for version 12.0.
+network/metasploit: Added (The Metasploit Framework)
+network/ndiswrapper-kernel: Updated for version 1.58.
+network/ndiswrapper-utils: Updated for version 1.58.
+network/opera: Updated for version 12.14.
+network/phpmyadmin: Updated for version 3.5.7.
+network/teamviewer: Fixup log/config dir symlinks
+network/teamviewer: Remove dangling symlink first
+network/teamviewer: Trivial rearrangement inside script
+network/teamviewer: Updated for version 8.0.17147.
+network/xombrero: Added (keyboard-centric web browser; formerly xxxterm)
+office/adobe-reader: Updated for version 9.5.3.
+office/epdfview: Use a working download link
+office/sigil: Updated for version 0.6.2.
+office/tellico: Updated for version 2.3.7.
+perl/perl-Geo-IP: Added (GeoIP Perl API)
+perl/perl-HTTP-Proxy: Updated for version 0.26.
+python/pyparsing: Updated for version 1.5.6.
+ruby/facter: Updated for version 1.6.17.
+system/bleachbit: Updated for version 0.9.5.
+system/gradm: Added (Grsecurity Administration Utility)
+system/nvidia-driver: Updated for version 310.32.
+system/nvidia-kernel: Updated for version 310.32.
+system/phpsysinfo: Updated for version 3.1.1.
+system/qtgzmanager: Added (TGZ/TXZ package management)
+system/qtgzmanager: Updated for version 1.0.1.
+system/regionset: Removed APPROVED from .info file
+system/swun: Added (SoftWare Update Notifier)
+system/tracker: Added (semantic data storage search engine)
+system/usbview: Updated for version 2.0.
+system/yakuake: Updated for version 2.9.9.
++--------------------------+
+Thu Feb 14 06:30:40 UTC 2013
+academic/wxmacmolplt: Updated for version 7.4.4.
+audio/audacity: Updated for version 2.0.3.
+audio/cwstation: Added (A morse code trainer)
+audio/faust: Added (Functional Audio Stream)
+audio/fmit: Added (Free Music Instrument Tuner)
+audio/nas: Minor fixes, added rc.* file.
+audio/shell-fm: Updated for version git20130207.
+audio/wavbreaker: Updated for version 0.11.
+desktop/evilwm: Added (minimalist window manager for X)
+desktop/rootactions_servicemenu: Updated for version 2.7.3.
+desktop/yawp: Updated for version 0.4.3.
+development/4th: Updated for version 3.62.0.
+development/gtest: Added (Google C++ Testing Framework)
+development/leveldb: Updated for version 1.9.0.
+development/mutagen: Updated for version 1.21.
+development/ne: Updated for version 2.5.
+development/snappy: Added (A fast compressor/decompressor)
+development/tiled-qt: Updated for version 0.9.0.
+development/trac: Updated for version 1.0.1.
+games/alienarena: Updated for version 7.65.
+games/mame: Updated for version 0.148.
+games/naev: Added (2d space trading game)
+games/nestopia: Updated for version 1.44.
+games/playonlinux: Updated for version 4.1.9.
+games/qmc2: Updated for version 0.38.
+games/robotfindskitten: Updated for version 2.7182818.701.
+games/tt: Added (Tetris for Terminals)
+games/vbam: Updated for version r1159.
+games/yamagi-quake2: Fix for missing stuff/yq2.cfg in docs.
+graphics/graphviz: Updated for version 2.30.0.
+graphics/mypaint: Note scons dependency in .info file
+graphics/photo: Updated for version 0.9.1.
+graphics/yed: Updated for version 3.10.1.
+libraries/gtksourceview3: Updated for version 3.7.2.
+libraries/harfbuzz: Updated for version 0.9.12.
+libraries/libee: Added (Event Expression Library inspired by CEE)
+libraries/libestr: Added (some essentials for string handling)
+libraries/lksctp-tools: Updated for version 1.0.13.
+misc/dvtm: Updated for version 0.8.
+multimedia/flash-player-plugin: Updated for version 11.2.202.270.
+multimedia/youtube-viewer: Added (browse YouTube videos from a terminal)
+network/arpwatch: Fixed slack-desc formatting
+network/eiskaltdcpp: Added (QT4 File Sharing)
+network/hydra: Updated for version 7.4.2.
+network/midori: Updated for version 0.4.8.
+network/mod_auth_kerb: Added (Kerberos Module for Apache)
+network/mod_dnssd: Added (dns-sd/zeroconf/avahi module for httpd)
+network/mpop: Updated for version 1.0.27.
+network/ngircd: Updated for version 20.1.
+network/node: Updated for version 0.8.17.
+network/openvswitch: Updated for version 1.4.5.
+network/pyNeighborhood: Updated for version bzr20130124.
+network/razor-agents: Added (collaborative spam detection)
+network/skype4pidgin: Updated for version r654.
+network/synergy: Added (Control sharing over the network)
+network/teamviewer: New maintainer.
+network/uwsgi: Updated for version 1.4.4.
+network/xtables-addons: Updated for version 1.47.
+network/yturl: Added (get direct URLs to YouTube videos)
+office/JabRef: Added (Reference Manager)
+office/ProjectLibre: Updated for version 1.5.3.
+office/flowkeeper: Added (Java-based timer for Pomodoro Technique(R))
+office/myrulib: Updated for version 0.29.12.
+perl/perl-SNMP-Info: Added (SNMP::Info)
+python/Markdown: Added (Python implementation of Markdown)
+python/Pyro4: Updated for version 4.17.
+python/blinker: Added (Python module for object-to-object and broadcast signaling)
+python/feedgenerator: Added (Atom/RSS feed generator Python module)
+python/pattern: Added (a web mining module for Python)
+python/pep8: Updated for version 1.4.1.
+python/python-urllib3: Added (HTTP library)
+python/python3: More path fixes; use system expat and libffi
+python/sippy: Added (Sippy B2BUA)
+python/webassets: Added (Media asset management for Python)
+system/adobe-source-code-pro-font: Updated for version 1.017.
+system/bindfs: Updated for version 1.11.
+system/blake2: Updated for version 20130131.
+system/cassandra-gui: Added (Cassandra GUI Project)
+system/dar: Updated for version 2.4.9.
+system/dateutils: Updated for version 0.2.4.
+system/dfc: Updated for version 3.0.1.
+system/efibootmgr: Added (Tool to manipulate the EFI/UEFI Boot Manager)
+system/fsviewer: Added (NextStep-like file browser)
+system/grub2: Added update-grub script.
+system/innoextract: Added (Unpacker for Inno Setup installers)
+system/openct: Minor fixes and updated download link.
+system/opensc: Updated for version 0.13.0.
+system/paxctl: Added (PaX control program)
+system/pcsc-lite: Updated for version 1.8.8.
+system/percona-xtrabackup: Fixed CFLAGS and innobackupex script.
+system/redis: Updated for version 2.6.9.
+system/regionset: Updated for version 0.2.
+system/sbotools: Added (ports-like interface to slackbuilds.org)
+system/sudosh2: Added (tool for server auditing and shell reporting)
+system/vifm: Updated for version 0.7.4b.
+system/xen: Added (the Xen virtualization hypervisor)
++--------------------------+
+Wed Feb  6 04:41:47 UTC 2013
+audio/mp3splt-gtk: Updated for version 0.8.1.
+audio/mp3splt: Updated for version 2.5.1.
+desktop/razorqt: Updated for version 0.5.2.
+development/jdk: Updated for version 7u13.
+libraries/libisofs: Removed unneeded libburn dep from .info
+libraries/libmp3splt: Updated for version 0.8.1a.
+multimedia/flash-player-plugin: Fixed minor typo
+multimedia/mediatomb: Support use of libjs from js185 package
+network/dansguardian: Updated for version 2.12.0.3.
+network/phpmyadmin: Updated for version 3.5.6.
+network/weechat: Updated for version 0.4.0.
+network/znc: Updated for version 1.0.
+office/pdftk: Updated for version 1.45.
+office/wink: Fixed download link
+perl/perl-MailTools: Updated for version 2.12.
+perl/perl-Net-NetMask: Added (parse/manipulate ipv4 netblocks)
+perl/perl-Net-Server: Updated for version 2.007.
+perl/perl-data-dump: Added (pretty printing of data structures)
+ruby/rubygem-gettext: Removed (no longer needed)
+ruby/rubygem-highline: Removed (no longer needed)
+ruby/rubygem-locale: Removed (no longer needed)
+ruby/rubygem-lockfile: Removed (no longer needed)
+ruby/rubygem-mime-types: Removed (no longer needed)
+ruby/rubygem-ncursesw: Removed (no longer needed)
+ruby/rubygem-net-ssh: Removed (no longer needed)
+ruby/rubygem-rmail: Removed (no longer needed)
+ruby/rubygem-sup: Removed (it's obsolete, development stopped)
+ruby/rubygem-trollop: Removed (no longer needed)
+ruby/rubygem-xapian-full: Removed (no longer needed)
+system/clamav: Another fix for the logrotate script.
+system/kc: Updated for version 2.2.1.
+system/phpsysinfo: Added (displays system information)
+system/xfburn: Noted libburn dependency
++--------------------------+
 Sun Jan 20 14:08:30 UTC 2013
 academic/antiprism: Updated for version 0.22.
 academic/bowtie: Added (short read aligner of DNA sequences).

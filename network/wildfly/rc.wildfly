@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Start/stop/restart jboss-as.
+# Start/stop/restart wildfly.
 
-# Copyright 2011 Giorgio Peron, Campodarsego, PD, Italy giorgio.peron@gmail.com
+# Copyright 2013 Giorgio Peron, Campodarsego, PD, Italy giorgio.peron@gmail.com
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +24,7 @@
 
 
 # define where jboss is - this is the directory containing directories log, bin, conf etc
-JBOSS_HOME=${JBOSS_HOME:-"/usr/share/jboss-as"}
+JBOSS_HOME=${JBOSS_HOME:-"/usr/share/wildfly"}
 
 # make java is on your path
 JAVAPTH=${JAVAPTH:-"$JAVA_HOME/bin"}
@@ -42,8 +42,8 @@ JBOSS_START_STANDALONE=${JBOSS_START_STANDALONE:-"$JBOSS_HOME/bin/standalone.sh 
 JBOSS_STOP_STANDALONE=${JBOSS_STOP_STANDALONE:-"$JBOSS_HOME/bin/jboss-admin.sh --connect controller=127.0.0.1:9999 command=:shutdown"}
 
 # define log file
-JBOSS_CONSOLE="/var/log/jboss-as/jboss.log"
-JBOSS_DOMAIN_CONSOLE="/var/log/jboss-as/jboss_domain.log"
+JBOSS_CONSOLE="/var/log/wildfly/wildfly.log"
+JBOSS_DOMAIN_CONSOLE="/var/log/wildfly/wildfly_domain.log"
 
 if [ -n "$JBOSS_CONSOLE" -a ! -d "$JBOSS_CONSOLE" ]; then
   # ensure the file exists
@@ -99,7 +99,7 @@ fi
 
 case "$1" in
 start)
-	echo "Starting JBoss Application Server"
+	echo "Starting WildFly (JBoss Application Server)"
     cd $JBOSS_HOME/bin
     if [ -z "$SUBIT" ]; then
         eval $CMD_START_STANDALONE >${JBOSS_CONSOLE} 2>&1 &
@@ -108,7 +108,7 @@ start)
     fi
     ;;
 stop)
-	echo "Stopping JBoss Application Server"
+	echo "Stopping WildFly (JBoss Application Server)"
     if [ -z "$SUBIT" ]; then
         $CMD_STOP_STANDALONE >/dev/null 2>&1
     else
@@ -120,7 +120,7 @@ restart)
     $0 start
     ;;
 domain-start)
-	echo "Starting Domain JBoss Application Server"
+	echo "Starting Domain WildFly (JBoss Application Server)"
     cd $JBOSS_HOME/bin
     if [ -z "$SUBIT" ]; then
         eval $CMD_START_DOMAIN >${JBOSS_DOMAIN_CONSOLE} 2>&1 &
@@ -129,7 +129,7 @@ domain-start)
     fi
     ;;
 domain-stop)
-	echo "Stopping Domain JBoss Application Server"
+	echo "Stopping Domain WildFly (JBoss Application Server)"
     if [ -z "$SUBIT" ]; then
         $CMD_STOP_DOMAIN >/dev/null 2>&1
     else

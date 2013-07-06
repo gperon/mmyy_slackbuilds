@@ -23,11 +23,11 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=luxrender
-VERSION=${VERSION:-1.2RC}
+VERSION=${VERSION:-1.2.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCVERSION=lux-512032ae7307
-LUXRAYSRCVERSION=luxrays-7fbe66a4b17b
+SRCVERSION=lux-3066b2161439
+LUXRAYSRCVERSION=luxrays-475fbf15f0ca
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
@@ -145,6 +145,11 @@ sed -i "/##########################      Find LuxRays       ####################
 SET(LuxRays_HOME $TMP/$LUXRAYSRCVERSION)"  cmake/Dependencies.cmake
 sed -i "s:SET(OPENCL_ROOT /usr/src/opencl-sdk):SET(OPENCL_ROOT /usr/share/cuda):g" cmake/Dependencies.cmake
 sed -i "s:ADD_DEFINITIONS(-msse2 -mfpmath=sse -ftree-vectorize -funroll-loops -Wall -fPIC -DHAVE_PTHREAD_H):ADD_DEFINITIONS(-msse2 -mfpmath=sse -ftree-vectorize -funroll-loops -Wall -fPIC -DHAVE_PTHREAD_H -l png14):g" CMakeLists.txt
+sed -i "s:set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} -fvisibility=hidden -fvisibility-inlines-hidden\"):set(CMAKE_CXX_FLAGS_RELEASE \"\${CMAKE_CXX_FLAGS_RELEASE} -fvisibility=hidden -fvisibility-inlines-hidden -lpthread\"):g" CMakeLists.txt
+sed -i "s:#SET(CMAKE_VERBOSE_MAKEFILE true):SET(CMAKE_VERBOSE_MAKEFILE true):g" CMakeLists.txt
+sed -i "/SET(CMAKE_VERBOSE_MAKEFILE true)/ a\
+set(CMAKE_CXX_FLAGS_RELEASE \"-lpthread\")" CMakeLists.txt
+
 
 cmake ./
 

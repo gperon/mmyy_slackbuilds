@@ -22,6 +22,6 @@ preserve_perms() {
   config $NEW
 }
 
-# Keep same perms on rc.jboss-as.new:
-preserve_perms  etc/rc.d/rc.jboss-as.new
+# Keep same perms on rc.wildfly.new:
+preserve_perms  etc/rc.d/rc.wildfly.new
 

@@ -1,12 +1,12 @@
 PRGNAM="luxrender"
-VERSION="1.2RC"
+VERSION="1.2.1"
 HOMEPAGE="http://www.luxrender.net/"
 DOWNLOAD="\
-          http://src.luxrender.net/luxrays/archive/7fbe66a4b17b.tar.bz2 \
-          http://src.luxrender.net/lux/archive/512032ae7307.tar.bz2"
+          http://src.luxrender.net/luxrays/archive/475fbf15f0ca.tar.bz2 \
+          http://src.luxrender.net/lux/archive/3066b2161439.tar.bz2"
 MD5SUM="\
-        d2ec5140e746a10211af0e77830480c5 \
-        39c4b1f999c6fb65db22dac71b3e5d2a"
+        fa4f0aaab11c292466b9fe2c21c6b915 \
+        f1ca46a44750f363ea12c594ed0a9e50"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="cudatoolkit nvidia-driver opencl-headers FreeImage"

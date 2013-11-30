@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Slackware build script for grass
 
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=grass
-VERSION=${VERSION:-6.4.2}
+VERSION=${VERSION:-6.4.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -63,39 +63,32 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
 # Option handling:
-# $WITHLIST has to be an array due to embedded spaces in the ffmpeg includes :-(
 set -- $(echo $ENABLE | sed 's/,/ /g')
-withnum=0
-while [[ "$1" != "" ]]; do
+
+while [ "$1" != "" ]; do
   case "$1"
   in
   blas | \
   lapack | \
-  geos | \
+  ffmpeg | \
   sqlite )
-    WITHLIST[$((withnum++))]="--with-$1"
+    WITHLIST="$WITHLIST --with-$1"
     shift
     ;;
-  mysql )
-    WITHLIST[$((withnum++))]="--with-mysql"
-    WITHLIST[$((withnum++))]="--with-mysql-includes=/usr/include/mysql"
+  mysql | mariadb )
+    WITHLIST="$WITHLIST --with-mysql"
+    WITHLIST="$WITHLIST --with-mysql-includes=/usr/include/mysql"
     shift
     ;;
   postgres | postgresql )
-    WITHLIST[$((withnum++))]="--with-postgres"
-    shift
-    ;;
-  ffmpeg )
-    FFINCL="/usr/include/libavcodec /usr/include/libavformat /usr/include/libswscale"
-    WITHLIST[$((withnum++))]="--with-ffmpeg"
-    WITHLIST[$((withnum++))]="--with-ffmpeg-includes=$FFINCL"
+    WITHLIST="$WITHLIST --with-postgres"
     shift
     ;;
   * )
@@ -110,12 +103,8 @@ else
   BITNESS=""
 fi
 
-# gcc-4.7 patch from grass svn, see http://trac.osgeo.org/grass/ticket/1533
-sed -i 's/mm.cpp/mm.cc/' $CWD/changeset_r50130.diff
-patch -p3 < $CWD/changeset_r50130.diff
-# ffmpeg-0.8 patch from Gentoo, see https://bugs.gentoo.org/show_bug.cgi?id=392371#c9
-# it's good for ffmpeg-0.10 too ;-)
-patch -p1 < $CWD/gentoo392371b.patch
+# geos now always enabled: it's an indirect hard dep (via gdal), and makes grass nicer :-)
+# ffmpeg includes are only parsed if ffmpeg is enabled so it is safe to pass them to configure.
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS -fpermissive" \
@@ -131,9 +120,13 @@ LDFLAGS="-ldl -lncurses" \
   --with-proj-share=/usr/share/proj \
   --with-cairo \
   --with-wxwidgets \
+  --with-geos \
   --enable-largefile  \
-  "${WITHLIST[@]}" \
+  $WITHLIST \
   $BITNESS \
+  --with-ffmpeg-includes="/usr/include/libavcodec /usr/include/libavdevice \
+  /usr/include/libavfilter /usr/include/libavformat /usr/include/libavutil \
+  /usr/include/libpostproc /usr/include/libswresample /usr/include/libswscale" \
   --build=$ARCH-slackware-linux \
   --host=$ARCH-slackware-linux
 

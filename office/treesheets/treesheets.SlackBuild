@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
 # Slackware build script for TreeSheets
-# Builds a Slackware package from the TreeSheets binary tarball. 
+# Builds a Slackware package from the TreeSheets binary tarball.
 #
 # Written by Luke Williams ( xocel@iquidus.org )
 # license: WTFPL <http://sam.zoy.org/wtfpl/COPYING>
 
 PRGNAM=treesheets
-VERSION=${VERSION:-110805}	
+VERSION=${VERSION:-131026}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -36,8 +36,8 @@ rm -rf $TARBALL_ROOT
 tar -xvf $CWD/$TARBALL
 cd $TARBALL_ROOT
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;

@@ -31,11 +31,11 @@ TAG=${TAG:-_SBo}
 
 # from the official online documenatation:
 #
-# --enable-camelcase will enable splitting camelCase words. This is not enabled 
-# by default as it has the unfortunate side-effect of making some phrase searches 
-# quite confusing: ie, "MySQL manual" would be matched by "MySQL manual" and 
+# --enable-camelcase will enable splitting camelCase words. This is not enabled
+# by default as it has the unfortunate side-effect of making some phrase searches
+# quite confusing: ie, "MySQL manual" would be matched by "MySQL manual" and
 # "my sql manual" but not "mysql manual" (only inside phrase searches).
-# 
+#
 # to use this feature, set ENABLE_CAMELCASE to YES (default is to let it disabled)
 ENABLE_CAMELCASE=${ENABLE_CAMELCASE:-"NO"}
 
@@ -81,8 +81,8 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;

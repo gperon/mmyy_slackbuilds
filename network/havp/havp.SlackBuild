@@ -51,7 +51,7 @@ elif ! getent passwd havp 2>&1 > /dev/null; then
   bailout ;
 fi
 
-set -e 
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -60,8 +60,8 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -72,7 +72,7 @@ patch -p1 < $CWD/patches/use_clamav_group_by_default.diff
 patch -p1 < $CWD/patches/put_templates_in_usrshare.diff
 patch -p1 < $CWD/patches/use_vartmphavp_for_tempdir.diff
 
-CFLAGS="$SLKCFLAGS" 
+CFLAGS="$SLKCFLAGS"
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc \

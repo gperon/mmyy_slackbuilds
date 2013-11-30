@@ -42,6 +42,11 @@
 #            * updated.
 # 20111224_9e50fdf: 26/dec/2011 by Matteo Bernardini <ponce@slackbuilds.org>
 #             * update.
+# 20131103_0cdb35c: 05/nov/2013 by Matteo Bernardini <ponce@slackbuilds.org>
+#             * update: now includes lxpolkit, lxsession-edit, lxlock,
+#               lxsession-default-apps and lxsettings-daemon.
+# 20131119_9d2a0cc: 23/nov/2013 by Matteo Bernardini <ponce@slackbuilds.org>
+#             * update: fixes wrong behaviour with missing lsb_release
 #
 # Run 'sh lxsession.SlackBuild' to build a Slackware package.
 # The package (.txz) plus descriptive .txt file are created in /tmp .
@@ -50,7 +55,7 @@
 # -----------------------------------------------------------------------------
 
 PRGNAM=lxsession
-VERSION=${VERSION:-20111224_9e50fdf}
+VERSION=${VERSION:-20131119_9d2a0cc}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -92,8 +97,8 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -111,6 +116,8 @@ CFLAGS="$SLKCFLAGS" \
   --mandir=/usr/man \
   --program-prefix= \
   --program-suffix= \
+  --enable-buildin-clipboard \
+  --enable-buildin-polkit \
   --build=$ARCH-slackware-linux
 
 make
@@ -126,6 +133,7 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

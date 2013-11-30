@@ -23,15 +23,16 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Modified by Willy Sudiarto Raharjo 
+# Modified by Willy Sudiarto Raharjo
 # Changelog
 # January 9, Upgraded to 8.0.16675, added rc.teamviewerd to provide teamviewer daemon
 # January 12, Rebuilt to create symlink in /usr/bin, thanks to Ponce
 # January 17, Rebuilt to change the default behaviour on rc.teamviewerd when no parameter is given
 # February 16: Upgraded to 8.0.17147
+# September 22: Upgraded to 8.0.20931
 
 PRGNAM=teamviewer
-VERSION=${VERSION:-8.0.17147}
+VERSION=${VERSION:-8.0.20931}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -74,11 +75,11 @@ cd $PKG
 ar p $CWD/teamviewer_linux${DEBARCH}.deb data.tar.gz | gzip -d | tar xv
 
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -103,13 +104,10 @@ mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Move docs to official place
-mv $PKG/opt/teamviewer8/*.txt $PKG/usr/doc/$PRGNAM-$VERSION
+mv $PKG/opt/teamviewer8/doc/*.txt $PKG/usr/doc/$PRGNAM-$VERSION
 
 mkdir -p $PKG/etc/rc.d/
 install -m 0644 $CWD/rc.teamviewerd $PKG/etc/rc.d/rc.teamviewerd.new
-
-# Remove duplicate file
-rm -f $PKG/opt/teamviewer8/tv_bin/xdg-utils/xdg-email~
 
 # Let's flip-flop the actual locations vs. symlinks of a couple of things:
 # First remove the dangling symlink made by Debian packages:

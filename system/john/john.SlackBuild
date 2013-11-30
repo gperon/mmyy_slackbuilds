@@ -7,12 +7,12 @@
 # 20/Nov/2011 * Updated for version 1.7.8 and jambo-patch 8
 #               Thanks a lot Kent Fritz for patch with many improvements
 # 19/Dec/2011 * Updated for version 1.7.9 and jambo-patch 5
+# 10/Nov/2013 * Updated for version 1.8.0
 
 PRGNAM=john
-VERSION=${VERSION:-1.7.9}
+VERSION=${VERSION:-1.8.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-JUMBOVERSION=${JUMBOVERSION:-5}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -49,21 +49,15 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 
-# Soft-link in tarball causes x bit to be set below; nuke it 
+# Soft-link in tarball causes x bit to be set below; nuke it
 rm -f $PRGNAM-$VERSION/README
-
-# Apply the Jumbo patch?
-if [ "$JUMBO" = "1" ]; then
-  zcat $CWD/john-$VERSION-jumbo-${JUMBOVERSION}.diff.gz | patch -p0 || exit 1
-  mv $PRGNAM-$VERSION/README-jumbo $PRGNAM-$VERSION/doc/README-jumbo 
-fi
 
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -72,7 +66,7 @@ mkdir -p $PKG/usr/share/john
 cp -a run/* $PKG/usr/share/john
 rm $PKG/usr/share/john/mailer
 
-make -C src clean $TARGET CFLAGS="-DJOHN_SYSTEMWIDE=1 -c -Wall -O2 -fomit-frame-pointer"
+make -j1 -C src clean $TARGET CFLAGS="-DJOHN_SYSTEMWIDE=1 -c -Wall -O2 -fomit-frame-pointer"
 
 # Merge /usr/share/dict/words into password list?
 if [ "$MERGEWORDS" = "1" ]; then

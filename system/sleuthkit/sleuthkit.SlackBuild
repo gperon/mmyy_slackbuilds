@@ -22,10 +22,10 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Updated v4.0.2 March 2013 Barry J. Grundy <bgrundy(at)linuxleo.com>
+# Updated v4.1.2 October 2013 Barry J. Grundy <bgrundy(at)linuxleo.com>
 
 PRGNAM=sleuthkit
-VERSION=4.0.2
+VERSION=4.1.2
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -65,10 +65,12 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# For whatever reason, libdl and libpthread weren't getting linked in
-LDFLAGS="-ldl -lpthread" \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
@@ -88,7 +90,7 @@ for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; r
 
 # "docs" directory now contains a simple pointer to the wiki.
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -ri *.txt licenses docs $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a *.txt licenses docs $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 rm -f $PKG/usr/doc/$PRGNAM-$VERSION/docs/Makefile*
 

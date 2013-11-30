@@ -1,0 +1,18 @@
+pgRouting extends the PostGIS / PostgreSQL geospatial database to provide
+geospatial routing functionality.
+
+The following algorithms are compiled:
+* All Pairs Shortest Path, Johnson’s Algorithm 
+* All Pairs Shortest Path, Floyd-Warshall Algorithm 
+* Shortest Path A*
+* Bi-directional Dijkstra Shortest Path 
+* Bi-directional A* Shortest Path 
+* Shortest Path Dijkstra
+* Driving Distance
+* K-Shortest Path, Multiple Alternative Paths 
+* K-Dijkstra, One to Many Shortest Path 
+* Traveling Sales Person
+* Turn Restriction Shortest Path
+
+To build the pgRouting documentation, pass WITH_DOC=YES to the script
+(this requires the Sphinx package to be installed).

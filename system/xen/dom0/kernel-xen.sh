@@ -3,10 +3,10 @@
 # Xem dom0 kernel installation script
 
 # Written by Chris Abela <chris.abela@maltats.com>, 20100515
-# Updated by mario <mario@slackverse.org>, 2010-2012
+# Modified by Mario Preksavec <mario@slackware.hr>
 
-KERNEL=${KERNEL:-3.2.29}
-XEN=${XEN:-4.2.1}
+KERNEL=${KERNEL:-3.10.17}
+XEN=${XEN:-4.3.1}
 BOOTLOADER=${BOOTLOADER:-lilo}
 
 ROOTMOD=${ROOTMOD:-ext4}

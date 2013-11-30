@@ -24,8 +24,8 @@
 
 # Currently maintained by Robert Allen <slacker@slaphappygeeks.com>
 
-# Note: This SVN snapshot of xalan-c is selected to build with xerces-c-3.x 
-# series without patching, so the source archive filename is hard-coded into 
+# Note: This SVN snapshot of xalan-c is selected to build with xerces-c-3.x
+# series without patching, so the source archive filename is hard-coded into
 # the script.  If you want to build with a different snapshot then you will
 # need to create your own archive an update the filename in the script.
 #
@@ -81,7 +81,11 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/xalan-c-1.11_1335373.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
   XALANCROOT=$(pwd) \
   XERCESCROOT="/usr" \

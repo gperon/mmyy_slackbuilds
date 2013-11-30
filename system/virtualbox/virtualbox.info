@@ -1,14 +1,14 @@
 PRGNAM="virtualbox"
-VERSION="4.2.0"
+VERSION="4.2.16"
 HOMEPAGE="http://www.virtualbox.org"
-DOWNLOAD="http://download.virtualbox.org/virtualbox/4.2.0/VirtualBox-4.2.0.tar.bz2 \
-          http://download.virtualbox.org/virtualbox/4.2.0/VBoxGuestAdditions_4.2.0.iso \
-          http://download.virtualbox.org/virtualbox/4.2.0/UserManual.pdf \
-          http://download.virtualbox.org/virtualbox/4.2.0/SDKRef.pdf"
-MD5SUM="691b4134983ce7d89b9fb683305cb647 \
-        ee74e968bab97466c3b463a0b4d665f5 \
-        261f6bd46bdeb05039396b6dbec76341 \
-        53654a262d301c1cbb9b98be1045e461"
+DOWNLOAD="http://download.virtualbox.org/virtualbox/4.2.16/VirtualBox-4.2.16.tar.bz2 \
+          http://download.virtualbox.org/virtualbox/4.2.16/VBoxGuestAdditions_4.2.16.iso \
+          http://download.virtualbox.org/virtualbox/4.2.16/UserManual.pdf \
+          http://download.virtualbox.org/virtualbox/4.2.16/SDKRef.pdf"
+MD5SUM="c4a36e2099a317f4715cd3861cdae238 \
+        6074747feb9ae8b6eec365616347eef3 \
+        944dfa95f55af74f70b1709948f5726d \
+        c1e3b86037cbafdbaf54aacf7f5ce157"
 DOWNLOAD_x86_64="UNTESTED"
 MD5SUM_x86_64=""
 REQUIRES="acpica virtualbox-kernel"

@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
 # Slackware build script for atari++
 
 # Written by B. Watson (yalhcru@gmail.com)
 
-# Licensed under the WTFPL. See http://sam.zoy.org/wtfpl/ for details.
+# Licensed under the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
 PRGNAM=atari++
-VERSION=${VERSION:-1.60}
+VERSION=${VERSION:-1.72}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -55,7 +55,11 @@ rm -rf $PRGNAM
 tar xvf $CWD/${PRGNAM}_$VERSION.tar.gz
 cd $PRGNAM
 chown -R root:root .
-chmod -R a-s,u+w,go+r-w .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \

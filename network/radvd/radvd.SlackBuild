@@ -23,16 +23,14 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=radvd
-VERSION=1.5
-BUILD=${BUILD:-1}
+VERSION=1.9.3
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
-# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -54,18 +52,22 @@ elif [ "$ARCH" = "x86_64" ]; then
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
-fi 
+fi
 
 set -e
 
-rm -rf $PKG 
+rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -86,18 +88,16 @@ make install DESTDIR=$PKG
   	xargs strip --strip-debug 2> /dev/null || true
 )
 
+mv $PKG/usr/share/man $PKG/usr/man
 ( cd $PKG/usr/man
   find . -type f -exec gzip -9 {} \;
 )
 
-mkdir -p $PKG/etc/rc.d 
-install -D -m 0755 $CWD/rc.radvd.new  $PKG/etc/rc.d/rc.radvd.new
+mkdir -p $PKG/etc/rc.d
+install -D -m 0644 $CWD/rc.radvd.new  $PKG/etc/rc.d/rc.radvd.new
 mv $TMP/$PRGNAM-$VERSION/radvd.conf.example $PKG/etc/radvd.conf.new
 
-mkdir -p $PKG/var/run/radvd
-chown -R daemon:daemon $PKG/var/run/radvd
-
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION 
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a CHANGES COPYRIGHT INTRO.html README TODO VERSION \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

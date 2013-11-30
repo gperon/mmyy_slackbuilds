@@ -27,8 +27,8 @@
 # Modified by the SlackBuilds.org project
 
 PRGNAM=privoxy
-VERSION=${VERSION:-3.0.19}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-3.0.21}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -84,19 +84,22 @@ rm -rf $PRGNAM-$VERSION-stable
 tar xvf $CWD/$PRGNAM-$VERSION-stable-src.tar.gz
 cd $PRGNAM-$VERSION-stable
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Put the docs where we tell them to go.
-# Also fix their permissions.
-sed -i \
-  -e "/^DOC_DEST/s/= .*/= @docdir@/" \
-  -e "/^RA_MODE/s/0664/0644/" \
-  GNUmakefile.in
+sed -i "/^DOC_DEST/s/= .*/= @docdir@/" GNUmakefile.in
+
+# The Makefile checks if certain config files exist, and if so, adds a
+# .new suffix.  Turn this behavior off.  We will do it below.
+sed -i "s/\[ -s \"\$(CONF_DEST)\/\$\$i\" \]/false/" GNUmakefile.in
 
 autoheader
 autoconf
 CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -129,15 +132,19 @@ sed -i \
   -e "s,%CONF_DEST%,/etc/$PRGNAM," \
   -e "s/%USER%/$PRIVOXY_USER/" \
   -e "s/%GROUP%/$PRIVOXY_GROUP/" \
-  $PKG/etc/rc.d/rc.$PRGNAM.new 
+  $PKG/etc/rc.d/rc.$PRGNAM.new
 
 # Make .new files so we don't clobber the existing configuration.
-# The makefile already adds the .new extension to some files,
-# perhaps those are the only ones that are meant to be edited?
-find $PKG/etc/privoxy -name '*.new' -prune -o -type f -exec mv {} {}.new \;
+for i in config match-all.action trust user.action user.filter; do
+  mv $PKG/etc/privoxy/$i $PKG/etc/privoxy/$i.new
+done
+# Others are not intended to be user-editable and will be overwritten.
+# To disregard, uncomment this and the corresponding lines in doinst.sh.
+#find $PKG/etc/privoxy -name '*.new' -prune -o -type f -exec mv {} {}.new \;
+
 # Don't clobber the logfile either.
 mv $PKG/var/log/privoxy/logfile $PKG/var/log/privoxy/logfile.new
- 
+
 # Remove empty directories that are part of Slackware base.
 rmdir $PKG/usr/share
 rmdir $PKG/var/run

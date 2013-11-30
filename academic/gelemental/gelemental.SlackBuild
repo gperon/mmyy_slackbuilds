@@ -68,8 +68,8 @@ patch -p0 -s < $CWD/$PRGNAM-$VERSION-gcc43.patch
 
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -80,7 +80,7 @@ sed -i "s:Categories=GTK;Utility;Science;Chemistry;:Categories=Education;:" data
 # Increase the info button size
 sed -i "s:set_size_request (50, 50):set_size_request (64, 64):" src/buttons.cc
 
-# Starting with glib 2.32 it is now mandatory to 
+# Starting with glib 2.32 it is now mandatory to
 # include glib.h instead of individual headers.
 patch -p1 -i $CWD/glib-single-include.patch
 

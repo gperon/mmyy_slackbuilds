@@ -1,12 +1,10 @@
 #!/bin/sh
 
-# Slackware build script for transmission-remote-gtk	
+# Slackware build script for transmission-remote-gtk
 
-# Written by Christopher Walker <kris240376@gmail.com
-
-# Copyright (c) 2012  Chris Walker <kris240376@gmail.com> 
+# Copyright 2012-2013  Chris Walker Copperas Cove, TX
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
 # met:
@@ -34,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=transmission-remote-gtk
-VERSION=${VERSION:-0.8}
+VERSION=${VERSION:-1.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -74,8 +72,8 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;

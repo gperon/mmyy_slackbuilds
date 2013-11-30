@@ -2,7 +2,7 @@
 
 # Slackware build script for openvswitch
 
-# Copyright 2008-2012 Christopher Walker Copperas Cove, TX
+# Copyright 2008-2013 Christopher Walker Copperas Cove, TX
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=openvswitch
-VERSION=${VERSION:-1.4.5}
+VERSION=${VERSION:-2.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -65,7 +65,11 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -89,11 +93,12 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-mkdir -p $PKG/lib/modules/${KERNEL}/kernel/extra/openvswitch
-install -m 644 datapath/linux/openvswitch_mod.ko \
-  $PKG/lib/modules/${KERNEL}/kernel/extra/openvswitch
-install -m 644 datapath/linux/brcompat_mod.ko \
-  $PKG/lib/modules/${KERNEL}/kernel/extra/openvswitch
+# install the kernel module only if not already available
+if [ ! -f /lib/modules/$(uname -r)/kernel/net/openvswitch/openvswitch.ko ]; then
+  mkdir -p $PKG/lib/modules/${KERNEL}/kernel/extra/openvswitch
+  install -m 644 datapath/linux/openvswitch.ko \
+    $PKG/lib/modules/${KERNEL}/kernel/extra/openvswitch
+fi
 
 mkdir -p $PKG/etc/openvswitch $PKG/etc/rc.d $PKG/var/run/openvswitch
 sed -e "s,@DOCDIR@,/usr/doc/$PRGNAM-$VERSION,g" $CWD/rc.openvswitch \

@@ -3,6 +3,7 @@
 # Slackware build script for qemu
 
 # Copyright 2009, 2010  Andrew Brouwers <abrouwers@gmail.com>
+# Copyright 2013  Edward Koenig, Vancouver, USA <kingbeowulf@gmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,10 +23,17 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Modified by the SlackBuilds.org project
+# Changelog
+# 1.0	27-FEB-2013	New SBo maintainer
+# 1.0	07-MAR-2013	updated to 1.4, includes qemu-kvm; thanks to
+#			rworkman and ponce for script ideas.
+# 1.1	28-MAR-2013	fix missing docs per C. Willing and
+#			add missing --libdir (patched in qemu-trivial upstream)
+# 1.2   22-SEP-2013     updated to 1.6
+# 1.3   03-NOV-2013     updated to 1.6.1
 
 PRGNAM=qemu
-VERSION=${VERSION:-1.2.0}
+VERSION=${VERSION:-1.6.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -45,16 +53,32 @@ OUTPUT=${OUTPUT:-/tmp}
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
   LIBDIRSUFFIX=""
+  KVMARCH="i386"
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
+  KVMARCH="i386"
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
+  KVMARCH="x86_64"
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
 fi
+
+# Enable only x86* and arm emulation for qemu: if you want to build
+# all the targets available use TARGETS=all
+if [ "${TARGETS:-}" = "all" ]; then
+  targets=""
+else
+  targets="--target-list=i386-softmmu,x86_64-softmmu,i386-linux-user,x86_64-linux-user,arm-softmmu,arm-linux-user,armeb-linux-user"
+fi
+
+KVMGROUP=${KVMGROUP:-users}
+
+# Needed to build man pages if built after plain "su"
+export PATH=$PATH:/usr/share/texmf/bin
 
 set -e
 
@@ -65,39 +89,69 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# To get the stable-1.0 patches, do this in git checkout of qemu:
-# git format-patch v1.0.1..origin/stable-1.0
-#for i in $CWD/patches/*.patch ; do patch -p1 < $i ; done
+# Remove double CFLAGS
+sed -i "s|^\ \ CFLAGS=\"-O2\ |  CFLAGS=\"|" configure || exit 1
 
-# Disable debug (hardcoded) and remove double CFLAGS
-sed -i "s|^CFLAGS=\"-g\ |CFLAGS=\"|" configure
-sed -i "s|^LDFLAGS=\"-g\ |LDFLAGS=\"|" configure
-sed -i "s|^\ \ CFLAGS=\"-O2\ |  CFLAGS=\"|" configure
-
-# check if spice support is enabled
+# check if spice is there
 if pkg-config --exists spice-server ; then
   with_spice="--enable-spice"
 else
   with_spice="--disable-spice"
 fi
 
-# --libdir isn't recognized and isn't needed anyway
+# check if usbredir is there
+if pkg-config --exists libusbredirhost ; then
+  with_usbredir="--enable-usb-redir"
+else
+  with_usbredir="--disable-usb-redir"
+fi
+
+# check if device-tree-compiler is installed
+if ls /var/log/packages/device-tree-compiler-* 1>/dev/null 2>/dev/null ; then
+  with_fdt="--enable-fdt"
+fi
+
+# --libdir is recognized but not advertised in --help
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
-  --enable-system \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
+  --localstatedir=/var \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --enable-sdl \
+  --enable-gtk \
+  --enable-system \
+  --enable-kvm \
+  --disable-debug-info \
   --audio-drv-list=alsa,oss,sdl,esd \
-  $with_spice
+  $targets \
+  $with_spice \
+  $with_usbredir \
+  $with_fdt
 
-make OS_CFLAGS="$SLKCFLAGS"
+make V=1 OS_CFLAGS="$SLKCFLAGS"
+
 make install DESTDIR=$PKG
+
+# install some udev rules for /dev/kvm
+mkdir -p $PKG/lib/udev/rules.d/
+sed "s/@GROUP@/$KVMGROUP/" $CWD/65-kvm.rules \
+  > $PKG/lib/udev/rules.d/65-kvm.rules
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# create a symlink for qemu-kvm to support aqemu and such frontends
+# even though qemu now has a gtk gui.
+[ ! -z $KVMARCH ] && ln -s qemu-system-$KVMARCH $PKG/usr/bin/qemu-kvm
 
 # move any generated man pages to their proper location
 if [ -d $PKG/usr/share/man ]; then
@@ -105,14 +159,10 @@ if [ -d $PKG/usr/share/man ]; then
   gzip -9 $PKG/usr/man/man?/*.?
 fi
 
-# Add docs, and if present, built documentation to the proper location
+# Add docs to the proper location
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a TODO README LICENSE COPYING COPYING.LIB MAINTAINERS \
+cp -a Changelog COPYING* LICENSE MAINTAINERS README qemu-*.html docs/* \
   $PKG/usr/doc/$PRGNAM-$VERSION
-if [ -d $PKG/usr/share/doc ]; then
-  mv $PKG/usr/share/doc/qemu/* $PKG/usr/doc/$PRGNAM-$VERSION/
-  rm -rf $PKG/usr/share/doc
-fi
 
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

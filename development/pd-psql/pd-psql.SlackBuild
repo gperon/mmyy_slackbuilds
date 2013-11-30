@@ -2,7 +2,7 @@
 # Slackware build script for <pd-psql>
 # Written by Michales Michaloudes korgie@gmail.com
 
-# Exit on most errors
+
 set -e
 
 PRGNAM=pd-psql
@@ -17,7 +17,7 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 CWD=$(pwd)
-TMP=${TMP:-/tmp/SBo}	
+TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 SRCNAM=$(echo $PRGNAM | cut -f2 -d-)
@@ -45,10 +45,11 @@ cd $SRCNAM
 
 # patch the Makefile
 sed -i "s|local/lib|lib${LIBDIRSUFFIX}|" Makefile
+sed -i "s| -Werror||" Makefile
 
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;

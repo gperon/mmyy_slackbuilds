@@ -27,7 +27,7 @@
 # permission to modify it as needed.
 
 PRGNAM=adobe-reader
-VERSION=9.5.4
+VERSION=9.5.5
 ARCH=i486	# Leave this alone for acroread
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -94,7 +94,7 @@ cd $PKG/usr/man/man1
   ln -sf ../../../opt/Adobe/Reader9/Resource/Shell/acroread.1.gz .
 cd -
 
-# Fix bug in bash completion script by redefining "_filedir" function 
+# Fix bug in bash completion script by redefining "_filedir" function
 # to "_acroread_filedir" as suggested on the adobe forum:
 # http://forums.adobe.com/thread/745833
 sed -i 's/_filedir/_acroread_filedir/g' $PKG/opt/Adobe/Reader9/Resource/Shell/acroread_tab
@@ -118,7 +118,11 @@ cat $CWD/doinst.sh > $PKG/install/doinst.sh
 cd $PKG
 find . -type d -exec chmod 755 {} \;
 chown -R root:root .
-chmod -R a-s,u+w,go+r-w .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # No stripping of binaries and such, as Firefox doesn't like naked acroread :D
 # Just build the package...  ;P

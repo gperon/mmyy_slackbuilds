@@ -66,7 +66,7 @@ DOCBOOK=dsssl-stylesheets-1.79
 CHUNK=xsl-stylesheets-1.76.1
 DOCBOOKX=xml-dtd-4.5
 
-set -e 
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -78,8 +78,8 @@ tar xvf $CWD/$SRCNAM-$VERSION.tar.bz2
 unzip $CWD/$QTEXENGINE.zip
 tar xvf $CWD/$UNOFPLUGIN.tar.gz
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -107,7 +107,7 @@ sed -i "s:/usr/local:/usr/share:" qtiplot/qtiplot.pro
 sed -i "s:/share/man:/man:" qtiplot/qtiplot.pro
 sed -i "s:/share/doc/qtiplot:/doc/$PRGNAM-$VERSION:" qtiplot/qtiplot.pro
 
-# Point to the right places of qt-assistant-compat, libreoffice (when 
+# Point to the right places of qt-assistant-compat, libreoffice (when
 # installed), latex, java, the QtiPlot html manual and fitPlugins
 sed -i "s:<QAssistantClient>:<QtAssistant/qassistantclient.h>:" qtiplot/src/core/ApplicationWindow.cpp
 sed -i "s:/usr/bin/soffice:/usr/bin/libreoffice:" qtiplot/src/core/ApplicationWindow.cpp
@@ -126,41 +126,41 @@ cd 3rdparty/qwt
 qmake
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-make
+make -j1
 
 # Build QtiPlot's qwtplot3d
 cd ../qwtplot3d
 qmake
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-make
+make -j1
 
 # Build QTeXEngine
 cd ../QTeXEngine
 qmake
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-make
+make -j1
 
 # Build importOPJ
 cd ../../qtiplot
 qmake importOPJ.pro
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-make
+make -j1
 
 # Make the html manual. If you want to generate the handbook as a PDF,
 # change "web" to "en" below and make sure you have installed dblatex.
 cd ../manual
-make web
+make -j1 web
 
 # Build QtiPlot
 cd ../qtiplot
 qmake qtiplot.pro
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-make
-make install INSTALL_ROOT=$PKG
+make -j1
+make -j1 install INSTALL_ROOT=$PKG
 
 # Generate translations and copy them to their proper place
 lrelease qtiplot.pro
@@ -176,8 +176,8 @@ cd ../fitPlugins
 qmake
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-make
-make install INSTALL_ROOT=$PKG
+make -j1
+make -j1 install INSTALL_ROOT=$PKG
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

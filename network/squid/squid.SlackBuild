@@ -24,8 +24,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=squid
-VERSION=${VERSION:-3.1.20}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-3.1.23}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -67,8 +67,8 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -102,7 +102,7 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $(find $PKG/usr/man -type l); do ln -s $(readlink $i).gz $i.gz; rm $i; done
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION 
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
   CONTRIBUTORS COPYING COPYRIGHT CREDITS ChangeLog INSTALL \
   QUICKSTART README RELEASENOTES.html SPONSORS $CWD/README.SBo \
@@ -110,7 +110,7 @@ cp -a \
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 chown root:root $PKG/usr/doc/$PRGNAM-$VERSION/*
 
-mkdir -p $PKG/etc/{logrotate.d,rc.d} 
+mkdir -p $PKG/etc/{logrotate.d,rc.d}
 cat $CWD/rc.squid > $PKG/etc/rc.d/rc.squid.new
 
 sed -e "s,@USER@,$SQUIDUSER," -e "s,@GROUP@,$SQUIDGROUP," $CWD/squid.logrotate \
@@ -118,7 +118,7 @@ sed -e "s,@USER@,$SQUIDUSER," -e "s,@GROUP@,$SQUIDGROUP," $CWD/squid.logrotate \
 
 mv $PKG/etc/squid/mime.conf $PKG/etc/squid/mime.conf.new
 mv $PKG/etc/squid/cachemgr.conf $PKG/etc/squid/cachemgr.conf.new
-rm $PKG/etc/squid/squid.conf 
+rm $PKG/etc/squid/squid.conf
 cat $CWD/squid.conf > $PKG/etc/squid/squid.conf.new
 cat $CWD/squid.conf.documented > $PKG/etc/squid/squid.conf.documented
 

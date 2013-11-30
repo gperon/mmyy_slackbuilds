@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=node
-VERSION=${VERSION:-0.8.17}
+VERSION=${VERSION:-0.10.22}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -63,24 +63,24 @@ rm -rf $PRGNAM-v$VERSION
 tar xvf $CWD/$PRGNAM-v$VERSION.tar.gz
 cd $PRGNAM-v$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Fix man page path.
 sed -i 's|share/||' tools/install.py
 sed -i '/var manRoot/ s/"share",//' deps/npm/lib/{,un}build.js
 
-# Make `npm help' to look for gzipped man pages.
-sed -i 's/\." + num/." + num + ".gz"/' deps/npm/lib/help.js
-
 # Fix libdir for 64-bit.
 sed -i "s|lib/|lib${LIBDIRSUFFIX}/|g" tools/install.py
-sed -i "s/'lib'/'lib${LIBDIRSUFFIX}'/" \
-  lib/module.js tools/wafadmin/Tools/node_addon.py
-sed -i "s|\"lib\"|\"lib${LIBDIRSUFFIX}\"|" deps/npm/lib/npm.js tools/node-waf
+sed -i "s/'lib'/'lib${LIBDIRSUFFIX}'/" lib/module.js
+sed -i "s|\"lib\"|\"lib${LIBDIRSUFFIX}\"|" deps/npm/lib/npm.js
 
 ./configure \
   --prefix=/usr \
-  --openssl-use-sys \
+  --shared-openssl \
   --shared-zlib
 
 make CFLAGS="$SLKCFLAGS" CXXFLAGS="$SLKCFLAGS"
@@ -89,7 +89,7 @@ make install DESTDIR=$PKG
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man $PKG/usr/lib${LIBDIRSUFFIX}/node_modules/npm/man -type f -exec gzip -9 {} \;
+find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 # Add bash completion file for npm.

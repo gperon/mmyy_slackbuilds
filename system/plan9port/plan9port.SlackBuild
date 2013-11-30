@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Slackware build script for plan9port 
+# Slackware build script for plan9port
 
-# Copyright (c) 2012, Ruben Schuller <ruben@orgizm.net>
+# Copyright (c) 2012,2013 Ruben Schuller <ruben@orgizm.net>
 #
 # Copyright (c) 2008-2010, Antonio Hernández Blas <hba.nihilismus@gmail.com>
 # All rights reserved.
@@ -26,7 +26,7 @@
 # 2012-10-23: added some changes to reflect the usage of nightly tarballs
 
 PRGNAM=plan9port
-VERSION=${VERSION:-20121022}
+VERSION=${VERSION:-20130308}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -48,28 +48,18 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG/opt $OUTPUT
 cd $TMP
+rm -rf $PRGNAM
 tar xvf $CWD/$PRGNAM-$VERSION.tgz
 cd $PRGNAM
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
 # All plan9 programs are going to be installed in "/opt/plan9"
-
-# The default prefix for plan9 is "/usr/local/plan9" and some files (that are
-# listed in $TMP/plan9/lib/moveplan9.files) are going to end up with that
-# prefix hardcoded. There's a script that resolves this problem, and the 
-# compilation runs it by default, but we'll have to edit it because it uses
-# the current build directory as the path.  I've tried passing /opt/plan9
-# as the value of PLAN9, hoping the script would pick it up and do the 
-# right thing, but no dice, so we'll kludge it.  --rworkman
-sed -i 's:^new=`cleanname $PLAN9`$:new=`cleanname /opt/plan9`:' \
-  lib/moveplan9.sh
-
-./INSTALL
+PLAN9_TARGET=/opt/plan9 ./INSTALL
 
 cd $TMP
 mv $PRGNAM $PKG/opt/plan9

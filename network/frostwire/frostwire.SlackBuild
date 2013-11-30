@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Slackware build script for frostwire
 # Based on SlackBuild for LimeWire by Robby Workman
 
 # Copyright 2006-2008  Robby Workman  Northport, Alabama (USA)
+# Copyright 2011-2013  Edward Koenig  Vancouver, Washington (USA)
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,10 +25,10 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Modified by Phil Warner for frostwire <pc_warner@yahoo.com>
-# Updated for new version - Edward Koenig <kingbeowulf@gmail.com>
+# Updated for new version - Edward Koenig <kingbeowulf@gmail.com> (new maintainer)
 
 PRGNAM=frostwire
-VERSION=5.3.9
+VERSION=5.6.0
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -45,9 +46,6 @@ mkdir -p $TMP $PKG/opt $OUTPUT
 
 tar xvf $CWD/$PRGNAM-$VERSION.$ARCH.tar.gz -C $PKG/opt
 mv $PKG/opt/$PRGNAM-$VERSION.$ARCH $PKG/opt/$PRGNAM-$VERSION
-
-# Fix to correctly find version from "java -version"
-patch -p0 -d $PKG/opt/$PRGNAM-$VERSION < $CWD/frostwire_checkjava.diff
 
 mkdir -p $PKG/usr/bin
 cat << EOF > $PKG/usr/bin/$PRGNAM
@@ -75,6 +73,10 @@ cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 chown -R root:root .
-chmod -R a-s,u+rw,go+r-w .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 find . -type d -name '.svn' | xargs rm -rf
 /sbin/makepkg -c n -l y $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

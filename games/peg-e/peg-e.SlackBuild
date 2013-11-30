@@ -5,7 +5,7 @@
 # Written by Larry Hajali <larryhaja[at]gmail[dot]com>
 
 PRGNAM=peg-e
-VERSION=${VERSION:-1.1.1.1}
+VERSION=${VERSION:-1.1.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -45,17 +45,16 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION-src.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-qmake PREFIX=/usr BINDIR=games -o Makefile $PRGNAM.pro
+qmake QMAKE_CFLAGS+="$SLKCFLAGS" QMAKE_CXXFLAGS+="$SLKCFLAGS" \
+  PREFIX=/usr BINDIR=games -o Makefile $PRGNAM.pro
 
-make \
-  CFLAGS="-pipe $SLKCFLAGS -Wall -W -D_REENTRANT \$(DEFINES)" \
-  CXXFLAGS="-pipe $SLKCFLAGS -Wall -W -D_REENTRANT \$(DEFINES)"
+make
 make install INSTALL_ROOT=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

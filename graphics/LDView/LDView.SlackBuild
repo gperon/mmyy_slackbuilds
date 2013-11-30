@@ -3,7 +3,7 @@
 # Slackware build script for LDView:
 # a program to visualize LDraw files
 
-# Copyright 2009-2010, 2012 Niels Horn, Rio de Janeiro, Brazil
+# Copyright 2009-2010, 2012-2013 Niels Horn, Rio de Janeiro, Brazil
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# revision date 2012/09/13
+# revision date 2013/11/20
 
 PRGNAM=LDView
 VERSION=4.1
@@ -69,7 +69,11 @@ cd $TMP
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Patch for a bug in QT, solves problems on NVIDIA cards
 patch -p1 < $CWD/opengl.patch
@@ -77,11 +81,18 @@ patch -p1 < $CWD/opengl.patch
 # Patch for gcc-4.7
 patch -p1 < $CWD/LDView_gcc47.patch
 
+# Patch for boost-1.50
+#  see https://svn.boost.org/trac/boost/ticket/6940
+patch -p1 < $CWD/LDView_boost15.patch
+
+# Patch for GL problems
+patch -p1 < $CWD/LDView_GL.patch
+
 # the 'makeall' script is in the QT directory
 cd QT
 
 # Fix LDView.pro for gcc-4.7
-sed -e 's/-ljpeg/-ljpeg -lpng14 -lz -lGLU/' -i LDView.pro
+sed -e 's/-ljpeg/-ljpeg -lpng14 -lz -lboost_system -lGLU/' -i LDView.pro
 
 export LDVDEV64
 QTDIR=$QT4DIR TESTING="$SLKCFLAGS" ./makeall

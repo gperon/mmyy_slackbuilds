@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Slackware build script for yturl
 
@@ -10,7 +10,7 @@
 # wget -O yturl-master-$(date +%Y%m%d).zip https://github.com/cdown/yturl/archive/master.zip
 
 PRGNAM=yturl
-VERSION=${VERSION:-20130202}
+VERSION=${VERSION:-20130618}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -52,18 +52,19 @@ rm -rf $ZIPNAME
 unzip $CWD/$ZIPNAME-$VERSION.zip
 cd $ZIPNAME
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-sed -i 's,share/man,man,' setup.py
-python setup.py install --root=$PKG
-gzip $PKG/usr/man/man1/$PRGNAM.1
+mkdir -p $PKG/usr/bin
+install -m0755 $PRGNAM $PKG/usr/bin/$PRGNAM
+mkdir -p $PKG/usr/man/man1
+gzip -9c $CWD/$PRGNAM.1 > $PKG/usr/man/man1/$PRGNAM.1.gz
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a README LICENSE $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a README.md LICENSE $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

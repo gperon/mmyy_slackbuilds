@@ -6,18 +6,16 @@
 # Heavily modified by Robby Workman <rworkman@slackbuilds.org>
 
 PRGNAM=couchdb
-VERSION=1.2.0
+VERSION=1.5.0
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 PKGSRC=apache-couchdb
 
-# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -67,12 +65,11 @@ cd $TMP
 tar xvf $CWD/$PKGSRC-$VERSION.tar.gz
 cd $PKGSRC-$VERSION
 chown -R root:root .
-chmod -R u+w,go+r-w,a-s .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
-  -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
-  -exec chmod 644 {} \;
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -114,7 +111,7 @@ for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; r
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS BUGS CHANGES LICENSE NEWS NOTICE README THANKS \
+  AUTHORS BUGS DEVELOPERS INSTALL INSTALL.Unix LICENSE NOTICE README.rst THANKS \
   $PKG/usr/doc/$PRGNAM-$VERSION
 find $PKG/usr/doc/$PRGNAM-$VERSION -type f -exec chmod 644 {} \;
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

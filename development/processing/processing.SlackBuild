@@ -12,7 +12,6 @@ if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -22,9 +21,9 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-set -e 
+set -e
 
-rm -rf $PKG 
+rm -rf $PKG
 
 mkdir -p $PKG/opt $OUTPUT
 tar xvf $CWD/$PRGNAM-$VERSION-linux.tgz -C $PKG/opt
@@ -36,7 +35,7 @@ cp $CWD/processing.png $PKG/usr/share/pixmaps
 
 chown -R root:root $PKG
 find $PKG \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;

@@ -3,7 +3,7 @@
 # Slackware Package Build Script for dcraw
 # Home Page http://cybercom.net/~dcoffin/dcraw
 
-# Copyright (c) 2008-2013, Nishant Limbachia, Hoffman Estates, IL, USA 
+# Copyright (c) 2008-2013, Nishant Limbachia, Hoffman Estates, IL, USA
 # (nishant _AT_ mnspace _DOT_ net)
 # All rights reserved.
 
@@ -29,17 +29,15 @@
 # If you want to build the rawphoto gimp plug-in, invoke the script as:
 # RAWPHOTO=yes ./dcraw.SlackBuild
 
-PRGNAM=dcraw
-VERSION=${VERSION:-9.17}
+PRGNAM="dcraw"
+VERSION=${VERSION:-9.19}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -81,7 +79,7 @@ fi
 # builds with support for jpeg, png, lcms and tiff and optionally, jasper
 DCRAW_BUILD_FLAGS="-lm -ljpeg -llcms -lpng -ltiff $JASPER_BUILD_FLAG"
 
-set -e # Exit on most errors
+set -e 
 
 rm -fr $TMP/$PRGNAM-$VERSION $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -90,8 +88,8 @@ tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 mv $TMP/$PRGNAM  $TMP/$PRGNAM-$VERSION
 cd $TMP/$PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;

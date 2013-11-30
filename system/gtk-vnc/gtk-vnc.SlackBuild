@@ -2,19 +2,17 @@
 
 # Slackware build script for gtk-vnc
 
-# Written by Ash Wiren   ash@spooksoftware.com
+# Written by Ash Wiren <ash@spooksoftware.com>
 
 PRGNAM=gtk-vnc
-VERSION=${VERSION:-0.5.1}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-0.5.3}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -52,7 +50,7 @@ rm -rf $PRGNAM-$VERSION{,-3}
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
 chown -R root:root $PRGNAM-$VERSION
 find $PRGNAM-$VERSION \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -60,34 +58,7 @@ find $PRGNAM-$VERSION \
 # Cut away jobs number from the MAKEFLAGS
 MAKEFLAGS=$(echo "$MAKEFLAGS" | sed "s/-j[0-999]//g")
 
-# We will build both the gtk+3 and gtk+2 libs with -j1 to avoid surprises
-# To avoid building the gtk3 version, pass GTK3=no to the script
-if [ "${GTK3:-yes}" = "yes" ]; then
-(
-cp -a $PRGNAM-$VERSION{,-3}
-cd $PRGNAM-$VERSION-3
-
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-./configure \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --sysconfdir=/etc \
-  --localstatedir=/var \
-  --mandir=/usr/man \
-  --docdir=/usr/doc/$PRGNAM-$VERSION \
-  --with-examples \
-  --with-libview \
-  --with-python \
-  --with-gtk=3.0 \
-  --enable-vala \
-  --enable-introspection \
-  --build=$ARCH-slackware-linux
-
-make -j1
-make install DESTDIR=$PKG
-)
-fi
+cp -a $PRGNAM-$VERSION $PRGNAM-$VERSION-3
 
 cd $PRGNAM-$VERSION
 
@@ -110,6 +81,36 @@ CXXFLAGS="$SLKCFLAGS" \
 
 make -j1
 make install DESTDIR=$PKG
+
+cd ..
+
+# We will build both the gtk+3 and gtk+2 libs with -j1 to avoid surprises
+# To avoid building the gtk3 version, pass GTK3=no to the script
+if [ "${GTK3:-yes}" = "yes" ]; then
+
+cd $PRGNAM-$VERSION-3
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --with-examples \
+  --with-libview \
+  --with-python \
+  --with-gtk=3.0 \
+  --enable-vala \
+  --enable-introspection \
+  --build=$ARCH-slackware-linux
+
+make -j1
+make install DESTDIR=$PKG
+
+fi
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

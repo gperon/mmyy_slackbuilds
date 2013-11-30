@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slackware Build script for vcdimager 
+# Slackware Build script for vcdimager
 
 # Copyright (c) 2009, eviljames <storgeek [ at ] gmail [ dot ] com>
 #
@@ -9,7 +9,7 @@
 # copyright notice and this permission notice appear in all copies.
 #
 # THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF 
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 # MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
 # ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 # WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
@@ -17,16 +17,14 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 PRGNAM=vcdimager
-VERSION=0.7.23
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-0.7.24}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -37,14 +35,14 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i486" ] ; then
-	SLKCFLAGS="-O2 -march=i486 -mtune=i686"
-	LIBDIRSUFFIX=""
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ] ; then
-	SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-	LIBDIRSUFFIX=""
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ] ; then
-	SLKCFLAGS="-O2 -fPIC"
-	LIBDIRSUFFIX="64"
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
@@ -57,10 +55,9 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
-
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
+find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 400 -o -perm 440 \) -exec chmod 644 {} \; -o \
  \( -perm 777 -o -perm 775 -o -perm 511 -o -perm 711 -o -perm 555 \) -exec chmod 755 {} \;
 
@@ -73,24 +70,20 @@ CXXFLAGS="$SLKCFLAGS" \
   --mandir=/usr/man \
   --infodir=/usr/info \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --disable-static \
   --build=$ARCH-slackware-linux
 
 make
 make DESTDIR=$PKG install
 
-( cd $PKG/usr/man
-  find -type f -exec gzip -9 {} \;
-  for deadlink in $(find -type l ! -iname "*.gz"); do
-    ln -s $(readlink $deadlink).gz $deadlink.gz
-    rm $deadlink
-  done
-)
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-rm -rf $PKG/usr/info/dir
-gzip -9 $PKG/usr/info/*
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-find $PKG -type f | xargs file | grep ELF | cut -f1 -d: | \
-  xargs strip --strip-unneeded 2> /dev/null || true
+rm -f $PKG/usr/info/dir
+gzip -9 $PKG/usr/info/*.info*
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \

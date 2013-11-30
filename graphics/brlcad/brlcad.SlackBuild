@@ -8,9 +8,12 @@
 # Maintained as of version 7.16.6 by Niels Horn <niels.horn@gmail.com>
 # Revision date: 2012/09/13
 
+# Modified by John Vogel <jvogel4@stny.rr.com> for build with cmake
+# ... and again to fix tcl/tk breakage
+
 PRGNAM=brlcad
-VERSION=${VERSION:-7.22.0}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-7.24.0}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -49,37 +52,55 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Create configure script
-sh autogen.sh
-
+mkdir -p build
+cd build
 # There is a "known issue" according to the guys on #brlcad and we need
-# the configure flag "-disable-strict-build" for now
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-./configure \
-  --prefix=/opt/$PRGNAM \
-  --sysconfdir=/etc \
-  --localstatedir=/var \
-  --mandir=/opt/$PRGNAM/man \
-  --with-ogl \
-  --with-tcl=/usr/lib${LIBDIRSUFFIX} \
-  --with-tk=/usr/lib${LIBDIRSUFFIX} \
-  --disable-tcl-build \
-  --disable-tk-build \
-  --disable-jove-build \
-  --disable-strict-build \
-  --build=$ARCH-slackware-linux
+# the cmake define "-DBRLCAD_ENABLE_STRICT=OFF" for now
+cmake \
+    -DBRLCAD_FLAGS_OPTIMIZATION=ON \
+    -DBRLCAD_ENABLE_STRICT=OFF \
+    -DBRLCAD_FLAGS_DEBUG=OFF \
+    -DBRLCAD_FLAGS_ENABLE_RUNTIME_DEBUG=OFF \
+    -DBRLCAD_ENABLE_OPENGL=ON \
+    -DBRLCAD_BUNDLED_LIBS=OFF \
+    -DBRLCAD_REGEX=SYSTEM \
+    -DBRLCAD_TERMLIB=SYSTEM \
+    -DBRLCAD_XMLLINT=SYSTEM \
+    -DBRLCAD_XSLTPROC=SYSTEM \
+    -DBRLCAD_ZLIB=SYSTEM \
+    -DBRLCAD_TCL=BUNDLED \
+    -DBRLCAD_TK=BUNDLED \
+    -DBRLCAD_ITCL=BUNDLED \
+    -DBRLCAD_ITK=BUNDLED \
+    -DBRLCAD_IWIDGETS=BUNDLED \
+    -DBRLCAD_LEMON=BUNDLED \
+    -DBRLCAD_LIBVDS=BUNDLED \
+    -DBRLCAD_OPENNURBS=BUNDLED \
+    -DBRLCAD_PERPLEX=BUNDLED \
+    -DBRLCAD_PNG=BUNDLED \
+    -DBRLCAD_RE2C=BUNDLED \
+    -DBRLCAD_SCL=BUNDLED \
+    -DBRLCAD_TKHTML=BUNDLED \
+    -DBRLCAD_TKPNG=BUNDLED \
+    -DBRLCAD_TKTABLE=BUNDLED \
+    -DBRLCAD_UTAHRLE=BUNDLED \
+    -DCMAKE_INSTALL_PREFIX=/opt/$PRGNAM \
+    -DMAN_DIR=man \
+    -DDATA_DIR=share \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" ..
 
 make
 make install DESTDIR=$PKG
 
-find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 find $PKG/opt/$PRGNAM/man -type f -exec gzip -9 {} \;

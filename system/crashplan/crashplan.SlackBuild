@@ -5,12 +5,12 @@
 # Written by Lionel Young <redtricycle@gmail.com>
 # Based on http://slackbuilds.org/template.SlackBuild
 
-PRGNAM=crashplan	
-VERSION=${VERSION:-3.0.3}
-BUILD=${BUILD:-1}
+PRGNAM=crashplan
+VERSION=${VERSION:-3.5.3}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
-SRCNAM=CrashPlan	
+SRCNAM=CrashPlan
 TARGETDIR=/opt/crashplan
 MANIFESTDIR=/var/crashplan # Directory to store backups to
 
@@ -42,8 +42,8 @@ rm -rf $SRCNAM-install
 tar xvf $CWD/${SRCNAM}_${VERSION}_Linux.tgz
 cd $SRCNAM-install
 chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
@@ -72,7 +72,7 @@ echo "INITDIR=/etc/rc.d" >> $PKG/${TARGETDIR}/install.vars
 echo "RUNLVLDIR=/etc/rc.d" >> $PKG/${TARGETDIR}/install.vars
 NOW=`date +%Y%m%d`
 echo "INSTALLDATE=$NOW" >> $PKG/${TARGETDIR}/install.vars
-cat .defaults >> $PKG/${TARGETDIR}/install.vars
+cat install.defaults >> $PKG/${TARGETDIR}/install.vars
 JAVACOMMON=`which java`
 echo "JAVACOMMON=${JAVACOMMON}" >> $PKG/${TARGETDIR}/install.vars
 
@@ -87,6 +87,7 @@ INITSCRIPT=$TARGETDIR/bin/CrashPlanEngine
 SEDEXPRSUB=`echo $INITSCRIPT | sed 's/\//\\\\\//g'`
 SEDEXPR="s/<INITSCRIPT>/$SEDEXPRSUB/g"
 sed $SEDEXPR scripts/crashplan > $PKG/etc/rc.d/rc.crashplan.new
+chmod 0755 $PKG/etc/rc.d/rc.crashplan.new
 
 # Desktop icon
 cp -a scripts/CrashPlan.desktop $PKG/usr/share/applications/

@@ -2,7 +2,7 @@
 
 # Slackware build script for apcupsd
 
-# Copyright 2006-2012  Robby Workman  Northport, AL, USA
+# Copyright 2006-2013  Robby Workman  Northport, AL, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -27,7 +27,7 @@
 
 PRGNAM=apcupsd
 VERSION=${VERSION:-3.14.10}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-4}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -59,18 +59,25 @@ fi
 
 set -e
 
-rm -rf $PKG 
+rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
-chmod -R a-s,u+w,go+r-w .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Create /var/lock/subsys in the init script (rc.apcupsd)
 # These days, /var/lock may be on a tmpfs, so we can't assume the dir is there
-patch -p1 < $CWD/create_lockdir_in_init_script.diff
+patch -p1 < $CWD/patches/create_lockdir_in_init_script.diff
+
+# Use /var/lock/subsys as the LOCKDIR in apcupsd.conf
+patch -p1 < $CWD/patches/fix_lockdir_in_config_file.diff
 
 # The "--disable-install-distdir" is important - don't remove it.
 # If you enable the distribution-specific install, then apcupsd will attempt
@@ -95,6 +102,7 @@ CXXFLAGS="$SLKCFLAGS -DNETSNMP_NO_LEGACY_DEFINITIONS=1" \
   --enable-cgi \
   --with-cgi-bin=${CGIPATH:-/var/www/cgi-bin} \
   --enable-usb \
+  --with-dev="" \
   --with-libwrap \
   --enable-snmp=yes \
   --enable-gapcmon \
@@ -128,6 +136,9 @@ for i in apccontrol apcupsd.conf apcupsd.css changeme commfailure \
   commok hosts.conf multimon.conf offbattery onbattery ; do
     mv $PKG/etc/apcupsd/$i $PKG/etc/apcupsd/$i.new;
 done
+
+# Remove obsolete HAL stuff
+rm -rf $PKG/usr/share/hal
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \

@@ -1,9 +1,14 @@
-#     |-----handy-ruler------------------------------------------------------|
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
 unhide: unhide (utility for discovering hidden processes)
 unhide:
 unhide: Unhide is a forensic tool to find porcesses and TCP/UCP ports hidden
 unhide: by rootkits, Linux kernel modules or by other techniques. It includes
-unhide: unhide-linux26 and unhide-tcp.
+unhide: unhide and unhide-tcp.
 unhide:
 unhide: http://www.unhide-forensics.info
 unhide:

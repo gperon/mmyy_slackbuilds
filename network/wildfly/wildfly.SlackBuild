@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2013 Giorgio Peron, Campodarsego, PD, Italy  giorgio.peron@gmail.com
+# Copyright 2014 Giorgio Peron, Campodarsego, PD, Italy  giorgio.peron@gmail.com
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,7 +22,7 @@
 
 
 PRGNAM=wildfly
-VERSION=${VERSION:-8.0.0.Alpha2}
+VERSION=${VERSION:-8.0.0.CR1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -95,17 +95,10 @@ mkdir -p $PKG/var/lib/$PRGNAM/domain/host_xml_history
 cd $PKG/etc/$PRGNAM/standalone/configuration
 ln -sf ../../../../var/lib/$PRGNAM/standalone/standalone_xml_history
 cd $PKG/etc/$PRGNAM/domain/configuration
-<<<<<<< HEAD:network/wildfly/wildfly.SlackBuild
 ln -sf ../../../../var/lib/$PRGNAM/domain/domain_xml_history 
 ln -sf ../../../../var/lib/$PRGNAM/domain/host_xml_history 
  
 # Add /etc/rc.d/rc.wildfly.new
-=======
-ln -sf ../../../../var/lib/$PRGNAM/domain/domain_xml_history
-ln -sf ../../../../var/lib/$PRGNAM/domain/host_xml_history
-
-# Add /etc/rc.d/rc.jboss.new
->>>>>>> slackbuilds:network/jboss-as/jboss-as.SlackBuild
 mkdir -p $PKG/etc/rc.d
 cat $CWD/rc.$PRGNAM > $PKG/etc/rc.d/rc.$PRGNAM.new
 
@@ -125,7 +118,6 @@ chmod +x $PKG/etc/profile.d/$PRGNAM.*
 rm $PKG/usr/share/$PRGNAM/bin/*.bat
 chmod 0755 $PKG/usr/share/$PRGNAM/bin/*.sh
 
-<<<<<<< HEAD:network/wildfly/wildfly.SlackBuild
 mkdir -p $PKG/sbin
 cd $PKG/sbin
 ln -sf ../usr/share/$PRGNAM/bin/add-user.sh 
@@ -137,15 +129,6 @@ ln -sf ../usr/share/$PRGNAM/bin/jdr.sh
 ln -sf ../usr/share/$PRGNAM/bin/standalone.sh 
 ln -sf ../usr/share/$PRGNAM/bin/wsconsume.sh 
 ln -sf ../usr/share/$PRGNAM/bin/wsprovide.sh 
-=======
-mkdir -p $PKG/usr/bin
-cd $PKG/usr/bin
-ln -sf ../share/$PRGNAM/bin/domain.sh
-ln -sf ../share/$PRGNAM/bin/standalone.sh
-ln -sf ../share/$PRGNAM/bin/jboss-admin.sh
-ln -sf ../share/$PRGNAM/bin/wsprovide.sh
-ln -sf ../share/$PRGNAM/bin/wsconsume.sh
->>>>>>> slackbuilds:network/jboss-as/jboss-as.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

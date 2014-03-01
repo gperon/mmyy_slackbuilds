@@ -23,7 +23,9 @@
 
 
 PRGNAM=wildfly
-VERSION=${VERSION:-8.0.0.CR1}
+VERSION=${VERSION:-8.0.0}
+MINORVER=${MINORVER:-.Final}
+
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -47,11 +49,11 @@ fi
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvzf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvzf $CWD/$PRGNAM-$VERSION$MINORVER.tar.gz
 
 # move everything to /usr/share/wildfly
 mkdir -p $PKG/usr/share/$PRGNAM
-mv $TMP/$PRGNAM-$VERSION/* $PKG/usr/share/$PRGNAM
+mv $TMP/$PRGNAM-$VERSION$MINORVER/* $PKG/usr/share/$PRGNAM
 cd $PKG/usr/share/$PRGNAM
 chown -R root:root .
 

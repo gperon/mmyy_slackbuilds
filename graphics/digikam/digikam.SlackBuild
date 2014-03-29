@@ -26,7 +26,7 @@
 # Updated by Willy Sudiarto Raharjo <willysr@slackware-id.org>
 
 PRGNAM=digikam
-VERSION=${VERSION:-3.5.0}
+VERSION=${VERSION:-4.0.0-beta3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 SRCVERSION=$(echo $VERSION | tr _ -)

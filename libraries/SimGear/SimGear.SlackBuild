@@ -6,7 +6,7 @@
 
 PRGNAM=SimGear
 SRCNAM=simgear
-VERSION=${VERSION:-2.12.1}
+VERSION=${VERSION:-3.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

@@ -79,6 +79,7 @@ mv $PKG/opt/$PRGNAM/etc/netbeans.clusters \
    $PKG/opt/$PRGNAM/etc/netbeans.clusters.new
 mv $PKG/opt/$PRGNAM/etc/netbeans.import \
    $PKG/opt/$PRGNAM/etc/netbeans.import.new
+rm $PKG/opt/$PRGNAM/bin/*.exe
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cd $PKG/opt/$PRGNAM

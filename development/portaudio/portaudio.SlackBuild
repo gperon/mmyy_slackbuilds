@@ -22,6 +22,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# modified by Giorgio Peron to include the CPP bindings
 
 PRGNAM=portaudio
 VERSION=${VERSION:-V19}
@@ -29,7 +30,7 @@ BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 # eek!
-SRCNAME="pa_stable_v19_20111121.tgz"
+SRCNAME="pa_stable_v19_20140130.tgz"
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -87,6 +88,19 @@ CXXFLAGS="$SLKCFLAGS" \
 
 make
 make install DESTDIR=$PKG
+
+cd bindings/cpp
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --mandir=/usr/man \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --build=$ARCH-slackware-linux
+
+make
+make install DESTDIR=$PKG
+cd ../..
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

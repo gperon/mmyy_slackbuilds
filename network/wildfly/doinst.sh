@@ -24,4 +24,3 @@ preserve_perms() {
 
 # Keep same perms on rc.wildfly.new:
 preserve_perms  etc/rc.d/rc.wildfly.new
-

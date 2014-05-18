@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+      |-----handy-ruler------------------------------------------------------|
+colamd: COLAMD (sparse matrix ordering routines)
+colamd:
+colamd: The COLAMD column approximate minimum degree ordering algorithm
+colamd: computes a permutation vector P such that the LU factorization of
+colamd: A (:,P) tends to be sparser than that of A.  The Cholesky
+colamd: factorization of (A (:,P))'*(A (:,P)) will also tend to be sparser
+colamd: than that of A'*A.
+colamd:
+colamd:
+colamd:
+colamd:

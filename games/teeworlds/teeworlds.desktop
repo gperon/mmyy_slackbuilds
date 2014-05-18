@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Teeworlds
+Name[he]= Teeworlds
+Comment=Multiplayer 2D shooter
+Exec=teeworlds
+Icon=teeworlds
+Terminal=false
+Type=Application
+Categories=Game;Arcade
+GenericName=Game

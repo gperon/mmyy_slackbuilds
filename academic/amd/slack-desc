@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+   |-----handy-ruler------------------------------------------------------|
+amd: AMD (sparse matrix ordering routines)
+amd:
+amd: AMD is a set of routines for ordering a sparse matrix prior to
+amd: Cholesky factorization (or for LU factorization with diagonal
+amd: pivoting).  There are versions in both C and Fortran.  Note that
+amd: this software has nothing to do with AMD the company.  This package
+amd: runs on any platform.
+amd:
+amd:
+amd:
+amd:

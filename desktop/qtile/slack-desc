@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+     |-----handy-ruler------------------------------------------------------|
+qtile: qtile (tiling window manager)
+qtile:
+qtile: Qtile is simple, small, and extensible. It's easy to write your own
+qtile: layouts, widgets, and built-in commands. Qtile is written and
+qtile: configured entirely in Python, which means you can leverage the full
+qtile: power and flexibility of the language to make it fit your needs.
+qtile:
+qtile: Homepage: http://qtile.org
+qtile:
+qtile:
+qtile:

@@ -1,0 +1,26 @@
+--- mars-game/src/CMakeLists.original.txt	2014-05-08 12:30:55.314629800 +0300
++++ mars-game/src/CMakeLists.txt	2014-05-08 12:38:59.999570405 +0300
+@@ -68,7 +68,7 @@
+ 		TARGETS 
+ 			mars
+ 		RUNTIME DESTINATION
+-			${CMAKE_INSTALL_PREFIX}/games
++			${CMAKE_INSTALL_PREFIX}/bin
+ 	)
+ 	install(
+ 		FILES
+--- mars-game/src/System/window.original.cpp	2014-05-08 12:18:31.053934339 +0300
++++ mars-game/src/System/window.cpp	2014-05-08 12:19:45.633001973 +0300
+@@ -308,12 +308,12 @@
+         glEnable(GL_TEXTURE_2D);
+ 
+         if (shader)
+-            shader->bind();
++            shader->bind(NULL);
+ 
+         window_.draw(toBeDrawn, states);
+ 
+         if (shader)
+-            shader->unbind();
++            shader->bind(NULL);
+ 

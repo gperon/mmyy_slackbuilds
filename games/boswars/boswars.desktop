@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Bos Wars
+Name[he]= Bos Wars
+Comment=RTS
+Exec=boswars
+Icon=boswars
+Terminal=false
+Type=Application
+Categories=Game;RTS
+GenericName=Game

@@ -22,11 +22,15 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
+<<<<<<< HEAD
 
+=======
+>>>>>>> slackbuilds
 PRGNAM=luxblend25
 VERSION=${VERSION:-1.3.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+<<<<<<< HEAD
 SRCVERSION=luxblend25-ad6536b0dda8
 blender_version()
 {
@@ -43,11 +47,17 @@ blender_version
 BLENDER_PLUGIN_DIR=/opt/blender/$BLENDER_VERSION/scripts/addons
 
 # Automatically determine the architecture we're building on:
+=======
+
+>>>>>>> slackbuilds
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
+<<<<<<< HEAD
 # Unless $ARCH is already set, use uname -m for all other archs:
+=======
+>>>>>>> slackbuilds
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -71,6 +81,24 @@ else
   LIBDIRSUFFIX=""
 fi
 
+<<<<<<< HEAD
+=======
+SRCVERSION=luxblend25-ad6536b0dda8
+
+blender_version()
+{
+  BLENDER_HEADER=`/opt/blender/blender --version 2>&1 | head -n 1`
+  BLENDER_IMPL=`echo ${BLENDER_HEADER} | cut -f1 -d' '`
+  if [ "$BLENDER_IMPL" = "Blender" ] ; then
+    BLENDER_VERSION=`echo ${BLENDER_HEADER} | sed "s/Blender \(.*\) (\(.*\))/\1/"`
+    return 0
+  fi
+}
+blender_version
+
+BLENDER_PLUGIN_DIR=/opt/blender/$BLENDER_VERSION/scripts/addons
+
+>>>>>>> slackbuilds
 set -e 
 
 rm -rf $PKG
@@ -78,6 +106,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 rm -rf $SRCVERSION
+<<<<<<< HEAD
 tar xvjf $CWD/$SRCVERSION.tar.bz2
 
 cd $TMP/$SRCVERSION
@@ -87,6 +116,16 @@ find . \
  -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
+=======
+tar xvf $CWD/$SRCVERSION.tar.bz2
+cd $TMP/$SRCVERSION
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+ -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+>>>>>>> slackbuilds
 
 # manual installation
 mkdir -p $PKG/$BLENDER_PLUGIN_DIR/

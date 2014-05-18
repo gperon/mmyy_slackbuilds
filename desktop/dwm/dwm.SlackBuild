@@ -2,6 +2,11 @@
 
 # Slackware build script for dwm
 
+# Copyright  2014 Ryan P.C. McQuen, WA, ryan.q@linux.com
+#
+# With permission of original maintainer Tom Canich.
+# All rights reserved.
+
 # Copyright (c) 2009,2011 Tom Canich, State College, Pennsylvania, USA
 # All rights reserved.
 #
@@ -13,14 +18,14 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Tom Canich nor the names of other contributors
+#     * Neither the name of Ryan P.C. McQuen nor the names of other contributors
 #       may be used to endorse or promote products derived from this
 #       software without specific prior written permission.
 #
-# THIS SOFTWARE IS PROVIDED BY Tom Canich ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# THIS SOFTWARE IS PROVIDED BY Ryan P.C. McQuen ''AS IS'' AND ANY EXPRESS OR IMPLIED
 # WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 # OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
-# NO EVENT SHALL Tom Canich BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# NO EVENT SHALL Ryan P.C. McQuen BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 # SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
 # TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
 # PROFITS; OR BUSINESS # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
@@ -29,8 +34,8 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=dwm
-VERSION=${VERSION:-5.8.2}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-6.0}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -70,9 +75,16 @@ tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 mv config.def.h config.h
 
-for i in $(ls $CWD/patches); do
-  patch -p0 < $CWD/patches/$i
-done
+### Per community request, this section has been restored
+### for those that wish to include custom patches.
+### A sample patch is included in the patches/ directory
+### that will change the default terminal from 'uxterm'
+### to 'st'. -Ryan
+#
+#for i in $(ls $CWD/patches); do
+#  patch -p0 < $CWD/patches/$i
+#done
+
 
 make \
   OPTS="$SLKCFLAGS" \
@@ -88,6 +100,9 @@ make install \
   X11INC=/usr/include \
   X11LIB=/usr/lib${LIBDIRSUFFIX}/X11 \
   DESTDIR=$PKG
+
+mkdir -p $PKG/etc/X11/xinit
+install -m 0755 $CWD/xinitrc.dwm $PKG/etc/X11/xinit/xinitrc.dwm
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

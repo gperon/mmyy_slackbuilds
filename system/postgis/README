@@ -1,8 +1,0 @@
-PostGIS adds support for geographic objects to the PostgreSQL
-object-relational database. In effect, PostGIS "spatially
-enables" the PostgreSQL server, allowing it to be used as a
-backend spatial database for geographic information systems
-(GIS).
-
-To disable the GTK-based graphical interface for shp2pgsql,
-set GUI=no.

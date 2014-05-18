@@ -3,7 +3,7 @@
 # Slackware Package Build Script for Disk ARchive (DAR)
 # Home Page http://dar.linux.free.fr/
 
-# Copyright (c) 2007-2013, Nishant Limbachia, Hoffman Estates, IL, USA
+# Copyright (c) 2007-2014, Nishant Limbachia, Hoffman Estates, IL, USA
 # <nishant _AT_ mnspace _DOT_ net>
 # All rights reserved.
 #
@@ -30,7 +30,7 @@
 # No additional license terms added  :-)
 
 PRGNAM="dar"
-VERSION=${VERSION:-2.4.11}
+VERSION=${VERSION:-2.4.13}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -70,10 +70,10 @@ tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root.root .
 find -L . \
- \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 LDFLAGS="-L/usr/lib${LIBDIRSUFFIX} -L/lib${LIBDIRSUFFIX}" \
 CFLAGS="$SLKCFLAGS" \
@@ -86,7 +86,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --mandir=/usr/man \
   --docdir=/usr/doc \
   --enable-shared \
-  --enable-static \
+  --disable-static \
   --disable-upx \
   --build=$ARCH-slackware-linux
 

@@ -41,9 +41,11 @@
 # 2.3	15-FEB-2013	new version - Long Lived Branch.
 # 2.4   19-MAY-2013	new version - Long Lived Branch.
 # 2.6   20-OCT-2013	new version - Long Lived Branch.
+# 3.0   13-NOV-2013	new version (LLB), new features.
+# 3.1	12-APR-2014	new version (LLB)
 
 PRGNAM=nvidia-kernel
-VERSION=319.60
+VERSION=${VERSION:-331.67}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -92,14 +94,17 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-cd kernel || exit 1
-
-make SYSSRC=$KERNELPATH module || exit 1
+(cd kernel || exit 1
+  make SYSSRC=$KERNELPATH module || exit 1
+  cd uvm
+  make SYSSRC=$KERNELPATH module || exit 1
+)
 
 mkdir -p $PKG/lib/modules/$KERNEL/kernel/drivers/video
-install -m 0664 nvidia.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
+install -m 0664 kernel/nvidia.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
+install -m 0664 kernel/uvm/nvidia-uvm.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
 
-# Make sure the X is specified to automagically load the
+# Make sure the X is specified to automagically load the 
 # correct driver, since I always forget. You can remove
 # this file if you have an equivilent entry in /etc/X11/xorg.d
 
@@ -107,7 +112,6 @@ mkdir -p $PKG/usr/share/X11/xorg.conf.d/
 cat $CWD/10-nvidia.conf > $PKG/usr/share/X11/xorg.conf.d/10-nvidia.conf
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$PKGVER
-cp -a README.template $PKG/usr/doc/$PRGNAM-$PKGVER
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$PKGVER/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

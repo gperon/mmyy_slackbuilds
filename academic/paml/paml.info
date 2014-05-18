@@ -1,0 +1,12 @@
+PRGNAM="paml"
+VERSION="4.8"
+HOMEPAGE="http://abacus.gene.ucl.ac.uk/software/paml.html"
+DOWNLOAD="http://abacus.gene.ucl.ac.uk/software/paml4.8.tgz \
+	http://abacus.gene.ucl.ac.uk/software/MCMCtree.Tutorials.pdf"
+MD5SUM="927b69551068e044bad2a0e133d8ace7 \
+	29c851d887eea56b949c01ab42cc48fb"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER="Petar Petrov"
+EMAIL="petar.petrov@student.oulu.fi"

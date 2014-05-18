@@ -1,0 +1,11 @@
+PRGNAM="argcomplete"
+VERSION="0.8.0"
+HOMEPAGE="https://github.com/kislyuk/argcomplete"
+DOWNLOAD="https://pypi.python.org/packages/source/a/argcomplete/argcomplete-0.8.0.tar.gz"
+MD5SUM="9beddca71ed8ffac5ce45b6c84258817"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="pysetuptools"
+MAINTAINER="Dimitris Zlatanidis"
+EMAIL="d.zlatanidis@gmail.com"
+

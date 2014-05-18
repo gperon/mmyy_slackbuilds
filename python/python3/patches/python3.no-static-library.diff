@@ -1,8 +1,8 @@
-diff -uar Python-3.3.1.orig/Makefile.pre.in Python-3.3.1/Makefile.pre.in
---- Python-3.3.1.orig/Makefile.pre.in	2013-04-06 10:41:48.000000000 +0300
-+++ Python-3.3.1/Makefile.pre.in	2013-04-21 15:43:24.509324568 +0300
-@@ -471,7 +471,7 @@
- 
+diff -uar Python-3.4.0.orig/Makefile.pre.in Python-3.4.0/Makefile.pre.in
+--- Python-3.4.0.orig/Makefile.pre.in	2014-03-17 04:31:30.000000000 +0200
++++ Python-3.4.0/Makefile.pre.in	2014-03-29 12:27:38.788419450 +0200
+@@ -532,7 +532,7 @@
+ 	$(RUNSHARED) $(PYTHON_FOR_BUILD) ./Tools/clinic/clinic.py --make
  
  # Build the interpreter
 -$(BUILDPYTHON):	Modules/python.o $(LIBRARY) $(LDLIBRARY) $(PY3LIBRARY)
@@ -10,8 +10,8 @@ diff -uar Python-3.3.1.orig/Makefile.pre.in Python-3.3.1/Makefile.pre.in
  	$(LINKCC) $(PY_LDFLAGS) $(LINKFORSHARED) -o $@ Modules/python.o $(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
  platform: $(BUILDPYTHON) pybuilddir.txt
-@@ -495,18 +495,6 @@
- 	$(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' \
+@@ -557,18 +557,6 @@
+ 		_TCLTK_INCLUDES='$(TCLTK_INCLUDES)' _TCLTK_LIBS='$(TCLTK_LIBS)' \
  		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
  
 -# Build static library
@@ -29,7 +29,7 @@ diff -uar Python-3.3.1.orig/Makefile.pre.in Python-3.3.1/Makefile.pre.in
  libpython$(LDVERSION).so: $(LIBRARY_OBJS)
  	if test $(INSTSONAME) != $(LDLIBRARY); then \
  		$(BLDSHARED) -Wl,-h$(INSTSONAME) -o $(INSTSONAME) $(LIBRARY_OBJS) $(MODLIBS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
-@@ -596,7 +584,7 @@
+@@ -658,7 +646,7 @@
  		echo "-----------------------------------------------"; \
  	fi
  
@@ -38,7 +38,7 @@ diff -uar Python-3.3.1.orig/Makefile.pre.in Python-3.3.1/Makefile.pre.in
  	$(LINKCC) $(PY_LDFLAGS) $(LINKFORSHARED) -o $@ Modules/_testembed.o $(BLDLIBRARY) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
  
  ############################################################################
-@@ -1191,18 +1179,6 @@
+@@ -1309,18 +1297,6 @@
  		else	true; \
  		fi; \
  	done

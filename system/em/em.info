@@ -1,0 +1,11 @@
+PRGNAM="em"
+VERSION="0.3"
+HOMEPAGE="http://em.readthedocs.org/"
+DOWNLOAD="https://github.com/ikalnitsky/em/archive/0.3.tar.gz"
+MD5SUM="0e9efd8cd5cc2b18ef68b68d0616ebd6"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="pysetuptools"
+MAINTAINER="Dimitris Zlatanidis"
+EMAIL="d.zlatanidis@gmail.com"
+

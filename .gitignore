@@ -12,6 +12,7 @@
 *.txz
 *.rpm
 *.zip
+*.deb
 *~
 .directory
 *.war

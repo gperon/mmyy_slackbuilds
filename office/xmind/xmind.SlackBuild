@@ -25,7 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=xmind
-VERSION=3.2.1.201011212218
+VERSION=3.4.1.201401221918
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -43,13 +43,11 @@ OUTPUT=${OUTPUT:-/tmp}
 set -eu
 
 # Get the real version, thanks to Fred Richards.
-REAL_VER=$(ar p xmind-${VERSION}_${DEBARCH}.deb control.tar.gz | tar zxO ./control | grep Version | awk '{print $2}' | cut -d- -f1)
-
+REAL_VER=$(ar p xmind-linux-${VERSION}_${DEBARCH}.deb control.tar.gz | tar zxO control | grep Version | awk '{print $2}' | cut -d- -f1)
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
-ar p $CWD/xmind-${VERSION}_${DEBARCH}.deb data.tar.gz | gunzip -d | tar xv
-
+ar p $CWD/xmind-linux-${VERSION}_${DEBARCH}.deb data.tar.gz | gunzip -d | tar xv
 # Move from /usr/local/xmind to /opt/xmind
 mkdir -p $PKG/opt
 mv $PKG/usr/local/xmind/ $PKG/opt/
@@ -59,7 +57,7 @@ rmdir $PKG/usr/local
 mkdir -p $PKG/usr/bin
 cat > $PKG/usr/bin/xmind << XMIND
 #!/bin/sh
-/opt/xmind/xmind
+/opt/xmind/XMind
 XMIND
 chmod +x $PKG/usr/bin/xmind
 

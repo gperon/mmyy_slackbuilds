@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Slackware build script for Blender
+
+# Ryan P.C. McQuen | Everett, WA | ryan.q@linux.com
+
 # Copyright 2008-2013  Robby Workman  Northport, AL, USA
 # All rights reserved.
 #

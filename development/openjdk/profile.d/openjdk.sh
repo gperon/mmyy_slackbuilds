@@ -1,4 +1,4 @@
 #!/bin/sh
-export OPENJDK_HOME=/usr/lib/openjdk
-export MANPATH="${MANPATH}:${OPENJDK_HOME}/man"
-export PATH="${PATH}:${OPENJDK_HOME}/bin:${OPENJDK_HOME}/jre/bin"
+export JAVA_HOME=/usr/lib/openjdk
+export MANPATH="${MANPATH}:${JAVA_HOME}/man"
+export PATH="${PATH}:${JAVA_HOME}/bin:${JAVA_HOME}/jre/bin"

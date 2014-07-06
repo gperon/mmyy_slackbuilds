@@ -1,10 +1,24 @@
 PRGNAM="openjdk"
-VERSION="1.7.0_b147"
-HOMEPAGE="http://openjdk.java.net/"
-DOWNLOAD="http://download.java.net/openjdk/jdk7/promoted/b147/openjdk-7-fcs-src-b147-27_jun_2011.zip"
-MD5SUM="c284c89a104f64a95afde3a96138ef0f"
+VERSION="7u60"
+HOMEPAGE="http://openjdk.java.net"
+DOWNLOAD="http://icedtea.classpath.org/download/source/icedtea-2.5.0.tar.xz \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/openjdk.tar.bz2 \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/corba.tar.bz2 \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/jaxp.tar.bz2 \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/jaxws.tar.bz2 \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/jdk.tar.bz2 \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/langtools.tar.bz2 \
+  http://icedtea.classpath.org/download/drops/icedtea7/2.5/hotspot.tar.bz2"
+MD5SUM="a14305c61f704b33369c433955572362 \
+  5a32302cc14e7bb113d399bc9a017b23 \
+  bfcdcf4d91e511056fc81a0d771fbdff \
+  34ce2eab91aaba3efb500a3b02051cca \
+  590460868b1c4911d3f57c4f5a80ecc7 \
+  2f2e28645f2203576d416115d5cdbd85 \
+  83a383d30ebc7edaa857430ec997091b \
+  964b7e610177db849dbe0b2483a564a1"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
-MAINTAINER="Giorgio Peron"
-EMAIL="giorgio.peron@gmail.com"
+REQUIRES="apache-ant"
+MAINTAINER="Strahil Yordanov"
+EMAIL="strahilski@yahoo.com"

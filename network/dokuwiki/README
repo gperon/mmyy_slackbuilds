@@ -1,0 +1,9 @@
+GitLab offers git repository management, code reviews, issue tracking, 
+activity feeds and wikis.
+Edit the configuration file to add your hostname
+sudo -e /etc/gitlab/gitlab.rb
+Install and start GitLab
+sudo gitlab-ctl reconfigure
+Browse to the hostname and login
+Username: root 
+Password: 5iveL!fe

@@ -1,7 +1,7 @@
 PRGNAM="gitlab"
 VERSION="7.0"
 HOMEPAGE="https://about.gitlab.com/"
-DOWNLOAD=""
+DOWNLOAD="UNSUPPORTED"
 MD5SUM=""
 DOWNLOAD_x86_64="https://downloads-packages.s3.amazonaws.com/centos-6.5/gitlab-7.0.0_omnibus-1.el6.x86_64.rpm"
 MD5SUM_x86_64="6bdf1d4f4d43dd39c6aa15f5bfa7d72e"

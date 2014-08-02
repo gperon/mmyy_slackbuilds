@@ -23,7 +23,8 @@
  
 
 PRGNAM=${PRGNAM:-dokuwiki}
-VERSION=${VERSION:-2014-05-05a}
+VERSION=${VERSION:-20140505a}
+SRCVERSION=${SRCVERSION:-2014-05-05a}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -39,11 +40,11 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvzf $CWD/$PRGNAM-$VERSION.tgz
+rm -rf $PRGNAM-$SRCVERSION
+tar xvzf $CWD/$PRGNAM-$SRCVERSION.tgz
 
 mkdir -p $PKG/var/www/$PRGNAM
-mv $TMP/$PRGNAM-$VERSION/* $PKG/var/www/$PRGNAM/
+mv $TMP/$PRGNAM-$SRCVERSION/* $PKG/var/www/$PRGNAM/
 chown -R apache:apache $PKG/var/www/$PRGNAM/
 mkdir -p $PKG/etc/httpd/extra
 

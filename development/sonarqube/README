@@ -13,5 +13,5 @@ Then start the service
 Then point your browser to
 http://localhost:9000/sonarqube/
 Then login as:
-user: admin 
+user: admin
 password: admin

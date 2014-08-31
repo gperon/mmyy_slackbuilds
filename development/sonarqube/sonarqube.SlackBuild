@@ -84,7 +84,7 @@ mkdir -p $PKG/etc/rc.d
 mv $TMP/$PRGNAM-$VERSION/* $PKG/usr/share/$PRGNAM/
 
 # expose the configuration file under /etc
-mv $PKG/usr/share/$PRGNAM/conf/sonar.properties{,.new} 
+mv $PKG/usr/share/$PRGNAM/conf/sonar.properties{,.new}
 mv $PKG/usr/share/$PRGNAM/conf/wrapper.conf{,.new}
 cd $PKG/etc
 ln -sf ../usr/share/$PRGNAM/conf $PRGNAM
@@ -97,8 +97,8 @@ sed -i "s_wrapper.java.command=java_wrapper.java.command=/usr/lib${LIBDIRSUFFIX}
 chown -R sonar:sonar $PKG/usr/share/$PRGNAM
 chown -R sonar:sonar $PKG/var/{log,run,tmp}/$PRGNAM
 
-rm -rf $PKG/usr/share/$PRGNAM/logs 
-rm -rf $PKG/usr/share/$PRGNAM/temp 
+rm -rf $PKG/usr/share/$PRGNAM/logs
+rm -rf $PKG/usr/share/$PRGNAM/temp
 cd $PKG/usr/share/$PRGNAM
 ln -fs ../../../var/log/$PRGNAM logs
 ln -fs ../../../var/tmp/$PRGNAM temp

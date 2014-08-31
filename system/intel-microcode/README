@@ -1,0 +1,14 @@
+Linux Processor Microcode Data File
+
+The microcode data file contains the latest microcode definitions for all Intel processors.
+Intel releases microcode updates to correct processor behavior as documented in the respective
+processor specification updates. While the regular approach to getting this microcode update
+is via a BIOS upgrade, Intel realizes that this can be an administrative hassle. The Linux
+operating system and VMware ESX products have a mechanism to update the microcode after booting.
+
+This script is intended to repackage the official Intel microcode tarball.
+The resulting firmware file is placed under /lib/firmware/microcode.dat
+
+NOTE:
+Although there is another (newer) mean of uploading the microcode data file to the processor,
+this package is meant to be used with the *microcode_ctl* utility available at slackbuilds.org.

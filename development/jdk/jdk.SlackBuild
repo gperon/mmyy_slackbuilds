@@ -24,12 +24,12 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=jdk
-VERSION=${VERSION:-8u5}
+VERSION=${VERSION:-8u25}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 #DVER=1.7.0_$(printf $VERSION | cut -du -f2)
-DVER=1.8.0_0$(printf $VERSION | cut -du -f2)
+DVER=1.8.0_$(printf $VERSION | cut -du -f2)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in

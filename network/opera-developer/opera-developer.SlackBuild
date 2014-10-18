@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=opera-developer
-VERSION=${VERSION:-25.0.1614.5}
+VERSION=${VERSION:-26.0.1655.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -68,7 +68,7 @@ chmod 4755 usr/lib/x86_64-linux-gnu/$PRGNAM/opera_sandbox
 # lib
 mv usr/lib/x86_64-linux-gnu/ usr/lib$LIBDIRSUFFIX/
 cd usr/bin
-ln -sf ../lib$LIBDIRSUFFIX/$PRGNAM/opera $PRGNAM
+ln -sf ../lib$LIBDIRSUFFIX/$PRGNAM/$PRGNAM $PRGNAM
 cd $PKG
 
 find . \

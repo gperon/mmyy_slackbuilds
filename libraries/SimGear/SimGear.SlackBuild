@@ -6,7 +6,7 @@
 
 PRGNAM=SimGear
 SRCNAM=simgear
-VERSION=${VERSION:-3.0.0}
+VERSION=${VERSION:-3.2.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -61,7 +61,7 @@ cd build
     -DSIMGEAR_SHARED=ON \
     -DSYSTEM_EXPAT=ON \
     -DCMAKE_BUILD_TYPE=Release ..
-  make
+  make -j7
   make install DESTDIR=$PKG
 cd ..
 

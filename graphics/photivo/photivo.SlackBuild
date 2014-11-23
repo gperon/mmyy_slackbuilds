@@ -2,7 +2,7 @@
 
 # Slackware build script for Photivo
 
-# Copyright 2013  Giorgio Peron <giorgio.peron@gmail.com>, Campodarsego, PD, Italy
+# Copyright 2014  Giorgio Peron <giorgio.peron@gmail.com>, Campodarsego, PD, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=photivo
-VERSION=${VERSION:-20131103}
+VERSION=${VERSION:-20140525}
+SRC_VERSION=2debcb532cbd
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -60,8 +61,8 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
-cd $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$SRC_VERSION.tar.?z*
+cd $PRGNAM-$SRC_VERSION
 find . -exec touch {} \;
 chown -R root:root .
 find -L . \
@@ -70,8 +71,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/lensfun
+patch -p1 < $CWD/photivo-lensfun-0.3.0.diff
 #qmake CONFIG+=WithClear CONFIG+=WithGimp CONFIG+=WithAdobeProfiles CONFIG+=WithCurves  photivo.pro PREFIX=/usr/share
-qmake photivo.pro PREFIX=/usr
+qmake CONFIG+=WithGimp photivo.pro PREFIX=/usr
 make
 make install INSTALL_ROOT=$PKG
 

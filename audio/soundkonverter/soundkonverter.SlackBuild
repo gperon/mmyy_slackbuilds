@@ -25,8 +25,7 @@
 # Updated and maintained by Donald Cooley La Porte, IN USA
 
 PRGNAM=soundkonverter
-VERSION=${VERSION:-2.1.0}
-SRC=${SRC:-v2.1.0}
+VERSION=${VERSION:-2.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -63,7 +62,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$SRC.tar.gz
+tar xvf $CWD/v$VERSION.tar.gz || tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \

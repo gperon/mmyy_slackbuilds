@@ -11,7 +11,7 @@
 # Updated to 0.9.0 by Brian Kysela 2011-12-12
 
 PRGNAM=rtorrent
-VERSION=0.9.0
+VERSION=${VERSION:-0.9.4}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
@@ -29,7 +29,7 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i486" ]; then
-  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
@@ -55,7 +55,7 @@ find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
- -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 LDFLAGS="-lpthread" \
 CFLAGS="$SLKCFLAGS" \
@@ -76,13 +76,11 @@ make install DESTDIR=$PKG
 # 'man_MANS = rtorrent.1' as well as the line below.
 #gzip -9 $PKG/usr/man/man?/*.?
 
-find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-  AUTHORS COPYING INSTALL README doc/rtorrent.rc \
-    $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS COPYING INSTALL README doc/rtorrent.rc $PKG/usr/doc/$PRGNAM-$VERSION
 find $PKG/usr/doc/$PRGNAM-$VERSION -type f -exec chmod 644 {} \;
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM-SlackBuild
 

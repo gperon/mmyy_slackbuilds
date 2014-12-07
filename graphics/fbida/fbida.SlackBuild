@@ -3,6 +3,9 @@
 # Slackware build script for fbida
 # Modified by Luis Henrique <lmello.009@gmail.com>
 
+# Modified again on 20140915 by B. Watson <yalhcru@gmail.com>
+# - Took over maintenance, minor script cleanup
+
 # (C) 2007 Michael Wagner <lapinours@web.de>
 # All rights reserved.
 #
@@ -24,7 +27,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=fbida
-VERSION=2.09
+VERSION=${VERSION:-2.09}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -73,10 +76,9 @@ find -L . \
  -exec chmod 644 {} \;
 
 CFLAGS="$SLKCFLAGS" make HAVE_MOTIF=no
-prefix=/usr make install DESTDIR=$PKG HAVE_MOTIF=no
+prefix=/usr make install DESTDIR=$PKG mandir=$PKG/usr/man HAVE_MOTIF=no
 
-mv $PKG/usr/share/man $PKG/usr && rm -rf $PKG/usr/share
-gzip -9 $PKG/usr/man/man1/* 2> /dev/null
+gzip -9 $PKG/usr/man/man1/*
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION

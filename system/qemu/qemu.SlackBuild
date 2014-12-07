@@ -34,16 +34,19 @@
 # 1.4   28-APR-2014     updated to 2.0.0 (thanks Callum Davies <calrogman@gmail.com>), added useful options,
 #                       clean ups, libusb version check.
 # 1.4a  04-MAY-2014     fixed typos thanks to sandb0y
-# 1.5   10-AUG-2014	updated to new version, watch for legacy "gotchas"
+# 1.5   10-AUG-2014		updated to new version, watch for legacy "gotchas"
+# 1.6	18-NOV-2014		updated version, last of the 2.1 series, changed defaults per SBo list
+# 1.6a	23-NOV-2014		added overlooked AUDIODRIVERS switch per SBo list
 
 PRGNAM=qemu
-VERSION=${VERSION:-2.1.0}
+VERSION=${VERSION:-2.1.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 KVMGROUP=${KVMGROUP:-users}
 TARGETS=${TARGETS:-some}
-VNC_ENABLE=${VNC_ENABLE:-no}
+VNC_ENABLE=${VNC_ENABLE:-yes}
+AUDIODRIVERS=${AUDIODRIVERS:-alsa,oss,sdl,esd}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -104,38 +107,11 @@ else
   targets="--target-list=i386-softmmu,x86_64-softmmu,i386-linux-user,x86_64-linux-user,arm-softmmu,arm-linux-user,armeb-linux-user"
 fi
 
-# Optional VNC support for those who want it (adjust options as needed); use VNC_ENABLE=yes
+# To omit VNC capability, use VNC_ENABLE=no
 if [ "$VNC_ENABLE" = "yes" ]; then
   with_vnc="--enable-vnc --enable-vnc-tls --enable-vnc-jpeg"
 else
   with_vnc="--disable-vnc"
-fi
-
-# Slackware-14.1 ships with an ancient libusb. Check for updates to enable.
-if pkg-config --atleast-version=1.0.13 libusb-1.0 ; then
-  with_libusb="--enable-libusb"
-  echo
-else
-  with_libusb="--disable-libusb"
-fi
-
-# check if spice is there
-if pkg-config --exists spice-server ; then
-  with_spice="--enable-spice"
-else
-  with_spice="--disable-spice"
-fi
-
-# check if usbredir is there
-if pkg-config --exists libusbredirhost ; then
-  with_usbredir="--enable-usb-redir"
-else
-  with_usbredir="--disable-usb-redir"
-fi
-
-# check if device-tree-compiler is installed. Some targets need this so consider installing it from SBo.
-if ls /var/log/packages/device-tree-compiler-* 1>/dev/null 2>/dev/null ; then
-  with_fdt="--enable-fdt"
 fi
 
 CFLAGS="$SLKCFLAGS" \
@@ -152,13 +128,9 @@ CXXFLAGS="$SLKCFLAGS" \
   --disable-debug-info \
   --enable-virtfs \
   --enable-sdl \
-  --audio-drv-list=alsa,oss,sdl,esd \
-  $with_libusb \
+  --audio-drv-list=${AUDIODRIVERS} \
   $with_vnc \
-  $targets \
-  $with_spice \
-  $with_usbredir \
-  $with_fdt
+  $targets
 
 #usb passthrough may fail since Slackware's libusb is too old.
 # other useful options:
@@ -167,7 +139,7 @@ CXXFLAGS="$SLKCFLAGS" \
 # --enable-vde             enable support for vde network
 # --enable-bluez           enable bluez stack connectivity
 
-make V=1 OS_CFLAGS="$SLKCFLAGS"
+make V=1
 
 make install DESTDIR=$PKG
 

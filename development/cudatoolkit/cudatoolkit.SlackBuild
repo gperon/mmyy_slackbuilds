@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# Copyright 2008-2012  Giorgio Peron Campodarsego, PD, Italy
+# Slackware build script for CUDA Toolkit
+
+# Copyright 2014  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -20,12 +22,9 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# OpenCL C++ bindings (optional). Strangely, they are not included with CUDA Toolkit,
-# but in case you use C++, they could make your code much more redable. 
-# It can be downloaded from http://www.khronos.org/registry/cl/api/1.1/cl.hpp
-
 PRGNAM=cudatoolkit
-VERSION=${VERSION:-4.2.9}
+FILENAME=cuda
+VERSION=${VERSION:-6.5.14}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -44,36 +43,40 @@ OUTPUT=${OUTPUT:-/tmp}
 set -e
 
 if [ "$ARCH" = "x86_64" ]; then
-  LIBDIRSUFFIX="64" 
-  WRONGLIBDIRSUFFIX="" 
+  LIBDIRSUFFIX="64"
   CUDAARCH="64"
   break
 elif [ "$ARCH" = "i386" ]; then
   LIBDIRSUFFIX=""
-  WRONGLIBDIRSUFFIX="64" 
   CUDAARCH="32"
   break
 else
   printf "\n\n$ARCH is not supported... \n"
   exit 1
 fi
-  
+
 rm -rf $PKG
-mkdir -p $TMP $PKG $OUTPUT 
+mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
-chmod +x $CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora14.run
-$CWD/$PRGNAM\_$VERSION\_linux_$CUDAARCH\_fedora14.run -- --prefix=$TMP/$PRGNAM-$VERSION
+chmod +x $CWD/$FILENAME\_$VERSION\_linux_$CUDAARCH.run
+$CWD/$FILENAME\_$VERSION\_linux_$CUDAARCH.run -extract=/tmp
+/tmp/$FILENAME-linux64*-$VERSION-*.run -noprompt -nosymlink -prefix=$TMP/$PRGNAM-$VERSION
 
 cd $PRGNAM-$VERSION
 chown -R root:root .
 
 # Move the docs to our standard location first
+mkdir -p $PKG/usr/man
+mv doc/man $PKG/usr/
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv doc/* $PKG/usr/doc/$PRGNAM-$VERSION
-rm -rf doc 
+rm -rf doc
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 # Now move everything else
 mkdir -p $PKG/usr/share/cuda
@@ -84,25 +87,12 @@ mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
 mv $PKG/usr/share/cuda/lib${LIBDIRSUFFIX} $PKG/usr
 cd $PKG/usr/share/cuda
 ln -sf ../../lib${LIBDIRSUFFIX} lib${LIBDIRSUFFIX}
-cd -
-rm -rf $PKG/usr/share/cuda/lib${WRONGLIBDIRSUFFIX}
 
-# Put binaries in the standard place
-mkdir -p $PKG/usr/bin
-mv $PKG/usr/share/cuda/bin/* $PKG/usr/bin
-cd $PKG/usr/share/cuda/bin
-for f in \
- bin2c cuda-gdb cuda-memcheck cudafe cudafe++ cuobjdump fatbin fatbinary filehash nvcc nvcc.profile nvvp ptxas
-do
-echo $f
-ln -sf ../../../bin/$f $f 
-done
-cd -
-cd $PKG/usr/bin
-ln -sf ../share/cuda/open$CUDAARCH/bin/nvopencc nvopencc
-ln -sf ../share/cuda/libnvvp/nvvp nvvp
-ln -sf ../share/cuda/nvvm/cicc cicc
-chmod 0755 $PKG/usr/bin/*
+mkdir -p $PKG/etc/profile.d
+cp $CWD/files/${FILENAME}* $PKG/etc/profile.d
+chmod +x $PKG/etc/profile.d/*
+mkdir -p $PKG/usr/share/applications
+cp $CWD/files/*.desktop $PKG/usr/share/applications
 
 # Put include in the standard place
 mkdir -p $PKG/usr/include/cuda
@@ -110,12 +100,9 @@ mv $PKG/usr/share/cuda/include/* $PKG/usr/include/cuda
 rm -rf $PKG/usr/share/cuda/include
 cd $PKG/usr/share/cuda/
 ln -sf ../../include/cuda include
-cd -
 
-# add OpenCL C++ bindings and patch host_config.h and nvcc.profile
-cat $CWD/files/cl.hpp > $PKG/usr/include/cuda/CL/cl.hpp
-cat $CWD/files/nvcc.profile > $PKG/usr/bin/nvcc.profile
-cat $CWD/files/host_config.h > $PKG/usr/include/cuda/host_config.h
+# install samples
+/tmp/$FILENAME-samples*-$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA-6.5_Samples -cudaprefix=/usr/share/cuda
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

@@ -20,10 +20,10 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
+
 
 PRGNAM=${PRGNAM:-gitlab}
-VERSION=${VERSION:-7.0.0}
+VERSION=${VERSION:-7.5.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -60,26 +60,34 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-rpm2tgz $CWD/$PRGNAM-$VERSION\_omnibus-1.el6.x86_64.rpm
-installpkg --root $PKG $TMP/$PRGNAM-$VERSION\_omnibus-1.el6.x86_64.tgz
+rpm2tgz $CWD/$PRGNAM-$VERSION\_omnibus.5.2.1.ci-1.el6.x86_64.rpm
+installpkg --root $PKG $TMP/$PRGNAM-$VERSION\_omnibus.5.2.1.ci-1.el6.x86_64.tgz
 rm -rf $PKG/var
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# use /var/lig/gitlab instead of /var/opt/gitlab
+mkdir -p $PKG/var/{opt,lib}/$PRGNAM
+cd $PKG/var/opt
+ln -sf ../lib/$PRGNAM $PRGNAM
 mkdir -p $PKG/etc/$PRGNAM
-cat > $PKG/etc/gitlab/gitlab.rb <<'EOF'
+cat > $PKG/etc/gitlab/gitlab.rb.new <<'EOF'
 # Change the external_url to the address your users will type in their browser
 external_url 'http://localhost:81'
+postgresql['shared_buffers'] = "100MB"
+user['username'] = "gitlab"
+user['group'] = "gitlab"
 EOF
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 mkdir -p $PKG/sbin
 cd $PKG/sbin
-ln -s ../opt/gitlab/bin/gitlab-ctl gitlab-ctl 
+ln -s ../opt/gitlab/bin/gitlab-ctl gitlab-ctl
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

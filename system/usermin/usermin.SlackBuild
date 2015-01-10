@@ -2,7 +2,7 @@
 
 # Slackware build script for usermin
 
-# Copyright 2014 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
+# Copyright 2014-2015 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=usermin
-VERSION=${VERSION:-1.620}
+VERSION=${VERSION:-1.640}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -102,7 +102,7 @@ $PKG/opt/usermin/setup.sh
 
 # Fixup the config files to use their real locations
 sed -i "s:^pidfile=.*$:pidfile=/var/run/usermin.pid:" $PKG/etc/usermin/miniserv.conf
-find $PKG/etc/usermin -type f -exec sed -i "s:$PKG::g" {} \; 
+find $PKG/etc/usermin -type f -exec sed -i "s:$PKG::g" {} \;
 
 # make it only accessible by localhost
 echo 'allow=127.0.0.1' >> $PKG/etc/usermin/miniserv.conf

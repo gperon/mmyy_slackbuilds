@@ -20,6 +20,7 @@
 *.run
 *.Z
 *.deb
+*.jar
 *~
 .directory
 *.war

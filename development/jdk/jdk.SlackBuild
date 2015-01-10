@@ -28,7 +28,6 @@ VERSION=${VERSION:-8u25}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-#DVER=1.7.0_$(printf $VERSION | cut -du -f2)
 DVER=1.8.0_$(printf $VERSION | cut -du -f2)
 
 if [ -z "$ARCH" ]; then

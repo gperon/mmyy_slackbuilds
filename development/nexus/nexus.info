@@ -1,5 +1,5 @@
 PRGNAM="nexus"
-VERSION="2.11.1-01"
+VERSION="2.11.1_01"
 HOMEPAGE="http://nexus.sonatype.org"
 DOWNLOAD="http://www.sonatype.org/downloads/nexus-2.11.1-01-bundle.tar.gz"
 MD5SUM="269bd464397215717a8591a3817f5f00"

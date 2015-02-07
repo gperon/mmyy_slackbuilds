@@ -4,7 +4,7 @@
 # Written by Andrew Lobanov <spline @ rooker dot ru>
 
 PRGNAM=instead
-VERSION=${VERSION:-2.2.0}
+VERSION=${VERSION:-2.2.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-SBo}
 
@@ -55,15 +55,18 @@ if [ ! -d ./build ]; then
 fi
 cd build
 cmake \
- -DBINDIR=/usr/bin \
- -DDOCDIR=/usr/doc \
- -DMANDIR=/usr/man \
- -DDATADIR=/usr/share \
- -DICONDIR=/usr/share/pixmaps \
- -DDESKTOPDIR=/usr/share/applications \
+ -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+ -DBINDIR=bin \
+ -DDOCDIR=doc \
+ -DMANDIR=man \
+ -DDATADIR=share \
+ -DICONDIR=share/pixmaps \
+ -DDESKTOPDIR=share/applications \
+ -DLANGDIR=share/lang \
  ../
 make
-make install DESTDIR=$PKG PREFIX=/usr
+make install DESTDIR=$PKG
+# PREFIX=/usr
 cd ..
 
 # Create a directory for documentation

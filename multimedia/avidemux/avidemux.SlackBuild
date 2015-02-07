@@ -26,10 +26,10 @@
 # project will use in the future.   No additional license terms added
 
 # Modified by Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
-# for version 2.6.7
+# for version 2.6.x
 
 PRGNAM=avidemux
-VERSION=${VERSION:-2.6.7}
+VERSION=${VERSION:-2.6.8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -86,7 +86,7 @@ find -L . \
 
 # mkdir build
 # cd build
-# 
+#
 #   CFLAGS="$SLKCFLAGS" \
 #   CXXFLAGS="$SLKCFLAGS" \
 #   cmake . \

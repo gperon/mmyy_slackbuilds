@@ -27,7 +27,7 @@
 PRGNAM=seafile-server
 SRCNAM=seafile
 VERSION=${VERSION:-4.0.5}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-3}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -86,7 +86,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-zcat $CWD/patch-seafile-controller-pid-path.diff.gz | patch -p0
+cat $CWD/patch-seafile-controller-pid-path.diff | patch -p0
 
 sh autogen.sh
 CFLAGS="$SLKCFLAGS" \
@@ -100,7 +100,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --enable-riak \
   --enable-fuse \
-  --disable-client \
+  --enable-client \
   --enable-server \
   --enable-python \
   --enable-static=no \

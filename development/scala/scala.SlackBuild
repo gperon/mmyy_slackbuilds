@@ -5,7 +5,7 @@
 # Written by Matthias Diehn Ingesman (matthias@pf-c.dk)
 # Public domain.
 
-# Copyright 2013  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
+# Copyright 2015  Giorgio Peron Campodarsego, PD, Italy giorgio.peron@gmail.com
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,10 +24,10 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
+
 
 PRGNAM=scala
-VERSION=${VERSION:-2.10.3}
+VERSION=${VERSION:-2.11.6}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -67,7 +67,7 @@ find -L . \
  -exec chmod 644 {} \;
 
 mkdir -p $PKG/$LIBDIR/$PRGNAM
-mv $TMP/$PRGNAM-$VERSION/{bin,lib,man,misc,src} $PKG/$LIBDIR/$PRGNAM
+mv $TMP/$PRGNAM-$VERSION/{bin,lib,man} $PKG/$LIBDIR/$PRGNAM
 rm $PKG/$LIBDIR/$PRGNAM/bin/*.bat
 chmod 0755 $PKG/$LIBDIR/$PRGNAM/bin/*
 

@@ -2,7 +2,7 @@
 
 # Slackware build script for slpkg
 
-# Copyright 2014-2015 Dimitris Zlatanidis Greece-Orestiada
+# Copyright 2014-2015 Dimitris Zlatanidis Orestiada, Greece
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=slpkg
-VERSION=${VERSION:-2.2.6}
+VERSION=${VERSION:-2.4.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -60,7 +60,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz || tar xvf $CWD/v$VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -69,7 +69,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# avoid install man page and blacklist over setup.py
+# avoid install configuration files and man page over setup.py
 sed -i 's/if "install"/if ""/' setup.py
 
 python setup.py install --root=$PKG
@@ -78,12 +78,23 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/etc/slpkg
-# install configurations files
-install -D -m0644 conf/${PRGNAM}.conf $PKG/etc/slpkg/${PRGNAM}.conf
-CONFIGS="blacklist slackware-mirrors custom-repositories"
+# install configuration files
+CONFIGS="slpkg.conf blacklist slackware-mirrors custom-repositories \
+    slackware-changelogs-mirror"
 for file in $CONFIGS; do
     install -D -m0644 conf/$file $PKG/etc/slpkg/${file}.new
 done
+
+# install bash completion file
+mkdir -p $PKG/etc/bash_completion.d
+install -D -m0744 conf/${PRGNAM}.bash-completion \
+    $PKG/etc/bash_completion.d/${PRGNAM}.bash-completion
+
+# install fish completion file
+if [ -d "/etc/fish/completions" ]; then
+    install -D -m0744 conf/${PRGNAM}.fish \
+        $PKG/etc/fish/completions/${PRGNAM}.fish
+fi
 
 # install man page
 mkdir -p $PKG/usr/man/man8

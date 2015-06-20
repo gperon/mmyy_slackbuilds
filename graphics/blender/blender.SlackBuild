@@ -31,7 +31,7 @@ VERSION=${VERSION:-2.74}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-SRCVERSION=$VERSION-linux-glibc211
+SRCVERSION=${VERSION}-linux-glibc211
 
 # We'll remove the libGL* shared libaries that are shipped with blender (and
 # instead use the ones that are shipped with Slackware's Xorg)

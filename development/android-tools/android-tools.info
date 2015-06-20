@@ -1,14 +1,14 @@
 PRGNAM="android-tools"
-VERSION="5.0.2_r1"
+VERSION="5.1.1_r4"
 HOMEPAGE="http://developer.android.com/sdk/"
-DOWNLOAD="https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/8032f3b5a501dabc1e28925cca834d2a39efbdee.tar.gz \
-          https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/ba2a23604727e5b333dd16a9287556d799d6d39e.tar.gz \
-          https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/3946f9119bf4eadfcfb17bd15661515328cbbc86.tar.gz \
-          https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/fc24ac8347630a14d62ffafa93a27ec3b81cc44b.tar.gz"
-MD5SUM="c558a90990a05050005e7826eb9352ec \
-        4f07dd7d50df0d6146d030ee9767b235 \
-        f83ecb1ebf39413d1af3bcf4ddeebd42 \
-        566e83f21767fa1f45d06281c9d7184c"
+DOWNLOAD="https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/5.1.1_r4/core-5b3aa21bc70d42b3fcb1764a1be04ab8db5ebfb9.tar.gz \
+          https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/5.1.1_r4/extras-8e9fa76016a34ec53b83157032e38fad06af1135.tar.gz \
+          https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/5.1.1_r4/libselinux-6608a1875b07370733d0f93f3a52febcef3442bf.tar.gz \
+          https://sourceforge.net/projects/slackbuildsdirectlinks/files/android-tools/5.1.1_r4/f2fs-tools-3f4408b13665bd82dd7edf5c76ed9dccc3a3fce7.tar.gz"
+MD5SUM="04909a7881167eb1bb5a1ce02c82535d \
+	03a38d3c7711d6e5a2c01a5153e1eba9 \
+	777d521427f2367267574ef80159a020 \
+	ace5fb268eb50ddc8a36ff2c88d2c5ee"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""

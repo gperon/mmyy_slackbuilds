@@ -23,7 +23,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=simpleburn
-VERSION=${VERSION:-1.7.1}
+VERSION=${VERSION:-1.7.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -57,7 +57,7 @@ fi
 set -e
 
 rm -rf $PKG
-mkdir -p $TMP $PKG
+mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz

@@ -78,6 +78,7 @@ cmake \
   -DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
   -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
+  -DBUILD_HSI=ON \
   -DCMAKE_BUILD_TYPE=Release .
 
 make -j7

@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=mgba
-VERSION=${VERSION:-0.2.1}
+VERSION=${VERSION:-0.3.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -39,6 +39,9 @@ CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
+
+# Set to on to build the Qt GUI. Requires Qt 5 and CMake 3.
+QT=${QT:-off}
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -60,7 +63,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$VERSION.tar.gz
+tar xvf $CWD/$VERSION.tar.gz || tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -70,9 +73,6 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 
-# Install libraries into the correct directories.
-patch -p1 --verbose < $CWD/correct_libdir.patch
-
 mkdir -p build
 cd build
   cmake \
@@ -80,6 +80,7 @@ cd build
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DLIBDIR=lib$LIBDIRSUFFIX \
+	-DBUILD_QT=${QT} \
     -DCMAKE_BUILD_TYPE=Release ..
   make
   make install DESTDIR=$PKG

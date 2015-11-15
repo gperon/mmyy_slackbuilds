@@ -3,10 +3,10 @@
 # Slackware build script for pulseaudio
 
 # Written by crocket (crockabiscuit@gmail.com)
-# Maintained by Christoph Willing <chris.willing@linux.com>
+# Maintained 2013-2015 by Christoph Willing <chris.willing@linux.com>
 
 PRGNAM=pulseaudio
-VERSION=${VERSION:-6.0}
+VERSION=${VERSION:-7.0}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
@@ -63,6 +63,13 @@ else
   ORC=no
 fi
 
+if pkg-config --exists bash-completion ; then
+  BASHCOMPLETIONDIR=$(pkg-config --variable=completionsdir bash-completion)
+else
+  echo "Setting completions directory manually."
+  BASHCOMPLETIONDIR=/usr/share/bash-completion/completions
+fi
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./bootstrap.sh \
@@ -78,6 +85,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --with-system-user=pulse \
   --with-system-group=pulse \
   --with-access-group=audio \
+  --with-bash-completion-dir=$BASHCOMPLETIONDIR \
   --build=$ARCH-slackware-linux
 
 make check

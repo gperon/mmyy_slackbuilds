@@ -23,7 +23,7 @@
 
 
 PRGNAM=${PRGNAM:-gitlab}
-VERSION=${VERSION:-7.8.4}
+VERSION=${VERSION:-8.1.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -60,17 +60,18 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-rpm2tgz $CWD/$PRGNAM-$VERSION\_omnibus.1-1.el7.x86_64.rpm
-installpkg --root $PKG $TMP/$PRGNAM-$VERSION\_omnibus.1-1.el7.x86_64.tgz
+rpm2tgz $CWD/$PRGNAM-ce-$VERSION-ce.0.el7.x86_64.rpm
+installpkg --root $PKG $TMP/$PRGNAM-ce-$VERSION\-ce.0.el7.x86_64.tgz
 rm -rf $PKG/var
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 # use /var/lib/gitlab instead of /var/opt/gitlab
-mkdir -p $PKG/var/{opt,lib}/$PRGNAM
-cd $PKG/var/opt
-ln -sf ../lib/$PRGNAM $PRGNAM
+#mkdir -p $PKG/var/lib/$PRGNAM
+mkdir -p $PKG/var/opt
+#cd $PKG/var/opt
+#ln -sf ../lib/$PRGNAM $PRGNAM
 mkdir -p $PKG/etc/$PRGNAM
 cat > $PKG/etc/gitlab/gitlab.rb.new <<'EOF'
 # Change the external_url to the address your users will type in their browser

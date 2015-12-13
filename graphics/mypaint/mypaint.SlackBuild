@@ -5,14 +5,27 @@
 # Copyright 2013 klaatu klaatu@member.fsf.org
 # All rights reserved.
 #
-# GNU All-Permissive License
-# Copying and distribution of this file, with or without modification,
-# are permitted in any medium without royalty provided the copyright
-# notice and this notice are preserved.  This file is offered as-is,
-# without any warranty.
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 PRGNAM=mypaint
-VERSION=${VERSION:-1.1.0}
+VERSION=${VERSION:-1.2.0b3}
+SRCVERSION=${SRCVERSION:-1.2.0-beta.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -49,8 +62,8 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
-cd $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$SRCVERSION.tar.xz
+cd $PRGNAM-$SRCVERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -60,7 +73,7 @@ find -L . \
 
 # Respect our $LIBDIRSUFFIX
 sed -i "s|prefix/lib/|prefix/lib$LIBDIRSUFFIX/|" SCons* brushlib/SConscript
-sed -i "s|lib/$PRGNAM/|lib$LIBDIRSUFFIX/$PRGNAM/|" $PRGNAM.py
+sed -i "s|join(prefix, 'lib', 'mypaint')|join(prefix, 'lib$LIBDIRSUFFIX', 'mypaint')|" $PRGNAM.py
 
 # Use our CFLAGS
 sed -i "s|-O3|$SLKCFLAGS|g" SConstruct
@@ -78,9 +91,9 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-    COPYING COPYING.cursors LICENSE \
-    README README.gegl README.gtk3 \
-    changelog \
+    COPYING COPYING.cursors DEBUGGING.md LICENSE \
+    README.md README_LINUX.md \
+    release_info Changelog.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

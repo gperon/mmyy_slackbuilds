@@ -1,3 +1,168 @@
+Fri Dec 25 03:24:58 UTC 2015
+network/uTox: Added missing gtk2.diff.
++--------------------------+
+Fri Dec 25 02:35:35 UTC 2015
+academic/sage: Updated for version 6.10.
+audio/apulse: Updated for version 20151219.
+audio/lmms: Updated for version 1.1.3.
+development/SQLAlchemy: Updated for version 1.0.11.
+development/flow: Added (A static type checker for JavaScript).
+development/gnats: Added (set of tools for tracking bugs).
+development/lighttable: Fix indentation.
+development/pycharm: Updated for version 5.0.3.
+development/watchman: Added (A file watching service).
+games/angband: Updated for version.
+games/atanks: Updated for version 6.4.
+games/jackhammer: Updated for version 11855.
+games/mednafen: Fix indentation.
+games/roccat-tools: Added (Roccat common files).
+games/supertuxkart: Updated for version 0.9.1.
+games/warsow: Updated for version 2.01.
+gis/cligj: Updated for version 0.4.0.
+gis/osm-gps-map: Added (gtk mapping widget).
+gis/rasterio: Updated for version 0.31.0.
+graphics/pngquant: Updated for version 2.5.2.
+graphics/potrace: Updated for version 1.13.
+libraries/OpenAL: Updated for version 1.17.1.
+libraries/batinfo: Removes python3 support.
+libraries/botocore: Updated for version 1.3.14.
+libraries/cffi: Updated for version 1.4.2.
+libraries/enum34: Updated for version 1.1.2.
+libraries/libewf: Patch for newer GCC.
+libraries/liblangtag: Fix VERSION.
+libraries/libmseed: Added (C library framework).
+libraries/libva: Updated for version 1.6.2.
+libraries/png++: Added (C++ wrapper for libpng).
+libraries/pymdstat: Removes python3 support.
+libraries/wxSQLite3: Updated for version 3.3.0.
+misc/fcitx-mozc: Added (Mozc engine for fcitx).
+multimedia/lives: Updated for version 2.4.6.
+network/awscli: Updated for version 1.9.14.
+network/bottle: Removes python3 support.
+network/claws-mail: Updated for version 3.13.1.
+network/clipgrab: Updated for version 3.5.6.
+network/dropbox: Updated for version 3.12.6.
+network/gtk-gnutella: Updated for version 1.1.8.
+network/hylafax+: Updated for version 5.5.6.
+network/icecat: Updated for version 38.5.0.
+network/mumble: Updated for version 1.2.11.
+network/murmur: Updated for version 1.2.11.
+network/pentadactyl: Updated for version 20151223.
+network/purple-facebook: Updated for version 078fbf8d1a4e.
+network/tixati: Updated for version 2.31_1.
+network/uTox: Updated for version 078fbf8d1a4e.
+network/vivaldi: Updated for version 1.0.352.3_1.
+network/you-get: Updated for version 0.4.217.
+network/youtube-dl: Updated for version 2015.12.18.
+perl/perl-CPAN-Meta-YAML: Updated for version 0.018.
+python/psutil: Updated for version 3.3.0.
+python/py3sensors: Removes python3 support.
+system/Iosevka: Updated for version 1.5.1.
+system/adobe-source-code-pro-font: Update DOWNLOAD url.
+system/colord-gtk: Added (GTK integration for libcolord).
+system/glances: Removes python3 support.
+system/hardinfo: Patched for newer GCC.
+system/letsencrypt: Updated for version 0.1.1.
+system/mksh: Updated for version R52.
+system/parallel: Updated for version 20151222.
+system/sqlcipher: Added (256 bit AES encryption SQLite extension).
+system/udiskie: Updated for version 1.4.1.
+system/vagrant: Updated for version 1.8.0.
+system/wine-staging: Added (Wine Is Not an Emulator Staging).
+system/z: Updated for version 1.9.
++--------------------------+
+Sat Dec 19 00:27:04 UTC 2015
+desktop/mimi: Added (xdg-open alternative).
+development/SQLAlchemy: Updated for version 1.0.10.
+development/hhvm-pgsql: Updated for version 3.11.0.
+development/kicad: Updated for version 4.0.0 + new maintainer.
+development/leiningen: Updated for version 2.5.3.
+development/lighttable: Updated for version 0.8.0.
+development/pycharm: Updated for version 5.0.2.
+development/rust: Updated for version 1.5.0.
+development/tyrutils-ericw: Added (Map Compiling Tools).
+development/ucpp: Added (C preprocessor compliant to ISO-C99).
+development/vispatch: Added (VIS Patching for Quake BSPs).
+games/mgba: Updated for version 0.3.2.
+games/pioneer: Updated for version 20151214.
+games/ut2004: Update launcher.
+games/yamagi-quake2: Updated for version 5.32.
+graphics/brlcad: Add note about qt5 conflict.
+graphics/shutter: Fix .info.
+libraries/CondConfigParser: Addec (Python library).
+libraries/activemq-cpp: Updated for version 3.9.1.
+libraries/agg: Fixed download url and homepage.
+libraries/botocore: Updated for version 1.3.13.
+libraries/cffi: Updated for version 1.4.1.
+libraries/libcmis: Update script.
+libraries/libcpuid: Updated for version 0.2.2.
+libraries/libeot: Added (Embedded OpenType Import Library).
+libraries/libgaminggear: Added (Libraries for gaming input devices).
+libraries/libkvkontakte: Patched to work with newer cmake.
+libraries/liblangtag: Added (access tags for identifying languages).
+libraries/libmspub: Added (Microsoft Publisher Import Library).
+libraries/libmwaw: Added (Import library).
+libraries/liborcus: Added (documents processing library).
+libraries/libpagemaker: Added (Adobe PageMaker Import Library).
+libraries/libsodium: Updated for version 1.0.7.
+libraries/libtermkey: Updated for version 0.18.
+libraries/libuv: Updated for version 1.8.0.
+libraries/libvisio: Added (Microsoft Visio Import Library).
+libraries/libwps: Added (Microsoft Works format import library).
+libraries/msgpack-c: Updated for version 1.3.0.
+libraries/python3-pillow: Added (Python3 support for python-pillow).
+libraries/trader: Added (Technical Analysis for traders).
+libraries/unibilium: Updated for version 1.2.0.
+misc/abduco: Added (session manager).
+misc/fcitx-configtool: Updated for version 0.4.8.
+misc/fcitx: Updated for version 4.2.8.6.
+misc/kcm-fcitx: Updated for version 0.4.3.
+multimedia/minidlna: Updated for version 1.1.5.
+multimedia/x265: Updated for version 1.8.
+network/aldryn-client: Updated for version 2.0.5.
+network/aria2: Updated for version 1.19.3.
+network/awscli: Updated for version 1.9.13.
+network/memcached: Updated for version 1.4.25.
+network/owncloud-client: Updated for version 2.1.0.
+network/pentadactyl: Updated for version 20151215.
+network/qTox: Updated for version 20151212.
+network/teamviewer: Updated for version 11.0.53191.
+network/tor-browser: Updated for version 5.0.6.
+network/toxcore: Updated for version 20151211.
+network/uTox: Added (The lightest and fluffiest Tox client).
+network/vivaldi: Updated for version 1.0.344.5_1.
+network/you-get: Updated for version 0.4.210.
+network/youtube-dl: Updated for version 2015.12.13.
+office/impressive: Updated for version 0.11.1.
+office/keepassx: Updated for version 0.4.4.
+office/libreoffice-helppack: Updated for version 5.0.4.
+office/libreoffice-langpack: Updated for version 5.0.4.
+office/libreoffice: Updated for version 5.0.4.
+office/mythes: Added (simple thesaurus).
+office/pdf2djvu: Updated for version 0.9.3.
+office/texstudio: Updated for version 2.10.4.
+python/colorama: Updated for version 0.3.5.
+python/pilkit: Update MD5SUM.
+python/pyperclip: Updated for version 1.5.25.
+python/pytest: Updated for version 2.8.5.
+python/python3: Updated for version 3.5.1.
+python/tox: Updated for version 2.3.1.
+ruby/heroku-client: Updated for version 3.42.25.
+system/fio: Updated for version 2.2.13.
+system/gencfs: Updated for version 1.2.
+system/gnome-disk-utility: Added (storage device manipulation tools)
+system/gparted: Updated for version 0.24.0.
+system/jenkins: Updated for version 1.641.
+system/mlterm: Updated for version 3.6.1.
+system/nvidia-driver: Updated for version 352.63.
+system/nvidia-kernel: Updated for version 352.63.
+system/nvidia-legacy304-driver: Updated for version 304.131.
+system/nvidia-legacy304-kernel: Updated for version 304.131.
+system/nvidia-legacy340-driver: Updated for version 340.96.
+system/nvidia-legacy340-kernel: Updated for version 340.96.
+system/patool: Updated for version 1.10.
+system/qemu: Updated for version 2.4.1.
++--------------------------+
 Sat Dec 12 00:21:30 UTC 2015
 academic/fet: Updated for version 5.28.3.
 academic/sundials: Updated for version 2.6.2.

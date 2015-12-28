@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+         |-----handy-ruler------------------------------------------------------|
+stockfish: Stockfish chess engine
+stockfish:
+stockfish: Stockfish is one of the strongest chess engines in the world.
+stockfish: It is also much stronger than the best human chess grandmasters.
+stockfish:
+stockfish: Homepage http://stockfishchess.org
+stockfish:
+stockfish:
+stockfish:
+stockfish:
+stockfish:

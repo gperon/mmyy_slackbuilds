@@ -2,6 +2,7 @@
 
 # Slackware build script for stellarium
 # Copyright 2008 Alan Alberghini <414N@slacky.it>
+# Copyright 2016 Giorgio Peron
 #
 # Based on slackbuild by Michael Bueker <m.bueker@berlin.de>
 #
@@ -23,7 +24,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=stellarium
-VERSION=${VERSION:-0.13.3}
+VERSION=${VERSION:-0.14.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -69,7 +70,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-patch -p0 < $CWD/stellarium-0.13.3-qt55.patch
+#patch -p0 < $CWD/stellarium-0.13.3-qt55.patch
 
 mkdir build && cd build
   cmake -DCMAKE_INSTALL_PREFIX=/usr \

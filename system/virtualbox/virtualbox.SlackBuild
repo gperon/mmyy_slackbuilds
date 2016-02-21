@@ -2,7 +2,7 @@
 
 # Slackware build script for virtualbox-ose
 
-# Copyright 2008-2015 Heinz Wiesinger, Amsterdam, The Netherlands
+# Copyright 2008-2016 Heinz Wiesinger, Amsterdam, The Netherlands
 # Copyright 2008 Mauro Giachero <mauro.giachero@gmail.com>
 # All rights reserved.
 #
@@ -25,7 +25,7 @@
 
 PRGNAM=virtualbox
 SRCNAM=VirtualBox
-VERSION=${VERSION:-4.3.24}
+VERSION=${VERSION:-5.0.14}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -77,21 +77,6 @@ else
   java=""
 fi
 
-# Enable vpx support for video capturing
-if [ "${VPX:-no}" = "no" ]; then
-  libvpx="--disable-libvpx"
-else
-  libvpx=""
-fi
-
-# Enable pulseaudio integration
-if [ "${PULSE:-no}" = "no" ]; then
-  libpulse="--disable-pulse"
-else
-  libpulse=""
-fi
-
-
 if [ "${WEBSERVICE:-no}" = "no" ]; then
     web_service=""
     vboxwebsrv=""
@@ -103,6 +88,12 @@ else
       echo "    # useradd -u 240 -g 215 -d /var/lib/vboxweb vboxweb"
       exit 1
     fi
+fi
+
+if [ "${SOFTWARE_VIRTUALIZATION:-no}" = "no" -a "$ARCH" = "x86_64" ]; then
+    sw_virt="--disable-vmmraw"
+else
+    sw_virt=""
 fi
 
 if [ "$ARCH" = "i486" ]; then
@@ -141,11 +132,11 @@ MODE="755"
 # Use virtualbox-kernel.SlackBuild for this.
 patch -d src/VBox/Installer/linux -i $CWD/vboxdrv.sh-setup.diff
 
-# Do not require makeself. We don't plan on building an automatic installer
-# Patch taken from gentoo
-patch -p1 -i $CWD/virtualbox-4-makeself-check.patch
-
+# Fix building against newer versions of gsoap
 patch -p1 -i $CWD/virtualbox-gsoap.patch
+
+# Fix wrong path to rdesktop-vrdp-keymaps
+patch -p1 -i $CWD/006-rdesktop-vrdp-keymap-path.patch
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -153,12 +144,12 @@ CXXFLAGS="$SLKCFLAGS" \
   --disable-kmods \
   --enable-vde \
   --enable-vnc \
+  --with-makeself=/usr/bin/echo \
   $web_service \
   $harden \
   $gui \
-  $java \
-  $libvpx \
-  $libpulse
+  $sw_virt \
+  $java
 
 . ./env.sh
 

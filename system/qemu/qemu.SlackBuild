@@ -46,15 +46,14 @@
 # 3.1   13-DEC-2015     uprgraded to new version, minor clean ups
 
 PRGNAM=qemu
-VERSION=${VERSION:-2.4.1}
+VERSION=${VERSION:-2.5.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 KVMGROUP=${KVMGROUP:-users}
 TARGETS=${TARGETS:-some}
 VNC_ENABLE=${VNC_ENABLE:-yes}
-AUDIODRIVERS=${AUDIODRIVERS:-alsa,oss,sdl}
-LIBUSB=${LIBUSB:-no}
+AUDIODRIVERS=${AUDIODRIVERS:-pa,alsa,oss,sdl}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -117,31 +116,11 @@ fi
 
 # To omit VNC capability, use VNC_ENABLE=no
 if [ "$VNC_ENABLE" = "yes" ]; then
-  with_vnc="--enable-vnc --enable-vnc-tls --enable-vnc-jpeg"
+  with_vnc="--enable-vnc --enable-vnc-sasl --enable-vnc-jpeg"
 else
   with_vnc="--disable-vnc"
 fi
 
-# Build libusb-1.0.19 statically so that usb passthrough will work;
-# not needed if you upgrade the default libdir.
-USBSTATIC=""
-if [ "$LIBUSB" = "yes" ]; then
-  tar xf $CWD/libusb-1.0.19.tar.xz
-  cd libusb-1.0.19
-  CFLAGS="$SLKCFLAGS" \
-  ./configure \
-    --prefix=$TMP/$PRGNAM-$VERSION/libusb-static \
-    --build=$ARCH-slackware-linux \
-    --disable-shared \
-    --enable-static
-  make install
-  cd ..
-  sed -i 's/--cflags libusb-1.0/\0 --static/' configure
-  sed -i 's/--libs libusb-1.0/\0 --static/' configure
-  USBSTATIC="$TMP/$PRGNAM-$VERSION/libusb-static/lib/pkgconfig"
-fi
-
-PKG_CONFIG_PATH+="${USBSTATIC}" \
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
@@ -156,6 +135,8 @@ CXXFLAGS="$SLKCFLAGS" \
   --disable-debug-info \
   --enable-virtfs \
   --enable-sdl \
+  --enable-jemalloc \
+  --enable-nettle \
   --audio-drv-list=${AUDIODRIVERS} \
   $with_vnc \
   $targets

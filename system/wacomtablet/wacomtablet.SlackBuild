@@ -71,6 +71,14 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+# Fixes based on Arch Linux patch (thanks!)
+sed -i \
+  -e 's/cmake_minimum_required(VERSION 2.6)/cmake_minimum_required(VERSION 3.0.0)/' \
+  CMakeLists.txt
+sed -i \
+  -e 's/XsetWacomAdaptor/XinputWacomAdaptor/' \
+  autotests/kded/xinputadaptor/CMakeLists.txt
+
 mkdir build
 cd build
   cmake \

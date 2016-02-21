@@ -1,12 +1,12 @@
 PRGNAM="fontforge"
-VERSION="20141126"
+VERSION="20150824"
 HOMEPAGE="http://fontforge.sourceforge.net/"
-DOWNLOAD="http://unrealize.co.uk/source/fontforge-20141126.tar.gz \
+DOWNLOAD="https://github.com/fontforge/fontforge/releases/download/20150824/fontforge-20150824.tar.gz \
           http://fontforge.sf.net/cidmaps.tgz \
-          http://slackware.osuosl.org/slackware-14.1/source/l/freetype/freetype-2.5.0.1.tar.xz"
-MD5SUM="eaf134632c6c3a1a9c2cf8c8026a0c4a \
+          http://mirrors.slackware.com/slackware/slackware-current/source/l/freetype/freetype-2.6.3.tar.xz"
+MD5SUM="74c49c73822d642b0511718d8eeb2210 \
         063691163e592515b31514515bb3ce8c \
-        7ca0e253eb589b30d3e33786dbf39dff"
+        c806890db47d8ad8887253a926377e33"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""

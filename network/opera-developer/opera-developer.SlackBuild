@@ -2,7 +2,7 @@
 
 # Slackware build script for opera-developer
 
-# Copyright 2015 Giorgio Peron giorgio.peron@gmail.com Campodarsego PD Italy
+# Copyright 2016 Giorgio Peron giorgio.peron@gmail.com Belluno Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=opera-developer
-VERSION=${VERSION:-35.0.2052.0}
+VERSION=${VERSION:-37.0.2142.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

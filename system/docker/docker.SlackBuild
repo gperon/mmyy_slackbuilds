@@ -3,9 +3,29 @@
 # Slackware build script for docker
 
 # Written by Vincent Batts <vbatts@hashbangbash.com>
+# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 PRGNAM=docker
-VERSION=${VERSION:-1.8.2}
+VERSION=${VERSION:-1.10.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -59,13 +79,13 @@ unset GOPATH
 # back out this commit, which causes btrfs headers to not be found on slackware
 # since btrfs-progs removes the <btrfs/ioctl.h> header.
 # https://github.com/docker/docker/commit/6922f1be08111d889b0585b763b08f92d7a55e05
-patch -p1 -R < $CWD/docker-btrfs.patch
+#patch -p1 -R < $CWD/docker-btrfs.patch
 
 # a couple of patches that missed the 1.8.2 release window, but are essential
-for patch in ${CWD}/patches/*.patch
-do
-	patch -p1 < ${patch}
-done
+#for patch in ${CWD}/patches/*.patch
+#do
+#	patch -p1 < ${patch}
+#done
 
 mkdir -p ${PKG}/usr/share/gocode/src/github.com/docker/docker
 cp -a .  ${PKG}/usr/share/gocode/src/github.com/docker/docker/

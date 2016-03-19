@@ -27,7 +27,8 @@
 # SOFTWARE.
 
 PRGNAM=google-go-lang
-VERSION=${VERSION:-1.4.3}
+VERSION=${VERSION:-1.6}
+VERSIONBS=${VERSIONBS:-1.4.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -65,6 +66,9 @@ OUTPUT=${OUTPUT:-/tmp}
 
 set -e
 
+tar -C /root -xzf $CWD/go$VERSIONBS.linux-$GARCH.tar.gz
+export GOROOT_BOOTSTRAP=/root/go
+
 rm -rf $PKG
 mkdir -p $TMP $PKG/usr/lib${LIBDIRSUFFIX} $OUTPUT
 cd $PKG/usr/lib${LIBDIRSUFFIX}
@@ -84,7 +88,8 @@ export GOOS="linux"
 export GOBIN="${PKG}/usr/bin"
 export GOARCH="${GARCH}"
 
-unset BASH_ENV # Not sure why, but this causes run.bash to fail --rworkman
+
+#unset BASH_ENV # Not sure why, but this causes run.bash to fail --rworkman
 
 mkdir -p "${GOBIN}"
 cd src
@@ -129,7 +134,7 @@ chmod 0755 $PKG/etc/profile.d/go.sh.new
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS CONTRIBUTORS LICENSE PATENTS README VERSION \
+  AUTHORS CONTRIBUTING.md CONTRIBUTORS LICENSE PATENTS README.md VERSION \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

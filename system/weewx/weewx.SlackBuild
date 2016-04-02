@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# Slackware build script for weewx
+
+# Copyright 2016 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PRGNAM=weewx
+VERSION=${VERSION:-3.5.0}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# adapt the configuration file
+sed -e "s:home = /home/weewx:home = $PKG/usr/share/$PRGNAM:" -i setup.cfg
+sed -e "s:install_lib = %(home)s/bin:install_lib = $PKG/usr/share/$PRGNAM:" -i setup.cfg
+sed -e "s:install_scripts = %(home)s/bin:install_scripts = $PKG/usr/share/$PRGNAM:" -i setup.cfg
+
+./setup.py build
+./setup.py install --no-prompt
+
+mkdir -p $PKG/etc/{rc.d,$PRGNAM}
+cat $CWD/rc.$PRGNAM > $PKG/etc/rc.d/rc.$PRGNAM.new
+mv $PKG/usr/share/$PRGNAM/util/* $PKG/etc/$PRGNAM
+rm -rf $PKG/usr/share/$PRGNAM/util
+rm -rf $PKG/etc/$PRGNAM/{init.d,launchd,systemd}
+mv $PKG/usr/share/$PRGNAM/skins $PKG/etc/$PRGNAM
+rm $PKG/usr/share/$PRGNAM/{LICENSE.txt,README,*.egg-info}
+
+# fix the conf file
+sed -e "s:WEEWX_ROOT = /tmp/SBo/package-weewx/usr/share/weewx:WEEWX_ROOT = /usr/share/weewx:" -i $PKG/usr/share/$PRGNAM/$PRGNAM.conf
+mv $PKG/usr/share/$PRGNAM/$PRGNAM.conf $PKG/etc/$PRGNAM/$PRGNAM.conf.new
+
+# bin link
+mkdir -p $PKG/usr/bin
+cd $PKG/usr/bin
+ln -sf ../share/$PRGNAM/wee_config wee_config
+ln -sf ../share/$PRGNAM/wee_database wee_database
+ln -sf ../share/$PRGNAM/wee_debug wee_debug
+ln -sf ../share/$PRGNAM/wee_device wee_device
+ln -sf ../share/$PRGNAM/wee_extension wee_extension
+ln -sf ../share/$PRGNAM/wee_reports wee_reports
+ln -sf ../share/$PRGNAM/weewxd weewxd
+ln -sf ../share/$PRGNAM/wunderfixer wunderfixer
+cd -
+
+cd $PKG/usr/share/$PRGNAM
+ln -sf ../../../etc/$PRGNAM/skins skins
+cd -
+
+mkdir -p $PKG/var/www/$PRGNAM
+cd $PKG/usr/share/$PRGNAM
+ln -sf ../../../var/www/$PRGNAM/ public_html
+cd -
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mv $PKG/usr/share/$PRGNAM/docs/* $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/share/$PRGNAM/docs
+cp -a \
+  LICENSE.txt PKG-INFO README \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

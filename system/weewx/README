@@ -1,0 +1,27 @@
+Weewx is a free, open source, software program, written in Python, which
+interacts with your weather station to produce graphs, reports, and HTML pages.
+
+# required packages:
+configobj (python-configobj)
+python-cheetah
+python-pillow (python-imaging)
+
+# required if hardware is serial or USB:
+pysetuptools (python-setuptools)
+pyserial
+pyusb
+
+# required if using MySQL:
+pymysql (python-mysqldb)
+
+# optional for extended almanac information:
+pyephem (not present in slackbuilds.org)
+
+The installation will place weewx in the /usr/share/weewx directory with the following layout:
+executable:                      /usr/bin/
+configuration file:              /etc/weewx/weewx.conf
+utilities:                       /home/weewx/bin/
+skins and templates:             /etc/weewx/skins/
+sqlite databases:                /home/weewx/archive/
+generated web pages and images:  /usr/share/weewx/public_html/
+documentation:	                 /usr/doc/weewx-X.Y.Z/

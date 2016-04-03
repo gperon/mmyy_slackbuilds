@@ -23,9 +23,10 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=darktable
-VERSION=${VERSION:-2.0.1}
+VERSION=${VERSION:-2.0.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -70,7 +71,7 @@ find -L . \
 
 # Fix build with gcc-5.3.0
 # http://redmine.darktable.org/issues/10931
-patch -p1 < $CWD/8b1bb5fbb108be341f8313da47be48470c0501ec.patch
+#patch -p1 < $CWD/8b1bb5fbb108be341f8313da47be48470c0501ec.patch
 
 mkdir -p build
 cd build
@@ -87,7 +88,7 @@ cd build
     -DUSE_GNOME_KEYRING=Off \
     -DBINARY_PACKAGE_BUILD=1 \
     -DCMAKE_BUILD_TYPE=Release ..
-  VERBOSE=1 make
+  make $NUMJOBS
   make install DESTDIR=$PKG
 cd ..
 

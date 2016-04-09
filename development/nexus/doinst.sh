@@ -23,5 +23,3 @@ preserve_perms() {
 }
 
 preserve_perms etc/rc.d/rc.nexus.new
-config etc/nexus/nexus.properties.new
-config etc/nexus/wrapper.conf.new

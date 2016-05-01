@@ -1,26 +1,18 @@
 PRGNAM="nvidia-driver"
-VERSION="361.28"
+VERSION="364.19"
 HOMEPAGE="http://www.nvidia.com"
-DOWNLOAD="ftp://download.nvidia.com/XFree86/Linux-x86/361.28/NVIDIA-Linux-x86-361.28.run \
-          ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-361.28.tar.bz2 \
-          ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-361.28.tar.bz2 \
-          ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-361.28.tar.bz2 \
-          ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-361.28.tar.bz2"
-MD5SUM="d4fc7fcf1204a46f15733d7cc2711ad2 \
-        ded9f1d6bfc7cf7884f5bec41f2c1428 \
-        7fffeeddbabe37ecf8186254f2f76c14 \
-        70c379092e068e3da1192e41e8018360 \
-        6fbae00939910f3019958876acd59017"
-DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/361.28/NVIDIA-Linux-x86_64-361.28.run \
-                 ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-361.28.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-361.28.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-361.28.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-361.28.tar.bz2"
-MD5SUM_x86_64="16a583d074a83c1a3ef926e9c59d4349 \
-        ded9f1d6bfc7cf7884f5bec41f2c1428 \
-        7fffeeddbabe37ecf8186254f2f76c14 \
-        70c379092e068e3da1192e41e8018360 \
-        6fbae00939910f3019958876acd59017"
+DOWNLOAD="UNSUPPORTED"
+MD5SUM=""
+DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/364.19/NVIDIA-Linux-x86_64-364.19.run \
+                 ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-364.19.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-364.19.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-364.19.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-364.19.tar.bz2"
+MD5SUM_x86_64="a7ca202401b5fd27f04f89c0dedaaf59 \
+        51c9441da815a75ddc313397db08bc46 \
+        e25cb32e0e7e6d62074dc7511aead7e6 \
+        c0180123f7df9fe3b431b5855220d2cc \
+        332722320713754bfd0c313ffb9b1703"
 REQUIRES="nvidia-kernel"
 MAINTAINER="Edward W. Koenig"
 EMAIL="kingbeowulf@gmail.com"

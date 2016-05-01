@@ -24,7 +24,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=hugin
-VERSION=${VERSION:-2015.0.0}
+VERSION=${VERSION:-2016.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -71,6 +71,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+mkdir build
+cd build
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
@@ -79,10 +81,11 @@ cmake \
   -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DBUILD_HSI=ON \
-  -DCMAKE_BUILD_TYPE=Release .
+  -DCMAKE_BUILD_TYPE=Release ..
 
 make -j7
 make install DESTDIR=$PKG
+cd -
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -90,7 +93,7 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 mv $PKG/usr/share/man $PKG/usr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog INSTALL_cmake README README_JP \
+cp -a AUTHORS COPYING Changes.txt INSTALL_cmake README \
   TODO $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

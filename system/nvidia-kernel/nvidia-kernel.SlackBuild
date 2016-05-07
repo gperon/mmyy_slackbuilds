@@ -91,7 +91,7 @@ if [ "$TARGET" = "x86_64" ]; then
     install -m 0664 kernel/nvidia-uvm.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
 fi
 
-# Make sure the X is specified to automagically load the 
+# Make sure the X is specified to automagically load the
 # correct driver, since I always forget. You can remove
 # this file if you have an equivilent entry in /etc/X11/xorg.d
 

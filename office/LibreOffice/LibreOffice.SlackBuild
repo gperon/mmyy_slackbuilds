@@ -26,9 +26,9 @@
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-5.1.1.3}
+VERSION=${VERSION:-5.1.2.2}
 SHORT_VERSION=${VERSION%.*.*}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PACKAGER=${PACKAGER:-"AnonymousCoward"}
 
@@ -73,8 +73,6 @@ cd $SRCNAM-$VERSION
 if [ "$HAVE_SRCS_TARBALL" = "1" ]; then
   tar xvf $CWD/$SRCNAM-${VERSION}-srcs.tar.xz
 fi
-
-patch -p0 < $CWD/010_isnan.diff
 
 chown -R root:root .
 find -L . \
@@ -154,11 +152,20 @@ if [ "$HAVE_SRCS_TARBALL" = "0" ]; then
 fi
 
 export LDFLAGS="-lboost_system"
-make build
+if [ "$ARCH" = "x86_64" ]; then
+    make build
+else
+    make build-nocheck
+fi
 make distro-pack-install DESTDIR=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+# Prefer GTK2 toolkit
+cd $PKG/usr/lib$LIBDIRSUFFIX/$SRCNAM/program
+sed -i -e '/^#\ restore/i# Prefer GTK2\nexport SAL_USE_VCLPLUGIN=${SAL_USE_VCLPLUGIN:-gtk}\n' soffice
+cd -
 
 cd $PKG/usr/lib$LIBDIRSUFFIX
 mv $SRCNAM  $SRCNAM-$VERSION

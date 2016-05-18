@@ -366,15 +366,8 @@ sed "s/PKGVERSION/$VERSION/g" $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-<<<<<<< HEAD
-if [ "$ARCH" = "x86_64" -a "${COMPAT32}" = "yes" ]; then
-  TAG="multi${TAG}"
-fi
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$TARGET-$BUILD$TAG.${PKGTYPE:-tgz}
-=======
 MULTI=""
 if [ "$ARCH" = "x86_64" -a "${COMPAT32}" = "yes" ]; then
   MULTI="_multi"
 fi
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION$MULTI-$TARGET-$BUILD$TAG.${PKGTYPE:-tgz}
->>>>>>> slackbuilds

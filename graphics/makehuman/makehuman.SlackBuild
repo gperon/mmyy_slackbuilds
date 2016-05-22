@@ -2,7 +2,7 @@
 
 # Slackware build script for makehuman
 
-# Copyright 2012-2014 Giorgio Peron, Campodarsego, PD, Italy giorgio.peron@gmail.com
+# Copyright 2016 Giorgio Peron <giorgio.peron@gmail.com> Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,9 +23,10 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=makehuman
-VERSION=${VERSION:-1.0.2}
+VERSION=${VERSION:-1.1.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+SRCNAM=MakeHuman-$PRGNAM-38e6e33b59ee
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -45,17 +46,26 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-ar vx $CWD/$PRGNAM-$VERSION\_all.deb
-cd $PKG
-tar -xvjf $TMP/data.tar.bz2
+tar xvjf $CWD/$SRCNAM.tar.bz2
+cd $SRCNAM
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-rm -rf $PKG/var
+mkdir -p $PKG/usr/share
+cp -r $PRGNAM $PKG/usr/share/
+rm -rf $PKG/usr/share/$PRGNAM/testsuite
+rm $PKG/usr/share/$PRGNAM/*.bat
+cp -r blendertools $PKG/usr/share/$PRGNAM
+cp -r docs $PKG/usr/share/$PRGNAM
+mkdir -p $PKG/usr/bin
+cp buildscripts/deb/bin/* $PKG/usr/bin/
+mkdir -p $PKG/usr/share/applications
+cp buildscripts/deb/debian/MakeHuman.desktop $PKG/usr/share/applications/
+sed -i "s/VERSION/$VERSION/g" $PKG/usr/share/applications/MakeHuman.desktop
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv $PKG/usr/share/$PRGNAM/licenses $PKG/usr/doc/$PRGNAM-$VERSION
+mv LICENSE.md README $PRGNAM/license.txt $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

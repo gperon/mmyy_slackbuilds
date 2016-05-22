@@ -1,14 +1,14 @@
 #!/bin/sh
 
-# Slackware build script for Sublime Text 2.0.2
-# Builds a Slackware package from the Sublime Text 2 binary tarballs.
+# Slackware build script for Sublime Text 3
+# Builds a Slackware package from the Sublime Text 3 binary tarballs.
 # Anyone can freely modify and/or distribute this script without restrictions
 #
 # Originally written by Luke Williams (xocel@iquidus.org)
 # Currently maintained by Bruno Queiros (bqueiros@gmail.com)
 
 PRGNAM=sublime_text
-VERSION=${VERSION:-3.0.83}
+VERSION=${VERSION:-3.1.14}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
@@ -25,8 +25,8 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-TARBALL_x86="sublime_text_3_build_3083_x32.tar.bz2" # Name of 32bit tarball
-TARBALL_x86_64="sublime_text_3_build_3083_x64.tar.bz2" # Name of 64bit tarball
+TARBALL_x86="sublime_text_3_build_3114_x32.tar.bz2" # Name of 32bit tarball
+TARBALL_x86_64="sublime_text_3_build_3114_x64.tar.bz2" # Name of 64bit tarball
 TARBALL_ROOT="sublime_text_3" # Name of tarballs root directory
 
 # Set LIBDIRSUFFIX and TARBALL.

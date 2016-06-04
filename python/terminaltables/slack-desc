@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
               |-----handy-ruler------------------------------------------------------|
-python-futures: python-futures (Backport of the concurrent.futures package)
-python-futures:
-python-futures: Backport of the concurrent.futures package to Python 2.6
-python-futures: and 2.7.  The concurrent.futures module provides a high-level
-python-futures: interface for asynchronously executing callables.
-python-futures:
-python-futures: Home page:  https://github.com/agronholm/pythonfutures
-python-futures:
-python-futures:
-python-futures:
-python-futures:
+terminaltables: terminaltables (Generate tables in terminals)
+terminaltables:
+terminaltables: Easily draw tables in terminal/console applications from a list of
+terminaltables: lists of strings. Supports multi-line rows.
+terminaltables:
+terminaltables: Homepage: https://github.com/Robpol86/terminaltables
+terminaltables:
+terminaltables:
+terminaltables:
+terminaltables:
+terminaltables:

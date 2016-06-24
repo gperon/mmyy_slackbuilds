@@ -36,7 +36,7 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-#NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
@@ -74,6 +74,7 @@ find . \
 
 cd src
 sed -i "s/LIB = lib/LIB = lib$LIBDIRSUFFIX/" Makefile
+sed -i "s:/share/man/:/man/:g" Makefile
 make $NUMJOBS
 make install DESTDIR=$PKG
 cd -

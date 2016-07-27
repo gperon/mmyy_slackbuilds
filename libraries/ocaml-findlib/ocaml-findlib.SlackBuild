@@ -22,7 +22,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=ocaml-findlib
-VERSION=${VERSION:-1.4.1}
+VERSION=${VERSION:-1.6.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -76,9 +76,9 @@ CXXFLAGS="$SLKCFLAGS" \
   -mandir  /usr/man \
   -sitelib /usr/lib$LIBDIRSUFFIX/ocaml/site-lib \
   -config  /etc/findlib.conf
-make all
-make opt
-make install prefix=$PKG
+make -j1 all
+make -j1 opt
+make -j1 install prefix=$PKG
 
 ( cd $PKG/etc; mv findlib.conf findlib.conf.new )
 

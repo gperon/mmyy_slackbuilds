@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=nexus
-VERSION=${VERSION:-3.0.0_03}
+VERSION=${VERSION:-3.0.1_01}
 ARCH=noarch
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -80,7 +80,7 @@ sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM.rc \
     -e "s:#run_as_user=\"\":run_as_user=\"nexus\":g"
   
 cd $PKG/etc/rc.d
-ln -sf ../../usr/share/$PRGNAM/bin/$PRGNAM rc.$PRGNAM.new
+ln -sf ../../usr/share/$PRGNAM/bin/$PRGNAM rc.$PRGNAM
 cd $PKG
 
 # Fix ownership of some dirs

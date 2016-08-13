@@ -78,7 +78,7 @@ ln -sf /../../../var/tmp/$PRGNAM tmp
 # Fix configuration files
 sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM.rc \
     -e "s:#run_as_user=\"\":run_as_user=\"nexus\":g"
-  
+
 cd $PKG/etc/rc.d
 ln -sf ../../usr/share/$PRGNAM/bin/$PRGNAM rc.$PRGNAM
 cd $PKG

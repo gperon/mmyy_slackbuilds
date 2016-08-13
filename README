@@ -47,11 +47,18 @@ for instructions on how to use this repository with sbopkg.
 original README from slackbuilds.org follows:
 ---------------------------------------------
 
-See http://slackbuilds.org/howto/ for instructions on 
+See https://slackbuilds.org/howto/ for instructions on 
 how to use the contents of this directory.
 
 Access is also available via:
  rsync://slackbuilds.org/slackbuilds
+<<<<<<< HEAD
  git://slackbuilds.org/slackbuilds
  http://slackbuilds.org/gitweb/
  ftp://slackbuilds.org/
+=======
+ https://slackbuilds.org/cgit/slackbuilds
+ ftp://slackbuilds.org/
+ git://slackbuilds.org/slackbuilds.git
+ https://gitlab.com/SlackBuilds.org/slackbuilds.git
+>>>>>>> slackbuilds

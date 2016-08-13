@@ -8,7 +8,7 @@
      |-----handy-ruler------------------------------------------------------|
 nexus: Nexus (Maven repository manager)
 nexus:
-nexus: Nexus Repository OSS is the single warehouse that reliably serves 
+nexus: Nexus Repository OSS is the single warehouse that reliably serves
 nexus: components to every part of your software supply chain.
 nexus: It is a universal repository manager with support for all major
 nexus: package formats and types: Maven, Docker, NuGet, npm, Bower

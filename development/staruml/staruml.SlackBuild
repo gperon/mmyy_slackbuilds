@@ -31,9 +31,8 @@ SRCNAM=StarUML
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) ARCH=i486 ;;
+    i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
-# Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -43,7 +42,7 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-if [ "$ARCH" = "i486" ]; then
+if [ "$ARCH" = "i586" ]; then
   SRCARCH="32-bit"
   DEBARCH="i386"
   LIBDIRSUFFIX=""
@@ -90,6 +89,13 @@ fi
 # Strip binaries and libraries.
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+if [ "$ARCH" = "x86_64" ]; then
+(
+  cd $PKG/lib64
+  ln -sf /opt/staruml/staruml staruml
+)
+fi
 
 mkdir -p $PKG/usr/doc/
 mv usr/share/doc/$PRGNAM usr/doc/$PRGNAM-$VERSION

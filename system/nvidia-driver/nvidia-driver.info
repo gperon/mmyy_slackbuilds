@@ -1,18 +1,18 @@
 PRGNAM="nvidia-driver"
-VERSION="364.19"
+VERSION="367.35"
 HOMEPAGE="http://www.nvidia.com"
 DOWNLOAD="UNSUPPORTED"
 MD5SUM=""
-DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/364.19/NVIDIA-Linux-x86_64-364.19.run \
-                 ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-364.19.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-364.19.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-364.19.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-364.19.tar.bz2"
-MD5SUM_x86_64="a7ca202401b5fd27f04f89c0dedaaf59 \
-        51c9441da815a75ddc313397db08bc46 \
-        e25cb32e0e7e6d62074dc7511aead7e6 \
-        c0180123f7df9fe3b431b5855220d2cc \
-        332722320713754bfd0c313ffb9b1703"
+DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/367.35/NVIDIA-Linux-x86_64-367.35.run \
+                 ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-367.35.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-367.35.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-367.35.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-367.35.tar.bz2"
+MD5SUM_x86_64="04c35b49507ced02f4e9dd08a1796c87 \
+        d824c8fde58bd55e01819b20a8133daa \
+        0fbba7136629f25bd44af6a90c4902a2 \
+        d8bd06ae3d0d3fc6383aeb6218c6fb2d \
+        469028405f4bbc28ddb01a2931f9911eum &"
 REQUIRES="nvidia-kernel"
 MAINTAINER="Edward W. Koenig"
 EMAIL="kingbeowulf@gmail.com"

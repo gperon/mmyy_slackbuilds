@@ -28,7 +28,7 @@
 # see nvidia-driver/changelog.txt
 
 PRGNAM=nvidia-kernel
-VERSION=${VERSION:-364.19}
+VERSION=${VERSION:-367.35}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

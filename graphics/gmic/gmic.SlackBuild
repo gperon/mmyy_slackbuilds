@@ -22,7 +22,7 @@
 
 
 PRGNAM=gmic
-VERSION=${VERSION:-1.7.2}
+VERSION=${VERSION:-1.7.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -61,9 +61,13 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG
 cd $TMP
-rm -rf $PRGNAM-$VERSION
+rm -rf $PRGNAM
+rm -rf $PRGNAM-community
 tar xvf $CWD/$PRGNAM\_$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+mv $PRGNAM-$VERSION $PRGNAM
+unzip $CWD/$PRGNAM-community-master.zip
+mv $PRGNAM-community-master $PRGNAM-community
+cd $PRGNAM
 
 chown -R root:root .
 find . \

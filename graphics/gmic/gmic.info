@@ -1,8 +1,10 @@
 PRGNAM="gmic"
-VERSION="1.7.2"
+VERSION="1.7.5"
 HOMEPAGE="http://gmic.eu"
-DOWNLOAD="http://gmic.eu/files/source/gmic_1.7.2.tar.gz"
-MD5SUM="4102857e16c2806a47e5bc6ab362eb4f"
+DOWNLOAD="http://gmic.eu/files/source/gmic_1.7.5.tar.gz \
+	https://codeload.github.com/dtschump/gmic-community/zip/master"
+MD5SUM="f49e428a211b28d755cd5e9945eaf61f \
+	3b2adca8919027912a0b625fd6da4012"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""

@@ -6,7 +6,7 @@
 # customary to leave one space after the ':'.
 
     |-----handy-ruler------------------------------------------------------|
-gmic: gmic
+gmic: gmic (image processing framework)
 gmic:
 gmic: G'MIC is a full-featured open-source framework for image processing.
 gmic: It provides several different user interfaces to convert/manipulate/

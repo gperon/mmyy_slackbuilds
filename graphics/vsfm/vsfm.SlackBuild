@@ -85,6 +85,7 @@ chmod +x $PKG/usr/bin/$NAME
 mkdir -p $PKG/usr/share/$PRGNAM/bin
 cp bin/$NAME $PKG/usr/share/$PRGNAM/bin
 mkdir -p $PKG/tmp
+chmod 1777 $PKG/tmp
 cd $PKG/usr/share/$PRGNAM/bin
 ln -sf ../../../tmp log
 cd -
@@ -95,11 +96,11 @@ cp $CWD/$PRGNAM.png $PKG/usr/share/$PRGNAM/
 mkdir -p $PKG/usr/share/applications
 cat > $PKG/usr/share/applications/$NAME.desktop <<EOL
 [Desktop Entry]
-Name=VisualSFM
-GenericName=VisualSFM
+Name=${NAME}
+GenericName=${NAME}
 Comment=A Visual Structure from Motion System
 Exec=${NAME}
-Icon=/usr/share/vsfm/vsfm.png
+Icon=/usr/share/${PRGNAM}/${PRGNAM}.png
 Terminal=false
 Type=Application
 Categories=Application;Graphics;3DGraphics

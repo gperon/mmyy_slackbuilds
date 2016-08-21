@@ -1,48 +1,27 @@
-Giorgio Peron's SlackBuild Projects
+Giorgio Peron's SlackBuild Projects hacking
 slackbuilds repository for slackware-current
 giorgio.peron@gmail.com
 
-they are here, working or not
-
-** PUBLISHED @ SlackBuilds.org **
-  blender - copied and modified from slackbuilds.org
-  jenkins - copied and modified from https://github.com/vbatts/SlackBuilds/tree/master/projects/jenkins
-  nexus - Maven repository manager
-  cudatoolkit - NVidia CUDA Toolkit 
-  jboss-as - JBoss Application Server
-  Alchemy - sketching tool
-   
-** STABLE **
-  mypaint - Graphics application
-  makehuman - Generate 3D humanoid models
-  FreeImage - Image library
-  digikam - photo management application (copied and modified from slackbuilds.org)
-  input-wacom - kernel driver for Wacom (already present in kernel) 
-  xf86-input-wacom - X11 driver for Wacom (already present in official slackware)
-  gimp-painter - GIMP for Painter
-  wacomtablet - KCM Wacom Tablet
-  flightgear - an open-source flight simulator project
-  flightgear-data - flight simulator data
-  simgear - a set of open-source 3d simulation libraries
-  fgrun - a graphical front-end for FlightGear
-  kdenlive - a free and open-source video editor
-  luxrender - unbiased rendering engine  
-  openjdk - Open Java Development Kit is a free and open source implementation of the Java  programming language. 
-
-** TESTING/BROKEN **
-  ---
+Packages not included by Slackbuilds
+games/gaviota. Added chess engine and tablespace
+games/stockfish. Added chess engine
+games/syzygy. Added chess tablebase generator
+graphics/gimp-painter. Added gimp for painter
+graphics/gmic. Added image processing framework
+graphics/vsfm. Added GUI application for 3D reconstruction
+libraries/clapack. Added f2c'ed version of LAPACK
+libraries/cmvs. Added Clustering Views for Multi-view Stereo
+libraries/graclus. Added graph clustering software
+libraries/pba. Added Multicore Bundle Adjustment
+libraries/siftgpu. Added GPU SIFT implementation
+network/opera-developer. Added Opera web browser
+system/gitlab. Added git repository management
+system/input-wacom. Added Kernel driver for Wacom (newer version than Slackware)
+system/weewx. Added software for weather stations
+system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackware)
 
 
-this is a unofficial fork of master branch from slackbuilds.org's
-git repository (http://slackbuilds.org/cgit/slackbuilds/).
 
-here I put my unofficial mods to their slackbuilds to run on
-slackware-current with sbopkg (http://www.sbopkg.org).
-
-Check https://github.com/Ponce/slackbuilds/wiki for additional informations.
-
-See https://github.com/Ponce/slackbuilds/wiki/configuring-the-current-repository-with-sbopkg
-for instructions on how to use this repository with sbopkg.
 
 original README from slackbuilds.org follows:
 ---------------------------------------------
@@ -52,13 +31,7 @@ how to use the contents of this directory.
 
 Access is also available via:
  rsync://slackbuilds.org/slackbuilds
-<<<<<<< HEAD
- git://slackbuilds.org/slackbuilds
- http://slackbuilds.org/gitweb/
- ftp://slackbuilds.org/
-=======
  https://slackbuilds.org/cgit/slackbuilds
  ftp://slackbuilds.org/
  git://slackbuilds.org/slackbuilds.git
  https://gitlab.com/SlackBuilds.org/slackbuilds.git
->>>>>>> slackbuilds

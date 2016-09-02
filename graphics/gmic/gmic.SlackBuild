@@ -65,8 +65,8 @@ rm -rf $PRGNAM
 rm -rf $PRGNAM-community
 tar xvf $CWD/$PRGNAM\_$VERSION.tar.gz
 mv $PRGNAM-$VERSION $PRGNAM
-unzip $CWD/$PRGNAM-community-master.zip
-mv $PRGNAM-community-master $PRGNAM-community
+unzip $CWD/$PRGNAM-community-8419067dfc17963aad27303ecacc5a3b1f5c0644.zip
+mv $PRGNAM-community-8419067dfc17963aad27303ecacc5a3b1f5c0644 $PRGNAM-community
 cd $PRGNAM
 
 chown -R root:root .
@@ -82,6 +82,7 @@ sed -i "s:/share/man/:/man/:g" Makefile
 make $NUMJOBS
 make install DESTDIR=$PKG
 cd -
+rmdir $PKG/usr/share || true
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
   COPYING* README* \

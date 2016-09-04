@@ -9,6 +9,7 @@ PRGNAM=tint2
 VERSION=${VERSION:-0.12.12}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+COMMIT=${COMMIT:-e9d6ec9f2301e88857ffa7b287a4a3eb36543940}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -34,20 +35,18 @@ else
 fi
 
 # A GTK+2 theme switcher for tint2
-TINT2CONF_BUILD=${TINT2CONF_BUILD:-OFF}
+TINT2CONF_BUILD=${TINT2CONF_BUILD:-ON}
 # Battery status plugin
 BATTERY_PLUGIN=${BATTERY_PLUGIN:-ON}
-# Install additional tint2rc examples in /usr/doc/tint2-$VERSION/examples
-ADD_EXAMPLES=${ADD_EXAMPLES:-OFF}
 
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
-cd $PRGNAM-$VERSION
+rm -rf ${PRGNAM}-${VERSION}
+tar xvf $CWD/${PRGNAM}_${VERSION}.orig.tar.gz
+cd ${PRGNAM}-${VERSION}-${COMMIT}
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -63,7 +62,6 @@ cd build
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DMANDIR=/usr/man \
     -DDOCDIR=/usr/doc/$PRGNAM-$VERSION \
-    -DENABLE_EXAMPLES:BOOL=$ADD_EXAMPLES \
     -DENABLE_TINT2CONF:BOOL=$TINT2CONF_BUILD \
     -DENABLE_BATTERY:BOOL=$BATTERY_PLUGIN \
     -DCMAKE_BUILD_TYPE=Release ..

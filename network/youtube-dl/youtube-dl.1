@@ -338,24 +338,7 @@ Use only video ID in file name
 .RE
 .TP
 .B \-o, \-\-output \f[I]TEMPLATE\f[]
-Output filename template.
-Use %(title)s to get the title, %(uploader)s for the uploader name,
-%(uploader_id)s for the uploader nickname if different, %(autonumber)s
-to get an automatically incremented number, %(ext)s for the filename
-extension, %(format)s for the format description (like "22 \- 1280x720"
-or "HD"), %(format_id)s for the unique id of the format (like
-YouTube\[aq]s itags: "137"), %(upload_date)s for the upload date
-(YYYYMMDD), %(extractor)s for the provider (youtube, metacafe, etc),
-%(id)s for the video id, %(playlist_title)s, %(playlist_id)s, or
-%(playlist)s (=title if present, ID otherwise) for the playlist the
-video is in, %(playlist_index)s for the position in the playlist.
-%(height)s and %(width)s for the width and height of the video format.
-%(resolution)s for a textual description of the resolution of the video
-format.
-%% for a literal percent.
-Use \- to output to stdout.
-Can also be used to download to a different directory, for example with
-\-o \[aq]/my/downloads/%(uploader)s /%(title)s\-%(id)s.%(ext)s\[aq] .
+Output filename template, see the "OUTPUT TEMPLATE" for all the info
 .RS
 .RE
 .TP
@@ -878,11 +861,19 @@ videos under \f[C]Movies\f[] directory in your home directory:
 .IP
 .nf
 \f[C]
-\-x
-\-\-no\-mtime
-\-\-proxy\ 127.0.0.1:3128
-\-o\ ~/Movies/%(title)s.%(ext)s
 #\ Lines\ starting\ with\ #\ are\ comments
+
+#\ Always\ extract\ audio
+\-x
+
+#\ Do\ not\ copy\ the\ mtime
+\-\-no\-mtime
+
+#\ Use\ this\ proxy
+\-\-proxy\ 127.0.0.1:3128
+
+#\ Save\ all\ videos\ under\ Movies\ directory\ in\ your\ home\ directory
+\-o\ ~/Movies/%(title)s.%(ext)s
 \f[]
 .fi
 .PP
@@ -1305,8 +1296,14 @@ $\ youtube\-dl\ \-f\ \[aq]best[filesize<50M]\[aq]
 
 #\ Download\ best\ format\ available\ via\ direct\ link\ over\ HTTP/HTTPS\ protocol
 $\ youtube\-dl\ \-f\ \[aq](bestvideo+bestaudio/best)[protocol^=http]\[aq]
+
+#\ Download\ the\ best\ video\ format\ and\ the\ best\ audio\ format\ without\ merging\ them
+$\ youtube\-dl\ \-f\ \[aq]bestvideo,bestaudio\[aq]\ \-o\ \[aq]%(title)s.f%(format_id)s.%(ext)s\[aq]
 \f[]
 .fi
+.PP
+Note that in the last example, an output template is recommended as
+bestvideo and bestaudio may have the same file name.
 .SH VIDEO SELECTION
 .PP
 Videos can be filtered by their upload date using the options
@@ -1453,7 +1450,7 @@ mplayer (http://mplayerhq.hu/) or mpv (https://mpv.io/) to be installed.
 .SS I have downloaded a video but how can I play it?
 .PP
 Once the video is fully downloaded, use any video player, such as
-mpv (https://mpv.io/), vlc (http://www.videolan.org) or
+mpv (https://mpv.io/), vlc (http://www.videolan.org/) or
 mplayer (http://www.mplayerhq.hu/).
 .SS I extracted a video URL with \f[C]\-g\f[], but it does not play on
 another machine / in my webbrowser.
@@ -1598,6 +1595,15 @@ youtube\-dl\ "http://www.youtube.com/watch?v=\-wNyEUrxzFU"
 .PP
 Use the \f[C]\-\-cookies\f[] option, for example
 \f[C]\-\-cookies\ /path/to/cookies/file.txt\f[].
+.PP
+In order to extract cookies from browser use any conforming browser
+extension for exporting cookies.
+For example,
+cookies.txt (https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg)
+(for Chrome) or Export
+Cookies (https://addons.mozilla.org/en-US/firefox/addon/export-cookies/)
+(for Firefox).
+.PP
 Note that the cookies file must be in Mozilla/Netscape format and the
 first line of the cookies file must be either
 \f[C]#\ HTTP\ Cookie\ File\f[] or
@@ -1616,6 +1622,47 @@ Another use case is working around
 CAPTCHA (https://en.wikipedia.org/wiki/CAPTCHA) some websites require
 you to solve in particular cases in order to get access (e.g.
 YouTube, CloudFlare).
+.SS How do I stream directly to media player?
+.PP
+You will first need to tell youtube\-dl to stream media to stdout with
+\f[C]\-o\ \-\f[], and also tell your media player to read from stdin (it
+must be capable of this for streaming) and then pipe former to latter.
+For example, streaming to vlc (http://www.videolan.org/) can be achieved
+with:
+.IP
+.nf
+\f[C]
+youtube\-dl\ \-o\ \-\ "http://www.youtube.com/watch?v=BaW_jenozKcj"\ |\ vlc\ \-
+\f[]
+.fi
+.SS How do I download only new videos from a playlist?
+.PP
+Use download\-archive feature.
+With this feature you should initially download the complete playlist
+with \f[C]\-\-download\-archive\ /path/to/download/archive/file.txt\f[]
+that will record identifiers of all the videos in a special file.
+Each subsequent run with the same \f[C]\-\-download\-archive\f[] will
+download only new videos and skip all videos that have been downloaded
+before.
+Note that only successful downloads are recorded in the file.
+.PP
+For example, at first,
+.IP
+.nf
+\f[C]
+youtube\-dl\ \-\-download\-archive\ archive.txt\ "https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re"
+\f[]
+.fi
+.PP
+will download the complete \f[C]PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re\f[]
+playlist and create a file \f[C]archive.txt\f[].
+Each subsequent run will only download new videos if any:
+.IP
+.nf
+\f[C]
+youtube\-dl\ \-\-download\-archive\ archive.txt\ "https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re"
+\f[]
+.fi
 .SS Can you add support for this anime video site, or site which shows
 current movies for free?
 .PP

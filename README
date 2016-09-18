@@ -4,6 +4,7 @@ giorgio.peron@gmail.com
 
 Packages not included by Slackbuilds
 games/gaviota. Added chess engine and tablespace
+games/polyglot. Added UCI adapter
 games/stockfish. Added chess engine
 games/syzygy. Added chess tablebase generator
 graphics/gimp-painter. Added gimp for painter

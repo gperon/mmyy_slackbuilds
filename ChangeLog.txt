@@ -1,3 +1,255 @@
+Sat Sep 17 07:23:50 UTC 2016
+audio/ncmpcpp: Updated for version 0.7.4.
+audio/puddletag: Updated for version 1.1.1 + new maintainer.
+desktop/gtk-theme-Greybird: Updated for version 3.20.1.
+development/autogen: Fix README.
+development/guile1.8: Disable static.
+games/GLupeN64: Updated for version 2016.09.15_6baff60.
+games/qmc2: Update HOMEPAGE.
+gis/qmapshack: Updated for version 1.7.1.
+graphics/leocad: Updated for version 0.83.1.
+libraries/cryptopp: Bring back required .pc file.
+libraries/jansson: Updated for version 2.8
+libraries/libxnvctrl: Added (NVIDIA NV-CONTROL X extension).
+libraries/live555: Updated for version 2016.09.12
+multimedia/vivaldi-codecs-ffmpeg-extra: Updated for version 52.0.
+network/aria2: Updated for version 1.27.0.
+network/flexget: Updated for version 2.3.27.
+network/glusterfs: Added (scalable network filesystem).
+network/opensmtpd: Updated for version 6.0.0p1.
+network/tor: Updated for version 0.2.8.7.
+network/vivaldi: Updated for version 1.4.589.15.
+network/yadifa: Added (Yet Another DNS Implementation For All).
+network/youtube-dl: Updated for version 2016.09.15.
+office/hunspell-de: Added (German hunspell dictionaries).
+office/task: Updated for version 2.5.1.
+office/taskjuggler: Updated for version 3.6.0.
+office/timetrap: Updated for version 1.12.0.
+perl/perl-Sidef: Updated for version 2.31.
+python/python-editor: Added (Programmatically open an editor).
+python/pyzmq: Updated for version 15.4.0.
+system/USBdev: Added (Recognition tool of USB devices).
+system/fzf: Fix VERSION.
+system/gradm: Updated for version 3.1_201608131257.
+system/letsencrypt.sh: Removed (letsencrypt trademark violation).
+system/spl-solaris: Updated for version 0.6.5.8.
+system/vifm: Updated for version 0.8.2.
+system/zfs-on-linux: Updated for version 0.6.5.8.
++--------------------------+
+Wed Sep 14 12:35:58 UTC 2016
+libraries/cryptopp: Removed cryptopp.pc.
+multimedia/flashplayer-plugin: Fix VERSION.
++--------------------------+
+Wed Sep 14 12:08:01 UTC 2016
+desktop/py3status: Updated for version 3.1.
+development/autogen: Updated for version 5.18.12.
+development/kicad: Updated for version 4.0.4.
+development/openjdk6: Updated for version 6b40.
+development/pycharm: Updated for version 2016.2.3.
+development/watchman: Updated for version 4.7.0.
+games/freeblocks: Added (puzzle game).
+games/mupen64plus-libretro: Updated for version 2016.09.12_5b86c3e.
+games/openmw: Updated for version 0.40.0.
+games/pinball: Use -j1.
+graphics/xmedcon: Fix VERSION.
+libraries/Botan: Updated for version 1.11.31.
+libraries/CherryPy: Updated for version 8.1.0.
+libraries/botocore: Updated for version 1.4.54.
+libraries/cryptopp: Updated for version 5.6.4.
+libraries/dietlibc: Switch to i586.
+libraries/libdsk: Updated for version 1.4.0.
+libraries/libhtp: Updated for version 0.5.22.
+libraries/libmp4v2: Update DOWNLOAD url.
+libraries/libofa: Update DOWNLOAD url.
+libraries/libowfat: Switch to i586.
+libraries/poco: Updated for version 1.7.5.
+libraries/tmdb3: Updated for version 0.7.2.
+multimedia/flashplayer-plugin: Updated for version 11.2.202.635.
+multimedia/shotcut: Update DOWNLOAD url.
+network/awscli: Updated for version 1.10.64.
+network/flexget: Updated for version 2.3.26.
+network/offlineimap: Updated for version 7.0.6.
+network/onioncat: Updated for version 0.2.2.r569.
+network/razor-agents: Switch to i586.
+network/suricata: Updated for version 3.1.2.
+network/telegram: Updated for version 0.10.6.
+network/urlwatch: Updated for version 2.5.
+office/hunspell-pl: Updated for version 20160907.
+office/jstock: Moved from misc + updated for version 1.0.7.16.
+office/openoffice.org: Fix build.
+perl/perl-Archive-Extract: Updated for version 0.78.
+perl/perl-CPANPLUS-Dist-Build: Updated for version 0.80.
+perl/perl-CPANPLUS-Dist-Slackware: Updated for version 1.024.
+perl/perl-CPANPLUS: Updated for version 0.9160.
+perl/perl-DBIx-Simple: Switch to i586.
+perl/perl-Log-Message-Simple: Switch to i586.
+perl/perl-Log-Message: Switch to i586.
+perl/perl-Module-Pluggable: Switch to i586.
+perl/perl-Object-Accessor: Switch to i586.
+perl/perl-Package-Constants: Switch to i586.
+perl/perl-Term-ReadLine-Gnu: Updated for version 1.34.
+perl/perl-Term-UI: Switch to i586.
+perl/perl-WebService-MusicBrainz: Updated for version 0.94.
+perl/perl-cgi-minimal: Added (alternative to the CGI.pm module).
+python/Flask-Cors: Updated for version 3.0.2.
+python/Markdown: Updated for version 2.6.6.
+python/PyGithub: Updated for version 1.28.
+python/Unidecode: Updated for version 0.04.19.
+python/blinker: Updated for version 1.4.
+python/buildbot-slave: Updated for version 0.8.12.
+python/curtsies: Updated for version 0.2.9.
+python/feedgenerator: Updated for version 1.9.
+python/pelican: Updated for version 3.6.3.
+python/pendulum: Updated for version 0.6.0.
+python/pycryptopp: Updated for version 0.7.1.
+python/python-libsass: Updated for version 0.11.1.
+python/s3transfer: Updated for version 0.1.4.
+ruby/rbenv: Fix broken /etc/profile.d/rbenv.csh.
+ruby/ruby-build: Updated for version 20160913.
+ruby/rubygem-bundler: Updated for version 1.13.1.
+system/aespipe: Switch to i586.
+system/fzf: Added (A command-line fuzzy finder).
+system/jsawk: Added (like awk, but for JSON).
+system/jshon: Added (a fast JSON parser).
+system/mksh: Updated for version R53a.
+system/powerline-status: Added (ultimate statusline/prompt utility).
+system/ptop: Updated for version 1.0.0.
++--------------------------+
+Sun Sep 11 16:57:44 UTC 2016
+libraries/ipaddress: Updated for version 1.0.17.
+python/pyOpenSSL: Fix VERSION.
+ruby/rubygem-bundler: Updated for version 1.13.0.
+system/containerd: Fix DOWNLOAD url.
+system/dar: Updated for version 2.5.6.
+system/webmin: Updated for version 1.810.
++--------------------------+
+Sun Sep 11 01:55:42 UTC 2016
+academic/libqalculate: Added (desktop caculator library).
+academic/qalculate-gtk: Added (GUI for libqalculate).
+audio/xwax: Updated for version 1.6.
+desktop/awesome-appmenu: Added (application menu tool for awesome).
+desktop/insync-thunar: Updated REQUIRES.
+development/codeblocks: Updated for version 16.01.
+development/flow: Updated for version 0.32.0.
+development/hub: Updated for version 2.2.6.
+development/komodo-edit: Updated for version 10.1.0.
+development/komodo-ide: Updated for version 10.1.0.
+development/poedit: Switch to i586.
+development/scite: Updated for version 3.6.7.
+development/tig: Updated for version 2.2.
+development/uz80as: Fix MD5SUM.
+development/vstudio: Updated for version 6.5.12.
+games/7kaa: Added (Seven Kingdoms, a real-time strategy game).
+games/GLupeN64: Added (mupen64plus + RSP-HLE + GLideN64 + libretro).
+games/blastem-libretro: Updated for version 2016.09.08_27b3f8e.
+games/bnes-libretro: Added (libretro implementation of bNES).
+games/chromium-bsu: Updated for version 0.9.16.1
+games/firestorm: Updated for version 4.7.9.50527.
+gis/Shapely: Updated for version 1.5.17.
+gis/google-earth: Add 64 bit support.
+gis/pdal: Updated for version 1.3.0.
+graphics/converseen: Updated for version 0.9.5.1.
+graphics/gmic: Added (image processing framework).
+graphics/mapcrafter: Updated for version 2.3.1.
+libraries/CherryPy: Updated for version 8.0.0.
+libraries/Nevow: Updated for version 0.14.2.
+libraries/VitaMTP: Added (Vita's MTP protocol library).
+libraries/botocore: Updated for version 1.4.52.
+libraries/cffi: Updated for version 1.8.2.
+libraries/cfitsio: Updated for version 3.39.
+libraries/cryptopp: Updated for version 5.6.3.
+libraries/dropbox-python: Updated for version 6.8.0.
+libraries/enca: Updated for version 1.19
+libraries/gtkspell3: Updated for version 3.0.9.
+libraries/jsoncpp: Updated for version 1.7.5
+libraries/libgadu: Updated for version 1.12.1 + new maintainer.
+libraries/libvirt-python: Updated for version 2.2.0.
+libraries/libvirt: Updated for version 2.2.0.
+libraries/live555: Updated for version 2016.09.08
+libraries/ntl: Updated for version 9.11.0.
+libraries/php-memcache: Fixed build with gnu89 flag.
+libraries/wxPython3: Added (Crossplatform GUI Toolkit).
+misc/QCMA: Added (Cross-platform content manager assistant).
+misc/qtspell: Updated for version 0.8.2.
+multimedia/aegisub: Switch to i586.
+multimedia/gpodder: Updated for version 3.9.1.
+multimedia/lives: Updated for version 2.8.0.
+multimedia/plexmediaserver: Updated for version 1.1.3.2700.
+network/Pyrit: Added (WPA precomputed cracker).
+network/allmydata-tahoe: Removed (replaced by tahoe-lafs).
+network/awscli: Updated for version 1.10.62.
+network/bitlbee-steam: Updated for version 1.4.2.
+network/boxcryptor: Updated for version 2.1.409.160.
+network/flexget: Updated for version 2.3.16.
+network/freeradius-server: Updated for version 2.2.9.
+network/imapproxy: i486 -> i586.
+network/midori: Switch to webkit2gtk.
+network/nghttp2: Updated for version 1.14.0.
+network/nzbget: Updated for version 17.1.
+network/postfix: Updated for version 3.1.2.
+network/qTox: Updated for version 20160901_76c4cf7.
+network/reaver: Update DOWNLOAD url.
+network/sipcalc: i486 -> i586.
+network/sphinx: Updated for version 2.2.11.
+network/sshguard: Updated for version 1.7.0.
+network/sshuttle: Updated for version 0.78.1.
+network/sslh: Updated for version 1.18.
+network/tahoe-lafs: Added (Secure File Store).
+network/tornado: Add backports-abc dependency.
+network/toxcore: Updated for version 20160727_755f084.
+network/vivaldi: Updated for version 1.4.589.11.
+network/wireshark: Updated for version 2.2.0.
+network/youtube-dl: Updated for version 2016.09.08.
+office/LibreOffice: Updated for version 5.2.1.2
+office/calibre: Updated for version 2.67.0
+office/gnucash: Updated for version 2.6.13.
+office/libreoffice-helppack: Updated for version 5.2.1.
+office/libreoffice-langpack: Updated for version 5.2.1.
+office/libreoffice: Updated for version 5.2.1.
+office/odt2txt: Updated for version 0.5.
+office/openoffice.org: Add security hotfix patch.
+office/pstoedit: Updated for version 3.70.
+python/attrs: Added (attributes without boilerplate).
+python/backports-abc: Added (backport of the collections.abc).
+python/cryptography: Updated for version 1.5.
+python/curtsies: Updated for version 0.2.6.
+python/foolscap: Updated for version 0.12.3.
+python/google-api-python-client: Updated for version 1.5.3.
+python/idna: Updated for version 2.1.
+python/pendulum: Updated for version 0.5.5.
+python/pyOpenSSL: Updated for version 0.16.1.
+python/pyasn1-modules: Updated for version 0.0.8.
+python/pyasn1: Updated for version 0.1.9.
+python/pytest: Updated for version 3.0.2.
+python/python-configargparse: Updated for version 0.11.0.
+python/python-django-tagging: Updated for version 0.4.3.
+python/python-django: Updated for version 1.10.
+python/python-jsonrpclib: Update HOMEPAGE.
+python/python-memcached: Updated for version 1.58 + new maintainer.
+python/python-oauth2client: Updated for version 3.0.0.
+python/python-oauthlib: Updated for version 2.0.0.
+python/python-swiftclient: Updated for version 3.1.0.
+python/python-twisted: Updated for version 16.4.0.
+python/requests-oauthlib: Updated for version 0.6.2.
+python/service_identity: Updated for version 16.0.0.
+python/sge-pygame: Updated for version 1.1.1.
+ruby/rubygem-sass: Added (a CSS extension).
+system/containerd: Added (linux containers manager).
+system/fakeroot: Change maintainer + new script option.
+system/firejail: Updated for version 0.9.42.
+system/parallel: Updated for version 20160822.
+system/pcsc-perl: Updated for version 1.4.14.
+system/pcsc-tools: Updated for version 1.4.27.
+system/phoronix-test-suite: Updated for version 6.6.0.
+system/qemu-guest-agent: Updated for version 2.6.1.
+system/qemu: Updated for version 2.6.1.
+system/rmw: Updated for version 2016.09.04.01a.
+system/runc: Added (lightweight portable containers).
+system/s3ql: Updated for version 2.20.
+system/usbredir: Updated for version 0.7.1.
+system/wine-staging: Updated for version 1.9.18.
+system/xen: Updated for version 4.7.0.
++--------------------------+
 Sat Sep  3 00:50:31 UTC 2016
 academic/irsim: Added (A digital circuit simulator).
 academic/magic: Added (A VLSI layout design tool).

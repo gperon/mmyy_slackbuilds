@@ -8,7 +8,6 @@ games/polyglot. Added UCI adapter
 games/stockfish. Added chess engine
 games/syzygy. Added chess tablebase generator
 graphics/gimp-painter. Added gimp for painter
-graphics/gmic. Added image processing framework
 graphics/vsfm. Added GUI application for 3D reconstruction
 libraries/clapack. Added f2c'ed version of LAPACK
 libraries/cmvs. Added Clustering Views for Multi-view Stereo

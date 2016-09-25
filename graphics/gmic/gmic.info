@@ -1,9 +1,9 @@
 PRGNAM="gmic"
-VERSION="1.7.5"
+VERSION="1.7.7"
 HOMEPAGE="http://gmic.eu"
-DOWNLOAD="http://gmic.eu/files/source/gmic_1.7.5.tar.gz \
+DOWNLOAD="http://gmic.eu/files/source/gmic_1.7.7.tar.gz \
 	https://codeload.github.com/dtschump/gmic-community/zip/8419067dfc17963aad27303ecacc5a3b1f5c0644"
-MD5SUM="f49e428a211b28d755cd5e9945eaf61f \
+MD5SUM="08ec40b53f7880e22589c96e6bb6dbbc \
 	c08c8c77e2132d9f2f3c8b1502d80b4c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

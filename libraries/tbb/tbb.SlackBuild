@@ -3,12 +3,32 @@
 # Slackware build script for tbb
 # Written by powtrix (@gmail.com)
 
+# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 PRGNAM=tbb
-VERSION=${VERSION-4.4u5}
+VERSION=${VERSION:-2017u1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-
-SRCVERSION=${SRCVERSION:-44_20160526oss}
+SRCVERSION=${SRCVERSION:-2017_20160916oss}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -42,7 +62,7 @@ set -e
 rm -rf $PKG $TMP/$PRGNAM${SRCVERSION}
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvf $CWD/$PRGNAM${SRCVERSION}_src_0.tgz
+tar xvf $CWD/$PRGNAM${SRCVERSION}_src.tgz
 cd $PRGNAM${SRCVERSION}
 chown -R root:root .
 find -L . \
@@ -51,7 +71,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-make
+make $NUMJOBS
 
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
 # The *.so (no numerical suffix) files should be symlinks, but they're not,
@@ -67,7 +87,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" \
  | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2>/dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CHANGES COPYING README doc $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CHANGES README* doc $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

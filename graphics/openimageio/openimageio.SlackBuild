@@ -3,6 +3,7 @@
 # Slackware build script for openimageio
 
 # Copyright 2015 Christoph Willing Brisbane, Australia
+# Copyright 2016 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,9 +25,10 @@
 
 PRGNAM=openimageio
 SRCNAM=oiio-Release
-VERSION=${VERSION:-1.5.19}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-1.7.7}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 PYLIB_INSTALL_DIRECTORY=$(python2 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
 PYLIB3_INSTALL_DIRECTORY=$(python3 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
@@ -85,14 +87,13 @@ cd build
     -DDOC_INSTALL_DIR:PATH=doc/$PRGNAM-$VERSION \
     -DLIB_INSTALL_DIR:PATH=lib$LIBDIRSUFFIX \
     -DPYLIB_INSTALL_DIR:PATH=$PYLIB_INSTALL_DIRECTORY \
-    -DPYLIB3_INSTALL_DIR:PATH=$PYLIB3_INSTALL_DIRECTORY \
     -DPYLIB_INCLUDE_SONAME:BOOL=ON \
     -DPYLIB_LIB_PREFIX:BOOL=OFF \
     -DUSE_OCIO:BOOL=ON \
     -DUSE_PYTHON:BOOL=ON \
     -DUSE_PYTHON3:BOOL=ON \
 
-  make
+  make $NUMJOBS
   make install DESTDIR=$PKG
 cd ..
 
@@ -100,7 +101,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CREDITS INSTALL README.rst $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CHANGES.md CONTRIBUTING.md CREDITS.md INSTALL.md LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

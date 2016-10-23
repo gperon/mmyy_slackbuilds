@@ -24,7 +24,7 @@
 
 PRGNAM=cudatoolkit
 FILENAME=cuda
-VERSION=${VERSION:-7.5.18}
+VERSION=${VERSION:-8.0.44}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -96,7 +96,7 @@ cd $PKG/usr/share/cuda/
 ln -sf ../../include/cuda include
 
 # install samples
-/tmp/$FILENAME-samples*-$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA-6.5_Samples -cudaprefix=/usr/share/cuda
+/tmp/$FILENAME-samples*-$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA-8.0_Samples -cudaprefix=/usr/share/cuda
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

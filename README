@@ -14,7 +14,6 @@ libraries/cmvs. Added Clustering Views for Multi-view Stereo
 libraries/graclus. Added graph clustering software
 libraries/pba. Added Multicore Bundle Adjustment
 libraries/siftgpu. Added GPU SIFT implementation
-network/opera-developer. Added Opera web browser
 system/gitlab. Added git repository management
 system/input-wacom. Added Kernel driver for Wacom (newer version than Slackware)
 system/weewx. Added software for weather stations

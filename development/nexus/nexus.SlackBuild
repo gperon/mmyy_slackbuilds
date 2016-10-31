@@ -23,16 +23,33 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=nexus
-VERSION=${VERSION:-3.0.1_01}
-ARCH=noarch
+VERSION=${VERSION:-3.0.2_02}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 SRCVERSION=$(echo $VERSION | tr _ -)
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i586 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i586" ]; then
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64"
+else
+  LIBDIRSUFFIX=""
+fi
 
 set -e
 
@@ -78,6 +95,8 @@ ln -sf /../../../var/tmp/$PRGNAM tmp
 # Fix configuration files
 sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM.rc \
     -e "s:#run_as_user=\"\":run_as_user=\"nexus\":g"
+sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM \
+    -e "s:# INSTALL4J_JAVA_HOME_OVERRIDE=:INSTALL4J_JAVA_HOME_OVERRIDE=\"/usr/lib${LIBDIRSUFFIX}/java\":g"
 
 cd $PKG/etc/rc.d
 ln -sf ../../usr/share/$PRGNAM/bin/$PRGNAM rc.$PRGNAM

@@ -1,7 +1,15 @@
-opera (Fast and secure web browser and Internet suite)
+opera (Fast and secure web browser)
 
-Opera is a small, fast, customizable, powerful, and user-friendly web
-browser, as well as an Internet suite, including an email client, an
-IRC client, web developer tools (Opera Dragonfly).
+Opera is a fast, secure, and user-friendly web browser.
 
-Optional dependencies: flashplayer-plugin, jdk or openjdk.
+It includes web developer tools, news aggregation, and the ability
+to compress data via Opera Turbo on congested networks.
+
+* recently, Opera bring us VPN support, Ad Blocker, and the first 
+version of RSS support!
+
+This is a Stable version of Opera browser, for development version 
+please see "opera-development" and for a old version based on 
+Presto engine, please see a SlackBuild called "opera-legacy".
+
+This suggests: pepperflash-plugin, ffmpeg, opera-ffmpeg-codecs.

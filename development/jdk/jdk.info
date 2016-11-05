@@ -1,7 +1,7 @@
 PRGNAM="jdk"
 VERSION="8u112"
 HOMEPAGE="http://www.oracle.com/technetwork/java/javase/downloads/index.html"
-DOWNLOAD="https://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-i586.tar.gz"
+DOWNLOAD="http://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-i586.tar.gz"
 MD5SUM="66ccf8e7c28969d56863034d030134bf"
 DOWNLOAD_x86_64="https://download.oracle.com/otn-pub/java/jdk/8u112-b15/jdk-8u112-linux-x64.tar.gz"
 MD5SUM_x86_64="de9b7a90f0f5a13cfcaa3b01451d0337"

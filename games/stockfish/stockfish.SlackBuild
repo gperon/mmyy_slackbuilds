@@ -23,7 +23,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=stockfish
-VERSION=${VERSION:-7}
+SRCNAME=Stockfish-sf
+VERSION=${VERSION:-8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -41,28 +42,25 @@ OUTPUT=${OUTPUT:-/tmp}
 set -e
 
 if [ "$ARCH" = "i486" ]; then
-#  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
-  ARCH1="x86-32"
+  SLKFLAGS="ARCH=x86-32"
 elif [ "$ARCH" = "i686" ]; then
-#  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-  ARCH1="x86-32"
+  SLKFLAGS="ARCH=x86-32"
 elif [ "$ARCH" = "x86_64" ]; then
-#  SLKCFLAGS="-O2 -fPIC"
-  ARCH1="x86-64"
-else
-#  SLKCFLAGS="-O2"
-  ARCH1=""
+  #SLKFLAGS="ARCH=x86-64-modern COMP=/home/gperon/myroot/opt/intel/bin/icc COMPCXX=/home/gperon/myroot/opt/intel/bin/icpc"
+  SLKFLAGS="ARCH=x86-64-modern"
 fi
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-unzip $CWD/$PRGNAM-$VERSION-src.zip
-cd $PRGNAM-$VERSION-src
+tar xvzf $CWD/$SRCNAME\_$VERSION.tar.gz
+cd $SRCNAME\_$VERSION
 chown -R root:root .
 cd src
-make build ARCH=$ARCH1
+
+make build ${SLKFLAGS}
+
 # binary
 mkdir -p $PKG/usr/bin
 mv $PRGNAM $PKG/usr/bin
@@ -74,7 +72,6 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-#cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -c n -l y $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

@@ -121,7 +121,7 @@ for bin in $BLENDERBINS ; do
 #!/bin/sh
 export PYTHONPATH=/usr/share/$SRCNAM/$VERSION/python/lib$LIBDIRSUFFIX/python$PYTHON_VERSION
 export LD_LIBRARY_PATH=/usr/lib$LIBDIRSUFFIX/opencollada
-exec $bin.bin "$@"
+exec $bin.bin "\$@"
 EOF
   chmod 0755 $PKG/usr/bin/$bin
 done

@@ -46,7 +46,7 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvjf $CWD/$SRCNAM.tar.bz2
+tar xvjf $CWD/$VERSION.tar.bz2
 cd $SRCNAM
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

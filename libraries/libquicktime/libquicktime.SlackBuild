@@ -24,7 +24,7 @@
 
 PRGNAM=libquicktime
 VERSION=1.2.4
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-3}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -71,6 +71,7 @@ find -L . \
 
 # Fix compatibility with ffmpeg 2.x
 patch -p1 -i $CWD/libquicktime-1.2.4-ffmpeg2.patch
+patch -p1 -i $CWD/libquicktime-ffmpeg3.patch
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
@@ -83,6 +84,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --enable-gpl \
   --with-libdv \
+  --with-vorbis-libraries=/usr/lib${LIBDIRSUFFIX} \
   --build=$ARCH-slackware-linux
 
 make

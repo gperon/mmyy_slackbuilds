@@ -2,9 +2,7 @@
 
 # Slackware build script for luxrender
 
-# Copyright 2013  Giorgio Peron Campodarsego, PD, Italy
-# Copyright 2015  Klaatu Wellington, NZ
-#
+# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,30 +23,23 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=luxrender
-SHORT=lux
-VERSION=${VERSION:-1.4}
+VERSION=${VERSION:-1.6.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+SRCVERSION=$PRGNAM-lux-b3f85cf7742f
+LUXRAYSRCVERSION=$PRGNAM-luxrays-61352e6aae3f
 
-if [ -z $OPENCL ]; then
-    OPENCL="-OpenCL"
-else
-    OPENCL=""
-fi
-
+# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) echo "32 bit builds not supported." && exit 1
-	  ;;
-    arm*) ARCH=arm
-	  LIBDIRSUFFIX=""
-	  ;;
-       *) ARCH=$( uname -m )
-	  LIBDIRSUFFIX="64"
-	  ;;
+    i?86) ARCH=i486 ;;
+    arm*) ARCH=arm ;;
+# Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
   esac
 fi
 
+NUMJOBS=${NUMJOBS:-" -j7 "}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
@@ -61,6 +52,7 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
+#  SLKCFLAGS="-O2 -fPIC"
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
@@ -73,60 +65,100 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SHORT-$VERSION
-tar xvjf $CWD/$SHORT-v"$VERSION"-x86_64-sse2"$OPENCL".tar.bz2
-cd $SHORT-v"$VERSION"-$(uname -m)-sse2"$OPENCL"
+rm -rf $PRGNAM-$VERSION
+rm -rf $LUXRAYSRCVERSION
+rm -rf $SRCVERSION
+tar xvjf $CWD/$SRCVERSION.tar.bz2
+tar xvjf $CWD/$LUXRAYSRCVERSION.tar.bz2
+
+cd $TMP/$LUXRAYSRCVERSION
 chown -R root:root .
-find -L . \
- \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
- -o -perm 511 \) -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
- -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# force python3 for boost
+patch -Np1 < "$CWD/force_python3_luxray.diff" || true
+
+cmake ./ \
+    -DCMAKE_VERBOSE_MAKEFILE=ON  \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DBoost_DEBUG=ON \
+    -DLUXRAYS_DISABLE_OPENCL=OFF \
+    -DCMAKE_BUILD_TYPE=Release
+
+# this sucks, but luxrays doesn't seem to honor  CMAKE_*_LINKER_FLAGS
+for file in `grep lboost_python -l -R ` ;do sed -i 's/$/ -lpython3/' $file ; done
+
+# compile luxrays
+make $NUMJOBS luxrays
+make $NUMJOBS luxcore
+make $NUMJOBS pyluxcore
+make $NUMJOBS slg4
 
 # manual installation
-mkdir -p $PKG/usr/bin/
-cp luxconsole $PKG/usr/bin/
-cp lux*r $PKG/usr/bin/
-cp slg4 $PKG/usr/bin/
+mkdir -p $PKG/usr/share/$PRGNAM
+cp -r scenes $PKG/usr/share/$PRGNAM
+mkdir -p $PKG/usr/{bin,lib$LIBDIRSUFFIX/python3.5}
+cp bin/slg4 $PKG/usr/share/$PRGNAM
+cp lib/pyluxcore.so $PKG/usr/lib$LIBDIRSUFFIX/python3.5/
+cat > $PKG/usr/bin/slg4 << EOF
+#!/bin/sh
+cd /usr/share/luxrender
+./slg4 >/dev/null 2>&1
+EOF
 chmod +x $PKG/usr/bin/slg4
-mkdir -p $PKG/usr/lib"$LIBDIRSUFFIX"
-cp *.so $PKG/usr/lib"$LIBDIRSUFFIX"
 
+cd $TMP/$SRCVERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+# fix some make files
+sed -i "/##########################      Find LuxRays       ##########################/ a\
+SET(LuxRays_HOME $TMP/$LUXRAYSRCVERSION)"  cmake/Dependencies.cmake
+
+patch -Np1 < "$CWD/force_python3.diff"
+
+#source /opt/intel/bin/iccvars.sh
+#rm -rf CMakeCache.txt CMakeFiles
+#CC=/opt/intel/bin/icc CXX=/opt/intel/bin/icpc cmake lux
+
+cmake ./ \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DPYTHON_CUSTOM=ON \
+    -DPYTHON_LIBRARIES=/usr/lib/libpython3.5m.so \
+    -DPYTHON_INCLUDE_PATH=/usr/include/python3.5m/ \
+    -DCMAKE_EXE_LINKER_FLAGS=-lpthread \
+    -DCMAKE_BUILD_TYPE=Release
+
+# compile luxrender
+make $NUMJOBS luxrender
+make install DESTDIR=$PKG
+
+# copy pylux.so
+cp pylux.so $PKG/usr/lib$LIBDIRSUFFIX/
+
+# Strip binaries and libraries.
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# are we using default SBo location of blender?
-if [ -z $BLENDER ]; then
-    BLENDER=$(egrep '^opt\/blender\/2\....?\/scripts\/$' /var/log/packages/blender-*_SBo 2> /dev/null) || BLENDER="no"
-fi
-
-if [ X"$BLENDER" != "Xno" ]; then
-    mkdir -p $PKG/$BLENDER
-    unzip luxblend/luxblend.zip -d $PKG/$BLENDER/addons/
-    unzip luxblend/luxblend-presets.zip -d $PKG/$BLENDER/presets/
-else
-    mkdir -p $PKG/usr/share/$PRGNAM-$VERSION/luxblend
-    cp luxblend/luxblend.zip $PKG/usr/share/$PRGNAM-$VERSION/luxblend
-    cp luxblend/luxblend-presets.zip $PKG/usr/share/$PRGNAM-$VERSION/luxblend
-fi
-
-mkdir -p $PKG/usr/share/applications
-mkdir -p $PKG/usr/share/$PRGNAM-$VERSION
-cp -r examples $PKG/usr/share/$PRGNAM-$VERSION
-cp $CWD/$PRGNAM.desktop $PKG/usr/share/applications
-
-#icons
-mkdir -p $PKG/usr/share/icons/hicolor/scalable/mimetypes
-cp $CWD/application-x-lux.svg $PKG/usr/share/icons/hicolor/scalable/mimetypes
-cp $CWD/luxrender.svg $PKG/usr/share/icons/hicolor/scalable/apps
-
-#mimetypes
-mkdir -p $PKG/usr/share/mime/application/
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp README $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  AUTHORS.txt \
+  COPYING.txt \
+  Readme.md \
+  License.md \
+  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-cat $CWD/mime-"$SHORT".xml > $PKG/usr/doc/$PRGNAM-$VERSION/mime-"$SHORT".xml
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

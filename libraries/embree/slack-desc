@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+      |-----handy-ruler------------------------------------------------------|
+embree: Embree (High Performance Ray Tracing Kernels)
+embree:
+embree: Embree is a collection of high-performance ray tracing kernels,
+embree: developed at Intel. The target user of Embree are graphics
+embree: application engineers that want to improve the performance of their
+embree: application by leveraging the optimized ray tracing kernels of
+embree: Embree.
+embree:
+embree: Homepage https://embree.github.io/
+embree:
+embree:

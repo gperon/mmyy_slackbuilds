@@ -3,6 +3,8 @@ slackbuilds repository for slackware-current
 giorgio.peron@gmail.com
 
 Packages not included by Slackbuilds
+---------------------------------------------
+development/ispc. Added Intel SPMD Program Compiler
 games/gaviota. Added chess engine and tablespace
 games/polyglot. Added UCI adapter
 games/syzygy. Added chess tablebase generator
@@ -10,16 +12,22 @@ graphics/gimp-painter. Added gimp for painter
 graphics/vsfm. Added GUI application for 3D reconstruction
 libraries/clapack. Added f2c'ed version of LAPACK
 libraries/cmvs. Added Clustering Views for Multi-view Stereo
+libraries/embree. Added Embree High Performance Ray Tracing Kernels
 libraries/graclus. Added graph clustering software
 libraries/pba. Added Multicore Bundle Adjustment
 libraries/siftgpu. Added GPU SIFT implementation
+multimedia/vokoscreen. Added vokoscreen recording screencasts with audio
 system/gitlab. Added git repository management
 system/input-wacom. Added Kernel driver for Wacom (newer version than Slackware)
 system/weewx. Added software for weather stations
 system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackware)
 
-
-
+Packages newer than slackbuilds version
+---------------------------------------------
+multimedia/ffmpeg. Updated for version 3.2
+graphics/luxrender. Updated for version 1.6.0
+graphics/mypaint. Updated for version 1.2.1.beta0
+office/scribus. Updated for version 1.5.2
 
 original README from slackbuilds.org follows:
 ---------------------------------------------

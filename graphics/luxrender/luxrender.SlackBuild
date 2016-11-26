@@ -69,7 +69,7 @@ rm -rf $PRGNAM-$VERSION
 rm -rf $LUXRAYSRCVERSION
 rm -rf $SRCVERSION
 tar xvjf $CWD/$SRCVERSION.tar.bz2
-tar xvjf $CWD/$LUXRAYSRCVERSION.tar.bz2
+tar xvjf $CWD/v16.tar.bz2
 
 cd $TMP/$LUXRAYSRCVERSION
 chown -R root:root .

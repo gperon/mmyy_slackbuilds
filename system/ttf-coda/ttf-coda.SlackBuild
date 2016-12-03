@@ -1,8 +1,8 @@
 #!/bin/sh
 #
-# Slackware build script for imgurbash.
+# Slackware build script for ttf-coda.
 #
-# Copyright 2015 Edinaldo P. Silva, Rio de Janeiro, Brazil.
+# Copyright 2016 Edinaldo P. Silva, Rio de Janeiro, Brazil.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,8 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=imgurbash
-VERSION=${VERSION:-4.0}
+PRGNAM=ttf-coda
+VERSION=${VERSION:-1.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -34,14 +34,16 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
+SRCNAM="coda"
+
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-mkdir $PRGNAM-$VERSION
-mv $CWD/imgurbash.sh $PRGNAM-$VERSION
+mkdir -p $PRGNAM-$VERSION
+unzip $CWD/$SRCNAM.zip -d $PRGNAM-$VERSION
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -53,14 +55,16 @@ find -L . \
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-install -d $PKG/usr/bin
-install -D -m755 imgurbash.sh $PKG/usr/bin/imgurbash.sh
+mkdir -p $PKG/usr/share/fonts/TTF
+cp -a Coda-Regular.ttf Coda-Heavy.ttf $PKG/usr/share/fonts/TTF/
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a  OFL.txt $PKG/usr/doc/$PRGNAM-$VERSION/LICENSE
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

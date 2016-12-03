@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
          |-----handy-ruler------------------------------------------------------|
-imgurbash: imgurbash (bash script uploader)
-imgurbash:
-imgurbash: imgurbash is a simple bash script to upload an image to imgur from
-imgurbash: the commandline.
-imgurbash:
-imgurbash: Home page: http://imgur.com/tools
-imgurbash:
-imgurbash:
-imgurbash:
-imgurbash:
-imgurbash:
+c-toxcore: c-toxcore (the future of online communication)
+c-toxcore:
+c-toxcore: Tox is a free (as in liberty and price) peer to peer, distributed,
+c-toxcore: multimedia messenger. Tox can provide a superior instant messaging
+c-toxcore: experience than current market offerings by using existing
+c-toxcore: technologies such as dispersed networking and strong cryptography.
+c-toxcore:
+c-toxcore: Homepage: http://tox.chat/
+c-toxcore:
+c-toxcore:
+c-toxcore:

@@ -24,10 +24,11 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=tbb
-VERSION=${VERSION:-2017u1}
+VERSION=${VERSION-2017u2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCVERSION=${SRCVERSION:-2017_20160916oss}
+
+SRCVERSION=${SRCVERSION:-2017_20161004oss}
 NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
@@ -87,7 +88,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" \
  | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2>/dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CHANGES README* doc $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CHANGES LICENSE README{,.md} doc/Release_Notes.txt \
+ $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

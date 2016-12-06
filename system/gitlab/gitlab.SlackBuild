@@ -23,7 +23,7 @@
 
 
 PRGNAM=${PRGNAM:-gitlab}
-VERSION=${VERSION:-8.7.5}
+VERSION=${VERSION:-8.14.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -68,10 +68,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 # use /var/lib/gitlab instead of /var/opt/gitlab
-#mkdir -p $PKG/var/lib/$PRGNAM
 mkdir -p $PKG/var/opt
-#cd $PKG/var/opt
-#ln -sf ../lib/$PRGNAM $PRGNAM
 mkdir -p $PKG/etc/$PRGNAM
 cat > $PKG/etc/gitlab/gitlab.rb.new <<'EOF'
 # Change the external_url to the address your users will type in their browser
@@ -82,6 +79,7 @@ user['group'] = "gitlab"
 EOF
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+mkdir -p $PKG/var/log/gitlab/reconfigure #required per https://gitlab.com/gitlab-org/gitlab-ce/issues/13775#note_3943883
 mkdir -p $PKG/sbin
 cd $PKG/sbin
 ln -s ../opt/gitlab/bin/gitlab-ctl gitlab-ctl

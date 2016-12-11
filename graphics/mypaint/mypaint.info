@@ -1,6 +1,6 @@
 PRGNAM="mypaint"
 VERSION="1.2.1.beta0"
-HOMEPAGE="http://mypaint.intilinux.com/"
+HOMEPAGE="http://mypaint.org"
 DOWNLOAD="https://github-cloud.s3.amazonaws.com/releases/20728281/7688a7a4-f924-11e5-8873-a8c1dfb88026.xz"
 MD5SUM="c1fe5518b010714881b2a5474c10f686"
 DOWNLOAD_x86_64=""

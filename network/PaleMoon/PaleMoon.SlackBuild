@@ -25,7 +25,7 @@
 # Modified by SlackBuilds.org
 
 PRGNAM=PaleMoon
-VERSION=${VERSION:-27.0.2}
+VERSION=${VERSION:-27.0.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -63,7 +63,7 @@ fi
 rm -rf $PKG $TMP/pmbuild $TMP/gold
 mkdir -p $TMP $PKG $OUTPUT $TMP/pmbuild $TMP/gold
 
-DEBUG=" --enable-strip --disable-debug --disable-debug-symbols "
+DEBUG=" --enable-strip --disable-debug --disable-debug-symbols --enable-release"
 if [ "${ENABLE_DEBUG:-no}" = "yes" ]; then
   DEBUG=" --disable-strip --disable-install-strip --enable-debug --enable-debug-symbols "
   # On IA32, use gold since GNU ld runs out of memory linking libxul.so
@@ -96,7 +96,7 @@ find . \
   -exec chmod 644 {} \;
 
 # Build a temporary copy of autoconf-2.13 only to be used to compile
-# PaleMoon, since it somewhat inexplicably requires this ancient version:
+# Pale Moon, since it somewhat inexplicably requires this ancient version:
 rm -rf $TMP/autoconf-tmp
 mkdir -p $TMP/autoconf-tmp
 # This will be at the beginning of the $PATH, so protect against nonsense
@@ -116,7 +116,7 @@ make || make -j1
 make install
 PATH=$TMP/autoconf-tmp/usr/bin:$PATH
 
-# Build palemoon
+# Build PaleMoon
 cd $TMP
 rm -rf Pale-Moon-${VERSION}_Release
 tar xzvf $CWD/${VERSION}_Release.tar.gz || tar xzvf $CWD/Pale-Moon-${VERSION}_Release.tar.gz
@@ -155,17 +155,20 @@ fi
 OPTIONS="\
   --enable-official-branding \
   --enable-application=browser \
+  --enable-default-toolkit=cairo-gtk2 \
   --disable-installer \
   --disable-updater \
   --disable-tests \
   --disable-mochitests \
   --enable-jemalloc \
   --with-pthreads \
+  --enable-gstreamer \
   $DEVTOOLS \
   $DEBUG \
   --x-libraries=/usr/lib${LIBDIRSUFFIX} \
   --with-default-mozilla-five-home=/usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION \
   --prefix=/usr \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=/usr/man"
@@ -183,23 +186,31 @@ echo "ac_add_options --disable-pulseaudio" >> .mozconfig; fi
 python2 mach build || echo "Next =>"
 python2 mach build
 
+# Clean up; and package PaleMoon.
 cd $TMP/pmbuild
-make package
-
-cd dist
-
-mkdir -p $PKG/usr/bin
-mkdir -p $PKG/usr/share/icons/hicolor/{16x16,32x32,48x48,128x128}/apps
-mkdir -p $PKG/usr/share/applications
-mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}
-
-# Install palemoon into /usr/lib${LIBDIRSUFFIX}
-cp -r palemoon $PKG/usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION
+make install DESTDIR=$PKG
 
 cd $PKG
 
+# We don't need these (just symlinks anyway):
+rm -rf usr/lib${LIBDIRSUFFIX}/palemoon-devel-$VERSION
+
+# Avoid duplicate binaries; details: https://bugzilla.mozilla.org/show_bug.cgi?id=658850
+# Pale Moon package scripts appear to attempt this, on other 'distros'; those scripts,
+# however, appear to fail on Slackware.
+rm -f usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/palemoon-bin
+
 ln -s /usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/palemoon usr/bin/palemoon-$VERSION
+
+# Use system provided Hunspell, if desired.
+if [ "${USE_SYSTEM_HUNSPELL}" = "yes" ]; then
+	rm -rfv usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/dictionaries
+	cp -vsr /usr/share/hunspell usr/lib${LIBDIRSUFFIX}/palemoon/dictionaries
+fi
+
 # Icons
+mkdir -p $PKG/usr/share/icons/hicolor/{16x16,32x32,48x48,128x128}/apps
+mkdir -p $PKG/usr/share/applications
 ln -s /usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/browser/chrome/icons/default/default16.png \
   usr/share/icons/hicolor/16x16/apps/${PRGNAM}-$VERSION.png
 ln -s /usr/lib${LIBDIRSUFFIX}/chrome/icons/default/default32.png \

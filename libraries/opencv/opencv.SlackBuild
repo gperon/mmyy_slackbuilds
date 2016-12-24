@@ -29,6 +29,7 @@ PRGNAM2=opencv_contrib
 VERSION=${VERSION:-3.1.0}
 BUILD=${BUILD:-3}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -110,7 +111,7 @@ cd build
     $cvplantuml \
     $cvdocs \
     -DOPENCV_EXTRA_MODULES_PATH=../$PRGNAM2-$VERSION/modules ..
-  make VERBOSE=1
+  make $NUMJOBS VERBOSE=1
   [ "${CVDOCS:-yes}" = "yes" ] && make doxygen
   make install DESTDIR=$PKG
 cd ..

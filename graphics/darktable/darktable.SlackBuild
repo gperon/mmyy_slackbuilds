@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=darktable
-VERSION=${VERSION:-2.2.0}
+VERSION=${VERSION:-2.2.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}
@@ -84,7 +84,6 @@ cd build
   make install DESTDIR=$PKG
 cd ..
 
-mv $PKG/usr/share/man $PKG/usr/
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 

@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=arduino
-VERSION=${VERSION:-1.6.9}
+VERSION=${VERSION:-1.8.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -71,7 +71,7 @@ find -L . \
 
 # Manual install ensues
 mkdir -p $PKG/opt/$PRGNAM
-mv arduino{,-builder} dist examples hardware lib libraries reference \
+mv arduino{,-builder} examples hardware lib libraries reference \
   tools{,-builder} $PKG/opt/$PRGNAM
 
 # Make it a bit more user friendly
@@ -81,8 +81,8 @@ sed "s/FULL_PATH/\/opt\/$PRGNAM/" $CWD/arduino.desktop \
 ln -s /opt/$PRGNAM/arduino $PKG/usr/bin/$PRGNAM
 
 # Hack for missing libtinfo.so.5
-ln -s /lib$LIBDIRSUFFIX/libncurses.so.5 \
-  $PKG/opt/$PRGNAM/hardware/tools/avr/lib/libtinfo.so.5
+#ln -s /lib$LIBDIRSUFFIX/libncurses.so.5 \
+#  $PKG/opt/$PRGNAM/hardware/tools/avr/lib/libtinfo.so.5
 
 # Fix perms
 chmod 755 $PKG/opt/$PRGNAM/reference/*

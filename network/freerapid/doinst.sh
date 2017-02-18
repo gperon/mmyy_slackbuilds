@@ -1,9 +1,3 @@
-set -e
-
-# create links for compatibility with new JDK versions...
-ln -sf /usr/lib/java/bin/java /usr/bin/java
-ln -sf /usr/lib/java/bin/javaws /usr/bin/javaws
-
 if [ -x /usr/bin/update-desktop-database ]; then
   /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
 fi
@@ -14,6 +8,6 @@ fi
 
 if [ -e usr/share/icons/hicolor/icon-theme.cache ]; then
   if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    /usr/bin/gtk-update-icon-cache usr/share/icons/hicolor >/dev/null 2>&1
+    /usr/bin/gtk-update-icon-cache -f usr/share/icons/hicolor >/dev/null 2>&1
   fi
 fi

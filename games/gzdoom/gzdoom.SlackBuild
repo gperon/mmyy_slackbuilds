@@ -6,6 +6,19 @@
 
 # Licensed under the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
+# 20170207 bkw:
+# - BUILD=2
+# - Get rid of private fmodapi, now that the SBo fmodapi has been updated
+#   to a new enough version. Re-add fmodapi to REQUIRES.
+# - Fix download link so we always get the correct filename.
+
+# 20170113 bkw:
+# - Updated for 2.3.2. 1.9.1 and 1.8.09 still work, too.
+# - Use newer version of fmodapi. Due to licensing confusion, the
+#   fmodapi version on SBo hasn't been upgraded in forever. So this
+#   build now uses its own dedicated fmodapi, which installs to
+#   a private directory (won't conflict with system fmodapi, if present).
+
 # 20160928 bkw:
 # - Updated for 2.2.0. 1.9.1 and 1.8.09 still work, too.
 
@@ -36,8 +49,8 @@
 # - Add WTFPL
 
 PRGNAM=gzdoom
-VERSION=${VERSION:-2.2.0}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-2.3.2}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -81,11 +94,11 @@ cd $PRGNAM-g$VERSION || cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
+ -exec chmod 755 {} \+ -o \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
+ -exec chmod 644 {} \+
 
-# fmodapi MIDI support tries to find its lib in the current dir, fix it:
+# fmodapi support tries to find its lib in the current dir, fix it:
 sed -i \
   "s,setPluginPath(progdir),setPluginPath(\"/usr/lib$LIBDIRSUFFIX/$PRGNAM\")," \
   src/sound/fmodsound.cpp
@@ -101,6 +114,7 @@ patch -p1 < $CWD/window_title_version.diff
 # title will read 1.8.08 for version 1.8.09, eg.
 sed -i "/#define *VERSIONSTR/s,\"[^\"]*\",\"$VERSION\"," src/version.h
 
+# This isn't currently used, but was in the past, and will be again I'm sure.
 [ -e $CWD/compilefix.$VERSION.diff ] && \
   patch -p1 < $CWD/compilefix.$VERSION.diff
 
@@ -112,8 +126,9 @@ cd build
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
     -DMAN_INSTALL_DIR=/usr/man \
+	 -DFMOD_LIBRARY=/usr/lib${LIBDIRSUFFIX}/libfmodex${LIBDIRSUFFIX}.so \
     -DCMAKE_BUILD_TYPE=Release ..
-  make
+  make VERBOSE=1
   mkdir -p $PKG/usr/games $PKG/usr/share/games/doom
   install -m0755 -s $PRGNAM $PKG/usr/games/$PRGNAM
   install -m0644 *.pk3 $PKG/usr/share/games/doom/
@@ -138,7 +153,7 @@ cp -a docs/* $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 cat $CWD/README_SBo.txt > $PKG/usr/doc/$PRGNAM-$VERSION/README_SBo.txt
 
-# Fix DOS CRLF line endings. The stuff in licenses/ is already OK, for 2.2.0.
+# Fix DOS CRLF line endings. The stuff in licenses/ is already OK, for 2.3.2.
 sed -i 's/\r//' $PKG/usr/doc/$PRGNAM-$VERSION/*.*
 
 mkdir -p $PKG/install

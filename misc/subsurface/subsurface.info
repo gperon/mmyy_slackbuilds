@@ -1,12 +1,12 @@
 PRGNAM="subsurface"
-VERSION="4.5.6"
+VERSION="4.6.1"
 HOMEPAGE="http://subsurface.hohndel.org/"
-DOWNLOAD="http://subsurface.hohndel.org/downloads/Subsurface-4.5.6.tgz \
-          http://subsurface-divelog.org/downloads/libdivecomputer-subsurface-branch-4.5.6.tgz \
-          http://subsurface-divelog.org/downloads/marble-subsurface-branch-4.5.6.tgz"
-MD5SUM="2938e9ef0f50279f021f376c2ea5f0b6 \
-        1453be70136d525c588e6665c8e007af \
-        0eed12c9853581b5d9ef150c9f453a36"
+DOWNLOAD="http://subsurface.hohndel.org/downloads/Subsurface-4.6.1.tgz \
+          http://subsurface-divelog.org/downloads/libdivecomputer-subsurface-branch-4.6.1.tgz \
+          http://subsurface-divelog.org/downloads/marble-subsurface-branch-4.6.1.tgz"
+MD5SUM="f93a459e92fa8331dee8ac94beb00aa8 \
+        519bf1f41357306d6575826ddff7cda7 \
+        7d10b06f173f5d84327d6c7e20df8c1b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="libgit2 grantlee-qt5 qt5-webkit"

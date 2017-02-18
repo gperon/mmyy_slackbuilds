@@ -4,7 +4,7 @@
 
 # Copyright 2006,2007,2008,2009,2010  Robby Workman, Northport, Alabama, USA
 # Copyright 2010-2014 Niels Horn, Rio de Janeiro, RJ, Brazil
-# Copyright 2014-2016 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
+# Copyright 2014-2017 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=libreoffice
-VERSION=${VERSION:-"5.2.4"}
+VERSION=${VERSION:-"5.3.0"}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -142,8 +142,6 @@ cd $PKG/usr/doc/$PRGNAM-$VERSION
   find . -type f -exec chmod -x {} \;
 cd -
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-# Include a script for those wanting to have OO.o + LibO installed together
-cp $CWD/open-libre-together.sh $PKG/usr/doc/$PRGNAM-$VERSION/
 
 # Disable Java support if desired (see above)
 if [ "$DISABLE_JAVA" = "YES" ]; then

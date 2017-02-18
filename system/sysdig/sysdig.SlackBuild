@@ -2,7 +2,7 @@
 
 # Slackware build script for sysdig
 
-# Copyright 2015-2016 Larry Hajali <larryhaja[at]gmail[dot]com>
+# Copyright 2015-2017 Larry Hajali <larryhaja[at]gmail[dot]com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=sysdig
-VERSION=${VERSION:-0.13.0}
+VERSION=${VERSION:-0.14.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -55,6 +55,7 @@ else
 fi
 
 KERNEL=${KERNEL:-$(uname -r)}
+PKGVER=${VERSION}_$(echo $KERNEL | tr - _)
 
 set -e
 
@@ -115,4 +116,4 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 sed -e "s|@KERNEL@|$KERNEL|" $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$PKGVER-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

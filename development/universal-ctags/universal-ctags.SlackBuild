@@ -2,7 +2,7 @@
 
 # Slackware build script for universal-ctags
 
-# Copyright 2015-2016 Eugene Wissner Germany, Dachau
+# Copyright 2015-2017 Eugene Wissner Germany, Dachau
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,8 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=universal-ctags
-VERSION=${VERSION:-c775c46}
-GITVERSION=${GITVERSION:-c775c46f3a73c76e8d884a532a18ef2e0ecbb693}
+VERSION=${VERSION:-d2efd07}
+GITVERSION=${GITVERSION:-d2efd070646bdf9a4471cadd2f0ae48a10b7372d}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

@@ -2,6 +2,7 @@
 
 # Slackware build script for lumina
 
+# Sasongko Bawono | sasongko262@gmail.com
 # Ryan P.C. McQuen | Everett, WA | ryanpcmcquen@member.fsf.org
 
 # Thanks to Willy Sudiarto Raharjo.
@@ -25,9 +26,8 @@
 # not, see <https://www.gnu.org/licenses/>.
 
 PRGNAM=lumina
-VERSION=${VERSION:-1.1.0_p1}
-PKGVERSION=${PKGVERSION:-1.1.0-p1}
-SRCVERSION="`echo $PKGVERSION | cut -d'-' -f1`"
+VERSION=${VERSION:-1.2.0_p1}
+PKGVERSION=${PKGVERSION:-1.2.0-p1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -63,13 +63,9 @@ set -eu
 rm -rf $PKG
 mkdir -pv $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$SRCVERSION-*
-if [ -e $CWD/v$SRCVERSION-*.tar.gz ]; then
-  tar xvf $CWD/v$SRCVERSION-*.tar.gz
-else
-  tar xvf $CWD/$PRGNAM-$SRCVERSION-*.tar.gz
-fi
-cd $PRGNAM-$SRCVERSION-*
+rm -rf $PRGNAM-$PKGVERSION
+tar xvf $CWD/$PRGNAM-$PKGVERSION.tar.gz
+cd $PRGNAM-$PKGVERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \

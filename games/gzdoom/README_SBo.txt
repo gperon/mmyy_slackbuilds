@@ -8,7 +8,27 @@ and Strife.  Place the .wad file(s) in /usr/share/games/doom.
 If you don't own any of the supported games, you can install one or more
 of these slackbuilds.org packages to get a playable game:
 
-freedoom, doom_shareware_data, heretic_shareware_data, hexen_demo_data
+- freedoom
+- doom_shareware_data
+- heretic_shareware_data
+- hexen_demo_data
+- chexquest3
+
+Sound Backend
+-------------
+The default sound backend is FMOD. If OpenAL was found when the package
+was built, it can be used instead of FMOD. From the main menu:
+
+Options -> Sound Options -> Sound Backend.
+
+If you have issues with positional audio, try switching to OpenAL. However,
+some mods (notably Brutal Doom) require FMOD for correct audio support.
+Unfortunately there are probably some other mods that only work with
+OpenAL :(
+
+If you use FMOD, set "FMOD Options -> Output System" to either "ALSA"
+or "PulseAudio". Otherwise, the default is OSS emulation, which doesn't
+share the soundcard nicely with other apps.
 
 Music Support
 -------------
@@ -33,8 +53,3 @@ set up /etc/timidity/timidity.cfg to use it.
 of classic soundcards from the early 1990s. They may sound "clunky" to
 modern ears, but they may also bring back fond memories for long-time
 Doom players.
-
-While you're in the Sound Options menu, it's probably a good idea to
-set "Output System" to "ALSA" (otherwise, the default is OSS emulation,
-which doesn't share the soundcard nicely with other apps).
-

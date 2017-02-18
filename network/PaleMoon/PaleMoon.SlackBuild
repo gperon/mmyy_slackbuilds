@@ -25,7 +25,7 @@
 # Modified by SlackBuilds.org
 
 PRGNAM=PaleMoon
-VERSION=${VERSION:-27.0.3}
+VERSION=${VERSION:-27.1.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -89,11 +89,11 @@ tar xvf $CWD/autoconf-2.13.tar.xz
 cd autoconf-2.13
 zcat $CWD/autoconf-2.13-consolidated_fixes-1.patch.gz | patch -p1 --verbose
 chown -R root:root .
-find . \
-  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
-  -exec chmod 755 {} \; -o \
-  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
-  -exec chmod 644 {} \;
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Build a temporary copy of autoconf-2.13 only to be used to compile
 # Pale Moon, since it somewhat inexplicably requires this ancient version:
@@ -122,10 +122,10 @@ rm -rf Pale-Moon-${VERSION}_Release
 tar xzvf $CWD/${VERSION}_Release.tar.gz || tar xzvf $CWD/Pale-Moon-${VERSION}_Release.tar.gz
 cd Pale-Moon-${VERSION}_Release
 chown -R root:root .
- find -L . \
-  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
-  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # Crude hack so that /usr/lib/mozilla/plugins points to
@@ -145,9 +145,17 @@ export CXXFLAGS="$SLKCFLAGS"
 # Dev tools are enabled by default in the official binaries, so we should do the same here;
 # passing DEVTOOLS=no to the script, however, will disable them.
 if [ "$DEVTOOLS" = "no" ]; then
-	DEVTOOLS=""
+  DEVTOOLS=""
 else
-	DEVTOOLS="--enable-devtools"
+  DEVTOOLS="--enable-devtools"
+fi
+
+# "gst-libav" has been replaced with ffmpeg in PaleMoon, and is slated for complete
+# removal; pass the parameter ENABLE_GST_LIBAV=yes, however, to keep using it (for now).
+if [ "$ENABLE_GST_LIBAV" = "yes" ]; then
+	GST_LIBAV="--enable-gstreamer --disable-ffmpeg"
+else
+	GST_LIBAV=""
 fi
 
 # Please see https://www.palemoon.org/redist.shtml for restrictions when using the official branding.
@@ -162,7 +170,7 @@ OPTIONS="\
   --disable-mochitests \
   --enable-jemalloc \
   --with-pthreads \
-  --enable-gstreamer \
+  $GST_LIBAV \
   $DEVTOOLS \
   $DEBUG \
   --x-libraries=/usr/lib${LIBDIRSUFFIX} \
@@ -200,12 +208,16 @@ rm -rf usr/lib${LIBDIRSUFFIX}/palemoon-devel-$VERSION
 # however, appear to fail on Slackware.
 rm -f usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/palemoon-bin
 
-ln -s /usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/palemoon usr/bin/palemoon-$VERSION
+# Append a version suffix to the binary, if we desire to install this version of
+# PaleMoon along side any other version of PaleMoon.
+if [ "$APPEND_VERSION_SUFFIX" = "yes" ]; then
+  mv usr/bin/palemoon usr/bin/palemoon-$VERSION
+fi
 
 # Use system provided Hunspell, if desired.
 if [ "${USE_SYSTEM_HUNSPELL}" = "yes" ]; then
-	rm -rfv usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/dictionaries
-	cp -vsr /usr/share/hunspell usr/lib${LIBDIRSUFFIX}/palemoon/dictionaries
+  rm -rfv usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/dictionaries
+  cp -vsr /usr/share/hunspell usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/dictionaries
 fi
 
 # Icons
@@ -223,6 +235,15 @@ ln -s /usr/lib${LIBDIRSUFFIX}/palemoon-$VERSION/browser/icons/mozicon128.png \
 # Install .desktop file
 sed "s|@VERSION@|$VERSION|" $CWD/$PRGNAM.desktop \
   > $PKG/usr/share/applications/$PRGNAM.desktop
+
+# Set the correct exec path inside of the .desktop
+if [ "$APPEND_VERSION_SUFFIX" = "yes" ]; then
+  sed -i 's|@APPEND_VERSION_SUFFIX@|-$VERSION|g' \
+    $PKG/usr/share/applications/$PRGNAM.desktop
+else
+  sed -i 's|@APPEND_VERSION_SUFFIX@||g' \
+    $PKG/usr/share/applications/$PRGNAM.desktop
+fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

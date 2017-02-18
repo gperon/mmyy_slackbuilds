@@ -4,7 +4,7 @@
 
 # Slackware build script for LibreOffice
 
-# Copyright 2015-2016 Christoph Willing Brisbane, Australia
+# Copyright 2015-2017 Christoph Willing Brisbane, Australia
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -26,9 +26,9 @@
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-5.2.3.3}
+VERSION=${VERSION:-5.3.0.3}
 SHORT_VERSION=${VERSION%.*.*}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PACKAGER=${PACKAGER:-"AnonymousCoward"}
 
@@ -69,6 +69,8 @@ cd $TMP
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.xz
 cd $SRCNAM-$VERSION
+patch -p0 < $CWD/no-check-if-root.diff
+patch -p1 < $CWD/firebird.diff
 
 if [ "$HAVE_SRCS_TARBALL" = "1" ]; then
   tar xvf $CWD/$SRCNAM-${VERSION}-srcs.tar.xz
@@ -90,6 +92,7 @@ LOLANGS=${LOLANGS:-"de es fr id it ja nl vi zh-CN"}
 # LibreOffice.info REQUIRES jdk
 [ -z $JAVA_HOME ] && . /etc/profile.d/jdk.sh
 
+#    --with-system-harfbuzz \
 ./configure \
     CFLAGS="$SLKCFLAGS" \
     CXXFLAGS="$SLKCFLAGS" \
@@ -123,7 +126,6 @@ LOLANGS=${LOLANGS:-"de es fr id it ja nl vi zh-CN"}
     --with-system-dicts \
     --with-system-expat \
     --with-system-glew \
-    --with-system-harfbuzz \
     --with-system-hunspell \
     --with-system-icu \
     --with-system-jpeg \

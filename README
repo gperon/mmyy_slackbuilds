@@ -26,13 +26,15 @@ Packages newer than slackbuilds version
 ---------------------------------------------
 development/arduino. Updated for version 1.8.0
 multimedia/avidemux. Updated for version 2.6.18
-multimedia/ffmpeg. Updated for version 3.3.2
-graphics/draftsight. Updated for version 2016SP2
+graphics/Blender. Updated for version 2.78b
+graphics/draftsight. Updated for version 2017SP0
 graphics/gmic. Updated for version 1.7.9
 graphics/inkscape. Updated for version 0.92.1
 graphics/luxrender. Updated for version 1.6.0
 graphics/meshlab. Updated for version 2016.12
 graphics/mypaint. Updated for version 1.2.1.beta0
+graphics/openimageio. Updated for version 1.7.11
+libraries/opencv. Updated for version 3.2
 office/keepassx. Updated for version 2.0.3
 office/scribus. Updated for version 1.5.2
 system/krusader. Updated for version 2.5.0

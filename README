@@ -27,11 +27,9 @@ Packages newer than slackbuilds version
 development/arduino. Updated for version 1.8.0
 multimedia/avidemux. Updated for version 2.6.18
 multimedia/ffmpeg. Updated for version 3.3.2
-libraries/SimGear. Updated for version 2016.4.4
-games/FlightGear. Updated for version 2016.4.4
-games/FlightGear-data. Updated for version 2016.4.4
 graphics/draftsight. Updated for version 2016SP2
 graphics/gmic. Updated for version 1.7.9
+graphics/inkscape. Updated for version 0.92.1
 graphics/luxrender. Updated for version 1.6.0
 graphics/meshlab. Updated for version 2016.12
 graphics/mypaint. Updated for version 1.2.1.beta0

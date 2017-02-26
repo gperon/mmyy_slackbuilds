@@ -1,19 +1,10 @@
 PRGNAM="nvidia-kernel"
-<<<<<<< HEAD
-VERSION="375.20"
-HOMEPAGE="http://www.nvidia.com"
-DOWNLOAD="ftp://download.nvidia.com/XFree86/Linux-x86/375.20/NVIDIA-Linux-x86-375.20.run"
-MD5SUM="b9bfa7f3f591418972e963b087ab91e3"
-DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/375.20/NVIDIA-Linux-x86_64-375.20.run"
-MD5SUM_x86_64="874ec6d875f532ee9995082176cf9074"
-=======
 VERSION="375.39"
 HOMEPAGE="http://www.nvidia.com"
 DOWNLOAD="ftp://download.nvidia.com/XFree86/Linux-x86/375.39/NVIDIA-Linux-x86-375.39.run"
 MD5SUM="9247d5eb9df58bb7755c9060ef5d103d"
 DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run"
 MD5SUM_x86_64="35b32baba21089dfe5d960ae89d98cde"
->>>>>>> slackbuilds
 REQUIRES=""
 MAINTAINER="Edward W. Koenig"
 EMAIL="kingbeowulf@gmail.com"

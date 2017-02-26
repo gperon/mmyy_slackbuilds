@@ -28,11 +28,7 @@
 # see nvidia-driver/changelog.txt
 
 PRGNAM=nvidia-kernel
-<<<<<<< HEAD
-VERSION=${VERSION:-375.20}
-=======
 VERSION=${VERSION:-375.39}
->>>>>>> slackbuilds
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

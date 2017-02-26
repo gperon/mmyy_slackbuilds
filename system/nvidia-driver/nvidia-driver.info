@@ -1,30 +1,30 @@
 PRGNAM="nvidia-driver"
-VERSION="375.20"
+VERSION="375.39"
 HOMEPAGE="http://www.nvidia.com"
-DOWNLOAD="ftp://download.nvidia.com/XFree86/Linux-x86/375.20/NVIDIA-Linux-x86-375.20.run \
-	  ftp://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-375.20.tar.bz2 \
-	  ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-375.20.tar.bz2 \
-          ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-375.20.tar.bz2 \
-          ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-375.20.tar.bz2 \
-          ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-375.20.tar.bz2"
-MD5SUM="93ff8e1fe32939ca4fd6522b93825edc \
-	f51a71ff7fcd4d5497ff0845f8cffe3a \
-        d770941b0e0cd125edf2efdebbc1f1a0 \
-        e30b2ff6481e188fcba57aa123c1584a \
-        2e729b8bf966d0f7239202a3f1ddf2c1 \
-        aef95c4f92612770772140a11432c4d3"
-DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/375.20/NVIDIA-Linux-x86_64-375.20.run \
-	         ftp://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-375.20.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-375.20.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-375.20.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-375.20.tar.bz2 \
-                 ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-375.20.tar.bz2"
-MD5SUM_x86_64="d874ec6d875f532ee9995082176cf9074 \
-               e44cb22afb275b5250d237c86383dc30 \
-               4b6339a178cca756a4bc24dee022231e \
-               96c675e526229c43417f65d7a787b551 \
-               babc3f9ebfbc0c04249fba94224d02c6 \
-               aef95c4f92612770772140a11432c4d3"
+DOWNLOAD="ftp://download.nvidia.com/XFree86/Linux-x86/375.39/NVIDIA-Linux-x86-375.39.run \
+          ftp://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-375.39.tar.bz2 \
+          ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-375.39.tar.bz2 \
+          ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-375.39.tar.bz2 \
+          ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-375.39.tar.bz2 \
+          ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-375.39.tar.bz2"
+MD5SUM="9247d5eb9df58bb7755c9060ef5d103d \
+        1a1b3ecbbd9cf17085548cc5d8fe6cba \
+        f630cbefa0c300d58df7a1d989c7766c \
+        d147dd34877b73000448f5fe8d06371d \
+        ced26b5504b08abaf4e156740021b2bc \
+        7f41d52c1220feb4d837982a54190d6c"
+DOWNLOAD_x86_64="ftp://download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run \
+                 ftp://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-375.39.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-375.39.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-375.39.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-375.39.tar.bz2 \
+                 ftp://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-375.39.tar.bz2"
+MD5SUM_x86_64="35b32baba21089dfe5d960ae89d98cde \
+               1a1b3ecbbd9cf17085548cc5d8fe6cba \
+               f630cbefa0c300d58df7a1d989c7766c \
+               d147dd34877b73000448f5fe8d06371d \
+               ced26b5504b08abaf4e156740021b2bc \
+               7f41d52c1220feb4d837982a54190d6c"
 REQUIRES="nvidia-kernel"
 MAINTAINER="Edward W. Koenig"
 EMAIL="kingbeowulf@gmail.com"

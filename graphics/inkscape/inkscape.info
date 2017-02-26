@@ -1,7 +1,7 @@
 PRGNAM="inkscape"
 VERSION="0.92.1"
 HOMEPAGE="http://www.inkscape.org/"
-DOWNLOAD="https://media.inkscape.org/dl/resources/file/inkscape-0.92.1.tar.bz2"
+DOWNLOAD="https://inkscape.global.ssl.fastly.net/media/resources/file/inkscape-0.92.1.tar.bz2"
 MD5SUM="db2eb2a566cf35ff949fc9ccb172889a"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

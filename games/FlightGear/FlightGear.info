@@ -5,6 +5,6 @@ DOWNLOAD="https://downloads.sourceforge.net/project/flightgear/release-2017.1/fl
 MD5SUM="0e190ff6b824d02e968bc28bf738f9d9"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="FlightGear-data SimGear"
+REQUIRES="FlightGear-data SimGear plib"
 MAINTAINER="Panagiotis Nikolaou"
 EMAIL="hostmaster@slackonly.com"

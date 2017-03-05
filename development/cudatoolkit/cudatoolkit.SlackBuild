@@ -2,7 +2,7 @@
 
 # Slackware build script for CUDA Toolkit
 
-# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +24,7 @@
 
 PRGNAM=cudatoolkit
 FILENAME=cuda
-VERSION=${VERSION:-8.0.44}
+VERSION=${VERSION:-8.0.61}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -55,8 +55,8 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
-chmod +x $CWD/$FILENAME\_$VERSION\_linux.run
-$CWD/$FILENAME\_$VERSION\_linux.run -extract=/tmp
+chmod +x $CWD/$FILENAME\_$VERSION\_375.26\_linux.run
+$CWD/$FILENAME\_$VERSION\_375.26\_linux.run -extract=/tmp
 /tmp/$FILENAME-linux64*-$VERSION-*.run -noprompt -nosymlink -prefix=$TMP/$PRGNAM-$VERSION
 
 cd $PRGNAM-$VERSION

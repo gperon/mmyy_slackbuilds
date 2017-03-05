@@ -22,10 +22,11 @@ system/input-wacom. Added Kernel driver for Wacom (newer version than Slackware)
 system/weewx. Added software for weather stations
 system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackware)
 
-Packages newer than slackbuilds version
+Packages newer than Slackbuilds version
 ---------------------------------------------
 development/arduino. Updated for version 1.8.0
 development/cudatoolkit. Updated for version 8.0.61
+development/staruml. Updated for version 2.8.0
 multimedia/avidemux. Updated for version 2.6.18
 graphics/Blender. Updated for version 2.78b
 graphics/draftsight. Updated for version 2017SP0

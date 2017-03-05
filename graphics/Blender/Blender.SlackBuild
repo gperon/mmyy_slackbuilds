@@ -24,7 +24,7 @@
 
 SRCNAM=blender
 PKGNAM=Blender
-VERSION=${VERSION:-2.78b}
+VERSION=${VERSION:-2.78c}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PYTHON_VERSION=$(python3 -c "import sys; print(sys.version[:3])")

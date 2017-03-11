@@ -25,10 +25,7 @@ system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackwar
 Packages newer than Slackbuilds version
 ---------------------------------------------
 development/arduino. Updated for version 1.8.0
-development/cudatoolkit. Updated for version 8.0.61
-development/staruml. Updated for version 2.8.0
 multimedia/avidemux. Updated for version 2.6.18
-graphics/Blender. Updated for version 2.78b
 graphics/draftsight. Updated for version 2017SP0
 graphics/gmic. Updated for version 1.7.9
 graphics/luxrender. Updated for version 1.6.0

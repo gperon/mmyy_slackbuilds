@@ -26,8 +26,8 @@
 
 PRGNAM=opencv
 PRGNAM2=opencv_contrib
-VERSION=${VERSION:-3.1.0}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-3.2.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}
 
@@ -65,7 +65,7 @@ cvgdal="" ;     [ "${CVGDAL:-no}" = "yes" ]    &&     cvgdal="-DWITH_GDAL=ON"
 cvdocs="-DBUILD_DOCS=ON -DBUILD_EXAMPLES=ON -DINSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON " ; [ "${CVDOCS:-yes}" = "no" ] && cvdocs=""
 
 # Only enable PlantUML if java is available
-cvplantuml="" ; [ $(which java 2>/dev/null ) ] && cvplantuml="-DPLANTUML_JAR=$CWD/plantuml.jar"
+cvplantuml="" #; [ $(which java 2>/dev/null ) ] && cvplantuml="-DPLANTUML_JAR=$CWD/plantuml.jar"
 
 set -e
 
@@ -84,8 +84,9 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # http://code.opencv.org/issues/2512
-patch -p1 < $CWD/fsh.patch
-patch -p0 < $CWD/patch_vtk7.diff
+#patch -p1 < $CWD/fsh.patch
+#patch -p0 < $CWD/patch_vtk7.diff
+#patch -p1 < $CWD/freetype.patch
 
 mkdir -p build
 cd build
@@ -95,15 +96,16 @@ cd build
     -DCMAKE_BUILD_TYPE="Release" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DLIB_SUFFIX=$LIBDIRSUFFIX \
-    -DBUILD_SHARED_LIBS=ON \
+    -DBUILD_SHARED_LIBS=OFF \
     -DENABLE_PRECOMPILED_HEADERS=OFF \
     -DWITH_IPP=OFF \
     -DWITH_QT=ON \
     -DWITH_OPENGL=ON \
     -DWITH_OPENMP=ON \
     -DWITH_XINE=ON \
-    -DBUILD_CUDA_STUBS=OFF \
-    -DWITH_CUDA=OFF \
+    -DBUILD_CUDA_STUBS=ON \
+    -DWITH_CUDA=ON \
+    -DWITH_MATLAB=OFF \
     $cv1394 \
     $cvffmpeg \
     $cvvtk \
@@ -120,14 +122,14 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 [ "${CVDOCS:-yes}" = "yes" ] && {
-  cp -a samples/java* samples/opencl* samples/opengl* $PKG/usr/share/opencv/samples
-  chmod -R 0755 $PKG/usr/share/opencv/samples
+  cp -a samples/java* samples/opencl* samples/opengl* $PKG/usr/share/OpenCV/samples
+  chmod -R 0755 $PKG/usr/share/OpenCV/samples
 }
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a README.md $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a CONTRIBUTING.md LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-mv $PKG/usr/share/doc/opencv/html $PKG/usr/doc/$PRGNAM-$VERSION && rm -rf $PKG/usr/share/doc
+mv $PKG/usr/share/OpenCV/doc/html $PKG/usr/doc/$PRGNAM-$VERSION && rm -rf $PKG/usr/share/OpenCV/doc
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

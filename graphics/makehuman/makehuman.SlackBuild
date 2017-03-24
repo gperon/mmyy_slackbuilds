@@ -2,7 +2,7 @@
 
 # Slackware build script for makehuman
 
-# Copyright 2016 Giorgio Peron <giorgio.peron@gmail.com> Belluno, Italy
+# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com> Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,10 +23,10 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=makehuman
-VERSION=${VERSION:-1.1.0}
+VERSION=${VERSION:-1.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCNAM=MakeHuman-$PRGNAM-38e6e33b59ee
+SRCNAM=MakeHuman-$PRGNAM-8bd47bfc28a1
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in

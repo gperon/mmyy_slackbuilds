@@ -3,7 +3,8 @@
 # Slackware build script for Hugin
 #
 # Copyright 2009-2010  Erik W. Hanson, Minneapolis, MN, USA
-# Copyright 2011-2015  by titopoquito (titopoquito@gmail.com)
+# Copyright 2011-2016  by titopoquito (titopoquito@gmail.com)
+# Thanks to Romain Dartigues for the help with the update to 2016.2.0
 # Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
@@ -32,7 +33,7 @@ NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) ARCH=i486 ;;
+    i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
        *) ARCH=$( uname -m ) ;;
   esac
@@ -43,8 +44,8 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-if [ "$ARCH" = "i486" ]; then
-  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+if [ "$ARCH" = "i586" ]; then
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
@@ -73,7 +74,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
+mkdir -p build
 cd build
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
@@ -85,9 +86,8 @@ cmake \
   -DBUILD_HSI=ON \
   -DCMAKE_BUILD_TYPE=Release ..
 
-make $NUMJOBS
-make install DESTDIR=$PKG
-cd -
+make $NUMJOBS install DESTDIR=$PKG
+cd ..
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -95,9 +95,10 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 mv $PKG/usr/share/man $PKG/usr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING.txt Changes.txt INSTALL_cmake README TODO \
-  $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS COPYING.txt Changes.txt INSTALL_cmake README \
+  TODO $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

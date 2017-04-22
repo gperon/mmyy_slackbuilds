@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=nexus
-VERSION=${VERSION:-3.0.2_02}
+VERSION=${VERSION:-3.3.0_01}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 SRCVERSION=$(echo $VERSION | tr _ -)
@@ -77,12 +77,9 @@ find -L . \
 mkdir -p $PKG/usr/share/$PRGNAM
 mkdir -p $PKG/etc/rc.d
 mkdir -p $PKG/var/{lib,log,tmp}/$PRGNAM
-mv data/tmp/.placeholder $PKG/var/tmp/$PRGNAM/
-rm -rf data/tmp
-mv data/* $PKG/var/lib/$PRGNAM/
+#mv deploy/.placeholder $PKG/var/tmp/$PRGNAM/
 mv * $PKG/usr/share/$PRGNAM
 mv .install4j $PKG/usr/share/$PRGNAM
-rm -rf $PKG/usr/share/$PRGNAM/data
 
 cd $PKG/etc
 ln -sf ../usr/share/$PRGNAM/etc $PRGNAM
@@ -97,6 +94,10 @@ sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM.rc \
     -e "s:#run_as_user=\"\":run_as_user=\"nexus\":g"
 sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM \
     -e "s:# INSTALL4J_JAVA_HOME_OVERRIDE=:INSTALL4J_JAVA_HOME_OVERRIDE=\"/usr/lib${LIBDIRSUFFIX}/java\":g"
+sed -i $PKG/usr/share/$PRGNAM/bin/$PRGNAM.vmoptions \
+-e "s\-XX:LogFile=../sonatype-work/nexus3/log/jvm.log\-XX:LogFile=/var/lib/nexus/log/jvm.log\g" \
+-e "s:-Dkaraf.data=../sonatype-work/nexus3:-Dkaraf.data=/var/lib/nexus:g" \
+-e "s:-Djava.io.tmpdir=../sonatype-work/nexus3/tmp:-Djava.io.tmpdir=/var/lib/nexus/tmp:g"
 
 cd $PKG/etc/rc.d
 ln -sf ../../usr/share/$PRGNAM/bin/$PRGNAM rc.$PRGNAM

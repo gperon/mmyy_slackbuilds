@@ -24,13 +24,14 @@
 
 PRGNAM=meshlab
 VERSION=${VERSION:-2016.12}
+NUMJOBS=${NUMJOBS:-" -j7 "}
+VCGLIBVER=${VCGLIBVER:-1.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) ARCH=i486 ;;
+    i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
        *) ARCH=$( uname -m ) ;;
   esac
@@ -41,7 +42,8 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-if [ "$ARCH" = "i486" ]; then
+if [ "$ARCH" = "i586" ]; then
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   LIBDIRSUFFIX=""
@@ -56,43 +58,57 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-rm -rf vcglib-1.0.1
-tar xvf $CWD/${PRGNAM}-${VERSION}.tar.gz
-tar xvf $CWD/vcglib-1.0.1.tar.gz 
-ln -sf vcglib-1.0.1 vcglib
-cd $PRGNAM-$VERSION
-chown -R root:root .
-find -L . \
- \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
 
-# fix src/plugins_experimental/io_TXT/ case sensitive path
+rm -rf meshlab
+tar xvf $CWD/meshlab-$VERSION.tar.gz --transform="s#^meshlab-$VERSION/#meshlab/#"
+
+rm -rf vcglib
+tar xvf $CWD/vcglib-$VCGLIBVER.tar.gz --transform="s#^vcglib-$VCGLIBVER/#vcglib/#"
+
+chown -R root:root meshlab vcglib
+find -L meshlab vcglib \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+cd meshlab
+
+# patches from or via Arch
+patch -p1 < $CWD/patches/mpir.patch      # use external library, see also below
+patch -p1 < $CWD/patches/bzip2.patch     # use external library, see also below
+patch -p1 < $CWD/patches/muparser.patch  # use external library, see also below
+patch -p1 < $CWD/patches/levmar.patch    # use external library, see also below
+patch -p1 < $CWD/patches/lapack.patch    # enable lapack
+# fix derpy filename
 mv src/plugins_experimental/io_TXT/io_txt.pro src/plugins_experimental/io_TXT/io_TXT.pro
-# fix meshalbserver missing -lGLU
-patch -Np1 -i $CWD/meshlabserver_GLU.patch
-# fix cpp11 abs()
-patch -Np1 -i $CWD/cpp11_abs.patch
-# fix decimal separator problem
-patch -Np1 -i $CWD/fix_locale.patch
-# using SBo mpir lib
-patch -Np1 -i $CWD/mpir.patch
-# using system bzip2 lib
-patch -Np1 -i $CWD/bzip2.patch
-sed -i -e 's|HEADERS       = +=|HEADERS +=|g' src/plugins_experimental/edit_mutualcorrs/edit_mutualcorrs.pro
+# fix from git: https://github.com/cnr-isti-vclab/meshlab/commit/1e2a54c
+patch -p1 < $CWD/patches/1e2a54cee2fcb2f0fc15fd83c1014e1813eb75df.patch
+# fix from git: https://github.com/cnr-isti-vclab/meshlab/commit/612388c
+patch -p1 < $CWD/patches/612388c42d00ab8eba1d9626a7da33a18c724d76.patch
 
-# Build all the dependencies. These will be statically linked into meshlab.
-# (Horrible duplication and many out of date, but avoids version clashes)
+# Build the supplied dependencies (they will be statically linked into meshlab)
 cd src/external
-qmake-qt5 -recursive external.pro
-make $NUMJOBS
 
-# Build meshlab
+  # don't use meshlab's ancient mpir
+  rm -rf inc/ lib/  # <-- mpir in these dirs
+  # and don't use meshlab's ancient bzip2, muParser, levmar
+  sed -i \
+    -e 's/bzip2.*pro//' -e '/muparser/d' -e '/levmar/d' \
+    external.pro
+
+  qmake-qt5 -recursive external.pro \
+    CFLAGS="$SLKCFLAGS" \
+    CXXFLAGS="$SLKCFLAGS -std=c++11"
+  make $NUMJOBS
+
 cd ..
-qmake-qt5 -recursive meshlab_full.pro
-make $NUMJOBS
+
+# Build meshlab itself
+qmake-qt5 -recursive meshlab_mini.pro \
+  CFLAGS="$SLKCFLAGS" \
+  CXXFLAGS="$SLKCFLAGS -std=c++11"
+make
 
 mkdir -p $PKG/opt
 cp -a distrib $PKG/opt/$PRGNAM
@@ -129,7 +145,7 @@ sed -i "s#Version=.*#Version=$VERSION#" $PKG/usr/share/applications/meshlab.desk
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  LICENSE.txt README.md \
+  $TMP/$PRGNAM/LICENSE.txt $TMP/$PRGNAM/README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

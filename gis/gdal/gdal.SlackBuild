@@ -112,6 +112,8 @@ else
    WITHLIST+=" --with-jpeg=/usr/lib${LIBDIRSUFFIX}"
 fi
 
+sed -i 's/JAS_CAST(uchar \*, buf)/JAS_CAST(unsigned char\*, buf)/g' frmts/jpeg2000/jpeg2000_vsil_io.cpp
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
@@ -140,7 +142,7 @@ CXXFLAGS="$SLKCFLAGS" \
   $WITHLIST \
   --build=$ARCH-slackware-linux
 
-make -j7
+make -j1
 make install DESTDIR=$PKG
 
 # Kill erroneously installed .dox files

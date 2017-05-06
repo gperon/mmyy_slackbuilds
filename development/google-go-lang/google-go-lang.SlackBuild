@@ -65,9 +65,6 @@ OUTPUT=${OUTPUT:-/tmp}
 
 set -e
 
-tar -C /root -xzf $CWD/go$VERSIONBS.linux-$GARCH.tar.gz
-export GOROOT_BOOTSTRAP=/root/go
-
 rm -rf $PKG
 mkdir -p $TMP $PKG/usr/lib${LIBDIRSUFFIX}/go${VERSION} $OUTPUT
 cd $PKG/usr/lib${LIBDIRSUFFIX}/go${VERSION}

@@ -1,0 +1,19 @@
+--- nikto-2.1.6.orig/program/nikto.pl	2015-07-09 08:06:04.000000000 -0600
++++ nikto-2.1.6/program/nikto.pl	2017-04-21 18:57:58.363647008 -0600
+@@ -54,13 +54,13 @@
+ setup_dirs();
+ require "$CONFIGFILE{'PLUGINDIR'}/nikto_core.plugin";
+ nprint("T:" . localtime($COUNTERS{'scan_start'}) . ": Starting", "d");
+-require "$CONFIGFILE{'PLUGINDIR'}/LW2.pm";
++#require "$CONFIGFILE{'PLUGINDIR'}/LW2.pm";
+ $VARIABLES{'GMTOFFSET'} = gmt_offset();
+ 
+-# use LW2;                   ### Change this line to use a different installed version
++use LW2;                   ### Change this line to use a different installed version
+ 
+ #set SSL Engine
+-LW2::init_ssl_engine($CONFIGFILE{'LW_SSL_ENGINE'});
++#LW2::init_ssl_engine($CONFIGFILE{'LW_SSL_ENGINE'});
+ 
+ my ($a, $b) = split(/\./, $LW2::VERSION);
+ die("- You must use LW2 2.4 or later\n") if ($a != 2 || $b < 4);

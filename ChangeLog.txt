@@ -1,3 +1,263 @@
+Sat May 13 00:01:17 UTC 2017
+academic/fet: Updated for version 5.31.6.
+academic/sage: Update README.
+academic/veusz: Updated for version 1.26.
+academic/xiphos: Updated for version 4.0.5.
+audio/gmpc-plugins: Update HOMEPAGE url.
+audio/gmpc: Update HOMEPAGE url.
+audio/irispdb: Update HOMEPAGE url.
+audio/jost_bin: Removed (upstream is gone).
+audio/llcon: Update HOMEPAGE url.
+audio/morituri: Update HOMEPAGE url.
+audio/mt-daapd: Update HOMEPAGE url.
+audio/paprefs: Update maintainer email
+audio/snd: Updated for version 17.4.
+audio/whipper: Updated for version 0.5.1.
+desktop/dark-aurora-gtk-theme: Updated for version 3.20.2.
+desktop/obapps: Update HOMEPAGE url.
+desktop/plasma-applet-daisy: Update HOMEPAGE url.
+desktop/tint2: Updated for version 0.14.4.
+desktop/xed: Updated for version 1.4.1.
+development/Cython-Kivy: Removed (per maintainer's request).
+development/kdiff3: Updated for version 0.9.98 + new maintainer.
+development/neovim: Updated for version 0.2.0.
+development/nodejs: Updated for version 6.10.3.
+development/pandas: Updated for version 0.20.1.
+development/pycharm: Updated for version 2017.1.2.
+development/tig: Updated for version 2.2.2.
+games/cpat: Update HOMEPAGE url.
+games/ds-models: Update HOMEPAGE url.
+games/fortune-ASR: Update HOMEPAGE url.
+games/freeorion: Updated for version 0.4.7.
+games/glestae: Update HOMEPAGE url.
+gis/GMT: Updated for version 5.4.1.
+gis/gdal: Updated for version 2.2.0.
+gis/grass: Updated for version 7.2.1.
+graphics/opencollada: Update maintainer email
+graphics/opencolorio: Update maintainer email
+graphics/ttyload: Added (A color-coded console load graph).
+graphics/tuxpaint-stamps: Update email.
+graphics/tuxpaint: Update email.
+ham/direwolf: Update HOMEPAGE url.
+libraries/Kivy: Updated for version 1.10.0.
+libraries/VTK: Updated for version 7.1.1
+libraries/botocore: Updated for version 1.5.48.
+libraries/dropbox-python: Updated for version 7.3.0.
+libraries/folly: Updated for version 2017.05.08.00.
+libraries/gconfmm: Update maintainer email
+libraries/glog: Updated for version 0.3.5.
+libraries/gstreamer-editing-services: Update HOMEPAGE url.
+libraries/libburn: Update HOMEPAGE url.
+libraries/libetpan: Updated for version 1.8.
+libraries/libinput: Updated for version 1.7.2.
+libraries/libisoburn: Update HOMEPAGE url.
+libraries/libisofs: Update HOMEPAGE url.
+libraries/liblogging: Updated for version 1.0.6.
+libraries/libopenshot-audio: Updated for version 0.1.4
+libraries/libopenshot: Updated for version 0.1.5
+libraries/libpaper: Switch to https.
+libraries/librelp: Updated for version 1.2.13.
+libraries/librra: Update HOMEPAGE url.
+libraries/libslack: Update maintainer email
+libraries/libxkbcommon: Updated for version 0.7.1.
+libraries/pgplot: Added (graphics subroutine library).
+libraries/proxygen: Updated for version 2017.05.08.00.
+libraries/vte3-ng: Added (enhanced vte terminal widget).
+libraries/wangle: Updated for version 2017.05.08.00.
+libraries/wcslib: Added (World Coordinate System for FITS).
+libraries/webkit2gtk: Updated for version 2.16.2.
+misc/KeePass: Updated for version 2.35.
+multimedia/flashplayer-plugin: Updated for version 25.0.0.171.
+multimedia/openshot: Updated for version 2.3.2
+multimedia/opera-ffmpeg-codecs: Updated for version 58.0.3029.81.
+multimedia/pepperflash-plugin: Updated for version 25.0.0.171.
+multimedia/spotify: Updated for version 1.0.53.
+multimedia/vivaldi-codecs-ffmpeg-extra: Updated for version 58.0.
+multimedia/zvbi: Fix maintainer email
+network/ClusterSSH: Update HOMEPAGE url.
+network/PaleMoon: Support different compilers.
+network/awscli: Updated for version 1.11.85.
+network/broadcom-sta: Support Linux kernel 4.9+.
+network/c-toxcore: Updated for version 0.1.8.
+network/claws-mail: Updated for version 3.15.0.
+network/filezilla: Update HOMEPAGE url.
+network/flexget: Updated for version 2.10.43.
+network/googler: Added (Google from the terminal).
+network/hydra: Remove HOMEPAGE in README.
+network/kivy-garden: Added (Garden tool for kivy flowers).
+network/nikto: Remove old patch.
+network/opera: Updated for version 45.0.2552.635.
+network/pure-ftpd: Updated for version 1.0.46.
+network/qTox: Updated for version 1.10.0.
+network/slimjet: Updated for version 14.0.6.0.
+network/smb4k: Updated for version 1.2.3.
+network/syncthing: Updated for version 0.14.27.
+network/vivaldi: Updated for version 1.9.818.44.
+network/x11vnc: Updated for version 0.9.14
+network/youtube-dl: Updated for version 2017.05.07.
+network/znc: Updated for version 1.6.5.
+office/LibreOffice: Updated for version 5.3.3.2
+office/calibre: Updated for version 2.84.0
+office/kbbi-qt: Added (Indonesian Language Dictionary).
+office/keepassx: Update HOMEPAGE url.
+office/libreoffice-helppack: Updated for version 5.3.3.
+office/libreoffice-langpack: Updated for version 5.3.3.
+office/libreoffice: Updated for version 5.3.3.
+office/openoffice-langpack: Added (Language pack).
+office/pdfstudio11: Updated for version 11.0.7.
+office/texworks: Updated for version 0.6.2.
+perl/perl-CPAN-Perl-Releases: Updated for version 3.16.
+perl/perl-Gtk2-CodeGen: Removed (same code as of perl-gtk2).
+perl/perl-Gtk2-Notify: Updated for version 0.05.
+perl/perl-Inline-C: Updated for version 0.77.
+perl/perl-Locale-Maketext-Lexicon: Update HOMEPAGE url.
+perl/perl-Sidef: Updated for version 3.01.
+python/PyGreSQL: Updated for version 5.0.3
+python/colored: Updated for version 1.3.5.
+python/coverage: Updated for version 4.4.
+python/invoke: Updated for version 0.17.0.
+python/monty: Updated for version 0.9.8.
+python/purl: Updated for version 1.3.1.
+python/pytest-cov: Updated for version 2.5.0.
+python/pytest-runner: Added (invoke py.test as a distutils command).
+python/python-lazy-object-proxy: Updated for version 1.3.1.
+python/python-m2r: Added (Markdown to reStructuredText converter).
+python/python-netaddr: Updated for version 0.7.19
+python/regex: Updated for version 2017.04.29.
+python/vcversioner: Added (use vc tags to discover version numbers).
+ruby/rubygem-gosu: Fix typo.
+system/afdko: Added (Adobe Font Development Kit for OpenType).
+system/docker-machine: Added (machine management).
+system/file-roller: Updated for version 3.24.1 + new maintainer.
+system/fr: Updated for version 1.35.
+system/hashcat: Updated for version 3.5.0.
+system/isdct: Updated for version 3.0.4.
+system/letsencrypt: Updated for version 0.14.0.
+system/lynis: Updated for version 2.5.0.
+system/mlterm: Update doc installation.
+system/motion: Updated for version 4.0.1.
+system/rsyslog: Updated for version 8.26.0.
+system/samsung-mfp-drivers: Added README.pdfprinterrors
+system/sboui: Updated for version 0.3.1.
+system/termite: Added (a keyboard-centric VTE-based terminal).
+system/the_silver_searcher: Updated for version 1.0.3.
+system/usermin: Updated for version 1.710.
+system/webmin: Updated for version 1.840.
+system/wine-staging: Updated for version 2.7.
+system/wine: Updated for version 2.0.1.
+system/xen: XSA 213 and 214 update.
+system/zstd: Updated for version 1.2.0.
++--------------------------+
+Sat May  6 00:05:04 UTC 2017
+academic/bpp-core: Added (Bio++ Core Library).
+academic/bpp-phyl-omics: Added (Bio++ Phylogenetic Omics Library).
+academic/bpp-phyl: Added (Bio++ Phylogenetic Library).
+academic/bpp-popgen: Added (Bio++ Population Genetics Library).
+academic/bpp-seq-omics: Added (Bio++ Sequence Omics Library).
+academic/bpp-seq: Added (Bio++ Sequence library).
+academic/bppsuite: Added (Bio++ program suite).
+academic/exonerate: Added (A generic tool for sequence alignment).
+academic/gwyddion: Updated for version 2.48.
+academic/prank-msa: Added (probabilistic alignment program).
+audio/aacgain: Fix DOWNLOAD url.
+audio/deadbeef: Updated for version 0.7.2 + new maintainer.
+audio/museeks: Added (cross-platform music player).
+audio/sayonara-player: Updated for version 0.9.3.
+desktop/numix-icon-theme: Updated for version 0.3.895.201704281832.
+desktop/variety: Added (python library).
+desktop/xed: Updated for version 1.4.0.
+desktop/zuki-themes: Updated for version 3.22.2.
+development/byacc: Updated for version 20170430.
+development/cargo-vendor: Updated for version 0.1.8.
+development/cycler: Script update.
+development/diffoscope: Updated for version 82.
+development/erlang-otp: Updated for version 19.3.
+development/git-lfs: Updated for version 2.1.0.
+development/gtkextra: Updated for version 3.3.3 (moved from libs).
+development/nwjs: Updated for version 0.22.1.
+development/p4: Updated for version 2016.2.1509269.
+development/p4d: Updated for version 2016.2.1509269.
+development/pylint: Updated for version 1.7.1.
+development/python3-cycler: Added (composable cycles for Python 3).
+development/python3-matplotlib: Added (Python 2D plotting library).
+development/sbcl: Updated for version 1.3.17.
+games/fuse-emulator: Updated for version 1.3.5.
+games/ioquake3: Added mumble support.
+games/larn: Added (adventure game).
+games/lutris: Updated for version 0.4.8.
+gis/navit: Updated for version R7404.
+gis/pyshp: Updated for version 1.2.11.
+graphics/CairoSVG: Updated for version 2.0.3.
+libraries/DateTime: Updated for version 4.2.
+libraries/libkml: Added (KML library).
+libraries/libquvi-scripts: Updated for version 0.9.20131130.
+libraries/libquvi: Updated for version 0.9.4, new maintainer.
+libraries/libspectrum: Updated for version 1.3.3.
+libraries/rabbitmq-c: Added (library for RabbitMQ).
+libraries/rocksdb: Updated for version 5.3.4.
+libraries/wxGTK3: Updated for version 3.0.3.
+libraries/xmlsec: Updated for version 1.2.24.
+misc/ibus-anthy: Update DOWNLOAD url.
+misc/ibus-qt: Update DOWNLOAD url.
+misc/moreutils: Updated for version 0.61.
+multimedia/AtomicParsley: Added (mpeg4 tag tool).
+multimedia/HandBrake: Updated for version 1.0.7.
+multimedia/acetoneiso: Updated for version 2.4.
+multimedia/flowblade: Updated for version 1.12.2.
+network/PaleMoon: Updated for version 27.3.0.
+network/Signal-Desktop: Updated for version 0.38.2.
+network/cacti-spine: Updated for version 1.1.4.
+network/cacti: Updated for version 1.1.4.
+network/cclive: Updated for version 0.9.3, new maintainer.
+network/driftnet: Updated for version 1.1.5, new maintainer.
+network/filezilla: Updated for version 3.25.2.
+network/heimdal: Updated for version 7.3.0.
+network/kea: Updated for version 1.2.0.
+network/nikto: Updated for version 2.1.6.
+network/opensmtpd: Misc cleanups.
+network/opera-developer: Updated for version 46.0.2573.0.
+network/palemoon: Updated for version 27.3.0.
+network/putty: Updated for version 0.69.
+network/quvi: Updated for version 0.9.5, new maintainer.
+network/slimjet: Updated for version 14.0.5.0.
+network/speedtest-cli: Updated for version 1.0.6.
+network/sslscan: Updated for version 1.11.10.
+network/uTox: Updated for version 0.15.0
+network/youtube-dl: Updated for version 2017.05.01.
+office/LibreOffice: Fix csh profile script.
+office/etmtk: Updated for version 3.2.30.
+office/hunspell-id: Added (Indonesian hunspell dictionary).
+office/hyphen-id: Added (Indonesian hyphenation library function).
+office/sc-im: Updated for version 0.6.0.
+office/wps-office: Use local path instead of all /tmp/SBo.
+office/xmind: Updated for version 8update2 + new maintainer.
+office/xreader: Updated for version 1.4.0.
+perl/perl-IO-Socket-Socks: Updated for version 0.74.
+python/functools-lru-cache: Added (Python module).
+python/ipython: Note jedi dependency.
+python/isort: Added (sort imports alphabetically).
+python/path.py: Fix DOWNLAOD url.
+python/pyresample: Updated for version 1.5.0.
+python/python-fonttools: Updated for version 3.11.0.
+python/python-lazy-object-proxy: Updated for version 1.3.0.
+python/python-requestbuilder: Updated for version 0.7.1
+python3-pyzmq: Updated for version 16.0.2
+ruby/rubygem-gosu: Updated for version 0.12.0.
+system/butterfly: Updated for version 3.1.2.
+system/eaglemode: Updated for version 0.93.0.
+system/fzf: Updated for version 0.16.7.
+system/glances: Updated for version 2.9.1.
+system/incron: Updated for version 0.6.0 + new maintainer.
+system/kitchen-sync: Updated for version 0.58.
+system/lsyncd: Updated for version 2.2.2.
+system/mksh: Updated for version R55.
+system/mlterm: Updated for version 3.8.1.
+system/noto-emoji: Updated for version git8056f38.
+system/noto-fonts: added conf files.
+system/signify: Added (cryptographically sign and verify files).
+system/ttf-crosscorefonts: Update HOMEPAGE and script.
+system/wine-staging: Fix email address.
++--------------------------+
 Sat Apr 29 05:52:35 UTC 2017
 academic/Data2FCS: Added (Data2FCS and FCS2Data).
 academic/fet: Updated for version 5.31.5.

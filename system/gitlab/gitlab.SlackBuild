@@ -23,7 +23,7 @@
 
 
 PRGNAM=${PRGNAM:-gitlab}
-VERSION=${VERSION:-9.1.3}
+VERSION=${VERSION:-9.2.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -76,10 +76,11 @@ external_url 'http://localhost:81'
 postgresql['shared_buffers'] = "100MB"
 user['username'] = "gitlab"
 user['group'] = "gitlab"
+prometheus['username'] = 'gitlab-prom'
 EOF
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-mkdir -p $PKG/var/log/gitlab/reconfigure #required per https://gitlab.com/gitlab-org/gitlab-ce/issues/13775#note_3943883
+#mkdir -p $PKG/var/log/gitlab/reconfigure #required per https://gitlab.com/gitlab-org/gitlab-ce/issues/13775#note_3943883
 mkdir -p $PKG/sbin
 cd $PKG/sbin
 ln -s ../opt/gitlab/bin/gitlab-ctl gitlab-ctl

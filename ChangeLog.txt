@@ -1,3 +1,857 @@
+Sat May 27 00:34:06 UTC 2017
+academic/arpack-ng: Updated for version 3.5.0.
+academic/easy_spice: Added (A Simple Frontend for SPICE).
+academic/reduce-algebra: Updated for version 20170516svn4052.
+academic/scipy3: Update HOMEPAGE.
+academic/scipy: Update HOMEPAGE.
+academic/spidey: Update HOMEPAGE.
+academic/sundials: Update HOMEPAGE and DOWNLOAD urls.
+academic/ucsc-blat: Update HOMEPAGE.
+academic/veusz: Updated for version 1.26.1.
+accessibility/speech-dispatcher: Update HOMEPAGE and DOWNLOAD urls.
+audio/ngjackspa: Update homepage.
+audio/opus: Updated for version 1.1.5.
+audio/qmmp: Update README.
+audio/sonata: Update HOMEPAGE and DOWNLOAD urls.
+audio/spandsp: Update HOMEPAGE and DOWNLOAD urls.
+audio/speex: Update HOMEPAGE.
+audio/tagtool: Update HOMEPAGE and DOWNLOAD urls.
+audio/vimpc: Update HOMEPAGE and DOWNLOAD urls.
+audio/volwheel: Update HOMEPAGE and DOWNLOAD urls.
+audio/vorbisgain: Update HOMEPAGE and DOWNLOAD urls.
+audio/wineasio: Update homepage.
+business/skrooge: Update HOMEPAGE and DOWNLOAD urls.
+desktop/arc-firefox-theme: Added (Arc firefox theme).
+desktop/arc-icon-theme: Added (Arc icon theme).
+desktop/catfish: Updated for version 1.4.2.
+desktop/i3status: Updated for version 2.11.
+desktop/menutray: Updated for version 0.48.
+desktop/qt5ct: Updated for version 0.32.
+desktop/slack-wallpapers: Updated for version 0.446.
+desktop/slackware-xdg-menu: Update HOMEPAGE.
+desktop/slackware-xdm-theme: Added (Custom Slackware XDM Theme).
+desktop/tint2: Updated for version 0.14.5.
+desktop/wmudmount: Update DOWNLOAD.
+desktop/wmudmount: Update homepage.
+desktop/wmweather+: Update DOWNLOAD.
+desktop/wmweather+: Update homepage.
+desktop/xed: Updated for version 1.4.2.
+desktop/xfce4-whiskermenu-plugin: Update HOMEPAGE.
+desktop/xmms-status-plugin: Update HOMEPAGE and DOWNLOAD urls.
+desktop/xtrascreenhacks: Update HOMEPAGE and DOWNLOAD urls.
+desktop/yad: Update HOMEPAGE and DOWNLOAD urls.
+development/Catch: Updated for version 1.9.4.
+development/SQLAlchemy: Updated for version 1.1.10.
+development/Sphinx: Updated for version 1.6.1.
+development/android-studio: Updated for version 2.3.2.0_162_3934792.
+development/cgit: Update HOMEPAGE.
+development/composer: Updated for version 1.4.2.
+development/dkms: Updated for version 1.0.1.
+development/gcclegacy494: Added (GCC 4.9.4 legacy).
+development/git-lfs: Updated for version 2.1.1.
+development/gr-osmosdr: Updated for version 20170421.
+development/jupyter-nbdime: Added (Jupyter notebook diff and merge).
+development/jupyter-qtconsole: Updated for version 4.3.0.
+development/komodo-edit: Updated for version 10.2.2.
+development/komodo-ide: Updated for version 10.2.2.
+development/mongodb-compass: Updated for version 1.6.2.
+development/rarian: Switch to https.
+development/rust: Update HOMEPAGE and DOWNLOAD urls.
+development/scratch: Update HOMEPAGE and DOWNLOAD urls.
+development/setuptools-git: Update HOMEPAGE.
+development/simulavr: Updated for version git20170521.
+development/sloccount: Update HOMEPAGE and DOWNLOAD urls.
+development/sqlcl: Updated for version 4.2.0.17.097.0719.
+development/tclvfs: Update HOMEPAGE and DOWNLOAD urls.
+development/teensy_loader_cli: Update HOMEPAGE and DOWNLOAD urls.
+development/textadept: Update HOMEPAGE.
+development/tkdnd: Update HOMEPAGE and DOWNLOAD urls.
+development/tstoolbox: Update HOMEPAGE.
+development/uncrustify: Added (source code beautifier).
+development/universal-ctags: Updated for version 923b4e4.
+development/wheel: Update HOMEPAGE.
+development/xmlstarlet: Update HOMEPAGE and DOWNLOAD urls.
+development/xtruss: Update homepage.
+development/xtruss: Update slack-desc.
+development/zeal: Update HOMEPAGE.
+development/zope.interface: Update HOMEPAGE and DOWNLOAD urls.
+games/QuickNES-Core: Update HOMEPAGE.
+games/RetroArch: Update HOMEPAGE.
+games/ceferino: Update homepage.
+games/egoboo: Updated for version 2.8.1.
+games/freeciv: Update DOWNLOAD url.
+games/larn: Updated for version 14.0.2.
+games/lutris: Updated for version 0.4.10.
+games/mame: Updated for version 0.185.
+games/mangband: Added (graphical dungeon adventure game).
+games/mednafen: Updated for version 0.9.44.1.
+games/ppsspp: Updated for version 1.4.1.
+games/qxw: Update HOMEPAGE and DOWNLOAD urls.
+games/roccat-tools: Update HOMEPAGE and DOWNLOAD urls.
+games/scummvm-libretro: Update HOMEPAGE.
+games/simsu: Update HOMEPAGE and DOWNLOAD urls.
+games/smashbattle: Update HOMEPAGE and DOWNLOAD urls.
+games/snes9x-libretro: Update HOMEPAGE.
+games/snes9x2002: Update HOMEPAGE.
+games/snes9x2005: Update HOMEPAGE.
+games/snes9x2010: Update HOMEPAGE.
+games/spring: Update HOMEPAGE and DOWNLOAD urls.
+games/stella-libretro: Update HOMEPAGE.
+games/tanglet: Update HOMEPAGE and DOWNLOAD urls.
+games/tome-ah: Added (fantasy adventure game).
+games/tome4: Update HOMEPAGE and DOWNLOAD urls.
+games/tome: Removed (use tome4 or tome-ah).
+games/tyrquake-libretro: Update HOMEPAGE.
+games/ut2004: Update HOMEPAGE.
+games/vba-next: Update HOMEPAGE.
+games/vbam-libretro: Update HOMEPAGE.
+games/virtualjaguar-libretro: Update HOMEPAGE.
+games/warsow: Update HOMEPAGE.
+games/worldofpadman: Update HOMEPAGE and DOWNLOAD urls.
+games/yae: Update DOWNLOAD.
+games/yae: Update homepage.
+gis/pytrainer: Add a patch from upstream
+gis/qgis: Updated for version 2.18.8.
+gis/qmapshack: Updated for version 1.8.1.
+gis/viking: Update HOMEPAGE and DOWNLOAD urls.
+graphics/mozjpeg: Updated for version 3.2.
+graphics/openimageio: Prep for GCC 7
+graphics/rawstudio: Update HOMEPAGE.
+graphics/rawtherapee: Updated for version 5.1.
+graphics/screencloud: Update HOMEPAGE and DOWNLOAD urls.
+graphics/teighafileconverter: Update HOMEPAGE.
+graphics/teighaviewer: Update HOMEPAGE.
+graphics/textext: Update HOMEPAGE and DOWNLOAD urls.
+graphics/uniconvertor: Update HOMEPAGE.
+graphics/vulkansdk: Updated for version 1.0.49.0.
+graphics/xzgv: Update HOMEPAGE and DOWNLOAD urls.
+graphics/yagf: Update HOMEPAGE and DOWNLOAD urls.
+graphics/zbar: Update HOMEPAGE and DOWNLOAD urls.
+ham/aprx: Fixed homepage
+ham/xdx: Update HOMEPAGE and DOWNLOAD urls.
+libraries/CherryPy: Updated for version 10.2.2.
+libraries/Hypodermic: Updated for version 2.4.
+libraries/QUSB: Added (Qt wrapper classes for LibUSB 1.0).
+libraries/QtUsb: Added (USB library for Qt).
+libraries/SQLObject: Update HOMEPAGE and DOWNLOAD urls.
+libraries/ZConfig: Update HOMEPAGE and DOWNLOAD urls.
+libraries/ZODB3: Update HOMEPAGE and DOWNLOAD urls.
+libraries/allegro: Updated for version 5.2.1.
+libraries/capnproto: Updated for version 0.6.0.
+libraries/fcl: Added (collision library).
+libraries/folly: Updated for version 2017.05.22.00.
+libraries/hackrf: Updated for version 20170228.
+libraries/lensfun: Update README for optional dep.
+libraries/leptonica: Updated for version 1.74.2.
+libraries/libaacs: Updated for version 0.9.0
+libraries/libccd: Added (collision detection library).
+libraries/libopenshot: Updated for version 0.1.6
+libraries/libopusenc: Added (High-level Opus decoding library).
+libraries/libosmo-dsp: Updated for version 20170317.
+libraries/libreadline-java: Added (Java-Readline JNI-wrapper).
+libraries/libversion: Updated for version 1.2.0.
+libraries/libwacom: Updated for version 0.25.
+libraries/live555: Updated for version 2017.05.24
+libraries/proxygen: Updated for version 2017.05.22.00.
+libraries/rest: Update HOMEPAGE and DOWNLOAD urls.
+libraries/rocksdb: Updated for version 5.3.6.
+libraries/simbody: Added (multibody physics API).
+libraries/skstream: Update HOMEPAGE and DOWNLOAD urls.
+libraries/sqlpp11-connector-sqlite3: Updated for version 0.24.
+libraries/swfdec: Update HOMEPAGE and DOWNLOAD urls.
+libraries/tre: Update HOMEPAGE and DOWNLOAD urls.
+libraries/vsqlite++: Update HOMEPAGE and DOWNLOAD urls.
+libraries/vte3: Updated for version 0.48.3.
+libraries/wangle: Updated for version 2017.05.22.00.
+libraries/webkit2gtk: Update HOMEPAGE and DOWNLOAD urls.
+libraries/webkitgtk3: Update HOMEPAGE and DOWNLOAD urls.
+libraries/webkitgtk: Update HOMEPAGE and DOWNLOAD urls.
+libraries/wfmath: Update HOMEPAGE and DOWNLOAD urls.
+libraries/wxsvg: Update HOMEPAGE and DOWNLOAD urls.
+libraries/xcb-util-xrm: Updated for version 1.2.
+libraries/zbase32: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zc.lockfile: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zdaemon: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zfec: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.component: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.configuration: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.event: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.hookable: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.i18nmessageid: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.location: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.proxy: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.schema: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.security: Update HOMEPAGE and DOWNLOAD urls.
+libraries/zope.sqlalchemy: Update HOMEPAGE and DOWNLOAD urls.
+misc/ardesia: Updated homepage and download links
+misc/grc: Updated for version 1.11.1.
+misc/readesm: Update HOMEPAGE and DOWNLOAD urls.
+misc/rsibreak: Update HOMEPAGE and DOWNLOAD urls.
+misc/tal: Update HOMEPAGE and DOWNLOAD urls.
+misc/utimer: Update HOMEPAGE and DOWNLOAD urls.
+misc/vdpauinfo: Update HOMEPAGE and DOWNLOAD urls.
+misc/xclip: Update HOMEPAGE and DOWNLOAD urls.
+multimedia/kodi: Updated for version 17.3
+multimedia/mkvtoolnix: Updated for version 12.0.0.
+multimedia/obs-studio: Updated for version 19.0.2
+multimedia/openshot: Updated for version 2.3.3
+multimedia/ripperX: Update HOMEPAGE and DOWNLOAD urls.
+multimedia/shotcut: Update HOMEPAGE.
+multimedia/spotify: Updated for version 1.0.55.
+multimedia/telepathy-farstream: Update HOMEPAGE and DOWNLOAD urls.
+multimedia/telepathy-glib: Update HOMEPAGE and DOWNLOAD urls.
+multimedia/telepathy-qt: Update HOMEPAGE and DOWNLOAD urls.
+multimedia/vlc: Updated for version 20170523_bec643e (addresses "hacked-in-translation" vulnerability)
+network/NetworkManager-openvpn: Updated for version 1.2.10.
+network/PaleMoon: Update build script.
+network/clipgrab: Updated for version 3.6.5.
+network/dropbear: Updated for version 2017.75, new maintainer.
+network/icecat: Updated for version 52.1.0.
+network/kea: Add support for botan.
+network/nbd: Updated for version 3.15.3
+network/nextcloud-client: Added (Nextcloud Desktop Client).
+network/opera: Updated for version 45.0.2552.812.
+network/qtmib: Added (SNMP MIB Browser).
+network/radicale: Updated for version 1.1.2.
+network/rclone: Update HOMEPAGE and DOWNLOAD urls.
+network/rekonq: Update HOMEPAGE and DOWNLOAD urls.
+network/sabnzbd: Update HOMEPAGE.
+network/slack: Updated for version 2.6.0.
+network/slimjet: Updated for version 14.0.10.0.
+network/snmpsim: Update HOMEPAGE and DOWNLOAD urls.
+network/snort: Update HOMEPAGE and DOWNLOAD urls.
+network/sqlmap: Updated for version 1.1.5.
+network/sshguard: Update HOMEPAGE and DOWNLOAD urls.
+network/strongswan: Update HOMEPAGE and DOWNLOAD urls.
+network/suricata: Update HOMEPAGE.
+network/t38modem: Update HOMEPAGE.
+network/tinc: Added (VPN daemon).
+network/tixati: Update HOMEPAGE and DOWNLOAD urls.
+network/tmate: Update HOMEPAGE.
+network/toxcore: Update HOMEPAGE.
+network/tribler: Update homepage.
+network/twine: Updated for version 1.9.0.
+network/unicornscan: Update HOMEPAGE.
+network/vivaldi: Updated for version 1.9.818.50.
+network/vpnc: Update HOMEPAGE.
+network/vrrpd: Update HOMEPAGE and DOWNLOAD urls.
+network/wol: Update HOMEPAGE and DOWNLOAD urls.
+network/youtube-dl: Updated for version 2017.05.23.
+office/asymptote: Updated for version 2.41.
+office/hunspell-de: Updated for version 20161207.
+office/lyx: Updated for version 2.2.3.
+office/mtp2-fonts: Added (Times-compatible math TeX fonts).
+office/scribus: Update HOMEPAGE and DOWNLOAD urls.
+office/taskd: Update HOMEPAGE and DOWNLOAD urls.
+office/xpad: Update HOMEPAGE and DOWNLOAD urls.
+office/xreader: Updated for version 1.4.2.
+perl/perl-AnyEvent-I3: Updated for version 0.17.
+perl/perl-CPAN-Perl-Releases: Updated for version 3.18.
+perl/perl-CPANPLUS-Dist-Build: Updated for version 0.88.
+perl/perl-CPANPLUS: Updated for version 0.9168.
+perl/perl-Expect: Updated for version 1.35.
+perl/perl-ExtUtils-Install: Updated for version 2.10.
+python/Flask: Updated for version 0.12.2.
+python/RBTools: Update HOMEPAGE and DOWNLOAD urls.
+python/Scrapy: Update HOMEPAGE.
+python/Scrapy: Updated for version 1.4.0.
+python/Unidecode: Update HOMEPAGE.
+python/euca2ools: Updated for version 3.4.1
+python/pendulum: Updated for version 1.2.1.
+python/pytest: Updated for version 3.1.0.
+python/python-fonttools: Updated for version 3.12.1.
+python/python-requests-kerberos: Updated for version 0.11.0.
+python/python-requests: Updated for version 2.14.2.
+python/python-slacklog: Added (Convert Slackware ChangeLog).
+python/python-twitter: Updated for version 3.3.
+python/requests-toolbelt: Updated for version 0.8.0.
+python/rsa: Update HOMEPAGE.
+python/selenium: Updated for version 3.4.2.
+python/shutil_which: Added (find path of executable).
+python/simplegeneric: Update HOMEPAGE and DOWNLOAD urls.
+python/six: Update HOMEPAGE and DOWNLOAD urls.
+python/sk1libs: Update HOMEPAGE.
+python/speaklater: Update HOMEPAGE and DOWNLOAD urls.
+python/sphinxcontrib-websupport: Added (Sphinx API for web apps).
+python/sqlalchemy-migrate: Updated for version 1.11.0.
+python/tempita: Script cleanup
+python/tempora: Updated for version 1.7.
+python/termcolor: Update HOMEPAGE.
+python/threadpool: Update HOMEPAGE.
+python/webassets: Update HOMEPAGE and DOWNLOAD urls.
+ruby/ruby-build: Updated for version 20170523.
+ruby/ruby-gist: Updated for version 4.6.1.
+ruby/rubygem-bundler: Updated for version 1.15.0.
+ruby/rubygem-cool.io: Update HOMEPAGE and DOWNLOAD urls.
+ruby/rubygem-fastercsv: Update HOMEPAGE and DOWNLOAD urls.
+ruby/rubygem-highline: Update HOMEPAGE and DOWNLOAD urls.
+ruby/rubygem-terminal-table: Update HOMEPAGE and DOWNLOAD urls.
+ruby/rubygems-update: Update HOMEPAGE and DOWNLOAD urls.
+ruby/sqlite3: Update HOMEPAGE and DOWNLOAD urls.
+system/ZoneMinder: Update HOMEPAGE and DOWNLOAD urls.
+system/acd_cli: Updated for version 0.3.2+3170d55.
+system/butterfly: Updated for version 3.1.4.
+system/cassandra-gui: Update README.
+system/daemontools: Added (djb's tools for managing UNIX services).
+system/docker: Disable rc script by default, update README.
+system/fio: Updated for version 2.20.
+system/gpsbabel: Updated for version 1.5.3.
+system/gtk-vnc: Updated for version 0.7.1.
+system/influxdb: Updated for version 1.2.4.
+system/intel-microcode: Updated for version 20170511.
+system/letsencrypt: Updated for version 0.14.2.
+system/nvme-cli: Updated for version 1.3.
+system/pass: Added (password store manager).
+system/refind: Updated for version 0.10.8.
+system/rng-tools: Update HOMEPAGE and DOWNLOAD urls.
+system/sleepd: Added (power management daemon).
+system/slim: Update HOMEPAGE and DOWNLOAD urls.
+system/spkg: Update HOMEPAGE and DOWNLOAD urls.
+system/swatch: Update HOMEPAGE and DOWNLOAD urls.
+system/syslog-ng: Update HOMEPAGE.
+system/trrntzip: Update HOMEPAGE and DOWNLOAD urls.
+system/twin: Update HOMEPAGE and DOWNLOAD urls.
+system/udftools: Update HOMEPAGE and DOWNLOAD urls.
+system/un-fonts-core: Update HOMEPAGE and DOWNLOAD urls.
+system/unetbootin: Updated for version 647.
+system/vagrant: Update HOMEPAGE.
+system/vbindiff: Update HOMEPAGE and DOWNLOAD urls.
+system/vcp: Update homepage.
+system/virtualbox-addons: Update HOMEPAGE.
+system/virtualbox-extension-pack: Update HOMEPAGE.
+system/virtualbox-kernel-addons: Update HOMEPAGE.
+system/virtualbox-kernel: Update HOMEPAGE.
+system/virtualbox: Update HOMEPAGE.
+system/wine-staging: Updated for version 2.8.
+system/wmconfig: Update HOMEPAGE and DOWNLOAD urls.
+system/xboxdrv-linux: Update HOMEPAGE and DOWNLOAD urls.
+system/xfsudo: Update HOMEPAGE and DOWNLOAD urls.
+system/xosd: Update HOMEPAGE.
+system/yakuake: Update HOMEPAGE and DOWNLOAD urls.
++--------------------------+
+Sat May 20 00:00:03 UTC 2017
+academic/GeoGebra:  Updated homepage
+academic/bpp-seq-omics: Fixed VERSION in SlackBuild.
+academic/gresistor: Updated homepage
+academic/itex2mml: Updated homepage and download links
+academic/mendeleydesktop: Updated homepage link.
+academic/ncbi-blast-plus: Updated homepage link.
+academic/ncbi-blast: Updated homepage link.
+academic/qtoctave: Updated homepage link.
+academic/sage: Updated for version 7.6.
+academic/suitesparse: Updated for version 4.5.5
+audio/easymp3gain: Updated homepage and download links
+audio/grip2: Updated homepage and download links
+audio/gvolwheel: Updated homepage and download links
+audio/horgand: Updatd homepage
+audio/id3v2: Updated homepage and download links
+audio/jackmeter: Updated homepage and download links
+audio/lxmusic: Updated homepage and download links
+audio/mixxx: Updated homepage link.
+audio/mp3blaster: Updated for version 3.2.6.
+audio/mpc: Updated homepage and download links.
+audio/mpd: Updated homepage and download links.
+audio/ncmpc: Updated homepage and download links.
+audio/ogmtools: Updated homepage and download links.
+audio/phat: Updated homepage and download links.
+audio/pianobar: Updated homepage link.
+audio/pyalsaaudio: Updated homepage link.
+desktop/compiz-boxmenu: Updated homepage and download links
+desktop/elementary-xfce: Updated homepage
+desktop/enlightenment: Updated homepage and download links
+desktop/gntp-send: Updated homepage and download links
+desktop/homerun: Updated homepage and download links
+desktop/insync-thunar: Updated homepage
+desktop/lumina: Updated homepage
+desktop/lxpanel: Updated homepage and download links
+desktop/menumaker: Updated for version 0.99.10.
+desktop/perwindowlayoutd: Updated homepage and download links.
+desktop/screenkey: Fixed deps.
+desktop/slock: Updated for version 1.4.
+desktop/vim-qt: Updated for version 20170421.
+desktop/xfce4-mount-plugin: Updated for version 1.1.2.
+development/Arduino: Updated homepage
+development/MySQL-python: Updated homepage and download links.
+development/arduino: Updated homepage
+development/bpython: Updated homepage
+development/bzr: Updated for version 2.7.0.
+development/ccl: Updated homepage
+development/check: Updated homepage
+development/checkbashisms: Updated homepage
+development/colordiff: Updated homepage and download links
+development/crosstool-ng: Updated for version 1.23.0
+development/cvsd: Updated homepage and download links
+development/dart: Fixed arch handling.
+development/diffuse: Updated homepage and download links
+development/docutils: Updated for version 0.13.1.
+development/dwarf: Updated homepage
+development/electron: Updated homepage
+development/flawfinder: Updated homepage and download links
+development/fpc-source: Updated homepage and download links
+development/fpc: Updated homepage and download links
+development/ftjam: Updated homepage and download links
+development/gaphor: Updated homepage and download links
+development/glade: Updated homepage and download links
+development/gnome-common: Updated homepage and download links
+development/google-webdesigner: Fix VERSION.
+development/gplcver: Updated homepage and download links
+development/hopper: Updated homepage
+development/julia: Updated homepage
+development/kdesvn: Updated homepage and download links
+development/libretro-samples: Updated homepage
+development/mysql-workbench: Patched against new gdal 2.2.0.
+development/nedit: Updated homepage and download links.
+development/nose: Updated homepage and download links.
+development/nwjs: Fixed arch handling.
+development/opencl-headers: Updated homepage link.
+development/p4: Updated homepage and download links.
+development/p4d: Updated homepage and download links.
+development/p4v: Updated homepage and download links.
+development/phpDocumentor: Updated homepage and download links.
+development/processing: Updated homepage link.
+development/pycscope: Updated homepage and download links.
+development/pylint: Updated homepage link.
+development/python3-cycler: Fixed deps.
+development/referenceassemblies-pcl: Fixed tarball handling.
+games/3D-Fasteroids: Updated home page and download link
+games/4do-libretro: Updated homepage link
+games/Craft-libretro: Updated homepage
+games/Genesis-Plus-GX: Updated homepage
+games/OpenXcom: Updated homepage link.
+games/ardentryst: Updated homepage and download links
+games/beetle-bsnes-libretro: Updated homepage
+games/beetle-gba-libretro: Updated homepage
+games/beetle-lynx-libretro: Updated homepage
+games/beetle-ngp-libretro: Updated homepage
+games/beetle-pce-fast-libretro: Updated homepage
+games/beetle-pcfx-libretro: Updated homepage
+games/beetle-psx-libretro: Updated homepage
+games/beetle-saturn-libretro: Updated homepage
+games/beetle-supergrafx-libretro: Updated homepage
+games/beetle-vb-libretro: Updated homepage
+games/beetle-wswan-libretro: Updated homepage
+games/blastem-libretro: Updated homepage
+games/blobwars: Updated homepage and download links
+games/blueMSX-libretro: Updated homepage
+games/bnes-libretro: Updated homepage
+games/bomberclone: Updated homepage and download links
+games/boswars: Updated homepage and download links
+games/bsnes-libretro: Updated homepage
+games/bsnes-mercury: Updated homepage
+games/bzflag: Updated homepage and download links
+games/ckmame: Updated homepage and download links
+games/connectagram: Updated homepage and download links
+games/cubosphere: Updated homepage and download links
+games/cutemaze: Updated homepage and download links
+games/cyphesis: Updated homepage and download links
+games/enigma: Updated homepage and download links
+games/etlegacy-data: Updated homepage
+games/etlegacy: Updated homepage
+games/extremetuxracer: Updated homepage and download links
+games/fbalpha: Updated homepage
+games/fgrun: Updated homepage and download links
+games/fmsx-libretro: Updated homepage
+games/fortune-dharma: Updated homepage and download links
+games/gambatte-libretro: Update homepage
+games/glxosd: Updated homepage
+games/gottet: Updated homepage and download links
+games/gpsp-libretro: Updated homepage
+games/gw-libretro: Updated homepage
+games/hexalate: Updated homepage and download links
+games/icebreaker: Updated homepage and download links
+games/ioquake3: Updated homepage
+games/kildclient: Updated homepage and download links
+games/libretro-2048: Updated homepage
+games/libretro-desmume: Updated homepage
+games/libretro-fceumm: Updated homepage
+games/libretro-handy: Updated homepage
+games/libretro-lutro: Updated homepage
+games/libretro-mgba: Updated homepage
+games/libretro-ppsspp: Updated homepage
+games/libretro-prboom: Updated homepage
+games/libretro-reicast: Updated homepage
+games/libretro-vecx: Updated homepage
+games/libretro-yabause: Updated homepage
+games/lincity-ng: Updated homepage and download links
+games/mame2000-libretro: Updated homepage link.
+games/mame2010-libretro: Updated homepage link.
+games/mame2014-libretro: Updated homepage link.
+games/meteor-libretro: Updated homepage link.
+games/mupen64plus-libretro: Updated homepage link.
+games/nestopia-libretro: Updated homepage link.
+games/nxengine-libretro: Updated homepage link.
+games/pcsx-rearmed: Updated homepage link.
+games/peg-e: Updated homepage and download links.
+games/picodrive-libretro: Updated homepage link.
+games/pingus: Updated homepage and download links.
+games/pioneer: Updated homepage link.
+games/prosystem-libretro: Updated homepage link.
+games/puzzles: Updated homepage link.
+games/qtsixa: Updated homepage and download links.
+gis/OWSLib: Updated homepage link.
+gis/foxtrotgps: Updated homepage and download links
+gis/geojson: Updated for version 1.3.5.
+gis/libLAS: Updated homepage
+gis/opencpn: Updated homepage link.
+gis/polyline: Updated homepage link.
+graphics/digikam: Updated homepage and download links
+graphics/feh: Updated homepage and download links
+graphics/gthumb: Updated for version 3.4.5.
+graphics/kuickshow: Updated homepage
+graphics/luminance-hdr: Updated for version 2.5.1.
+graphics/mirage: Updated homepage and download links.
+graphics/openclipart: Updated homepage and download links.
+graphics/opencollada: Updated for version 1.6.47
+graphics/opencolorio: Updated for version 1.0.9.20170426
+graphics/openimageio: Updated for version 1.7.14
+graphics/pdf2png: Updated homepage link.
+graphics/qelectrotech: Updated homepage link.
+graphics/qrencode: Updated homepage and download links.
+ham/chirp: Updated for version 20170510.
+ham/cqrlog: Updated homepage
+haskell/hscolour: Updated for version 1.24.1
+libraries/Atlas-C++: Updated homepage and download links
+libraries/BeautifulSoup4: Updated homepage
+libraries/BeautifulSoup: Updated homepage and download links
+libraries/CCfits: Updated homepage and download links
+libraries/ConfigParser: Updated homepage
+libraries/GtkD: Updated homepage
+libraries/Impacket: Updated homepage
+libraries/Jinja2: Updated homepage
+libraries/Nevow: Updated homepage link.
+libraries/ORBit2: Updated homepage link.
+libraries/allegro4: Updated homepage and download link
+libraries/allegro: Updated homepage and download link
+libraries/aubio: Updated homepage and download links
+libraries/barry: Updated homepage and download links
+libraries/cfitsio: Updated homepage and download links
+libraries/chromaprint: Updated homepage
+libraries/cryptopp: Updated homepage and download links
+libraries/daq: Updated homepage and download links
+libraries/darcsver: Updated homepage and download links
+libraries/dropbox-python: Updated homepage
+libraries/e_dbus: Updated homepage and download links
+libraries/ecore: Updated homepage and download links
+libraries/edje: Updated homepage and download links
+libraries/eet: Updated homepage and download links
+libraries/efreet: Updated homepage and download links
+libraries/eina: Updated homepage and download links
+libraries/eio: Updated homepage and download links
+libraries/elementary: Updated homepage and download links
+libraries/embryo: Updated homepage and download links
+libraries/emotion: Updated homepage and download links
+libraries/ethumb: Updated homepage and download links
+libraries/evas: Updated homepage and download links
+libraries/fox-toolkit-devel: Updated for version 1.7.59.
+libraries/fox-toolkit: Updated for version 1.6.54.
+libraries/fpconst: Updated homepage and download links
+libraries/gaphas: Updated homepage and download links
+libraries/gdl: Updated homepage and download links
+libraries/gnome-python2-gconf: Updated homepage and download links
+libraries/goffice: Updated for version 0.10.34.
+libraries/gstreamermm: Updated homepage and download links
+libraries/gtk-aurora-engine: Updated homepage and download links
+libraries/gtkdatabox: Updated homepage and download links
+libraries/gtkglext: Updated homepage and download links
+libraries/gtkglextmm: Updated homepage and download links
+libraries/hdf: Updated homepage and download links
+libraries/imlib2: Updated homepage and download links
+libraries/libbonobo: Updated homepage and download links
+libraries/libbonoboui: Updated homepage and download links
+libraries/libbsd: Updated homepage and download links
+libraries/libcdaudio: Updated homepage and download links
+libraries/libcec: Fixed tarball handling.
+libraries/libcsv: Updated homepage and download links
+libraries/libdc1394: Updated homepage and download links
+libraries/libdmapsharing: Updated homepage and download links
+libraries/libdvbpsi: Updated for version 1.3.1.
+libraries/libftdi1: Updated homepage and download links
+libraries/libftdi: Updated homepage and download links
+libraries/libg15: Updated homepage and download links
+libraries/libg15render: Updated homepage and download links
+libraries/libgaminggear: Updated homepage and download links
+libraries/libgda: Updated homepage and download links
+libraries/libgit2-glib: Updated homepage and download links
+libraries/libgnome: Updated homepage and download links
+libraries/libgnomecups: Updated homepage and download links
+libraries/libgnomeprint: Updated homepage and download links
+libraries/libgnomeprintui: Updated homepage and download links
+libraries/libgnomeui: Updated homepage and download links
+libraries/libgringotts: Updated homepage and download links
+libraries/libicns: Updated homepage and download links
+libraries/libiec61883: Updated homepage and download links
+libraries/libkvkontakte: Updated homepage and download links
+libraries/libmimedir: Updated homepage and download links
+libraries/libmpdclient: Updated homepage and download links
+libraries/libmspack: Updated homepage and download links
+libraries/libnet: Updated homepage and download links
+libraries/libnice: Updated homepage and download links
+libraries/libopenshot-audio: Fixed maintainer email
+libraries/liborigin: Updated homepage and download links
+libraries/libr3: Fixed download.
+libraries/libsmf: Updated homepage and download links
+libraries/libtxc_dxtn: Updated homepage and download links
+libraries/libvmime: Updated homepage and download links
+libraries/libxkbcommon: Updated homepage and download links
+libraries/lockdev: Updated homepage
+libraries/logilab-astng: Updated homepage and download links
+libraries/logilab-common: Updated homepage and download links
+libraries/lua-MessagePack: Noted orphan status (no SBo maintainer).
+libraries/mbedtls: Updated homepage and download links.
+libraries/mercator: Updated homepage and download links.
+libraries/mujs: Updated homepage link.
+libraries/mysql-connector-c++: Updated for version 1.1.9.
+libraries/ois: Updated homepage and download links.
+libraries/pgtcl-ng: Updated homepage and download links.
+libraries/poco: Updated homepage link.
+libraries/polyclipping: Updated homepage and download links.
+libraries/pyte: Fixed deps.
+libraries/python-e_dbus: Updated homepage and download links.
+libraries/python-elementary: Updated homepage and download links.
+libraries/python-emotion: Updated homepage and download links.
+libraries/python-ethumb: Updated homepage and download links.
+libraries/python-evas: Updated homepage and download links.
+libraries/qt5-webkit: Updated homepage and download links.
+libraries/wxGTK3: Updated for version 3.0.3.1.
+misc/bodr: Updated homepage and download links
+misc/ciso: Updated homepage and download links
+misc/cups-windows: Updated homepage
+misc/dcc: Updated homepage
+misc/g15composer: Updated homepage and download links
+misc/g15daemon: Updated homepage and download links
+misc/g15stats: Updated homepage and download links
+misc/gnome-mime-data: Updated homepage and download links
+misc/kcm-fcitx: Updated homepage and download links
+misc/klibc: Updated homepage and download links
+multimedia/JSampler: Updated homepage and download links
+multimedia/Mopidy: Updated homepage link.
+multimedia/OpenLP: Updated homepage and download links.
+multimedia/cinelerra: Updated homepage and download links
+multimedia/coriander: Updated homepage and download links
+multimedia/gimp-gap: Updated homepage and download links
+multimedia/gpac: Remove old a52dec reference from README.
+multimedia/gst-libav: Updated homepage and download links
+multimedia/gst-plugins-bad: Updated homepage and download links
+multimedia/gst-plugins-ugly: Updated homepage and download links
+multimedia/gst0-ffmpeg: Updated homepage and download links
+multimedia/gst0-plugins-bad: Updated homepage and download links
+multimedia/gst0-plugins-ugly: Updated homepage and download links
+multimedia/iat: Updated homepage and download links
+multimedia/jlscp: Updated homepage and download links
+multimedia/lsdvd: Updated homepage and download links
+multimedia/mlt: Updated homepage and download links.
+multimedia/mpv: Updated for version 0.25.0.
+multimedia/mtpfs: Updated homepage and download links.
+multimedia/mythplugins: Updated homepage and download links.
+multimedia/mythtv: Updated homepage link.
+multimedia/obs-studio: Updated for version 18.0.2
+multimedia/pngnq-s9: Updated homepage and download links.
+network/NetworkManager-openconnect: Updated for version 1.2.4.
+network/NetworkManager-openvpn: Updated for version 1.2.8.
+network/NetworkManager-pptp: Updated for version 1.2.4.
+network/NetworkManager-vpnc: Updated for version 1.2.4.
+network/amavisd-new: Updated homepage
+network/aria2: Updated for version 1.32.0.
+network/awscli: Updated homepage
+network/bitlbee: Updated homepage and download links
+network/btpd: Updated homepage and download links
+network/c-toxcore: Updated homepage
+network/darkstat: Updated homepage and download links
+network/dillo: Updated homepage and download links
+network/dnscrypt-proxy: Updated homepage and download links
+network/driftnet: Fixed tarball handling.
+network/dropbox: Updated homepage
+network/dsniff: Updated homepage and download links
+network/flexget: Updated homepage
+network/gq: Updated homepage and download links
+network/gtk-gnutella: Updated homepage and download links
+network/havp: Updated homepage and download links
+network/hiawatha: Updated homepage and download links
+network/httpie: Updated homepage
+network/insync: Updated homepage
+network/iperf: Updated homepage and download links
+network/konversation: Updated homepage and download links
+network/leechcraft: Updated homepage and download links
+network/lighttpd: Change some hints in README.SLACKWARE.
+network/megatools: Updated homepage link.
+network/metasploit: Updated homepage link.
+network/mod_ruid2: Updated homepage and download link
+network/munge: Updated homepage link.
+network/nagios: Updated homepage and download links.
+network/nbd: Updated for version 3.15.2
+network/ngircd: Updated homepage and download links.
+network/nload: Updated homepage and download links.
+network/nrpe: Updated homepage and download links.
+network/nsca: Updated homepage and download links.
+network/nxclient: Updated homepage link.
+network/onioncat: Updated homepage link.
+network/openconnect: Updated for version 7.08.
+network/openrdate: Updated homepage and download links.
+network/openresolv: Updated homepage and download links.
+network/opensmtpd: Updated homepage and download links.
+network/owncloud-client: Updated homepage link.
+network/owncloud-server: Updated homepage and download links.
+network/pastebincl: Updated homepage and download links.
+network/pgl: Updated homepage and download links.
+network/pidgin-sound: Updated homepage and download links.
+network/putty: Updated homepage link.
+network/sshuttle: Fixed deps.
+network/telegram: Updated for version 1.1.2.
+network/weechat: Updated for version 1.8.
+network/wireshark: Update DOWNLOAD url.
+network/xtables-addons: Updated for version 2.12.
+office/LibreOffice: Added USE_CCACHE option (default off)
+office/abiword: Updated for version 3.0.2.
+office/ding: Updated homepage
+office/fbreader: Updated homepage and download links
+office/focuswriter: Updated homepage and download links
+office/gnumeric: Updated for version 1.12.34.
+office/moneydance: Updated for version 2017.1597.
+office/mupdf: Updated homepage and download links.
+office/openoffice-langpack: Fixed slack-desc.
+office/pdfstudio11: Updated homepage and download links.
+office/pdftk: Updated homepage and download links.
+office/smoffice2016: Fixed arch handling.
+perl/perl-YAML-LibYAML: Updated for version 0.65.
+python/APScheduler: Updated homepage
+python/Automat: Fixed deps.
+python/Flask-Babel: Updated homepage and download links.
+python/Markdown: Updated homepage link.
+python/MarkupSafe: Updated homepage link.
+python/PythonQt: Updated for version 3.1.6
+python/asciimatics: Fixed deps.
+python/bitarray: Updated homepage and download links.
+python/blinker: Updated homepage
+python/boto3: Updated homepage
+python/cheroot: Fixed deps.
+python/decorator: Updated homepage link.
+python/etk.docking: Updated homepage and download links
+python/euca2ools: Updated for version 3.3.3
+python/feedgenerator: Updated homepage
+python/functools-lru-cache: Fixed deps.
+python/gnome-python: Updated homepage and download links
+python/gst-python3: Updated homepage and download links
+python/gst-python: Updated homepage and download links
+python/gst0-python: Updated homepage and download links
+python/json-py: Updated homepage and download links
+python/jsonschema: Fixed deps.
+python/linecache2: Fixed deps.
+python/netifaces: Updated homepage link.
+python/parsel: Fixed deps.
+python/pelican: Updated homepage link.
+python/pyOpenSSL: Updated homepage link.
+python/pySmartDL: Updated homepage link.
+python/pyasn1: Updated homepage and download links.
+python/pycrypto: Update DOWNLOAD url.
+python/pycryptopp: Updated homepage link.
+python/pygpgme: Updated homepage and download links.
+python/pyrsistent: Updated homepage link.
+python/pysnmp: Updated homepage and download links.
+python/python-Levenshtein: Updated homepage and download links.
+python/python-autobahn: Updated for version 17.5.1.
+python/python-bigfloat: Updated homepage and download links.
+python/python-blake2: Updated homepage and download links.
+python/python-configargparse: Updated for version 0.12.0.
+python/python-demjson: Updated homepage and download links.
+python/python-keyring: Fixed deps.
+python/python-ldap: Updated homepage link.
+python/python-mccabe: Fixed deps.
+python/python-morbid: Updated homepage and download links.
+python/python-mpd: Updated homepage and download links.
+python/python-oauth2: Updated homepage and download links.
+python/python-parsedatetime: Updated for version 2.4.
+python/python-swiftclient: Updated homepage link.
+python/python-transaction: Updated homepage and download links.
+python/python-twitter: Fixed deps.
+python/python-txaio: Updated for version 2.7.1.
+python/python-urllib3: Updated homepage and download links.
+python/python-uuid: Updated homepage and download links.
+python/python-vulndb: Fixed deps.
+python/python-yenc: Updated homepage and download links.
+python/python3-decorator: Updated homepage link.
+python/python3-pycrypto: Update DOWNLOAD url.
+python/python3-simplegeneric: Updated homepage and download links.
+python/python3-six: Updated homepage and download links.
+python/pyutil: Updated homepage and download links.
+python/rebulk: Fixed deps.
+python/tempora: Fixed deps.
+python/txi2p: Fixed deps.
+python/txsocksx: Fixed deps.
+sbo/README: Update README.
+system/Type1_to_OTF: Added (OTF fonts converted from Type1 fonts).
+system/ack: Updated homepage
+system/acpi: Updated homepage and download link
+system/afdko: Fixed SlackBuild.
+system/aide: Updated homepage and download link
+system/asbt: Updated for version 1.8.1.
+system/atop: Updated homepage and download links
+system/cabextract: Updated homepage and download links
+system/ccd2iso: Updated homepage and download links
+system/convmv: Updated homepage and download links
+system/courier-prime: Updated homepage and download links
+system/cpu-g: Updated homepage and download links
+system/cups-bjnp: Updated homepage and download links
+system/d-feet: Updated for version 0.3.11.
+system/dfc: Updated homepage and download links
+system/dtrx: Updated homepage and download links
+system/eventlog: Updated homepage
+system/ext4magic: Updated homepage and download links
+system/firejail: Updated for version 0.9.46.
+system/fs-uae-arcade: Updated homepage and download links
+system/fs-uae-launcher: Updated homepage and download links
+system/fs-uae: Updated homepage and download links
+system/gconf-editor: Updated homepage and download links
+system/gimp-help: Updated homepage and download links
+system/gnome-commander: Updated homepage and download links
+system/gnome-terminal: Updated homepage and download links
+system/gnome-vfs: Updated homepage and download links
+system/gnomint: Updated homepage and download links
+system/gsmartcontrol: Updated homepage and download links
+system/hardinfo: Updated homepage and download links
+system/kbfs: Updated for version 1.0.22_20170512160033.
+system/kcm_touchpad: Updated homepage
+system/keybase: Updated for version 1.0.22.
+system/keylaunch: Updated homepage
+system/krusader: Updated for version git_20150309_13fa966.
+system/letsencrypt: Updated for version 0.14.1.
+system/libnatspec: Updated homepage and download links
+system/linuxconsoletools: Updated homepage and download links
+system/lxrandr: Updated homepage and download links
+system/lxsession: Updated homepage and download links
+system/lxtask: Updated homepage and download links
+system/lxterminal: Updated homepage
+system/ncdu: Updated homepage and download links.
+system/netatop: Updated homepage and download links.
+system/nss-pam-ldapd: Updated homepage and download links.
+system/nvidia-driver: Update DOWNLOAD urls.
+system/nvidia-kernel: Update DOWNLOAD urls.
+system/nvidia-legacy304-driver: Update DOWNLOAD urls.
+system/nvidia-legacy304-kernel: Update DOWNLOAD urls.
+system/nvidia-legacy340-driver: Update DOWNLOAD urls.
+system/nvidia-legacy340-kernel: Update DOWNLOAD urls.
+system/ohsnap: Updated homepage and download links.
+system/openrc-services: Updated for version 20170517.
+system/openrc: Updated for version 0.26.2.
+system/openscap: Updated homepage link.
+system/ossec-agent: Updated homepage link.
+system/ossec-local: Updated homepage link.
+system/ossec-server: Updated homepage link.
+system/passwordsafe: Updated homepage link.
+system/pgadmin3: Updated homepage link.
+system/polyglotman: Updated homepage and download links.
+system/postgresql: Updated homepage and download links.
+system/pwgen: Updated homepage and download links.
+system/qtgzmanager: Updated homepage and download links.
+system/salt: Updated for version 2016.11.5.
+system/sbotools: Updated for version 2.4.
+system/sysdig: Updated for version 0.16.0
+system/ttf-bitstream-vera: Updated homepage and download links
+system/ttf-paratype-pt-fonts: Updated homepage and download links
+system/vagrant: Updated for version 1.9.5.
+system/xfe: Updated for version 1.42.
+system/xosd: Updated for version 2.2.14.
+system/zpaq: Updated for version 7.15
++--------------------------+
 Sat May 13 00:01:17 UTC 2017
 academic/fet: Updated for version 5.31.6.
 academic/sage: Update README.

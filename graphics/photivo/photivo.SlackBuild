@@ -61,7 +61,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/Photivo-$PRGNAM-$SRC_VERSION.tar.gz || tar xvf $CWD/66a8c1082d88e6fb8e6ade73f373d28a6ac09721.tar.gz
+tar xvf $CWD/Photivo-$PRGNAM-$SRC_VERSION.tar.gz || tar xvf $CWD/tip.tar.gz
 cd Photivo-$PRGNAM-$SRC_VERSION
 find . -exec touch {} \;
 chown -R root:root .

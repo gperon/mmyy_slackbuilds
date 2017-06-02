@@ -2,7 +2,7 @@
 
 # Slackware build script for Photivo
 
-# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,8 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=photivo
-VERSION=${VERSION:-20150519}
-SRC_VERSION=66a8c1082d88
+VERSION=${VERSION:-20160525}
+SRC_VERSION="5d7d1cc4ef4d"
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -61,8 +61,8 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$SRC_VERSION.tar.gz || tar xvf $CWD/66a8c1082d88e6fb8e6ade73f373d28a6ac09721.tar.gz
-cd $PRGNAM-$SRC_VERSION
+tar xvf $CWD/Photivo-$PRGNAM-$SRC_VERSION.tar.gz || tar xvf $CWD/66a8c1082d88e6fb8e6ade73f373d28a6ac09721.tar.gz
+cd Photivo-$PRGNAM-$SRC_VERSION
 find . -exec touch {} \;
 chown -R root:root .
 find -L . \

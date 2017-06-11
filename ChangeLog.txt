@@ -1,3 +1,304 @@
+Sat Jun 10 03:48:34 UTC 2017
+academic/sage: Update README.
+audio/clyrics: Updated for version 0.08.
+audio/qjackctl: Updated for version 0.4.5.
+audio/quodlibet: Updated for version 3.9.1.
+desktop/ctwm: Updated for version 4.0.1.
+development/CImg: Updated for version 2.0.0.
+development/atom-amd64: Added (A hackable text editor).
+development/hhvm: Updated for version 3.19.2.
+development/mono-addins: Updated for version 1.3.5.
+development/mono: Updated for version 5.0.1.1.
+development/monodevelop: Remove nuget as dep.
+development/zulu-openjdk7: Added (Open Implementation of JDK).
+development/zulu-openjdk8: Added (Open Implementation of JDK).
+games/instead: Updated for version 3.0.1.
+games/iortcw: Updated for version 1.51.
+games/mame: Updated for version 0.186, speed up build.
+games/open-adventure: Added (Colossal Cave Adventure).
+games/yamagi-quake2: Updated for version 7.00.
+gis/Fiona: Reflect upstream change to source in md5sum.
+gis/saga-gis: Updated for version 4.1.0.
+graphics/opencollada: Updated for version 1.6.52
+graphics/paraview: Updated for version 5.4.0
+libraries/gnome-sharp: Updated for version 2.24.5.
+libraries/gtk-sharp: Updated for version 2.12.43.
+libraries/libgdiplus: Updated for version 5.4, new maintainer.
+libraries/libjson-rpc-cpp: Added (C++ framework for json-rpc).
+libraries/libmodplug: Updated for version 0.8.9.0
+libraries/libvirt-python: Updated for version 3.4.0.
+libraries/libvirt: Updated for version 3.4.0.
+libraries/libvirt: managesave running VMs on shutdown by default
+misc/dmg2img: Updated for version 1.6.7 + new maintainer.
+network/Electrum: Updated for version 2.8.3.
+network/TeamSpeak3: Updated for version 3.1.4, from multimedia.
+network/dovecot: Updated for version 2.2.30.2.
+network/firewalld: Added (dynamically managed firewall gui).
+network/openfire: Updated for version 4.1.4.
+network/skype: Put important notice in README.
+network/skypeforlinux: Added (an instant messaging app).
+network/slack: Fix symlink and remove ARCH detection.
+network/slimjet: Updated for version 14.0.14.0.
+network/tor-browser: Updated for version 7.0.
+office/texlive: Changed download location.
+perl/perl-Sidef: Updated for version 3.02.
+perl/perl-Sub-Quote: Updated for version 2.004000.
+perl/perl-local-lib: Updated for version 2.000023.
+python/python-faulthandler: Added (display Python traceback).
+python/python-fonttools: Updated for version 3.13.1.
+python/python-slip: Added (convenience & extension code).
+system/TLP: Updated for version 1.0.
+system/acd_cli: Removed (discontinued upstream).
+system/asbt: Updated for version 1.9.0.
+system/conky: Fixed building with gcc-7.
+system/fzf: Updated for version 0.16.8.
+system/inxi: Updated for version 2.3.12.
+system/openrc: Updated for version 0.27.
+system/phoronix-test-suite: Updated for version 7.2.0.
+system/qemu-guest-agent: Updated for version 2.9.0.
+system/qemu: Updated for version 2.9.0.
+system/the_silver_searcher: Updated for version 2.0.0.
++--------------------------+
+Tue Jun  6 00:57:41 UTC 2017
+academic/PyAMG: Update HOMEPAGE.
+academic/libqalculate: Updated for version 0.9.12
+academic/pyfits: Update deps.
+academic/qalculate-gtk: Updated for version 0.9.12
+audio/fst: Update DOWNLOAD url.
+business/stansoft: Fix architecture naming.
+desktop/oxygen-transparent: Removed.
+desktop/razorqt: Update HOMEPAGE.
+development/Bottleneck: Updated for version 1.2.1.
+development/QStlink: Added (cross-platform STLinkV2 GUI).
+development/acpica: Updated for version 20170531.
+development/atom: Updated for version 1.17.2.
+development/dwarf: Updated for version 20170416.
+development/gsoap: Updated for version 2.8.46.
+development/hugs98: Update DOWNLOAD url.
+development/jupyter-nbconvert: Updated for version 5.2.1.
+development/jupyter_console: Added (console frontend for Jupyter).
+development/ming: Updated for version 0.4.8.
+development/mkchroot: Updated for version 1.2.
+development/mutagen: Updated for version 1.38.
+development/ocambuild: Compress man pages.
+development/xdebug: Updated for version 2.5.4.
+games/bitfighter: Updated for version 019f.
+games/fuse-emulator: Updated for version 1.3.6.
+games/roccat-tools: Updated for version 5.6.0.
+gis/Fiona: Updated for version 1.7.7.
+gis/python-mapnik: Added (Python bindings for Mapnik).
+graphics/Pixie: Update HOMEPAGE.
+graphics/pngcrush: Fix x86 build.
+graphics/scour: Added (python SVG cleaner).
+libraries/QUSB: Fix VERSION.
+libraries/dropbox-python: Updated for version 7.3.1.
+libraries/libevhtp: Update DOWNLOAD url.
+libraries/libmseed: Update HOMEPAGE.
+libraries/libspectrum: Updated for version 1.3.4.
+libraries/libx86emu: Updated for version 1.11.
+libraries/live555: Updated for version 2017.06.04
+libraries/php-imagick: Updated for version 3.4.3.
+libraries/php-pgsql: Updated for version 5.6.30.
+misc/KeePassHttp: Updated for version 1.8.4.2.
+misc/gcp: Update to avoid dep download.
+misc/kasumi: Updated for version 2.5.
+misc/kronometer: Update HOMEPAGE and DOWNLOAD urls.
+misc/zyGrib: Updated for version 8.0.1 + new maintainer.
+network/cyrus-imapd: Update HOMEPAGE.
+network/heimdal: Compress man pages.
+network/hydra: Updated for version 8.5.
+network/libident: Added (library for querying IDENT servers).
+network/ngircd: Updated for version 24.
+network/opera: Updated for version 45.0.2552.888.
+network/seahub: Update DOWNLOAD url for x86_64.
+network/slack: Fix path on x86_64.
+network/twine: Updated for version 1.9.1.
+network/you-get: Updated for version 0.4.750.
+network/youtube-dl: Updated for version 2017.06.05.
+office/basket: Added doinst.sh.
+office/fop: Fix build against newer JDK.
+perl/perl-Date-Manip: Updated for version 6.59.
+perl/perl-ExtUtils-Install: Updated for version 2.14.
+perl/perl-Glib-Object-Introspection: Updated for version 0.043.
+perl/perl-Math-Decimal64: Updated for version 0.16.
+perl/perl-Mojolicious: Updated for version 7.33.
+perl/perl-linux-desktop-files: Updated for version 0.13.
+python/PyRIC: Added (Linux wireless library for Python).
+python/astroid: Updated for version 1.5.3.
+python/autopep8: Updated for version 1.3.2.
+python/jmespath: Updated for version 0.9.3.
+python/lxml: Updated for version 3.8.0
+python/netifaces: Updated for version 0.10.6
+python/paramiko: Updated for version 2.1.2.
+python/parsel: Updated for version 1.2.0.
+python/py: Updated for version 1.4.34.
+python/pytest: Updated for version 3.1.1.
+python/python-keyring: Updated for version 10.3.3.
+python/regex: Updated for version 2017.05.26.
+python/selenium: Updated for version 3.4.3.
+python/stevedore: Updated for version 1.23.0.
+system/ZoneMinder: Fix man8 path.
+system/apcupsd: Update build script.
+system/cldr-emoji-annotation: Added (CLDR annotation files).
+system/daemontools: Updated for version 0.76.
+system/encfs: Updated for version 1.9.1.
+system/firetools: Fix library path on x86_64.
+system/fish: Updated for version 2.6.0.
+system/fswatch: Added (A cross-platform file change monitor).
+system/gammu: Updated for version 1.38.3.
+system/hwinfo: Updated for version 21.46.
+system/isdct: Update MD5SUM.
+system/kbfs: Updated for version 1.0.24_20170601160157.
+system/redis: Updated for version 3.2.9.
+system/virtualbox-addons: Updated for version 5.0.40.
+system/virtualbox-extension-pack: Updated for version 5.0.40.
+system/virtualbox-kernel-addons: Updated for version 5.0.40.
+system/virtualbox-kernel: Updated for version 5.0.40.
+system/virtualbox: Updated for version 5.0.40.
+system/xonsh: Updated for version 0.5.10.
++--------------------------+
+Sat Jun  3 01:03:32 UTC 2017
+academic/GeoGebra: Updated for version 5.0.361.0.
+academic/scidavis: Updated for version 1.17.
+academic/solfege: Update HOMEPAGE and DOWNLOAD urls.
+audio/gogglesmm: Updated for version 1.1.8.
+desktop/ctwm: Updated for version 4.0.0.
+desktop/hsetroot: Updated for version 1.0.2.
+desktop/i3lock: Updated for version 2.9.
+desktop/qt5ct: Updated for version 0.33.
+desktop/qtpass: Fix desktop icon.
+desktop/redshift: Updated for version 1.11 + new maintainer.
+desktop/wmdate: Fix dockapp header path.
+development/Sphinx: Updated for version 1.6.2.
+development/ahven: Updated for version 2.6.
+development/dmd: Updated for version 2.074.1.
+development/eclim: Update DEP.
+development/elixir: Update HOMEPAGE.
+development/extra-cmake-modules: Updated for version 5.34.0.
+development/fossil: Updated for version 2.2.
+development/hopper: Updated for version 4.2.2.
+development/kotlin: Added (Kotlin Compiler)
+development/mkchroot: Updated for version 1.0.
+development/mm-common: Update HOMEPAGE.
+development/monotone: Removed (Not compatible with Botan 2).
+development/newtonsoft-json: Switch to i586.
+development/vscode: Fix build on x86.
+games/FlightGear-data: Updated for version 2017.2.1.
+games/FlightGear: Updated for version 2017.2.1.
+games/fgrun: Updated for version 2016.4.0.
+games/glob2: Update HOMEPAGE.
+games/opendune: Fix x86 build.
+games/scummvm-libretro: Update HOMEPAGE.
+games/stone_soup: Updated for version 0.20.0.
+games/tome-ah: Update HOMEPAGE.
+games/xarchon: Fix build on x86.
+gis/SFCGAL: Updated for version 1.3.1.
+gis/osm2pgsql: Updated for version git28ce89d.
+gis/qgis: Updated for version 2.18.9.
+graphics/FreeCAD: Update HOMEPAGE.
+graphics/darktable: Updated for version 2.2.5.
+graphics/gmic: Updated for version 2.0.0.
+graphics/opencollada: Updated for version 1.6.51
+graphics/openimageio: Updated for version 1.7.15
+graphics/paraview: Update HOMEPAGE and DOWNLOAD urls.
+graphics/photivo: Updated for version 20160525.
+graphics/qcad: Updated for version 3.17.1.1
+graphics/vsxu: Updated for version 0.6.1.0
+ham/chirp: Updated for version 20170526.
+libraries/SimGear: Updated for version 2017.2.1.
+libraries/allegro: Update HOMEPAGE.
+libraries/allegro: Updated for version 5.2.2.0.
+libraries/dropbox-python: Fixed deps.
+libraries/folly: x86 is not supported.
+libraries/frei0r: Updated for version 1.6.0.
+libraries/gnome-vfsmm: Update HOMEPAGE.
+libraries/imlib2_loaders: Added (image loaders for imlib2).
+libraries/libc++: Fix build.
+libraries/libedit: Updated for version 20170329_3.1.
+libraries/libfilezilla: Updated for version 0.9.2.
+libraries/libglademm: Update HOMEPAGE.
+libraries/libgnomecanvasmm: Update HOMEPAGE.
+libraries/libgnomemm: Update HOMEPAGE.
+libraries/libgnomeuimm: Update HOMEPAGE.
+libraries/libopenshot: Updated for version 0.1.7
+libraries/libtomcrypt: Fix build failure on x86.
+libraries/libuv: Updated for version 1.12.0.
+libraries/libversion: Fix build on x86.
+libraries/munkres: Updated for version 1.0.10.
+libraries/pjsip: Fix build on x86.
+libraries/proxygen: x86 is not supported.
+libraries/pyte: Updated for version 0.6.0.
+libraries/wangle: x86 is not supported.
+libraries/webkit2gtk: Updated for version 2.16.3.
+misc/mosquitto: Updated for version 1.4.12
+misc/projectM: Patched for gcc 6/7.
+multimedia/OpenPHT: Updated for version 1.8.0.148.
+multimedia/miro: Fix build against new ffmpeg.
+multimedia/mkvtoolnix: Removed wxPython from REQUIRES.
+multimedia/openshot: Updated for version 2.3.4
+multimedia/opera-developer-ffmpeg-codecs: Updated for version 59.0.
+multimedia/opera-ffmpeg-codecs: Updated for version 58.0.3029.110.
+multimedia/simpleburn: Updated for version 1.8.3, moved from system.
+network/avahi: Updated for version 0.6.32.
+network/bitlbee: Fixed md5sum.
+network/etherpad-lite: Updated for version 1.6.1.
+network/filezilla: Updated for version 3.26.1.
+network/icecat: Fix build.
+network/ip2location-c: Update MD5SUM.
+network/nbd: Updated for version 3.16.1
+network/ngrep: Fix build.
+network/opera: Updated for version 45.0.2552.881.
+network/psad: Do not download signature by default.
+network/radicale: Updated for version 1.1.3.
+network/sslstrip: Change dependency
+network/telegram: Updated for version 1.1.7.
+network/wireshark: Updated for version 2.2.7.
+office/basket: Added (KDE note-taking application).
+office/kmymoney: Fix build failure.
+office/tasksh: Fix HOMEPAGE and DOWNLOAD urls.
+perl/perl-CPAN-Perl-Releases: Updated for version 3.22.
+perl/perl-ExtUtils-Install: Updated for version 2.12.
+perl/perl-Inline-C: Updated for version 0.78.
+perl/perl-Module-Build: Updated for version 0.4224.
+perl/perl-Mojolicious: Updated for version 7.32.
+python/APScheduler: Fixed deps.
+python/ipython: Upgraded for version 5.4.0.
+python/pytest-runner: Fixed deps.
+python/pytest: Fixed deps.
+python/python-d2to1: Added (distutils2 setup.cfg for setuptools).
+python/python-rubymarshal: Added (read/write Ruby-marshalled data).
+python/python-stsci.distutils: Added (STScI's packaging utilities).
+python/python-twisted-web2: Removed (broken and abandoned upstream).
+python/python3-ipython: Added missing dependency.
+python/python3-ipython: Updated for version 6.1.0.
+python/python3-jupyter-ipykernel: Added missing dependencies.
+python/sphinxcontrib-plantuml: Added (Sphinx extension).
+system/AnonymousPro: Update HOMEPAGE and DOWNLOAD urls.
+system/ack: Updated for version 2.18.
+system/agedu: Added (time-sensitive 'du' utility).
+system/apcupsd: fixup a restart issue + minor tweaks
+system/foomatic-db: Updated for version 20170531.
+system/gradm: Removed.
+system/guake: Updated for version 0.8.9.
+system/hh: Update MD5SUM.
+system/krusader: Updated for version 3.0.1.
+system/lxterminal: Updated for version 20170514_0f2ca01.
+system/mongodb: x86 is no longer supported.
+system/newrelic-sysmond: Fix MD5SUM.
+system/packagekit: Update README.
+system/pass: Removed (duplicate of password-store).
+system/password-store: Updated for version 1.7.1, new maintainer.
+system/paxctl: Update README.
+system/postgresql: Updated for version 9.6.3.
+system/setconf: Added (configuration utility)
+system/terminix: Update MD5SUM.
+system/tinyvm: Fix build.
+system/trashy: Updated for version 2.0.
+system/veracrypt: Updated for version git_5103f19e.
+system/wine-staging: Updated for version 2.9.
+system/winetricks: Updated for version 20170517.
+system/xen: Updated for version 4.8.1.
++--------------------------+
 Sat May 27 00:34:06 UTC 2017
 academic/arpack-ng: Updated for version 3.5.0.
 academic/easy_spice: Added (A Simple Frontend for SPICE).

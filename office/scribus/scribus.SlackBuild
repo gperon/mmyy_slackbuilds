@@ -74,13 +74,21 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+ patch -p1 -i $CWD/findOpenSSL.patch
+
+ sed \
+        -e 's|#!/usr/bin/python|#!/usr/bin/python2|' \
+        -e 's|#!/usr/bin/env python|#!/usr/bin/env python2|' \
+        -i scribus/plugins/scriptplugin/{samples,scripts}/*
+
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
   -DLIB_SUFFIX=${LIBDIRSUFFIX} \
-  -DRENDER_LIB=CAIRO
-
+  -DRENDER_LIB=CAIRO \
+  -DWANT_GRAPHICSMAGICK=1
+exit
 make -j7
 make install DESTDIR=$PKG
 

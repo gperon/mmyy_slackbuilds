@@ -5,6 +5,6 @@ DOWNLOAD="https://downloads.sourceforge.net/project/scribus/scribus-devel/1.5.3/
 MD5SUM="942fdd3c1927b8c84ca8abae7cc90a78"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="qt5"
+REQUIRES="qt5 poppler-qt5 harfbuzz GraphicsMagick"
 MAINTAINER="Heinz Wiesinger"
 EMAIL="pprkut@liwjatan.at"

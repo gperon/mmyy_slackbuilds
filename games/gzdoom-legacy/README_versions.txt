@@ -4,7 +4,7 @@ of gzdoom. Supported versions:
 
 1.8.09 - last version to use SDL1 (good for older/slower systems).
 1.9.1 - last version to not require OpenGL 3.0 (good for nouveau).
-2.4.0 - latest version of gzdoom (best choice for fast modern systems).
+2.4.0 - latest version of gzdoom 2.x.
 
 By default, 2.4.0 is built (as per the .info file). If you'd like to
 try one of the others, download the source, save it in the SlackBuild

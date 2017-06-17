@@ -88,7 +88,7 @@ cmake \
   -DLIB_SUFFIX=${LIBDIRSUFFIX} \
   -DRENDER_LIB=CAIRO \
   -DWANT_GRAPHICSMAGICK=1
-exit
+
 make -j7
 make install DESTDIR=$PKG
 

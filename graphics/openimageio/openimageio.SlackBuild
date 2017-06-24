@@ -75,7 +75,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # save this for GCC 7.0
-#sed -i "s|std=c++11|std=c++11 -Wno-error=maybe-uninitialized -Wno-error=format-truncation -Wno-error=noexcept-type -faligned-new|" CMakeLists.txt
+sed -i "s|std=c++11|std=c++11 -Wno-error=maybe-uninitialized -Wno-error=format-truncation -Wno-error=noexcept-type -faligned-new|" CMakeLists.txt
 
 mkdir -p build
 cd build
@@ -89,6 +89,7 @@ cd build
     -DDOC_INSTALL_DIR:PATH=doc/$PRGNAM-$VERSION \
     -DLIB_INSTALL_DIR:PATH=lib$LIBDIRSUFFIX \
     -DPYLIB_INSTALL_DIR:PATH=$PYLIB_INSTALL_DIRECTORY \
+    -DPYLIB3_INSTALL_DIR:PATH=$PYLIB3_INSTALL_DIRECTORY \
     -DPYLIB_INCLUDE_SONAME:BOOL=ON \
     -DPYLIB_LIB_PREFIX:BOOL=OFF \
     -DUSE_OCIO:BOOL=ON \

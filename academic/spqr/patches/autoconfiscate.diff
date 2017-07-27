@@ -1,0 +1,1127 @@
+diff --git a/Demo/Makefile.am b/Demo/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Demo/Makefile.am
+@@ -0,0 +1,115 @@
++AM_CPPFLAGS = -I$(top_srcdir)/Include $(CHOLMOD_CFLAGS) $(SUITESPARSECONFIG_CFLAGS)
++
++EXTRA_DIST = \
++	README.txt \
++	qrdemo_out.txt \
++	qrdemoc_out.txt
++
++check_PROGRAMS = \
++	qrsimple \
++	qrsimplec \
++	qrdemo \
++	qrdemoc
++
++qrsimple_SOURCES = qrsimple.cpp
++qrsimple_LDADD = $(top_builddir)/Source/libspqr.la $(CHOLMOD_LIBS)
++
++qrsimplec_SOURCES = qrsimplec.c
++qrsimplec_LDADD = $(top_builddir)/Source/libspqr.la $(CHOLMOD_LIBS)
++
++qrdemo_SOURCES = qrdemo.cpp
++qrdemo_LDADD = $(top_builddir)/Source/libspqr.la $(CHOLMOD_LIBS)
++
++qrdemoc_SOURCES = qrdemoc.c
++qrdemoc_LDADD = $(top_builddir)/Source/libspqr.la $(CHOLMOD_LIBS)
++
++MATRICES = \
++	$(top_srcdir)/Matrix/GD01_b.mtx \
++	$(top_srcdir)/Matrix/GD06_theory.mtx \
++	$(top_srcdir)/Matrix/GD98_a.mtx \
++	$(top_srcdir)/Matrix/LFAT5.mtx \
++	$(top_srcdir)/Matrix/Ragusa16.mtx \
++	$(top_srcdir)/Matrix/Tina_AskCal.mtx \
++	$(top_srcdir)/Matrix/Tina_AskCal_perm.mtx \
++	$(top_srcdir)/Matrix/a0.mtx \
++	$(top_srcdir)/Matrix/a04.mtx \
++	$(top_srcdir)/Matrix/a1.mtx \
++	$(top_srcdir)/Matrix/a2.mtx \
++	$(top_srcdir)/Matrix/a4.mtx \
++	$(top_srcdir)/Matrix/ash219.mtx \
++	$(top_srcdir)/Matrix/b1_ss.mtx \
++	$(top_srcdir)/Matrix/bcspwr01.mtx \
++	$(top_srcdir)/Matrix/bfwa62.mtx \
++	$(top_srcdir)/Matrix/c2.mtx \
++	$(top_srcdir)/Matrix/c32.mtx \
++	$(top_srcdir)/Matrix/lfat5b.mtx \
++	$(top_srcdir)/Matrix/lp_share1b.mtx \
++	$(top_srcdir)/Matrix/lpi_galenet.mtx \
++	$(top_srcdir)/Matrix/lpi_itest6.mtx \
++	$(top_srcdir)/Matrix/r2.mtx \
++	$(top_srcdir)/Matrix/s32.mtx \
++	$(top_srcdir)/Matrix/west0067.mtx \
++	$(top_srcdir)/Matrix/young1c.mtx \
++	$(top_srcdir)/Matrix/lp_e226_transposed.mtx
++
++check-local: $(check_PROGRAMS) $(MATRICES)
++	-./qrsimple < $(top_srcdir)/Matrix/ash219.mtx
++	-./qrsimplec < $(top_srcdir)/Matrix/ash219.mtx
++	-./qrsimple < $(top_srcdir)/Matrix/west0067.mtx
++	-./qrsimplec < $(top_srcdir)/Matrix/west0067.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/a2.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/r2.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/a04.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/a2.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/west0067.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/c2.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/a0.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/lfat5b.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/bfwa62.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/LFAT5.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/b1_ss.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/bcspwr01.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/lpi_galenet.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/lpi_itest6.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/ash219.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/a4.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/s32.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/c32.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/lp_share1b.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/a1.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/GD06_theory.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/GD01_b.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/Tina_AskCal_perm.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/Tina_AskCal.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/GD98_a.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/Ragusa16.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/young1c.mtx
++	-./qrdemo < $(top_srcdir)/Matrix/lp_e226_transposed.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/a2.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/r2.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/a04.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/a2.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/west0067.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/c2.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/a0.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/lfat5b.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/bfwa62.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/LFAT5.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/b1_ss.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/bcspwr01.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/lpi_galenet.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/lpi_itest6.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/ash219.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/a4.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/s32.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/c32.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/lp_share1b.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/a1.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/GD06_theory.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/GD01_b.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/Tina_AskCal_perm.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/Tina_AskCal.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/GD98_a.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/Ragusa16.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/young1c.mtx
++	-./qrdemoc < $(top_srcdir)/Matrix/lp_e226_transposed.mtx
+diff --git a/Doc/Makefile.am b/Doc/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Doc/Makefile.am
+@@ -0,0 +1,29 @@
++EXTRA_DIST = \
++	ChangeLog \
++	License.txt \
++	README.txt \
++	gpl.txt
++
++dist_noinst_DATA = \
++	spqr_user_guide.tex \
++	spqr_user_guide.bib
++
++dist_pdf_DATA = \
++	spqr_user_guide.pdf \
++	algo_spqr.pdf \
++	spqr.pdf
++
++TEX = TEXINPUTS="$(srcdir):" pdflatex -interaction nonstopmode -file-line-error
++BIB = BIBINPUTS="$(srcdir):" bibtex
++%.pdf: %.tex %.bbl
++	$(TEX) $*
++	while grep -q "Rerun to get cross-references right" $*.log; do \
++		$(TEX) $*; \
++	done
++%.bbl: %.aux %.bib
++	$(BIB) $*
++%.aux: %.tex
++	$(TEX) $*
++
++CLEANFILES = *.aux *.bbl *.blg *.log *.toc
++MAINTAINERCLEANFILES = $(dist_pdf_DATA)
+diff --git a/Include/Makefile.am b/Include/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Include/Makefile.am
+@@ -0,0 +1,5 @@
++pkginclude_HEADERS = \
++	SuiteSparseQR.hpp \
++	SuiteSparseQR_C.h \
++	SuiteSparseQR_definitions.h \
++	spqr.hpp
+diff --git a/Makefile.am b/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Makefile.am
+@@ -0,0 +1,9 @@
++ACLOCAL_AMFLAGS = -I m4
++
++SUBDIRS = Include Source Matrix Demo Tcov Doc
++EXTRA_DIST = README.txt
++
++pkgconfig_DATA = spqr.pc
++
++CODE_COVERAGE_BRANCH_COVERAGE = 1
++@CODE_COVERAGE_RULES@
+diff --git a/Matrix/Makefile.am b/Matrix/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Matrix/Makefile.am
+@@ -0,0 +1,36 @@
++EXTRA_DIST = \
++	README.txt
++
++dist_noinst_DATA = \
++	GD01_b.mtx \
++	GD06_theory.mtx \
++	GD98_a.mtx \
++	LFAT5.mtx \
++	Ragusa16.mtx \
++	Tina_AskCal.mtx \
++	Tina_AskCal_perm.mtx \
++	a0.mtx \
++	a04.mtx \
++	a1.mtx \
++	a2.mtx \
++	a4.mtx \
++	arrow.mtx \
++	ash219.mtx \
++	b1_ss.mtx \
++	bcspwr01.mtx \
++	bfwa62.mtx \
++	c2.mtx \
++	c32.mtx \
++	lfat5b.mtx \
++	lp_share1b.mtx \
++	lpi_galenet.mtx \
++	lpi_itest6.mtx \
++	pwr01b.mtx \
++	r2.mtx \
++	s32.mtx \
++	west0067.mtx \
++	young1c.mtx \
++	Franz6_id1959_aug.mtx \
++	Groebner_id2003_aug.mtx \
++	lp_e226.mtx \
++	lp_e226_transposed.mtx
+diff --git a/Source/Makefile.am b/Source/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Source/Makefile.am
+@@ -0,0 +1,56 @@
++AM_CPPFLAGS = -I$(top_srcdir)/Include $(TBB_CFLAGS) $(CHOLMOD_CFLAGS) $(SUITESPARSECONFIG_CFLAGS)
++if !EXPERT
++AM_CPPFLAGS += -DNEXPERT
++endif
++if TBB
++AM_CPPFLAGS += -DHAVE_TBB
++endif
++
++lib_LTLIBRARIES = libspqr.la
++
++libspqr_la_SOURCES = \
++	SuiteSparseQR.cpp \
++	SuiteSparseQR_C.cpp \
++	SuiteSparseQR_expert.cpp \
++	SuiteSparseQR_qmult.cpp \
++	spqr_1colamd.cpp \
++	spqr_1factor.cpp \
++	spqr_1fixed.cpp \
++	spqr_analyze.cpp \
++	spqr_append.cpp \
++	spqr_assemble.cpp \
++	spqr_cpack.cpp \
++	spqr_csize.cpp \
++	spqr_cumsum.cpp \
++	spqr_debug.cpp \
++	spqr_factorize.cpp \
++	spqr_fcsize.cpp \
++	spqr_freefac.cpp \
++	spqr_freenum.cpp \
++	spqr_freesym.cpp \
++	spqr_front.cpp \
++	spqr_fsize.cpp \
++	spqr_happly.cpp \
++	spqr_happly_work.cpp \
++	spqr_hpinv.cpp \
++	spqr_kernel.cpp \
++	spqr_larftb.cpp \
++	spqr_maxcolnorm.cpp \
++	spqr_panel.cpp \
++	spqr_parallel.cpp \
++	spqr_rconvert.cpp \
++	spqr_rcount.cpp \
++	spqr_rhpack.cpp \
++	spqr_rmap.cpp \
++	spqr_rsolve.cpp \
++	spqr_shift.cpp \
++	spqr_stranspose1.cpp \
++	spqr_stranspose2.cpp \
++	spqr_tol.cpp \
++	spqr_trapezoidal.cpp \
++	spqr_type.cpp
++
++libspqr_la_LIBADD = $(TBB_LIBS) $(CHOLMOD_LIBS) $(SUITESPARSECONFIG_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) -lm $(CODE_COVERAGE_LIBS)
++libspqr_la_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS)
++libspqr_la_CXXFLAGS = $(AM_CXXFLAGS) $(CODE_COVERAGE_CXXFLAGS)
++libspqr_la_LDFLAGS = -no-undefined -release $(PACKAGE_VERSION)
+diff --git a/Tcov/Makefile.am b/Tcov/Makefile.am
+new file mode 100644
+--- /dev/null
++++ b/Tcov/Makefile.am
+@@ -0,0 +1,52 @@
++AM_CPPFLAGS = -I$(top_srcdir)/Include $(CHOLMOD_CFLAGS) $(SUITESPARSECONFIG_CFLAGS)
++
++EXTRA_DIST = \
++	README.txt
++
++dist_noinst_DATA = \
++	matrix1.txt \
++	matrixlist.txt
++
++if CODE_COVERAGE_ENABLED
++check_PROGRAMS = \
++	qrtest
++
++qrtest_SOURCES = qrtestc.c qrtest.cpp
++qrtest_LDADD = $(top_builddir)/Source/libspqr.la $(CHOLMOD_LIBS) $(SUITESPARSECONFIG_LIBS)
++
++MATRICES = \
++	$(srcdir)/matrix1.txt \
++	$(srcdir)/matrixlist.txt \
++	$(top_srcdir)/Matrix/GD01_b.mtx \
++	$(top_srcdir)/Matrix/GD06_theory.mtx \
++	$(top_srcdir)/Matrix/GD98_a.mtx \
++	$(top_srcdir)/Matrix/LFAT5.mtx \
++	$(top_srcdir)/Matrix/Ragusa16.mtx \
++	$(top_srcdir)/Matrix/Tina_AskCal.mtx \
++	$(top_srcdir)/Matrix/Tina_AskCal_perm.mtx \
++	$(top_srcdir)/Matrix/a0.mtx \
++	$(top_srcdir)/Matrix/a04.mtx \
++	$(top_srcdir)/Matrix/a1.mtx \
++	$(top_srcdir)/Matrix/a2.mtx \
++	$(top_srcdir)/Matrix/a4.mtx \
++	$(top_srcdir)/Matrix/arrow.mtx \
++	$(top_srcdir)/Matrix/ash219.mtx \
++	$(top_srcdir)/Matrix/b1_ss.mtx \
++	$(top_srcdir)/Matrix/bcspwr01.mtx \
++	$(top_srcdir)/Matrix/bfwa62.mtx \
++	$(top_srcdir)/Matrix/c2.mtx \
++	$(top_srcdir)/Matrix/c32.mtx \
++	$(top_srcdir)/Matrix/lfat5b.mtx \
++	$(top_srcdir)/Matrix/lp_share1b.mtx \
++	$(top_srcdir)/Matrix/lpi_galenet.mtx \
++	$(top_srcdir)/Matrix/lpi_itest6.mtx \
++	$(top_srcdir)/Matrix/r2.mtx \
++	$(top_srcdir)/Matrix/s32.mtx \
++	$(top_srcdir)/Matrix/west0067.mtx
++
++check-local: $(check_PROGRAMS) $(MATRICES)
++	./qrtest $(srcdir)/matrixlist.txt > qrtest_out.txt
++	./qrtest $(srcdir)/matrix1.txt > qrtest_out1.txt
++endif
++
++CLEANFILES = qrtest_out.txt qrtest_out1.txt
+diff --git a/configure.ac b/configure.ac
+new file mode 100644
+--- /dev/null
++++ b/configure.ac
+@@ -0,0 +1,119 @@
++#                                               -*- Autoconf -*-
++# Process this file with autoconf to produce a configure script.
++
++AC_PREREQ([2.69])
++AC_INIT([SPQR],[2.0.8],[DrTimothyAldenDavis@gmail.com],[spqr],[http://www.suitesparse.com/])
++AC_CONFIG_SRCDIR([Source/spqr_kernel.cpp])
++AC_CONFIG_AUX_DIR([build-aux])
++AC_CONFIG_MACRO_DIR([m4])
++AC_CONFIG_HEADERS([config.h])
++AM_INIT_AUTOMAKE([foreign])
++AM_SILENT_RULES([yes])
++LT_INIT([disable-static])
++
++# Checks for programs.
++PKG_PROG_PKG_CONFIG
++AC_PROG_INSTALL
++AC_PROG_F77
++AC_PROG_CC
++AC_PROG_CXX
++AC_LANG([C++])
++AX_CODE_COVERAGE
++
++AC_ARG_ENABLE([expert],
++	[AS_HELP_STRING(
++		[--disable-expert],
++		[compile without the min 2-norm solution option])],
++	[],
++	[AS_VAR_SET([enable_expert], [yes])])
++
++AC_ARG_WITH([tbb],
++	[AS_HELP_STRING(
++		[--without-tbb],
++		[do not use Intel Threading Building Blocks for multithreading])],
++	[],
++	[AS_VAR_SET([with_tbb], [yes])])
++
++AS_VAR_SET([LIBS_SAVED], [$LIBS])
++
++# Checks for libraries.
++AC_CHECK_LIB([m], [sqrt])
++
++AX_BLAS(
++	[],
++	[AC_MSG_ERROR([cannot find BLAS])])
++
++AX_LAPACK(
++	[],
++	[AC_MSG_ERROR([cannot find LAPACK])])
++
++PKG_CHECK_MODULES([SUITESPARSECONFIG], [suitesparseconfig])
++PKG_CHECK_MODULES([CHOLMOD], [cholmod])
++
++# Checks for header files.
++AC_CHECK_HEADERS([float.h stdlib.h])
++
++AS_IF([test "x$with_tbb" = "xyes"], [
++	AC_CHECK_HEADERS([tbb/task_scheduler_init.h tbb/task.h])
++])
++
++# Checks for typedefs, structures, and compiler characteristics.
++AC_TYPE_SIZE_T
++
++# Checks for library functions.
++AC_CHECK_FUNCS([sqrt])
++
++AS_VAR_SET([LIBS], [$LIBS_SAVED])
++
++AS_IF([test "x$with_tbb" = "xyes"], [
++	AC_SUBST([TBB_CFLAGS], [""])
++	AC_SUBST([TBB_LIBS], ["-ltbb"])
++])
++
++AC_MSG_CHECKING([whether to use expert routines])
++AC_MSG_RESULT([$enable_expert])
++AM_CONDITIONAL([EXPERT], [test "x$enable_expert" = "xyes"])
++
++AC_MSG_CHECKING([whether to use Intel Threading Building Blocks])
++AC_MSG_RESULT([$with_tbb])
++AM_CONDITIONAL([TBB], [test "x$with_tbb" = "xyes"])
++
++PKG_INSTALLDIR
++AC_CONFIG_FILES([
++	spqr.pc
++	Makefile
++	Demo/Makefile
++	Doc/Makefile
++	Include/Makefile
++	Matrix/Makefile
++	Source/Makefile
++	Tcov/Makefile
++])
++#AC_CONFIG_LINKS([Matrix:Matrix])  # Can't link an entire directory?
++AC_CONFIG_LINKS([Matrix/GD01_b.mtx:Matrix/GD01_b.mtx])
++AC_CONFIG_LINKS([Matrix/GD06_theory.mtx:Matrix/GD06_theory.mtx])
++AC_CONFIG_LINKS([Matrix/GD98_a.mtx:Matrix/GD98_a.mtx])
++AC_CONFIG_LINKS([Matrix/LFAT5.mtx:Matrix/LFAT5.mtx])
++AC_CONFIG_LINKS([Matrix/Ragusa16.mtx:Matrix/Ragusa16.mtx])
++AC_CONFIG_LINKS([Matrix/Tina_AskCal.mtx:Matrix/Tina_AskCal.mtx])
++AC_CONFIG_LINKS([Matrix/Tina_AskCal_perm.mtx:Matrix/Tina_AskCal_perm.mtx])
++AC_CONFIG_LINKS([Matrix/a0.mtx:Matrix/a0.mtx])
++AC_CONFIG_LINKS([Matrix/a04.mtx:Matrix/a04.mtx])
++AC_CONFIG_LINKS([Matrix/a1.mtx:Matrix/a1.mtx])
++AC_CONFIG_LINKS([Matrix/a2.mtx:Matrix/a2.mtx])
++AC_CONFIG_LINKS([Matrix/a4.mtx:Matrix/a4.mtx])
++AC_CONFIG_LINKS([Matrix/arrow.mtx:Matrix/arrow.mtx])
++AC_CONFIG_LINKS([Matrix/ash219.mtx:Matrix/ash219.mtx])
++AC_CONFIG_LINKS([Matrix/b1_ss.mtx:Matrix/b1_ss.mtx])
++AC_CONFIG_LINKS([Matrix/bcspwr01.mtx:Matrix/bcspwr01.mtx])
++AC_CONFIG_LINKS([Matrix/bfwa62.mtx:Matrix/bfwa62.mtx])
++AC_CONFIG_LINKS([Matrix/c2.mtx:Matrix/c2.mtx])
++AC_CONFIG_LINKS([Matrix/c32.mtx:Matrix/c32.mtx])
++AC_CONFIG_LINKS([Matrix/lfat5b.mtx:Matrix/lfat5b.mtx])
++AC_CONFIG_LINKS([Matrix/lp_share1b.mtx:Matrix/lp_share1b.mtx])
++AC_CONFIG_LINKS([Matrix/lpi_galenet.mtx:Matrix/lpi_galenet.mtx])
++AC_CONFIG_LINKS([Matrix/lpi_itest6.mtx:Matrix/lpi_itest6.mtx])
++AC_CONFIG_LINKS([Matrix/r2.mtx:Matrix/r2.mtx])
++AC_CONFIG_LINKS([Matrix/s32.mtx:Matrix/s32.mtx])
++AC_CONFIG_LINKS([Matrix/west0067.mtx:Matrix/west0067.mtx])
++AC_OUTPUT
+diff --git a/m4/ax_blas.m4 b/m4/ax_blas.m4
+new file mode 100644
+--- /dev/null
++++ b/m4/ax_blas.m4
+@@ -0,0 +1,238 @@
++# ===========================================================================
++#         https://www.gnu.org/software/autoconf-archive/ax_blas.html
++# ===========================================================================
++#
++# SYNOPSIS
++#
++#   AX_BLAS([ACTION-IF-FOUND[, ACTION-IF-NOT-FOUND]])
++#
++# DESCRIPTION
++#
++#   This macro looks for a library that implements the BLAS linear-algebra
++#   interface (see http://www.netlib.org/blas/). On success, it sets the
++#   BLAS_LIBS output variable to hold the requisite library linkages.
++#
++#   To link with BLAS, you should link with:
++#
++#     $BLAS_LIBS $LIBS $FLIBS
++#
++#   in that order. FLIBS is the output variable of the
++#   AC_F77_LIBRARY_LDFLAGS macro (called if necessary by AX_BLAS), and is
++#   sometimes necessary in order to link with F77 libraries. Users will also
++#   need to use AC_F77_DUMMY_MAIN (see the autoconf manual), for the same
++#   reason.
++#
++#   Many libraries are searched for, from ATLAS to CXML to ESSL. The user
++#   may also use --with-blas=<lib> in order to use some specific BLAS
++#   library <lib>. In order to link successfully, however, be aware that you
++#   will probably need to use the same Fortran compiler (which can be set
++#   via the F77 env. var.) as was used to compile the BLAS library.
++#
++#   ACTION-IF-FOUND is a list of shell commands to run if a BLAS library is
++#   found, and ACTION-IF-NOT-FOUND is a list of commands to run it if it is
++#   not found. If ACTION-IF-FOUND is not specified, the default action will
++#   define HAVE_BLAS.
++#
++# LICENSE
++#
++#   Copyright (c) 2008 Steven G. Johnson <stevenj@alum.mit.edu>
++#
++#   This program is free software: you can redistribute it and/or modify it
++#   under the terms of the GNU General Public License as published by the
++#   Free Software Foundation, either version 3 of the License, or (at your
++#   option) any later version.
++#
++#   This program is distributed in the hope that it will be useful, but
++#   WITHOUT ANY WARRANTY; without even the implied warranty of
++#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
++#   Public License for more details.
++#
++#   You should have received a copy of the GNU General Public License along
++#   with this program. If not, see <https://www.gnu.org/licenses/>.
++#
++#   As a special exception, the respective Autoconf Macro's copyright owner
++#   gives unlimited permission to copy, distribute and modify the configure
++#   scripts that are the output of Autoconf when processing the Macro. You
++#   need not follow the terms of the GNU General Public License when using
++#   or distributing such scripts, even though portions of the text of the
++#   Macro appear in them. The GNU General Public License (GPL) does govern
++#   all other use of the material that constitutes the Autoconf Macro.
++#
++#   This special exception to the GPL applies to versions of the Autoconf
++#   Macro released by the Autoconf Archive. When you make and distribute a
++#   modified version of the Autoconf Macro, you may extend this special
++#   exception to the GPL to apply to your modified version as well.
++
++#serial 15
++
++AU_ALIAS([ACX_BLAS], [AX_BLAS])
++AC_DEFUN([AX_BLAS], [
++AC_PREREQ(2.50)
++AC_REQUIRE([AC_F77_LIBRARY_LDFLAGS])
++AC_REQUIRE([AC_CANONICAL_HOST])
++ax_blas_ok=no
++
++AC_ARG_WITH(blas,
++	[AS_HELP_STRING([--with-blas=<lib>], [use BLAS library <lib>])])
++case $with_blas in
++	yes | "") ;;
++	no) ax_blas_ok=disable ;;
++	-* | */* | *.a | *.so | *.so.* | *.o) BLAS_LIBS="$with_blas" ;;
++	*) BLAS_LIBS="-l$with_blas" ;;
++esac
++
++# Get fortran linker names of BLAS functions to check for.
++AC_F77_FUNC(sgemm)
++AC_F77_FUNC(dgemm)
++
++ax_blas_save_LIBS="$LIBS"
++LIBS="$LIBS $FLIBS"
++
++# First, check BLAS_LIBS environment variable
++if test $ax_blas_ok = no; then
++if test "x$BLAS_LIBS" != x; then
++	save_LIBS="$LIBS"; LIBS="$BLAS_LIBS $LIBS"
++	AC_MSG_CHECKING([for $sgemm in $BLAS_LIBS])
++	AC_TRY_LINK_FUNC($sgemm, [ax_blas_ok=yes], [BLAS_LIBS=""])
++	AC_MSG_RESULT($ax_blas_ok)
++	LIBS="$save_LIBS"
++fi
++fi
++
++# BLAS linked to by default?  (happens on some supercomputers)
++if test $ax_blas_ok = no; then
++	save_LIBS="$LIBS"; LIBS="$LIBS"
++	AC_MSG_CHECKING([if $sgemm is being linked in already])
++	AC_TRY_LINK_FUNC($sgemm, [ax_blas_ok=yes])
++	AC_MSG_RESULT($ax_blas_ok)
++	LIBS="$save_LIBS"
++fi
++
++# BLAS in OpenBLAS library? (http://xianyi.github.com/OpenBLAS/)
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(openblas, $sgemm, [ax_blas_ok=yes
++			                BLAS_LIBS="-lopenblas"])
++fi
++
++# BLAS in ATLAS library? (http://math-atlas.sourceforge.net/)
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(atlas, ATL_xerbla,
++		[AC_CHECK_LIB(f77blas, $sgemm,
++		[AC_CHECK_LIB(cblas, cblas_dgemm,
++			[ax_blas_ok=yes
++			 BLAS_LIBS="-lcblas -lf77blas -latlas"],
++			[], [-lf77blas -latlas])],
++			[], [-latlas])])
++fi
++
++# BLAS in PhiPACK libraries? (requires generic BLAS lib, too)
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(blas, $sgemm,
++		[AC_CHECK_LIB(dgemm, $dgemm,
++		[AC_CHECK_LIB(sgemm, $sgemm,
++			[ax_blas_ok=yes; BLAS_LIBS="-lsgemm -ldgemm -lblas"],
++			[], [-lblas])],
++			[], [-lblas])])
++fi
++
++# BLAS in Intel MKL library?
++if test $ax_blas_ok = no; then
++	# MKL for gfortran
++	if test x"$ac_cv_fc_compiler_gnu" = xyes; then
++		# 64 bit
++		if test $host_cpu = x86_64; then
++			AC_CHECK_LIB(mkl_gf_lp64, $sgemm,
++			[ax_blas_ok=yes;BLAS_LIBS="-lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lpthread"],,
++			[-lmkl_gf_lp64 -lmkl_sequential -lmkl_core -lpthread])
++		# 32 bit
++		elif test $host_cpu = i686; then
++			AC_CHECK_LIB(mkl_gf, $sgemm,
++				[ax_blas_ok=yes;BLAS_LIBS="-lmkl_gf -lmkl_sequential -lmkl_core -lpthread"],,
++				[-lmkl_gf -lmkl_sequential -lmkl_core -lpthread])
++		fi
++	# MKL for other compilers (Intel, PGI, ...?)
++	else
++		# 64-bit
++		if test $host_cpu = x86_64; then
++			AC_CHECK_LIB(mkl_intel_lp64, $sgemm,
++				[ax_blas_ok=yes;BLAS_LIBS="-lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread"],,
++				[-lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread])
++		# 32-bit
++		elif test $host_cpu = i686; then
++			AC_CHECK_LIB(mkl_intel, $sgemm,
++				[ax_blas_ok=yes;BLAS_LIBS="-lmkl_intel -lmkl_sequential -lmkl_core -lpthread"],,
++				[-lmkl_intel -lmkl_sequential -lmkl_core -lpthread])
++		fi
++	fi
++fi
++# Old versions of MKL
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(mkl, $sgemm, [ax_blas_ok=yes;BLAS_LIBS="-lmkl -lguide -lpthread"],,[-lguide -lpthread])
++fi
++
++# BLAS in Apple vecLib library?
++if test $ax_blas_ok = no; then
++	save_LIBS="$LIBS"; LIBS="-framework vecLib $LIBS"
++	AC_MSG_CHECKING([for $sgemm in -framework vecLib])
++	AC_TRY_LINK_FUNC($sgemm, [ax_blas_ok=yes;BLAS_LIBS="-framework vecLib"])
++	AC_MSG_RESULT($ax_blas_ok)
++	LIBS="$save_LIBS"
++fi
++
++# BLAS in Alpha CXML library?
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(cxml, $sgemm, [ax_blas_ok=yes;BLAS_LIBS="-lcxml"])
++fi
++
++# BLAS in Alpha DXML library? (now called CXML, see above)
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(dxml, $sgemm, [ax_blas_ok=yes;BLAS_LIBS="-ldxml"])
++fi
++
++# BLAS in Sun Performance library?
++if test $ax_blas_ok = no; then
++	if test "x$GCC" != xyes; then # only works with Sun CC
++		AC_CHECK_LIB(sunmath, acosp,
++			[AC_CHECK_LIB(sunperf, $sgemm,
++				[BLAS_LIBS="-xlic_lib=sunperf -lsunmath"
++                                 ax_blas_ok=yes],[],[-lsunmath])])
++	fi
++fi
++
++# BLAS in SCSL library?  (SGI/Cray Scientific Library)
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(scs, $sgemm, [ax_blas_ok=yes; BLAS_LIBS="-lscs"])
++fi
++
++# BLAS in SGIMATH library?
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(complib.sgimath, $sgemm,
++		     [ax_blas_ok=yes; BLAS_LIBS="-lcomplib.sgimath"])
++fi
++
++# BLAS in IBM ESSL library? (requires generic BLAS lib, too)
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(blas, $sgemm,
++		[AC_CHECK_LIB(essl, $sgemm,
++			[ax_blas_ok=yes; BLAS_LIBS="-lessl -lblas"],
++			[], [-lblas $FLIBS])])
++fi
++
++# Generic BLAS library?
++if test $ax_blas_ok = no; then
++	AC_CHECK_LIB(blas, $sgemm, [ax_blas_ok=yes; BLAS_LIBS="-lblas"])
++fi
++
++AC_SUBST(BLAS_LIBS)
++
++LIBS="$ax_blas_save_LIBS"
++
++# Finally, execute ACTION-IF-FOUND/ACTION-IF-NOT-FOUND:
++if test x"$ax_blas_ok" = xyes; then
++        ifelse([$1],,AC_DEFINE(HAVE_BLAS,1,[Define if you have a BLAS library.]),[$1])
++        :
++else
++        ax_blas_ok=no
++        $2
++fi
++])dnl AX_BLAS
+diff --git a/m4/ax_code_coverage.m4 b/m4/ax_code_coverage.m4
+new file mode 100644
+--- /dev/null
++++ b/m4/ax_code_coverage.m4
+@@ -0,0 +1,264 @@
++# ===========================================================================
++#     https://www.gnu.org/software/autoconf-archive/ax_code_coverage.html
++# ===========================================================================
++#
++# SYNOPSIS
++#
++#   AX_CODE_COVERAGE()
++#
++# DESCRIPTION
++#
++#   Defines CODE_COVERAGE_CPPFLAGS, CODE_COVERAGE_CFLAGS,
++#   CODE_COVERAGE_CXXFLAGS and CODE_COVERAGE_LIBS which should be included
++#   in the CPPFLAGS, CFLAGS CXXFLAGS and LIBS/LIBADD variables of every
++#   build target (program or library) which should be built with code
++#   coverage support. Also defines CODE_COVERAGE_RULES which should be
++#   substituted in your Makefile; and $enable_code_coverage which can be
++#   used in subsequent configure output. CODE_COVERAGE_ENABLED is defined
++#   and substituted, and corresponds to the value of the
++#   --enable-code-coverage option, which defaults to being disabled.
++#
++#   Test also for gcov program and create GCOV variable that could be
++#   substituted.
++#
++#   Note that all optimization flags in CFLAGS must be disabled when code
++#   coverage is enabled.
++#
++#   Usage example:
++#
++#   configure.ac:
++#
++#     AX_CODE_COVERAGE
++#
++#   Makefile.am:
++#
++#     @CODE_COVERAGE_RULES@
++#     my_program_LIBS = ... $(CODE_COVERAGE_LIBS) ...
++#     my_program_CPPFLAGS = ... $(CODE_COVERAGE_CPPFLAGS) ...
++#     my_program_CFLAGS = ... $(CODE_COVERAGE_CFLAGS) ...
++#     my_program_CXXFLAGS = ... $(CODE_COVERAGE_CXXFLAGS) ...
++#
++#   This results in a "check-code-coverage" rule being added to any
++#   Makefile.am which includes "@CODE_COVERAGE_RULES@" (assuming the module
++#   has been configured with --enable-code-coverage). Running `make
++#   check-code-coverage` in that directory will run the module's test suite
++#   (`make check`) and build a code coverage report detailing the code which
++#   was touched, then print the URI for the report.
++#
++#   In earlier versions of this macro, CODE_COVERAGE_LDFLAGS was defined
++#   instead of CODE_COVERAGE_LIBS. They are both still defined, but use of
++#   CODE_COVERAGE_LIBS is preferred for clarity; CODE_COVERAGE_LDFLAGS is
++#   deprecated. They have the same value.
++#
++#   This code was derived from Makefile.decl in GLib, originally licenced
++#   under LGPLv2.1+.
++#
++# LICENSE
++#
++#   Copyright (c) 2012, 2016 Philip Withnall
++#   Copyright (c) 2012 Xan Lopez
++#   Copyright (c) 2012 Christian Persch
++#   Copyright (c) 2012 Paolo Borelli
++#   Copyright (c) 2012 Dan Winship
++#   Copyright (c) 2015 Bastien ROUCARIES
++#
++#   This library is free software; you can redistribute it and/or modify it
++#   under the terms of the GNU Lesser General Public License as published by
++#   the Free Software Foundation; either version 2.1 of the License, or (at
++#   your option) any later version.
++#
++#   This library is distributed in the hope that it will be useful, but
++#   WITHOUT ANY WARRANTY; without even the implied warranty of
++#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
++#   General Public License for more details.
++#
++#   You should have received a copy of the GNU Lesser General Public License
++#   along with this program. If not, see <https://www.gnu.org/licenses/>.
++
++#serial 24
++
++AC_DEFUN([AX_CODE_COVERAGE],[
++	dnl Check for --enable-code-coverage
++	AC_REQUIRE([AC_PROG_SED])
++
++	# allow to override gcov location
++	AC_ARG_WITH([gcov],
++	  [AS_HELP_STRING([--with-gcov[=GCOV]], [use given GCOV for coverage (GCOV=gcov).])],
++	  [_AX_CODE_COVERAGE_GCOV_PROG_WITH=$with_gcov],
++	  [_AX_CODE_COVERAGE_GCOV_PROG_WITH=gcov])
++
++	AC_MSG_CHECKING([whether to build with code coverage support])
++	AC_ARG_ENABLE([code-coverage],
++	  AS_HELP_STRING([--enable-code-coverage],
++	  [Whether to enable code coverage support]),,
++	  enable_code_coverage=no)
++
++	AM_CONDITIONAL([CODE_COVERAGE_ENABLED], [test x$enable_code_coverage = xyes])
++	AC_SUBST([CODE_COVERAGE_ENABLED], [$enable_code_coverage])
++	AC_MSG_RESULT($enable_code_coverage)
++
++	AS_IF([ test "$enable_code_coverage" = "yes" ], [
++		# check for gcov
++		AC_CHECK_TOOL([GCOV],
++		  [$_AX_CODE_COVERAGE_GCOV_PROG_WITH],
++		  [:])
++		AS_IF([test "X$GCOV" = "X:"],
++		  [AC_MSG_ERROR([gcov is needed to do coverage])])
++		AC_SUBST([GCOV])
++
++		dnl Check if gcc is being used
++		AS_IF([ test "$GCC" = "no" ], [
++			AC_MSG_ERROR([not compiling with gcc, which is required for gcov code coverage])
++		])
++
++		AC_CHECK_PROG([LCOV], [lcov], [lcov])
++		AC_CHECK_PROG([GENHTML], [genhtml], [genhtml])
++
++		AS_IF([ test -z "$LCOV" ], [
++			AC_MSG_ERROR([To enable code coverage reporting you must have lcov installed])
++		])
++
++		AS_IF([ test -z "$GENHTML" ], [
++			AC_MSG_ERROR([Could not find genhtml from the lcov package])
++		])
++
++		dnl Build the code coverage flags
++		dnl Define CODE_COVERAGE_LDFLAGS for backwards compatibility
++		CODE_COVERAGE_CPPFLAGS="-DNDEBUG"
++		CODE_COVERAGE_CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
++		CODE_COVERAGE_CXXFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
++		CODE_COVERAGE_LIBS="-lgcov"
++		CODE_COVERAGE_LDFLAGS="$CODE_COVERAGE_LIBS"
++
++		AC_SUBST([CODE_COVERAGE_CPPFLAGS])
++		AC_SUBST([CODE_COVERAGE_CFLAGS])
++		AC_SUBST([CODE_COVERAGE_CXXFLAGS])
++		AC_SUBST([CODE_COVERAGE_LIBS])
++		AC_SUBST([CODE_COVERAGE_LDFLAGS])
++
++		[CODE_COVERAGE_RULES_CHECK='
++	-$(A''M_V_at)$(MAKE) $(AM_MAKEFLAGS) -k check
++	$(A''M_V_at)$(MAKE) $(AM_MAKEFLAGS) code-coverage-capture
++']
++		[CODE_COVERAGE_RULES_CAPTURE='
++	$(code_coverage_v_lcov_cap)$(LCOV) $(code_coverage_quiet) $(addprefix --directory ,$(CODE_COVERAGE_DIRECTORY)) --capture --output-file "$(CODE_COVERAGE_OUTPUT_FILE).tmp" --test-name "$(call code_coverage_sanitize,$(PACKAGE_NAME)-$(PACKAGE_VERSION))" --no-checksum --compat-libtool $(CODE_COVERAGE_LCOV_SHOPTS) $(CODE_COVERAGE_LCOV_OPTIONS)
++	$(code_coverage_v_lcov_ign)$(LCOV) $(code_coverage_quiet) $(addprefix --directory ,$(CODE_COVERAGE_DIRECTORY)) --remove "$(CODE_COVERAGE_OUTPUT_FILE).tmp" "/tmp/*" $(CODE_COVERAGE_IGNORE_PATTERN) --output-file "$(CODE_COVERAGE_OUTPUT_FILE)" $(CODE_COVERAGE_LCOV_SHOPTS) $(CODE_COVERAGE_LCOV_RMOPTS)
++	-@rm -f $(CODE_COVERAGE_OUTPUT_FILE).tmp
++	$(code_coverage_v_genhtml)LANG=C $(GENHTML) $(code_coverage_quiet) $(addprefix --prefix ,$(CODE_COVERAGE_DIRECTORY)) --output-directory "$(CODE_COVERAGE_OUTPUT_DIRECTORY)" --title "$(PACKAGE_NAME)-$(PACKAGE_VERSION) Code Coverage" --legend --show-details "$(CODE_COVERAGE_OUTPUT_FILE)" $(CODE_COVERAGE_GENHTML_OPTIONS)
++	@echo "file://$(abs_builddir)/$(CODE_COVERAGE_OUTPUT_DIRECTORY)/index.html"
++']
++		[CODE_COVERAGE_RULES_CLEAN='
++clean: code-coverage-clean
++distclean: code-coverage-clean
++code-coverage-clean:
++	-$(LCOV) --directory $(top_builddir) -z
++	-rm -rf $(CODE_COVERAGE_OUTPUT_FILE) $(CODE_COVERAGE_OUTPUT_FILE).tmp $(CODE_COVERAGE_OUTPUT_DIRECTORY)
++	-find . \( -name "*.gcda" -o -name "*.gcno" -o -name "*.gcov" \) -delete
++']
++	], [
++		[CODE_COVERAGE_RULES_CHECK='
++	@echo "Need to reconfigure with --enable-code-coverage"
++']
++		CODE_COVERAGE_RULES_CAPTURE="$CODE_COVERAGE_RULES_CHECK"
++		CODE_COVERAGE_RULES_CLEAN=''
++	])
++
++[CODE_COVERAGE_RULES='
++# Code coverage
++#
++# Optional:
++#  - CODE_COVERAGE_DIRECTORY: Top-level directory for code coverage reporting.
++#    Multiple directories may be specified, separated by whitespace.
++#    (Default: $(top_builddir))
++#  - CODE_COVERAGE_OUTPUT_FILE: Filename and path for the .info file generated
++#    by lcov for code coverage. (Default:
++#    $(PACKAGE_NAME)-$(PACKAGE_VERSION)-coverage.info)
++#  - CODE_COVERAGE_OUTPUT_DIRECTORY: Directory for generated code coverage
++#    reports to be created. (Default:
++#    $(PACKAGE_NAME)-$(PACKAGE_VERSION)-coverage)
++#  - CODE_COVERAGE_BRANCH_COVERAGE: Set to 1 to enforce branch coverage,
++#    set to 0 to disable it and leave empty to stay with the default.
++#    (Default: empty)
++#  - CODE_COVERAGE_LCOV_SHOPTS_DEFAULT: Extra options shared between both lcov
++#    instances. (Default: based on $CODE_COVERAGE_BRANCH_COVERAGE)
++#  - CODE_COVERAGE_LCOV_SHOPTS: Extra options to shared between both lcov
++#    instances. (Default: $CODE_COVERAGE_LCOV_SHOPTS_DEFAULT)
++#  - CODE_COVERAGE_LCOV_OPTIONS_GCOVPATH: --gcov-tool pathtogcov
++#  - CODE_COVERAGE_LCOV_OPTIONS_DEFAULT: Extra options to pass to the
++#    collecting lcov instance. (Default: $CODE_COVERAGE_LCOV_OPTIONS_GCOVPATH)
++#  - CODE_COVERAGE_LCOV_OPTIONS: Extra options to pass to the collecting lcov
++#    instance. (Default: $CODE_COVERAGE_LCOV_OPTIONS_DEFAULT)
++#  - CODE_COVERAGE_LCOV_RMOPTS_DEFAULT: Extra options to pass to the filtering
++#    lcov instance. (Default: empty)
++#  - CODE_COVERAGE_LCOV_RMOPTS: Extra options to pass to the filtering lcov
++#    instance. (Default: $CODE_COVERAGE_LCOV_RMOPTS_DEFAULT)
++#  - CODE_COVERAGE_GENHTML_OPTIONS_DEFAULT: Extra options to pass to the
++#    genhtml instance. (Default: based on $CODE_COVERAGE_BRANCH_COVERAGE)
++#  - CODE_COVERAGE_GENHTML_OPTIONS: Extra options to pass to the genhtml
++#    instance. (Default: $CODE_COVERAGE_GENHTML_OPTIONS_DEFAULT)
++#  - CODE_COVERAGE_IGNORE_PATTERN: Extra glob pattern of files to ignore
++#
++# The generated report will be titled using the $(PACKAGE_NAME) and
++# $(PACKAGE_VERSION). In order to add the current git hash to the title,
++# use the git-version-gen script, available online.
++
++# Optional variables
++CODE_COVERAGE_DIRECTORY ?= $(top_builddir)
++CODE_COVERAGE_OUTPUT_FILE ?= $(PACKAGE_NAME)-$(PACKAGE_VERSION)-coverage.info
++CODE_COVERAGE_OUTPUT_DIRECTORY ?= $(PACKAGE_NAME)-$(PACKAGE_VERSION)-coverage
++CODE_COVERAGE_BRANCH_COVERAGE ?=
++CODE_COVERAGE_LCOV_SHOPTS_DEFAULT ?= $(if $(CODE_COVERAGE_BRANCH_COVERAGE),\
++--rc lcov_branch_coverage=$(CODE_COVERAGE_BRANCH_COVERAGE))
++CODE_COVERAGE_LCOV_SHOPTS ?= $(CODE_COVERAGE_LCOV_SHOPTS_DEFAULT)
++CODE_COVERAGE_LCOV_OPTIONS_GCOVPATH ?= --gcov-tool "$(GCOV)"
++CODE_COVERAGE_LCOV_OPTIONS_DEFAULT ?= $(CODE_COVERAGE_LCOV_OPTIONS_GCOVPATH)
++CODE_COVERAGE_LCOV_OPTIONS ?= $(CODE_COVERAGE_LCOV_OPTIONS_DEFAULT)
++CODE_COVERAGE_LCOV_RMOPTS_DEFAULT ?=
++CODE_COVERAGE_LCOV_RMOPTS ?= $(CODE_COVERAGE_LCOV_RMOPTS_DEFAULT)
++CODE_COVERAGE_GENHTML_OPTIONS_DEFAULT ?=\
++$(if $(CODE_COVERAGE_BRANCH_COVERAGE),\
++--rc genhtml_branch_coverage=$(CODE_COVERAGE_BRANCH_COVERAGE))
++CODE_COVERAGE_GENHTML_OPTIONS ?= $(CODE_COVERAGE_GENHTML_OPTIONS_DEFAULT)
++CODE_COVERAGE_IGNORE_PATTERN ?=
++
++code_coverage_v_lcov_cap = $(code_coverage_v_lcov_cap_$(V))
++code_coverage_v_lcov_cap_ = $(code_coverage_v_lcov_cap_$(AM_DEFAULT_VERBOSITY))
++code_coverage_v_lcov_cap_0 = @echo "  LCOV   --capture"\
++ $(CODE_COVERAGE_OUTPUT_FILE);
++code_coverage_v_lcov_ign = $(code_coverage_v_lcov_ign_$(V))
++code_coverage_v_lcov_ign_ = $(code_coverage_v_lcov_ign_$(AM_DEFAULT_VERBOSITY))
++code_coverage_v_lcov_ign_0 = @echo "  LCOV   --remove /tmp/*"\
++ $(CODE_COVERAGE_IGNORE_PATTERN);
++code_coverage_v_genhtml = $(code_coverage_v_genhtml_$(V))
++code_coverage_v_genhtml_ = $(code_coverage_v_genhtml_$(AM_DEFAULT_VERBOSITY))
++code_coverage_v_genhtml_0 = @echo "  GEN   " $(CODE_COVERAGE_OUTPUT_DIRECTORY);
++code_coverage_quiet = $(code_coverage_quiet_$(V))
++code_coverage_quiet_ = $(code_coverage_quiet_$(AM_DEFAULT_VERBOSITY))
++code_coverage_quiet_0 = --quiet
++
++# sanitizes the test-name: replaces with underscores: dashes and dots
++code_coverage_sanitize = $(subst -,_,$(subst .,_,$(1)))
++
++# Use recursive makes in order to ignore errors during check
++check-code-coverage:'"$CODE_COVERAGE_RULES_CHECK"'
++
++# Capture code coverage data
++code-coverage-capture: code-coverage-capture-hook'"$CODE_COVERAGE_RULES_CAPTURE"'
++
++# Hook rule executed before code-coverage-capture, overridable by the user
++code-coverage-capture-hook:
++
++'"$CODE_COVERAGE_RULES_CLEAN"'
++
++GITIGNOREFILES ?=
++GITIGNOREFILES += $(CODE_COVERAGE_OUTPUT_FILE) $(CODE_COVERAGE_OUTPUT_DIRECTORY)
++
++A''M_DISTCHECK_CONFIGURE_FLAGS ?=
++A''M_DISTCHECK_CONFIGURE_FLAGS += --disable-code-coverage
++
++.PHONY: check-code-coverage code-coverage-capture code-coverage-capture-hook code-coverage-clean
++']
++
++	AC_SUBST([CODE_COVERAGE_RULES])
++	m4_ifdef([_AM_SUBST_NOTMAKE], [_AM_SUBST_NOTMAKE([CODE_COVERAGE_RULES])])
++])
+diff --git a/m4/ax_lapack.m4 b/m4/ax_lapack.m4
+new file mode 100644
+--- /dev/null
++++ b/m4/ax_lapack.m4
+@@ -0,0 +1,131 @@
++# ===========================================================================
++#        https://www.gnu.org/software/autoconf-archive/ax_lapack.html
++# ===========================================================================
++#
++# SYNOPSIS
++#
++#   AX_LAPACK([ACTION-IF-FOUND[, ACTION-IF-NOT-FOUND]])
++#
++# DESCRIPTION
++#
++#   This macro looks for a library that implements the LAPACK linear-algebra
++#   interface (see http://www.netlib.org/lapack/). On success, it sets the
++#   LAPACK_LIBS output variable to hold the requisite library linkages.
++#
++#   To link with LAPACK, you should link with:
++#
++#     $LAPACK_LIBS $BLAS_LIBS $LIBS $FLIBS
++#
++#   in that order. BLAS_LIBS is the output variable of the AX_BLAS macro,
++#   called automatically. FLIBS is the output variable of the
++#   AC_F77_LIBRARY_LDFLAGS macro (called if necessary by AX_BLAS), and is
++#   sometimes necessary in order to link with F77 libraries. Users will also
++#   need to use AC_F77_DUMMY_MAIN (see the autoconf manual), for the same
++#   reason.
++#
++#   The user may also use --with-lapack=<lib> in order to use some specific
++#   LAPACK library <lib>. In order to link successfully, however, be aware
++#   that you will probably need to use the same Fortran compiler (which can
++#   be set via the F77 env. var.) as was used to compile the LAPACK and BLAS
++#   libraries.
++#
++#   ACTION-IF-FOUND is a list of shell commands to run if a LAPACK library
++#   is found, and ACTION-IF-NOT-FOUND is a list of commands to run it if it
++#   is not found. If ACTION-IF-FOUND is not specified, the default action
++#   will define HAVE_LAPACK.
++#
++# LICENSE
++#
++#   Copyright (c) 2009 Steven G. Johnson <stevenj@alum.mit.edu>
++#
++#   This program is free software: you can redistribute it and/or modify it
++#   under the terms of the GNU General Public License as published by the
++#   Free Software Foundation, either version 3 of the License, or (at your
++#   option) any later version.
++#
++#   This program is distributed in the hope that it will be useful, but
++#   WITHOUT ANY WARRANTY; without even the implied warranty of
++#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
++#   Public License for more details.
++#
++#   You should have received a copy of the GNU General Public License along
++#   with this program. If not, see <https://www.gnu.org/licenses/>.
++#
++#   As a special exception, the respective Autoconf Macro's copyright owner
++#   gives unlimited permission to copy, distribute and modify the configure
++#   scripts that are the output of Autoconf when processing the Macro. You
++#   need not follow the terms of the GNU General Public License when using
++#   or distributing such scripts, even though portions of the text of the
++#   Macro appear in them. The GNU General Public License (GPL) does govern
++#   all other use of the material that constitutes the Autoconf Macro.
++#
++#   This special exception to the GPL applies to versions of the Autoconf
++#   Macro released by the Autoconf Archive. When you make and distribute a
++#   modified version of the Autoconf Macro, you may extend this special
++#   exception to the GPL to apply to your modified version as well.
++
++#serial 8
++
++AU_ALIAS([ACX_LAPACK], [AX_LAPACK])
++AC_DEFUN([AX_LAPACK], [
++AC_REQUIRE([AX_BLAS])
++ax_lapack_ok=no
++
++AC_ARG_WITH(lapack,
++        [AS_HELP_STRING([--with-lapack=<lib>], [use LAPACK library <lib>])])
++case $with_lapack in
++        yes | "") ;;
++        no) ax_lapack_ok=disable ;;
++        -* | */* | *.a | *.so | *.so.* | *.o) LAPACK_LIBS="$with_lapack" ;;
++        *) LAPACK_LIBS="-l$with_lapack" ;;
++esac
++
++# Get fortran linker name of LAPACK function to check for.
++AC_F77_FUNC(cheev)
++
++# We cannot use LAPACK if BLAS is not found
++if test "x$ax_blas_ok" != xyes; then
++        ax_lapack_ok=noblas
++        LAPACK_LIBS=""
++fi
++
++# First, check LAPACK_LIBS environment variable
++if test "x$LAPACK_LIBS" != x; then
++        save_LIBS="$LIBS"; LIBS="$LAPACK_LIBS $BLAS_LIBS $LIBS $FLIBS"
++        AC_MSG_CHECKING([for $cheev in $LAPACK_LIBS])
++        AC_TRY_LINK_FUNC($cheev, [ax_lapack_ok=yes], [LAPACK_LIBS=""])
++        AC_MSG_RESULT($ax_lapack_ok)
++        LIBS="$save_LIBS"
++        if test $ax_lapack_ok = no; then
++                LAPACK_LIBS=""
++        fi
++fi
++
++# LAPACK linked to by default?  (is sometimes included in BLAS lib)
++if test $ax_lapack_ok = no; then
++        save_LIBS="$LIBS"; LIBS="$LIBS $BLAS_LIBS $FLIBS"
++        AC_CHECK_FUNC($cheev, [ax_lapack_ok=yes])
++        LIBS="$save_LIBS"
++fi
++
++# Generic LAPACK library?
++for lapack in lapack lapack_rs6k; do
++        if test $ax_lapack_ok = no; then
++                save_LIBS="$LIBS"; LIBS="$BLAS_LIBS $LIBS"
++                AC_CHECK_LIB($lapack, $cheev,
++                    [ax_lapack_ok=yes; LAPACK_LIBS="-l$lapack"], [], [$FLIBS])
++                LIBS="$save_LIBS"
++        fi
++done
++
++AC_SUBST(LAPACK_LIBS)
++
++# Finally, execute ACTION-IF-FOUND/ACTION-IF-NOT-FOUND:
++if test x"$ax_lapack_ok" = xyes; then
++        ifelse([$1],,AC_DEFINE(HAVE_LAPACK,1,[Define if you have LAPACK library.]),[$1])
++        :
++else
++        ax_lapack_ok=no
++        $2
++fi
++])dnl AX_LAPACK
+diff --git a/spqr.pc.in b/spqr.pc.in
+new file mode 100644
+--- /dev/null
++++ b/spqr.pc.in
+@@ -0,0 +1,13 @@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
++
++Name: @PACKAGE_NAME@
++Description: Multifrontal sparse QR factorization
++Version: @PACKAGE_VERSION@
++URL: @PACKAGE_URL@
++Requires.private: cholmod suitesparseconfig
++Libs: -L${libdir} -lspqr
++Libs.private: @TBB_LIBS@ @LAPACK_LIBS@ @BLAS_LIBS@ -lm
++Cflags: -I${includedir}/spqr

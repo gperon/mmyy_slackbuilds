@@ -26,7 +26,7 @@
 
 PRGNAM=texlive-extra
 VERSION=${VERSION:-2017.170622}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 CWD=$(pwd)
@@ -34,9 +34,15 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-ARCH=noarch
-
 set -e
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i586 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
 
 rm -rf $PKG
 mkdir -p $TMP $PKG/usr/share $OUTPUT
@@ -45,6 +51,7 @@ chown -R root:root $PKG
 chmod -R u+w,go-w,a+rX-st $PKG
 
 # Move biber binary to $PATH
+mkdir -p $PKG/usr/bin
 case $ARCH in
 	"x86_64") mv $PKG/usr/share/texmf-dist/bin/x86_64-linux/biber $PKG/usr/bin ;;
 	"i586") mv $PKG/usr/share/texmf-dist/bin/i386-linux/biber $PKG/usr/bin ;;

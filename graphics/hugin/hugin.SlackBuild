@@ -3,7 +3,7 @@
 # Slackware build script for Hugin
 #
 # Copyright 2009-2010  Erik W. Hanson, Minneapolis, MN, USA
-# Copyright 2011-2016  by titopoquito (titopoquito@gmail.com)
+# Copyright 2011-2017  by titopoquito (titopoquito@gmail.com)
 # Thanks to Romain Dartigues for the help with the update to 2016.2.0
 # Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
@@ -26,7 +26,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=hugin
-VERSION=${VERSION:-2016.2.0}
+VERSION=${VERSION:-2017.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}

@@ -1,14 +1,14 @@
 #!/bin/sh
 # Slackware java packaging script for josm
 #
-# Michales - clavisound - Michaloudes korgie@gmail.com <2012>
+# Michales - clavisound - Michaloudes korgie@gmail.com <2012-2017>
 #
-# If you want to extract the version from an download
+# For latest verion download
 # http://josm.openstreetmap.de/download/josm-tested.jar
-# execute the script passing it VERSION=tested
+# execute the script with VERSION=tested
 
 PRGNAM=josm
-VERSION=${VERSION:-11526}
+VERSION=${VERSION:-12450}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -60,15 +60,16 @@ cat > $PKG/usr/bin/$PRGNAM << EOF
 java -jar /opt/$PRGNAM/$PRGNAM.jar
 EOF
 chmod 755 $PKG/usr/bin/$PRGNAM
+chmod 755 $PKG/opt/$PRGNAM/$PRGNAM.jar
 
 # cp KDE desktop icon
 mkdir -p $PKG/usr/share/applications
 mkdir -p $PKG/usr/share/$PRGNAM
-cp -a $CWD/$PRGNAM.desktop $PKG/usr/share/applications
+cp $CWD/$PRGNAM.desktop $PKG/usr/share/applications
 mkdir -p $PKG/usr/share/icons/hicolor/160x160/apps/$PRGNAM/
 mkdir -p $PKG/usr/share/icons/hicolor/64x64/apps/$PRGNAM/
-cp -a $CWD/$PRGNAM\_160.xpm $PKG/usr/share/icons/hicolor/160x160/apps/$PRGNAM/$PRGNAM.xpm
-cp -a $CWD/$PRGNAM\_64.xpm $PKG/usr/share/icons/hicolor/64x64/apps/$PRGNAM/$PRGNAM.xpm
+cp $CWD/$PRGNAM\_160.xpm $PKG/usr/share/icons/hicolor/160x160/apps/$PRGNAM/$PRGNAM.xpm
+cp $CWD/$PRGNAM\_64.xpm $PKG/usr/share/icons/hicolor/64x64/apps/$PRGNAM/$PRGNAM.xpm
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

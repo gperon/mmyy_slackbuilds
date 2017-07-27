@@ -66,8 +66,10 @@ Packages newer than Slackbuilds version
 graphics/draftsight. Updated for version 2017SP3
 graphics/luxrender. Updated for version 1.6.0
 graphics/mypaint. Updated for version 1.2.1
+office/gnucash. Updated for version 2.16.18
 office/scribus. Updated for version 1.5.3
 system/apache-tomcat. Updated for version 8.5.20
+
 
 original README from slackbuilds.org follows:
 ---------------------------------------------

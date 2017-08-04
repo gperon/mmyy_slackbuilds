@@ -19,7 +19,6 @@ TclMagick, of course).
 Optional dependencies: Some file formats require extra libraries. These
 are all autodetected at build time.
 
-libwebp (.webp support)
 jbigkit (.jbg, .jbig support)
 dcraw (Raw camera files, various filename extensions)
 

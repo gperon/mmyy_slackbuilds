@@ -5,6 +5,6 @@ DOWNLOAD="http://sourceforge.net/projects/guacamole/files/current/source/guacamo
 MD5SUM="cce818bfcba35fe0456b45d988118893"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libwebp libtelnet"
+REQUIRES="libtelnet"
 MAINTAINER="Zhu Qun-Ying"
 EMAIL="zhu.qunying@gmail.com"

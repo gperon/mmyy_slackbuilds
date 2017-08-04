@@ -1,7 +1,7 @@
 Qt is a cross-platform C++ application framework. Qt's primary feature
 is its rich set of widgets that provide standard GUI functionality.
 
-Optional dependencies: unixodbc, freetds, OpenAL, libwebp, opus, snappy,
+Optional dependencies: unixodbc, freetds, OpenAL, opus, snappy,
 wayland, and postgresql
 
 Optional dependencies: openvg and firebird (not available

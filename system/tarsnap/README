@@ -1,8 +1,11 @@
-Tarsnap: Online backups for the truly paranoid
+Tarsnap is a secure cloud-based backup service featuring client-side
+encryption and de-duplication created by Colin Percival.  You will need
+to be a Tarsnap subscriber to use this software.
 
-Colin Percival's program 'tarsnap' to be used as a part of Tarsnap. Tarsnap
-is an online snapshotted backup service featuring client-side encryption
-and deduplication.
+The recommended cache directory for Slackware is /var/cache/tarsnap, but
+this can be changed in /etc/tarsnap.conf to suit your file scheme.
 
-Please note that this is only the client. In order to use tarsnap you must
-subscribe to the service. Please visit https://tarsnap.com for further details.
+Even casual backups may contain sensitive data!  Before running the
+build, please take a moment to verify the source tarball.  The Tarsnap
+website has instructions for checking your copy against the release hash
+and Tarsnap code signing key.

@@ -2,6 +2,45 @@ Giorgio Peron's SlackBuild Projects hacking
 slackbuilds repository for slackware-current
 giorgio.peron@gmail.com
 
+
+###########################################################################
+                   Before use, please note that 
+  THIS SOFTWARE IS PROVIDED BY THE AUTHOR `AS IS'' AND ANY EXPRESS OR IMPLIED
+  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+###########################################################################
+
+Please, also note that many of my scripts are designed to install unstable
+development versions of the software packages, and may require
+corrections at any time when a source code is significantly modified
+by its developers.
+Prior to opt for my scripts, I would suggest to check: 
+* the official Slackware packages http://www.slackware.com/changelog/
+* SlackBuild.org http://slackbuilds.org 
+* Eric Hameleers' (AlienBOB) http://www.slackware.com/~alien/slackbuilds/ , 
+* PhantomX/slackbuilds http://phantomx.github.io/slackbuilds/
+* Slackers/slackbuilds https://github.com/conraid/SlackBuilds
+* Papitux/SlackStuff https://github.com/Papitux/SlackStuff
+
+
+for the more stable and perhaps better tested versions.
+My SlackBuild scripts are complementary to those.
+
+All my scripts are tested to be working on my own Slackware 
+configuration, based on: 
+* the Slackware-current for the x86_64 architecture 
+* Eric Hameleers' (AlienBOB) 'multilib'&'ktown_testing' (for the Frameworks 5)
+* Ponce/SBo-git (current) https://github.com/Ponce/slackbuilds
+* and the revised versions of SlackBuilds from the mentioned above
+
+
 Packages not included by Slackbuilds
 ---------------------------------------------
 development/ispc. Added Intel SPMD Program Compiler
@@ -24,18 +63,13 @@ system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackwar
 
 Packages newer than Slackbuilds version
 ---------------------------------------------
-development/arduino. Updated for version 1.8.0
-multimedia/avidemux. Updated for version 2.6.18
-graphics/draftsight. Updated for version 2017SP0
-graphics/gmic. Updated for version 1.7.9
+graphics/draftsight. Updated for version 2017SP2
 graphics/luxrender. Updated for version 1.6.0
 graphics/meshlab. Updated for version 2016.12
 graphics/mypaint. Updated for version 1.2.1.beta0
 graphics/openimageio. Updated for version 1.7.11
-libraries/opencv. Updated for version 3.2
 office/keepassx. Updated for version 2.0.3
-office/scribus. Updated for version 1.5.2
-system/krusader. Updated for version 2.5.0
+office/scribus. Updated for version 1.6.3
 
 original README from slackbuilds.org follows:
 ---------------------------------------------

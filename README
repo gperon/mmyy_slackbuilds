@@ -66,10 +66,9 @@ Packages newer than Slackbuilds version
 graphics/draftsight. Updated for version 2017SP2
 graphics/luxrender. Updated for version 1.6.0
 graphics/meshlab. Updated for version 2016.12
-graphics/mypaint. Updated for version 1.2.1.beta0
+graphics/mypaint. Updated for version 1.2.1
 graphics/openimageio. Updated for version 1.7.11
-office/keepassx. Updated for version 2.0.3
-office/scribus. Updated for version 1.6.3
+office/scribus. Updated for version 1.5.3
 
 original README from slackbuilds.org follows:
 ---------------------------------------------

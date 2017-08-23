@@ -1,14 +1,14 @@
 PRGNAM="opencv"
-VERSION="3.2.0"
-HOMEPAGE="http://opencv.org/"
-DOWNLOAD="https://github.com/Itseez/opencv/archive/3.2.0/opencv-3.2.0.tar.gz \
-        https://github.com/Itseez/opencv_contrib/archive/3.2.0/opencv_contrib-3.2.0.zip \
+VERSION="3.3.0"
+HOMEPAGE="https://opencv.org/"
+DOWNLOAD="https://github.com/Itseez/opencv/archive/3.3.0/opencv-3.3.0.tar.gz \
+        https://github.com/Itseez/opencv_contrib/archive/3.3.0/opencv_contrib-3.3.0.zip \
         http://sourceforge.net/projects/plantuml/files/plantuml.8053.jar"
-MD5SUM="a43b65488124ba33dde195fea9041b70 \
-        423237bccd1c6e0a5edd812823fb4237 \
+MD5SUM="eeedaec282a70aa2ea1d5152a372c990 \
+        2dd6dc53d49a09dd8538e63a55edc87a \
         9b94aca7093e38179df891907578ce03"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="cudatoolkit"
 MAINTAINER="Christoph Willing"
 EMAIL="chris.willing@linux.com"

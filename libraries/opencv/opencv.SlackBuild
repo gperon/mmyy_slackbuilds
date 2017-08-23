@@ -26,7 +26,7 @@
 
 PRGNAM=opencv
 PRGNAM2=opencv_contrib
-VERSION=${VERSION:-3.2.0}
+VERSION=${VERSION:-3.3.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:--j7}
@@ -63,9 +63,9 @@ cvffmpeg="" ;   [ "${CVFFMPEG:-yes}" = "no" ]  &&   cvffmpeg="-DWITH_FFMPEG=OFF"
 cvvtk="" ;      [ "${CVVTK:-yes}" = "no" ]     &&      cvvtk="-DWITH_VTK=OFF"
 cvgdal="" ;     [ "${CVGDAL:-no}" = "yes" ]    &&     cvgdal="-DWITH_GDAL=ON"
 cvdocs="-DBUILD_DOCS=ON -DBUILD_EXAMPLES=ON -DINSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON " ; [ "${CVDOCS:-yes}" = "no" ] && cvdocs=""
-
 # Only enable PlantUML if java is available
-cvplantuml="" #; [ $(which java 2>/dev/null ) ] && cvplantuml="-DPLANTUML_JAR=$CWD/plantuml.jar"
+cvplantuml="" ; [ $(which java 2>/dev/null ) ] && cvplantuml="-DPLANTUML_JAR=$CWD/plantuml.jar"
+cvcuda="" ;     [ "${CVCUDA:-no}" = "yes" ]    &&     cvcuda="-DBUILD_CUDA_STUBS=ON -DWITH_CUDA=ON"
 
 set -e
 
@@ -109,16 +109,15 @@ cd build
     -DWITH_OPENGL=ON \
     -DWITH_OPENMP=ON \
     -DWITH_XINE=ON \
-    -DBUILD_CUDA_STUBS=OFF \
-    -DWITH_CUDA=OFF \
     -DWITH_MATLAB=OFF \
+    -DWITH_FFMPEG=ON \
     $cv1394 \
     $cvffmpeg \
     $cvvtk \
     $cvgdal \
-    $cvplantuml \
     $cvdocs \
-    -DWITH_FFMPEG=ON \
+    $cvplantuml \
+    $cvcuda \
     -DOPENCV_EXTRA_MODULES_PATH=../$PRGNAM2-$VERSION/modules ..
   make $NUMJOBS VERBOSE=1
   [ "${CVDOCS:-yes}" = "yes" ] && make doxygen

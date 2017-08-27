@@ -77,7 +77,6 @@ find -L . \
 mkdir -p $PKG/usr/share/$PRGNAM
 mkdir -p $PKG/etc/rc.d
 mkdir -p $PKG/var/{lib,log,tmp}/$PRGNAM
-#mv deploy/.placeholder $PKG/var/tmp/$PRGNAM/
 mv * $PKG/usr/share/$PRGNAM
 mv .install4j $PKG/usr/share/$PRGNAM
 

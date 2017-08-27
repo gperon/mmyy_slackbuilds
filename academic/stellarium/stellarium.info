@@ -1,7 +1,7 @@
 PRGNAM="stellarium"
 VERSION="0.16.0"
 HOMEPAGE="http://www.stellarium.org"
-DOWNLOAD="http://sourceforge.net/projects/stellarium/files/Stellarium-sources/0.16.0/stellarium-0.16.0.tar.gz"
+DOWNLOAD="https://downloads.sourceforge.net/project/stellarium/Stellarium-sources/0.16.0/stellarium-0.16.0.tar.gz"
 MD5SUM="28cef169854b845b20bea7b764aef024"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

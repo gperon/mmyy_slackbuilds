@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Slackware build script for xf86-input-wacom
 
 # Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy

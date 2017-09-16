@@ -34,6 +34,7 @@ TOMCAT_CMD="-java-home $JAVA_HOME \
             -user $USER \
             -classpath $CLASSPATH \
             -Xms$MEMALLOC_MIN -Xmx$MEMALLOC_MAX -Xss$STACK -XX:MaxPermSize=$MAXPERMSIZE \
+            $JAVA_OPTS $CATALINA_OPTS \
             -Djava.io.tmpdir=$CATALINA_TMPDIR \
             -Dcatalina.home=$CATALINA_HOME \
             -Dcatalina.base=$CATALINA_BASE \

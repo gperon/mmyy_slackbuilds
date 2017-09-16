@@ -18,7 +18,7 @@ fi
 PIDFILE="/var/spool/tomcat/tomcat.pid"
 LOGFILE="/var/log/tomcat/tomcat.log"
 
-CLASSPATH="$CATALINA_BASE/bin/bootstrap.jar:$CATALINA_BASE/bin/tomcat-juli.jar"
+CLASSPATH="$CATALINA_HOME/bin/bootstrap.jar:$CATALINA_HOME/bin/tomcat-juli.jar"
 CLASSPATH="$CLASSPATH:/usr/share/java/commons-daemon.jar"
 for i in $CATALINA_LIBDIR/*.jar; do
   CLASSPATH=$CLASSPATH:$i
@@ -27,17 +27,24 @@ done
 USER="tomcat"
 
 JSVC="/usr/bin/jsvc"
-TOMCAT_CMD="-user $USER -cp $CLASSPATH \
-  -pidfile $PIDFILE -outfile $LOGFILE -errfile $LOGFILE \
-  -Xms$MEMALLOC_MIN -Xmx$MEMALLOC_MAX -Xss$STACK -XX:MaxPermSize=$MAXPERMSIZE \
-  -Djava.io.tmpdir="$CATALINA_TMPDIR" \
-  -Dcatalina.home=$CATALINA_HOME -Dcatalina.base=$CATALINA_BASE \
-  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \
-  -Djava.util.logging.config.file=$CATALINA_BASE/conf/logging.properties \
-  -Djava.awt.headless=true org.apache.catalina.startup.Bootstrap"
+TOMCAT_CMD="-java-home $JAVA_HOME \
+            -pidfile $PIDFILE \
+            -outfile $LOGFILE \
+            -errfile $LOGFILE \
+            -user $USER \
+            -classpath $CLASSPATH \
+            -Xms$MEMALLOC_MIN -Xmx$MEMALLOC_MAX -Xss$STACK -XX:MaxPermSize=$MAXPERMSIZE \
+            -Djava.io.tmpdir=$CATALINA_TMPDIR \
+            -Dcatalina.home=$CATALINA_HOME \
+            -Dcatalina.base=$CATALINA_BASE \
+            -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \
+            -Djava.util.logging.config.file=$CATALINA_BASE/conf/logging.properties \
+            -Djava.awt.headless=true \
+            org.apache.catalina.startup.Bootstrap"
+
 
 tomcat_start() {
-  echo -n "Starting Apache Tomcat ... "
+  echo -n "Starting Apache Tomcat ..."
   if [ -e "$PIDFILE" ]; then
     echo "already running!"
   else
@@ -49,7 +56,7 @@ tomcat_start() {
 }
 
 tomcat_stop() {
-  echo -n "Stopping Apache Tomcat ... "
+  echo -n "Stopping Apache Tomcat ..."
   if [ -e "$PIDFILE" ]; then
     cd /var/lib/tomcat
       $JSVC -stop $TOMCAT_CMD
@@ -76,6 +83,22 @@ case "$1" in
 'restart')
   tomcat_restart
   ;;
+ 'version')
+      "$JSVC" \
+      -java-home "$JAVA_HOME" \
+      -pidfile "$CATALINA_PID" \
+      -classpath "$CLASSPATH" \
+      -errfile "$LOGFILE" \
+      -version \
+      -check \
+      org.apache.catalina.startup.Bootstrap
+      if [ "$?" = 0 ]; then
+        "$JAVA_HOME/bin/java" \
+        -classpath "$CATALINA_HOME/lib/catalina.jar" \
+        org.apache.catalina.util.ServerInfo
+      fi
+      exit $? 
+  ;;
 *)
-  echo "usage $0 start|stop|restart"
+  echo "usage $0 start|stop|restart|version"
 esac

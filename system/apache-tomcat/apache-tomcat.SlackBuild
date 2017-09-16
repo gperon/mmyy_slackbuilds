@@ -24,7 +24,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=apache-tomcat
-VERSION=${VERSION:-8.5.15}
+VERSION=${VERSION:-8.5.20}
 ARCH=noarch
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -78,13 +78,21 @@ cp -f conf/* $PKG/etc/tomcat/
 cp -f $CWD/tomcat-java.conf $PKG/etc/tomcat/tomcat-java.conf
 
 cp -rf webapps ${PKG}${TOMCAT_HOME}/webapps
+cp -rf bin/tomcat-juli.jar ${PKG}${TOMCAT_HOME}/bin
 
-ln -s /usr/share/tomcat/bin ${PKG}${TOMCAT_HOME}/bin
-ln -s /var/log/tomcat ${PKG}${TOMCAT_HOME}/logs
-ln -s /var/tmp/tomcat ${PKG}${TOMCAT_HOME}/temp
-ln -s /var/run/tomcat ${PKG}${TOMCAT_HOME}/work
-ln -s /etc/tomcat ${PKG}${TOMCAT_HOME}/conf
 
+#ln -s /usr/share/tomcat/bin ${PKG}${TOMCAT_HOME}/bin
+#ln -s /var/log/tomcat ${PKG}${TOMCAT_HOME}/logs
+#ln -s /var/tmp/tomcat ${PKG}${TOMCAT_HOME}/temp
+#ln -s /var/run/tomcat ${PKG}${TOMCAT_HOME}/work
+#ln -s /etc/tomcat ${PKG}${TOMCAT_HOME}/conf
+
+cd ${PKG}${TOMCAT_HOME}
+ln -s ../../../var/log/tomcat logs
+ln -s ../../../var/tmp/tomcat temp
+ln -s ../../../var/run/tomcat work
+ln -s ../../../etc/tomcat conf
+cd -
 for i in tmp run spool; do
     chown -R tomcat:tomcat ${PKG}/var/${i}/tomcat
     chmod -R 755 ${PKG}/var/${i}/tomcat

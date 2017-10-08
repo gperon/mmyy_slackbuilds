@@ -1,14 +1,31 @@
 #!/bin/sh
 
 # Slackware build script for Sublime Text 3
-# Builds a Slackware package from the Sublime Text 3 binary tarballs.
-# Anyone can freely modify and/or distribute this script without restrictions
-#
+
+# Copyright 2017 Bruno Queiros (bqueiros@gmail.com)
 # Originally written by Luke Williams (xocel@iquidus.org)
-# Currently maintained by Bruno Queiros (bqueiros@gmail.com)
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 PRGNAM=sublime_text
-VERSION=${VERSION:-3.1.26}
+VERSION=${VERSION:-3.1.43}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -25,8 +42,8 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-TARBALL_x86="sublime_text_3_build_3126_x32.tar.bz2" # Name of 32bit tarball
-TARBALL_x86_64="sublime_text_3_build_3126_x64.tar.bz2" # Name of 64bit tarball
+TARBALL_x86="sublime_text_3_build_3143_x32.tar.bz2" # Name of 32bit tarball
+TARBALL_x86_64="sublime_text_3_build_3143_x64.tar.bz2" # Name of 64bit tarball
 TARBALL_ROOT="sublime_text_3" # Name of tarballs root directory
 
 # Set LIBDIRSUFFIX and TARBALL.

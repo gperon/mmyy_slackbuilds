@@ -9,6 +9,6 @@ MD5SUM="5c18e5f60fcc94580571f0db5c00a8a5 \
         d6cdb231911a8d0b08a25b8dd8c5935c"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="ffmpeg"
+REQUIRES=""
 MAINTAINER="khronosschoty"
 EMAIL="khronosschoty@posteo.org"

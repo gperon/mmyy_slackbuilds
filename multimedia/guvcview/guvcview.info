@@ -5,6 +5,6 @@ DOWNLOAD="http://downloads.sourceforge.net/project/guvcview/source/guvcview-src-
 MD5SUM="f4d238ccd26e126ae6e8e6bd4a052bfc"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="ffmpeg portaudio SDL2"
+REQUIRES="portaudio SDL2"
 MAINTAINER="Willy Sudiarto Raharjo"
 EMAIL="willysr@slackbuilds.org"

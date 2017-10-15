@@ -5,6 +5,6 @@ DOWNLOAD="https://sourceforge.net/projects/slackbuildsdirectlinks/files/freerdp/
 MD5SUM="93c2ee23a95837b00bdc2b94010c684a"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="ffmpeg"
+REQUIRES=""
 MAINTAINER="Philip van der Hoeven"
 EMAIL="philip@vd-hoeven.nl"

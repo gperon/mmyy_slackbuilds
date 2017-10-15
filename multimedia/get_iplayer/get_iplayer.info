@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/get-iplayer/get_iplayer/archive/v2.97/get_iplayer-2
 MD5SUM="783f5b692e23f5721b2ab2c8eec757ef"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="ffmpeg libwww-perl rtmpdump perl-xml-libxml"
+REQUIRES="libwww-perl rtmpdump perl-xml-libxml"
 MAINTAINER="ArTourter"
 EMAIL="artourter@gmail.com"

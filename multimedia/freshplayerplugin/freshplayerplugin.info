@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/i-rinat/freshplayerplugin/archive/v0.3.7/freshplaye
 MD5SUM="9076ce1e61c9ec12234306b62afff9ce"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="ffmpeg pepperflash-plugin ragel uriparser"
+REQUIRES="pepperflash-plugin ragel uriparser"
 MAINTAINER="Matteo Bernardini"
 EMAIL="ponce@slackbuilds.org"

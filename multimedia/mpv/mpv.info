@@ -7,6 +7,6 @@ MD5SUM="ec86f42b091d891f9a932de0f6e873ad \
         fbb646eafa430f959743010c85e269be"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="ffmpeg libass docutils"
+REQUIRES="libass docutils"
 MAINTAINER="Andreas Guldstrand"
 EMAIL="andreas.guldstrand@gmail.com"

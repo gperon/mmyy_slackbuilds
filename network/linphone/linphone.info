@@ -9,6 +9,6 @@ MD5SUM="c1c3a63b7ee963360e0e89cf5e5ff406 \
 	1ca115e94a718638fbecf8352c169861"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="speex ffmpeg belle-sip linphone-srtp bzrtp libupnp"
+REQUIRES="speex belle-sip linphone-srtp bzrtp libupnp"
 MAINTAINER="Euan Thoms"
 EMAIL="euan at potensol dot com"

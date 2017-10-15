@@ -5,6 +5,6 @@ DOWNLOAD="https://pypi.python.org/packages/29/1e/d27a02a5a432888792e22d7d5d6a923
 MD5SUM="198d6f25b182a08ed4cd0197e41fc5cd"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="python3 python3-PyYAML minidb python-requests python-keyring"
+REQUIRES="python3-PyYAML minidb python-requests python-keyring"
 MAINTAINER="Dimitris Zlatanidis"
 EMAIL="d.zlatanidis@gmail.com"

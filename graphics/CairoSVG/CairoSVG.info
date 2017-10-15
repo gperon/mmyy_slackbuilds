@@ -5,6 +5,6 @@ DOWNLOAD="https://pypi.python.org/packages/88/30/63f5899306fc9e78888cb8453b08012
 MD5SUM="70eeaab4801370e9fb3b3c73523338e8"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="python3 cairocffi lxml cssselect tinycss python3-pillow"
+REQUIRES="cairocffi lxml cssselect tinycss python3-pillow"
 MAINTAINER="Dimitris Zlatanidis"
 EMAIL="d.zlatanidis@gmail.com"

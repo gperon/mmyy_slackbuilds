@@ -7,6 +7,6 @@ MD5SUM="17ad5c9ab4793f7ebf5e3797c077937f \
         d4c63da46d6b426eb71509d2bd4637bf"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="python3 openjdk apache-ant perl-Archive-Zip"
+REQUIRES="openjdk apache-ant perl-Archive-Zip"
 MAINTAINER="Christoph Willing"
 EMAIL="chris.willing@linux.com"

@@ -5,6 +5,6 @@ DOWNLOAD="https://pypi.python.org/packages/50/c0/dddd1e662d17d288824100579e50cb5
 MD5SUM="efcd47e1a297fede20550fb53feb3c7d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="python3"
+REQUIRES=""
 MAINTAINER="Dimitris Zlatanidis"
 EMAIL="d.zlatanidis@gmail.com"

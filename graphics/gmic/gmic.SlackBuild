@@ -21,7 +21,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gmic
-VERSION=${VERSION:-2.0.3}
+VERSION=${VERSION:-2.1.1}
 COMMUNITYVERSION=${COMMUNITYVERSION:-ab911d94c33af6285908393265ccac5b8e83952c}
 QTVERSION=${QTVERSION:-f6a13ac4cdbea97448db840c73adbf6e957c7601}
 BUILD=${BUILD:-1}
@@ -67,7 +67,6 @@ tar xvf $CWD/$PRGNAM\_$VERSION.tar.gz --warning=no-unknown-keyword
 mv $PRGNAM-$VERSION $PRGNAM
 unzip $CWD/$PRGNAM-community-$COMMUNITYVERSION.zip || unzip $CWD/$COMMUNITYVERSION
 mv $PRGNAM-community-$COMMUNITYVERSION $PRGNAM-community
-#tar xvf $CWD/$PRGNAM-qt-$QTVERSION.tar.gz --warning=no-unknown-keyword || tar xvf $CWD/$QTVERSION.tar.gz --warning=no-unknown-keyword
 unzip $CWD/$PRGNAM-qt-$QTVERSION.zip || unzip $CWD/$QTVERSION
 mv $PRGNAM-qt-$QTVERSION $PRGNAM-qt
 cd $PRGNAM

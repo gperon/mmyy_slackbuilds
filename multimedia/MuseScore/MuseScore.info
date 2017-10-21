@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/musescore/MuseScore/archive/v2.1.0/MuseScore-2.1.0.
 MD5SUM="de1bf9c231d35847191bf7321f527cd4"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="qt5-webkit jack2 lame portaudio"
+REQUIRES="qt5-webkit jack2 portaudio"
 MAINTAINER="Klaatu"
 EMAIL="klaatu@member.fsf.org"

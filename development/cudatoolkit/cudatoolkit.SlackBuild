@@ -24,7 +24,7 @@
 
 PRGNAM=cudatoolkit
 FILENAME=cuda
-VERSION=${VERSION:-8.0.61}
+VERSION=${VERSION:-9.0.176}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -55,9 +55,11 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
-chmod +x $CWD/$FILENAME\_$VERSION\_375.26\_linux-run
-$CWD/$FILENAME\_$VERSION\_375.26\_linux-run -extract=$TMP
-$TMP/$FILENAME-linux64*-$VERSION-*.run -noprompt -nosymlink -prefix=$TMP/$PRGNAM-$VERSION
+#chmod +x $CWD/$FILENAME\_$VERSION\_384.81\_linux-run
+#$CWD/$FILENAME\_$VERSION\_384.81\_linux-run -extract=$TMP
+chmod +x $CWD/$FILENAME\_$VERSION\_384.81\_linux.run
+$CWD/$FILENAME\_$VERSION\_384.81\_linux.run -extract=$TMP
+$TMP/$FILENAME-linux.$VERSION-*.run -noprompt -nosymlink -prefix=$TMP/$PRGNAM-$VERSION
 
 cd $PRGNAM-$VERSION
 chown -R root:root .
@@ -68,6 +70,7 @@ mv doc/man $PKG/usr/
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv doc/* $PKG/usr/doc/$PRGNAM-$VERSION
 rm -rf doc
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
@@ -99,7 +102,7 @@ ln -sf ../../include/cuda include
 rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libOpenCL.s*
 
 # install samples
-$TMP/$FILENAME-samples*-$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA-8.0_Samples -cudaprefix=/usr/share/cuda
+$TMP/$FILENAME-samples.$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA-8.0_Samples -cudaprefix=/usr/share/cuda
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

@@ -79,6 +79,6 @@ MD5SUM="a563f222b125f0df8d4e5dd92076e7b6\
         c900e7dbce808ff8ced375077b17a163"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="rust"
+REQUIRES=""
 MAINTAINER="Andrew Clemons"
 EMAIL="andrew.clemons@gmail.com"

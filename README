@@ -47,6 +47,7 @@ development/ispc. Added Intel SPMD Program Compiler
 games/gaviota. Added chess engine and tablespace
 games/polyglot. Added UCI adapter
 games/syzygy. Added chess tablebase generator
+graphics/AwesomeBump. Added texture map generator
 graphics/gimp-painter. Added gimp for painter
 graphics/vsfm. Added GUI application for 3D reconstruction
 libraries/clapack. Added f2c'ed version of LAPACK

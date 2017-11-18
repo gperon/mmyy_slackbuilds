@@ -1,10 +1,10 @@
 PRGNAM="gmic"
-VERSION="2.1.1"
+VERSION="2.1.5"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_2.1.1.tar.gz \
+DOWNLOAD="https://gmic.eu/files/source/gmic_2.1.5.tar.gz \
           https://codeload.github.com/dtschump/gmic-community/zip/ab911d94c33af6285908393265ccac5b8e83952c \
           https://codeload.github.com/c-koi/gmic-qt/zip/f6a13ac4cdbea97448db840c73adbf6e957c7601"
-MD5SUM="1672ab5d116e600752fff877e8910a93 \
+MD5SUM="03b0f2dce76d114caebe2f3d79382335 \
         1588cde1daec2a4f984323618c91a9ce \
         b03f6cc637dd80e4d181dcc30bb406da" 
 DOWNLOAD_x86_64=""

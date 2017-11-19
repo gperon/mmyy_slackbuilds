@@ -64,7 +64,7 @@ system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackwar
 
 Packages newer than Slackbuilds version
 ---------------------------------------------
-graphics/draftsight. Updated for version 2017SP3
+graphics/draftsight. Updated for version 2018SP0
 graphics/gmic. Updated for version 2.1.5
 graphics/luxrender. Updated for version 1.6.0
 graphics/mypaint. Updated for version 1.2.1

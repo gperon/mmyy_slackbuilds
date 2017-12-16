@@ -56,7 +56,6 @@ libraries/embree. Added Embree High Performance Ray Tracing Kernels
 libraries/graclus. Added graph clustering software
 libraries/pba. Added Multicore Bundle Adjustment
 libraries/siftgpu. Added GPU SIFT implementation
-multimedia/vokoscreen. Added vokoscreen recording screencasts with audio
 system/gitlab. Added git repository management
 system/input-wacom. Added Kernel driver for Wacom (newer version than Slackware)
 system/weewx. Added software for weather stations

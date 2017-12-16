@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
           |-----handy-ruler------------------------------------------------------|
-vokoscreen: vokoscreen (recording screencasts with audio)
+vokoscreen: vokoscreen (screencast creator)
 vokoscreen:
-vokoscreen: record all actions on your screen for documentations 
-vokoscreen: educational videos
-vokoscreen:
-vokoscreen: Homepage: http://www.kohaupt-online.de/hp/ 
-vokoscreen:
+vokoscreen: vokoscreen is an easy to use screencast creator to record
+vokoscreen: educational videos, live recordings of browser, installation,
+vokoscreen: videoconferences, etc.
 vokoscreen:
 vokoscreen:
 vokoscreen:
+vokoscreen:
+vokoscreen: http://linuxecke.volkoh.de/vokoscreen/vokoscreen.html
 vokoscreen:

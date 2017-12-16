@@ -63,7 +63,7 @@ system/xf86-input-wacom. Added X11 driver for Wacom (newer version than Slackwar
 
 Packages newer than Slackbuilds version
 ---------------------------------------------
-audio/audacity. Updated for version 2.2.0
+audio/audacity. Updated for version 2.2.1
 graphics/draftsight. Updated for version 2018SP0
 graphics/gmic. Updated for version 2.1.5
 graphics/luxrender. Updated for version 1.6.0

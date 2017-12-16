@@ -31,7 +31,7 @@
 
 PRGNAM=audacity
 SRCNAM=Audacity
-VERSION=${VERSION:-2.2.0}
+VERSION=${VERSION:-2.2.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -89,7 +89,7 @@ sed -i "s,lib/vamp,lib$LIBDIRSUFFIX/vamp,g" \
   lib-src/libvamp/src/vamp-hostsdk/PluginHostAdapter.cpp || true
 
 # fix building against ffmpeg-2.6.x, patch from archlinux
-patch -p1 < $CWD/audacity-ffmpeg.patch
+#patch -p1 < $CWD/audacity-ffmpeg.patch
 
 autoreconf -fi
 

@@ -23,5 +23,5 @@ preserve_perms() {
 }
 
 # Keep same perms on :
-preserve_perms  etc/gitlab/gitlab.rb.new
-
+preserve_perms etc/gitlab/gitlab.rb.new
+config etc/rc.d/rc.gitlab.new

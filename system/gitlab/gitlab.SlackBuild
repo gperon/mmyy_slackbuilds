@@ -23,7 +23,7 @@
 
 
 PRGNAM=${PRGNAM:-gitlab}
-VERSION=${VERSION:-10.2.2}
+VERSION=${VERSION:-10.3.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -80,7 +80,8 @@ prometheus['username'] = 'gitlab-prom'
 EOF
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-#mkdir -p $PKG/var/log/gitlab/reconfigure #required per https://gitlab.com/gitlab-org/gitlab-ce/issues/13775#note_3943883
+mkdir -p $PKG/etc/rc.d
+cp $CWD/rc.$PRGNAM $PKG/etc/rc.d/rc.$PRGNAM.new
 mkdir -p $PKG/sbin
 cd $PKG/sbin
 ln -s ../opt/gitlab/bin/gitlab-ctl gitlab-ctl

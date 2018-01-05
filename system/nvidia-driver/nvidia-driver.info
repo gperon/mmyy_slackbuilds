@@ -1,30 +1,30 @@
 PRGNAM="nvidia-driver"
-VERSION="387.12"
+VERSION="384.111"
 HOMEPAGE="http://www.nvidia.com"
-DOWNLOAD="https://download.nvidia.com/XFree86/Linux-x86/387.12/NVIDIA-Linux-x86-387.12.run \
-          https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-387.12.tar.bz2 \
-          https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-387.12.tar.bz2 \
-          https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-387.12.tar.bz2 \
-          https://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-387.12.tar.bz2 \
-          https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-387.12.tar.bz2"
-MD5SUM="1113b7efb570a7604d9e31d93351c5ff \
-        ec4af5fb076ce5567a893907614b17d8 \
-        8212d12d0a9f85a7978ca0e674aca6ff \
-        b733eff9a20ff1b8ac5cd18472053a27 \
-        209d393bb740486452c2025c7b26f496 \
-        e5c81d4035b1c62de2c65ce31f53d109"
-DOWNLOAD_x86_64="https://download.nvidia.com/XFree86/Linux-x86_64/387.12/NVIDIA-Linux-x86_64-387.12.run \
-                 https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-387.12.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-387.12.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-387.12.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-387.12.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-387.12.tar.bz2"
-MD5SUM_x86_64="a11bd0d1bad9c4b462c2bbd17b0c969c \
-               ec4af5fb076ce5567a893907614b17d8 \
-               8212d12d0a9f85a7978ca0e674aca6ff \
-               b733eff9a20ff1b8ac5cd18472053a27 \
-               209d393bb740486452c2025c7b26f496 \
-               e5c81d4035b1c62de2c65ce31f53d109"
+DOWNLOAD="https://download.nvidia.com/XFree86/Linux-x86/384.111/NVIDIA-Linux-x86-384.111.run \
+          https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-384.111.tar.bz2 \
+          https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-384.111.tar.bz2 \
+          https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-384.111.tar.bz2 \
+          https://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-384.111.tar.bz2 \
+          https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-384.111.tar.bz2"
+MD5SUM="2d2d5e12b3d677b9e8864320150e2499 \
+        e43325998d517b629bb7f2cf9ab7a114 \
+        63ac7f5ed1a616abee5993300a832392 \
+        dcb10d10d1069b8101e3f0f74e5cfe6a \
+        7b9eabc9accacc5e0342d124900c86cd \
+        05b6c1b7a7c4f10eb59ac204f33f8005"
+DOWNLOAD_x86_64="https://download.nvidia.com/XFree86/Linux-x86_64/384.111/NVIDIA-Linux-x86_64-384.111.run \
+                 https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-384.111.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-384.111.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-384.111.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-384.111.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-384.111.tar.bz2"
+MD5SUM_x86_64="0428addcf69a21a955e4caf4c90d0c68 \
+               e43325998d517b629bb7f2cf9ab7a114 \
+               63ac7f5ed1a616abee5993300a832392 \
+               dcb10d10d1069b8101e3f0f74e5cfe6a \
+               7b9eabc9accacc5e0342d124900c86cd \
+               05b6c1b7a7c4f10eb59ac204f33f8005"
 REQUIRES="nvidia-kernel"
 MAINTAINER="Edward W. Koenig"
 EMAIL="kingbeowulf@gmail.com"

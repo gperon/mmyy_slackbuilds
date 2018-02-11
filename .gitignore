@@ -27,3 +27,4 @@
 *.war
 gimp-painter/*.diff
 *.hidden
+*.phar

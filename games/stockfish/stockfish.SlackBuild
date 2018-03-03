@@ -23,7 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=stockfish
-VERSION=${VERSION:-8}
+SRCNAM=Stockfish-sf
+VERSION=${VERSION:-9}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -59,9 +60,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM
-unzip $CWD/$PRGNAM-$VERSION-src.zip
-cd $PRGNAM-$VERSION-src
+rm -rf $SRCNAM\_$VERSION
+tar xvzf $CWD/$SRCNAM\_$VERSION.tar.gz
+cd $SRCNAM\_$VERSION
 
 chown -R root:root .
 find -L . \

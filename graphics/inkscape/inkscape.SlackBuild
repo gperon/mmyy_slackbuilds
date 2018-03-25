@@ -23,8 +23,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=inkscape
-VERSION=${VERSION:-0.92.2}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-0.92.3}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}
 
@@ -64,8 +64,6 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 
-patch -p1 < $CWD/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch
-patch -p1 < $CWD/inkscape-0.92.2-poppler-1.patch
 sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
 
 chown -R root:root .

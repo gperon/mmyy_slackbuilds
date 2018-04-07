@@ -4,6 +4,7 @@
 
 # Copyright 2015  Trayan Denev, tdenev@gmail.com
 # Copyright 2017  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# This version Copyright 2018 Lenard Spencer <lspencer31@cfl.rr.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gnucash
-VERSION=${VERSION:-2.6.18}
+VERSION=${VERSION:-2.6.20}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -40,9 +41,6 @@ CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
-
-DBI=${DBI:-false}
-OPT_ARGS=""
 
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
@@ -64,21 +62,45 @@ else
   LIBDIRSUFFIX=""
 fi
 
-if [ ! "$DBI" = "false" ] ; then
-  OPT_ARGS+="--enable-dbi --with-dbi-dbd-dir=/usr/lib${LIBDIRSUFFIX}/dbd/ "
-  echo $0 : building with dbi enabled
-  sleep 0.5
+if [ "$DBI" = "yes" ]; then
+  DBIARGS="--enable-dbi --with-dbi-dbd-dir=/usr/lib${LIBDIRSUFFIX}/dbd/ "
+  echo " building with dbi enabled"
+  sleep 1
 else
-  OPT_ARGS+="--disable-dbi "
+  DBIARGS="--disable-dbi "
+fi
+
+if [ "$OFX" = "yes" ]; then
+  OFXBANKING="--enable-ofx"
+  echo " building with OFX enabled"
+  sleep 1
+else
+  OFXBANKING="--disable-ofx"
+fi
+
+if [ "$AQ" = "yes" ]; then
+  AQBANKING="--enable-aqbanking"
+  echo " building with aqbanking enabled"
+  sleep 1
+else
+  AQBANKING="--disable-aqbanking"
 fi
 
 set -e
+
+# First, make sure a previous Gnucash installation is removed:
+if [ -e /usr/bin/gnucash ]; then
+  echo "A previous Gnucash installation has been found."
+  echo "Please remove it before running this script."
+  exit 1
+fi
+
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION-1.tar.bz2
+tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -98,11 +120,11 @@ CXXFLAGS="$SLKCFLAGS" \
   --mandir=/usr/man \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --enable-python \
-  --enable-ofx \
-  --disable-aqbanking \
+  $OFXBANKING \
+  $AQBANKING \
   --disable-schemas-compile \
-  --build=$ARCH-slackware-linux \
-  $OPT_ARGS
+  $DBIARGS \
+  --build=$ARCH-slackware-linux
 
 # --enable-register2 (not ready for 2.6.0 release)
 

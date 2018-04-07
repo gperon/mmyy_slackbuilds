@@ -2,7 +2,7 @@
 
 # Slackware build script for Marathon: Rubicon X
 
-# Copyright 2015 Hunter Sezen California, USA
+# Copyright 2015, 2018 Hunter Sezen California, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +24,7 @@
 
 PRGNAM=marathon-rubicon-data
 VERSION=${VERSION:-20060807} # Last modified date from the zipfile's http header
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 ARCH=noarch
@@ -34,14 +34,13 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-set -e
+set -eu
 
 # install gamedata in opt instead of usr
-OPT=${OPT:-no}
-if [ "${OPT:-yes}" == "yes" ]; then
-    DATA="/opt/AlephOne"
+if [ "${OPT:-0}" != 0 ]; then
+  DATA='/opt/AlephOne'
 else
-    DATA="/usr/share/AlephOne/gamedata"
+  DATA='/usr/share/AlephOne/gamedata'
 fi
 
 ZIPNAME=marathonRubiconX
@@ -50,9 +49,8 @@ WRAPPER=marathon-rubicon
 DATADIR=$PKG$DATA
 
 rm -rf $PKG
-mkdir -p $TMP $PKG $OUTPUT
+mkdir -p $TMP $PKG $OUTPUT $DATADIR
 cd $TMP
-mkdir -p $DATADIR
 unzip $CWD/$ZIPFILE -d $DATADIR
 
 chown -R root:root $DATADIR
@@ -77,7 +75,7 @@ find $PKG/usr/games -perm 644 -exec chmod 755 {} \;
 mkdir -p $PKG/usr/share/applications
 cat > $PKG/usr/share/applications/$WRAPPER.desktop <<EOF
 [Desktop Entry]
-Name=Marathon Rubicon X 
+Name=Marathon Rubicon X
 Exec=$WRAPPER
 Icon=alephone
 Type=Application
@@ -90,6 +88,13 @@ rm -rf $DATADIR/__MACOSX
 
 # Remove unneeded hidden files
 find $DATADIR -name ".[^.]*" -mindepth 1 -print0 | xargs -0r rm -rf
+
+# Fix windows formatted scripts
+set -- $DATADIR/*/Scripts/*
+for script do
+  tr '\r' '\n' < "$script" > "$script-tmp"
+  mv -- "$script-tmp" "$script"
+done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

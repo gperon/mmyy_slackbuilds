@@ -84,18 +84,23 @@ cd build
   make
 cd ..
 
-mkdir -p $PKG/usr/lib$LIBDIRSUFFIX $PKG/usr/include/$PRGNAM/internal/custom \
-    $PKG/usr/include/gmock/internal/custom
+mkdir -p $PKG/usr/lib$LIBDIRSUFFIX \
+    $PKG/usr/include/$PRGNAM/internal/custom \
+    $PKG/usr/include/gmock/internal/custom \
+    $PKG/usr/src/{$PRGNAM,gmock}
 
 install -m 0644 build/googlemock/*.so $PKG/usr/lib$LIBDIRSUFFIX
 install -m 0644 googlemock/include/gmock/*.h $PKG/usr/include/gmock
 install -m 0644 googlemock/include/gmock/internal/*.h $PKG/usr/include/gmock/internal/
 install -m 0644 googlemock/include/gmock/internal/custom/*.h $PKG/usr/include/gmock/internal/custom
+install -m 0644 googlemock/src/*.cc $PKG/usr/src/gmock/
+ln -s $PKG/usr/src/gmock/ $PKG/usr/src/gmock/src
 
 install -m 0644 build/googlemock/$PRGNAM/*.so $PKG/usr/lib$LIBDIRSUFFIX
 install -m 0644 googletest/include/$PRGNAM/*.h $PKG/usr/include/$PRGNAM/
 install -m 0644 googletest/include/$PRGNAM/internal/*.h $PKG/usr/include/$PRGNAM/internal/
 install -m 0644 googletest/include/$PRGNAM/internal/custom/*.h $PKG/usr/include/$PRGNAM/internal/custom
+install -m 0644 googletest/src/*.cc $PKG/usr/src/$PRGNAM/
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

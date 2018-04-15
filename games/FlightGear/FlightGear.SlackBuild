@@ -28,6 +28,7 @@ SRCNAM=flightgear
 VERSION=${VERSION:-2018.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+QT5=${QT5:-yes}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -86,8 +87,8 @@ cd build
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DEVENT_INPUT:STRING="ON" \
     -DFG_DATA_DIR=/usr/share/${PRGNAM} \
-    -DENABLE_QT=ON \
     $OPT \
+    -DENABLE_QT=ON \
     -DCMAKE_BUILD_TYPE=Release ..
   make -j7
   make install DESTDIR=$PKG

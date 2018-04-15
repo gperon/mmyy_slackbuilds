@@ -64,12 +64,39 @@ else
   LIBDIRSUFFIX=""
 fi
 
-if [ ! "$DBI" = "false" ] ; then
-  OPT_ARGS+="--enable-dbi --with-dbi-dbd-dir=/usr/lib${LIBDIRSUFFIX}/dbd/ "
-  echo $0 : building with dbi enabled
-  sleep 0.5
+# First, make sure a previous Gnucash installation is removed:
+if [ -e /usr/bin/gnucash ]; then
+  echo "A previous Gnucash installation has been found."
+  echo "Please remove it before running this script."
+  exit 1
+fi
+
+if [ "$DBI" = "yes" ]; then
+  DBIARGS="--enable-dbi --with-dbi-dbd-dir=/usr/lib${LIBDIRSUFFIX}/dbd/ "
+  echo " building with dbi enabled"
+else
+  DBIARGS="--disable-dbi "
+fi
+
+if [ "$OFX" = "yes" ]; then
+  OFXBANKING="--enable-ofx"
+  echo " building with OFX enabled"
+else
+  OFXBANKING="--disable-ofx"
+fi
+
+if [ "$AQ" = "yes" ]; then
+  AQBANKING="--enable-aqbanking"
+  echo " building with aqbanking enabled"
 else
   OPT_ARGS+="--disable-dbi "
+fi
+
+if [ "$WITH_PYTHON" = "yes" ]; then
+  W_PYTHON="--enable-python"
+  echo " building with Python bindings enabled"
+else
+  W_PYTHON="--disable-python"
 fi
 
 set -e
@@ -80,6 +107,12 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
+
+# Restore missing .py files lost from 2.6.19 to 2.6.20:
+if [ "$WITH_PYTHON" = "yes" ]; then
+  cp -nv $CWD/missing-py/* src/optional/python-bindings
+fi
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \

@@ -3,7 +3,7 @@
 
 # Copyright before version 2016.3.1 by Diego Pantano  <poplin.dp@gmail.com>
 # Copyright 2016-2017 Panagiotis Nikolaou, Culver City, CA
-# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2018 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,7 +25,7 @@
 
 PRGNAM=FlightGear
 SRCNAM=flightgear
-VERSION=${VERSION:-2017.3.1}
+VERSION=${VERSION:-2018.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

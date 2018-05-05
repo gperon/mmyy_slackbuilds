@@ -7,6 +7,6 @@ MD5SUM="31ea7c1259c7285bd9d71f3000cbd95b \
         965fe35c4db4401cb9644ebb6251df55"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="json-glib cldr-emoji-annotation"
+REQUIRES="cldr-emoji-annotation"
 MAINTAINER="Heinz Wiesinger"
 EMAIL="pprkut@liwjatan.at"

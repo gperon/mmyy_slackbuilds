@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/hughsie/appstream-glib/archive/appstream_glib_0_7_8
 MD5SUM="9b48ca0715f0f89b63bc8c4a54fe3c1d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="meson json-glib gcab"
+REQUIRES="meson gcab"
 MAINTAINER="Andrew Clemons"
 EMAIL="andrew.clemons@gmail.com"

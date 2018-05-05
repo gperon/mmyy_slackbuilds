@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/flatpak/flatpak/releases/download/0.11.3/flatpak-0.
 MD5SUM="0fa123088e64ae733fea210ce1005772"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="bubblewrap ostree appstream-glib json-glib libseccomp"
+REQUIRES="bubblewrap ostree appstream-glib libseccomp"
 MAINTAINER="Vincent Batts"
 EMAIL="vbatts@hashbangbash.com"

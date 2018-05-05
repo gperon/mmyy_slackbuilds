@@ -31,7 +31,7 @@
 # - document optional deps in README
 
 PRGNAM=GraphicsMagick
-VERSION=${VERSION:-1.3.28}
+VERSION=${VERSION:-1.3.29}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -183,6 +183,9 @@ EOF
   WITHTCL=WITHOUT
 fi
 ### Done with tcl module
+
+# Don't ship .la files:
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

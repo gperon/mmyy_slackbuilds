@@ -24,8 +24,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gnucash
-VERSION=${VERSION:-3.0}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-2.6.21}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -95,7 +95,7 @@ else
   OPT_ARGS+="--disable-dbi "
 fi
 
-if [ "$WITH_PYTHON" = "yes" ]; then
+if [ "$WITHPYTHON" = "yes" ]; then
   W_PYTHON="--enable-python"
   echo " building with Python bindings enabled"
   sleep 1

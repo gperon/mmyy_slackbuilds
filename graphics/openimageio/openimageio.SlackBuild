@@ -24,8 +24,8 @@
 
 PRGNAM=openimageio
 SRCNAM=oiio-Release
-VERSION=${VERSION:-1.8.10}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-1.8.11}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}
 

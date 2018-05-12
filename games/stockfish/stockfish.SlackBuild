@@ -2,7 +2,7 @@
 
 # Slackware build script for stockfish
 
-# Copyright 2016  Johannes Schoepfer
+# Copyright 2016 - 2018  Johannes Schoepfer, Germany
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,6 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=stockfish
-SRCNAM=Stockfish-sf
 VERSION=${VERSION:-9}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -60,9 +59,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM\_$VERSION
-tar xvzf $CWD/$SRCNAM\_$VERSION.tar.gz
-cd $SRCNAM\_$VERSION
+rm -rf $PRGNAM
+unzip -d $PRGNAM $CWD/$PRGNAM-$VERSION-src.zip
+cd $PRGNAM
 
 chown -R root:root .
 find -L . \

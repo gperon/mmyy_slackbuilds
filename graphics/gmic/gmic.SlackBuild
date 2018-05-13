@@ -21,12 +21,12 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gmic
-VERSION=${VERSION:-2.2.1}
+VERSION=${VERSION:-2.2.3}
 COMMUNITYVERSION=${COMMUNITYVERSION:-ab911d94c33af6285908393265ccac5b8e83952c}
 QTVERSION=${QTVERSION:-f6a13ac4cdbea97448db840c73adbf6e957c7601}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j1 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -79,17 +79,15 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-sed -i -e 's|LIB = lib|LIB = lib$LIBDIRSUFFIX|g ' \
-       -e 's|/share/man/|/man/|g' \
-       -e 's|/etc/bash_completion.d|/usr/share/bash-completion/completions|g' \
-       -e 's|qmake|qmake-qt5|g' \
+sed -i -e "s|LIB = lib|LIB = lib$LIBDIRSUFFIX|g" \
+       -e "s|/share/man/|/man/|g" \
+       -e "s|/etc/bash_completion.d|/usr/share/bash-completion/completions|g" \
+       -e "s|qmake|qmake-qt5|g" \
        src/Makefile
-sed -i -e 's|-Ofast|-O3 -fno-fast-math --std=c++11|g' \
+sed -i -e "s|-Ofast|-O2 -fno-fast-math --std=c++11|g" \
     gmic-qt/gmic_qt.pro
 
-make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS cli lib gimp WGET=/bin/true
-make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS krita WGET=/bin/true
-#make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS libc zart WGET=/bin/true
+make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS all WGET=/bin/true
 make -C src install LIB=lib$LIBDIRSUFFIX DESTDIR="$PKG" USR="/usr"
 
 rmdir $PKG/usr/share || true

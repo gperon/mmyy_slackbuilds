@@ -25,7 +25,7 @@
 
 
 PRGNAM=sublime_text
-VERSION=${VERSION:-3.1.70}
+VERSION=${VERSION:-3.1.76}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -42,8 +42,8 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-TARBALL_x86="sublime_text_3_build_3170_x32.tar.bz2" # Name of 32bit tarball
-TARBALL_x86_64="sublime_text_3_build_3170_x64.tar.bz2" # Name of 64bit tarball
+TARBALL_x86="sublime_text_3_build_3176_x32.tar.bz2" # Name of 32bit tarball
+TARBALL_x86_64="sublime_text_3_build_3176_x64.tar.bz2" # Name of 64bit tarball
 TARBALL_ROOT="sublime_text_3" # Name of tarballs root directory
 
 # Set LIBDIRSUFFIX and TARBALL.

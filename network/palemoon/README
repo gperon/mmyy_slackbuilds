@@ -1,4 +1,4 @@
-PaleMoon (Web browser -- BUILD FROM SOURCE)
+palemoon (Web browser -- BUILD FROM SOURCE)
 
 This SlackBuild builds Pale Moon from source.
 For a binary repackage, see 'palemoon' at SlackBuilds.org.
@@ -19,7 +19,8 @@ offically released by the Pale Moon devs.
 To package this version of Pale Moon for installation along side any other
 version of Pale Moon, (such as the before mentioned version known here as
 "palemoon") pass the script the parameter:
-APPEND_VERSION_SUFFIX=yes
+
+    APPEND_VERSION_SUFFIX=yes
 
 See http://docs.slackware.com/howtos:software:palemoon for additional tips and
 help resources.
@@ -36,18 +37,32 @@ gcclegacy494 here on SBo.
 
 A native fork of FireFox's developer tools exists as an external add-on or
 internally. Pale Moon by default ships with the developer tools internally;
-if desired, do DEVTOOLS=no ./PaleMoon.SlackBuild to build Pale Moon without
-them.
+if this is undesirable, dev tools can be disabled by passing the script the
+parameter:
+
+    DEVTOOLS=no ./palemoon.SlackBuild
 
 Pale Moon's default is to build, ship, and use its own internal dictionary;
-if desired, however, do USE_SYSTEM_HUNSPELL=yes ./PaleMoon.SlackBuild, to
+if desired, however, do USE_SYSTEM_HUNSPELL=yes ./palemoon.SlackBuild, to
 use the Slackware system Hunspell instead. This assumes you have dictionaries
 such as hunspell-en or hunspell-es installed in /usr/share/hunspell -- the
 location that a few SlackBuilds at SBo install them.
+
+To remove the "AdNauseam" extension from the Pale Moon blocklist, do
+
+    ADNAUSEAM=unblock ./palemoon.SlackBuild
+
+To remove the "NoScript" extension from the Pale Moon blocklist, do
+
+    NOSCRIPT=unblock ./palemoon.SlackBuild
+
+Note: The most up-to-date version of the NoScript campatible with Pale Moon can
+be found here: https://noscript.net/getit#classic
 
 If your processor doesn't support sse2 instructions or you get segfaults,
 try looking in the SlackBuild for the OPTIMIZE build option (eventually
 refer to the Pale Moon developers for help).
 
 To enable debug information, pass the script the parameter
-ENABLE_DEBUG=yes
+
+    ENABLE_DEBUG=yes

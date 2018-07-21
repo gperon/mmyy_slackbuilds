@@ -80,7 +80,7 @@ sed "s/FULL_PATH/\/opt\/$PRGNAM/" $CWD/$PRGNAM.desktop \
   > $PKG/usr/share/applications/$PRGNAM.desktop
 ln -s /opt/$PRGNAM/$PRGNAM $PKG/usr/bin/$PRGNAM
 
-# Hack for missing libtinfo.so.5
+## Hack for missing libtinfo.so.5
 #ln -s /lib$LIBDIRSUFFIX/libncurses.so.5 \
 #  $PKG/opt/$PRGNAM/hardware/tools/avr/lib/libtinfo.so.5
 

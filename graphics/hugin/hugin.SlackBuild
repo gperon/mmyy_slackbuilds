@@ -5,7 +5,6 @@
 # Copyright 2009-2010  Erik W. Hanson, Minneapolis, MN, USA
 # Copyright 2011-2017  by titopoquito (titopoquito@gmail.com)
 # Thanks to Romain Dartigues for the help with the update to 2016.2.0
-# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -26,10 +25,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=hugin
-VERSION=${VERSION:-2018.0.0}
+VERSION=${VERSION:-2017.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -83,10 +81,9 @@ cmake \
   -DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
   -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
-  -DBUILD_HSI=ON \
   -DCMAKE_BUILD_TYPE=Release ..
 
-make $NUMJOBS install DESTDIR=$PKG
+make install DESTDIR=$PKG
 cd ..
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \

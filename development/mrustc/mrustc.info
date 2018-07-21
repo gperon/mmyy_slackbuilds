@@ -1,12 +1,12 @@
 PRGNAM="mrustc"
-VERSION="git5206b78"
+VERSION="git5d4bf9e"
 HOMEPAGE="https://github.com/thepowersgang/mrustc"
-DOWNLOAD="UNSUPPORTED"
-MD5SUM=""
-DOWNLOAD_x86_64="https://github.com/thepowersgang/mrustc/archive/5206b786247238f32a2b5ad8ed7f6d378a1d2d12/mrustc-5206b786247238f32a2b5ad8ed7f6d378a1d2d12.tar.gz \
+DOWNLOAD="https://github.com/thepowersgang/mrustc/archive/5d4bf9e96d795623f1b32b2f1f2e57c4f74419fe/mrustc-5d4bf9e96d795623f1b32b2f1f2e57c4f74419fe.tar.gz \
                  https://static.rust-lang.org/dist/rustc-1.19.0-src.tar.xz"
-MD5SUM_x86_64="885a166cbbf5c59c243c69a2b88d7e27 \
-               e9af5bb321c0cad44ea0e3e2c644ab2f"
+MD5SUM="1c134fa4842a13216542fde8779262de \
+        e9af5bb321c0cad44ea0e3e2c644ab2f"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
 REQUIRES=""
 MAINTAINER="Andrew Clemons"
 EMAIL="andrew.clemons@gmail.com"

@@ -26,10 +26,13 @@
 
 PRGNAM=opencv
 PRGNAM2=opencv_contrib
-VERSION=${VERSION:-3.4.1}
-BUILD=${BUILD:-4}
+VERSION=${VERSION:-3.4.2}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:--j7}
+
+PY2VERSION=${PY2VERSION:-2.7}
+PY3VERSION=${PY3VERSION:-3.6}
+
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -62,12 +65,11 @@ cv1394="" ;     [ "${CV1394:-yes}" = "no" ]    &&     cv1394="-DWITH_1394=OFF"
 cvffmpeg="" ;   [ "${CVFFMPEG:-yes}" = "no" ]  &&   cvffmpeg="-DWITH_FFMPEG=OFF"
 cvvtk="" ;      [ "${CVVTK:-yes}" = "no" ]     &&      cvvtk="-DWITH_VTK=OFF"
 cvgdal="" ;     [ "${CVGDAL:-no}" = "yes" ]    &&     cvgdal="-DWITH_GDAL=ON"
-dnn="-DBUILD_opencv_dnn_modern=OFF" ; [ "${DNN:-no}" = "yes" ] && dnn=""
+dnn="-DBUILD_opencv_dnn=OFF" ; [ "${DNN:-no}" = "yes" ] && dnn=""
+face="" ;       [ "${OCV_FACE:-yes}" = "no" ]  &&       face="-DBUILD_opencv_face=OFF"
 xf2d="-DBUILD_opencv_xfeatures2d=OFF" ; [ "${XF2D:-no}" = "yes" ] && xf2d=""
 cvdocs="-DBUILD_DOCS=ON -DBUILD_EXAMPLES=ON -DINSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON " ; [ "${CVDOCS:-yes}" = "no" ] && cvdocs=""
-# Only enable PlantUML if java is available
-cvplantuml="" ; [ $(which java 2>/dev/null ) ] && cvplantuml="-DPLANTUML_JAR=$CWD/plantuml.jar"
-cvcuda="" ;     [ "${CVCUDA:-no}" = "yes" ]    &&     cvcuda="-DBUILD_CUDA_STUBS=ON -DWITH_CUDA=ON"
+
 
 set -e
 
@@ -87,51 +89,36 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-[ "${DNN:-no}" = "no" ] && {
-  sed -i '2s/^/ocv_module_disable(dnn_modern) \n/' $PRGNAM2-$VERSION/modules/dnn_modern/CMakeLists.txt
-  rm -rf $PRGNAM2-$VERSION/modules/face
-}
 
 mkdir -p build
 cd build
-  QTDIR=/usr/lib${LIBDIRSUFFIX}/qt5 \
-  PATH=$QTDIR/bin:$PATH \
   cmake \
     -DCMAKE_C_FLAGS="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
     -DCMAKE_BUILD_TYPE="Release" \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DINSTALL_MAN_DIR=man \
-    -DINSTALL_DOC_DIR=doc/$PRGNAM-$VERSION \
-    -DSYSCONF_INSTALL_DIR=/etc \
-    -DLIB_SUFFIX=$LIBDIRSUFFIX \
-    -DLIB_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX} \
-    -DBUILD_PACKAGE=OFF \
-    -DBUILD_PERF_TESTS=OFF \
     -DBUILD_SHARED_LIBS=ON \
-    -DBUILD_TESTS=OFF \
-    -DBUILD_WITH_DEBUG_INFO=OFF \
+    -DPYTHON2_PACKAGES_PATH=/usr/lib${LIBDIRSUFFIX}/python${PY2VERSION}/site-packages \
+    -DPYTHON3_PACKAGES_PATH=/usr/lib${LIBDIRSUFFIX}/python${PY3VERSION}/site-packages \
     -DENABLE_PRECOMPILED_HEADERS=OFF \
-    -DOPENCV_EXTRA_MODULES_PATH=../${PKGNAM}_contrib-$VERSION/modules \
     -DWITH_IPP=OFF \
     -DWITH_QT=ON \
     -DWITH_OPENGL=ON \
     -DWITH_OPENMP=ON \
     -DWITH_XINE=ON \
-    -DWITH_MATLAB=OFF \
-    -DWITH_FFMPEG=ON \
+    -DBUILD_CUDA_STUBS=OFF \
+    -DWITH_CUDA=OFF \
     $cv1394 \
     $cvffmpeg \
     $cvvtk \
     $cvgdal \
     $dnn \
+    $face \
     $xf2d \
     $cvdocs \
-    $cvplantuml \
-    $cvcuda \
     -DOPENCV_EXTRA_MODULES_PATH=../$PRGNAM2-$VERSION/modules ..
 
-  make $NUMJOBS VERBOSE=1
+  make VERBOSE=1
   [ "${CVDOCS:-yes}" = "yes" ] && make doxygen
   make install DESTDIR=$PKG
 cd ..
@@ -140,14 +127,14 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 [ "${CVDOCS:-yes}" = "yes" ] && {
-  cp -a samples/java* samples/opencl* samples/opengl* $PKG/usr/share/OpenCV/samples
-  chmod -R 0755 $PKG/usr/share/OpenCV/samples
+  cp -a samples/java* samples/opencl* samples/opengl* $PKG/usr/share/opencv/samples
+  chmod -R 0755 $PKG/usr/share/opencv/samples
 }
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CONTRIBUTING.md LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-mv $PKG/usr/share/OpenCV/doc/html $PKG/usr/doc/$PRGNAM-$VERSION && rm -rf $PKG/usr/share/OpenCV/doc
+mv $PKG/usr/share/doc/opencv/html $PKG/usr/doc/$PRGNAM-$VERSION && rm -rf $PKG/usr/share/doc
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

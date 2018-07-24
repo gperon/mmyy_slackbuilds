@@ -1,0 +1,14 @@
+diff --git a/src/extension/internal/pdfinput/pdf-parser.cpp b/src/extension/internal/pdfinput/pdf-parser.cpp
+index 6c498f9..caaeca1 100644
+--- a/src/extension/internal/pdfinput/pdf-parser.cpp
++++ b/src/extension/internal/pdfinput/pdf-parser.cpp
+@@ -37,8 +37,7 @@ extern "C" {
+ #include "util/units.h"
+ 
+ #include "goo/gmem.h"
+-#include "goo/GooTimer.h"
+-#include "goo/GooHash.h"
++#include "goo/GooString.h"
+ #include "GlobalParams.h"
+ #include "CharTypes.h"
+ #include "Object.h"

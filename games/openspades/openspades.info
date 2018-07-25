@@ -7,6 +7,6 @@ MD5SUM="76cb316b2125affdfb6a02c58d0284f9 \
         daa4d6ecffe263d9567e9a37fe49b01b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2_image OpenAL opusfile"
+REQUIRES="SDL2_image OpenAL"
 MAINTAINER="Dimitris Zlatanidis"
 EMAIL="d.zlatanidis@gmail.com"

@@ -7,6 +7,6 @@ MD5SUM="028172125a16625f51d470293babacb2 \
         167b9a50a7e6eb0b272bec7e9dd6cc6b"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2"
+REQUIRES=""
 MAINTAINER="Dugan Chen"
 EMAIL="thedoogster [at] gmail [dot] com"

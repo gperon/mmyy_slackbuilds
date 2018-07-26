@@ -9,6 +9,6 @@ MD5SUM="77178cd46feb757aa7738da84babdbc8 \
         91fa7f10bcb11a9294f04b51482fc60f"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="lua SDL2 mono"
+REQUIRES="lua mono"
 MAINTAINER="khronosschoty"
 EMAIL="khronosschoty@posteo.org"

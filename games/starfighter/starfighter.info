@@ -5,6 +5,6 @@ DOWNLOAD="http://download-mirror.savannah.gnu.org/releases/starfighter/1.7/starf
 MD5SUM="dfaa649221a3997ec7eddbf2dbdeb6a0"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2_image SDL2_mixer"
+REQUIRES=""
 MAINTAINER="Tim Dickson"
 EMAIL="dickson.tim@googlemail.com"

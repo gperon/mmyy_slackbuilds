@@ -7,6 +7,6 @@ MD5SUM="7e80d27d89f9640b411a8a571fbf1d52 \
         4a60b4202e8fd3302b795c4176a98750"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="libmodplug SDL2_mixer libminizip"
+REQUIRES="libmodplug libminizip"
 MAINTAINER="Thibaut Notteboom"
 EMAIL="thibaut.notteboom@gmail.com"

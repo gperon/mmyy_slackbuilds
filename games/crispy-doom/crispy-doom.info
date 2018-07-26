@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/fabiangreffrath/crispy-doom/archive/crispy-doom-5.1
 MD5SUM="00b4ad39b87221b731cd0f0d2aed287d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2 SDL2_net SDL2_mixer"
+REQUIRES=""
 MAINTAINER="Dugan Chen"
 EMAIL="thedoogster [at] gmail [dot] com"

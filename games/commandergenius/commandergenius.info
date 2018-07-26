@@ -5,6 +5,6 @@ DOWNLOAD="https://gitlab.com/Dringgstein/Commander-Genius/-/archive/v2.2.2/Comma
 MD5SUM="976c721a943e26f94db63f813bba936a"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2 python3"
+REQUIRES="python3"
 MAINTAINER="B. Watson"
 EMAIL="yalhcru@gmail.com"

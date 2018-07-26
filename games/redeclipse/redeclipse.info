@@ -79,6 +79,6 @@ bba5d43b78667f1973985b39f3d04c21 \
 a7c15faf02a7a300d94b5640802396a5"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2 SDL2_image SDL2_mixer"
+REQUIRES=""
 MAINTAINER="Jeremy Hansen"
 EMAIL="jebrhansen+SBo@gmail.com"

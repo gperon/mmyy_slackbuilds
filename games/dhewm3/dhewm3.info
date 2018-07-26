@@ -7,6 +7,6 @@ MD5SUM="cf5ccd169accd324d3916e2f9d7a9e0d \
         6325f0936f59420d33668754032141cb"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="OpenAL SDL2"
+REQUIRES="OpenAL"
 MAINTAINER="Hunter Sezen"
 EMAIL="orbea@fredslev.dk"

@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/coelckers/gzdoom/archive/g3.4.1/gzdoom-g3.4.1.tar.g
 MD5SUM="d3b240afaa9de1de4226090aa99d3714"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2 OpenAL"
+REQUIRES="OpenAL"
 MAINTAINER="B. Watson"
 EMAIL="yalhcru@gmail.com"

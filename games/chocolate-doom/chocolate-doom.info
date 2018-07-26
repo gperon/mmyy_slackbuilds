@@ -5,6 +5,6 @@ DOWNLOAD="https://www.chocolate-doom.org/downloads/3.0.0/chocolate-doom-3.0.0.ta
 MD5SUM="8bece4533e144ca01f13daa1b5912e95"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="SDL2_mixer SDL2_net"
+REQUIRES=""
 MAINTAINER="B. Watson"
 EMAIL="yalhcru@gmail.com"

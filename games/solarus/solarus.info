@@ -5,6 +5,6 @@ DOWNLOAD="https://gitlab.com/solarus-games/solarus/-/archive/v1.5.3/solarus-v1.5
 MD5SUM="4953477094e7e0505c27733a19e74d99"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="OpenAL SDL2_image SDL2_ttf libmodplug luajit physfs"
+REQUIRES="OpenAL libmodplug luajit physfs"
 MAINTAINER="Hunter Sezen"
 EMAIL="orbea@fredslev.dk"

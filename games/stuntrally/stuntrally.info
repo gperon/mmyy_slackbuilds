@@ -7,6 +7,6 @@ MD5SUM="652fca6a2f8ba43ac6525275806257c2 \
         f67d464b792e68966f0917f8f39f9e24"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="MyGUI SDL2 enet bullet OpenAL FreeImage"
+REQUIRES="MyGUI enet bullet OpenAL FreeImage"
 MAINTAINER="Jeremy Hansen"
 EMAIL="jebrhansen+SBo@gmail.com"

@@ -5,6 +5,6 @@ DOWNLOAD="http://sourceforge.net/projects/slackbuildsdirectlinks/files/vsxu/vsxu
 MD5SUM="626704712b89b37baa0cc9dfecfea1bf"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="glfw ftgl opencv SDL2"
+REQUIRES="glfw ftgl opencv"
 MAINTAINER="Christoph Willing"
 EMAIL="chris.willing@linux.com"

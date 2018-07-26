@@ -9,6 +9,6 @@ MD5SUM="c4fb54ec542fed09e03e0d5830106c39 \
         10f2160fe68294013efcd1473cd36f72"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="perl-Date-Manip perl-Sys-Mmap perl-LWP-Protocol-https SDL2"
+REQUIRES="perl-Date-Manip perl-Sys-Mmap perl-LWP-Protocol-https"
 MAINTAINER="Gene Baxter"
 EMAIL="GenoBob@gmail.com"

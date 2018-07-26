@@ -5,6 +5,6 @@ DOWNLOAD="http://ks392457.kimsufi.com/orbea/stuff/slackbuilds/src/pcsx2-2018.05.
 MD5SUM="dd4faba347b4c5241b0e1bc7e0f8a128"
 DOWNLOAD_x86_64="UNSUPPORTED"
 MD5SUM_x86_64=""
-REQUIRES="SDL2 wxGTK3 portaudio soundtouch"
+REQUIRES="wxGTK3 portaudio soundtouch"
 MAINTAINER="Hunter Sezen"
 EMAIL="orbea@fredslev.dk"

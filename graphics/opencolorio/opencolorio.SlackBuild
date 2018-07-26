@@ -78,6 +78,12 @@ for v in $PYTHON_VERSIONS ; do
      \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
       -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+    sed -i "s/-Werror//g" src/core/CMakeLists.txt
+    sed -i "s/-Werror//g" src/pyglue/CMakeLists.txt
+    sed -i "s/push(hidden)/push(default)/g" src/core/OCIOYaml.cpp
+
+    patch -Np1 -i "$CWD"/8d48ee8da42de2d878db7b42586db8b3c67f83e1.patch
+
     mkdir -p build
     cd build
       cmake \

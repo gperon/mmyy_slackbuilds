@@ -5,6 +5,6 @@ DOWNLOAD="http://slackware.schoepfer.info/slackbuilds/texlive/2018/texlive-extra
 MD5SUM="224e0cebecad1a4394e148a13e5ad2f9"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="texlive"
+REQUIRES=""
 MAINTAINER="Johannes Schoepfer"
 EMAIL="slackbuilds[at]schoepfer[dot]info"

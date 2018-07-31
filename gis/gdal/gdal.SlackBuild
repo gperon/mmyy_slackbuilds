@@ -25,7 +25,7 @@
 # Maintained by David Spencer <baildon.research@googlemail.com>
 
 PRGNAM=gdal
-VERSION=${VERSION:-2.2.4}
+VERSION=${VERSION:-2.3.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -166,7 +166,7 @@ make -f GNUmakefile -B docs
 # --docdir is ignored :-(
 make install-docs DESTDIR=$PKG INST_DOCS=/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  COMMITERS HOWTO-RELEASE LICENSE.TXT NEWS PROVENANCE.TXT VERSION \
+  COMMITTERS HOWTO-RELEASE LICENSE.TXT NEWS PROVENANCE.TXT VERSION \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

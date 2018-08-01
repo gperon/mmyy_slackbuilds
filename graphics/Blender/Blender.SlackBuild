@@ -26,7 +26,7 @@ SRCNAM=blender
 PKGNAM=Blender
 VERSION=${VERSION:-2.79b}
 BASE_VERSION=${BASE_VERSION:-$( echo $VERSION | sed -e 's/[^0-9.]*//g')}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PYTHON_VERSION=$(python3 -c "import sys; print(sys.version[:3])")
 NUMJOBS=${NUMJOBS:-" -j7 "}
@@ -73,7 +73,12 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+patch -p0 < $CWD/buildinfo-$VERSION.diff
 patch -p1 < $CWD/use-libopenmj2-for-openjpeg.diff
+#patch -Np1 -i $CWD/ffmpeg4.0.patch
+patch -Np1 -i $CWD/tree_hpp.patch
+patch -Np1 -i $CWD/util_sseb.patch
+patch -Np1 -i $CWD/openvdb3-abi.patch
 
 mkdir -p build
 cd build
@@ -107,6 +112,8 @@ cd build
     -DWITH_SDL:BOOL=ON \
     -DWITH_SDL_DYNLOAD:BOOL=ON \
     -DCMAKE_BUILD_TYPE=Release \
+#    -DWITH_CYCLES_CUDA_BINARIES=ON \
+#    -DCYCLES_CUDA_BINARIES_ARCH="sm_30;sm_35;sm_37;sm_50;sm_52;sm_60;sm_61;sm_62;sm_70" \
 
   make ${NUMJOBS}
   make install DESTDIR=$PKG

@@ -1,0 +1,18 @@
+The Purple Plugin Pack is a compilation of plugins for the libpurple
+family of IM clients.
+
+The Purple Plugin Pack was originally created by
+Gary Kramelich and Stu Tomlinson as a way to distribute
+their ever growing lists of simple Pidgin plugins.
+
+This includes an optional patch to change the default nickserv identify command
+in the irchelp plugin to:
+
+/msg nickserv identify <password>
+
+rather than the '/identify <password>' command that it defaults to, which fails
+on some IRCd's such as e.g. ngircd (also available on slackbuilds.org).
+
+To use the patch do:
+
+IDENTIFY_PATCH=1 ./purple-plugin-pack.SlackBuild

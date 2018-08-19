@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=sunvox
-VERSION=${VERSION:-1.9.3b}
+VERSION=${VERSION:-1.9.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -48,7 +48,7 @@ install -d ${PKG}/usr/{bin,doc,share/{${PRGNAM}/instruments/,${PRGNAM}/effects/,
 
 cd $TMP
 rm -rf $PRGNAM
-unzip $CWD/$PRGNAM-$VERSION.zip
+unzip $CWD/$PRGNAM-${VERSION}c.zip
 cd $PRGNAM
 chown -R root:root .
 find -L . \

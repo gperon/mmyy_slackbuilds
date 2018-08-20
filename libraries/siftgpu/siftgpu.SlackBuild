@@ -25,7 +25,7 @@
 PRGNAM=siftgpu
 VERSION=${VERSION:-4.0.0}
 NAME=SiftGPU
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 # Automatically determine the architecture we're building on:
@@ -74,6 +74,8 @@ find . \
  -exec chmod 644 {} \;
 
 sed -i "s:CUDA_INSTALL_PATH = /usr/local/cuda:CUDA_INSTALL_PATH = /usr/share/cuda:g" makefile
+sed -i "s:-DCUDA_SIFTGPU_ENABLED -O2 -Xcompiler:-DCUDA_SIFTGPU_ENABLED -std=c++03 -Xcompiler:g" makefile
+
 make
  
 # manual installation
@@ -91,7 +93,6 @@ cp -r doc $PKG/usr/doc/$PRGNAM-$VERSION/
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-#cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

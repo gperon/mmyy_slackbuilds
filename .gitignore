@@ -28,3 +28,4 @@
 gimp-painter/*.diff
 *.hidden
 *.phar
+*.AppImage

@@ -69,6 +69,7 @@ $CWD/$SRCNAM-$VERSION-$CARCH.AppImage --appimage-extract
 mkdir -p $PKG/opt/${PRGNAM} $PKG/usr/share/applications $PKG/usr/bin/ $PKG/usr/lib$LIBDIRSUFFIX
 cp -f squashfs-root/* $PKG/opt/${PRGNAM}
 cp -Rf squashfs-root/locales $PKG/opt/${PRGNAM}
+cp -Rf squashfs-root/resources $PKG/opt/${PRGNAM}
 cp -Rf squashfs-root/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX
 cp -Rf squashfs-root/usr/share/* $PKG/usr/share
 cp -fp squashfs-root/${PRGNAM}.desktop $PKG/usr/share/applications

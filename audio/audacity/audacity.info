@@ -7,6 +7,6 @@ MD5SUM="0389b57584a41994d92951b2388dfbcd \
         a1b4fb4075760366a98688c91d1da2c7"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="wxGTK3"
+REQUIRES="wxGTK3 vamp"
 MAINTAINER="Matteo Bernardini"
 EMAIL="ponce@slackbuilds.org"

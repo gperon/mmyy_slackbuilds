@@ -26,17 +26,14 @@
 # Updated by Andre Barboza <bmg.andre@gmail.com>
 
 PRGNAM=netbeans
-VERSION=${VERSION:-8.2}
+VERSION=${VERSION:-9.0}
 ARCH=noarch
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-BUNDLE=${BUNDLE:+-$BUNDLE}
-DATE="201609300101"
-
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
-PKG=$TMP/package-${PRGNAM}${BUNDLE}
+PKG=$TMP/package-${PRGNAM}
 OUTPUT=${OUTPUT:-/tmp}
 
 set -e
@@ -44,7 +41,7 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG/opt $OUTPUT
 cd $PKG/opt
-unzip -o $CWD/$PRGNAM-$VERSION-$DATE${BUNDLE}.zip
+unzip -o $CWD/incubating-$PRGNAM-java-$VERSION-bin.zip
 chown -R root:root .
 
 find -L . \
@@ -58,7 +55,7 @@ install -D -m 0644 $CWD/$PRGNAM.desktop \
   $PKG/usr/share/applications/$PRGNAM.desktop
 
 # Add an icon for netbeans
-install -D -m 0644 $CWD/$PRGNAM.png $PKG/usr/share/pixmaps/$PRGNAM.png
+install -D -m 0644 $PKG/opt/$PRGNAM/nb/$PRGNAM.png $PKG/usr/share/pixmaps/$PRGNAM.png
 
 # Add an script to call netbeans from /usr/bin.
 mkdir -p $PKG/usr/bin
@@ -83,7 +80,7 @@ rm $PKG/opt/$PRGNAM/bin/*.exe
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cd $PKG/opt/$PRGNAM
-cp -a *.html *.txt *.css $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a *.html DEPENDENCIES DISCLAIMER LICENSE NOTICE *.css $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

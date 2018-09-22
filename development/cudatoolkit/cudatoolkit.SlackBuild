@@ -24,7 +24,8 @@
 
 PRGNAM=cudatoolkit
 FILENAME=cuda
-VERSION=${VERSION:-9.2.148}
+VERSION=${VERSION:-9.1.85}
+DRIVER=${DRIVER:-387.26}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -55,9 +56,16 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
-chmod +x $CWD/$FILENAME\_$VERSION\_396.37\_linux.run
-$CWD/$FILENAME\_$VERSION\_396.37\_linux.run -extract=$TMP
+chmod +x $CWD/$FILENAME\_$VERSION\_$DRIVER\_linux.run
+$CWD/$FILENAME\_$VERSION\_$DRIVER\_linux.run -extract=$TMP
 $TMP/$FILENAME-linux.$VERSION-*.run -noprompt -nosymlink -prefix=$TMP/$PRGNAM-$VERSION
+
+# install the official patch
+for i in 1 2 3 
+do
+	chmod +x $CWD/$FILENAME\_$VERSION.$i\_linux.run
+	$CWD/$FILENAME\_$VERSION.$i\_linux.run --silent --installdir=$TMP/$PRGNAM-$VERSION --accept-eula
+done
 
 cd $PRGNAM-$VERSION
 chown -R root:root .
@@ -95,14 +103,15 @@ mv $PKG/usr/share/cuda/include/* $PKG/usr/include/cuda
 rm -rf $PKG/usr/share/cuda/include
 cd $PKG/usr/share/cuda/
 ln -sf ../../include/cuda include
+
 # patch GCC 8 version
-sed -i -e "s|#if __GNUC__ > 7|#if __GNUC__ > 8|g" $PKG/usr/include/cuda/crt/host_config.h
+#sed -i -e "s|#if __GNUC__ > 7|#if __GNUC__ > 8|g" $PKG/usr/include/cuda/crt/host_config.h
 
 # These are already in the nvidia-driver package
 rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libOpenCL.s*
 
 # install samples
-$TMP/$FILENAME-samples.$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/NVIDIA_CUDA-8.0_Samples -cudaprefix=/usr/share/cuda
+$TMP/$FILENAME-samples.$VERSION-*.run -noprompt -prefix=$PKG/usr/doc/$PRGNAM-$VERSION/samples -cudaprefix=/usr/share/cuda
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

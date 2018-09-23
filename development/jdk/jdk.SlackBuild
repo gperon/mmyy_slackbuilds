@@ -24,11 +24,9 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=jdk
-VERSION=${VERSION:-8u181}
+VERSION=${VERSION:-10.0.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-
-DVER=1.$(printf $VERSION | cut -du -f1).0_$(printf $VERSION | cut -du -f2)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -60,7 +58,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $PKG
 mkdir -p usr/lib${LIBDIRSUFFIX}
 cd usr/lib${LIBDIRSUFFIX}
-tar xvf $CWD/$PRGNAM-$VERSION-linux-$SRC_ARCH.tar.gz
+tar xvf $CWD/$PRGNAM-$VERSION\_linux-$SRC_ARCH\_bin.tar.gz
 chown -R root.root $PKG
 find $PKG \
   \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -76,12 +74,12 @@ done
 chmod 755 $PKG/etc/profile.d/*
 
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}
-  mv ${PRGNAM}${DVER} java
-  ln -sf java ${PRGNAM}${DVER}
+  mv ${PRGNAM}-${VERSION} java
+  ln -sf java ${PRGNAM}-${VERSION}
 )
 
 cd $PKG/usr/lib${LIBDIRSUFFIX}
-    ln -sf ./java/jre/lib/${LIB_ARCH}/server/libjvm.so .
+    ln -sf ./java/lib/${LIB_ARCH}/server/libjvm.so .
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
@@ -91,10 +89,9 @@ cat << EOF > $PKG/install/doinst.sh
 if [ -L usr/lib${LIBDIRSUFFIX}/java ]; then
   rm -rf usr/lib${LIBDIRSUFFIX}/java
   mkdir -p usr/lib${LIBDIRSUFFIX}/java/man
-  mkdir -p usr/lib${LIBDIRSUFFIX}/java/jre/lib/${LIB_ARCH}/server
-  mkdir -p usr/lib${LIBDIRSUFFIX}/java/jre/lib/${LIB_ARCH}/client
-  mkdir -p usr/lib${LIBDIRSUFFIX}/java/jre/javaws
-  mkdir -p usr/lib${LIBDIRSUFFIX}/java/jre/bin
+  mkdir -p usr/lib${LIBDIRSUFFIX}/java/lib/${LIB_ARCH}/server
+  mkdir -p usr/lib${LIBDIRSUFFIX}/java/lib/${LIB_ARCH}/client
+  mkdir -p usr/lib${LIBDIRSUFFIX}/java/javaws
   mkdir -p usr/lib${LIBDIRSUFFIX}/java/bin
   mkdir -p usr/lib${LIBDIRSUFFIX}/mozilla/plugins
 fi
@@ -130,11 +127,11 @@ EOF
 
 # Install the desktop/mime files:
 mkdir -p $PKG/usr/share/{applications,icons,mime}
-cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/jre/lib/desktop/applications/* \
+cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/applications/* \
   $PKG/usr/share/applications/
-cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/jre/lib/desktop/icons/hicolor \
+cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/icons/hicolor \
   $PKG/usr/share/icons/
-cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/jre/lib/desktop/mime/packages \
+cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/mime/packages \
   $PKG/usr/share/mime/
 
 # Install the unlimited strength JCE policy files
@@ -142,16 +139,12 @@ cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/jre/lib/desktop/mime/packages \
 ENCRYPTION_POLICY_ZIP="$CWD/jce_policy-*.zip"
 if [ -r $ENCRYPTION_POLICY_ZIP ]; then
   unzip -jo $ENCRYPTION_POLICY_ZIP -x README.txt \
-        -d $PKG/usr/lib${LIBDIRSUFFIX}/java/jre/lib/security
+        -d $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/security
 fi
 
 # Java may not expect compressed manpages, so don't compress them.
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-  $PKG/usr/lib${LIBDIRSUFFIX}/java/THIRDPARTYLICENSEREADME.txt \
-  $PKG/usr/lib${LIBDIRSUFFIX}/java/LICENSE \
-  $PKG/usr/lib${LIBDIRSUFFIX}/java/COPYRIGHT \
-  $PKG/usr/lib${LIBDIRSUFFIX}/java/README.html \
+cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/README.html \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

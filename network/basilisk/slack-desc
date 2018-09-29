@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
         |-----handy-ruler------------------------------------------------------|
-basilisk: basilisk (Web browser)
+basilisk: basilisk (Web browser -- BUILD FROM SOURCE)
 basilisk:
-basilisk: Basilisk is a free and Open Source XUL-based web browser, featuring
-basilisk: the well-known Firefox-style interface and operation. It is based on
-basilisk: the Goanna layout and rendering engine (a fork of Gecko) and builds
-basilisk: on the Unified XUL Platform (UXP), which in turn is a fork of the
-basilisk: Mozilla code base without Servo or Rust.
+basilisk: Basilisk is a demonstration program for the Unified XUL Platform
+basilisk: (XUP). It is a hard fork from the Mozilla code repository
+basilisk: (mozilla-central) with an ESR-52 fork point.
 basilisk:
 basilisk:
-basilisk: Homepage: https://www.basilisk-browser.org/
+basilisk:
+basilisk: https://github.com/MoonchildProductions/UXP
+basilisk:
 basilisk:

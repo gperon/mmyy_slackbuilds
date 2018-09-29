@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
             |-----handy-ruler------------------------------------------------------|
-basilisk-src: basilisk-src (Web browser -- BUILD FROM SOURCE)
-basilisk-src:
-basilisk-src: Basilisk is a demonstration program for the Unified XUL Platform
-basilisk-src: (XUP). It is a hard fork from the Mozilla code repository
-basilisk-src: (mozilla-central) with an ESR-52 fork point.
-basilisk-src:
-basilisk-src:
-basilisk-src:
-basilisk-src: https://github.com/MoonchildProductions/UXP
-basilisk-src:
-basilisk-src:
+PyQt5-legacy: PyQt5-legacy (Python bindings for Qt)
+PyQt5-legacy:
+PyQt5-legacy: PyQt5 is a set of Python bindings for Trolltech's Qt5 application
+PyQt5-legacy: framework and runs on all platforms supported by Qt5.
+PyQt5-legacy:
+PyQt5-legacy: This is the legacy version to use with qt5-legacy and
+PyQt5-legacy: qt5-webkit-legacy
+PyQt5-legacy:
+PyQt5-legacy: Homepage: https://riverbankcomputing.com/software/pyqt/intro/
+PyQt5-legacy:
+PyQt5-legacy:

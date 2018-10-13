@@ -1,8 +1,7 @@
 #!/bin/sh
 
-# Slackware build script for newlib-headers
-
-# Copyright 2017  Fernando Lopez Jr. <fernando.lopezjr@gmail.com>
+# Slackware build script for ShellCheck-bin
+# Copyright 2018 Dave Woodfall <dave@dawoodfall.net>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,32 +21,56 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=newlib-headers
-VERSION=${VERSION:-2.5.0}
+PRGNAM=ShellCheck-bin
+BINNAM=shellcheck
+SRCNAM=ShellCheck
+VERSION=${VERSION:-0.5.0}
+SRCVERSION=v${VERSION}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-ARCH=noarch
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i586 ;;
+    arm*) ARCH=arm ;;
+    *) ARCH=$( uname -m ) ;;
+  esac
+fi
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
+if [ "$ARCH" != "x86_64" ]; then
+  echo "$ARCH is not supported."
+  exit 1
+fi
+
 set -e
 
 rm -rf $PKG
-mkdir -p $TMP $PKG/usr/include/newlib $OUTPUT
-cd $PKG/usr/include/newlib
-tar xvf $CWD/newlib-$VERSION.tar.gz --strip-components=2 newlib-$VERSION/newlib/libc/include
-chown -R root.root $PKG/usr/include/newlib/*
-find $PKG/usr/include/newlib \
- \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $BINNAM-$SRCVERSION
+tar xvf $CWD/$BINNAM-$SRCVERSION.linux.$ARCH.tar.xz
+cd $BINNAM-$SRCVERSION
+tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+install -D -m 0755 $BINNAM $PKG/usr/bin/$BINNAM
+gzip -9 $SRCNAM-$VERSION/$BINNAM.1
+install -D -m 0644 $SRCNAM-$VERSION/$BINNAM.1.gz $PKG/usr/man/man1/$BINNAM.1.gz
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a \
+  README.txt LICENSE.txt \
+  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

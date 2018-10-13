@@ -24,8 +24,8 @@
 
 PRGNAM=opencollada
 SRCNAM=OpenCOLLADA
-VERSION=${VERSION:-1.6.63}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-1.6.64}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then

@@ -1,0 +1,11 @@
+--- libgcc/config/aarch64/linux-unwind.h	2017/07/04 10:22:56	249956
++++ libgcc/config/aarch64/linux-unwind.h	2017/07/04 10:23:57	249957
+@@ -52,7 +52,7 @@
+   struct rt_sigframe
+   {
+     siginfo_t info;
+-    struct ucontext uc;
++    ucontext_t uc;
+   };
+ 
+   struct rt_sigframe *rt_;

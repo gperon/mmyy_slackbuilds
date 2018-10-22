@@ -104,8 +104,8 @@ rm -rf $PKG/usr/share/cuda/include
 cd $PKG/usr/share/cuda/
 ln -sf ../../include/cuda include
 
-# patch GCC 8 version
-#sed -i -e "s|#if __GNUC__ > 7|#if __GNUC__ > 8|g" $PKG/usr/include/cuda/crt/host_config.h
+# silent the message for GCC 8 version
+sed -i -e "s|#if __GNUC__ > 6|#if __GNUC__ > 8|g" $PKG/usr/include/cuda/crt/host_config.h
 
 # These are already in the nvidia-driver package
 rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libOpenCL.s*

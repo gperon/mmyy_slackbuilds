@@ -24,7 +24,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=jdk
-VERSION=${VERSION:-10.0.2}
+VERSION=${VERSION:-11.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -126,13 +126,13 @@ fi
 EOF
 
 # Install the desktop/mime files:
-mkdir -p $PKG/usr/share/{applications,icons,mime}
-cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/applications/* \
-  $PKG/usr/share/applications/
-cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/icons/hicolor \
-  $PKG/usr/share/icons/
-cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/mime/packages \
-  $PKG/usr/share/mime/
+#mkdir -p $PKG/usr/share/{applications,icons,mime}
+#cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/applications/* \
+#  $PKG/usr/share/applications/
+#cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/icons/hicolor \
+#  $PKG/usr/share/icons/
+#cp -a $PKG/usr/lib${LIBDIRSUFFIX}/java/lib/desktop/mime/packages \
+#  $PKG/usr/share/mime/
 
 # Install the unlimited strength JCE policy files
 # if the zip file is also in the build directory

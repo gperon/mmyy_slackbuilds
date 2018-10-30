@@ -25,7 +25,7 @@
 # Modified by the slackbuilds.org project.
 
 PRGNAM=krename
-VERSION=${VERSION:-r247}
+VERSION=${VERSION:-5.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -71,20 +71,17 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-KDEPREF=$(kde4-config --prefix)
-
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
   -DCMAKE_INSTALL_PREFIX="$KDEPREF" \
-  -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   .
 
 make
 make install DESTDIR=$PKG
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING INSTALL README TODO \
+cp -a AUTHORS COPYING INSTALL README.md TODO \
  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

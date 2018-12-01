@@ -27,7 +27,7 @@
 # Thanks to Giorgio Peron <giorgio.peron@gmail.com> for some build tips
 
 PRGNAM=blender
-VERSION=${VERSION:-2.78c}
+VERSION=${VERSION:-2.79b}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

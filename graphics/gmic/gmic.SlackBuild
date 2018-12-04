@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2018 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -21,8 +21,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gmic
-VERSION=${VERSION:-2.4.1}
-COMMUNITYVERSION=${COMMUNITYVERSION:-ab911d94c33af6285908393265ccac5b8e83952c}
+VERSION=${VERSION:-2.4.2}
+COMMUNITYVERSION=${COMMUNITYVERSION:-b43000765fee484a9156d180e891d7a0e1bf8d0b}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j1 "}

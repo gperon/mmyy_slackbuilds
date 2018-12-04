@@ -1,12 +1,12 @@
 PRGNAM="gmic"
-VERSION="2.4.1"
+VERSION="2.4.2"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_2.4.1.tar.gz \
-          https://codeload.github.com/dtschump/gmic-community/zip/ab911d94c33af6285908393265ccac5b8e83952c"
-MD5SUM="f5e69b94a0bc559e0cf29efb95bb277c \
-        1588cde1daec2a4f984323618c91a9ce" 
+DOWNLOAD="https://gmic.eu/files/source/gmic_2.4.2.tar.gz \
+          https://github.com/dtschump/gmic-community/archive/b43000765fee484a9156d180e891d7a0e1bf8d0b.zip"
+MD5SUM="a43389984672136ab04e0a170ed233b7 \
+        313abfe891858395626a0bbd7c33d786" 
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="opencv"
+REQUIRES="qt5 opencv-legacy"
 MAINTAINER="Giorgio Peron"
 EMAIL="giorgio.peron@gmail.com"

@@ -3,7 +3,7 @@
 # Slackware build script for tbb
 # Written by powtrix (@gmail.com)
 
-# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2018  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +24,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=tbb
-VERSION=${VERSION:-2018u3}
+VERSION=${VERSION:-2019u3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

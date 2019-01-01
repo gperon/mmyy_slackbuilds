@@ -12,7 +12,6 @@ if [ -x /usr/bin/update-desktop-database ]; then
   /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
 fi
 
-config opt/netbeans/etc/netbeans.conf.new
-config opt/netbeans/etc/netbeans.clusters.new
-config opt/netbeans/etc/netbeans.import.new
-
+config etc/netbeans/netbeans.conf.new
+config etc/netbeans/netbeans.clusters.new
+config etc/netbeans/netbeans.import.new

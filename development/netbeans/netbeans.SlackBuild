@@ -21,13 +21,13 @@
 # THE SOFTWARE.
 
 PRGNAM=netbeans
-VERSION=${VERSION:-9.0}
+VERSION=${VERSION:-10.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 ARCH=noarch
 
-SRCNAM=incubating-netbeans-java-${VERSION}-bin
+SRCNAM=incubating-netbeans-${VERSION}-bin
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
@@ -70,6 +70,10 @@ mv $PKG/opt/$PRGNAM/etc/netbeans.clusters \
    $PKG/opt/$PRGNAM/etc/netbeans.clusters.new
 mv $PKG/opt/$PRGNAM/etc/netbeans.import \
    $PKG/opt/$PRGNAM/etc/netbeans.import.new
+mkdir -p $PKG/etc/$PRGNAM
+mv $PKG/opt/$PRGNAM/etc/* $PKG/etc/$PRGNAM/
+rm -rf $PKG/opt/$PRGNAM/etc
+ln -sf ../../etc/$PRGNAM etc 
 rm $PKG/opt/$PRGNAM/bin/*.exe
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION

@@ -1,7 +1,7 @@
 PRGNAM="netbeans"
 VERSION="10.0"
 HOMEPAGE="https://netbeans.apache.org/"
-DOWNLOAD="http://apache.panu.it/incubator/netbeans/incubating-netbeans/incubating-10.0/incubating-netbeans-10.0-bin.zip"
+DOWNLOAD="https://www-eu.apache.org/dist/incubator/netbeans/incubating-netbeans/incubating-10.0/incubating-netbeans-10.0-bin.zip"
 MD5SUM="8f8e8ff2396a13741d163d01be662c8e"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

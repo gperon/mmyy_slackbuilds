@@ -23,8 +23,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=inkscape
+PRGSUB=_A6N0YOn
 VERSION=${VERSION:-0.92.4}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}
 
@@ -61,7 +62,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION\_A6N0YOn.tar.?z*
+tar xvf $CWD/$PRGNAM-$VERSION$PRGSUB.tar.?z*
 cd $PRGNAM-$VERSION
 
 sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp

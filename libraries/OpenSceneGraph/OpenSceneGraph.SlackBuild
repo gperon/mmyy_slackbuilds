@@ -7,9 +7,10 @@
 # Maintained 2018 by Christoph Willing <chris.willing@linux.com>
 
 PRGNAM=OpenSceneGraph
-VERSION=${VERSION:-3.5.5}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-3.6.3}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -69,7 +70,7 @@ cd build
     $occ \
     -DBUILD_OSG_EXAMPLES=ON \
 
-  make
+  make $NUMJOBS
   make install DESTDIR=$PKG
 cd ..
 

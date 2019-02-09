@@ -31,6 +31,7 @@ PRGNAM=scribus
 VERSION=${VERSION:-1.5.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -84,7 +85,7 @@ sed \
 
 export CC=clang
 export CXX=clang++
-cmake \
+cmake . \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
@@ -95,7 +96,7 @@ cmake \
   -DRENDER_LIB=CAIRO \
   -DWANT_GRAPHICSMAGICK=1
 
-make -j7
+make $NUMJOBS
 make install DESTDIR=$PKG
 
 mkdir -p $PKG/usr/share/{applications,pixmaps}

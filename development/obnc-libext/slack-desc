@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-obnc-libstd: obnc-libstd (Standard Library for OBNC)
-obnc-libstd:
-obnc-libstd: This package complements the basic libraries bundled with OBNC (the
-obnc-libstd: Oberon compiler obnc) with modules for accessing command line
-obnc-libstd: arguments and evironment variables, printing to the standard error
-obnc-libstd: stream and converting numbers to strings and viceversa.
-obnc-libstd:
-obnc-libstd: http://miasap.se/obnc
-obnc-libstd:
-obnc-libstd:
-obnc-libstd:
+obnc-libext: obnc-libext (Extended Library for OBNC)
+obnc-libext:
+obnc-libext: This package complements the basic libraries bundled with OBNC (the
+obnc-libext: Oberon compiler obnc) with modules for accessing command line
+obnc-libext: arguments and evironment variables, printing to the standard error
+obnc-libext: stream and converting numbers to strings and viceversa.
+obnc-libext:
+obnc-libext: http://miasap.se/obnc
+obnc-libext:
+obnc-libext:
+obnc-libext:

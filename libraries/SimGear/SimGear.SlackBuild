@@ -24,9 +24,10 @@
 
 PRGNAM=SimGear
 SRCNAM=simgear
-VERSION=${VERSION:-2018.3.1}
+VERSION=${VERSION:-2018.3.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -83,7 +84,7 @@ cd build
     -DSYSTEM_EXPAT=ON \
     -DENABLE_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=Release ..
-  make
+  make $NUMJOBS
   make install DESTDIR=$PKG
 cd ..
 

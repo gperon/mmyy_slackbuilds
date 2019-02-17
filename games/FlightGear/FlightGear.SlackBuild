@@ -25,10 +25,11 @@
 
 PRGNAM=FlightGear
 SRCNAM=flightgear
-VERSION=${VERSION:-2018.3.1}
+VERSION=${VERSION:-2018.3.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 QT5=${QT5:-yes}
+NUMJOBS=${NUMJOBS:-" -j7 "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -90,7 +91,7 @@ cd build
     $OPT \
     -DENABLE_QT=ON \
     -DCMAKE_BUILD_TYPE=Release ..
-  make -j7
+  make $NUMJOBS
   make install DESTDIR=$PKG
 cd ..
 

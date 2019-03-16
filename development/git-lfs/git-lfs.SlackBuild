@@ -2,7 +2,7 @@
 
 # Slackware build script for git-lfs
 
-# Copyright 2015-2017 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
+# Copyright 2015-2019 Willy Sudiarto Raharjo <willysr@slackbuilds.org>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=git-lfs
-VERSION=${VERSION:-2.7.0}
+VERSION=${VERSION:-2.7.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -68,6 +68,7 @@ tar xvf $CWD/$PRGNAM-linux-$SRCARCH-v$VERSION.tar.gz
 
 mkdir -p $PKG/usr/bin
 install -m0755 $PRGNAM $PKG/usr/bin
+rm -f install.sh
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp *.md $PKG/usr/doc/$PRGNAM-$VERSION

@@ -71,10 +71,12 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+# because -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX doesn't work :(
 sed -i "s|SET(RUNTIME_INSTALL_DIR lib)|SET(RUNTIME_INSTALL_DIR lib$LIBDIRSUFFIX)|g" CMakeLists.txt
 sed -i "s|SET(LIBRARY_INSTALL_DIR lib)|SET(LIBRARY_INSTALL_DIR lib$LIBDIRSUFFIX)|g" CMakeLists.txt
 sed -i "s|SET(ARCHIVE_INSTALL_DIR lib)|SET(ARCHIVE_INSTALL_DIR lib$LIBDIRSUFFIX)|g" CMakeLists.txt
-# sed -i "s|_DIR}/lib|_DIR}/lib$LIBDIRSUFFIX|g" lib/Alembic/CMakeLists.txt
+# sed -i "s|/lib>|/lib$LIBDIRSUFFIX>|g" lib/Alembic/CMakeLists.txt
+# sed -i "s|/lib/|/lib$LIBDIRSUFFIX/|g" lib/Alembic/Util/CMakeLists.txt
 # sed -i "s|\blib\b|lib$LIBDIRSUFFIX|g" CMakeLists.txt
 
 mkdir build && cd build
@@ -90,12 +92,18 @@ mkdir build && cd build
   make install DESTDIR=$PKG
 cd -
 
+
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/usr/lib$LIBDIRSUFFIX
-mv $PKG/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX
-rm -rf $PKG/usr/lib/
+# because -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX doesn't work :(
+if [ "$LIBDIRSUFFIX" = "64" ]; then
+  mkdir -p $PKG/usr/lib$LIBDIRSUFFIX
+  mv $PKG/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX
+  rm -rf $PKG/usr/lib/
+  sed -i "s|/lib/|/lib$LIBDIRSUFFIX/|g" $PKG/usr/lib$LIBDIRSUFFIX/cmake/Alembic/AlembicTargets-noconfig.cmake
+  sed -i "s|/lib/|/lib$LIBDIRSUFFIX/|g" $PKG/usr/lib$LIBDIRSUFFIX/cmake/Alembic/AlembicTargets.cmake
+fi
 
 mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild

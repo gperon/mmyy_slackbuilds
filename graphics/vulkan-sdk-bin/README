@@ -1,3 +1,5 @@
+This packages the Vulkan SDK binaries for Slackware.
+
 The Vulkan SDK provides the development and runtime components
 required to build, run and debug Vulkan applications. This SDK is
 based on the Vulkan API header. The SDK also includes certain Vulkan

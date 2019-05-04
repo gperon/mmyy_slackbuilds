@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Slackware build script for vulkansdk
+# Slackware build script for SavvyCAN
 
-# Copyright 2017 Dugan Chen Canada
+# Copyright 2019 Fernando Lopez Jr. <fernando.lopezjr@gmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,8 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=vulkansdk
-VERSION=${VERSION:-1.1.70.0}
+PRGNAM=SavvyCAN
+VERSION=${VERSION:-197}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -40,11 +40,18 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-if [ "$ARCH" = "x86_64" ]; then
+if [ "$ARCH" = "i586" ]; then
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
-  echo "$ARCH is not supported." >&2
-  exit 1
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
 fi
 
 set -e
@@ -52,11 +59,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf VulkanSDK $PRGNAM-linux-$ARCH-$VERSION.run
-cp $CWD/$PRGNAM-linux-$ARCH-$VERSION.run .
-chmod +x $PRGNAM-linux-$ARCH-$VERSION.run
-./$PRGNAM-linux-$ARCH-$VERSION.run
-cd VulkanSDK
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -64,17 +69,21 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir -p $PKG/usr/lib$LIBDIRSUFFIX
-cp -r $VERSION/$ARCH/lib/* $PKG/usr/lib$LIBDIRSUFFIX
-mkdir -p $PKG/{usr/bin,etc,usr/include}
-cp -r $VERSION/$ARCH/bin/* $PKG/usr/bin
-cp -r $VERSION/$ARCH/etc/* $PKG/etc
-cp -r $VERSION/$ARCH/include/* $PKG/usr/include
+qmake-qt5 \
+    QMAKE_CFLAGS+="$SLKCFLAGS" \
+    QMAKE_CXXFLAGS+="$SLKCFLAGS" \
+    SavvyCAN.pro
+
+make
+
+mkdir -p $PKG/usr/bin/
+install -m755 SavvyCAN $PKG/usr/bin/
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-  $VERSION/{*.html,doc/,samples/,examples} \
-  $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

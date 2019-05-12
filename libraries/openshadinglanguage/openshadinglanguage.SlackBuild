@@ -2,7 +2,7 @@
 
 # Slackware build script for OpenShadingLanguge
 
-# Copyright 2018 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
+# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,11 +23,11 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=openshadinglanguage
-VERSION=${VERSION:-1.9.10}
+VERSION=${VERSION:-1.10.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PRGNAMSRC=OpenShadingLanguage-Release
-NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 case "$( uname -m )" in
   i?86) ARCH=i686 ;;
@@ -60,17 +60,19 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAMSRC-$VERSION
-tar xvf $CWD/$PRGNAMSRC-$VERSION.tar.gz
+tar xvf $CWD/$PRGNAMSRC-$VERSION.tar.gz || tar xvf $CWD/Release-$VERSION
 cd $PRGNAMSRC-$VERSION
 chown -R root:root .
 
 # Add system libraries needed to link against LLVM components (zlib, ncurses)
 # This is required in order to statically link against LLVM
+# used for version before 1.9.10
 # patch -Np1 < $CWD/llvm-static-system-libs.patch
-patch -Np1 -i "$CWD"/clang7.patch
+# used for version before 1.10.5
+# patch -Np1 -i "$CWD"/clang7.patch
 
 mkdir build && cd build
-
+# Boost 1.70.0 issue with cmake
   cmake ../ \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX \

@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-alembic: Alembic
-alembic:
-alembic: alembic is a open framework for storing and sharing scene data.
-alembic:
-alembic:
-alembic:
-alembic: Homepage http://www.alembic.io
-alembic:
-alembic:
-alembic:
-alembic:
+Alembic: Alembic
+Alembic:
+Alembic: Alembic is a open framework for storing and sharing scene data.
+Alembic:
+Alembic:
+Alembic:
+Alembic: Homepage http://www.alembic.io
+Alembic:
+Alembic:
+Alembic:
+Alembic:

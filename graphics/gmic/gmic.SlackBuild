@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2018 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -21,11 +21,11 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gmic
-VERSION=${VERSION:-2.6.1}
+VERSION=${VERSION:-2.6.4}
 COMMUNITYVERSION=${COMMUNITYVERSION:-b43000765fee484a9156d180e891d7a0e1bf8d0b}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j1 "}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -82,7 +82,22 @@ sed -i -e "s|LIB = lib|LIB = lib$LIBDIRSUFFIX|g" \
 sed -i -e "s|-Ofast|-O2 -fno-fast-math --std=c++11|g" \
     gmic-qt/gmic_qt.pro
 
-make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS all WGET=/bin/true
+# make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS all WGET=/bin/true
+# make -C src install LIB=lib$LIBDIRSUFFIX DESTDIR="$PKG" USR="/usr"
+make -C src cli lib libc WGET=/bin/true LIBS=${LDFLAGS} -j1
+
+cd gmic-qt
+qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on HOST=none
+make $NUMJOBS
+qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on HOST=gimp
+make $NUMJOBS
+qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on HOST=krita
+make $NUMJOBS 
+
+cd ../zart
+qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on QMAKE_CXXFLAGS+=" -DOPENCV2_HEADERS"
+make $NUMJOBS
+cd ..
 make -C src install LIB=lib$LIBDIRSUFFIX DESTDIR="$PKG" USR="/usr"
 
 rmdir $PKG/usr/share || true

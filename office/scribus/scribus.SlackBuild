@@ -4,7 +4,7 @@
 
 # Copyright 2006 Martin Lefebvre <dadexter@gmail.com>
 # Copyright 2008-2014 Heinz Wiesinger, Amsterdam, The Netherlands
-# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -28,10 +28,10 @@
 # Including input by Yalla-One and some code cleanup by rworkman
 
 PRGNAM=scribus
-VERSION=${VERSION:-1.5.4}
+VERSION=${VERSION:-1.5.5}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -74,9 +74,6 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-
-patch -p1 -i $CWD/fix-15289.patch
-patch -p1 -i $CWD/fix-15289-2.patch
 
 sed \
         -e 's|#!/usr/bin/python|#!/usr/bin/python2|' \

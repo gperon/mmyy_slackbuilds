@@ -21,7 +21,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gmic
-VERSION=${VERSION:-2.6.4}
+VERSION=${VERSION:-2.7.0}
 COMMUNITYVERSION=${COMMUNITYVERSION:-b43000765fee484a9156d180e891d7a0e1bf8d0b}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -77,10 +77,16 @@ find -L . \
 sed -i -e "s|LIB = lib|LIB = lib$LIBDIRSUFFIX|g" \
        -e "s|/share/man/|/man/|g" \
        -e "s|/etc/bash_completion.d|/usr/share/bash-completion/completions|g" \
+       -e "s|pkg-config opencv|pkg-config opencv4|" \
        -e "s|qmake|qmake-qt5|g" \
        src/Makefile
 sed -i -e "s|-Ofast|-O2 -fno-fast-math --std=c++11|g" \
     gmic-qt/gmic_qt.pro
+
+# fix build with openCV 4.0
+cd zart
+patch -p1 -i $CWD/zart-opencv4.patch
+cd -
 
 # make -C src LIB=lib$LIBDIRSUFFIX OPT_CFLAGS="$SLKCFLAGS" $NUMJOBS all WGET=/bin/true
 # make -C src install LIB=lib$LIBDIRSUFFIX DESTDIR="$PKG" USR="/usr"

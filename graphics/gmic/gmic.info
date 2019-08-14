@@ -1,12 +1,12 @@
 PRGNAM="gmic"
-VERSION="2.6.4"
+VERSION="2.7.0"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_2.6.4.tar.gz \
+DOWNLOAD="https://gmic.eu/files/source/gmic_2.7.0.tar.gz \
           https://github.com/dtschump/gmic-community/archive/b43000765fee484a9156d180e891d7a0e1bf8d0b.zip"
-MD5SUM="d796c8dcdb4c724dbb29a5cde0a7566a \
+MD5SUM="cccaf229cf24a200f1039e20f426a63b \
         313abfe891858395626a0bbd7c33d786" 
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="qt5 opencv-legacy"
+REQUIRES="qt5 opencv"
 MAINTAINER="Giorgio Peron"
 EMAIL="giorgio.peron@gmail.com"

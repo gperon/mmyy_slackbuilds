@@ -3,6 +3,7 @@
 # Slackware build script for gnucash
 
 # Copyright 2015  Trayan Denev, tdenev@gmail.com
+# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # This version Copyright 2018 Lenard Spencer <lspencer31@cfl.rr.com>
 # All rights reserved.
 #
@@ -27,6 +28,7 @@ PRGNAM=gnucash
 VERSION=${VERSION:-3.6}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -102,7 +104,6 @@ fi
 
 set -e
 
-
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
@@ -116,9 +117,13 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-  mkdir -p build
+# fix CMakeLists
+sed -i '2 a include(CheckSymbolExists)' $PRGNAM/register/register-gnome/CMakeLists.txt
+
+mkdir -p build
 cd build
   cmake \
+    -DBoost_NO_BOOST_CMAKE=ON \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -135,7 +140,7 @@ cd build
     $AQBANKING \
     -DCMAKE_BUILD_TYPE=release ..
 
-make
+make $NUMJOBS
 make -j1 install DESTDIR=$PKG docdir=/usr/doc/$PRGNAM-$VERSION
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

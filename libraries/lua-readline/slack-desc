@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
             |-----handy-ruler------------------------------------------------------|
-python-odict: python-odict (ordered dictionary)
-python-odict:
-python-odict: Dictionary in which the insertion order of items is preserved
-python-odict: (using an internal double linked list). In this implementation
-python-odict: replacing an existing item keeps it at its original position.
-python-odict:
-python-odict: Homepage: https://github.com/bluedynamics/odict
-python-odict:
-python-odict:
-python-odict:
-python-odict:
+lua-readline: lua-readline (Interface to the readline library)
+lua-readline:
+lua-readline: This Lua module offers a simple calling interface
+lua-readline: to the GNU Readline/History Library.
+lua-readline: 
+lua-readline: Homepage: http://www.pjb.com.au/comp/lua/readline-2.5.tar.gz
+lua-readline: 
+lua-readline: 
+lua-readline: 
+lua-readline:
+lua-readline:

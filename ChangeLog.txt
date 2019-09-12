@@ -1,3 +1,170 @@
+Sat Sep  7 04:22:20 UTC 2019
+audio/FAudio: Updated for version 19.09.
+audio/clyrics: Updated for version 0.12.
+desktop/i3: Updated for version 4.17.1.
+desktop/qt5ct: Updated for version 0.41.
+development/apache-maven: Updated for version 3.6.2.
+development/d-tools: Updated for version 2.088.0
+development/dmd: Updated for version 2.088.0
+development/google-webdesigner: Updated for version 6.0.1.0801.
+development/kicad: Update README.
+development/radare2: Update README.
+development/universal-ctags: Updated for version 2614dbe
+development/vscode-bin: Updated for version 1.38.0.
+games/crispy-doom: Updated for version 5.6.1.
+gis/opencpn-plugin-oesenc: Updated for version 3.2.0.
+libraries/SimGear: Move back to Games.
+libraries/enchant2: Updated for version 2.2.6.
+libraries/grpc: add optional dependency
+libraries/libgit2: Updated for version 0.28.3
+libraries/libgta: Updated for version 1.2.1
+libraries/libnfs: fix tarball naming convention
+libraries/ntl: Updated for version 11.3.3.
+libraries/pcre2: Updated for version 10.33
+libraries/re2: Updated for version 2019_09_01
+libraries/spdlog: Update MD5SUM.
+libraries/wxSQLite3: Updated for version 4.4.6.
+libraries/wxsvg: Updated for version 1.5.12.
+libraries/zint: Updated for version 2.6.5.
+misc/subsurface: Updated for version 4.9.2
+multimedia/dvdstyler: Updated for version 3.0.4.
+multimedia/get_iplayer: Updated for version 3.22.
+network/exim: Updated for version 4.92.2.
+network/heimdal: Updated for version 7.7.0.
+network/nordvpn: Updated for version 3.3.1-2.
+network/opera-developer: Updated for version 65.0.3425.0.
+network/opera: Updated for version 63.0.3368.66.
+network/prosody-mod-http-upload: Updated for version hg3661.
+network/prosody-mod-vcard-muc: Added (vCard for MUC rooms).
+network/qutebrowser: Updated for version 1.7.0.
+network/shorewall-core: Updated for version 5.2.3.4.
+network/shorewall6: Updated for version 5.2.3.4.
+network/shorewall: Updated for version 5.2.3.4.
+network/signal-desktop: Updated for version 1.27.1.
+network/teamviewer: Updated for version 14.5.5819.
+network/telegram: Updated for version 1.8.3.
+network/tor-browser: Updated for version 8.5.5.
+network/vivaldi: Updated for version 2.7.1628.33.
+network/youtube-dl: Updated for version 2019.09.01.
+network/zoom-linux: Updated for version 3.0.287250.0828.
+office/calibre-bin: Updated for version 3.47.1.
+office/libreoffice-helppack: Updated for version 6.2.7.
+office/libreoffice-langpack: Updated for version 6.2.7.
+office/libreoffice: Updated for version 6.2.7.
+perl/perl-Date-Manip: Updated for version 6.78.
+python/affine: Updated for version 2.3.0.
+python/git-fame: Updated for version 1.10.1.
+python/httplib2: Updated for version 0.11.3, changed homepage.
+python/python-PySnooper: Updated for version 0.2.5.
+python/python-certifi: Updated for version 2019.6.16.
+python/python3-certifi: Remove extra DOWNLOAD.
+python/python3-ipython: Updated for version 7.8.0.
+python/python3-jedi: Updated for version 0.15.1.
+python/python3-packaging: Add dependency.
+python/stevedore: Updated for version 1.31.0.
+ruby/rubygem-parser: Updated for version 2.6.4.0.
+ruby/rubygem-ruumba: Updated for version 0.1.12.
+system/ansible: Updated for version 2.8.4.
+system/borgbackup: Update README.
+system/epson-inkjet-printer-escpr: Updated for version 1.7.3.
+system/inxi: Updated for version 3.0.36.
+system/kbfs: Updated for version 4.4.0.
+system/keybase: Updated for version 4.4.0.
+system/letsencrypt: Updated for version 0.38.0.
+system/localepurge: Updated for version 0.7.3.8.
+system/openrc: Updated for version 0.42.1.
+system/pspg: Updated for version 1.7.2.
+system/sysdig: Updated for version 0.26.4
+system/telegraf: Updated for version 1.12.0.
+system/wine-staging: Updated for version 4.15.
++--------------------------+
+Sat Aug 31 10:14:16 UTC 2019
+audio/asunder: Updated for version 2.9.4.
+desktop/Zafiro-icons: Updated for version 1.0.
+desktop/compton-conf: Updated for version 0.14.1.
+desktop/lxappearance: Changed maintainer.
+development/apache-jmeter: Updated for version 5.1.1.
+development/arm-binutils: Updated for version 2.32.
+development/arm-gcc: Updated for version 9.2.0.
+development/arm-gdb: Updated for version 8.3.
+development/fossil: Updated for version 2.9.
+development/idea: Updated for version 2019.1.1.
+development/ioncube-loader: Updated for version 10.3.8
+development/jupyter-qtconsole: Updated for version 4.5.4.
+development/universal-ctags: Updated for version 0484191
+games/7kaa: Updated for version 2.15.2.
+games/FlightGear-data: Updated for version 2019.1.1.
+games/FlightGear: Updated for version 2019.1.1.
+games/RetroArch: Fix Qt5 support.
+games/SimGear: Updated for version 2019.1.1, Moved from Libraries.
+games/ioquake3: Updated for version r20190822.
+games/solarus-quest-editor: Updated for version 1.6.2.
+games/solarus: Updated for version 1.6.2.
+games/zbom: Fix white spaces.
+gis/gpxsee: Updated for version 7.12.
+gis/rasterio: Updated for version 1.0.26.
+graphics/fontforge: Update source url.
+graphics/vuescan: Updated for version 9.6.47.
+libraries/CoinMP: Updated for version 1.8.4.
+libraries/fmt: Added (A modern formatting library).
+libraries/libabw: Updated for version 0.1.3.
+libraries/libetonyek: Fix mdds version.
+libraries/libgta: Updated for version 1.2.0
+libraries/libinput: Updated for version 1.14.1.
+libraries/libixion: Updated for version 0.15.0.
+libraries/libmwaw: Updated for version 0.3.15.
+libraries/liborcus: Updated for version 0.15.1.
+libraries/libwacom: Updated for version 1.0.
+libraries/live555: Updated for version 2019.08.28
+libraries/mdds: Updated for version 1.5.0.
+libraries/nltk: Updated for version 3.4.5.
+libraries/spdlog: Updated for version 1.3.1, moved from development.
+libraries/wxSQLite3: Updated for version 4.4.5.
+network/avahi: Update maintainer
+network/bro: Updated for version 2.6.3.
+network/clipgrab: Updated for version 3.8.4.
+network/courier-authlib: Updated for version 0.69.1.
+network/courier-imap: Updated for version 5.0.7.
+network/ipscan: Updated for version 3.6.0.
+network/monkey: Updated for version 1.6.9.
+network/nordvpn: Added (Protect your privacy online).
+network/nss-mdns: Look in /run for avahi daemon socket
+network/opensmtpd: Fix bug.
+network/opera-developer: Updated for version 64.0.3416.0.
+network/opera: Updated for version 63.0.3368.53.
+network/palemoon: Updated for version 28.7.0.
+network/prosody-mod-http-upload: Updated for version hg3649.
+network/prosody-mod-smacks: Updated for version hg3646.
+network/s-nail: Updated for version 14.9.15.
+network/teamviewer: Updated for version 14.5.1691.
+office/calibre-bin: Updated for version 3.47.0.
+office/onlyoffice-desktopeditors: Updated for version 5.3.5.
+office/pdfstudio: Updated for version 2019.1.2.
+office/pdfstudioviewer: Updated for version 2019.1.2.
+office/smoffice2018: Updated for version 2018_970.
+office/vmd: Added (Terminal Markdown Viewer).
+perl/perl-Class-Method-Modifiers: Fix build.
+perl/perl-Sidef: Updated for version 3.85.
+perl/perl-glib: Updated for version 1.3291.
+perl/perl-gtk2: Updated for version 1.24993.
+python/git-fame: Updated for version 1.10.0.
+python/pycryptodome: Updated for version 3.9.0.
+ruby/ruby-build: Updated for version 20190828.
+system/adobe-source-code-pro-font: Changed maintainer.
+system/adobe-source-sans-pro-font: Changed maintainer.
+system/adobe-source-serif-pro-font: Changed maintainer.
+system/btrbk: Updated for version 0.28.3.
+system/chronograf: Updated for version 1.7.14.
+system/forkstat: Updated for version 0.02.11.
+system/fwupd: Update homepage.
+system/gtk-vnc: Updated for version 1.0.0.
+system/isdct: Updated for version 3.0.20.
+system/qemu: Update README.
+system/telegraf: Updated for version 1.11.5.
+system/webcore-fonts: Changed maintainer.
+system/wine-staging: Updated for version 4.14.
+system/zuluCrypt: Updated for version 5.6.0.
++--------------------------+
 Sat Aug 24 01:25:40 UTC 2019
 audio/eyeD3: Updated for version 0.8.10
 audio/mixx: Remove dep (included in Slackware).

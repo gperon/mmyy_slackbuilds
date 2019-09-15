@@ -4,3 +4,7 @@ helps you take advantage of multi-core processor performance without having
 to be a threading expert. Intel TBB is not just a threads-replacement library.
 It represents a higher-level, task-based parallelism that abstracts platform
 details and threading mechanisms for scalability and performance.
+
+we need to compile with GCC 6.3.x to use in OpenSubDiv avoiding error 
+../libtbb.so.2: undefined reference to `std::__exception_ptr::exception_ptr::exception_ptr(void*)@CXXABI_1.3.11'
+../libtbb.so.2: undefined reference to `__cxa_init_primary_exception@CXXABI_1.3.11'

@@ -3,3 +3,22 @@ subdivision surface (subdiv) evaluation on massively parallel CPU and GPU
 architectures. This codepath is optimized for drawing deforming subdivs with
 static topology at interactive framerates. The resulting limit surface matches
 Pixar's Renderman to numerical precision.
+
+This package need this manual patch to compile in file /usr/include/bits/floatn.h!
+
+diff --git a/floatn.h b/floatn.h
+index f93a9f8..96db3c3 100644
+--- a/floatn.h
++++ b/floatn.h
+@@ -34,6 +34,11 @@
+ # define __HAVE_FLOAT128 0
+ #endif
+ 
++#if CUDART_VERSION
++#undef __HAVE_FLOAT128
++#define __HAVE_FLOAT128 0
++#endif
++
+ /* Defined to 1 if __HAVE_FLOAT128 is 1 and the type is ABI-distinct
+    from the default float, double and long double types in this glibc.  */
+ #if __HAVE_FLOAT128

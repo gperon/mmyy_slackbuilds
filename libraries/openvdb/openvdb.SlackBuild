@@ -83,7 +83,6 @@ mkdir build && cd build
     -DOPENVDB_BUILD_DOCS=ON \
     -DOPENVDB_ABI_VERSION_NUMBER=3 \
     -DOPENVDB_BUILD_UNITTESTS=OFF
-
   # Improper use of -isystem, messing up include order, failing to find stdlib.h
   sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_static.dir/flags.make
   sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_shared.dir/flags.make

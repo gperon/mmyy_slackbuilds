@@ -23,7 +23,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=openshadinglanguage
-VERSION=${VERSION:-1.10.6}
+VERSION=${VERSION:-1.10.7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PRGNAMSRC=OpenShadingLanguage-Release
@@ -63,13 +63,6 @@ rm -rf $PRGNAMSRC-$VERSION
 tar xvf $CWD/$PRGNAMSRC-$VERSION.tar.gz || tar xvf $CWD/Release-$VERSION
 cd $PRGNAMSRC-$VERSION
 chown -R root:root .
-
-# Add system libraries needed to link against LLVM components (zlib, ncurses)
-# This is required in order to statically link against LLVM
-# used for version before 1.9.10
-# patch -Np1 < $CWD/llvm-static-system-libs.patch
-# used for version before 1.10.5
-# patch -Np1 -i "$CWD"/clang7.patch
 
 mkdir build && cd build
 # Boost 1.70.0 issue with cmake

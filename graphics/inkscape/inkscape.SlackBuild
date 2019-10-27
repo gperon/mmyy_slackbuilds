@@ -89,6 +89,7 @@ sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS  -std=c++11" \
 ./configure \
+  --enable-strict-build=no \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --sysconfdir=/etc \

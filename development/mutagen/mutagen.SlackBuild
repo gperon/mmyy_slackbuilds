@@ -77,8 +77,8 @@ find -L . \
 python setup.py build
 python setup.py install --root $PKG
 
-# Build mutagen with python3. Default is no.
-if [ "${PYTHON3:-no}" == "yes" ]; then
+# Build mutagen with python3. Default is yes.
+if [ "${PYTHON3:-yes}" == "yes" ]; then
   python3 setup.py build
   python3 setup.py install --root=$PKG
 fi

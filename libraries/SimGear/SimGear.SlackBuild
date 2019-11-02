@@ -27,7 +27,7 @@ SRCNAM=simgear
 VERSION=${VERSION:-2019.1.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -65,7 +65,8 @@ rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.?z*
 cd $SRCNAM-$VERSION
 
-patch -p1 -i $CWD/boost-1.69.patch
+# patch -p1 -i $CWD/boost-1.69.patch
+# sed -i -e "s|#include <simgear/structure/map.hxx>|#include <simgear/structure/map.hxx>\n#include <boost/utility/enable_if.hpp>|g" simgear/nasal/cppbind/NasalHash.hxx
 
 chown -R root:root .
 find -L . \
@@ -84,6 +85,11 @@ cd build
     -DSYSTEM_EXPAT=ON \
     -DENABLE_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=Release ..
+
+  # various CMakeLists.txt files must be revised for the newer cmake...
+  mv config.h ../3rdparty/udns/
+  mv simgear/simgear_config.h simgear/version.h ../simgear/
+
   make $NUMJOBS
   make install DESTDIR=$PKG
 cd ..

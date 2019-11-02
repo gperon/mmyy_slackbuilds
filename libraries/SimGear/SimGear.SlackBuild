@@ -64,10 +64,6 @@ cd $TMP
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.?z*
 cd $SRCNAM-$VERSION
-
-# patch -p1 -i $CWD/boost-1.69.patch
-# sed -i -e "s|#include <simgear/structure/map.hxx>|#include <simgear/structure/map.hxx>\n#include <boost/utility/enable_if.hpp>|g" simgear/nasal/cppbind/NasalHash.hxx
-
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \

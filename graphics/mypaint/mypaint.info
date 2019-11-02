@@ -1,6 +1,6 @@
 PRGNAM="mypaint"
 VERSION="1.2.1"
-HOMEPAGE="http://mypaint.org"
+HOMEPAGE="http://mypaint.org/"
 DOWNLOAD="https://github.com/mypaint/mypaint/releases/download/v1.2.1/mypaint-1.2.1.tar.xz"
 MD5SUM="ac08c3135929f5641488fbbb9746fe41"
 DOWNLOAD_x86_64=""

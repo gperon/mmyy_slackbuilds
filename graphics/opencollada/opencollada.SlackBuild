@@ -70,10 +70,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-sed -i "s|struct real_pcre;||g" COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h
-sed -i "s|typedef struct real_pcre pcre;|#include <pcre.h>|g" COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h
-mkdir -p build
+# https://github.com/KhronosGroup/OpenCOLLADA/issues/570
+patch -p1 < $CWD/pcre.patch
 
+mkdir -p build
 cd build
   cmake ../ \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \

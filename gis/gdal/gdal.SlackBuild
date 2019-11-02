@@ -72,6 +72,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+patch -p1 < $CWD/poppler.patch
+
 # OpenCL, webp, Spatialite and Grass support need special arrangements.
 # Everything else is handled automatically by configure.
 WITHLIST=""
@@ -113,11 +115,10 @@ else
    WITHLIST+=" --with-jpeg=/usr/lib${LIBDIRSUFFIX}"
 fi
 
-sed -i 's/JAS_CAST(uchar \*, buf)/JAS_CAST(unsigned char\*, buf)/g' frmts/jpeg2000/jpeg2000_vsil_io.cpp
-
-CFLAGS="$SLKCFLAGS -I/usr/include/mysql/server -I/usr/include" \
-CXXFLAGS="$SLKCFLAGS -I/usr/include/mysql/server -I/usr/include" \
-MYSQL_INC="/usr/include/mysql/server" \
+# The CPPFLAGS are for the newer mariadb (thanks pprkut!)
+CPPFLAGS="-I/usr/include/mysql/server" \
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -135,7 +136,7 @@ MYSQL_INC="/usr/include/mysql/server" \
   --with-static-proj4 \
   --with-mysql \
   --with-python=python3.7 \
-  --with-poppler=no \
+  --with-poppler \
   --with-libtiff=internal \
   --with-rename-internal-libtiff-symbols=yes \
   --with-geotiff=internal \
@@ -146,7 +147,6 @@ MYSQL_INC="/usr/include/mysql/server" \
 
 make $NUMJOBS
 make install DESTDIR=$PKG
-make man
 
 if $(python3 -c 'import sys' 2>/dev/null); then
   cd swig/python
@@ -155,8 +155,6 @@ if $(python3 -c 'import sys' 2>/dev/null); then
     python3 setup.py install --root=$PKG --prefix=/usr
   cd - >/dev/null
 fi
-
-mv $PKG/usr/etc $PKG/
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -170,7 +168,7 @@ make -f GNUmakefile -B docs
 # --docdir is ignored :-(
 make install-docs DESTDIR=$PKG INST_DOCS=/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  COMMITTERS HOWTO-RELEASE LICENSE.TXT NEWS PROVENANCE.TXT VERSION \
+  COMMITERS HOWTO-RELEASE LICENSE.TXT NEWS PROVENANCE.TXT VERSION \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

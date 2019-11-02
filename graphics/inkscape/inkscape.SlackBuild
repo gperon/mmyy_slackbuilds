@@ -64,9 +64,6 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION$PRGSUB.tar.?z*
 cd $PRGNAM-$VERSION
-
-sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
-
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -74,47 +71,36 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-./autogen.sh
-sed -i 's|/usr/bin/python\>|/usr/bin/python2|g' cxxtest/*.py
-sed -i 's|/usr/bin/env python\>|/usr/bin/env python2|g' share/*/{test/,}*.py
-sed -i 's|"python" },|"python2" },|g' src/extension/implementation/script.cpp
-sed -i 's|python -c|python2 -c|g' configure share/extensions/uniconv*.py
-sed -i 's|"python"|"python2"|g' src/main.cpp
-sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
-# # Fix build with poppler 0.71
-# sed -e 's|gTrue|true|g' -e 's|gFalse|false|g' -e 's|GBool|bool|g' -i src/extension/internal/pdfinput/pdf-parser.*
-# # Fix build with poppler 0.72
-# sed -e 's|getCString|c_str|g' -i src/extension/internal/pdfinput/*
+mkdir -p build
+cd build
+  cmake \
+    -DCMAKE_C_FLAGS_RELEASE:STRING="-DNDEBUG" \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING="-DNDEBUG" \
+    -DCMAKE_Fortran_FLAGS_RELEASE:STRING="-DNDEBUG" \
+    -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX} \
+    -DINCLUDE_INSTALL_DIR=/usr/include \
+    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
+    -DSYSCONF_INSTALL_DIR=/etc \
+    -DSHARE_INSTALL_PREFIX=/usr/share \
+    -DBUILD_SHARED_LIBS:BOOL=OFF \
+    -DMAN_INSTALL_DIR=/usr/man \
+    ..
+  make
+  make install DESTDIR=$PKG
+cd ..
 
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS  -std=c++11" \
-./configure \
-  --enable-strict-build=no \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --sysconfdir=/etc \
-  --localstatedir=/var \
-  --mandir=/usr/man \
-  --docdir=/usr/doc/$PRGNAM-$VERSION \
-  --with-python \
-  --with-perl \
-  --enable-lcms \
-  --enable-poppler-cairo \
-  --disable-strict-build \
-  --disable-dependency-tracking \
-  --build=$ARCH-slackware-linux
-
-make ${NUMJOBS}
-make install DESTDIR=$PKG
+mv $PKG/usr/share/man $PKG/usr/man
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS COPYING* INSTALL NEWS README TRANSLATORS doc/* \
+  AUTHORS COPYING* INSTALL NEWS README* TRANSLATORS *GPL*.txt doc/* \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 find $PKG/usr/doc -name "Makefile*" -exec rm {} \;

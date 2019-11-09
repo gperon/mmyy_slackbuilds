@@ -25,7 +25,7 @@
 # see changelog.txt
 
 PRGNAM=nvidia-driver
-VERSION=${VERSION:-430.50}
+VERSION=${VERSION:-440.31}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -169,17 +169,6 @@ if [ "$ARCH" = "x86_64" -a "${COMPAT32}" = "yes" ]; then
       cd $PKG/usr/lib
           ln -sf tls/libnvidia-tls.so.$VERSION libnvidia-tls.so.$VERSION
       cd -
-fi
-
-# Only one conflicting lib
-cd $PKG/usr/lib$LIBDIRSUFFIX
-mv libGL.la libGL.la-nvidia
-cd -
-
-if [ "$ARCH" = "x86_64" -a "${COMPAT32}" = "yes" ]; then
-   cd $PKG/usr/lib
-   mv libGL.la libGL.la-nvidia
-   cd -
 fi
 
 # Compile utilites from source, replacing the precompiled versions

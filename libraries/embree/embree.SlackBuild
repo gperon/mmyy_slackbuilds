@@ -91,6 +91,13 @@ mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv $PKG/usr/share/doc/$NAME/* $PKG/usr/doc/$PRGNAM-$VERSION
 rm -rf $PKG/usr/share/
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/docs
+cp -rp build/src/github.com/adnanh/$PRGNAM/docs $PKG/usr/doc/$PRGNAM-$VERSION
+install -Dpm 0755 $CWD/webhook-wrapper.sh $PKG/usr/sbin/webhook-wrapper.sh
+#install -Dpm 0644 $CWD/hooks.json $PKG/etc/webhook/hooks.json.new
+install -Dpm 0644 $CWD/webhook.init $PKG/etc/rc.d/rc.webhook.new
+install -Dpm 0644 $CWD/webhook.sysconfig $PKG/etc/default/webhook.new
+install -Dpm 0644 $CWD/webhook.logrotate $PKG/etc/logrotate.d/webhook.new
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

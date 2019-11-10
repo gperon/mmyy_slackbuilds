@@ -1,0 +1,12 @@
+PRGNAM="openjfx13"
+VERSION="13.0.1"
+HOMEPAGE="https://openjfx.io"
+DOWNLOAD="UNSUPPORTED"
+MD5SUM=""
+DOWNLOAD_x86_64="http://gluonhq.com/download/javafx-13.0.1-sdk-linux/ \
+                 https://gluonhq.com/download/javafx-13.0.1-javadoc/"
+MD5SUM_x86_64="f4645d43b4f312de32e1996198a779d1 \
+               de0472813833f90c19a2dbebc8f516d6"
+REQUIRES="jdk13"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

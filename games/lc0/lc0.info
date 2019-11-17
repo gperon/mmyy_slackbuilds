@@ -1,0 +1,12 @@
+PRGNAM="lc0"
+VERSION="0.22.0"
+HOMEPAGE="https://github.com/LeelaChessZero/lc0"
+DOWNLOAD="https://github.com/LeelaChessZero/lc0/archive/v0.22.0.tar.gz \
+          http://lczero.org/get_network?sha=ff1b4a93c8e1391d6e9112ed0aea8e1dd1e9adbf218fa95814d2f85fd8f239e7"
+MD5SUM="3942a294e640c553101851b28bd41005 \
+        6a0d30ad27dfd91581bc540627f09767"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="ispc" 
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

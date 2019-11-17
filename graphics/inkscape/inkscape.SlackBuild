@@ -23,8 +23,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=inkscape
-PRGSUB=_A6N0YOn
-VERSION=${VERSION:-0.92.4}
+VERSION=${VERSION:-20191115_a4ee55b}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j7 "}
@@ -62,7 +61,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION$PRGSUB.tar.?z*
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -73,6 +72,7 @@ find -L . \
 
 mkdir -p build
 cd build
+  # imagemagick >= 7.x is unsupported yet, so use GraphicsMagick
   cmake \
     -DCMAKE_C_FLAGS_RELEASE:STRING="-DNDEBUG" \
     -DCMAKE_CXX_FLAGS_RELEASE:STRING="-DNDEBUG" \
@@ -88,6 +88,8 @@ cd build
     -DSHARE_INSTALL_PREFIX=/usr/share \
     -DBUILD_SHARED_LIBS:BOOL=OFF \
     -DMAN_INSTALL_DIR=/usr/man \
+    -DWITH_GRAPHICS_MAGICK:BOOL=ON \
+    -DWITH_IMAGE_MAGICK:BOOL=OFF \
     ..
   make
   make install DESTDIR=$PKG
@@ -100,7 +102,7 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS COPYING* INSTALL NEWS README* TRANSLATORS *GPL*.txt doc/* \
+  AUTHORS COPYING* README* TRANSLATORS LICENSES *.md doc/* \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 find $PKG/usr/doc -name "Makefile*" -exec rm {} \;

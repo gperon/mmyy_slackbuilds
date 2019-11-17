@@ -2,6 +2,7 @@
 # Slackware build script for seq24
 
 # Copyright 2010  Arik Miller <milleraa@msoe.edu>
+# Copyright 2019  Johannes Schoepfer, Germany
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -27,10 +28,12 @@ VERSION=${VERSION:-0.9.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
+# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
+    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -60,7 +63,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar -xvf $CWD/$PRGNAM-$VERSION.tar.?z*
+tar -xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -69,17 +72,12 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Thanks to fedora for this:
-# class "mutex" in src/* clashes with "std::mutex" due
-# to "using namespace std;". Rename mutex to seq24_mutex.
-sed -i \
-  -e 's,mutex::,seq24_mutex::,' \
-  -e 's,\([ cs]\) mutex,\1 seq24_mutex,' \
-  -e 's,::mutex,::seq24_mutex,' \
-   src/*.h src/*.cpp
+autoreconf -i
+
+patch -p1 < $CWD/01-mutex.patch
 
 CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS -std=c++11" \
+CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
@@ -104,6 +102,16 @@ cat $CWD/$PRGNAM.SlackBuild > /$PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+
+# Only add capability stuff if not disabled:
+if [ "${SETCAP:-yes}" = "yes" ]; then
+  # set realtime capabilities 
+  echo "/sbin/setcap cap_ipc_lock,cap_sys_nice=ep usr/bin/seq24" \
+    >> $PKG/install/doinst.sh
+  # Only allow execution by audio group
+  chown root:audio $PKG/usr/bin/*
+  chmod 0750 $PKG/usr/bin/*
+fi
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

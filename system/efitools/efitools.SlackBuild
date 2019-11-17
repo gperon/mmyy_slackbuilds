@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=efitools
-VERSION=${VERSION:-1.8.1}
+VERSION=${VERSION:-1.9.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -92,6 +92,9 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+# https://github.com/vathpela/gnu-efi/commit/d34132e62f666904158c7ec2f1eef5a9d5281c36
+sed -i "s|EFI_WARN_UNKOWN_GLYPH|EFI_WARN_UNKNOWN_GLYPH|" lib/console.c
 
 make \
   CRTPATH=/usr/lib${LIBDIRSUFFIX}/gnuefi \

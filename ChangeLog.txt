@@ -1,3 +1,188 @@
+Sun Dec  1 01:51:28 UTC 2019
+accessibility/sct: Added (set the color temperature of the screen).
+audio/DPF-Plugins: Added (Collection of DPF-based plugins).
+audio/a2jmidid: Update DEP.
+audio/azr3: Update DEP.
+audio/seq24: Update script.
+business/ledger: Updated for version 3.1.3.
+development/apache-maven: Updated for version 3.6.3.
+development/git-lfs: Updated for version 2.9.1.
+development/jupyter-nbconvert: Updated for version 5.6.1.
+development/pycharm: Updated for version 2019.2.5.
+development/uncrustify: Updated for version 0.70.1.
+development/universal-ctags: Updated for version f58752a
+development/vscode-bin: Updated for version 1.40.2.
+games/atari800: Updated for version 4.1.0.
+games/pioneer: Updated for version 20191117.
+games/tbftss: Updated for version 1.5.1.
+gis/OWSLib: Updated for version 0.19.0.
+gis/gpxsee: Updated for version 7.18.
+graphics/Blender: Updated for version 2.81
+graphics/XnViewMP: Updated for version 0.94.1.
+graphics/white_dune: Updated for version 1.654.
+graphics/xfishtank: Added (X11 aquarium).
+ham/tlf: Updated for version 1.4.0
+libraries/botocore: Updated for version 1.13.28.
+libraries/imlib2: Updated for version 1.6.0.
+libraries/libagentcrypt: Added (symmetric encryption ssh agent).
+libraries/live555: Updated for version 2019.11.22
+libraries/lua-luv: Updated for version 1.32.0-0.
+libraries/qwt-qt5: Fix versions.
+misc/mosquitto: Updated for version 1.6.8
+misc/sigrok-firmware-fx2lafw: Updated for version 0.1.7.
+network/Pafy: Updated for version 0.5.5.
+network/RSSOwl: Removed.
+network/awscli: Updated for version 1.16.292.
+network/bitcoin: Updated for version 0.19.0.1.
+network/isync: Update script.
+network/pirate-get: Updated for version 0.3.4.
+network/unbound: Updated for version 1.9.5.
+network/youtube-dl: Updated for version 2019.11.22.
+office/LibreOffice: Fix md5sum
+office/calibre-bin: Updated for version 4.5.0.
+office/onlyoffice-desktopeditors: Updated for version 5.4.2.
+perl/MoarVM: Updated for version 2019.11.
+perl/nqp: Updated for version 2019.11.
+perl/perl-CPANPLUS: Updated for version 0.9902.
+perl/perl-PPI: Fix VERSION.
+perl/perl-Test-Object: Fix DOWNLOAD url.
+perl/perl6-Readline: Removed (use raku-Readlines.com).
+perl/raku-Readline: Added (Raku interface to GNU Readline library).
+perl/rakudo: Updated for version 2019.11.
+perl/zef: Add missing doinst.sh.
+perl/zef: Updated for version 0.8.2.
+python/colored: Updated for version 1.4.1.
+python/mypy: Updated for version 0.750.
+python/pycryptodome: Updated for version 3.9.4.
+python/python-libtmux: Updated for version 0.8.2.
+python/python-parsedatetime: Updated for version 2.5.
+python/python3-ipython: Updated for version 7.10.0.
+python/python3-jsonschema: Updated for version 3.2.0.
+python/python3-pyrsistent: Updated for version 0.15.6.
+python/python3-pyzmq: Updated for version 18.1.1
+python/pyzmq: Updated for version 18.1.1.
+system/ansible: Updated for version 2.8.7.
+system/logwatch: Added (a customizable log analysis system).
+system/mlterm: Updated for version 3.8.9.
+system/netdata: Updated for version 1.19.0.
+system/newLd: Added (new ld linker).
+system/nsca-ng: Fix download location and homepage.
+system/nvidia-driver: Updated for version 440.36.
+system/nvidia-kernel: Updated for version 440.36.
+system/powerline-status: Added python3 support.
+system/pspg: Updated for version 2.5.5.
+system/pspg: Updated for version 2.6.0.
+system/sargon: Added (User privilege system for docker).
+system/symbola-font-ttf: Updated for version 12.00.
++--------------------------+
+Sat Nov 23 09:03:15 UTC 2019
+academic/ITK: Update download link.
+academic/Shark: Updated for version 4.0.0.
+audio/a2jmidid: Updated for version 9.
+audio/azr3: Added (tonewheel organ simulator).
+audio/setBfree: Added (A DSP Tonewheel Organ emulator).
+desktop/simplenote: Updated for version 1.11.0.
+development/byacc: Updated for version 20191119.
+development/dart: Updated for version 2.6.1.
+development/gambas3: Updated for version 3.14.2.
+development/jupyter-qtconsole: Updated for version 4.6.0.
+development/jupyter_core: Update for version 4.6.1.
+development/kotlin: Update VERSION.
+development/kotlin: Updated for version 1.3.60.
+development/sbcl: Updated for version 1.5.8.
+development/sqlitebrowser: Updated for version 3.11.2.
+development/sublime_merge: Added (A git client for Sublime Text).
+development/sublime_text: Updated for version 3.2.11.
+development/tig: Updated for version 2.5.0.
+development/yarn: Updated for version 1.19.2.
+games/vkQuake: Updated for version 1.03.0.
+gis/Fiona: Updated for version 1.8.11.
+gis/Fiona: Updated for version 1.8.9.
+gis/Fiona: Use Python 3 by default for CLI.
+gis/OTB: Fix comment.
+gis/OTB: Updated for version 7.0.0.
+gis/cartopy: Add support for proj6.
+gis/gdal: Updated for version 3.0.2.
+gis/geos: Make sure geos compiles under current.
+gis/geos: Updated for version 3.8.0.
+gis/grass: Add a couple of missing comments.
+gis/grass: Updated for version 7.8.0.
+gis/libLAS: Remove GDAL support.
+gis/libgeotiff: Updated for version 1.5.1.
+gis/libspatialite: Updated for version 4.3.0.
+gis/mapnik: Support proj version 6.
+gis/merkaartor: Updated for version 0.18.4.
+gis/osgEarth: Add geos 3.8 patch, remove Qt support.
+gis/osgEarth: Remove unneeded line from patch.
+gis/osm2pgsql: Updated for version 1.2.0.
+gis/ossim: Updated for version 2.10.0.
+gis/pdal: Updated for version 2.0.1.
+gis/pgsql-ogr-fdw: Updated for version 1.0.9.
+gis/proj: Updated for version 6.2.1.
+gis/pyproj: Updated for version 2.4.1 and removed Python 2 support.
+gis/pyspatialite: Removed.
+gis/python-mapnik: Python 3 won't work on 14.2.
+gis/qgis: Clarify build order in README.
+gis/qgis: Fix issue with build directory.
+gis/qgis: Remove comment from REQUIRES line.
+gis/qgis: Updated for version 3.10.0.
+gis/qlandkartegt: Removed (use qmapshack instead).
+gis/qmapshack: Fix paths.
+gis/rasterio: Enable Python 3 by default.
+gis/rasterio: Updated for version 1.1.0.
+gis/saga-gis: Alter metadata install path.
+graphics/vuescan: Update md5sums.
+graphics/white_dune: Updated for version 1.624.
+graphics/xdaliclock: Added (melting digital clock).
+libraries/QScintilla-qt5: Updated for version 2.11.3.
+libraries/libseccomp: Updated for version 2.4.2.
+libraries/libwpe: Added (General-purpose library for WPE WebKit).
+libraries/libxls: Updated for version 1.5.2.
+libraries/qwt-qt5: Updated for version 6.1.4.
+misc/zyGrib: Removed (no longer builds).
+multimedia/flashplayer-plugin: Updated for version 32.0.0.293.
+multimedia/pepperflash-plugin: Updated for version 32.0.0.293.
+multimedia/plexmediaserver: Updated for v 1.18.2.2041_3d469cb32.
+network/AdGuardHome: Updated for version 0.99.3.
+network/deluge: Updated for version 2.0.3.
+network/pyzor: New maintainer
+network/qutebrowser-tox: Updated for version 1.8.2.
+network/qutebrowser: Updated for version 1.8.2.
+network/slack: Updated for version 4.1.2.
+network/slimjet: Updated for version 24.0.6.0.
+network/spamassassin: Updated for version 3.4.2, new maintainer.
+network/teamviewer: Updated for version 15.0.8397.
+network/unbound: Updated for version 1.9.4.
+office/calibre-bin: Updated for version 4.4.0.
+pis/postgis: Updated for version 3.0.0.
+python/cocos2d: Updated for Python 3.
+python/kaptan: Updated for version 0.5.12.
+python/lockfile: Updated for Python 3.
+python/munch: Updated for version 2.5.0.
+python/nxt-python: Update README and update dep.
+python/pycryptodome: Updated for version 3.9.3.
+python/python-importlib_metadata: Added (Python package metadata).
+python/python-joblib: Updated for version 0.14.0.
+python/python-neovim: Updated for version 0.4.0.
+python/python-zipp: Added (Python module).
+python/python3-dateutil: Updated for version 2.8.1.
+python/python3-jsonschema: Updated for version 3.1.1.
+python/python3-pyrsistent: Added (persistent collections).
+python/python3-six: Updated for version 1.13.0.
+python/rencode: Added (Python module).
+python/waitress: Updated for version 1.3.1.
+ruby/ruby-build: Updated for version 20191111.
+system/capstone: Fix URL.
+system/clamav: Updated for version 0.102.1.
+system/multitail: Updated for version 6.5.0.
+system/noto-emoji: Updated for version 20191119.
+system/pspg: Updated for version 2.5.4.
+system/sboui: Updated for version 2.1.
+system/stow: Updated for version 2.3.1.
+system/telegraf: Updated for version 1.12.6.
+system/tmuxp: Updated for version 1.5.4.
+system/xen: Updated for version 4.12.1.
++--------------------------+
 Sat Nov 16 18:23:50 UTC 2019
 academic/gwyddion: Updated for version 2.55.
 academic/klavaro: Updated for version 3.03.

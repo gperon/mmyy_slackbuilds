@@ -158,6 +158,9 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
+# Fix a missing header with kernel-5.4.x - Thanks to USUARIONUEVO
+patch -p1 < $CWD/patches/kernel_5.4_qtserialbus.patch
+
 ( cd qtbase
   # Support for openssl-1.1.x - Thanks a lot to Ole-André!
   patch -p1 < $CWD/patches/qtbase59-openssl11.patch 
@@ -185,6 +188,8 @@ if [ "$WEBENGINE" = "yes" ]; then
     patch -p1 < $CWD/patches/qt5.webengine_gcc8.patch )
   ( cd qtwebengine/src/3rdparty
     patch -p1 < $CWD/patches/pulseaudio-13.patch )
+  # Fix a missing header with kernel-5.4.x - Thanks to USUARIONUEVO
+  patch -p1 < $CWD/patches/kernel_5.4_qtwebengine.patch
 fi
 
 # Borrowed a few things from alienBOB:

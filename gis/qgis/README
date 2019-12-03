@@ -16,5 +16,5 @@ Optional run-time dependencies:
  - saga-gis
  - TauDEM
 
-If ninja is installed, set NINJA=yes to use it for parallel builds that should
-be faster on most systems.
+All dependencies must be built with Python 3 support and qtkeychain must be
+built after Qt5.

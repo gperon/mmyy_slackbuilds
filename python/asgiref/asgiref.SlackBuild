@@ -1,10 +1,8 @@
 #!/bin/sh
 
-# Slackware build script for oniguruma
+# Slackware build script for asgiref
 
-# Copyright 2015-2016 Eugene Wissner, Dachau, Germany
-# Copyright 2008, 2009, 2010, 2011 Phantom X, Goiania, Brazil.
-# Copyright 2006 Martijn Dekker, Groningen, Netherlands.
+# Copyright 2019  Dimitris Zlatanidis  Orestiada, Greece
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -13,7 +11,7 @@
 # 1. Redistributions of this script must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
 #
-#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR `AS IS'' AND ANY EXPRESS OR IMPLIED
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
 #  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 #  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
 #  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
@@ -24,11 +22,10 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=oniguruma
-VERSION=${VERSION:-5.9.6_p1}
+PRGNAM=asgiref
+VERSION=${VERSION:-3.2.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-SRCNAM=onig-5.9.6
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -62,9 +59,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM
-tar xvf $CWD/onig-$VERSION.tar.gz
-cd $SRCNAM
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -72,29 +69,13 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-./configure \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --sysconfdir=/etc \
-  --localstatedir=/var \
-  --docdir=/usr/doc/$PRGNAM-$VERSION \
-  --disable-static \
-  --with-rubydir=/usr/bin \
-  --build=$ARCH-slackware-linux
-
-make
-make install DESTDIR=${PKG}
-
-find ${PKG} \( -name '*.la' -o -name '*.a' \) -exec rm -f {} ';'
+python3 setup.py install --root=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING HISTORY README* index*.html doc/{API,FAQ,RE}* \
-  $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a LICENSE README.rst $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

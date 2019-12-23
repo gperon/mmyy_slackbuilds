@@ -2,6 +2,7 @@
 
 # Slackware build script for libtorrent (rasterbar)
 
+# Copyright 2019 Donald Cooley, South Haven, Indiana, USA
 # Copyright 2009-2015  Erik W. Hanson, Minneapolis, MN, USA
 # All rights reserved.
 #
@@ -70,16 +71,19 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 # https://github.com/qbittorrent/qBittorrent/issues/6383#issuecomment-281535787
-sed -i -e "s/+ target_specific(),/+ target_specific() + ['-std=c++11'],/" \
+sed -i -e "s/+ target_specific(),/+ target_specific() + ['-std=c++14'],/" \
   bindings/python/setup.py
 
 EXAMPLES=${EXAMPLES:-no}
 [ "$EXAMPLES" = "yes" ] && examples="--enable-examples"
 
-patch -p1 < $CWD/libtorrent-1_1_13...RC_1_1.patch
+patch -p1 < $CWD/libtorrent-1_1_13...RC_1_1-5c39557.patch
+patch -p1 < $CWD/boost-1.72.0.patch
+
+autoreconf -fi
 
 CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS -std=c++11" \
+CXXFLAGS="$SLKCFLAGS -std=c++14" \
 LDFLAGS="-L/usr/lib${LIBDIRSUFFIX}" \
 ./configure \
   --prefix=/usr \

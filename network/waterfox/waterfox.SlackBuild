@@ -26,7 +26,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=waterfox
-VERSION=${VERSION:-56.2.12}
+SRCNAM=waterfox-classic
+VERSION=${VERSION:-2019.12}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -54,9 +55,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM
-tar xvf $CWD/$PRGNAM-$VERSION.en-US.linux-$ARCH.tar.?z*
-cd $PRGNAM
+rm -rf $SRCNAM
+tar xvf $CWD/$SRCNAM-$VERSION.en-US.linux-$ARCH.tar.?z*
+cd $SRCNAM
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \

@@ -82,7 +82,6 @@ CXXFLAGS="$SLKCFLAGS" \
 
 # Compile the application and install it into the $PKG directory
 make
-make install DESTDIR=$PKG
 
 # Strip binaries and libraries
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

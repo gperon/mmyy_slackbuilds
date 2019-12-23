@@ -5,7 +5,7 @@
 # Maintained by Robby Workman <rworkman@slackbuilds.org>
 
 PRGNAM=libvirt
-VERSION=${VERSION:-5.9.0}
+VERSION=${VERSION:-5.10.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -56,8 +56,11 @@ sed -i "s|(prefix)/lib/sysctl|(sysconfdir)/sysctl|" src/Makefile.in
 patch -p1 < $CWD/use-virtgroup-in-polkit-rules.diff
 sed -i -e "s,@VIRTGROUP@,$VIRTGROUP,g" src/remote/libvirtd.rules
 
+# Since 5.10: "configure: error: Build directory must be different from source directory"
+mkdir -p build
+cd build
 CFLAGS="$SLKCFLAGS" \
-./configure \
+../configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
   --bindir=/usr/sbin \
@@ -79,6 +82,7 @@ make \
   HTML_DIR=/usr/doc/$PRGNAM-$VERSION \
   EXAMPLE_DIR=/usr/doc/$PRGNAM-$VERSION/examples \
   install-strip DESTDIR=$PKG
+cd ..
 
 # we don't have augeas
 rm -fr $PKG/usr/share/augeas

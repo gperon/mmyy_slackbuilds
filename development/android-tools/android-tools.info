@@ -1,20 +1,30 @@
 PRGNAM="android-tools"
-VERSION="9.0.0_r18"
+VERSION="29.0.5"
 HOMEPAGE="http://developer.android.com/sdk/"
-DOWNLOAD="http://ponce.cc/slackware/sources/repo/android-tools/9.0.0_r18/core-c9602275fc7dae822d22ba36c933d29f4556d6aa.tar.gz \
-          http://ponce.cc/slackware/sources/repo/android-tools/9.0.0_r18/e2fsprogs-fecf0a211618bbed183ebf58d5bf489105bed72c.tar.gz \
-          http://ponce.cc/slackware/sources/repo/android-tools/9.0.0_r18/extras-9d680761912ab259ffd35b05c880b9e49d800bc8.tar.gz \
-          http://ponce.cc/slackware/sources/repo/android-tools/9.0.0_r18/f2fs-tools-d2d127499ebdfaa681df4c13a303a7d0445f1e80.tar.gz \
-          http://ponce.cc/slackware/sources/repo/android-tools/9.0.0_r18/selinux-0d8f825909d3e600facbf23be4758877f98c2602.tar.gz \
-          http://ponce.cc/slackware/sources/repo/android-tools/9.0.0_r18/boringssl-45210dd4e21ace9d28cb76b3f83303fcdd2efcce.tar.gz"
-MD5SUM="8bba902ab4b5aace76e2efc34e47fe46 \
-        8f01009b219d13fce4960a9b5de2e868 \
-        44894217f0c6b8dcae77292b08e51d40 \
-        789498e1c7f5dc2851590d8e2fa05028 \
-        b94232d9153df5a020419ac228153837 \
-        a532caf142cb80ca418629e45cfa4b67"
+DOWNLOAD="http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/avb-355c69ae673220da533696c44acbfa489702d1ff.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/base-d634d2306033599c00b83e68c9ecb60e3206d40c.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/boringssl-a7a75f208caea8a303615724d4cc5f4e8dfb9695.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/core-fa4254a53a368a8f9b6604442eace6a7b6b63b6d.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/e2fsprogs-5fab03bbdc3789515748af8181b9e82dd99beb3b.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/extras-6748c3dd53494096ffeebfeeb12e3b3efad90a83.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/f2fs-tools-39ec3b4c2edc136d32392ddc7a7f222b4c68e88c.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/mkbootimg-e29814dcf6434e8d14379062e4ea1c1b58ff11d0.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/native-b9005758dcf78f89c6640ffb119b5b527a417928.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/selinux-9e188fde016babc76150098e0ab288e053cf92e2.tar.gz \
+          http://ponce.cc/slackware/sources/repo/android-tools/29.0.5/deployagent.jar"
+MD5SUM="6800e83627f1046be645fc8c7ba027d5 \
+        e816083df667905b865c248a8a20c2e7 \
+        a20c134ee4310e600384b7d0a60c2db6 \
+        34fb01c210c7371833da14f1d7a970e6 \
+        3b559a1c803c94079b177065b7424457 \
+        cdd9d7b4956e5da607bb1e94cb929065 \
+        880a1708785515fe1447b1bf6b020093 \
+        f912725e4d01596c2a2d0fa3fe772d8e \
+        3daf9cf55dceb85ca06ae116e61800b4 \
+        28a8438bc0856def465f6456781a5275 \
+        bb500620af2f3716a61100f7b5c445fa"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="gtest ninja pcre2"
+REQUIRES="gtest ninja pcre2 protobuf3"
 MAINTAINER="Philip van der Hoeven"
 EMAIL="philip@vd-hoeven.nl"

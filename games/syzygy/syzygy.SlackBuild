@@ -34,6 +34,8 @@ case "$( uname -m )" in
      *) ARCH=$( uname -m ) ;;
 esac
 
+KICAD_VERSION=${KICAD_VERSION:-5.1.5}
+
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM

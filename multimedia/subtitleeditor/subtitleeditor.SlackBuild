@@ -3,6 +3,7 @@
 # Slackware build script for subtitleeditor
 
 # Copyright (C) 2010  Georgy Shepelev <geo.shepelev@gmail.com>
+# Copyright (C) 2020  Matteo Bernardini <ponce@slackbuilds.org>, Pisa, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +24,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=subtitleeditor
-VERSION=${VERSION:-20180925_50d8af9}
+VERSION=${VERSION:-20191130_4c215f4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

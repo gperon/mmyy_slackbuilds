@@ -22,8 +22,10 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Updated by Emmanuel N. Millan 2020
+
 PRGNAM=chkrootkit
-VERSION=${VERSION:-0.52}
+VERSION=${VERSION:-0.53}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -79,6 +81,7 @@ done
 
 # Thanks to Erik Jan Tromp (alphageek) for the suggestion on this
 # Install a wrapper script
+###sbolint off
 mkdir -p $PKG/usr/sbin
 cat << EOF > $PKG/usr/sbin/chkrootkit
 #!/bin/sh
@@ -87,6 +90,7 @@ PRGDIR=/usr/lib${LIBDIRSUFFIX}/${PRGNAM}/bin
 cd \$PRGDIR && exec ./$PRGNAM \$*
 EOF
 chmod 0755 $PKG/usr/sbin/$PRGNAM
+###sbolint on
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

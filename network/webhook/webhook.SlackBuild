@@ -35,9 +35,14 @@ VERSION=${VERSION:-2.12.0}
 BUILD=${BUILD:-1}
 =======
 PRGNAM=webhook
+<<<<<<< HEAD
 VERSION=${VERSION:-2.6.10}
 BUILD=${BUILD:-5}
 >>>>>>> ponce:network/webhook/webhook.SlackBuild
+=======
+VERSION=${VERSION:-2.6.11}
+BUILD=${BUILD:-1}
+>>>>>>> ponce/opensmtpd
 TAG=${TAG:-_SBo}
 
 # Automatically determine the architecture we're building on:

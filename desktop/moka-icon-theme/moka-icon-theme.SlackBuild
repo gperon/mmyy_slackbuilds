@@ -2,7 +2,7 @@
 #
 # Slackware build script for moka-icon-theme.
 #
-# Copyright 2015-2018  Edinaldo P. Silva, Rio de Janeiro, Brazil.
+# Copyright 2015-2020  Edinaldo P. Silva, Rio de Janeiro, Brazil.
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -34,7 +34,7 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 CWD=$(pwd)
 
-SRCVER=${SRCVER:-d63bd966332fb6de5034d8bbc00ba0e14825ed07}
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT

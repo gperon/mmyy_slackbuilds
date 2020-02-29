@@ -1,5 +1,6 @@
 #!/bin/sh
 
+<<<<<<< HEAD
 <<<<<<< HEAD:games/polyglot/polyglot.SlackBuild
 # Slackware build script for chess polyglot
 
@@ -7,6 +8,9 @@
 =======
 # Copyright 2019 bifferos@gmail.com UK
 >>>>>>> ponce:development/amazon-corretto/amazon-corretto.SlackBuild
+=======
+# Copyright 2019-2020 bifferos@gmail.com UK
+>>>>>>> ponce/opensmtpd
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -44,7 +48,7 @@ fi
 =======
 
 PRGNAM=amazon-corretto
-VERSION=${VERSION:-8.222.10.1}
+VERSION=${VERSION:-8.242.08.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

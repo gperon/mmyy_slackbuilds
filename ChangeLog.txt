@@ -1,3 +1,1455 @@
+Sat Feb 29 01:02:25 UTC 2020
+academic/fet: Updated for version 5.43.1.
+audio/alsa-tools: Updated for version 1.2.2.
+desktop/faba-icon-theme: New maintainer.
+desktop/gtk-theme-Bluebird: New maintainer.
+desktop/gtk-theme-Greybird: New maintainer.
+desktop/moka-icon-theme: New maintainer.
+desktop/paper-icon-theme: New maintainer.
+development/cf-cli: Added (Cloud Foundry command-line interface).
+development/unifdef: Updated for version 2.12.
+development/vscode-bin: Updated for version 1.42.1.
+development/yarn: Updated for version 1.22.0.
+games/endless-sky: updated for version 0.9.11
+games/fortune-dune: Fix homepage.
+games/roll: Added (Dice game).
+gis/OWSLib: Python 3 by default.
+gis/proj: Fix .info.
+gis/pyproj: Updated for version 2.5.0.
+gis/qgis: Updated for version 3.12.0.
+gis/rasterio: Updated for version 1.1.3.
+graphics/white_dune: Updated for version 1.789.
+libraries/QDarkStyle: Added python3 support.
+libraries/QScintilla-qt5: Updated for version 2.11.4.
+libraries/libpst: Updated for version 0.6.74.
+libraries/libtommath: Updated for version 1.2.0.
+libraries/live555: Updated for version 2020.02.25
+libraries/qt3: Minor script tweak.
+misc/rbutil: Added (Rockbox Utility).
+misc/sbo-templates: Updated for version 1.3.2.
+multimedia/x265: Updated for version 3.3.
+network/brave-browser: Updated for version 1.4.95.
+network/discord: Version bump to 0.0.10
+network/dropbox: Updated for version 91.4.548.
+network/krb5: Updated for version 1.18.
+network/mailspring: Updated for version 1.7.4.
+network/opensmtpd: Fix security issue.
+network/opera-developer: Updated for version 68.0.3609.0.
+network/opera: Updated for version 67.0.3575.31.
+network/sfeed: Updated for version 0.9.16.
+network/shadowsocks-libev: Updated for version 3.3.4.
+network/teamviewer: Updated for version 15.3.2682.
+network/uget: Updated for version 2.2.3_1.
+network/vivaldi: Updated for version 2.11.1811.44.
+network/weechat: Updated for version 2.7.1.
+network/wireshark: Updated for version 3.2.2.
+network/yle-dl: Updated for version 20200222.
+office/lyx: Updated for version 2.3.4.3.
+office/pandoc-bin: Updated for version 2.9.2.
+perl/MoarVM: Updated for version 2020.02.
+perl/nqp: Updated for version 2020.02.
+perl/rakudo: Updated for version 2020.02.
+python/bleach: Updated for version 3.1.1.
+python/pycryptodomex: Updated for version 3.9.7.
+python/python-argopt: Updated for version 0.6.0.
+python/python3-multidict: Updated for version 4.7.5.
+python/sphinxcontrib-websupport: Updated for version 1.2.0.
+ruby/ruby-build: Updated for version 20200224.
+system/fish: Updated for version 3.1.0.
+system/kbfs: Updated for version 5.2.1_20200225210944.
+system/keybase: Updated for version 5.2.1.
+system/letsencrypt: Detect Python3 version.
+system/netdata: Updated for version 1.20.0.
+system/phoronix-test-suite: Updated for version 9.4.0.
+system/skim: Updated for version 0.8.0.
+system/slpkg: Updated for version 3.8.4.
+system/telegraf: Updated for version 1.13.4.
+system/vagrant: Updated for version 2.2.7.
+system/wine-staging: Updated for version 5.2.
+system/zsh-syntax-highlighting: Updated for version 0.7.0.
++--------------------------+
+Sun Feb 23 23:10:46 UTC 2020
+academic/FreeFem: Updated for version 4.5.
+academic/amd: Updated for SuiteSparse 5.6.0.
+academic/btf: Updated for SuiteSparse 5.6.0.
+academic/camd: Updated for SuiteSparse 5.6.0.
+academic/ccolamd: Updated for SuiteSparse 5.6.0.
+academic/cholmod: Updated for SuiteSparse 5.6.0.
+academic/colamd: Updated for SuiteSparse 5.6.0.
+academic/csparse: Updated for SuiteSparse 5.6.0.
+academic/cxsparse: Updated for SuiteSparse 5.6.0.
+academic/evopedia_qt: Use proper github URL.
+academic/getdp: Added (Finite Element Solver).
+academic/gmsh: Added (Finite Element Mesh Generator).
+academic/klu: Updated for SuiteSparse 5.6.0.
+academic/ldl: Updated for SuiteSparse 5.6.0.
+academic/octave: Updated for version 5.2.0.
+academic/rbio: Updated for SuiteSparse 5.6.0.
+academic/spqr: Updated for SuiteSparse 5.6.0.
+academic/suitesparseconfig: Updated for version 5.6.0.
+academic/umfpack: Updated for version 5.7.9.
+accessibility/espeakup: Use proper github URL.
+audio/MP3Diags: Update script.
+audio/aacplusenc: Orphaned.
+audio/acousticbrainz-client: Use proper github URL.
+audio/clementine: Updated for version 1.4.0rc1, add qt5 requirement.
+audio/clyrics: Orphaned.
+audio/decibel-audio-player: Orphaned.
+audio/easytag: Updated for version 2.2.6.
+audio/flake: Orphaned.
+audio/freac: Orphaned.
+audio/hydrogen: Updated README and REQUIRES.
+audio/hydrogen: Use proper github URL.
+audio/lastfm: Use proper github URL.
+audio/lyvi: Orphaned.
+audio/mp4tools: Orphaned.
+audio/museeks: Updated for version 0.11.2.
+audio/ponymix: Use proper github URL.
+audio/quodlibet: Orphaned.
+audio/ttaenc: Orphaned.
+desktop/LX-Colors-Revival: Orphaned.
+desktop/LX-Colors-themes: Orphaned.
+desktop/Zafiro-icons: Orphaned.
+desktop/adapta-gtk-theme: Orphaned.
+desktop/anki: Updated for version 2.1.16.
+desktop/arc-openbox: Orphaned.
+desktop/arc-theme-Red: Orphaned.
+desktop/autorandr: Added (display configuration manager).
+desktop/awemenugen: Orphaned.
+desktop/awesome-extra: Orphaned.
+desktop/awoken-icon-theme: Orphaned.
+desktop/bashish: Orphaned.
+desktop/boje-themes: Orphaned.
+desktop/bunsen-themes: Orphaned.
+desktop/cathexis-suite-themes: Orphaned.
+desktop/clearlooks-phenix-theme: Use proper github URL.
+desktop/compton-conf: Orphaned.
+desktop/cwm-openbsd: Use proper github URL.
+desktop/cwm: Updated for version 6.6.
+desktop/dark-aurora-gtk-theme: Orphaned.
+desktop/faba-icon-theme: Orphaned.
+desktop/faba-mono-icons: Orphaned.
+desktop/faenza-cupertino: Orphaned.
+desktop/faience-icon-theme: Orphaned.
+desktop/flatpak-builder: Updated for version 1.0.9.
+desktop/flatpak: Updated for version 1.6.2.
+desktop/gsimplecal: Use proper github URL.
+desktop/gtk-theme-Albatross: Orphaned.
+desktop/gtk-theme-Blackbird: Orphaned.
+desktop/gtk-theme-Orion: Orphaned.
+desktop/moka-icon-theme: Orphaned.
+desktop/moka-minimal: Orphaned.
+desktop/moka-themes: Orphaned.
+desktop/openbox-simple-theme: Orphaned.
+desktop/oranchelo-icon-theme: Orphaned.
+desktop/orchis-gtk-theme: Orphaned.
+desktop/paper-gtk-theme: Orphaned.
+desktop/paper-icon-theme: Orphaned.
+desktop/pspshrink: Orphaned.
+desktop/sawfish-extra: Orphaned.
+desktop/sawfish-pager: Orphaned.
+desktop/sawfish-session-dialog: Orphaned.
+desktop/sawfish: Orphaned.
+desktop/screenfetch: Orphaned.
+desktop/siva-flat-themes: Orphaned.
+desktop/xdgurl: Orphaned.
+desktop/xed: Orphaned.
+desktop/xipper: Orphaned.
+development/SQLAlchemy: Updated for version 1.3.13.
+development/afl: Fix clang support.
+development/cryptoki: Removed.
+development/cutter: Cutter removed. Fails to build.
+development/dasht: Added (Search API Docs Offline).
+development/dotnet-runtime: Updated for version 3.1.2.
+development/dotnet-sdk: Updated for version 3.1.102.
+development/fly: Added (cli tool for concourse).
+development/fuel: Orphaned.
+development/jdk: Noted alt download in README
+development/minikube: Added (local kubernetes).
+development/sdcc: Updated for version 4.0.0.
+development/svn-all-fast-export: Updated for version 1.0.17.
+development/urn: Added (Lisp Dialect).
+games/bstone: Updated for version 1.1.16_2.
+games/freeciv: updated for version 2.6.2
+games/javacpc: Updated for version 2.9.8f.
+games/qmc2: Updated for version 0.195.
+games/xcowsay: Add man pages, usr/bin => usr/games.
+gis/gdal: Updated for version 3.0.3.
+gis/postgis: Updated for version 3.0.1.
+gis/proj: Updated for version 6.3.1.
+gis/whitebox-tools: Updated for version 1.2.0.
+graphics/aaphoto: Added (automatic color correction of photo).
+graphics/mtpaint: Updated for version 3.40.
+graphics/openimageio: Updated for version 2.0.13
+graphics/vuescan: Updated for version 9.7.23.
+graphics/white_dune: Updated for version 1.750.
+libraries/PrettyTable: Added support python3.
+libraries/aspnetcore-runtime: Updated for version 3.1.2.
+libraries/gtkhotkey: Orphaned.
+libraries/jbigkit: New maintainer.
+libraries/libaec: Added (Adaptive Entropy Coding library).
+libraries/libinput: Updated for version 1.15.2.
+libraries/librep: Orphaned.
+libraries/libsidplay2: Fix prior copyright holder email
+libraries/libxlsxwriter: Updated for version 0.9.4.
+libraries/plyr: Orphaned.
+libraries/rep-gtk: Orphaned.
+libraries/wxSQLite3: Orphaned.
+libraries/zuluplay: Orphaned.
+misc/Colormake: Orphaned.
+misc/dos2unix: Updated for version 7.4.1.
+misc/rarcrack: Orphaned.
+misc/tidyp: Added (HTML Validation Library).
+multimedia/ExMplayer: Orphaned.
+multimedia/acetoneiso: Orphaned.
+multimedia/mkclean: Orphaned.
+multimedia/mkvalidator: Orphaned.
+multimedia/opera-developer-ffmpeg-codecs: Updated for v 0.44.1.
+multimedia/opera-ffmpeg-codecs: Updated for version 0.44.1.
+multimedia/plexmediaserver: Updated for v 1.18.7.2438_f342a5a43.
+network/SoulseekQt: Update DOWNLOAD url.
+network/TeamSpeak3: fix md5sums
+network/anydesk: Updated for version 5.5.3.
+network/brave-browser: Updated for version 1.3.118.
+network/dothost: Updated for version 0.2.
+network/haskell-network-multicast: Added (Multicast module).
+network/ipscan: Orphaned.
+network/ircd-hybrid: Updated for version 8.2.28.
+network/mattermost-desktop: Updated for version 4.4.0.
+network/nordvpn: Updated for version 3.6.1.
+network/opera-developer: Updated for version 68.0.3602.0.
+network/opera: Updated for version 66.0.3515.103.
+network/qutebrowser-tox: Updated for version 1.10.1.
+network/qutebrowser: Updated for version 1.10.1.
+network/squirrelmail: Added (forever green webmail).
+network/teams: Added (Microsoft Teams for Linux).
+network/teamviewer: Updated for version 15.2.2756.
+network/telegram: Updated for version 1.9.14.
+network/waterfox: Updated for version 2020.02.1
+network/wireguard-linux-compat: Updated for version 0.0.20200215.
+network/xdman: Orphaned.
+network/yandex-browser-beta: Updated for version 19.12.3.332.
+network/youtube-dl: Updated for version 2020.02.16.
+network/znc: Updated for version 1.7.5.
+office/anorack: Updated for version 0.2.5.
+office/calibre-bin: Updated for version 4.11.2.
+office/fbpdf: Use mupdf-legacy dep.
+office/mupdf-legacy: Added (a lightweight PDF, CBZ, and XPS viewer).
+office/mupdf: Updated for version 1.16.1.
+office/zathura-pdf-mupdf: Use mupdf-legacy dep.
+perl/perl-HTML-Tidy: Added (HTML validation).
+perl/perl-IO-Socket-SSL: Updated for version 2.067.
+perl/perl-Math-Complex_C-L: Orphaned.
+perl/perl-Math-Complex_C-Q: Orphaned.
+perl/perl-Math-Complex_C: Orphaned.
+perl/perl-Math-GMPf: Orphaned.
+perl/perl-Math-LongDouble: Updated for version 0.22.
+perl/perl-Math-MPFR: Updated for version 4.13.
+perl/perl-Module-ScanDeps: Orphaned.
+perl/perl-String-Random: Added (Random string generator).
+perl/perl-glib: Updated for version 1.3292.
+perl/perl-gnome2-gconf: Orphaned.
+python/getdevinfo: Orphaned.
+python/git-fame: Updated for version 1.11.0.
+python/python-faulthandler: Orphaned.
+python/python-requests: Updated for version 2.23.0.
+python/python3-attrs: Updated for version 19.3.0.
+python/python3-ipython-sql: Added (IPython extension).
+python/python3-ipython: Updated for version 7.12.0.
+ruby/ruby-build: Updated for version 20200214.
+ruby/ruby-faraday: Orphaned.
+ruby/ruby-gist: Orphaned.
+ruby/ruby-haste: Orphaned.
+ruby/ruby-json: Orphaned.
+ruby/ruby-multipart-post: Orphaned.
+system/chronograf: Updated for version 1.8.0.
+system/dateutils: Updated for version 0.4.7.
+system/ddrescue-gui: Orphaned.
+system/dget: Updated for version 2.20.2.
+system/dust: Updated for version 0.4.5.0.
+system/dust: Updated for version 0.5.0.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.7.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.8.
+system/evilvte: Orphaned.
+system/extract-xiso: Orphaned.
+system/forkstat: Orphaned.
+system/fs-uae-arcade: Fix DOWNLOAD link.
+system/fs-uae-launcher: Fix DOWNLOAD link.
+system/fs-uae: Fix DOWNLOAD link.
+system/hddtemp: Update Script.
+system/intelmas: Added (Intel Memory And Storage Tool).
+system/isdct: Removed (replaced by intelmas).
+system/nnn: Updated for version 3.0.
+system/nvidia-legacy340-driver: Fix script.
+system/slpkg: Updated for version 3.8.3.
+system/xorgxrdp: Fix MD5SUM.
+system/zuluCrypt: Orphaned.
++--------------------------+
+Sat Feb 15 02:58:47 UTC 2020
+academic/aris: New maintainer.
+academic/geomview: New maintainer.
+audio/azr3: Removed unused files.
+desktop/e16: Updated for version 1.0.19.
+desktop/sun: Updated for version 1.3.0.
+desktop/x-tile: updated for version 2.6
+desktop/xfce4-cpufreq-plugin: New maintainer.
+development/bigloo: Updated for version 4.3f.
+development/bluefish: fix md5sum
+development/composer: Updated for version 1.9.3
+development/d-tools: Updated for version 2.090.1
+development/dmd: Updated for version 2.090.1
+development/jupyter_core: Update for version 4.6.2.
+development/radare2: Updated for version 4.2.0.
+development/src-vcs: Updated for version 1.28.
+development/tiled: updated for version 1.3.2
+development/universal-ctags: Updated for version 6ffdd48
+games/bsnes-libretro: Removed.
+games/crispy-doom: Updated for version 5.6.4.
+games/higan-libretro: Removed.
+games/lgogdownloader: updated for version 3.5
+games/libretro-lutro: Removed.
+games/vbam-libretro: Removed.
+games/vkQuake: Updated for version 1.04.1.
+games/wesnoth: updated for version 1.14.11
+gis/OWSLib: Updated for version 0.19.1.
+gis/gpxsee: Updated for version 7.20.
+gis/saga-gis: Updated for version 7.5.0.
+graphics/Blender: Updated for version 2.82
+graphics/entangle: New maintainer.
+graphics/mtpaint: New maintainer.
+graphics/plotutils: New maintainer.
+graphics/white_dune: Updated for version 1.748.
+libraries/SOPE: Updated for version 4.3.0.
+libraries/allegro: updated for version 5.2.6.0
+libraries/argon2: Updated for version 20190702.
+libraries/botocore: Updated for version 1.14.15.
+libraries/htmlcxx: updated for version 0.87
+libraries/id3lib: use patches from Slackware-current
+libraries/libjwt: updated for version 1.12.0
+libraries/libopenshot-audio: Updated for version 0.1.9
+libraries/libopenshot: Updated for versin 0.2.4
+libraries/libsidplay2: Updated to patch version 2.1.1-15
+libraries/live555: Updated for version 2020.02.11
+misc/vdpauinfo: revert version back to 1.0
+multimedia/lives: Updated for version 3.0.2.
+multimedia/openshot: Updated for version 2.5.0
+multimedia/pepperflash-plugin: Updated for version 32.0.0.330.
+multimedia/plexmediaserver: Updated for v 1.18.6.2368_97add474d.
+network/TeamSpeak3: update dependency list
+network/arno-iptables-firewall: Updated for version 2.1.0.
+network/asterisk: Updated for version 16.8.0.
+network/awscli: Updated for version 1.17.15.
+network/bottle: Updated for version 0.12.18.
+network/glewlwyd: updated for version 2.1.1
+network/guacamole-client: Updated for version 1.1.0
+network/guacamole-server: Updated for version 1.1.0
+network/hylafax+: Updated for version 7.0.2.
+network/insync: Updated for version 3.0.28.40721.
+network/netcat-openbsd: Remove unused patches.
+network/openresolv: Fix update-resolv-conf script to remove existing nameservers
+network/openresolv: Update to 3.10.0
+network/sfeed: Fix SlackBuild.
+network/signal-desktop: Updated for version 1.30.1.
+network/signal-desktop: Updated for version 1.31.0.
+network/slack: Updated for version 4.3.2.
+network/slimjet: Updated for version 25.0.8.0.
+network/sshuttle: updated for version 0.78.5
+network/synergy: Updated for version 1.8.8
+network/telegram: Updated for version 1.9.13.
+network/tor-browser: Updated for version 9.0.5.
+network/ucarp: Fix command line processing.
+network/vivaldi: Updated for version 2.11.1811.33.
+office/SOGo: Updated for version 4.3.0.
+office/lyx: Updated for version 2.3.4.
+office/smoffice2018: Updated for version 2018_974.
+office/xournalpp: Updated for version 1.0.17.
+perl/MoarVM: Updated for version 2020.01.1.
+perl/nqp: Updated for version 2020.01.
+perl/perl-IO-HTML: New maintainer
+perl/perl-IO-String: remove old build log.
+perl/perl-goo-canvas: New maintainer
+perl/perl-html-form: New maintainer
+perl/perl-http-response-encoding: New maintainer
+perl/perl-http-server-simple: New maintainer
+perl/perl-x11-protocol: New maintainer
+perl/rakudo: Updated for version 2020.01.
+perl/zef: Updated for version 0.8.3.
+python/cloudscraper: Added (Python Module).
+python/parso: Updated for version 0.6.1.
+python/py-cpuinfo: Updated for version 5.0.0.
+python/pycryptodomex: Updated for version 3.9.6.
+python/python-evdev: Updated for version 1.3.0.
+python/python-notify2: Added python3 support.
+python/python-zipp: Updated for version 2.2.0.
+python/python3-lhafile: New maintainer.
+python/python3-pexpect: Updated for version 4.8.0.
+python/python3-pyrsistent: Updated for version 0.15.7.
+python/s3transfer: Updated for version 0.3.3.
+system/ansible: Updated for version 2.9.5.
+system/dosbox-dev: updated for version 0.74.3.r4313
+system/fs-uae-arcade: New maintainer.
+system/fs-uae-launcher: New maintainer.
+system/fs-uae: New maintainer.
+system/glances: Updated for version 3.1.0.
+system/libsignal-protocol-c: Added (Forward Secrecy Protocol).
+system/nvidia-driver: update for version 440.59, minor edits
+system/nvidia-kernel: fix download link
+system/nvidia-kernel: update for version 440.59
+system/nvidia-legacy304-driver: unmaintained
+system/nvidia-legacy304-kernel: unmaintained
+system/nvidia-legacy390-driver: update for version 390.132, edits
+system/nvidia-legacy390-kernel: update for version 390.132
+system/qdirstat: Updated for version 1.6.1.
+system/slpkg: Updated for version 3.8.1.
+system/telegraf: Updated for version 1.13.3.
+system/tinycdb: Fix include dir.
+system/ttf-paratype-pt-fonts: Update README.
+system/ufiformat: Updated for version 0.9.9.
+system/xorgxrdp: Added (support files for xrdp).
+system/xrdp: Add missing files.
+system/xrdp: Updated for version 0.9.12.
++--------------------------+
+Sat Feb  8 08:04:01 UTC 2020
+academic/Gridcoin-Research: updated for version 4.0.6.0
+academic/boinc: updated for version 7.16.4
+academic/ds9: Updated for version 8.1.
+academic/fastqc: Updated for version 0.11.9.
+academic/fet: Updated for version 5.42.3.
+academic/sage: Updated for version 9.0.
+audio/qjackctl: Updated for version 0.6.1, new maintainer.
+audio/yoshimi: Updated for version 1.7.0.
+desktop/Buku: Removed (replaced by buku).
+desktop/breeze-snow-cursor-theme: Added (White cursor theme).
+desktop/buku: Added (Cmdline bookmark manager).
+desktop/flatpak: fix build
+desktop/jgmenu: Updated for version 4.0.2.
+desktop/x-tile: New maintainer.
+development/astyle: New maintainer, various enhancements.
+development/avrdude: Updated for version 6.3.
+development/bluefish: updated for version 2.2.11
+development/check: Updated for version 0.14.0.
+development/codelite: Updated for version 13.0.
+development/dotnet-runtime: Fix typo.
+development/dotnet-sdk: Fix typo.
+development/google-go-lang: Updated for version 1.13.7.
+development/jupyter-notebook: Updated for version 6.0.3.
+development/jupyter_console: Updated for version 6.1.0.
+development/mutagen: Add python3 support.
+development/portaudio: New maintainer.
+development/processing: Updated for version 3.5.4.
+development/pycharm: Updated for version 2019.3.2.
+development/sbcl: Updated for version 2.0.1.
+development/vscode-bin: Updated for version 1.42.0.
+games/aisleriot: Add missing patch.
+games/aisleriot: Fix build.
+games/lgogdownloader: New maintainer.
+games/retux: Add missing pygame dep.
+games/scummvm: Updated for version 2.1.1.
+games/stormbaancoureur: Fix email.
+games/ultimatestunts: Updated for version 0.7.7.1.
+games/waterCloset: Updated for version 1.0.
+gis/geopy: Updated for version 1.21.0.
+graphics/converseen: Updated for version 0.9.8.1.
+graphics/sxiv: Updated for version 26.
+graphics/vuescan: Updated for version 9.7.22.
+libraries/Jinja2: Updated for version 2.11.1.
+libraries/aqbanking: Updated for version 6.0.2.
+libraries/aspnetcore-runtime: Fix typo.
+libraries/gwenhywfar: Updated for version 5.1.3.
+libraries/htmlcxx: New maintainer.
+libraries/libinput: Updated for version 1.15.1.
+libraries/libsidplay2: New maintainer.
+misc/html-xml-utils: Updated for version 7.8.
+misc/vdpauinfo: updated for version 1.3
+multimedia/lives: New maintainer.
+multimedia/strawberry: Updated for version 0.6.8.
+multimedia/tovid: update homepage
+multimedia/vgmplay: Updated for version 0.40.9.
+network/aircrack-ng: Updated for version 1.6.
+network/go-ipfs: Updated for version 0.4.23.
+network/mailspring: Added (Fork of Nylas mail).
+network/netcat-openbsd: Updated for version 1.206.
+network/netdiscover: Updated for version 053dda2.
+network/nordvpn: Updated for version 3.6.0.
+network/opensmtpd: Reverted to 6.0.3p1.
+network/opera-developer: Updated for version 68.0.3590.0.
+network/opera: Updated for version 66.0.3515.72.
+network/palemoon-bin: Updated for version 28.8.2.1.
+network/palemoon: Updated for version 28.8.2.1.
+network/pexip-infinity-connect: Added (Video Communication).
+network/qutebrowser-tox: Updated for version 1.10.0.
+network/qutebrowser: Updated for version 1.10.0.
+network/resilio-sync: Added (Sync All Your Data Across Devices).
+network/riot-web: Fix path.
+network/s-nail: Updated for version 14.9.17.
+network/sshuttle: New maintainer.
+network/syncthing: Updated for version 1.3.4.
+network/synergy: New maintainer.
+network/uget-integrator: Added (download manager).
+network/webhook: Updated for version 2.6.11.
+network/wireguard-linux-compat: Updated for version 0.0.20200205.
+network/wireguard-tools: Updated for version 1.0.20200206.
+network/zoom-linux: Updated for version 3.5.352596.0119.
+office/calibre-bin: Updated for version 4.10.1.
+office/lowdown: Added (markdown translator).
+perl/perl-Mojolicious-Plugin-Humane: Added (perl module).
+perl/perl-Mojolicious-Plugin-I18N: Added (Perl module).
+perl/perl-Path-Tiny: Updated for version 0.112.
+perl/perl-Test-HexDifferences: Fix deps.
+perl/perl-YAML-Syck: Updated for version 1.32.
+python/html2text: Updated for version 2020.1.16, new maintainer.
+python/llfuse: New maintainer.
+python/parso: Updated for version 0.6.0.
+python/psutil: Fix permission.
+python/python-PySnooper: Updated for version 0.3.0.
+python/python-importlib_metadata: Updated for 1.5.0.
+python/python-neovim: Updated for version 0.4.1.
+python/python3-django: Updated for version 3.0.3.
+python/python3-jedi: Updated for version 0.16.0.
+python/python3-jupyter-ipykernel: Updated for version 5.1.4.
+python/pyudev: Updated for version 0.22.0.
+python/selenium: Updated for version 3.141.0.
+python/werkzeug: Updated for version 0.16.1.
+ruby/ruby-gist: Updated for version 5.1.0.
+system/asbt: Updated for version 2.1.1.
+system/autoslackpkg: Added (automates the use of slackpkg).
+system/bleachbit: Updated for version 3.2.0.
+system/clamav: Updated for version 0.102.2.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.6.
+system/fatsort: Updated for version 1.6.2.605.
+system/isdct: Updated for version 3.0.24.
+system/kapacitor: Updated for version 1.5.4.
+system/letsencrypt: Updated for version 1.2.0.
+system/magiic: Updated for version 0.3.1.
+system/monitorix: New maintainer.
+system/powershell: Added (command-line shell).
+system/scrypt: Updated for version 1.3.0.
+system/slpkg: Updated for version 3.8.0.
+system/telegraf: Updated for version 1.13.2.
+system/tmpwatch: Added (A utility for removing temporary files).
+system/ttf-paratype-pt-fonts: Added (ParaType free fonts).
+system/ttf-xo-fonts: Added (free XO Fonts).
+system/wine-staging: Updated for version 5.1.
+system/worker: Updated for version 4.3.0.
++--------------------------+
+Sat Feb  1 02:01:22 UTC 2020
+academic/abella: Reflow README.
+audio/audacious-ffmpeg: Fix email.
+audio/azr3: Update script.
+audio/opus: Update build parameters.
+audio/setBfree: Update script.
+dart-sdk updated to 2.7.1
+desktop/Buku: Updated for version 4.2.2.
+desktop/conky-manager: Updated for version 2.4.
+desktop/fbmenugen: Updated for version 0.84.
+desktop/flatpak: Updated to version 1.6.1.
+desktop/spectrwm: Updated for version 3.3.0.
+desktop/wmii: Assume maintainership
+desktop/xfce4-windowck-plugin: Reflow README.
+development/Sphinx: Update build instructions for pytz dependency.
+development/amazon-corretto: Updated for version 8.242.08.1.
+development/ninja: Updated for version 1.10.0.
+development/snappy: Convert .info file to UTF-8.
+development/sublime_merge: Fix symlink.
+games/aisleriot: Added (card games collection).
+games/cowsay: Fix email.
+games/ultimatestunts: Fix email.
+gis/Shapely: Updated for version 1.7.0.
+graphics/shaderc: Updated for version 2019.1.
+graphics/vuescan: Update MD5SUMs.
+graphics/vulkan-sdk: Updated for version 1.2.131.1.
+ham/spectools: Added (spectrum analyzer).
+jstock updated to 1.0.7.44
+libraries/glfw3: Updated for version 3.3.2.
+libraries/html5lib: Add python3 support
+libraries/id3lib: Remove broken patch.
+libraries/jbigkit: Marked as orphaned (no SBo maintainer)
+libraries/libasr: Updated for version 1.0.4.
+libraries/libbsd: Changed maintainer, cleanups.
+libraries/libcbor: Reflow README.
+libraries/libev: Updated for version 4.31.
+libraries/librelp: Updated for version 1.5.0.
+libraries/libuv: Updated for version 1.34.2.
+libraries/live555: Updated for version 2020.01.28
+libraries/python3-PyQtWebEngine: Added (Py3 QtWebEngine Binding).
+libraries/tls: Removed (duplicate of tcl-tls).
+misc/KeePass: Updated for version 2.44.
+misc/goldencheetah: Avoid dependency on qt5-webkit.
+misc/gramps: Updated for version 5.1.2.
+misc/hoorex: Updated for version 0.7.0
+misc/xbanish: Updated for version 1.6, new maintainer.
+multimedia/MuseScore: jack2 => jack in REQUIRES.
+multimedia/dvgrab: Update script.
+multimedia/lives: jack2 => jack in REQUIRES.
+network/NetworkManager-pptp: Fixed DOWNLOAD and MD5SUM
+network/NetworkManager-ssh: Reflow README.
+network/barrier: Convert .info file to UTF-8.
+network/cni-plugins: Reflow README.
+network/opensmtpd-extras: Reflow README.
+network/opensmtpd: Fix more security issues.
+network/opensmtpd: Updated for version 6.6.2p1.
+network/opera-developer: Updated for version 68.0.3581.0.
+network/pure-ftpd: Updated for version 1.0.49.
+network/qtmib: New maintainer.
+network/r8168: Updated for version 8.048.00.
+network/radicale: Fix email.
+network/shorewall-core: Updated for version 5.2.3.5.
+network/shorewall6: Updated for version 5.2.3.5.
+network/shorewall: Updated for version 5.2.3.5.
+network/ssmtp: New maintainer.
+network/telegram: Updated for version 1.9.8.
+network/telegram: Updated for version 1.9.9.
+network/tor: Updated for version 0.4.2.6.
+network/weechat: Allow optional build of docs/man.
+network/wireguard-linux-compat: Updated for version 0.0.20200128.
+network/youtube-dl: Updated for version 2020.01.24.
+office/coolreader: New maintainer.
+office/hunspell-de: Fix email.
+office/zim: Updated for version 0.72.1.
+perl/perl-Astro-SunTime: Marked as orphaned (no SBo maintainer)
+perl/perl-Convert-UU: Marked as orphaned (no SBo maintainer)
+perl/perl-Coro: Updated for version 6.55.
+perl/perl-Device-SerialPort: Marked as orphaned (no SBo maintainer)
+perl/perl-Email-Date-Format: Marked as orphaned (no SBo maintainer)
+perl/perl-IO-HTML: Marked as orphaned (no SBo maintainer)
+perl/perl-Image-Magick: Remove - from VERSION, reflow README.
+perl/perl-MIME-Lite: Marked as orphaned (no SBo maintainer)
+perl/perl-Module-Build: Updated for version 0.4231.
+perl/perl-PHP-Serialization: Marked as orphaned (no SBo maintainer)
+perl/perl-PerlIO-Layers: Marked as orphaned (no SBo maintainer)
+perl/perl-Sub-Exporter-Progressive: Marked as orphaned (no SBo maintainer)
+perl/perl-Sys-Mmap: Marked as orphaned (no SBo maintainer)
+perl/perl-Template-Toolkit: Updated for version 3.007.
+perl/perl-Test-Number-Delta: Marked as orphaned (no SBo maintainer)
+perl/perl-X10: Marked as orphaned (no SBo maintainer)
+perl/perl-cgi-minimal: Fix email.
+perl/perl-file-slurper: Added (perl module).
+perl/perl-goo-canvas: Marked as orphaned (no SBo maintainer)
+perl/perl-html-form: Marked as orphaned (no SBo maintainer)
+perl/perl-http-response-encoding: Marked as orphaned (no SBo maintainer)
+perl/perl-http-server-simple: Marked as orphaned (no SBo maintainer)
+perl/perl-x11-protocol: Marked as orphaned (no SBo maintainer)
+python/PyXB: Convert .info file to UTF-8.
+python/backlash: Reflow README.
+python/psutil: Updated for version 5.6.7
+python/python-importlib_metadata: Updated for 1.4.0.
+python/python-sh: Autodetect python3
+python/python3-packaging: Updated for version 20.1.
+python/six: Updated for version 1.14.0
+ruby/rubygem-parser: Updated for version 2.7.0.2.
+system/bubblewrap: Updated for version 0.4.0.
+system/createrepo_c: Updated for version 0.15.5, Moved from network.
+system/dust: Updated for version 0.4.4.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.5.
+system/epson-inkjet-printer-escpr: Updated for version 1.7.7.
+system/fwupd: Fix building without uefi support.
+system/gcdemu: Fix permission checking.
+system/letsencrypt: Update README.
+system/lzop: New maintainer.
+system/ostree: Updated for version 2019.6.
+system/powerkit: Reflow README.
+system/pspg: Updated for version 2.6.6.
+system/rsyslog: Updated for version 8.2001.0.
+system/rxvt-unicode: Update Maintainer in SlackBuild
+system/skim: 0.7.0.
+system/splix: Marked as orphaned (no SBo maintainer)
+system/zfs-on-linux: Updated for version 0.8.3.
++--------------------------+
+Sun Jan 26 01:10:45 UTC 2020
+academic/gcalctool: Removed (see mate-calc).
+academic/xflr5: Updated for version 6.47.
+accessibility/espeak: Migrate jack-audio-connection-kit => jack.
+audio/DPF-Plugins: Add setcap.
+audio/SuperCollider: Migrate jack-audio-connection-kit => jack.
+audio/TiMidity++: Migrate jack-audio-connection-kit => jack.
+audio/a2jmidid: Migrate jack-audio-connection-kit => jack.
+audio/aeolus: Migrate jack-audio-connection-kit => jack.
+audio/aj-snapshot: Migrate jack-audio-connection-kit => jack.
+audio/alsa-plugin-jack: Migrate jack-audio-connection-kit => jack.
+audio/alsamodularsynth: Migrate jack-audio-connection-kit => jack.
+audio/amSynth: Migrate jack-audio-connection-kit => jack.
+audio/ardour: Migrate jack-audio-connection-kit => jack.
+audio/audacity: Migrate jack-audio-connection-kit => jack.
+audio/azr3: Migrate jack-audio-connection-kit => jack.
+audio/bristol: Migrate jack-audio-connection-kit => jack.
+audio/butt: Migrate jack-audio-connection-kit => jack.
+audio/calf: Migrate jack-audio-connection-kit => jack.
+audio/carla: Migrate jack-audio-connection-kit => jack.
+audio/chuck: Migrate jack-audio-connection-kit => jack.
+audio/clam: Fix jack2 build.
+audio/clam: Migrate jack-audio-connection-kit => jack.
+audio/connie: Migrate jack-audio-connection-kit => jack.
+audio/creox4: Migrate jack-audio-connection-kit => jack.
+audio/darkice: Migrate jack-audio-connection-kit => jack.
+audio/drumkv1: Migrate jack-audio-connection-kit => jack.
+audio/ecasound: Migrate jack-audio-connection-kit => jack.
+audio/fluidsynth: Migrate jack-audio-connection-kit => jack.
+audio/fmit: Migrate jack-audio-connection-kit => jack.
+audio/foo-yc20: Migrate jack-audio-connection-kit => jack.
+audio/fst: Migrate jack-audio-connection-kit => jack.
+audio/guitarix: Migrate jack-audio-connection-kit => jack.
+audio/helm: Migrate jack-audio-connection-kit => jack.
+audio/horgand: Migrate jack-audio-connection-kit => jack.
+audio/jaaa: Migrate jack-audio-connection-kit => jack.
+audio/jack-audio-connection-kit: Removed (renamed to jack1).
+audio/jack-keyboard: Migrate jack-audio-connection-kit => jack.
+audio/jack-rack: Migrate jack-audio-connection-kit => jack.
+audio/jack-tools: Migrate jack-audio-connection-kit => jack.
+audio/jack1: Added (realtime low-latency sound server).
+audio/jack2: Removed (renamed to jack).
+audio/jack: Added (realtime low-latency sound server).
+audio/jack_capture: Migrate jack-audio-connection-kit => jack.
+audio/jack_delay: Migrate jack-audio-connection-kit => jack.
+audio/jackmeter: Migrate jack-audio-connection-kit => jack.
+audio/jalv: Migrate jack-audio-connection-kit => jack.
+audio/jamin: Migrate jack-audio-connection-kit => jack.
+audio/jamulus: Migrate jack-audio-connection-kit => jack.
+audio/japa: Migrate jack-audio-connection-kit => jack.
+audio/jkmeter: Migrate jack-audio-connection-kit => jack.
+audio/jnoise: Migrate jack-audio-connection-kit => jack.
+audio/jokosher: Migrate jack-audio-connection-kit => jack.
+audio/jvmetro: Migrate jack-audio-connection-kit => jack.
+audio/klick: Migrate jack-audio-connection-kit => jack.
+audio/lash: Migrate jack-audio-connection-kit => jack.
+audio/lingot: Migrate jack-audio-connection-kit => jack.
+audio/linuxsampler: Migrate jack-audio-connection-kit => jack.
+audio/llcon: Migrate jack-audio-connection-kit => jack.
+audio/lmms: Migrate jack-audio-connection-kit => jack.
+audio/luppp: Migrate jack-audio-connection-kit => jack.
+audio/meterbridge: Migrate jack-audio-connection-kit => jack.
+audio/mhwaveedit: Migrate jack-audio-connection-kit => jack.
+audio/mididings: Migrate jack-audio-connection-kit => jack.
+audio/miniAudicle: Migrate jack-audio-connection-kit => jack.
+audio/muse: Migrate jack-audio-connection-kit => jack.
+audio/ngjackspa: Migrate jack-audio-connection-kit => jack.
+audio/non: Migrate jack-audio-connection-kit => jack.
+audio/padthv1: Migrate jack-audio-connection-kit => jack.
+audio/patchage: Migrate jack-audio-connection-kit => jack.
+audio/pd: Migrate jack-audio-connection-kit => jack.
+audio/pd_mrpeach: Migrate jack-audio-connection-kit => jack.
+audio/qjackctl: Migrate jack-audio-connection-kit => jack.
+audio/qm-vamp-plugins: Remove atlas from REQUIRES.
+audio/qmidiarp: Migrate jack-audio-connection-kit => jack.
+audio/qmidinet: Migrate jack-audio-connection-kit => jack.
+audio/qmmp-plugin-pack-qt5: Updated for version 1.3.1.
+audio/qmmp-qt5: Updated for version 1.3.6.
+audio/qmmp: Migrate jack-audio-connection-kit => jack.
+audio/qtractor: Migrate jack-audio-connection-kit => jack.
+audio/rakarrack: Migrate jack-audio-connection-kit => jack.
+audio/rezound: Migrate jack-audio-connection-kit => jack.
+audio/rosegarden: Migrate jack-audio-connection-kit => jack.
+audio/samplv1: Migrate jack-audio-connection-kit => jack.
+audio/seq24: Migrate jack-audio-connection-kit => jack.
+audio/setBfree: Migrate jack-audio-connection-kit => jack.
+audio/sonic-visualiser: Migrate jack-audio-connection-kit => jack.
+audio/sooperlooper: Migrate jack-audio-connection-kit => jack.
+audio/specimen: Migrate jack-audio-connection-kit => jack.
+audio/synthv1: Migrate jack-audio-connection-kit => jack.
+audio/tap_plugins: Migrate jack-audio-connection-kit => jack.
+audio/tapiir: Migrate jack-audio-connection-kit => jack.
+audio/vmpk: Migrate jack-audio-connection-kit => jack.
+audio/vocoder: Migrate jack-audio-connection-kit => jack.
+audio/wineasio: Migrate jack-audio-connection-kit => jack.
+audio/xmms-jack: Migrate jack-audio-connection-kit => jack.
+audio/xwax: Migrate jack-audio-connection-kit => jack.
+audio/yoshimi: Migrate jack-audio-connection-kit => jack.
+audio/zita-ajbridge: Migrate jack-audio-connection-kit => jack.
+audio/zita-dpl1: Migrate jack-audio-connection-kit => jack.
+audio/zita-rev1: Migrate jack-audio-connection-kit => jack.
+audio/zynaddsubfx: Updated for version 1.18.2.
+desktop/Buku: Fixed MD5SUM.
+desktop/jgmenu: Updated for version 4.0.1.
+desktop/obapps: Add missing dependency.
+desktop/obmenu-generator: Updated for version 0.87.
+desktop/ssr: Migrate jack-audio-connection-kit => jack.
+desktop/xdg-desktop-portal: Add missing json-glib dependency.
+development/avra: Updated for version 1.4.1.
+development/dotnet-runtime: Updated for version 3.1.1.
+development/dotnet-sdk: Updated for version 3.1.101.
+development/gambas3: Fixed MD5SUM.
+development/gede: Updated for version 2.15.4.
+development/git-lfs: Updated for version 2.10.0.
+development/gnuradio: Migrate jack-audio-connection-kit => jack.
+development/hub: Updated for version 2.14.1.
+development/jdk11: Updated for version 11.0.6.
+development/jdk13: Updated for version 13.0.2.
+development/mcu8051ide: Fix homepage.
+development/obnc-libext: Updated for version 0.7.0.
+development/obnc: Updated for version 0.16.1.
+development/portaudio: Migrate jack-audio-connection-kit => jack.
+development/rtags: Updated for version 2.38.
+development/rustup: Updated MD5SUM.
+development/universal-ctags: Updated for version fefbad2
+games/FlightGear-data: Update DOWNLOAD url.
+games/RetroArch: Migrate jack-audio-connection-kit => jack.
+games/doomseeker: Updated for version 1.3+20200119_b623ab1.
+games/jfsw: Migrate jack-audio-connection-kit => jack.
+games/mednafen: Migrate jack-audio-connection-kit => jack.
+games/qtsixa: Migrate jack-audio-connection-kit => jack.
+games/stockfish: Updated for version 11.
+games/xroar: Migrate jack-audio-connection-kit => jack.
+gis/opencpn-plugin-oesenc: Updated for version 4.0.0.
+graphics/Blender: Migrate jack-audio-connection-kit => jack.
+graphics/fontforge: Updated for version 20190413.
+graphics/gscan2pdf: Added (A GUI to produce PDFs or DjVus).
+graphics/ralcgm: Fix download URL.
+graphics/teighafileconverter: Fix typo in script.
+graphics/vsxu: Migrate jack-audio-connection-kit => jack.
+ham/klog: Updated for version 0.9.8.1.
+libraries/aspnetcore-runtime: Updated for version 3.1.1.
+libraries/aubio: Migrate jack-audio-connection-kit => jack.
+libraries/frei0r: Disable opencv support.
+libraries/ftgl: Remove unused patches.
+libraries/hoel: updated for version 1.4.13
+libraries/id3lib: Add upstream patches.
+libraries/libbsd: Updated for version 0.10.0.
+libraries/libmirage: Updated for version 3.2.4.
+libraries/libxkbcommon: Updated for version 0.10.0.
+libraries/live555: Updated for version 2020.01.24
+libraries/orcania: updated for version 2.1.0
+libraries/slv2: Migrate jack-audio-connection-kit => jack.
+libraries/spdlog: Upgraded for version 1.5.0.
+libraries/stk: Migrate jack-audio-connection-kit => jack.
+libraries/tDOM: Deal with badly-named download file.
+libraries/tcllib: Updated for version 1.20.
+libraries/ulfius: updated for version 2.6.5
+libraries/wxPython4: Updated for version 4.0.7.post2.
+libraries/yder: updated for version 1.4.9
+misc/asterixInspector: Update script.
+misc/protobuf3: Updated for version 3.11.2.
+multimedia/avidemux: Migrate jack-audio-connection-kit => jack.
+multimedia/dsmidiwifi: Migrate jack-audio-connection-kit => jack.
+multimedia/dssi: Migrate jack-audio-connection-kit => jack.
+multimedia/ffmpeg: Migrate jack-audio-connection-kit => jack.
+multimedia/flowblade: Migrate jack-audio-connection-kit => jack.
+multimedia/gmidimonitor: Migrate jack-audio-connection-kit => jack.
+multimedia/gpac: Migrate jack-audio-connection-kit => jack.
+multimedia/mpv: Fix typo in README.
+multimedia/mpv: Migrate jack-audio-connection-kit => jack.
+multimedia/mythtv: Migrate jack-audio-connection-kit => jack.
+multimedia/obs-studio: Migrate jack-audio-connection-kit => jack.
+multimedia/openshot: Migrate jack-audio-connection-kit => jack.
+multimedia/shotcut: Migrate jack-audio-connection-kit => jack.
+multimedia/vcdimager: Fix script.
+multimedia/vlc: Migrate jack-audio-connection-kit => jack.
+multimedia/x265: Handle badly-named download file.
+multimedia/xjadeo: Migrate jack-audio-connection-kit => jack.
+network/Pafy: Add youtube-dl to REQUIRES.
+network/acme.sh: Updated for version 2.8.5.
+network/arping: Updated for version 2.20.
+network/basilisk: Migrate jack-audio-connection-kit => jack.
+network/brave-browser: Updated for version 1.2.43.
+network/clipgrab: Updated for version 3.8.10.
+network/ctorrent: Fix script.
+network/elinks: Fix gopher HTML entities
+network/ipvsadm: Updated for version 1.31.
+network/nordvpn: Updated for version 3.6.0.
+network/nsd: Updated for version 4.2.4.
+network/openresolv: Fix copying README file
+network/opera-developer: Updated for version 67.0.3574.0.
+network/opera: Updated for version 66.0.3515.44.
+network/palemoon-bin: Updated for version 28.8.1.
+network/palemoon: Migrate jack-audio-connection-kit => jack.
+network/palemoon: Updated for version 28.8.1.
+network/riot-web: Updated for version 1.5.7
+network/sic: Updated for version 1.2.
+network/signal-desktop: Updated for version 1.29.6.
+network/sshpass: Updated for version 1.06.
+network/telegram: Updated for version 1.9.5.
+network/tinyproxy: Updated for version 1.10.0.
+network/wireguard-linux-compat: Updated for version 0.0.20200121.
+network/wireguard-tools: Updated for version 1.0.20200121.
+network/wireshark: Updated for version 3.2.1.
+network/yadifa: Updated for version 2.3.9_8497.
+network/yle-dl: Update DEP.
+network/zeek: Updated for version 3.0.1.
+office/calibre-bin: Updated for version 4.9.1.
+office/keepassxc: Updated for version 2.5.3.
+office/mate-calc: Added (calculator for the MATE desktop).
+office/pdfstudio: Updated for version 2019.2.1.
+office/pdfstudioviewer: Updated for version 2019.2.1.
+office/timew: Fixed MD5SUM.
+office/treesheets: Fixed MD5SUM.
+perl/perl-CPANPLUS: Updated for version 0.9906.
+perl/perl-GooCanvas2: Added (Perl binding for GooCanvas2 widget).
+perl/perl-Image-Magick: Added (Perl interface to ImageMagick).
+perl/perl-Math-LongDouble: Updated for version 0.21.
+perl/perl-audio-sndfile: Added (perl bindings for libsndfile).
+python/django-debug-toolbar: Updated REQUIRES.
+python/dnspython: Update README
+python/pycryptodome: Removed (See pycryptodomex).
+python/pycryptodomex: Added (Python Cryptography Toolkit).
+python/python-configargparse: Updated for version 1.0.
+python/python-neovim: Add missing pytest-runner dependency.
+python/python3-multidict: Updated for version 4.7.4.
+python/pytz: Add python3 support by default.
+python/thonny: Updated for version 3.2.7.
+system/JetBrainsMono: Added (a typeface for developers).
+system/alacritty: Updated for version 0.4.1.
+system/ansible: Updated for version 2.9.4.
+system/cdemu-client: Updated for version 3.2.4.
+system/cdemu-daemon: Updated for version 3.2.4.
+system/dosbox-dev: updated for version 0.74.3.r4308
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.4.
+system/gcdemu: Updated for version 3.2.4.
+system/laptop-mode-tools: Updated for version 1.73.1.
+system/letsencrypt: Updated for version 1.1.0.
+system/nvidia-legacy340-kernel: Remove unneeded patch.
+system/s6-rc: Update script.
+system/sddm: Fix sddm homedir detection.
+system/st: Include terminfo files in package.
+system/unar: Fix MD5SUM.
+system/usermin: Updated for version 1.791.
+system/vhba-module: Updated for version 20200106.
+system/webmin: Updated for version 1.941.
+system/wine-staging: Updated for version 5.0.
++--------------------------+
+Sat Jan 18 05:26:22 UTC 2020
+academic/WordNet: Assume maintainership
+academic/antiprism: Assume maintainership
+academic/coq: Updated for version 8.9.0.
+academic/tabix: Removed.
+academic/wehi-weasel: Updated for version 3.6.11.8.
+academic/xcircuit: Assume maintainership
+academic/zotero: Updated for version 5.0.81.
+audio/alsa-plugin-jack: Fix README.
+audio/alsa-plugin-jack: Fix download link.
+audio/audioconvert: Assume maintainership
+audio/azr3: Convert slack-desc to ASCII.
+audio/calf: Demote lash from required to optional dep.
+audio/deezer-desktop-for-linux: Removed (No longer maintained upstream).
+audio/drumkv1: Updated for version 0.9.12.
+audio/ecasound: Updated for version 2.9.3.
+audio/faac: Updated for version 1.30.
+audio/faad2: Updated for version 2.9.1.
+audio/horgand: Fix first-time startup.
+audio/jack2: Remove --profile build option.
+audio/ngjackspa: Fix homepage and download.
+audio/padthv1: Updated for version 0.9.12.
+audio/samplv1: Updated for version 0.9.12.
+audio/synthv1: Updated for version 0.9.12.
+audio/tapiir: Fix homepage and download.
+audio/tta: Assume maintainership
+audio/tuxguitar: Make .desktop file validate.
+audio/xcfa: Assume maintainership
+desktop/Buku: Assume maintainership.
+desktop/draco: Convert slack-desc to ASCII.
+desktop/gnome-menus: New maintainer.
+desktop/xfce4-datetime-plugin: Updated for version 0.8.0.
+development/Fennel: Updated for version 0.3.2.
+development/android-studio: Make .desktop file validate.
+development/atom-amd64: Convert slack-desc to ASCII.
+development/avr-binutils: Assume maintainership
+development/avra: Assume maintainership
+development/avrdude: Assume maintainership
+development/bless: Convert slack-desc to ASCII.
+development/cgit: Updated for version 1.2.2.
+development/composer: Updated for version 1.9.2
+development/gambas3: Updated for version 3.14.3.
+development/google-go-lang: Updated to version go1.13.5.
+development/kakoune: Convert slack-desc to ASCII.
+development/kotlin: Convert slack-desc to ASCII.
+development/neovim: Convert slack-desc to ASCII.
+development/netbeans: Make .desktop file validate.
+development/nwjs: Convert slack-desc to ASCII.
+development/portaudio: Fix builds with jack/jack2.
+development/re2c: Updated for version 1.3.
+development/setedit: Added (a friendly text editor).
+development/smartsvn: Make .desktop file validate.
+development/snappy: Return to original maintainer.
+development/sublime_merge: Make .desktop file validate.
+development/swi-prolog: Updated for version 8.0.3.
+development/textadept: Updated for version 10.8.
+development/tidy-html5: Convert slack-desc to ASCII.
+development/vscode-bin: Make .desktop file validate.
+development/zope.interface: Add python3 support.
+games/abuse: Assume maintainership
+games/antares: Moved from graphics.
+games/lbreakout2: Assume maintainership
+games/smokinguns: Assume maintainership
+games/vkQuake: Updated for version 1.04.0.
+graphics/icc_profiles: Added (Rec709 and ITU color management).
+graphics/icc_profiles_from_eci: Added (ECI ICC profiles).
+graphics/iccprofiles: Removed (see icc_profiles).
+graphics/vuescan: Updated for version 9.7.20.
+ham/direwolf: Updated for version 1.5.
+ham/hamlib: New maintainer.
+ham/qrq: New maintainer.
+ham/tlf: New maintainer.
+ham/wsjtx: New maintainer.
+ham/xdemorse: Make .desktop file validate.
+ham/xdx: New maintainer.
+ham/xlog: New maintainer.
+haskell/haskell-microlens: Convert slack-desc to ASCII.
+haskell/haskell-pipes: Added (stream processing library).
+lbraries/librhtv: Fix build.
+libraries/SimGear: Fix DOWNLOAD url.
+libraries/antlr4: Updated for version 4.8.
+libraries/configobj: Updated for version 5.0.6, python3 support.
+libraries/ftgl: Disable docs to avoid texlive.
+libraries/hdf5: Updated for version 1.8.21.
+libraries/leptonica: Updated for version 1.79.0.
+libraries/libdbusmenu: Updated for version 18.10.20180917~bzr492.
+libraries/libmp4v2: Updated for version 20191108_9084868.
+libraries/libthai: Convert slack-desc to ASCII.
+libraries/libxml++3: Updated for version 3.2.0.
+libraries/live555: Updated for version 2020.01.11
+libraries/ntl: Updated for version 11.4.3.
+libraries/pyPEG2: Assume maintainership
+libraries/zope.component: Add python3 support.
+libraries/zope.event: Add python3 support.
+misc/cksfv: Assume maintainership
+misc/goldencheetah: Updated for version 3.5.
+misc/projectM: Fix build against latest ftgl.
+multimedia/flashplayer-plugin: Updated for version 32.0.0.314.
+multimedia/obs-studio: Updated for version 24.0.6
+multimedia/pepperflash-plugin: Updated for version 32.0.0.314.
+network/AdGuardHome: Updated for version 0.100.9.
+network/NetworkManager-pptp: Updated for version 1.2.8.
+network/acme.sh: Updated for version 2.8.4.
+network/arping: Assume maintainership
+network/brave-browser: Updated for version 1.2.42.
+network/dropbox: Updated for version 88.4.172.
+network/fping6: Removed. See fping3 (soon to be fping)
+network/fping: Removed. See fping3 (soon to be fping)
+network/ipvsadm: Assume maintainership
+network/keepalived: Assume maintainership
+network/lxi-tools: Make .desktop file validate.
+network/nbtscan: Assume maintainership
+network/neomutt: Fix script.
+network/pptp: Assume maintainership
+network/prosody-mod-http-upload: Updated for version hg3838.
+network/prosody-mod-smacks: Updated for version hg3841.
+network/qbittorrent-qt5: Fix email.
+network/qbittorrent-qt5: Remove unwanted file
+network/remmina: Make .desktop file validate.
+network/sabnzbd: Updated for version 2.3.9.
+network/sshpass: Assume maintainership
+network/telegram: Updated for version 1.9.4.
+network/tinyproxy: Assume maintainership
+network/tor-browser: Updated for version 9.0.4.
+network/vivaldi: Updated for version 2.10.1745.27.
+network/vnatst: Updated for version 2.5.
+network/wireguard-linux-compat: Fixed build for non-running kernel
+network/wireguard-tools: Fix script.
+network/xl2tpd: Assume maintainership
+network/yadifa: Convert slack-desc to ASCII.
+network/zoom-linux: Convert slack-desc to ASCII.
+office/aspell6-es: Convert slack-desc to ASCII.
+office/pandoc-bin: Updated for version 2.9.1.1.
+office/timew: Updated for version 1.2.0.
+office/treesheets: Assume maintainership
+perl/perl-IO-Interface: Assume maintainership
+perl/perl-IO-String: Assume maintainership
+perl/perl-Math-BigInt-GMP: Assume maintainership
+perl/perl-Math-BigInt: Assume maintainership
+perl/perl-Path-Tiny: Updated for version 0.110.
+perl/perl-Template-Toolkit: Updated for version 3.006.
+perl/perl-net-mpd: Added (perl Module).
+python/Unidecode: Add python3 support.
+python/imagesize: Convert slack-desc to ASCII.
+python/mock: Add python3 support.
+python/pbr: Add python3 support.
+python/ptyprocess: Convert slack-desc to ASCII.
+python/pycryptodome: Add Python 3 support.
+python/pyrfc3339: Add python3 support.
+python/python-augeas: Add python3 support.
+python/python-d2to1: Convert slack-desc to ASCII.
+python/python-parsedatetime: Add python3 support.
+python/python-stsci.distutils: Convert slack-desc to ASCII.
+python/python3-aiohttp-socks: Updated for version 0.3.4.
+python/python3-django: Convert slack-desc to ASCII.
+python/python3-ptyprocess: Convert slack-desc to ASCII.
+python/testtools: Convert slack-desc to ASCII.
+python/typed_ast: Updated for version 1.4.1.
+ruby/ruby-build: Updated for version 20200115.
+ruby/rubygem-ruby_parser: Convert slack-desc to ASCII.
+sbo/scripts: Email changes
+system/ack: Updated for version 3.3.1.
+system/anacron: Marked as orphaned (no SBo maintainer)
+system/ansible: Updated for version 2.9.3.
+system/chronograf: Convert slack-desc to ASCII.
+system/coolkey: Assume maintainership
+system/disk-manager: Make .desktop file validate.
+system/flashcards: Fix app failing to start.
+system/magiic: Updated for version 0.3.
+system/nologind: Convert slack-desc to ASCII.
+system/nvidia-legacy340-driver: Updated for version 340.108.
+system/nvidia-legacy340-kernel: Updated for version 340.108.
+system/opensc: Updated for version 0.20.0.
+system/pcsc-lite: Updated for version 1.8.26.
+system/posixovl: Convert slack-desc to ASCII.
+system/powerkit: Convert slack-desc to ASCII.
+system/rEFInd: Added (An EFI boot manager utility).
+system/rdiff-backup: Assume maintainership
+system/s6-linux-init: Added (tools to create s6-based init system).
+system/system76-power: Updated for version 1.1.2.
+system/telegraf: Convert slack-desc to ASCII.
+system/tinyterm: Updated for version 0.6.0.
+system/ttf-dark-courier: Convert slack-desc to ASCII.
+system/ttf-ibm-plex: Updated for version 4.0.2.
+system/usermin: Updated for version 1.790.
+system/wine-staging: Assume maintainership
+system/xbrightness: Convert slack-desc to ASCII.
++--------------------------+
+Sun Jan 12 15:40:11 UTC 2020
+academic/FCSalyzer: Updated for version 0.9.18_alpha.
+academic/FreeFem: Updated for version 4.4.3.
+academic/HMMER: Updated for version 3.3.
+academic/ITK: Fix slack-desc.
+academic/MetaPhlAn2: Updated for version 2.9.5.3.
+academic/PhyML: Updated for version 3.3.20190909.
+academic/RepeatMasker: Updated for version 4.1.0.
+academic/SU2: Fix slack-desc.
+academic/TreeGraph: Updated for version 2.15.0_887_beta.
+academic/ViennaRNA: Fix slack-desc.
+academic/bcftools: Remove template comment from script.
+academic/cblas: Updated for version 3.9.0.
+academic/cistrome-CEAS: updated download link and misc cleanups
+academic/cistrome-MACS: updated homepage and misc cleanups
+academic/cvc4: Fix slack-desc.
+academic/diamond: Updated for version 0.9.29.
+academic/eprover: Updated for version 2.4.
+academic/equalx: Add .desktop and patch
+academic/fiji: Updated for version 20191216_2110.
+academic/io_lib: Updated for version 1.14.11.
+academic/lapacke: Updated for version 3.9.0.
+academic/latex2html: Fix slack-desc.
+academic/mafft: Updated for version 7.453.
+academic/meep: Fix slack-desc.
+academic/meep: Make sbolint happy.
+academic/megax: Updated for version 10.1.6_1.
+academic/meme-db-gomo: Added (MEME Suite GOMo databases)
+academic/meme-db-motif: Added (MEME Suite motif databases)
+academic/meme-db-tgene: Added (MEME Suite T-gene databases)
+academic/meme-suite: Updated for version 5.1.0.
+academic/ncbi-blast+: Updated for version 2.10.0.
+academic/pcalc: Remove empty doinst.sh.
+academic/qucs: Updated for version 0.0.19.
+academic/seaview: Updated for version 5.0.
+academic/spades: Updated for version 3.14.0.
+academic/stringtie: Remove template comment from script.
+academic/suitesparse: Remove template comment from script.
+academic/t_coffee: Updated for version 13.41.0_git28bdc39.
+academic/treebest-ensembl: Added (Tree Building).
+academic/treerecs: Added (a tree reconciliation tool).
+academic/treeviewx: Updated for version 1.18.4.2171_ac2afe5f8.
+academic/trimmomatic: Remove template comment from script.
+academic/ugene: Updated for version 33.
+academic/wehi-weasel: Updated for version 3.6.0.18.
+academic/z3: Updated for version 4.8.7.
+accessibility/sct: Fix slack-desc.
+audio/FAudio: Updated for version 20.01.
+audio/abcde: Updated for version 2.9.3.
+audio/aseqview: Fix download URL.
+audio/butt: Updated for version 0.1.18
+audio/fabla: Updated for version 1.3.2
+audio/libebur128: Updated for version 1.2.4
+audio/luppp: Updated for version 1.0.1
+audio/non: Updated for version 20190925
+audio/ntk: Updated for version 20190925
+audio/soxr: Updated for version 0.1.3
+desktop/PyPanel: Update script.
+desktop/Qogir-icon-theme: Added (A colorful design icon theme)
+desktop/arc-theme-Red: Fix slack-desc.
+desktop/candle: Fix slack-desc.
+desktop/evilwm: Remove template comments from script.
+desktop/flatpak: update README for audio setup
+desktop/gntp-send: Remove template comments from script.
+desktop/jgmenu: Updated for version 4.0.
+desktop/light: Remove template comments from script.
+desktop/papirus-icon-theme: Rename doinst.sh.in => doinst.sh.
+desktop/plank: Updated for version 0.11.89.
+desktop/weston: Fix slack-desc.
+desktop/xdm-slackware-theme: Updated for version 2020.0101.
+desktop/xearth: Fix slack-desc.
+desktop/xtrlock: Use https URLs.
+development/adms: Added (An automatic device model synthesizer).
+development/adoptopenjdk: Remove template comments from script.
+development/amazon-corretto: Updated for version 8.232.09.1.
+development/android-studio: Fix slack-desc.
+development/bed: Fix homepage/download URLs.
+development/camlp5: Updated for version 7.10.
+development/chicken: Fix slack-desc.
+development/d-tools: Updated for version 2.090.0
+development/dmd: Updated for version 2.090.0
+development/edb-debugger: Fix PRGNAM in script.
+development/editorconfig-core-c: Fix slack-desc.
+development/ex-vi: Don't override environment CC.
+development/gn: Added (Meta-build system).
+development/gprolog: Remove template comments from script.
+development/hhvm: Remove template comments from script.
+development/javacc: Remove template comments from script.
+development/mawk: Updated for version 1.3.4_20200106.
+development/mg-troglobit: Fix slack-desc.
+development/nodejs-bin: Fix slack-desc.
+development/openjdk7: Move PRGNAM and friends to top of script.
+development/p4v: Fix typo in script.
+development/p4v: Make sbolint happy.
+development/pahole: Fix slack-desc.
+development/peg: Fix slack-desc.
+development/postman: Fix slack-desc.
+development/processing: Updated for version 3.5.3.
+development/regina-rexx: Switch to i586.
+development/simulavr: Remove template comments from script.
+development/universal-ctags: Updated for version feffe43
+development/zope.sqlalchemy: Remove template comments from script.
+development/zulu-openjdk-lts: Fix slack-desc.
+games/FlightGear-data: Updated for version 2019.1.2.
+games/FlightGear: Updated for version 2019.1.2.
+games/SameBoy: Updated for version 0.12.3.
+games/ZEsarUX: Fix slack-desc.
+games/ags: updated for version 3.5.0.23
+games/bluez-sixaxis: Fix slack-desc.
+games/dgen: Remove template comments from script.
+games/fortune-slackware: Added (Slackware quotes for fortune).
+games/fortune_doctor_who: Updated for version 20150503.
+games/freeciv: updated for version 2.6.1
+games/goonies: Fix PRGNAM in script.
+games/larn: Updated for version 14.1.3.
+games/mame: Allow builds with unsupported gcc9.
+games/manaplus: Fix slack-desc.
+games/scid_vs_pc: Updated for version 4.21.
+games/sms_sdl: Fix icon.
+games/stone_soup: Updated for version 0.24.0.
+games/supertuxkart: Updated to version 1.1
+games/vegastrike: Move VERSION/BUILD/TAG to top of script.
+gis/geopy: Fix slack-desc.
+gis/ossim: Fix slack-desc.
+gis/proj: Fix .info file.
+gis/qgis: Updated for version 3.10.1.
+graphics/GPS: added information on how to use with 2.10 Flatpak
+graphics/GraphicsMagick: Updated for version 1.3.34.
+graphics/antares: Added (A tactical space combat game).
+graphics/azpainter: Remove template comments from script.
+graphics/dblatex: Fix missing bookmark package.
+graphics/dcraw: Remove template comments from script.
+graphics/draw.io: Fix slack-desc.
+graphics/flameshot: Fix slack-desc.
+graphics/fontmatrix: removed. No updates in 10 years, Python2 only.
+graphics/gcolor2: Changed category, updated script
+graphics/ipe: Added (The Ipe extensible drawing editor).
+graphics/maim: Fix slack-desc.
+graphics/psftools: Add comments about former doinst.sh.
+graphics/vuescan: Updated MD5SUMs.
+graphics/vulkan-sdk-bin: Fix slack-desc.
+ham/tqsl: Updated for version 2.5.1.
+haskell/haskell-zeromq4-haskell: Added (haskell binding for OMQ).
+libraries/Botan: Updated for version 2.13.0.
+libraries/QScintilla-qt5: Fix slack-desc.
+libraries/QScintilla-qt5: Set build concurrency.
+libraries/SimGear: Updated for version 2019.1.2.
+libraries/bamf: New maintainer.
+libraries/blas: Updated for version 3.9.0.
+libraries/fltk: Updated for version 1.3.5.
+libraries/fmt: Updated for version 6.1.2.
+libraries/frei0r: Force -std=c++11 to fix build.
+libraries/ftgl: Updated for version 2.4.0.
+libraries/glfw3: Updated for version 3.3.1.
+libraries/lapack: Updated for version 3.9.0.
+libraries/libc++: Updated for version 3.8.0.
+libraries/libgxps: Remove mention of nonexistent doinst.sh.
+libraries/libinput: Updated for version 1.15.0.
+libraries/liblangtag: Updated for version 0.6.3.
+libraries/libmigdb: Remove template comments from script.
+libraries/liborcus: Updated for version 0.15.3.
+libraries/liborocos-kdl: Add missing BUILD= to script.
+libraries/liborocos-kdl: Make BUILD respect environment.
+libraries/librhtv: Add back rhtv-config.
+libraries/librhtv: Fix slack-desc.
+libraries/libscca: Fix shebang, #/bin/sh => #!/bin/sh.
+libraries/libsigrok: Updated for version 0.5.2.
+libraries/libsigrokdecode: Updated for version 0.5.3.
+libraries/libsixel: Updated for version 1.8.5.
+libraries/libwnck3: New maintainer.
+libraries/live555: Updated for version 2020.01.10
+libraries/lua-readline: Fix slack-desc.
+libraries/lua-std._debug: Fix slack-desc.
+libraries/lua-std.normalize: Fix slack-desc.
+libraries/marisa: Fix slack-desc.
+libraries/med: Fix slack-desc.
+libraries/nv-codec-headers: Remove template comments from script.
+libraries/ode: Updated for version 0.16.
+libraries/olm: Added (olm and megolm cryptographic ratchets)
+libraries/opencv: Updated for version 4.2.0
+libraries/p4api: Fix typo in script.
+libraries/p4api: Make sbolint happy.
+libraries/qca-qt5: Fix shebang, #!/bin/bash => #!/bin/sh.
+libraries/skalibs: Updated for version 2.9.1.0.
+libraries/spdlog: Updated for version 1.4.2.
+libraries/tcllib: New maintainer.
+libraries/vcglib: Fix slack-desc and actually install it.
+misc/OSCAR: Fix slack-desc, remove template comments from script.
+misc/dmg2img: Remove template comments from script.
+misc/igal2: Updated for version 2.3.
+misc/lastpass-cli: Fix slack-desc.
+misc/twa: Fix slack-desc.
+multimedia/audio-recorder: Fix slack-desc.
+multimedia/ccextractor: Fix slack-desc.
+multimedia/get_iplayer: Updated for version 3.24.
+multimedia/gtk-recordmydesktop: New maintainer
+multimedia/plexmediaserver: Updated for v 1.18.4.2171_ac2afe5f8.
+multimedia/smplayer: Updated for version 19.10.2.
+multimedia/vkeybd: Fix download and homepage URLs.
+multimedia/vlc: Add RUNASROOT & LIBAOM options
+multimedia/vlc: Make sbolint happy.
+multimedia/youtube-viewer: Updated for version 3.7.0.
+network/NetworkManager-l2tp: Fix slack-desc.
+network/SpiderOakONE: Actually install slack-desc.
+network/WhatWeb: Fix slack-desc.
+network/acme.sh: Fix shebang, #!/bin/bash => #!/bin/sh.
+network/cni-plugins: Fix slack-desc.
+network/dmitry: Fix slack-desc and TAG.
+network/elemental-ircd: Remove template comments from script.
+network/elinks: Add gopher patch for html entities
+network/geomyidae: Use http HOMEPAGE, not gopher.
+network/gnome-bluetooth: Fix slack-desc.
+network/googler: Updated for version 4.0.
+network/guacamole-client: Fix slack-desc.
+network/guacamole-server: Fix slack-desc.
+network/hipchat2: Removed.
+network/hipchat: Removed.
+network/igmpproxy: Fix slack-desc.
+network/inadyn: Updated for version 2.5.
+network/insync: Updated for version 3.0.27.40677.
+network/iptv-analyzer: Remove template comments from script.
+network/macchanger: Updated for version 1.7.0
+network/mattermost-desktop: Updated for version 4.3.2
+network/mkvserver_mk2: Fix slack-desc.
+network/onedrive: Fix slack-desc.
+network/opera-developer: Updated for version 67.0.3564.0.
+network/opera: Updated for version 66.0.3515.27.
+network/pmacct: Fix slack-desc.
+network/prosody-mod-smacks-offline: Fix slack-desc.
+network/prosody-mod-smacks: Fix slack-desc.
+network/prosody-mod-vcard-muc: Fix slack-desc.
+network/qutebrowser-tox: Updated for version 1.9.0.
+network/qutebrowser: Updated for version 1.9.0.
+network/rspamd: Fix slack-desc.
+network/s-nail: Updated for version 14.9.16.
+network/slimjet: Updated for version 25.0.2.0.
+network/slirp4netns: Fix md5sum
+network/surfraw: Fix broken manpage symlinks.
+network/swaks: Fix slack-desc.
+network/torsocks: Updated for version 2.3.0.
+network/uget-chrome-wrapper: Remove template comments from script.
+network/varnish: Updated for version 6.3.1.
+network/vivaldi: Updated for version 2.10.1745.23 + new maintainer.
+network/wireguard-linux-compat: Updated for version 0.0.20200105.
+network/wireguard-tools: Updated for version 1.0.20200102.
+network/youtube-dl: Updated for version 2020.01.01.
+office/adobe-reader: Document ADOBE_LANG in README.
+office/bibtex2html: Make sbolint happy.
+office/fop: Update README.
+office/keepassxc: Updated for version 2.5.2.
+office/pdfstudioviewer: Fix slack-desc.
+office/texlive: Fix slack-desc.
+office/xournal: Updated for version 0.4.8.
+office/xournalpp: Fix slack-desc.
+perl/perl-Audio-FLAC-Header: Fix PRGNAM in script.
+perl/perl-Class-Gomor: Remove template comments from script.
+perl/perl-Class-Mix: Added (Perl dynamic class mixing).
+perl/perl-Config-File: Remove template comments from script.
+perl/perl-Crypt-Eksblowfish: Added (Perl Eksblowfish password hash).
+perl/perl-Data-Compare: Remove template comments from script.
+perl/perl-File-Slurp: Remove template comments from script.
+perl/perl-Hook-LexWrap: Fix slack-desc.
+perl/perl-Net-IPv4Addr: Remove template comments from script.
+perl/perl-Net-IPv6Addr: Remove template comments from script.
+perl/perl-Net-RawIP: Remove template comments from script.
+perl/perl-Net-SNMP: Remove template comments from script.
+perl/perl-Net-Server: Remove template comments from script.
+perl/perl-Net-Telnet: Remove template comments from script.
+perl/perl-Set-IntSpan: Fix slack-desc.
+perl/perl-Template-Toolkit: Updated for version 3.003.
+perl/perl-data-messagepack: Added (data structure <--> MessagePack converter)
+perl/perl-data-section-simple: Added (extracts data from __DATA__ section)
+perl/perl-http-tiny: Added (small, simple, correct HTTP/1.1 client)
+perl/perl-inc-module-install: Added (@INC refresher)
+perl/perl-lwp-useragent-cached: Updated for version 0.08.
+python/CommonMark: Fix slack-desc.
+python/Markups: Fix slack-desc.
+python/Pygments: Updated for version 2.5.2.
+python/Routes: Fix slack-desc.
+python/TurboGears2: Fix slack-desc.
+python/Whoosh: Fix slack-desc.
+python/crcmod: Fix slack-desc.
+python/django-debug-toolbar: Added (The Django Debug Toolbar).
+python/ebaysdk: Fix slack-desc.
+python/esptool: Added (Utility to work with ESP8266 and ESP32).
+python/ipython: Rename executable to ipython2.
+python/lockfile: Fix typo in script, i486=>i586.
+python/numexpr: Updated for version 2.7.1.
+python/python-iso3166: Updated for version 1.0.1.
+python/python-xlib: Updated for version 0.26.
+python/python-zipp: Fix slack-desc.
+python/python3-certifi: Fix slack-desc.
+python/python3-ipython: Updated for version 7.11.1.
+python/python3-itsdangerous: Fix slack-desc.
+python/python3-kiwisolver: Fix slack-desc.
+python/python3-packaging: Updated for version 20.0.
+python/python3-pandas: Fix PRGNAM in script.
+python/python3-pythondialog: Updated for version 3.5.1.
+python/python3-wcwidth: Updated for version 0.1.8.
+python/recommonmark: Fix slack-desc.
+python/rencode: Fix slack-desc.
+python/scikit-learn: Updated for version 0.22.1.
+python/send2trash: Fix slack-desc.
+python/sphinxcontrib-jsmath: Fix shebang.
+python/sqlalchemy-migrate: Updated for version 0.13.0.
+python/thonny: Updated for version 3.2.6.
+python/xarray: Fix md5sum.
+python/zeep: Fix slack-desc.
+system/apparmor: Remove template comments from script.
+system/chkrootkit: Make sbolint happy.
+system/chkrootkit: Updated for version 0.53.
+system/chronograf: Updated for version 1.7.17.
+system/cnijfilter2: Updated for version 5.90.1.
+system/ded: Updated for version 20191226.
+system/dget: Updated for version 2.19.7.
+system/docker: Indentation in script.
+system/dosbox-dev: updated for version 0.74.3.r4305
+system/dosbox-x: Updated for version 0.82.25.
+system/execline: Updated for version 2.5.3.0.
+system/fatrace: Updated for version 0.15.
+system/fcron: Switch to i586.
+system/fish: New maintainer.
+system/fuse3: Update to version 3.9.0.
+system/gigolo: Remove template comments from script.
+system/ipmitool: Updated for version 1.8.18.
+system/isight-firmware-tools: New maintainer.
+system/jdupes: updated for version 1.14.0
+system/komparator4: New maintainer.
+system/listpkg: Update DOWNLOAD and HOMEPAGE urls.
+system/logwatch: Fix shebang.
+system/magiic: Added (Simple front for Slackpkg).
+system/newLd: Fix shebang.
+system/newLd: Remove template comments from script.
+system/nordvpn: Updated for version 3.6.0.
+system/noto-emoji: Fix VERSION in script.
+system/noto-emoji: Fix script.
+system/nvme-cli: Updated for version 1.10.1.
+system/passwordsafe: Updated for version 1.09.0.
+system/pce: Fix VERSION in script.
+system/pigz: Updated for version 2.4
+system/pixma: Fix VERSION in script.
+system/pwman: Added (an NCurses password management program)
+system/s6-rc: Added (service manager for s6-based systems).
+system/s6: Updated for version 2.9.0.1.
+system/saleae-logic: Fix slack-desc, install doinst.sh.
+system/scangearmp2: Added (Frontend GUI for Canon Printers)
+system/siji-font: Fix VERSION in script.
+system/socketcand: Install doinst.sh.
+system/stress-ng: Fix TAG in script.
+system/system76-io-dkms: Change delimiter in sed (sbolint).
+system/system76-power: Remove template comments from script.
+system/telegraf: Updated for version 1.13.1.
+system/ufiformat: New maintainer.
+system/uhubctl: Remove template comments from script.
+system/unar: Updated for version 1.10.7.
+system/vifm: Tighten up beta version check.
+system/worker: Fix MD5SUM.
++--------------------------+
 Fri Jan  3 13:06:03 UTC 2020
 academic/bcftools: Updated for version 1.10.2.
 academic/bowtie2-legacy: Fixed PRGNAM in build script.

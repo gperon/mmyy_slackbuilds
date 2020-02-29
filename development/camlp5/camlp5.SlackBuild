@@ -1,7 +1,5 @@
 #!/bin/sh
 #
-# Slackware build script for camlp5
-#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -14,6 +12,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Slackware build script for camlp5
 
 # Written by adaptr (jeroen@adaptr.nl)
 # Rewrite for updated camlp5 Panagiotis Nikolaou, Culver City, CA
@@ -81,7 +81,7 @@ find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CHANGES LICENSE MODE README* $PKG/usr/doc/$PRGNAM-$VERSION/
+cp -a CHANGES LICENSE MODE README.md $PKG/usr/doc/$PRGNAM-$VERSION/
 
 ## Build TeX, PS, PDF, TeXinfo and HTML Documentation
 cd doc/htmlp

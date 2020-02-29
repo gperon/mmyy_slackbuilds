@@ -2,7 +2,8 @@
 
 # Slackware build script for CoolReader
 
-# Copyright 2011-2012  Fridrich von Stauffenberg <cancellor2@gmail.com>
+# Copyright 2011-2012  Fridrich von Stauffenberg <email removed>
+# Copyright 2020       B. Watson <yalhcru@gmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,12 +23,23 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Upsteam url: https://sourceforge.net/p/crengine/crengine/ci/master/tree/
+# 20200126 bkw, BUILD=2:
+# - take over maintenance
+# - i486 => i586
+# - make .desktop file validate
+# - fix documetn => document typo
+# - add supported filetypes to README and slack-desc
+# - save/load settings (.ini file) to ~/.cr3, not /usr/share/cr3.
 
 PRGNAM=coolreader
-VERSION=${VERSION:-20160825_d8a3a1b}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-3.0.56}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
+
+ORIG_PRGNAM=cr3
+ORIG_VERSION=$VERSION-7
+ORIG_DIRNAME=cr$ORIG_VERSION
+ORIG_FILENAME=${ORIG_PRGNAM}_$VERSION.orig.tar.gz
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -56,44 +68,45 @@ else
   LIBDIRSUFFIX=""
 fi
 
-ORIG_PRGNAM=cr3
-
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
-cd $PRGNAM-$VERSION
+rm -rf $ORIG_DIRNAME
+tar xvf $CWD/$ORIG_FILENAME
+cd $ORIG_DIRNAME
 chown -R root:root .
-find -L . \
- \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-  -o -perm 511 \) -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
-  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+# Fix upstream typo
+sed -i 's,documetn,document,g' cr3qt/src/*.ui cr3qt/src/i18n/*.ts
+
+# Don't try to load/save .ini file from /usr/share
+patch -p1 < $CWD/inifile.diff
 
 mkdir -p build
 cd build
 cmake \
-  -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-  -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-  -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DMAX_IMAGE_SCALE_MUL=2 \
-  -DDOC_DATA_COMPRESSION_LEVEL=3 \
-  -DDOC_BUFFER_SIZE=0x1400000 \
-  -DGUI=QT ..
+  -D CMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+  -D CMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+  -D CMAKE_INSTALL_PREFIX=/usr \
+  -D LIB_SUFFIX=${LIBDIRSUFFIX} \
+  -D CMAKE_BUILD_TYPE=Release \
+  -D MAX_IMAGE_SCALE_MUL=2 \
+  -D DOC_DATA_COMPRESSION_LEVEL=3 \
+  -D DOC_BUFFER_SIZE=0x1400000 \
+  -D GUI=QT ..
 make VERBOSE=1
 make install DESTDIR=$PKG
 cd ..
 
-find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | \
-  grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+strip $PKG/usr/bin/$ORIG_PRGNAM
 
 mkdir -p $PKG/usr/man
 mv $PKG/usr/share/man/* $PKG/usr/man
 rm -rf $PKG/usr/share/man
+
+sed -i '/Icon/s|\.png||' $PKG/usr/share/applications/$ORIG_PRGNAM.desktop
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv $PKG/usr/share/doc/$ORIG_PRGNAM/* $PKG/usr/doc/$PRGNAM-$VERSION

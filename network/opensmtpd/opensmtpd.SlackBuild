@@ -3,7 +3,7 @@
 # Slackware build script for opensmtpd
 
 # Copyright 2013-2014  Robby Workman, Northport, Alabama, USA
-# Copyright 2015-2018  Richard Narron, California, USA
+# Copyright 2015-2020  Richard Narron, California, USA
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +24,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=opensmtpd
-VERSION=${VERSION:-6.6.1p1}
+VERSION=${VERSION:-6.6.4p1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -92,8 +92,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-#cat $CWD/ca-c-patch | patch -p0
-
 CFLAGS="$SLKCFLAGS -D_DEFAULT_SOURCE" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
@@ -137,10 +135,16 @@ ln -s smtpctl $PKG/usr/sbin/makemap
 mkdir -p $PKG/etc/rc.d
 cat $CWD/rc.opensmtpd > $PKG/etc/rc.d/rc.opensmtpd.new
 
-# Don't clobber the config file
+# copy original smtpd.conf file
+cp -p $PKG/etc/opensmtpd/smtpd.conf $PKG/etc/opensmtpd/smtpd.conf.upstream.default
+
+# Don't clobber the existing config file
 mv $PKG/etc/opensmtpd/smtpd.conf $PKG/etc/opensmtpd/smtpd.conf.new
 # and reflect the correct path to aliases file
-sed -i "s,/etc/mail/,/etc/opensmtpd/,g" $PKG/etc/opensmtpd/smtpd.conf.new
+# and use mbox instead of maildir
+sed -i -e "s,/etc/mail/,/etc/opensmtpd/,g" \
+       -e "s,maildir alias,mbox alias,g" \
+     $PKG/etc/opensmtpd/smtpd.conf.new
 
 # Create (but don't clobber) the aliases file
 cat $CWD/aliases > $PKG/etc/opensmtpd/aliases.new

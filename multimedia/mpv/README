@@ -6,8 +6,8 @@ features with the former projects while introducing many more. It
 supports a wide variety of video file formats, audio and video codecs,
 and subtitle types.
 
-optional: docutils, jack-audio-connection-kit, libbluray, libdvdnav,
-          libfdk-aac, libuchardet, lOpenAL, lua, mujs, oss, rubberband,
+optional: docutils, jack, libbluray, libdvdnav,
+          libfdk-aac, libuchardet, OpenAL, lua, mujs, oss, rubberband,
           SDL2, wayland, youtube-dl
 
 If docutils is not installed, the man pages will not be built/installed.
@@ -31,7 +31,7 @@ BUILD_OPTS prior to or at build time. For example, to enable cdda and
 openal, which are disabled by default, and to build with four jobs in
 parallel, you could use the following:
 
-~# BUILD_OPTS="--enable-cdda --enable-openal --jobs=4" sh mpv.SlackBuild
+~# BUILD_OPTS="--enable-cdda --enable-openal --jobs 4" sh mpv.SlackBuild
 
 The following list is meant as a note to myself of build options or
 optional dependencies currently unavailable via full Slackware

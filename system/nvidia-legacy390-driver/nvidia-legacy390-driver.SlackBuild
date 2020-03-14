@@ -289,6 +289,7 @@ cd $PKG/usr/lib$LIBDIRSUFFIX
    fi
    mv libGLESv1_CM.so.1.2.0 libGLESv1_CM.so.1.2.0-nvidia
    mv libGLESv2.so.2.1.0 libGLESv2.so.2.1.0-nvidia
+   rm -f libGL.la
    rm -f libEGL.so
    rm -f libGL.so
    rm -f libGL.so.1

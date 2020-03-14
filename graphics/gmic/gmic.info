@@ -1,9 +1,9 @@
 PRGNAM="gmic"
-VERSION="2.8.0"
+VERSION="2.8.4"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_2.8.0.tar.gz \
+DOWNLOAD="https://gmic.eu/files/source/gmic_2.8.4.tar.gz \
           https://github.com/dtschump/gmic-community/archive/5a9aefc05e9585c1198c1d68f4b47ee32ff68ae2.zip"
-MD5SUM="38361565e2293f46ea732e2bc118b54e \
+MD5SUM="9f3d9a85e0eac544b9df5c4d413137df \
         a54fa39b205e6dd712f42a2f3c1f45ae"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

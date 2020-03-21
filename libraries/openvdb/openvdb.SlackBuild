@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PKGNAM=openvdb
-VERSION=${VERSION:-6.2.1}
+VERSION=${VERSION:-7.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
@@ -75,23 +75,31 @@ sed -i "s|DESTINATION docs|DESTINATION doc/$PKGNAM-$VERSION|g" openvdb/CMakeList
 sed -i "s|\blib\b|lib$LIBDIRSUFFIX|g" openvdb/CMakeLists.txt
 
 mkdir build && cd build
-  export CXXFLAGS="${CXXFLAGS} -DPY_OPENVDB_USE_NUMPY -DOPENVDB_USE_DEPRECATED_ABI"
+  # export CXXFLAGS="${CXXFLAGS} -DPY_OPENVDB_USE_NUMPY -DOPENVDB_USE_DEPRECATED_ABI"
+  # export CXXFLAGS="${CXXFLAGS} -DPY_OPENVDB_USE_NUMPY"
   cmake .. \
-    -DBoost_NO_BOOST_CMAKE=ON \
+    -GNinja \
+    -DUSE_NUMPY=ON \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DOPENVDB_BUILD_PYTHON_MODULE=ON \
     -DOPENVDB_BUILD_DOCS=ON \
-    -DOPENVDB_ABI_VERSION_NUMBER=3 \
-    -DOPENVDB_USE_DEPRECATED_ABI=ON \
-    -DOPENVDB_BUILD_UNITTESTS=OFF
-  # Improper use of -isystem, messing up include order, failing to find stdlib.h
-  sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_static.dir/flags.make
-  sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_shared.dir/flags.make
-  sed -i 's/isystem /I/g' $PKGNAM/python/CMakeFiles/pyopenvdb.dir/flags.make
-  sed -i 's/isystem /I/g' $PKGNAM/cmd/CMakeFiles/vdb_print.dir/flags.make
+    -DOPENVDB_BUILD_UNITTESTS=OFF \
+    -DUSE_LOG4CPLUS=ON \
+    # -DBoost_NO_BOOST_CMAKE=ON \
 
-  make $NUMJOBS
-  make install DESTDIR=$PKG
+  # Improper use of -isystem, messing up include order, failing to find stdlib.h
+  # sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_static.dir/flags.make
+  # sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_shared.dir/flags.make
+  # sed -i 's/isystem /I/g' $PKGNAM/python/CMakeFiles/pyopenvdb.dir/flags.make
+  # sed -i 's/isystem /I/g' $PKGNAM/cmd/CMakeFiles/vdb_print.dir/flags.make
+
+  # make $NUMJOBS
+  # make install DESTDIR=$PKG
+  sed -i "s/isystem/I/g" build.ninja
+  sed -i "s/Boost::numpy-NOTFOUND//g" build.ninja
+  sed -i "s/Boost$:$:numpy-NOTFOUND//g" build.ninja
+  ninja
+  DESTDIR=$PKG ninja install
 cd -
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
@@ -100,8 +108,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 mv $PKG/usr/doc/html $PKG/usr/doc/$PKGNAM-$VERSION/
-mv $PKG/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX/
-rm -rf $PKG/usr/lib
+# mv $PKG/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX/
+# rm -rf $PKG/usr/lib
 
 
 mkdir -p $PKG/install

@@ -1,6 +1,6 @@
 PRGNAM="unison"
 VERSION="20191211_26a29f7"
-HOMEPAGE="http://www.cis.upenn.edu/~bcpierce/unison/"
+HOMEPAGE="https://www.cis.upenn.edu/~bcpierce/unison/"
 DOWNLOAD="http://ponce.cc/slackware/sources/repo/unison-20191211_26a29f7.tar.xz"
 MD5SUM="7c702475d21c2368f0af044847eb6c53"
 DOWNLOAD_x86_64=""

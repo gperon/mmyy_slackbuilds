@@ -8,9 +8,6 @@ git submodule update
 cd libs
 git archive master > ../../libs.tar
 cd ..
-cd scripts
-git archive master > ../../scripts.tar
-cd ..
 COMMIT=$( git log -1 | head -1 | cut -c 8-14 )
 COMMDATE=$( git log -1 --date=short | grep ^Date | awk '{print $2}' | sed 's/-//g' )
 rm -f /tmp/etlegacy-${COMMDATE}_${COMMIT}.tar.xz
@@ -21,9 +18,6 @@ cd etlegacy-${COMMDATE}_${COMMIT}
 tar xf ../src.tar
 cd libs
 tar xf ../../libs.tar
-cd ..
-cd scripts
-tar xf ../../scripts.tar
 cd ..
 cd ..
 rm -f src.tar libs.tar scripts.tar

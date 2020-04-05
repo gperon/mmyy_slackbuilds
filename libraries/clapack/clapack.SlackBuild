@@ -61,7 +61,7 @@ fi
 set -e
 
 rm -rf $PKG
-mkdir -p $TMP $PKG $OUTPUT
+mkdir -p $TMP $PKG $PKG/usr $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvzf $CWD/$PRGNAM.tgz
@@ -87,6 +87,7 @@ mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv COPYING README.install \
    $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/$PRGNAM.info > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.info
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

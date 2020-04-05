@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Slackware build script for etlegacy-from-source
-# Copyright 2013-2016 Matteo Bernardini <ponce@slackbuilds.org>, Pisa, Italy
+# Copyright 2013-2020 Matteo Bernardini <ponce@slackbuilds.org>, Pisa, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 
 PRGNAM=etlegacy-from-source
 SRCNAM=etlegacy
-VERSION=${VERSION:-20170622_ae5f9ef}
+VERSION=${VERSION:-20200328_050087d}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -75,8 +75,8 @@ sed -i "s|^\.\/etl|etl|" misc/etl_bot.sh misc/etlded_bot.sh
 
 mkdir -p build/legacy
 cd build
-  ln -s $CWD/omnibot-linux-latest.tar.gz legacy/
-  ln -s $CWD/wolfadmin.tar.gz legacy/
+  cp -a $CWD/omnibot-linux-latest.tar.gz legacy/
+  cp -a $CWD/wolfadmin.tar.gz legacy/
   # We have to use bundled lua and sdl
   cmake \
     -DCMAKE_C_FLAGS_RELEASE:STRING="$SLKCFLAGS" \

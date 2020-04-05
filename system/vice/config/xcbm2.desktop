@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=VICE CBM2 emulator
-Comment=Commodore CBM2 emulator from the VICE team
+Name=VICE CBM-II emulator
+Comment=A Commodore CBM-II (6x0/7x0) emulator
 StartupNotify=true
 Exec=xcbm2
 Icon=vice

@@ -18,15 +18,11 @@ fi
 
 if [ -e usr/share/icons/hicolor/icon-theme.cache ]; then
   if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    /usr/bin/gtk-update-icon-cache usr/share/icons/hicolor >/dev/null 2>&1
+    /usr/bin/gtk-update-icon-cache -f usr/share/icons/hicolor >/dev/null 2>&1
   fi
-<<<<<<< HEAD:graphics/vsfm/doinst.sh
-fi 
-=======
 fi
 
 config etc/udev/rules.d/49-stlinkv1.rules.new
 config etc/udev/rules.d/49-stlinkv2-1.rules.new
 config etc/udev/rules.d/49-stlinkv2.rules.new
 config etc/udev/rules.d/49-stlinkv3.rules.new
->>>>>>> ponce:development/STM32CubeIDE/doinst.sh

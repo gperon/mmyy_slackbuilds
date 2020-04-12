@@ -22,11 +22,5 @@ preserve_perms() {
   config $NEW
 }
 
-<<<<<<< HEAD:system/gitlab/doinst.sh
-# Keep same perms on :
-preserve_perms etc/gitlab/gitlab.rb.new
-config etc/rc.d/rc.gitlab.new
-=======
 preserve_perms etc/rc.d/rc.system76-power.new
 config etc/logrotate.d/system76-power.new
->>>>>>> ponce:system/system76-power/doinst.sh

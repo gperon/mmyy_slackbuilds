@@ -6,7 +6,6 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
        |-----handy-ruler------------------------------------------------------|
-<<<<<<< HEAD:games/gaviota/slack-desc
 gaviota: Gaviota chess engine
 gaviota:
 gaviota: Gaviota (Spanish word for Seagull) is a chess engine.
@@ -18,16 +17,3 @@ gaviota:
 gaviota:
 gaviota:
 gaviota:
-=======
-seafile: seafile (Cloud Storage System)
-seafile:
-seafile: Seafile is a next-generation open source cloud storage system with
-seafile: advanced support for file syncing, privacy protection and teamwork.
-seafile:
-seafile: Homepage: http://seafile.com/
-seafile:
-seafile:
-seafile:
-seafile:
-seafile:
->>>>>>> ponce:network/seafile/slack-desc

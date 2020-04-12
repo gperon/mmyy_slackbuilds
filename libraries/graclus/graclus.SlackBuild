@@ -2,11 +2,7 @@
 
 # Slackware build script for graclus
 
-<<<<<<< HEAD:libraries/graclus/graclus.SlackBuild
 # Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
-=======
-# Copyright 2013-2020 Thibaut Notteboom, Paris, FRANCE
->>>>>>> ponce/opensmtpd:python/python-requests/python-requests.SlackBuild
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -26,13 +22,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-<<<<<<< HEAD:libraries/graclus/graclus.SlackBuild
 PRGNAM=graclus
 VERSION=${VERSION:-1.2}
-=======
-PRGNAM=python-requests
-VERSION=${VERSION:-2.23.0}
->>>>>>> ponce/opensmtpd:python/python-requests/python-requests.SlackBuild
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

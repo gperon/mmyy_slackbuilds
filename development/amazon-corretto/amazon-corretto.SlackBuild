@@ -1,16 +1,6 @@
 #!/bin/sh
 
-<<<<<<< HEAD
-<<<<<<< HEAD:games/polyglot/polyglot.SlackBuild
-# Slackware build script for chess polyglot
-
-# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
-=======
-# Copyright 2019 bifferos@gmail.com UK
->>>>>>> ponce:development/amazon-corretto/amazon-corretto.SlackBuild
-=======
 # Copyright 2019-2020 bifferos@gmail.com UK
->>>>>>> ponce/opensmtpd
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -19,9 +9,9 @@
 # 1. Redistributions of this script must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
 #
-#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
 #  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
 #  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
 #  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
 #  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
@@ -30,38 +20,18 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-<<<<<<< HEAD:games/polyglot/polyglot.SlackBuild
-PRGNAM=polyglot
-VERSION=${VERSION:-1.4w29}
-BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-
-# Automatically determine the architecture we're building on:
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i486 ;;
-    arm*) ARCH=arm ;;
-# Unless $ARCH is already set, use uname -m for all other archs:
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-=======
 
 PRGNAM=amazon-corretto
 VERSION=${VERSION:-8.242.08.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
->>>>>>> ponce:development/amazon-corretto/amazon-corretto.SlackBuild
 
-NUMJOBS=${NUMJOBS:-" -j7 "}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-amazon-corretto
 OUTPUT=${OUTPUT:-/tmp}
 
-<<<<<<< HEAD:games/polyglot/polyglot.SlackBuild
-=======
 ARCH=$( uname -m )
 
 if [ "$ARCH" != "x86_64" ]; then
@@ -73,39 +43,10 @@ LIB_ARCH=amd64
 LIBDIRSUFFIX="64"
 SRC_ARCH="x64"
 
->>>>>>> ponce:development/amazon-corretto/amazon-corretto.SlackBuild
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
-<<<<<<< HEAD:games/polyglot/polyglot.SlackBuild
-cd $TMP
-rm -rf $PRGNAM$VERSION
-unzip -u $CWD/$PRGNAM$VERSION.zip
-mv Src $PRGNAM$VERSION
-
-cd $TMP/$PRGNAM$VERSION
-chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
-
-make $NUMJOBS
-
-#manual installation
-mkdir -p $PKG/usr/bin
-cp $PRGNAM $PKG/usr/bin/
-
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-  readme* \
-  copying.txt \
-  README2.TXT \
-  $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-=======
 cd $PKG
 mkdir -p usr/lib${LIBDIRSUFFIX}
 cd usr/lib${LIBDIRSUFFIX}
@@ -128,7 +69,6 @@ chmod 755 $PKG/etc/profile.d/*
   mv $PRGNAM-$VERSION-linux-$SRC_ARCH java
 )
 
->>>>>>> ponce:development/amazon-corretto/amazon-corretto.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

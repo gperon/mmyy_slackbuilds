@@ -28,6 +28,7 @@ PRGNAM=hugin
 VERSION=${VERSION:-2019.2.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -78,13 +79,15 @@ cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
   -DCMAKE_VERBOSE_MAKEFILE:BOOL=OFF \
-  -DBoost_NO_BOOST_CMAKE=ON \
+  -DENABLE_LAPACK=yes \
+  -DBUILD_HSI=ON \
+  -DUSE_GDKBACKEND_X11=ON \
   -DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
   -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DCMAKE_BUILD_TYPE=Release ..
 
-make install DESTDIR=$PKG
+make $NUMJOBS install DESTDIR=$PKG
 cd ..
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \

@@ -24,7 +24,7 @@
 
 PRGNAM=openimageio
 SRCNAM=oiio-Release
-VERSION=${VERSION:-2.1.12.0}
+VERSION=${VERSION:-2.1.13.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
@@ -98,8 +98,6 @@ cd build
     -DUSE_PYTHON:BOOL=TRUE \
     -DUSE_EXTERNAL_PUGIXML:BOOL=FALSE \
     -DSTOP_ON_WARNING=0 \
-
-    # -DPYBIND11_INCLUDE_DIR:STRING=/usr/include/python2.7 \
 
   sed -i "s|libboost_python.so|libboost_python3.so|g" CMakeCache.txt
   sed -i "s|libboost_python.so|libboost_python3.so|g" src/python/CMakeFiles/PyOpenImageIO.dir/build.make

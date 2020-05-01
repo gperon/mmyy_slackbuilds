@@ -3,7 +3,7 @@
 # Slackware build script for tbb
 # Written by powtrix (@gmail.com)
 
-# Copyright 2019  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2020  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -27,6 +27,7 @@ PRGNAM=tbb
 VERSION=${VERSION:-2020u2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+SRCPRGNAM=oneTBB
 
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 SRCVERSION=$( echo ${VERSION} | sed 's,u,_U,' )
@@ -63,8 +64,8 @@ set -e
 rm -rf $PKG $TMP/oneTBB-${SRCVERSION}
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvf $CWD/${PRGNAM}-${SRCVERSION}.tar.gz
-cd oneTBB-${SRCVERSION}
+tar xvf $CWD/${SRCPRGNAM}-${SRCVERSION}.tar.gz
+cd ${SRCPRGNAM}-${SRCVERSION}
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -72,8 +73,6 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-CC=/usr/bin/gcc-6 \
-CXX=/usr/bin/g++-6 \
 make $NUMJOBS
 
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}

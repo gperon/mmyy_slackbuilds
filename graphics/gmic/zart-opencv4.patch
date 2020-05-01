@@ -23,19 +23,6 @@ index 8c1911a..9194385 100644
  #include "ImageSource.h"
  
  class QSplashScreen;
-diff --git a/zart.pro b/zart.pro
-index d98a192..ddb2d3b 100644
---- a/zart.pro
-+++ b/zart.pro
-@@ -29,7 +29,7 @@
- CONFIG	+= warn_on
- QT_CONFIG -= no-pkg-config
- CONFIG += link_pkgconfig
--PKGCONFIG += opencv fftw3 zlib
-+PKGCONFIG += opencv4 fftw3 zlib
- DEFINES += cimg_use_fftw3 cimg_use_zlib
-
- DEFINES += QT_DEPRECATED_WARNINGS
 diff --git a/src/ImageConverter.cpp b/src/ImageConverter.cpp
 --- a/src/ImageConverter.cpp
 +++ b/src/ImageConverter.cpp
@@ -57,3 +44,14 @@ diff --git a/src/ImageConverter.cpp b/src/ImageConverter.cpp
  }
  
  void ImageConverter::convert(const cimg_library::CImg<float> & in, QImage * out)
+--- a/zart.pro	2020-04-20 09:10:31.828147336 +1000
++++ b/zart.pro	2020-04-20 09:12:38.123150760 +1000
+@@ -29,7 +29,7 @@
+ CONFIG	+= warn_on
+ QT_CONFIG -= no-pkg-config
+ CONFIG += link_pkgconfig
+-PKGCONFIG += opencv fftw3 zlib
++PKGCONFIG += opencv4 fftw3 zlib
+ DEFINES += cimg_use_fftw3 cimg_use_zlib
+ 
+ DEFINES += QT_DEPRECATED_WARNINGS

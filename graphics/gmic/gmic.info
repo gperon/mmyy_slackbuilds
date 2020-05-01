@@ -1,10 +1,10 @@
 PRGNAM="gmic"
-VERSION="2.8.4"
+VERSION="2.9.0"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_2.8.4.tar.gz \
-          https://github.com/dtschump/gmic-community/archive/5a9aefc05e9585c1198c1d68f4b47ee32ff68ae2.zip"
-MD5SUM="9f3d9a85e0eac544b9df5c4d413137df \
-        a54fa39b205e6dd712f42a2f3c1f45ae"
+DOWNLOAD="https://gmic.eu/files/source/gmic_2.9.0.tar.gz \
+          https://github.com/dtschump/gmic-community/archive/6b8d582fb2c7ea32cfc871932cb841b249eaac83.zip"
+MD5SUM="0980af23bfc6466f6aab3d60d758f1ac \
+        f4579d0a4e746057b6165f5c1b36ad00"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="qt5 opencv"

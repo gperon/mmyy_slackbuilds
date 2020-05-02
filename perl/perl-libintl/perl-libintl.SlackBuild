@@ -5,7 +5,7 @@
 # Written by Luis Henrique <lmello.009@gmail.com>
 
 PRGNAM=perl-libintl
-VERSION=${VERSION:-1.23}
+VERSION=${VERSION:-1.27}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -66,7 +66,7 @@ find $PKG -name perllocal.pod -o -name ".packlist" -o -name "*.bs" | xargs rm -f
 find $PKG -depth -type d -empty -delete || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a COPYING.LESSER ChangeLog FAQ MANIFEST NEWS README* THANKS TODO \
+cp -a COPYING ChangeLog FAQ MANIFEST NEWS README* THANKS TODO \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

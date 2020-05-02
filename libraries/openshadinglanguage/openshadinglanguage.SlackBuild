@@ -2,7 +2,7 @@
 
 # Slackware build script for OpenShadingLanguge
 
-# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
+# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,8 +24,9 @@
 
 PRGNAM=openshadinglanguage
 VERSION=${VERSION:-1.10.9}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
+# PRGNAMSRC=OpenShadingLanguage-master
 PRGNAMSRC=OpenShadingLanguage-Release
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
@@ -62,26 +63,26 @@ cd $TMP
 rm -rf $PRGNAMSRC-$VERSION
 tar xvf $CWD/$PRGNAMSRC-$VERSION.tar.gz || tar xvf $CWD/Release-$VERSION
 cd $PRGNAMSRC-$VERSION
+patch -Np1 -i $CWD/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
 chown -R root:root .
 
 mkdir build && cd build
-# Boost 1.70.0 issue with cmake
   cmake ../ \
+    -DCMAKE_CXX_STANDARD=14 \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX \
     -DLLVM_STATIC=0 \
     -DENABLERTTI=ON \
-    -DBoost_NO_BOOST_CMAKE=ON \
     -DSTOP_ON_WARNING=OFF
   make $NUMJOBS
   make install DESTDIR=$PKG
 
-mkdir "$PKG"/usr/share/OSL
-mv "$PKG"/usr/shaders "$PKG"/usr/share/OSL/shaders
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-mv "$PKG"/usr/share/doc/OSL "$PKG"/usr/doc/$PRGNAM-$VERSION/
-rm -rf "$PKG"/usr/share/doc
+mv $PKG/usr/share/doc/OSL/* $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/share/doc
+mkdir $PKG/usr/share/OSL
+mv $PKG/usr/shaders $PKG/usr/share/OSL/shaders
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 

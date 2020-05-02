@@ -2,7 +2,7 @@
 
 # Slackware build script for embree
 
-# Copyright 2016 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
+# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,8 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=embree
-NAME=embree2
-VERSION=${VERSION:-2.12.0}
+NAME=embree3
+VERSION=${VERSION:-3.9.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -64,7 +64,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvzf $CWD/v-$VERSION.tar.gz
+tar xvzf $CWD/v-$VERSION.tar.gz || tar xvzf $CWD/$PRGNAM-$VERSION.tar.gz
 
 cd $TMP/$PRGNAM-$VERSION
 chown -R root:root .
@@ -74,30 +74,39 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+    # -DTBB_ROOT=/usr \
+    # -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+    # -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
 cmake ./ \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX \
-    -DENABLE_TUTORIALS=OFF \
-    -DTBB_ROOT=/usr \
-    -DCMAKE_BUILD_TYPE=Release
+    -DEMBREE_TUTORIALS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DEMBREE_MAX_ISA="AVX512SKX"
+    # Embree detects actual ISA at runtime
 
 make $NUMJOBS
 make DESTDIR=$PKG install
 
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
 rm -rf $PKG/usr/lib$LIBDIRSUFFIX/cmake
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv $PKG/usr/share/doc/$NAME/* $PKG/usr/doc/$PRGNAM-$VERSION
+mkdir -p $PKG/usr/man
+mv $PKG/usr/share/man/man3 $PKG/usr/man/
 rm -rf $PKG/usr/share/
+
+# Compress man pages if they exist
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $(find . -type l) ; do ln -s $(readlink $i).gz $i.gz ; rm $i ; done
+  ) 
+fi
+
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/docs
-cp -rp build/src/github.com/adnanh/$PRGNAM/docs $PKG/usr/doc/$PRGNAM-$VERSION
-install -Dpm 0755 $CWD/webhook-wrapper.sh $PKG/usr/sbin/webhook-wrapper.sh
-#install -Dpm 0644 $CWD/hooks.json $PKG/etc/webhook/hooks.json.new
-install -Dpm 0644 $CWD/webhook.init $PKG/etc/rc.d/rc.webhook.new
-install -Dpm 0644 $CWD/webhook.sysconfig $PKG/etc/default/webhook.new
-install -Dpm 0644 $CWD/webhook.logrotate $PKG/etc/logrotate.d/webhook.new
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

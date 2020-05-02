@@ -75,8 +75,6 @@ sed -i "s|DESTINATION docs|DESTINATION doc/$PKGNAM-$VERSION|g" openvdb/CMakeList
 sed -i "s|\blib\b|lib$LIBDIRSUFFIX|g" openvdb/CMakeLists.txt
 
 mkdir build && cd build
-  # export CXXFLAGS="${CXXFLAGS} -DPY_OPENVDB_USE_NUMPY -DOPENVDB_USE_DEPRECATED_ABI"
-  # export CXXFLAGS="${CXXFLAGS} -DPY_OPENVDB_USE_NUMPY"
   cmake .. \
     -GNinja \
     -DUSE_NUMPY=ON \
@@ -84,20 +82,7 @@ mkdir build && cd build
     -DOPENVDB_BUILD_PYTHON_MODULE=ON \
     -DOPENVDB_BUILD_DOCS=ON \
     -DOPENVDB_BUILD_UNITTESTS=OFF \
-    -DUSE_LOG4CPLUS=ON \
-    # -DBoost_NO_BOOST_CMAKE=ON \
-
-  # Improper use of -isystem, messing up include order, failing to find stdlib.h
-  # sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_static.dir/flags.make
-  # sed -i 's/isystem /I/g' $PKGNAM/CMakeFiles/$PKGNAM\_shared.dir/flags.make
-  # sed -i 's/isystem /I/g' $PKGNAM/python/CMakeFiles/pyopenvdb.dir/flags.make
-  # sed -i 's/isystem /I/g' $PKGNAM/cmd/CMakeFiles/vdb_print.dir/flags.make
-
-  # make $NUMJOBS
-  # make install DESTDIR=$PKG
-  # sed -i "s/isystem/I/g" build.ninja
-  # sed -i "s/Boost::numpy-NOTFOUND//g" build.ninja
-  # sed -i "s/Boost$:$:numpy-NOTFOUND//g" build.ninja
+    -DUSE_LOG4CPLUS=ON 
   ninja
   DESTDIR=$PKG ninja install
 cd -
@@ -108,9 +93,6 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
 mv $PKG/usr/doc/html $PKG/usr/doc/$PKGNAM-$VERSION/
-# mv $PKG/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX/
-# rm -rf $PKG/usr/lib
-
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

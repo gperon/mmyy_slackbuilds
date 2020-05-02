@@ -78,8 +78,8 @@ find -L . \
 
 sed -i 's|gpu-architecture compute_20|gpu-architecture compute_30|g' CMakeLists.txt
 
-CC=/usr/bin/gcc-6 \
-CXX=/usr/bin/g++-6 \
+# CC=/usr/bin/gcc-6 \
+# CXX=/usr/bin/g++-6 \
 cmake . \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \

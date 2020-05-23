@@ -84,7 +84,7 @@ find -L . \
 autoreconf -vif
 
 CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS -fpermissive" \
+CXXFLAGS="$SLKCFLAGS -fpermissive -Wno-narrowing" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \

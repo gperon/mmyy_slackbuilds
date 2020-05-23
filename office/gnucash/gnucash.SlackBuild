@@ -1,10 +1,9 @@
-#!/bin/sh
+#! /bin/sh
 
 # Slackware build script for gnucash
 
 # Copyright 2015  Trayan Denev, tdenev@gmail.com
-# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
-# This version Copyright 2018 Lenard Spencer <lspencer31@cfl.rr.com>
+# This version Copyright 2018 Lenard Spencer <lenardrspencer@gmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,8 +24,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gnucash
-VERSION=${VERSION:-3.9}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-3.10}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
@@ -72,7 +71,7 @@ if [ -e /usr/bin/gnucash ]; then
 fi
 
 if [ "$DBI" = "yes" ]; then
-  DBIARGS="-DWITH_SQL=ON -DGNC_DBD_DIR=/usr/lib${LIBDIRSUFFIX}/dbd/ "
+  DBIARGS="-DWITH_SQL=ON -DGNC_DBD_DIR=/usr/lib${LIBDIRSUFFIX}/dbd/ -DGENERATE_SWIG_WRAPPERS=ON "
   echo " building with SQL integration enabled"
   sleep 1
 else
@@ -118,7 +117,19 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-sed -i '1iinclude(CheckSymbolExists)' gnucash/register/register-gnome/CMakeLists.txt
+# Patch for the newest boost (will be in gncuash 3.11)
+patch -p0 < $CWD/gnucash-boost-1.73.patch
+
+# New option to build with ninja:
+if [ "${NINJA:-no}" = "yes" ]; then
+  echo "building using Ninja:"
+  NINJABUILD="-GNinja"
+else
+  NINJABUILD=""
+fi
+
+sed -i '/^#include <vector>$/a #include <algorithm>' \
+  gnucash/import-export/csv-imp/gnc-imp-settings-csv.hpp
 
   mkdir -p build
 cd build
@@ -129,16 +140,20 @@ cd build
     -DLIBDIR=/usr/lib${LIBDIRSUFFIX} \
     -DSYSCONFDIR=/etc \
     -DCOMPILE_GSCHEMAS=OFF \
-    -DCMAKE_HAVE_LIBC_PTHREAD=OFF \
     $DBIARGS \
     $W_PYTHON \
     $OFXBANKING \
     $AQBANKING \
-    -DGNUCASH_BUILD_ID="$VERSION by $PACKAGER" \
+    $NINJABUILD \
+    -DGNUCASH_BUILD_ID="$VERSION-`date -I` by $PACKAGER" \
     -DCMAKE_BUILD_TYPE=release ..
 
-make $NUMJOBS
-make -j1 install DESTDIR=$PKG docdir=/usr/doc/$PRGNAM-$VERSION
+if [ $NINJA = "yes" ]; then
+  DESTDIR="$PKG" ninja install
+else
+ make
+ make -j1 install DESTDIR=$PKG docdir=/usr/doc/$PRGNAM-$VERSION
+fi
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

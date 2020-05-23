@@ -86,7 +86,7 @@ patch -p1 < $CWD/transcode-imagemagick7.patch
 
 autoreconf -vif
 
-CFLAGS="$SLKCFLAGS" \
+CFLAGS="$SLKCFLAGS -fcommon" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \

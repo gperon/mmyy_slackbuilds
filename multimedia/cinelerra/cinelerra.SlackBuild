@@ -83,7 +83,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --with-plugindir=/usr/lib${LIBDIRSUFFIX}/cinelerra \
+  --with-plugin-dir=/usr/lib${LIBDIRSUFFIX}/cin \
   --mandir=/usr/man \
   --build=$ARCH-slackware-linux \
   $mmx

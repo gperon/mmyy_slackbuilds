@@ -43,18 +43,21 @@ LIB="${ROOT}usr/lib${LIBSUFFIX}"
 LIB32="${ROOT}usr/lib"
 
 save_GL(){
-# backup original mesa and xorg conflicts
+# backup original mesa conflict
   cd $2
   case "$1" in
     "nvidia")
-      mv libGL.la libGL.la-xorg
-      mv libGL.la-nvidia libGL.la
+      if [ ! -e libGL.la-xorg ]; then
+        mv libGL.la libGL.la-xorg
+      fi
+      cp -a libGL.la-nvidia libGL.la
       /sbin/ldconfig
     ;;
 
     "xorg")
-       mv libGL.la libGL.la-nvidia
-       mv libGL.la-xorg libGL.la
+      if [ -e libGL.la-xorg ]; then
+       cp -a libGL.la-xorg libGL.la
+      fi
        /sbin/ldconfig
   ;;
 
@@ -87,7 +90,7 @@ nvidia_remove(){
   echo "and in /usr/share/X11/xorg.conf.d and /etc/X11/xorg.conf.d."
   echo "(Removing nvidia-kernelis recommended to accomplish this.)"
   echo "Otherwise, this may lead to improperly working drivers."
-  echo -e "\nPlease run /sbin/ldconfing after removing nvidia-driver."
+  echo -e "\nPlease run /sbin/ldconfing after removing nvidia-driver.\n"
 
   save_GL "xorg" $LIB
 # Check for multilib configuration

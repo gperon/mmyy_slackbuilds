@@ -79,8 +79,15 @@ find -L . \
 # Required by the newer mesa
 patch -p1 < $CWD/0d2b624f1e24240a1c4e651aa1cfe9a8dd10a573.patch
 
-CFLAGS="$SLKCFLAGS" \
+# 20200416 bkw: vita_cell on IRC reported missing DSO errors for -lm
+# and -ldl. efl has a LOT of optional/autodetected libraries, I couldn't
+# duplicate his problem, but it looks like some optional library normally
+# adds the -lm -ldl in its pkgconfig file and he was missing whatever
+# it was. In any case, adding them here won't hurt anything.
+
+CFLAGS="$SLKCFLAGS -fcommon" \
 CXXFLAGS="$SLKCFLAGS" \
+LIBS="-lm -ldl" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \

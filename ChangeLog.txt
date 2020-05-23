@@ -1,3 +1,654 @@
+Sat May 23 02:32:35 UTC 2020
+academic/boinc: fix default data location
+academic/colin: Added (a structural analysis application).
+academic/muscle: Update script and added manual page.
+academic/rpy2: Updated for version 3.3.3.
+academic/tiemu: Added (TI-89/92/V200 emulator for linux)
+desktop/lumina: Updated for version 1.6.0.
+desktop/unsaver: Added (deactivate screensaver).
+development/OpenHantek6022: Added (Hantek6022 oscilloscope software)
+development/dasht: Updated for version 2.4.0.
+development/dbeaver-ce: Updated for version 7.0.5.
+development/dbeaver: Removed (use dbeaver-ce).
+games/VASSAL: Better desktop support.
+games/mangband: Fix MD5SUM.
+games/mgba: Fix typos when copying documents.
+games/mrboom: Update script.
+gis/qgis: Updated for version 3.12.3.
+graphics/tuxpaint: Add missing dep.
+libraries/aqbanking: Updated for version 6.2.1.
+libraries/enchant2: Updated for version 2.2.8.
+libraries/gwenhywfar: Updated for version 5.3.0.
+libraries/imlib2_loaders: Updated for version 1.6.1.
+misc/goldencheetah: Added desktop file and icons.
+misc/protobuf3: Updated for version 3.12.1.
+multimedia/aom: Added (Open Source Video Codec)
+multimedia/plexmediaserver: Updated to 1.19.3.2831_181d9145d.
+multimedia/xawtv: Updated for version 3.107.
+network/bluejeans: Updated for version 2.2.0.
+network/dropbox: Updated for version 97.4.467.
+network/etherape: Updated for version 0.9.19.
+network/frr: Updated for version 7.3.
+network/onedrive: Updated for version 2.4.1.
+network/pCloudDrive: Updated for version 1.8.2.
+network/prosody-mod-smacks-offline: Removed.
+network/signal-desktop: Updated for version 1.34.1.
+network/teamviewer: Updated for version 15.5.6.
+network/tor: Updated for version 0.4.3.5.
+network/wireguard-linux-compat: Updated for version 1.0.20200520.
+network/wireguard-tools: Updated for version 1.0.20200513.
+network/wireshark: Updated for version 3.2.4.
+network/zoom-linux: Updated for version 5.0.408598.0517.
+office/aspell6-es: Removed.
+office/focuswriter-legacy: Added (distraction-free word processor)
+office/focuswriter: Updated for version 1.7.6.
+office/fop2.0: Added (print formatter).
+office/fop: Updated for version 2.5.
+office/lumina-calculator: Updated for version 1.6.0.
+office/lumina-pdf: Updated for version 1.6.0.
+office/pstoedit: Added configure options.
+office/timew: Update MD5SUM.
+perl/perl-Module-Build: Updated README with optional deps..
+python/BeautifulSoup4: Updated for v 4.9.1, moved from libraries.
+python/PyAudio: Updated for version 0.2.11.
+python/WTForms: Updated for version 2.3.1.
+python/Yapps2: Added (Yet Another Python Parser System).
+python/alabaster: Updated for version 0.7.12.
+python/captcha: Added (A captcha python library)
+python/cheetah3: Added (template engine and code-generation tool)
+python/imagesize: Updated for version 1.2.0.
+python/jaraco-packaging: Added (Tools for packaging).
+python/jsonpatch: Added (Library to apply JSON Patches)
+python/python-soupsieve: Updated for version 1.9.6.
+python/python3-Flask-httpauth: Added (Extension for Python3-Flask)
+python/python3-multidict: Updated for version 4.7.6.
+python/python3-soupsieve: Updated for version 2.0.1.
+python/rst-linker: Added (routine for adding links).
+python/rst: Added (Python module).
+ruby/ruby-build: Updated for version 20200520.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.12.
+system/fd: Updated for version 8.1.0.
+system/gnu-unifont: Updated for version 13.0.02.
+system/kitchen-sync: Updated for version 2.3.
+system/slack-osquery: Added (osquery extensions for slackware).
+system/ttf-ipaex: Updated for version 004.01.
+system/vagrant: Updated md5sum.
++--------------------------+
+Sat May 16 01:45:30 UTC 2020
+academic/fet: Updated for version 5.44.6.
+academic/latex2html: Updated for version 2020.
+academic/libqalculate: Updated to version 3.10.0
+academic/meep: Updated for version 1.14.
+academic/mpb: Updated for version 1.10.0.
+academic/qalculate-gtk: Updated to version 3.10.0
+audio/ocp: Updated for version 0.2.1.
+desktop/x-tile: updated for version 3.1
+development/codelite: Fix build against newer libssh.
+development/colordiff: Updated for version 1.0.19.
+development/dbeaver-ce: Updated for version 7.0.4.
+development/git-lfs: Updated for version 2.11.0.
+development/nodejs: Fix MD5SUM.
+development/vscode-bin: Updated for version 0.98.
+games/FlightGear-data: Updated for version 2020.1.1.
+games/FlightGear: Updated for version 2020.1.1.
+games/mrboom: Updated for version 4.9.
+games/peg-e: Updated to version 1.2.8
+games/quarry: Added (a universal board game interface program)
+gis/Fiona: Remove Python 2 support.
+gis/Shapely: Remove Python 2 support.
+gis/geopandas: Added (Python tools for geographic data)
+gis/geopy: Updated for version 1.22.0.
+gis/navit: Updated for version 0.5.4.
+gis/pgsql-ogr-fdw: Updated for version 1.0.11.
+gis/pyproj: Updated for version 2.6.1.
+gis/rasterio: Updated for version 1.1.4.
+gis/saga-gis: Updated for version 7.6.3.
+graphics/qrencode: Remove .la files.
+libraries/Jinja2: Updated for version 2.11.2.
+libraries/SimGear: Updated for version 2020.1.1.
+libraries/digimend-kernel-drivers: Updated for version 20200429.
+libraries/libctl: Updated for version 4.5.0.
+libraries/libqb: Updated for version 2.0.0.
+libraries/libxnvctrl: Updated for version 440.82.
+libraries/libyang: Updated for version 1.0.167.
+libraries/live555: Updated for version 2020.05.15
+libraries/luasec: Updated for version 0.9.
+libraries/netcdf: Updated for version 4.7.4.
+libraries/pcre2: Updated to version 10.35
+libraries/podofo: Fix build version number
+misc/linux_logo: Updated for version 6.0.
+misc/yubioath-desktop: Added (Yubico Authenticator)
+multimedia/flashplayer-plugin: Updated for version 32.0.0.371.
+multimedia/pepperflash-plugin: Updated for version 32.0.0.371.
+multimedia/strawberry: Updated for version 0.6.10.
+multimedia/webvfx: Added (video effects engine).
+network/AdGuardHome: Updated for version 0.102.0.
+network/brave-browser: Updated for version 1.8.95.
+network/broadcom-sta: Support for Linux 5.6.
+network/deluge: Update DEP.
+network/icecat: Updated for version 60.7.0.
+network/netsniff-ng: Updated for version 0.6.7.
+network/prosody: Updated for version 11.5.
+network/sfeed: Updated for version 0.9.17.
+network/shorewall-core: Updated for version 5.2.4.5.
+network/shorewall6: Updated for version 5.2.4.5.
+network/shorewall: Updated for version 5.2.4.5.
+network/signal-desktop: Updated for version 1.33.4.
+network/spamassassin: Updated for version 3.4.4.
+network/syncthing: Updated for version 1.5.0.
+network/telegram: Updated for version 2.1.5.
+network/wireguard-tools: Updated for version 1.0.20200510.
+network/zoom-linux: Updated for version 5.0.403652.0509.
+office/calibre-bin: Updated for version 4.16.0.
+office/ganttproject: Updated for version 2.8.11.
+office/gnucash: Patched.
+office/when: Updated for version 1.1.40.
+perl/perl-MaxMind-DB-Reader-XS: Added (XS searching in MaxMind DB)
+perl/perl-MaxMind-DB-Reader: Added (MaxMind DB reader)
+python/contextlib2: Added (Context management).
+python/internetarchive: Added (CLI interface to Archive.org).
+python/jsonpointer: Added (Library to resolve JSON Pointers).
+python/python-branca: Updated for version 0.4.1.
+python/python-libnacl: Updated to version 1.7.1
+python/python-toml: Updated for version 0.10.1.
+python/python3-Cython: Updated for version 0.29.17
+python/python3-astroid: Updated for version 2.4.1.
+python/python3-jupyter-ipykernel: Updated for version 5.2.1.
+python/python3-pandas: Updated for version 1.0.3.
+python/python3-pylint: Updated for version 2.5.2.
+python/python3-seaborn: Updated for version 0.10.1.
+python/python3-wrapt: Updated for version 1.12.1.
+python/schema: Added (Python data structures validation).
+python/sphinx-rtd-theme: Added (decorator)
+python/typing-extensions: Added (Backported/Experimental Type Hints)
+python/vine: Added (promise, async, future)
+python/workbook: Added (App that creates xls reports or tables)
+python/xlutils: Added (utilities for working with Excel files)
+ruby/rubygem-parser: Updated for version 2.7.1.2.
+system/ansible: Updated for version 2.9.9.
+system/clamav: Updated for version 0.102.3.
+system/goaccess: Updated for version 1.3.
+system/letsencrypt: Updated for version 1.4.0.
+system/runit: Update config.tar.
+system/targetcli-fb: Updated for version 2.1.52.
+system/usbrelay: Updated for version 0.7.
+system/vagrant: Updated for version 2.2.9.
++--------------------------+
+Sun May 10 01:38:26 UTC 2020
+academic/biblesync: Fix pkg-config.
+academic/chartgeany: Added (market analysis tool)
+academic/cryptominisat: Updated for version 5.7.1.
+academic/freechartgeany: Removed
+academic/gcompris-qt: Added (an educational software suite)
+academic/libqalculate: Updated for version 3.9.0a
+academic/mpb: Added (computing electromagnetic band).
+academic/qalculate-gtk: Updated for version 3.9.0a
+academic/sage: Fix post-installation path.
+academic/sword: Add patch to fix formatting.
+audio/qmmp-plugin-pack: Updated for version 0.12.2.
+audio/qmmp: Updated for version 0.12.7.
+desktop/bukubrow: Updated for version 5.1.0.
+desktop/simplenote: Updated for version 1.16.0.
+development/cmocka: Updated for version 6.5.2.
+development/jdk11: Fix shebang.
+development/jdk12: Fix shebang.
+development/jdk13: Fix shebang.
+development/jdk14: Fix shebang.
+development/libb2: Updated for version 0.98.1.
+development/nodejs: Updated for version 12.16.3.
+development/robotframework: Updated for version 3.2.1.
+development/spin: Updated for version 6.5.2.
+games/fceux: Fix build with scons.
+games/onscripter: Updated for version 20200419.
+gis/cartopy: Updated for version 0.18.0.
+gis/qgis: Updated for version 3.12.2.
+graphics/brlcad: updated for version 7.30.8
+ham/ax25-apps: Added (AX.25 Packet radio support software).
+ham/ax25-tools: Added (AX.25 Packet radio supporting tools).
+ham/libax25: Added (AX.25 Packet radio support for linux).
+libraries/SDL_kitchensink: updated for version 1.0.8
+libraries/VTK: Note VTK-8.2.0 is last suitable version for SL-14.2
+libraries/hoel: updated for version 1.4.16
+libraries/http-parser: Updated for version 2.9.4
+libraries/podofo: Updated for version 0.9.6
+libraries/zziplib: Updated for version 0.13.71
+misc/KeePass: Updated for version 2.45.
+multimedia/dvdbackup: Fix name.
+multimedia/k9copy-reloaded: Fix path.
+multimedia/lives: Fix email.
+multimedia/plexmediaserver: Updated for v 1.19.3.2764_ef515a800.
+network/asterisk: Updated for version 16.10.0.
+network/bluejeans: Fix shebang.
+network/openconnect: Updated for version 8.09 + new maintainer.
+network/pexip-infinity-connect: Fix shebang.
+network/prosody-mod-cloud-notify: Updated for version hg3996.
+network/prosody-mod-smacks: Updated for version hg4009.
+network/qutebrowser-tox: Updated for version 1.11.1.
+network/slimjet: Updated for version 26.0.5.0.
+network/telegram: Updated for version 2.1.2.
+network/telegram: Updated for version 2.1.4.
+network/tor-browser: Updated for version 9.0.10.
+network/vivaldi: Updated for version 3.0.1874.38.
+network/wireguard-linux-compat: Updated for version 1.0.20200506.
+network/zeek: Updated for version 3.0.5.
+office/gnucash-legacy-docs: Update email.
+office/gnucash-legacy: Update README.
+office/gnucash: Update README.
+office/texmaker: Updated for version 5.0.4
+office/texstudio: Updated for version 2.12.22
+office/timew: Updated for version 1.3.0.
+office/when: Added (an extremely simple personal calendar program)
+perl/MoarVM: Updated for version 2020.05.
+perl/nqp: Updated for version 2020.05.
+perl/perl-Net-ARP: Updated for version 1.0.11.
+perl/rakudo: Updated for version 2020.05.
+perl/zef: Updated for version 0.8.4.
+python/python3-astroid: Updated for version 2.4.0.
+python/python3-ipython: Updated for version 7.14.0.
+python/python3-pylint: Updated for version 2.5.0.
+system/bat: Revert to version 0.13.0.
+system/ccd2cue: Added (convert CloneCD images to bin/cue)
+system/chronograf: Updated for version 1.8.4.
+system/crc32_simple: Added (calculate crc32 checksum of files)
+system/dosbox-x: Updated for version 0.98.1.
+system/mksh: Updated for version R59.
+system/nvidia-driver: Update script.
+system/nvidia-legacy390-driver: Update script.
+system/osquery-bin: Added (OS instrumentation framework)
+system/ripgrep: Updated for version 12.1.0.
+system/skopeo: Updated to version 0.2.0.
+system/sleuthkit: Updated for version 4.9.0.
+system/telegraf: Updated for version 1.14.2.
++--------------------------+
+Sun May  3 01:49:27 UTC 2020
+academic/fet: Fix download link.
+academic/fet: Updated for version 5.44.3.
+audio/exhale: Added (a CLI xHE-AAC encoder).
+audio/mixxx: Remove unnecessary scons routine.
+business/stansoft: Updated for version 7.19.
+desktop/breath-gtk-theme: Added (Theme for Manjaro Linux).
+desktop/i3blocks: Updated for version 1.5.
+desktop/ssr: Updated for version 0.4.1.
+desktop/xfce4-wavelan-plugin: Updated for version 0.6.1.
+development/Sphinx: 3.0.3.
+development/adoptopenjdk-openj9: Added (Open Implementation of JDK).
+development/arm-binutils: Updated for version 2.34.
+development/cgit: Fix GIT version.
+development/composer: Updated for version 1.10.5
+development/d-tools: Updated for version 2.091.1
+development/dbeaver-ce: Updated for version 7.0.3.
+development/dmd: Updated for version 2.091.1
+development/dwz: Added (dwarf compressor).
+development/google-go-lang: Updated for version 1.13.10.
+development/jdk: Updated for version 8u251.
+development/mg-troglobit: Fix slack-desc.
+development/psycopg2: Updated for version 2.8.5.
+development/robotframework: Updated for version 3.2.
+development/sbcl: Updated for version 2.0.4.
+development/svn-all-fast-export: Updated for version 1.0.18.
+development/universal-ctags: Updated for version 41e1fb6
+games/crispy-doom: Updated for version 5.8.0.
+games/endless-sky: updated for version 0.9.12
+games/fs-uae-arcade: Updated for version 3.0.3.
+games/fs-uae-launcher: Updated for version 3.0.3.
+games/fs-uae: Updated for version 3.0.3, moved from system.
+games/gzdoom-legacy: Fix window title.
+games/hatari: Support IPF/CTR images, various fixes.
+games/jfsw: Update docs, support Twin Dragon.
+games/jfsw_registered_data: Use CD image as source.
+games/jfsw_twin_dragon: Added (game data for Shadow Warrior)
+games/nblood: Added (Game Engine for Blood).
+games/powerslave_demo_data: Added (game data for nblood).
+games/steam: Updated for version 1.0.0.62
+gis/OTB: Updated for version 7.1.0.
+gis/ossim: Updated for version 2.11.1.
+gis/pdal: Updated for version 2.1.0.
+gis/proj: Updated for 7.0.1.
+gis/saga-gis: Updated for version 7.6.2.
+graphics/SweetHome3D: changed src for openjdk8
+graphics/SweetHome3D: updated for version 6.3
+graphics/fritzing: build against newer version of libgit2
+graphics/ueberzug: Added ueberzug (An alternative to w3mimgdisplay).
+haskell/haskell-ShellCheck: Updated for version 0.7.1.
+libraries/grantlee-qt5: Updated for version 5.2.0
+libraries/grpc: Updated for version 1.28.1
+libraries/jsoncpp: Updated for version 1.9.2
+libraries/libaal: Updated for version 1.0.7.
+libraries/libbluray: Updated for version 1.2.0
+libraries/libcapsimage: Added libcapsimage (decoder library)
+libraries/libcbor: updated for version 0.7.0
+libraries/libcec: Updated for version 4.0.4
+libraries/libgit2-glib: build against newer version of libgit2
+libraries/libgit2: Updated for version 1.0.0
+libraries/libotf: Updated for version 0.9.16
+libraries/libsass: updated for version 3.6.4
+libraries/liburcu: Updated for version 0.12.1.
+libraries/live555: Updated for version 2020.04.24
+libraries/nltk: Updated for version 3.5.
+libraries/python3-PyQt5: Change python3 include path.
+libraries/qt5: Update README.
+libraries/re2: Updated for version 2020_05_01
+libraries/tinyxml2: Updated for version 8.0.0
+libraries/wxGTK3: Updated for version 3.0.5.
+libraries/xmlsec: Updated for version 1.2.30.
+misc/bchunk: Updated for version 1.2.2.
+misc/dvtm: Fix and install terminfo.
+misc/subsurface: Fix building against newer version of libgit2
+multimedia/MuseScore: Updated for version 3.4.2.
+multimedia/plexmediaserver: Updated for v 1.19.2.2737_b69929dab.
+multimedia/vlc: Updated for version 3.0.10
+multimedia/xmms-cue: Added xmms-cue (XMMS Cuesheet reader plugin).
+network/coturn: Updated for version 4.5.1.2.
+network/hostapd: Updated for version 2.9.
+network/opensmtpd-extras: updated for version 6.7.1
+network/owncloud-client: Updated for version 2.5.4.11654.
+network/palemoon-bin: Fix SlackBuild for version 28.8.4.
+network/pexip-infinity-connect: Add missing image.
+network/prosody-mod-cloud-notify: Updated for version hg3979.
+network/prosody-mod-smacks: Updated for version hg3986.
+network/qutebrowser-tox: Updated for version 1.11.0.
+network/shorewall-core: Updated for version 5.2.4.4.
+network/shorewall6: Updated for version 5.2.4.4.
+network/shorewall: Updated for version 5.2.4.4.
+network/signal-desktop: Updated for version 1.33.3.
+network/sqlmap: Updated for version 1.4.4.
+network/teamviewer: Updated for version 15.5.3.
+network/telegram: Updated for version 2.1.0.
+network/telegram: Updated for version 2.1.1.
+network/tgt: Added SCSI target driver (iSCSI, Fibre Channel, SRP, etc)
+network/unbound: Updated for version 1.10.0.
+network/vivaldi: Updated for version 3.0.1874.33.
+network/wireguard-linux-compat: Updated for version 1.0.20200429.
+network/zabbix_agentd: Updated for version 4.4.7.
+network/zabbix_java_gateway: Updated for version 4.4.7.
+network/zabbix_proxy: Updated for version 4.4.7.
+network/zabbix_server: Updated for version 4.4.7.
+network/zoom-linux: Updated for version 5.0.398100.0427.
+office/calcurse: Updated for version 4.6.0.
+office/calibre-bin: Updated for version 4.14.0.
+office/calibre-bin: Updated for version 4.15.0.
+office/htmldoc: Updated for version 1.9.8.
+office/pdfstudio: Updated for version 2019.2.2.
+office/pdfstudioviewer: Updated for version 2019.2.2.
+perl/perl-Data-IEEE754: Added (Support for IEEE754 floats)
+perl/perl-MaxMind-DB-Common: Added (Common code/metadata)
+perl/perl-Net-ARP: Updated for version 1.0.10.
+perl/perl-Net-Works: Added (APIs for IP addresses and networks)
+perl/perl-Path-Tiny: Updated for version 0.114.
+perl/perl-Test-Bits: Added perl-Test-Bits (Test single bits)
+python/PyGreSQL: Updated for version 5.1.2
+python/bleach: Updated for version 3.1.5.
+python/et_xmlfile: Added (python library to create large XML files)
+python/jdcal: Added jdcal (python module to convert dates)
+python/pyperclip: Updated for version 1.7.0.
+python/python-configargparse: Updated for version 1.2.3.
+python/python-toml: Added (A Python library).
+python/python3-aiohttp-socks: Updated for version 0.3.9.
+python/python3-openpyxl: Added (lib to read/write Excel 2010 files)
+python/python3-sip: Change python3 include path.
+python/sphinxcontrib-websupport: Updated for version 1.2.2.
+ruby/ruby-native-package-installer: Updated for version 1.0.9.
+ruby/rubygem-mime-types-data: Updated for version 3.2020.0425.
+ruby/rubygem-parser: Updated for version 2.7.1.1.
+system/avfs: Updated for version 1.1.2.
+system/bat: Updated for version 0.15.0.
+system/corosync: Updated for version 2.4.5.
+system/dlm: Updated for version 4.0.9.
+system/dtrx: Updated for version 7.1.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.11.
+system/fio: Updated for version 3.19.
+system/hwloc: Updated for version 2.2.0.
+system/isextract: Added (extract v3 InstallShield files).
+system/kapacitor: Updated for version 1.5.5.
+system/kbfs: Updated for version 5.4.2_20200424214931.
+system/keybase: Updated for version 5.4.2.
+system/motion: Updated for version 4.3.1.
+system/numactl: Updated for version 2.0.13.
+system/nvme-cli: Updated for version 1.11.1.
+system/pacemaker: Updated for version 2.0.3.
+system/passwordsafe: Updated for version 1.010.0.
+system/phoronix-test-suite: Updated for version 9.6.0.
+system/pspg: Updated for version 3.0.7.
+system/rclone: Updated for version 1.51.0.
+system/reiserfs4progs: Updated for version 1.2.1.
+system/sysdig: Updated for version 0.26.6
+system/wine-staging: Updated for version 5.7.
+system/wine: Updated for version 5.0.
++--------------------------+
+Fri Apr 24 01:19:39 UTC 2020
+academic/rpy2: Updated for version 3.3.1.
+desktop/anki: Add REQUIRES python3-PyQtWebEngine.
+desktop/find-cursor: Updated for version 1.6.
+development/Sphinx: Fix README.
+development/cgit: Updated for version 1.2.3.
+development/jdk11: Updated for version 11.0.7.
+development/jdk12: Update script.
+development/jdk13: Update script.
+development/jdk14: Added (Java Platform SDK).
+games/edgar: Updated for version 1.33.
+games/ppsspp: Rename .info file to avoid confusion.
+gis/saga-gis: Add clarifying note about OpenCV.
+graphics/nomacs: Updated for version 3.14.2.
+ham/chirp: Updated for version 20200409.
+libraries/BeautifulSoup4: Updated for version 4.9.0.
+libraries/hdf5: Updated for version 1.10.6.
+libraries/libuv: Updated for version 1.37.0.
+libraries/med: Updated for version 4.0.0.
+libraries/opencv: Updated for version 4.3.0
+libraries/pcre2: Updated for version 10.34
+libraries/qt5-styleplugins: Patched for qt5-5.12.8.
+libraries/qt5-webkit: Fix source directory.
+libraries/qt5: Update README.
+misc/dmg2img: added missing man page
+multimedia/LBRY: Updated for version 0.45.0.
+multimedia/dvdbackup: Updated for version 0.4.2.
+multimedia/flashplayer-plugin: Updated for version 32.0.0.363.
+multimedia/pepperflash-plugin: Updated for version 32.0.0.363.
+multimedia/plexmediaserver: Updated for v 1.19.1.2701-6327e27bf.
+multimedia/strawberry: Updated for version 0.6.9.
+multimedia/xawtv: Fix path issue.
+network/RTL8192: Added (Realtek RTL8192 chip Driver).
+network/bluejeans: Updated for version 2.1.1.
+network/dnscrypt-proxy: Updated for version 2.0.42.
+network/easyrsa: Updated for version 3.0.7.
+network/keepalived: Updated for version 2.0.20.
+network/neomutt: Updated for version 20200417.
+network/pCloudDrive: Updated for version 1.8.0.
+network/pexip-infinity-connect: Updated for v 1.6.0.52922.63.120.
+network/qutebrowser-tox: Updated for version 1.10.2.
+network/vivaldi: Updated for version 3.0.1874.23.
+network/wp-cli: Added (A command line interface for WordPress).
+network/yle-dl: Updated for version 20200419.
+office/gnucash-docs: Updated for version 3.10.
+office/gnucash: Updated for version 3.10.
+office/xournalpp: Updated for version 1.0.18.
+python/pytables: Removed (abandoned and not compatible with hdf5).
+python/python-zipp: Updated dependencies.
+python/python3-setuptools_autover: Updated for version 1.0.2.
+python/python3-uth: Updated for version 1.1.1.
+ruby/rubygem-asciidoctor: Updated for version 2.0.10.
+system/ansible: Updated for version 2.9.7.
+system/cluster-glue: Updated for version 20161102_afaeeb.
+system/docker-proxy: Fix MD5SUM.
+system/fence-agents: Updated for version 4.5.2.
+system/heartbeat: Added (Linux-HA heartbeat).
+system/nvme-cli: Updated for version 1.11.
+system/resource-agents: Updated for version 4.5.0.
+system/worker: Updated for version 4.4.0.
++--------------------------+
+Sun Apr 19 03:58:19 UTC 2020
+academic/fet: Updated for version 5.44.1.
+academic/rpy2: Added (R in Python).
+audio/audacity: Use correct github URL.
+audio/carla: Updated for version 2.1.
+audio/deadbeef: New maintainer.
+audio/faac: Use correct github URL.
+audio/faad2: Use correct github URL.
+audio/fluidsynth-dssi: Updated for version 1.0.0+20190112_c9b4107.
+audio/lmms: Updated for version 1.2.1.
+audio/mpd: Updated for version 0.21.22.
+audio/muse: Patched.
+audio/muse: Updated for version 3.1.
+audio/swami: Updated for version 2.2.1.
+desktop/Qogir-icon-theme: Speed up build.
+desktop/Surfn: Simplify & speed up build.
+desktop/Zafiro-icons: Speed up build.
+desktop/arc-icon-theme: Speed up build.
+desktop/areao43-icon-theme: Speed up build.
+desktop/awoken-icon-theme: Speed up build.
+desktop/faba-mono-icons: Speed up build.
+desktop/faenza-icon-theme: Speed up build.
+desktop/faience-icon-theme: Speed up build.
+desktop/find-cursor: Updated for version 1.5.
+desktop/flatwoken-icon-theme: Speed up build.
+desktop/kfaenza-icon-theme: Speed up build.
+desktop/meliae-icon-theme: Speed up build.
+desktop/numix-icon-theme-square: Speed up build.
+desktop/numix-icon-theme-square: Updated for version 20191227.
+desktop/numix-icon-theme: Fix VERSION, speed up build.
+desktop/oranchelo-icon-theme: Speed up build.
+desktop/papirus-icon-theme: Speed up build.
+desktop/ssr: Updated for version 0.4.0.
+desktop/vivacious-colors-gtk-icon-theme: Speed up build.
+desktop/weston: Update DEP.
+development/cf-cli: Updated for version 6.51.0.
+development/codelite: Updated for version 14.0.
+development/google-webdesigner: Updated for version 8.0.1.0401.
+development/kotlin: Updated for version 1.3.72.
+development/love: Updated for version 11.3, new maintainer.
+development/tea: new maintainer
+development/tig: Updated for version 2.5.1.
+development/tiled: Updated for version 1.3.4.
+development/tiled: updated for version 1.3.3
+development/uz80as: Update MD5SUM.
+development/vscode-bin: Updated for version 1.44.1.
+development/vscode-bin: Updated for version 1.44.2.
+games/7kaa: Updated for version 2.15.3.
+games/FlightGear-data: Updated for version 2018.3.5.
+games/FlightGear: Updated for version 2018.3.5.
+games/SLADE: Updated for version 3.1.11, new maintainer.
+games/ags: updated for version 3.5.0.24
+games/doomretro: Updated for version 3.5.4, new maintainer.
+games/eureka: Updated for version 1.24, new maintainer.
+games/innoextract: New maintainer.
+games/jfsw: Fix fluidsynth 2.x build.
+games/lgogdownloader: updated for version 3.7
+games/lmpc: Updated for version 1b70022.
+games/mangband: Updated for version 1.5.3.
+games/mgba: Updated for version 0.8.1.
+games/mrrescue: Updated for version 1.02e+20180818_a5be73c.
+games/nestopia: Updated for version 1.50.
+games/ppsspp: Add missing file.
+games/ppsspp: Fix missing dep.
+games/ppsspp: Updated for version 1.9.4.
+games/prboom-plus: Updated for version 2.5.1.7um, new maintainer.
+games/qzdl: New maintainer.
+games/scummvm: Updated for version 2.1.2, fix build.
+games/yamagi-quake2: New maintainer.
+gis/gpxsee: Updated for version 7.28.
+graphics/brlcad: updated for version 7.30.2
+graphics/wayland-egl: Removed (included in wayland).
+ham/CubicSDR: Updated for version d2f9333.
+ham/liquid-dsp: Updated for version 1.3.2.
+libraries/Botan: Updated for version 2.14.0.
+libraries/SDL2: Updated for version 2.0.12, new maintainer.
+libraries/SDL2_image: Updated for version 2.0.5, new maintainer.
+libraries/SDL2_mixer: new maintainer.
+libraries/SDL2_net: new maintainer.
+libraries/SDL2_ttf: Updated for version 2.0.15, new maintainer.
+libraries/SimGear: Add missing patch.
+libraries/SimGear: Updated for version 2018.3.5.
+libraries/efl: Fix build.
+libraries/hoel: updated for version 1.4.15
+libraries/libcbor: updated for version 0.6.1
+libraries/libinput: Updated for version 1.15.5.
+libraries/libinstpatch: Updated for version 1.1.2.
+libraries/librsync: New maintainer.
+libraries/liburcu: Updated for version 0.12.0.
+libraries/live555: Updated for version 2020.04.12
+libraries/lua-readline: Updated for version 2.6.
+libraries/lua-std.normalize: Updated for version 2.0.3.
+libraries/python3-PyQt5: Update REQUIRES.
+libraries/qt5-legacy: Remove README.benchmarks.
+libraries/qt5-webkit-annulen: Removed.
+libraries/qt5-webkit: Add -reduce-relocations.
+libraries/qt5-webkit: Use correct github URL.
+libraries/qt5: Updated for version 5.12.8.
+libraries/tolua++: Use correct github URL.
+libraries/ulfius: updated for version 2.6.6
+libraries/yder: updated for version 1.4.10
+misc/grc: New maintainer.
+misc/qtkeychain: Updated for version 0.10.0.
+multimedia/dvdbackup: Remove instructions for current.
+multimedia/k9copy-reloaded: Use internal dvdnav.
+multimedia/obs-studio: Note latest buildable version
+multimedia/vlc: Updated for version 3.0.9.2
+network/coturn: Added (open source TURN and STUN Server).
+network/freerdp: Updated for version 2.0.0.
+network/insync: Updated for version 3.1.3.40790.
+network/krb5: Updated for version 1.18.1.
+network/netcat-openbsd: Removed unused patches.
+network/palemoon: Updated for version 28.9.1.
+network/qutebrowser-tox: Updated for version 1.10.2.
+network/qutebrowser: Update README.
+network/qutebrowser: Updated for version 1.10.2.
+network/shorewall-core: Updated for version 5.2.4.1.
+network/shorewall6: Updated for version 5.2.4.1.
+network/shorewall: Updated for version 5.2.4.1.
+network/signal-desktop: Updated for version 1.33.1.
+network/skypeforlinux: Updated for version 8.59.0.77.
+network/translate-shell: Updated for version 0.9.6.11.
+network/uTox: Updated for version 0.17.2
+network/urlgrabber: New maintainer.
+network/wireguard-linux-compat: Updated for version 1.0.20200413.
+network/zoom-linux: Updated for version 3.5.385850.0413.
+office/hunspell-de: Fix script.
+office/keepassxc: Updated for version 2.5.4.
+office/plover: Added (Open source stenotype engine).
+office/xlsx2csv: Added (xlsx to csv converter).
+office/xournal: Updated for version 0.4.8.2016.
+perl/perl-CPANPLUS: Updated for version 0.9908.
+perl/perl-List-AllUtils: Added (All List utilities).
+perl/perl-Moo: Updated for version 2.004000.
+perl/perl-MooX-StrictConstructor: Updated for version 0.011.
+python/asttokens: Updated for version 2.0.4.
+python/pybind11: Updated for version 2.5.0
+python/pycdio: Updated for version 0.21.
+python/python-configargparse: Updated for version 1.2.1.
+python/python-jsonrpclib: Updated for version 0.4.1.
+python/python-soupsieve: Update README.
+python/python3-pyrsistent: Updated for version 0.16.0.
+python/python3-soupsieve: Updated for version 1.9.5.
+python/sphinxcontrib-plantuml: Updated for version 0.18.
+python/sphinxcontrib-websupport: Updated for version 1.2.1.
+system/acpitool: New maintainer.
+system/bleachbit: Updated for version 3.9.2.
+system/chronograf: Updated for version 1.8.2.
+system/ciopfs: New maintainer.
+system/containerd: Updated for version 1.2.13.
+system/docker-proxy: Updated for version 20200102_9fd385b.
+system/docker: Updated for version 19.03.8.
+system/dosbox-dev: updated for version 0.74.3.r4335
+system/fd: Updated for version 8.0.0.
+system/kbfs: Updated for version 5.4.0_20200416162659.
+system/keybase: Updated for version 5.4.0.
+system/lnav: Updated for version 0.8.5.
+system/netdata: Updated for version 1.21.1.
+system/nvidia-driver: Updated for version 440.82.
+system/nvidia-kernel: Updated for version 440.82.
+system/nvidia-legacy390-driver: Fix nvidia-switch.
+system/ossec-agent: Update copyright year and credits.
+system/ossec-local: Update copyright year and credits.
+system/ossec-server: Update copyright year and credits.
+system/runc: Updated for version 1.0.0_rc10.
+system/skim: Updated for version 0.8.1.
+system/sysbench: Added (benchmark suite).
+system/telegraf: Updated for version 1.14.1.
+system/thinkfan: Updated for version 1.1.
+system/unetbootin: Updated for version 677.
+system/xen: Updated for version 4.13.0.
+system/xldconfig: Updated for version 0.7.
++--------------------------+
 Sat Apr 11 02:30:39 UTC 2020
 academic/gri: Update HOMEPAGE.
 audio/fluidsynth: Updated for version 2.1.1, new maintainer.

@@ -2,7 +2,7 @@
 
 # Slackware build script for pCloudDrive
 
-# Copyright 2019 Igor Alexandrov <igora.vault@gmail.com>
+# Copyright 2020 Igor Alexandrov <igor.alexandrov@outlook.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,18 +22,27 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Modifid by slackbuilds.org
+
 PRGNAM=pCloudDrive
-VERSION=${VERSION:-1.7.2}
+VERSION=${VERSION:-1.8.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
-  case "$(uname -m)" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$(uname -m) ;;
-  esac
+  ARCH=$(uname -m)
 fi
+
+case "$ARCH" in
+  i?86) break ;;
+  x86_64) break ;;
+  *)
+    echo "$ARCH is not supported for $PRGNAM-$VERSION"
+    exit 1
+    ;;
+esac
+
+set -e
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
@@ -41,13 +50,6 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 APPIMGNAM=pcloud
-
-if [ "$ARCH" != "x86_64" -a "$ARCH" != "i586" ]; then
-  echo "$ARCH is not supported for $PRGNAM-$VERSION"
-  exit 1
-fi
-
-set -eu
 
 rm -rf $PKG
 mkdir -p $TMP $OUTPUT $PKG/{install,opt,usr/{bin,doc/$PRGNAM-$VERSION}}
@@ -57,7 +59,7 @@ $CWD/$APPIMGNAM --appimage-extract
 mv squashfs-root $PRGNAM
 cd $PKG
 mv $PKG/opt/$PRGNAM/usr/share $PKG/usr
-rm -rf $PKG/opt/$PRGNAM/{usr,AppRun,pcloud.png,pcloud.desktop}
+rm -rf $PKG/opt/$PRGNAM/{usr,AppRun,pcloud.png,pcloud.desktop,resources/app/.vscode}
 install -D -m 644 -t $PKG/usr/share/applications $CWD/pclouddrive.desktop
 
 chown -R root:root .

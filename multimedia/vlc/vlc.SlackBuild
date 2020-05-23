@@ -28,7 +28,7 @@
 # -----------------------------------------------------------------------------
 
 PRGNAM=vlc
-VERSION=${VERSION:-3.0.8}
+VERSION=${VERSION:-3.0.10}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -83,6 +83,8 @@ cd $PRGNAM-$VERSION
 
 sed -i '/DEPRECATED/s:^://:' modules/text_renderer/freetype/text_layout.c
 
+patch -p0 < $CWD/patch-dvdread-503.diff
+patch -p0 < $CWD/patch-dvdnav-503.diff
 patch -p0 < $CWD/patch-projectM-fontpath.diff
 patch -p0 < $CWD/patch_vlc_cache_gen.diff
 
@@ -130,12 +132,10 @@ LDFLAGS="$SLKLDFLAGS" \
   --build=$ARCH-slackware-linux \
   $qtversion \
   $wayland \
-  $opencv \
   $runasroot \
   $libaom \
-  --enable-merge-ffmpeg \
   --disable-opencv \
-  --disable-vpx \
+  --enable-merge-ffmpeg \
   --with-kde-solid=no \
 
 make

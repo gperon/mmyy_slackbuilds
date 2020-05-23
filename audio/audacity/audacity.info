@@ -1,7 +1,7 @@
 PRGNAM="audacity"
 VERSION="2.3.3"
 HOMEPAGE="https://www.audacityteam.org"
-DOWNLOAD="https://github.com/audacity/audacity/archive/Audacity-2.3.3.tar.gz \
+DOWNLOAD="https://github.com/audacity/audacity/archive/Audacity-2.3.3/audacity-Audacity-2.3.3.tar.gz \
           http://ponce.cc/slackware/sources/repo/audacity-manual-2.3.3.zip"
 MD5SUM="946c27cd0a129ca364589534c70f81d1 \
         1122493858ec050665f48315bcf90953"

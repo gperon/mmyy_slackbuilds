@@ -64,7 +64,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvzf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvzf $CWD/$PRGNAM-$VERSION.tar.gz || tar xvzf $CWD/v$VERSION.tar.gz || exit 1
 
 cd $TMP/$PRGNAM-$VERSION
 chown -R root:root .

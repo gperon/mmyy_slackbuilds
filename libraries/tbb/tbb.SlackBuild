@@ -64,7 +64,7 @@ set -e
 rm -rf $PKG $TMP/oneTBB-${SRCVERSION}
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvf $CWD/${SRCPRGNAM}-${SRCVERSION}.tar.gz
+tar xvf $CWD/${SRCPRGNAM}-${SRCVERSION}.tar.gz || tar xvf $CWD/${PRGNAM}-${SRCVERSION}.tar.gz || exit 1
 cd ${SRCPRGNAM}-${SRCVERSION}
 chown -R root:root .
 find -L . \
@@ -73,8 +73,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-CC=/usr/bin/gcc-6 \
-CXX=/usr/bin/g++-6 \
+# CC=/usr/bin/gcc-6 \
+# CXX=/usr/bin/g++-6 \
 make $NUMJOBS
 
 mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}

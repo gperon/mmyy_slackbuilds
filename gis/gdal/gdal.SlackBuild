@@ -28,7 +28,7 @@ PRGNAM=gdal
 VERSION=${VERSION:-3.0.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
-NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -71,8 +71,6 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-
-patch -p1 < $CWD/poppler.patch
 
 # OpenCL, webp, Spatialite and Grass support need special arrangements.
 # Everything else is handled automatically by configure.
@@ -135,7 +133,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --without-grib \
   --with-static-proj4 \
   --with-mysql \
-  --with-python=python3.7 \
+  --with-python=python3.8 \
   --with-poppler \
   --with-libtiff=internal \
   --with-rename-internal-libtiff-symbols=yes \

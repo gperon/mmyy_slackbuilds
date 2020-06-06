@@ -26,7 +26,7 @@
 # Revision date: 2019-12-12
 
 PRGNAM=kicad-symbols
-VERSION=${VERSION:-5.1.5}
+VERSION=${VERSION:-5.1.6}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -35,8 +35,6 @@ case "$( uname -m )" in
   arm*) ARCH=arm ;;
      *) ARCH=$( uname -m ) ;;
 esac
-
-KICAD_VERSION=${KICAD_VERSION:-5.1.5}
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}

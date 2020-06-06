@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slackware build script for tzlocal
+# Slackware build script for python-pynacl
 
 # Copyright 2020  Giorgio Peron, Belluno, Italy
 # All rights reserved.

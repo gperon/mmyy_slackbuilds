@@ -1,7 +1,6 @@
-diff -ur VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh VirtualBox-5.2.2/src/VBox/Installer/linux/vboxdrv.sh
---- VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh	2017-11-23 10:21:59.000000000 +0100
-+++ VirtualBox-5.2.2/src/VBox/Installer/linux/vboxdrv.sh	2017-12-03 13:58:52.107070523 +0100
-@@ -51,23 +51,9 @@
+--- VirtualBox-6.1.4.orig/src/VBox/Installer/linux/vboxdrv.sh	2020-02-18 18:20:19.000000000 +0100
++++ VirtualBox-6.1.4/src/VBox/Installer/linux/vboxdrv.sh	2020-02-22 14:33:41.141337430 +0100
+@@ -61,23 +61,8 @@
  export USERNAME
  export USER=$USERNAME
  
@@ -22,14 +21,21 @@ diff -ur VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh VirtualBox-5.
  VIRTUALBOX="${INSTALL_DIR}/VirtualBox"
  VBOXMANAGE="${INSTALL_DIR}/VBoxManage"
 -BUILDINTMP="${MODULE_SRC}/build_in_tmp"
-+
  if test -u "${VIRTUALBOX}"; then
      GROUP=root
      DEVICE_MODE=0600
-@@ -111,117 +97,6 @@
-     lsmod | grep -q "$1[^_-]"
+@@ -148,125 +133,6 @@
+     echo "${1}" >> "${LOG}"
  }
  
+-module_build_log()
+-{
+-    setup_log
+-    echo "${1}" | egrep -v \
+-        "^test -e include/generated/autoconf.h|^echo >&2|^/bin/false\)$" \
+-        >> "${LOG}"
+-}
+-
 -## Output the vboxdrv part of our udev rule.  This is redirected to the right file.
 -udev_write_vboxdrv() {
 -    VBOXDRV_GRP="$1"
@@ -144,7 +150,19 @@ diff -ur VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh VirtualBox-5.
  start()
  {
      begin_msg "Starting VirtualBox services" console
-@@ -283,8 +158,6 @@
+@@ -287,10 +153,7 @@
+             failure "Cannot remove $DEVICE"
+         fi
+         if ! $MODPROBE vboxdrv > /dev/null 2>&1; then
+-            setup
+-            if ! $MODPROBE vboxdrv > /dev/null 2>&1; then
+-                failure "modprobe vboxdrv failed. Please use 'dmesg' to find out why"
+-            fi
++            failure "modprobe vboxdrv failed. Please use 'dmesg' to find out why"
+         fi
+         sleep .2
+     fi
+@@ -337,8 +200,6 @@
          mkdir -p -m 0750 /dev/vboxusb 2>/dev/null
          chown root:vboxusers /dev/vboxusb 2>/dev/null
      fi
@@ -153,7 +171,7 @@ diff -ur VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh VirtualBox-5.
      succ_msg "VirtualBox services started"
  }
  
-@@ -365,66 +238,10 @@
+@@ -419,102 +280,10 @@
      fi
  }
  
@@ -177,6 +195,7 @@ diff -ur VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh VirtualBox-5.
 -                  "${i}/misc/vboxnetflt.ko" "${i}/misc/vboxpci.ko"
 -            version=`expr "${i}" : "/lib/modules/\(.*\)"`
 -            depmod -a "${version}"
+-            sync
 -        fi
 -        # Remove the kernel version folder if it was empty except for us.
 -        test   "`echo ${i}/misc/* ${i}/misc/.?* ${i}/* ${i}/.?*`" \
@@ -189,45 +208,87 @@ diff -ur VirtualBox-5.2.2.orig/src/VBox/Installer/linux/vboxdrv.sh VirtualBox-5.
  setup()
  {
 -    begin_msg "Building VirtualBox kernel modules" console
--    if ! $BUILDINTMP \
+-    log "Building the main VirtualBox module."
+-    if ! myerr=`$BUILDINTMP \
 -        --save-module-symvers /tmp/vboxdrv-Module.symvers \
 -        --module-source "$MODULE_SRC/vboxdrv" \
--        --no-print-directory install >> $LOG 2>&1; then
+-        --no-print-directory install 2>&1`; then
 -        "${INSTALL_DIR}/check_module_dependencies.sh" || exit 1
+-        log "Error building the module:"
+-        module_build_log "$myerr"
 -        failure "Look at $LOG to find out what went wrong"
 -    fi
--    if ! $BUILDINTMP \
+-    log "Building the net filter module."
+-    if ! myerr=`$BUILDINTMP \
 -        --use-module-symvers /tmp/vboxdrv-Module.symvers \
 -        --module-source "$MODULE_SRC/vboxnetflt" \
--        --no-print-directory install >> $LOG 2>&1; then
+-        --no-print-directory install 2>&1`; then
+-        log "Error building the module:"
+-        module_build_log "$myerr"
 -        failure "Look at $LOG to find out what went wrong"
 -    fi
--    if ! $BUILDINTMP \
+-    log "Building the net adaptor module."
+-    if ! myerr=`$BUILDINTMP \
 -        --use-module-symvers /tmp/vboxdrv-Module.symvers \
 -        --module-source "$MODULE_SRC/vboxnetadp" \
--        --no-print-directory install >> $LOG 2>&1; then
+-        --no-print-directory install 2>&1`; then
+-        log "Error building the module:"
+-        module_build_log "$myerr"
 -        failure "Look at $LOG to find out what went wrong"
 -    fi
--    if ! $BUILDINTMP \
--        --use-module-symvers /tmp/vboxdrv-Module.symvers \
--        --module-source "$MODULE_SRC/vboxpci" \
--        --no-print-directory install >> $LOG 2>&1; then
--        failure "Look at $LOG to find out what went wrong"
+-    if test -e "$MODULE_SRC/vboxpci"; then
+-        log "Building the PCI pass-through module."
+-        if ! myerr=`$BUILDINTMP \
+-            --use-module-symvers /tmp/vboxdrv-Module.symvers \
+-            --module-source "$MODULE_SRC/vboxpci" \
+-            --no-print-directory install 2>&1`; then
+-            log "Error building the module:"
+-            module_build_log "$myerr"
+-            failure "Look at $LOG to find out what went wrong"
+-        fi
 -    fi
 -    rm -f /etc/vbox/module_not_compiled
 -    depmod -a
+-    sync
 -    succ_msg "VirtualBox kernel modules built"
+-    # Secure boot on Ubuntu and Debian.
+-    if test -n "$HAVE_SEC_BOOT" &&
+-        type update-secureboot-policy >/dev/null 2>&1; then
+-        SHIM_NOTRIGGER=y update-secureboot-policy --new-key
+-    fi
+-    if test -f "$DEB_PUB_KEY" && test -f "$DEB_PRIV_KEY"; then
+-        HAVE_DEB_KEY=true
+-        for i in $MODULE_LIST; do
+-            kmodsign sha512 /var/lib/shim-signed/mok/MOK.priv \
+-                /var/lib/shim-signed/mok/MOK.der \
+-                /lib/modules/"$KERN_VER"/misc/"$i".ko
+-        done
+-        # update-secureboot-policy "expects" DKMS modules.
+-        # Work around this and talk to the authors as soon
+-        # as possible to fix it.
+-        mkdir -p /var/lib/dkms/vbox-temp
+-        update-secureboot-policy --enroll-key 2>/dev/null ||
+-            begin_msg "Failed to enroll secure boot key." console
+-        rmdir -p /var/lib/dkms/vbox-temp 2>/dev/null
+-    fi
 +    echo "Not implemented! Please use the virtualbox-kernel.SlackBuild available at SlackBuilds.org instead."
  }
  
  dmnstatus()
-@@ -480,13 +297,7 @@
-     ## todo Do we need a udev rule to create /dev/vboxdrv[u] at all?  We have
-     ## working fall-back code here anyway, and the "right" code is more complex
-     ## than the fall-back.  Unnecessary duplication?
+@@ -564,20 +333,7 @@
+     stop && start
+     ;;
+ setup)
+-    test -n "${2}" && export KERN_VER="${2}"
+-    # Create udev rule and USB device nodes.
+-    ## todo Wouldn't it make more sense to install the rule to /lib/udev?  This
+-    ## is not a user-created configuration file after all.
+-    ## todo Do we need a udev rule to create /dev/vboxdrv[u] at all?  We have
+-    ## working fall-back code here anyway, and the "right" code is more complex
+-    ## than the fall-back.  Unnecessary duplication?
 -    stop && cleanup
 -    setup_usb "$GROUP" "$DEVICE_MODE" "$INSTALL_DIR"
--    setup && start
+-    start
 -    ;;
 -cleanup)
 -    stop && cleanup

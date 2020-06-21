@@ -3,26 +3,7 @@ enables dramatic increases in computing performance by harnessing the
 power of the GPU.
 
 NOTE:
-- the binary file to download is 1,4 Gb;
-- the temporary package file will need 3,5 Gb;
-- the final package will be around 1 Gb (2,2 Gb when installed).
+- the binary file to download is 2,8 Gb;
+- the temporary package file will need 7 Gb;
+- the final package will be around 2 Gb (3 Gb when installed).
 Be sure to have enough free space before building this.
-
-this cuda version requires a patch in the package glibc-2.29
-
-diff --git a/floatn.h b/floatn.h
-index f93a9f8..96db3c3 100644
---- a/floatn.h
-+++ b/floatn.h
-@@ -34,6 +34,11 @@
- # define __HAVE_FLOAT128 0
- #endif
- 
-+#if CUDART_VERSION
-+#undef __HAVE_FLOAT128
-+#define __HAVE_FLOAT128 0
-+#endif
-+
- /* Defined to 1 if __HAVE_FLOAT128 is 1 and the type is ABI-distinct
-    from the default float, double and long double types in this glibc.  */
- #if __HAVE_FLOAT128

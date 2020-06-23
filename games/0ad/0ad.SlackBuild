@@ -83,6 +83,10 @@ sed -i 's|-mt||g' build/premake/extern_libs5.lua
 sed -i 's|/usr/local/include|/usr/include|' build/premake/{extern_libs5.lua,premake5.lua}
 sed -i 's|-isystem |-I|' build/premake/premake5/{src/tools/gcc.lua,tests/tools/test_gcc.lua}
 
+# Fix missing headers
+sed -i '/include <sstream>/a #include <deque>' ./source/third_party/cppformat/format.h
+sed -i '/include "ps\/Profiler2.h"/a #include <stack>' ./source/ps/Profiler2GPU.cpp
+
 # build/workspaces/update-workspaces.sh
 #   have a root check, let's disable it.
 patch -p1 < $CWD/disable-root-check.patch

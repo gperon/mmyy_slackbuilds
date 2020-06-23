@@ -96,6 +96,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+sed -i '/include <QTextStream>/a #include <QPainterPath>' \
+  Rendering/Qt/vtkQtLabelRenderStrategy.cxx \
+  Rendering/Qt/vtkQtStringToImage.cxx
+
 if pkg-config --exists proj ; then
   proj="-DVTK_USE_SYSTEM_LIBPROJ:BOOL=ON"
   # proj6 patch courtesy of
@@ -147,10 +151,12 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/qt
-mv \
-  $PKG/usr/plugins/ \
-  $PKG/usr/lib${LIBDIRSUFFIX}/qt
+[ -d $PKG/usr/plugins ] && {
+  mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/qt
+  mv \
+    $PKG/usr/plugins/ \
+    $PKG/usr/lib${LIBDIRSUFFIX}/qt
+}
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \

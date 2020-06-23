@@ -1,10 +1,10 @@
 PRGNAM="audacity"
-VERSION="2.3.3"
+VERSION="2.4.1"
 HOMEPAGE="https://www.audacityteam.org"
-DOWNLOAD="https://github.com/audacity/audacity/archive/Audacity-2.3.3/audacity-Audacity-2.3.3.tar.gz \
-          http://ponce.cc/slackware/sources/repo/audacity-manual-2.3.3.zip"
-MD5SUM="946c27cd0a129ca364589534c70f81d1 \
-        1122493858ec050665f48315bcf90953"
+DOWNLOAD="https://github.com/audacity/audacity/archive/Audacity-2.4.1/audacity-Audacity-2.4.1.tar.gz \
+          http://ponce.cc/slackware/sources/repo/audacity-manual-2.4.1.zip"
+MD5SUM="c02a12a9f14f2db223f84e99e17b4850 \
+        b3640ddc811e0d3c6b22c9b411743f39"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="wxGTK3 vamp soxr"

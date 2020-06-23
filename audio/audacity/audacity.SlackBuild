@@ -3,7 +3,7 @@
 # Slackware build script for audacity
 
 # Copyright 2006-2010 Chess Griffin <chess@chessgriffin.com>
-# Copyright 2011-2019 Matteo Bernardini <ponce@slackbuilds.org>
+# Copyright 2011-2020 Matteo Bernardini <ponce@slackbuilds.org>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -31,8 +31,8 @@
 
 PRGNAM=audacity
 SRCNAM=Audacity
-VERSION=${VERSION:-2.3.3}
-MANVER=${MANVER:-2.3.3}
+VERSION=${VERSION:-2.4.1}
+MANVER=${MANVER:-2.4.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -89,6 +89,9 @@ find -L . \
 sed -i "s,lib/vamp,lib$LIBDIRSUFFIX/vamp,g" \
   lib-src/libvamp/src/vamp-hostsdk/PluginHostAdapter.cpp || true
 
+# fix building against ffmpeg-2.6.x, patch from archlinux
+patch -p1 < $CWD/audacity-ffmpeg.patch || exit 1
+
 autoreconf -fi
 
 # libsoxr is the new default resampling library
@@ -124,7 +127,7 @@ for i in ffmpeg expat lame libid3tag libflac libmad libresample libsndfile libva
   rm -rf lib-src/$i
 done
 
-make -j7
+make
 make install DESTDIR=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
@@ -149,8 +152,8 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 # Before changing the version just check the path inside of the zip:
 # the index file must be located to /usr/share/audacity/help/manual/index.html
 if [ "${MANUAL:-no}" = "yes" ]; then
-  mkdir -p $PKG/usr/share/$PRGNAM/help
-  unzip $CWD/$PRGNAM-manual-$MANVER.zip -d $PKG/usr/share/$PRGNAM/help
+  mkdir -p $PKG/usr/share/$PRGNAM
+  unzip $CWD/$PRGNAM-manual-$MANVER.zip -d $PKG/usr/share/$PRGNAM
 fi
 
 mkdir -p $PKG/install

@@ -67,7 +67,7 @@ find -L . \
 
 if ! [ "${HARDENING:-yes}" = "yes" ]; then
   sed -i "s/ -DVBOX_WITH_HARDENING//g" \
-   {vboxdrv,vboxnetadp,vboxnetflt,vboxpci}/Makefile
+   {vboxdrv,vboxnetadp,vboxnetflt}/Makefile
 fi
 
 make KERN_DIR=${KERNELPATH}

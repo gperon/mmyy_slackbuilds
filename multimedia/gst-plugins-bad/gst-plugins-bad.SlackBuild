@@ -75,6 +75,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+# Needed for the newer vulkan-sdk, thanks to Skaendo!
+# https://github.com/KhronosGroup/Vulkan-Docs/issues/1230
+patch -p1 < $CWD/vulkan.patch
+
 # Needed for gcc >= 10.x
 patch -p1 < $CWD/gstreamer1-plugins-bad-lv2-make-it-build-with-fno-common.patch
 

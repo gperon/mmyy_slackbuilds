@@ -24,7 +24,7 @@
 
 PRGNAM=embree
 NAME=embree3
-VERSION=${VERSION:-3.9.0}
+VERSION=${VERSION:-3.11.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -38,7 +38,7 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-NUMJOBS=${NUMJOBS:-" -j7 "}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
@@ -64,7 +64,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvzf $CWD/v-$VERSION.tar.gz || tar xvzf $CWD/$PRGNAM-$VERSION.tar.gz
+tar xvzf $CWD/v$VERSION.tar.gz || tar xvzf $CWD/$PRGNAM-$VERSION.tar.gz
 
 cd $TMP/$PRGNAM-$VERSION
 chown -R root:root .

@@ -4,7 +4,7 @@
 
 # Copyright 2006 Martin Lefebvre <dadexter@gmail.com>
 # Copyright 2008-2014 Heinz Wiesinger, Amsterdam, The Netherlands
-# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -29,7 +29,7 @@
 
 PRGNAM=scribus
 VERSION=${VERSION:-1.5.5}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
@@ -80,21 +80,21 @@ sed \
         -e 's|#!/usr/bin/env python|#!/usr/bin/env python2|' \
         -i scribus/plugins/scriptplugin/{samples,scripts}/*
 
-export CC=clang
-export CXX=clang++
-cmake . \
-  -DCMAKE_C_FLAGS="$SLKCFLAGS" \
-  -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
+patch -p1 -i $CWD/scribus-boost-1.71.patch # Fix build with boost 1.71
+patch -p1 -i $CWD/scribus-qt-5.15.patch
+# patch -p1 -i $CWD/scribus-poppler-0.86.patch # Fix build with poppler 0.86
+
+mkdir build
+cd build
+cmake .. \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_BUILD_TYPE=None \
   -DCMAKE_SKIP_RPATH=ON \
   -DLIB_SUFFIX=${LIBDIRSUFFIX} \
-  -DWANT_CPP11=1 \
-  -DRENDER_LIB=CAIRO \
-  -DWANT_GRAPHICSMAGICK=1
 
 make $NUMJOBS
 make install DESTDIR=$PKG
+cd ..
 
 mkdir -p $PKG/usr/share/{applications,pixmaps}
 cat scribus.desktop > $PKG/usr/share/applications/scribus.desktop

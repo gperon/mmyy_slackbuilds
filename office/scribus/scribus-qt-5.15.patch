@@ -1,0 +1,12 @@
+diff --git a/scribus/ui/scresizecursor.cpp b/scribus/ui/scresizecursor.cpp
+index f2c78e5ae7..85271ed861 100644
+--- a/scribus/ui/scresizecursor.cpp
++++ b/scribus/ui/scresizecursor.cpp
+@@ -12,6 +12,7 @@
+ 
+ #include <QDebug>
+ #include <QPainter>
++#include <QPainterPath>
+ #include <QPixmap>
+ #include <QPen>
+ #include <QBrush>

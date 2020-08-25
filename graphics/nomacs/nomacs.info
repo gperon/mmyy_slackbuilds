@@ -1,10 +1,10 @@
 PRGNAM="nomacs"
-VERSION="3.14.2"
+VERSION="3.16.224"
 HOMEPAGE="http://www.nomacs.org"
-DOWNLOAD="https://github.com/nomacs/nomacs/archive/3.14.2/nomacs-3.14.2.tar.gz \
-          https://github.com/nomacs/nomacs-plugins/archive/3.14/nomacs-plugins-3.14.tar.gz"
-MD5SUM="65bd50be8f611305850d3c071adcfcc3 \
-        52eff2a14ff70e2f439f7f2119d80895"
+DOWNLOAD="https://github.com/nomacs/nomacs/archive/3.16/nomacs-3.16.224.tar.gz \
+          https://github.com/nomacs/nomacs-plugins/archive/3.16/nomacs-plugins-3.16.tar.gz"
+MD5SUM="3489dc4dfb56007ffbc4b2d442f95131 \
+        fe809775c82da4e55fb47a6e0d05b97a"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="lcov opencv quazip-qt5"

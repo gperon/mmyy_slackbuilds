@@ -23,8 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=nomacs
-VERSION=${VERSION:-3.14.2}
-PVERSION=${PVERSION:-3.14}
+VERSION=${VERSION:-3.16.224}
+PVERSION=${PVERSION:-3.16}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -55,7 +55,7 @@ else
   LIBDIRSUFFIX=""
 fi
 
-DOCS="Readme/COPYRIGHT Readme/LICENSE* Readme/README"
+DOCS="CONTRIBUTING.md LICENSE README.md"
 
 set -e
 
@@ -75,14 +75,14 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-sed -i '/^#include <QPainter>$/a #include <QPainterPath>' \
-  ImageLounge/plugins/PageExtractionPlugin/src/DkPageSegmentation.cpp
+# sed -i '/^#include <QPainter>$/a #include <QPainterPath>' \
+#   ImageLounge/plugins/PageExtractionPlugin/src/DkPageSegmentation.cpp
 
 cd ImageLounge
 
 # Fix man pages and plugins installation path
-sed -i "s|share\/man|man|" cmake/UnixBuildTarget.cmake || exit 1
-sed -i "s|lib/nomacs-plugins|lib${LIBDIRSUFFIX}/nomacs-plugins|" plugins/cmake/Utils.cmake || exit 1
+# sed -i "s|share\/man|man|" cmake/UnixBuildTarget.cmake || exit 1
+# sed -i "s|lib/nomacs-plugins|lib${LIBDIRSUFFIX}/nomacs-plugins|" plugins/cmake/Utils.cmake || exit 1
 
 mkdir -p build
 cd build
@@ -101,10 +101,12 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+mv $PKG/usr/share/man $PKG/usr
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cd ..
 cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

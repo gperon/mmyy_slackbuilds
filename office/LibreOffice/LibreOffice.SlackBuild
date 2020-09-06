@@ -26,7 +26,7 @@
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-6.4.1.2}
+VERSION=${VERSION:-7.0.0.3}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
@@ -91,15 +91,15 @@ jval="$(echo $MAKEFLAGS |grep -o "\-j *[0-9]*" | grep -o "[0-9]*")" || true
 # If PARALLEL environment variable is set, use that to override everything.
 [ "${PARALLEL:-0}" != "0" ] && parallel="--with-parallelism=$PARALLEL"
 
-JAVA=${JAVA:-jdk}
+JAVA=${JAVA:-jdk11}
 if [ "$JAVA" = "openjdk7" ]; then
   . /etc/profile.d/openjdk7.sh
   use_java="--with-java=java"
 elif [ "$JAVA" = "openjdk8" ]; then
   . /etc/profile.d/openjdk8.sh
   use_java="--with-java=java"
-elif [ "$JAVA" = "jdk" ]; then
-  . /etc/profile.d/jdk.sh
+elif [ "$JAVA" = "jdk11" ]; then
+  . /etc/profile.d/jdk11.sh
   use_java="--with-java=java"
 elif [ "$JAVA" = "no" ]; then
   use_java="--with-java=no"

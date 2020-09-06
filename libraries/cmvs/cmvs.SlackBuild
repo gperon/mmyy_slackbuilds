@@ -54,8 +54,9 @@ elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
-  SLKCFLAGS="-O2"
-  LIBDIRSUFFIX=""
+  # https://github.com/baldurk/renderdoc/issues/1991#issuecomment-670518428
+  printf %s\\n 'Only x86_64 is supported for linux.' >&2
+  exit 1
 fi
 
 set -e

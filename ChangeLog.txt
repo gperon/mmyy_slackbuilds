@@ -1,3 +1,429 @@
+Sat Sep  5 01:28:04 UTC 2020
+academic/STAR: Updated for version 2.7.5c.
+academic/ViennaRNA: Updated for version 2.4.15.
+academic/bibletime: Updated for version 3.0.
+academic/cvc4: Updated for version 1.8.
+academic/eprover: Updated for version 2.5.
+academic/pysam: Updated for version 0.16.0.1.
+academic/rpy2: Updated for version 3.3.5.
+audio/fabla: Patch for the newer lv2.
+audio/lv2dynparam1: Fix for the newer lv2.
+audio/yoshimi: Updated for version 1.7.2.
+audio/zynjacku: Fix for the newer lv2.
+desktop/dbgl-legacy: Added (a Java frontend for DOSBox).
+desktop/dbgl: Updated for version 0.92.
+desktop/enlightenment: Updated for version 0.24.2.
+desktop/qt5ct: Updated for version 1.1.
+desktop/spectrwm: Updated for version 3.4.1.
+development/Fennel: Updated for version 0.5.0.
+development/atom: Updated for version 1.50.0.
+development/avra: Updated for version 1.4.2.
+development/brotli: Updated for version 1.0.9.
+development/check: Updated for version 0.15.2.
+development/chibi-scheme: Updated for version 0.9.
+development/dbeaver-ce: Updated for version 7.1.5.
+development/fossil: Updated for version 2.12.1.
+development/gambas3: Updated for version 3.15.1.
+development/google-webdesigner: Updated for version 8.0.3.0603.
+development/gprolog: Updated for version 1.4.5.
+development/hopper: Updated for version 4.5.29.
+development/idea: Updated for version 2020.2.
+development/kotlin: Updated for version 1.4.0.
+development/mg-troglobit: Updated for version 3.4.
+development/mlr: Updated for version 5.8.0.
+development/nodejs: Updated for version 12.16.3.
+development/regina-rexx: Updated for version 3.9.3.
+development/robotframework: Updated for version 3.2.2.
+development/sbcl: Updated for version 2.0.7.
+development/swi-prolog: Updated for version 8.2.1.
+development/tiled: updated for version 1.4.2
+development/vscode-bin: Updated for version 1.48.2.
+games/0ad-data: Updated for version 0.0.23b.
+games/0ad: Updated for version 0.0.23b.
+games/CorsixTH: Updated for version 0.63.
+games/ags: updated for version 3.5.0.26
+games/freedink: Patched for newer SDL2.
+games/fs-uae-arcade: Updated for version 3.0.5.
+games/fs-uae-launcher: Updated for version 3.0.5.
+games/fs-uae: Updated for version 3.0.5.
+games/mgba: Updated for version 0.8.2
+games/ppsspp: Updated for version 1.10.3
+games/solarus-quest-editor: Updated for version 1.6.4.
+games/solarus: Updated for version 1.6.4.
+games/starfighter: Updated for version 2.3.1.
+games/vegastrike: Patched and rebuilt.
+games/warzone2100: updated for version 3.4.1
+graphics/apitrace: Updated for v 9.0, Moved from Development.
+graphics/brlcad: updated for version 7.30.10
+graphics/renderdoc: Added (Stand-alone graphics debugging tool)
+graphics/ueberzug: Updated for version 18.1.6.
+graphics/vuescan: Updated MD5SUMs.
+libraries/Botan: Updated for version 2.15.0.
+libraries/PyQt5: Fix download link.
+libraries/QScintilla-qt5: Fix download link.
+libraries/SDL_kitchensink: updated for version 1.0.9
+libraries/adns: Updated for version 1.6.0.
+libraries/efl: Updated for version 1.24.3.
+libraries/gloox: Updated for version 1.0.23.
+libraries/iddawc: updated for version 0.9.6
+libraries/leptonica: Updated for version 1.80.0.
+libraries/lua-posix: Updated for version 35.0.
+libraries/orcania: updated for version 2.1.1
+libraries/python-efl: Updated for version 1.24.0.
+libraries/python3-PyQt5: Fix download link.
+libraries/python3-PyQtWebEngine: Fix download link.
+libraries/rhonabwy: updated for version 0.9.12
+libraries/slv2: Fix for the newer lv2.
+libraries/ulfius: updated for version 2.6.9
+libraries/yder: updated for version 1.4.12
+misc/jmri: Updated for version 4.20.
+misc/slop: Updated for version 7.5.
+multimedia/fdkaac: Updated for version 1.0.0
+multimedia/get_iplayer: Updated for version 3.26.
+multimedia/plexmediaserver: Updated for v 1.20.1.3252_a78fef9a9.
+network/AdGuardHome: Updated for version 0.103.3.
+network/UDR: Updated for version 0.9.4_774f2e7.
+network/brave-browser: Updated for version 1.11.104.
+network/ddclient: Updated for version 3.9.1.
+network/discord: Updated for version 0.0.11.
+network/dma: Added (DragonFlyBSD Mail Agent).
+network/dokuwiki: Updated for version 20200729.
+network/dropbox: Updated for version 104.4.175.
+network/glewlwyd: updated for version 2.3.3
+network/i2pd: Updated for version 2.33.0.
+network/keepalived: Updated for version 2.1.5.
+network/neomutt: Updated for version 20200821.
+network/nicotine+: Updated for version 2.0.1.
+network/onedrive: Updated for version 2.4.5.
+network/persepolis: Fix MD5SUM.
+network/protonmail-bridge: Updated for version 1.3.3.
+network/pulse-sms: Added (SMS messaging for Desktop)
+network/qutebrowser-tox: Update pdf.js version.
+network/qutebrowser-tox: Updated for version 1.13.1.
+network/sfeed: Updated for version 1.34.5.
+network/shorewall-core: Updated for version 5.2.7.
+network/shorewall6: Updated for version 5.2.7.
+network/shorewall: Updated for version 5.2.7.
+network/signal-desktop: Updated for version 1.34.5.
+network/sshuttle: updated for version 1.0.4
+network/teamviewer: Updated for version 15.9.5.
+network/tinc: Updated for version 1.0.36.
+network/tor-browser: Updated for version 9.5.4.
+network/tor: Updated for v 0.4.3.6.
+network/urlscan: Updated for version 0.9.5.
+network/wireguard-linux-compat: Updated for version 1.0.20200729.
+network/wireguard-tools: Updated for version 1.0.20200827.
+network/wsdd2: Added (WSD/LLMNR Descovery/Name Service Daemon)
+network/yle-dl: Updated for version 20200807.
+network/zoom-linux: Updated for version 5.2.454870.0831.
+office/LibreOffice: Mention clearing of environment variables
+office/MasterPDFEditor: Fix build.
+office/MasterPDFEditor: Updated for version 5.6.42.
+office/calibre-bin: Updated for version 4.23.0.
+office/fop: New dependency added.
+office/gnucash-docs: Updated for version 3.11.
+office/gnucash: Updated for version 3.11.
+office/lyx: Updated for version 2.3.5.2.
+office/onlyoffice-desktopeditors: Updated for version 5.6.0.
+office/pandoc-bin: Updated for version 2.10.1.
+office/pdfstudio: Remove PDF docs.
+office/pdfstudio: Updated for version 2019.2.3.
+office/pdfstudioviewer: Remove PDF docs.
+office/pdfstudioviewer: Updated for version 2019.2.3.
+office/zim: Updated for version 0.73.2.
+perl/MoarVM: Updated for version 2020.08.
+perl/nqp: Updated for version 2020.08.2.
+perl/perl-CPANPLUS-Dist-Slackware: Updated for version 1.029.
+perl/perl-DBD-SQLite: Updated for version 1.66.
+perl/rakudo: Updated for version 2020.08.2.
+python/google-images-download: Updated for version 620e7f5.
+python/internetarchive: Updated for version 1.9.4.
+python/josepy: Updated for version 1.4.0.
+python/mypy: Updated for version 0.782.
+python/python2-sip: Fix download link.
+python/python3-isort: Updated for version 5.4.2.
+python/python3-sip: Fix download link.
+python/ruffus: Updated for version 2.8.4.
+system/Solaar: Updated for version 1.0.3.
+system/ansible: Updated for version 2.9.13.
+system/avfs: Updated for version 1.1.3.
+system/beebem: Added (Acorn BBC Micro and Master 128 emulator).
+system/chronograf: Updated for version 1.8.6.
+system/dosbox-dev: updated for version 0.75_pre4358
+system/dosbox-x: Updated for version 0.83.2.
+system/epson-inkjet-printer-escpr2: Updated for version 1.1.16.
+system/intel-microcode: Updated for version 20200616.
+system/intelmas: Updated for version 1.2.
+system/jdupes: updated for version 1.18.2
+system/libtrash: Updated for version 3.6.
+system/logwatch: Updated for version 7.5.4.
+system/makeself: Updated for version 2.4.2.
+system/ncdu: Updated for version 1.15.1.
+system/nvidia-driver: Updated for version 450.66.
+system/nvidia-kernel: Updated for version 450.66.
+system/scrypt: Updated for version 1.3.1.
+system/sleepd: Fix bug.
+system/system76-power: Updated for version 1.1.10.
+system/terminology: Updated for version 1.8.0.
+system/thin-provisioning-tools: Updated for version 0.9.0.
+system/usermin: Updated for version 1.803.
+system/webmin: Updated for version 1.955.
+system/worker: Updated for version 4.5.1.
++--------------------------+
+Sat Aug 29 03:10:52 UTC 2020
+academic/OpenFOAM: Updated for version 8.
+academic/dakota: Updated for version 6.11.0.
+accessibility/espeak: Fix non-portaudio builds.
+accessibility/svox: Update download URL.
+audio/ardour: Updated for version 6.2.
+audio/calf-ladspa: Update download URL.
+audio/caps: Update download URL.
+audio/clam: Update download URL.
+audio/connie: Update download URL.
+audio/creox4: Update download URL.
+audio/faad2: Updated for version 2.9.2.
+audio/ff8dls: Update download URL.
+audio/fluidsynth-dssi: Update download URL.
+audio/fmmidi: Update download URL.
+audio/horgand: Update download URL.
+audio/jack-tools: Update download URL.
+audio/lash: Add texi2html auto-detection.
+audio/lmms: Update download URL.
+audio/lv2-mda-metapiano: Update download URL.
+audio/millennium-plugins: Update download URL.
+audio/mixxx: Updated for version 2.2.4.
+audio/mpd: Add meson to REQUIRES. Reformat README.
+audio/opusfile: Updated for version 0.12.
+audio/tapiir: Update download URL.
+audio/transcribe: Update download URL.
+audio/unsf: Update download URL.
+audio/vcf_plugins: Update download URL.
+desktop/9menu: Updated for version 1.10.
+desktop/bukubrow: Remove python dependency.
+desktop/ssr: Update to https.
+desktop/unsaver: Update download URL.
+desktop/vwm: Update download URL.
+desktop/wmclock: Update download URL.
+desktop/wmwebcam: Update download URL.
+development/bed: Update download URL.
+development/blassic: Update download URL.
+development/cc65: Update download URL.
+development/check: Fix MD5, info. Disable static.
+development/dkms: Updated for version 2.8.3
+development/eclipse-cpp: Updated for version 4.15.
+development/eclipse-java: Updated for version 4.15.
+development/eclipse-jee: Updated for version 4.15.
+development/inform: Update download URL.
+development/nchexedit: Update download URL.
+development/neovim: Updated for version 0.4.4.
+development/nim: Updated for version 1.2.4.
+development/ninja: Updated for version 1.10.1.
+development/racer: Remove python dependency.
+development/racket: Updated for version 7.8.
+development/re2c: Updated for version 2.0.3.
+development/rmac: Update download URL.
+development/robotframework: Switch to HTTPS.
+development/rustup: Remove python dependency.
+development/valgrind: Updated for version 3.16.1.
+development/vscode-bin: Updated for version 1.47.
+development/vscode-bin: Updated for version 1.47.3.
+development/xa: Update download URL.
+games/VASSAL: Updated for version 3.3.2.
+games/adl: Update download URL.
+games/antares: Updated for version 0.9.1.
+games/armagetronad: Updated for version 0.2.9.0.1.
+games/bstone: Updated for version 1.2.8.
+games/burgerspace: Update download URL.
+games/colem: Update download URL.
+games/cosmosmash: Update download URL.
+games/doomretro: Updated for version 3.5.10.
+games/ds-models: Update download URL.
+games/dungeon: Update download URL.
+games/eureka: Updated for version 1.27b.
+games/fortune-dune: Update download URL.
+games/fortune-farscape: Update download URL.
+games/fortune-slackware: Update download URL.
+games/fortune_firefly: Update download URL.
+games/goonies: Update download URL.
+games/gzdoom-legacy: Update old version URL.
+games/jezzball-kazzmir: Update download URL.
+games/jfsw_twin_dragon: Update download URL.
+games/jfsw_wanton_destruction: Update download URL.
+games/mari0: Update download URL.
+games/micropolis: Update download URL.
+games/minetest: Updated for version 5.3.0.
+games/minetest_game: Updated for version 5.3.0.
+games/mog: Update download URL.
+games/nblood: Update download URL.
+games/noteye: Update download URL.
+games/notpacman: Update download URL.
+games/nottetris2: Update download URL.
+games/openjazz: Update download URL.
+games/pentagram: Update download URL.
+games/pysolfc-extra-cardsets: Update download URL.
+games/smc: Update download URL.
+games/stella: Updated for version 6.2.1.
+games/syobonaction: Update download URL.
+games/warzone2100: Clean up build.
+games/wolf4sdl: Update download URL.
+games/xu4: Update download URL.
+games/yae: Update download URL.
+games/z26: Update download URL.
+games/zsnes: Update download URL.
+games/ztools: Update download URL.
+gis/geos: Update to https.
+gis/google-earth: Updated for version 7.3.3.7786.
+gis/proj-data: Updated for version 1.1.
+gis/proj: Updated for 7.1.0.
+gis/whitebox-tools: Updated for version 1.3.0.
+graphics/Blender: Updated for version 2.83.4
+graphics/gource: Updated for version 0.51.
+graphics/inkscape: Fix download link and README.
+graphics/libplacebo: Updated for version 2.72.0.
+graphics/pcx-pixbuf-loader: Update download URL.
+graphics/phatch: Update download URL.
+graphics/shaderc: Updated for version 2020.1.
+graphics/teighafileconverter: Update download URL.
+graphics/vuescan: Updated for version 9.7.32.
+graphics/webp-pixbuf-loader: Update download URL.
+graphics/wine-nine-standalone: Updated for version 0.6.
+graphics/xcf-pixbuf-loader: Update download URL.
+libraries/HawkNL: Update download URL.
+libraries/configobj: Add missing dep.
+libraries/flatzebra: Update download URL.
+libraries/libev: Updated for version 4.33.
+libraries/libgee: Updated for version 0.20.3.
+libraries/liblo: Updated for version 0.31.
+libraries/libosinfo: Updated for version 1.8.0, switch to meson.
+libraries/libseccomp: Updated for version 2.5.0.
+libraries/lilv: Updated for version 0.24.8.
+libraries/live555: Updated for version 2020.08.11
+libraries/quazip-qt5: Updated for version 0.9.1.
+libraries/quazip: Updated for version 0.9.1.
+libraries/serd: Updated for version 0.30.4.
+libraries/sparsehash: Updated for version 2.0.4.
+libraries/zita-alsa-pcmi: Updated for version 0.3.2.
+libraries/zita-resampler: Updated for version 1.6.2.
+misc/bdfresize: Update download URL.
+misc/keychain: Updated for version 2.8.5
+misc/moreutils: Make requirements optional, add a build variable
+misc/mosquitto: Updated for version 1.6.11
+misc/pinfo: Fix slack-desc, restore pman link.
+misc/xbanish: Updated for version 1.7.
+multimedia/ffmpeg4: Updated for version 4.3.1
+multimedia/flashplayer-plugin: Updated for version 32.0.0.414.
+multimedia/makemkv: Update download urls.
+multimedia/pepperflash-plugin: Updated for version 32.0.0.414.
+multimedia/straw-viewer: Update download URL.
+multimedia/straw-viewer: Updated for version 0.0.7.
+multimedia/x265: Switch to github mirror.
+network/2ping: Updated for version 4.5.
+network/cicb: Update download URL.
+network/dropbox: Updated for versoin 100.4.409.
+network/dropear: Updated for version 2020.80.
+network/ettercap: Updated for version 0.8.3.1.
+network/gophernicus: Update download URL.
+network/grsync: Updated for version 1.2.8.
+network/ipxnet: Update download URL.
+network/krb5: Remove unwanted files.
+network/lighttpd: Updated for version 1.4.55.
+network/mosaic-ck: Update download URL.
+network/newsboat: Updated for version 2.20.1.
+network/persepolis: Updated for version 3.2.0.
+network/policyd2: Update download URL.
+network/postgrey: Updated for version 1.37.
+network/prosody-mod-http-upload: Updated for version hg4070.
+network/prosody-mod-turncredentials: Updated for version hg4055.
+network/prosody-mod-vcard-muc: Updated for version hg4043.
+network/purple-facebook: Updated for version 0.9.6.
+network/qutebrowser: Updated for version 1.13.1.
+network/r8168: Updated for version 8.048.03.
+network/sshfs-fuse: Updated for version 3.7.0.
+network/sslcan: Updated for version 2.0.0.
+network/telegram: Updated for version 2.2.0.
+network/telegram: Updated for version 2.3.0.
+network/telegram: Updated for version 2.3.1.
+network/telegram: Updated for version 2.3.2.
+network/tor-browser: Updated for version 9.5.1.
+network/tor-browser: Updated for version 9.5.3.
+network/tribler: Update download URL.
+network/weechat: Updated for version 2.9.
+network/wireshark: Updated for version 3.2.5.
+network/wireshark: Updated for version 3.2.6.
+network/yle-dl: Updated for version 20200628.
+network/youtube-dl: Updated for version 2020.06.16.1.
+office/MasterPDFEditor: Updated for version 5.6.20.
+office/MasterPDFEditor: Updated for version 5.6.29.
+office/calcurse: Update README with optional dependency.
+office/fbpdf: Update download URL.
+office/keepassxc: Updated for version 2.6.0.
+office/tellico: Update to https.
+office/turtl: Update to version 0.7.2.6
+perl/perl-Math-MPC: Updated for version 1.09.
+perl/perl-Math-MPFR: Updated for version 4.14.
+perl/perl-Sidef: Updated for version 3.96.
+perl/perl-parallel-forkmanager: Added the dependency perl-test-warn.
+python/Pygments: Update to https.
+python/html2text: Use github URL.
+python/python-djvulibre: Updated for version 0.8.5.
+python/python-magick: Updated for version 0.9.19.
+python/python3-packaging: Fix homepage.
+python/python3-packaging: Updated for version 20.4.
+python/python3-pandas: Updated for version 1.0.5.
+python/python3-pylint: Updated for version 2.6.0.
+python/python3-wcwidth: Updated for version 0.2.5.
+ruby/ruby-build: Updated for version 20200819.
+system/ZoneMinder: Update download URL.
+system/ack: Updated for version 3.4.0.
+system/adobe-source-sans-pro-font: Updated for version 3.006R.
+system/agedu: Update download URL.
+system/alacritty: Remove python dependency.
+system/bitmapfont2ttf: Update download URL.
+system/blktrace: Switch to HTTPS.
+system/clamav: Updated for version 0.102.4.
+system/dse-typewriter-font: Update download URL.
+system/etsh: Update download URL.
+system/exa: Remove python dependency.
+system/exomizer: Update download URL.
+system/fd: Remove python dependency.
+system/fwupd: Updated for version 1.2.13.
+system/fzf: Updated for version 0.22.0.
+system/gnu-unifont: Updated for version 13.0.03.
+system/info2man: Update download URL.
+system/isextract: Update download URL.
+system/jsawk: Support mozjs68 from -current.
+system/kitchen-sync: Updated with version 2.5.
+system/letsencrypt: Updated for version 1.6.0.
+system/letsencrypt: Updated for version 1.7.0.
+system/lxsession: Updated for version 0.5.5.
+system/mkslack: Updated for version 5.3.4.
+system/noto-emoji: Updated for version 20200722.
+system/openstego: Updated for version 0.7.4.
+system/osinfo-db-tools: Updated for version 1.8.0, switch to meson.
+system/osinfo-db: Updated for version 20200813.
+system/osquery-bin: Updated for version 4.4.0.
+system/otf2bdf: Update download URL.
+system/ph: Update email.
+system/phoronix-test-suite: Updated for version 9.8.0.
+system/podman: change variable for repo source directory
+system/pucrunch: Update download URL.
+system/ripgrep: Remove python dependency.
+system/rtirq: Update download URL.
+system/sandy: Update download URL.
+system/sdl-jstest: Update download URL.
+system/setconf: Updated for version 0.7.7.
+system/slpkg: Updated for version 3.9.0.
+system/solarize-12x29-psf: Update download URL.
+system/ttf-console-fonts: Update download URL.
+system/usermin: Updated for version 1.802.
+system/vice: New maintainer.
+system/vinterm: Update download URL.
+system/vtcol: Remove python dependency.
+system/webmin: Updated for version 1.954.
+system/wine-staging: Updated for version 5.15.2.
+system/wine: Update README.
+system/xen: XSA 317-328 update.
++--------------------------+
 Sun Jun 28 01:18:06 UTC 2020
 academic/biblesync: Update README.
 academic/bibletime: Update README.

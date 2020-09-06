@@ -24,7 +24,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=gnucash
-VERSION=${VERSION:-4.0}
+VERSION=${VERSION:-4.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
@@ -71,7 +71,7 @@ if [ -e /usr/bin/gnucash ]; then
 fi
 
 if [ "$DBI" = "yes" ]; then
-  DBIARGS="-DWITH_SQL=ON -DGNC_DBD_DIR=/usr/lib${LIBDIRSUFFIX}/dbd/ -DGENERATE_SWIG_WRAPPERS=ON "
+  DBIARGS="-DWITH_SQL=ON -DGNC_DBD_DIR=/usr/lib${LIBDIRSUFFIX}/dbd/"
   echo " building with SQL integration enabled"
   sleep 1
 else

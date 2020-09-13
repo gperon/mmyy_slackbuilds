@@ -26,7 +26,7 @@
 
 PRGNAM=LibreOffice
 SRCNAM=libreoffice
-VERSION=${VERSION:-7.0.0.3}
+VERSION=${VERSION:-7.0.1.2}
 SHORT_VERSION=${VERSION%.*.*}
 BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
@@ -164,6 +164,8 @@ extwikipub="--enable-ext-wiki-publisher"; [ "${EXTWIKIPUB:-no}" != "yes" ]     &
 
 extnlpsolver="--enable-ext-nlpsolver"; [ "${EXTNLPSOLVER:-yes}" != "yes" ]     && extnlpsolver=""
 
+    # --with-build-version="SlackBuild for $PRGNAM-$VERSION by $PACKAGER" \
+
 ./autogen.sh \
     CFLAGS="$SLKCFLAGS" \
     CXXFLAGS="$SLKCFLAGS" \
@@ -173,7 +175,6 @@ extnlpsolver="--enable-ext-nlpsolver"; [ "${EXTNLPSOLVER:-yes}" != "yes" ]     &
     --libdir=/usr/lib$LIBDIRSUFFIX \
     --sysconfdir=/etc \
     --build=$ARCH-slackware-linux \
-    --with-build-version="SlackBuild for $PRGNAM-$VERSION by $PACKAGER" \
     --with-vendor="Just Another Slacker" \
     --with-lang="$LOLANGS" \
     --enable-release-build=yes  \
@@ -283,7 +284,7 @@ sed -i -e '/^#\ restore/i# Prefer GTK2\nexport SAL_USE_VCLPLUGIN=${SAL_USE_VCLPL
 cd -
 
 cd $PKG/usr/lib$LIBDIRSUFFIX
-mv $SRCNAM  $SRCNAM-$VERSION
+mv $SRCNAM $SRCNAM-$VERSION
 ln -s $SRCNAM-$VERSION $SRCNAM
 cd -
 

@@ -74,7 +74,6 @@ find -L . \
 
 # scons is now python3 based
 sed -i "s|from features|from .features|" build/depends.py
-patch -p1 < $CWD/mixxx-list-fix.patch
 
 # Fix library installation path
 sed -i "s|'lib'|'lib$LIBDIRSUFFIX'|" build/depends.py src/SConscript || exit 1

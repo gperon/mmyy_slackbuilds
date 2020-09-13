@@ -2,8 +2,8 @@
 
 # Slackware build script for gloox
 
+# Updates since 2020 Copyright 2020 Tim  dickson.tim@googlemail.com
 # Ryan P.C. McQuen | Everett, WA | ryanpcmcquen@member.fsf.org
-
 # Copyright 2010  Binh Nguyen <binhvng@gmail.com>
 # All rights reserved.
 #
@@ -25,9 +25,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#update to version 1.0.23 dickson.tim@googlemail.com
-
-#note update breaks binary compatability but maintains source compatability.
+#note update to 1.0.24  breaks binary compatability but maintains source compatability.
 #ie. you'll need to recreate packages that use gloox. eg currently 0ad and licq
 
 PRGNAM=gloox

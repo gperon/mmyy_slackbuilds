@@ -70,15 +70,46 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-python setup.py install --root=$PKG
+mkdir -p "build-cmake"
+python3 setup.py build
+
+# cmake files and tests
+cd build-cmake
+cmake -DCMAKE_INSTALL_PREFIX:PATH='/usr' -Wno-dev ..
+make all mock_install
+cd -
+
+# manpage
+# commented due error with Sphinx 3.2.1 and pyrhon-breathe 4.22.1
+# /build/1st/pybind11-2.5.0/docs/reference.rst:52: WARNING: Duplicate C++ declaration, also defined in 'reference'.
+# Declaration is 'str : public object'.
+# /build/1st/pybind11-2.5.0/docs/reference.rst.rst:52: WARNING: C++ declarations inside functions are not supported. Parent function is str
+
+# Exception occurred:
+#   File "/usr/lib/python3/dist-packages/breathe/renderer/sphinxrenderer.py", line 425, in run_directive
+#     rst_node = nodes[1]
+# IndexError: list index out of range
+
+# mkdir -p "docs"
+# make -C "docs" man
+
+# python setup.py install --root=$PKG
 
 # Python 3 support.
 if $(python3 -c 'import sys' 2>/dev/null); then
-  python3 setup.py install --root=$PKG
+  python3 setup.py install --root=$PKG --install-headers='/usr/include/pybind11'
 fi
 
-find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
-  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+# cmake files
+mkdir -p "$PKG/usr/lib$LIBDIRSUFFIX/cmake/$PRGNAM"
+install -m644 build-cmake/mock_install/share/cmake/$PRGNAM/*.cmake -t "$PKG/usr/lib$LIBDIRSUFFIX/cmake/$PRGNAM/"
+
+# man page
+# install -D -m644 "docs/.build/man/${PRGNAM}.1" "${PKG}/usr/man/man7/${PRGNAM}.7"
+# sed -i '/^\.TH/s/"1"/"7"/' "${PKG}/usr/man/man7/${PRGNAM}.7"
+
+# find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+#   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \

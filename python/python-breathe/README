@@ -1,0 +1,7 @@
+An extension to reStructuredText and Sphinx to be able to read and 
+render Doxygen xml output
+
+To install python3 bindings install python3 and then run the script
+with PYTHON3=yes.
+
+  # PYTHON3=yes ./python-libnacl.SlackBuild

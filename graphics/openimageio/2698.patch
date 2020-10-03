@@ -1,0 +1,87 @@
+From 35f11b889787c40a27e7ea3feb45c36811fcd96f Mon Sep 17 00:00:00 2001
+From: Patrick Northon <northon_patrick3@yahoo.ca>
+Date: Thu, 3 Sep 2020 17:43:29 -0400
+Subject: [PATCH] - Fix external pugixml linkage. Also remove 'BEFORE' as it is
+ unnecessary. - A few fixes for cross compiling with mingw on linux.
+
+---
+ src/include/OpenImageIO/fstream_mingw.h |  2 +-
+ src/libOpenImageIO/CMakeLists.txt       | 10 ++++++----
+ src/libutil/sysutil.cpp                 | 10 +++++-----
+ 3 files changed, 12 insertions(+), 10 deletions(-)
+
+diff --git a/src/include/OpenImageIO/fstream_mingw.h b/src/include/OpenImageIO/fstream_mingw.h
+index 9ed0f5000..9f74b82c3 100644
+--- a/src/include/OpenImageIO/fstream_mingw.h
++++ b/src/include/OpenImageIO/fstream_mingw.h
+@@ -18,9 +18,9 @@
+ #include <ostream>
+ 
+ #if defined(_WIN32) && defined(__GLIBCXX__)
+-#    include <Share.h>
+ #    include <ext/stdio_filebuf.h>  // __gnu_cxx::stdio_filebuf
+ #    include <fcntl.h>
++#    include <share.h>
+ #    include <sys/stat.h>
+ 
+ 
+diff --git a/src/libOpenImageIO/CMakeLists.txt b/src/libOpenImageIO/CMakeLists.txt
+index e5e63cb7e..fe39cdd41 100644
+--- a/src/libOpenImageIO/CMakeLists.txt
++++ b/src/libOpenImageIO/CMakeLists.txt
+@@ -150,10 +150,12 @@ target_link_libraries (OpenImageIO
+         )
+ 
+ if (USE_EXTERNAL_PUGIXML)
+-    # insert include path to pugixml first, to ensure that the external
+-    # pugixml is found, and not the one in OIIO's include directory.
+-    target_include_directories (OpenImageIO PRIVATE BEFORE ${PUGIXML_INCLUDES})
+-    target_link_libraries (OpenImageIO PRIVATE ${PUGIXML_LIBRARIES})
++    if(TARGET pugixml)
++        target_link_libraries (OpenImageIO PRIVATE pugixml)
++    else()
++        target_include_directories (OpenImageIO PRIVATE ${PUGIXML_INCLUDES})
++        target_link_libraries (OpenImageIO PRIVATE ${PUGIXML_LIBRARIES})
++    endif()
+ endif()
+ 
+ if (FREETYPE_FOUND)
+diff --git a/src/libutil/sysutil.cpp b/src/libutil/sysutil.cpp
+index 934c34670..61edc0bbf 100644
+--- a/src/libutil/sysutil.cpp
++++ b/src/libutil/sysutil.cpp
+@@ -45,10 +45,10 @@
+ #ifdef _WIN32
+ #    define WIN32_LEAN_AND_MEAN
+ #    define DEFINE_CONSOLEV2_PROPERTIES
+-#    include <Psapi.h>
+ #    include <cstdio>
+ #    include <io.h>
+ #    include <malloc.h>
++#    include <psapi.h>
+ #else
+ #    include <sys/resource.h>
+ #endif
+@@ -211,7 +211,7 @@ Sysutil::physical_memory()
+ void
+ Sysutil::get_local_time(const time_t* time, struct tm* converted_time)
+ {
+-#ifdef _MSC_VER
++#ifdef _WIN32
+     localtime_s(converted_time, time);
+ #else
+     localtime_r(time, converted_time);
+@@ -486,10 +486,10 @@ Term::ansi_bgcolor(int r, int g, int b)
+ 
+ 
+ bool
+-#if !defined(_MSC_VER)
+-Sysutil::put_in_background(int argc, char* argv[])
+-#else
++#ifdef _WIN32
+ Sysutil::put_in_background(int, char*[])
++#else
++Sysutil::put_in_background(int argc, char* argv[])
+ #endif
+ {
+     // You would think that this would be sufficient:

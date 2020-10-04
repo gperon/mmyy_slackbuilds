@@ -2,7 +2,7 @@
 
 # Slackware build script for weewx
 
-# Copyright 2016 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,9 +23,9 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=weewx
-VERSION=${VERSION:-3.5.0}
+VERSION=${VERSION:-4.1.1}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_SBo} 
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -70,7 +70,7 @@ mv $PKG/usr/share/$PRGNAM/util/* $PKG/etc/$PRGNAM
 rm -rf $PKG/usr/share/$PRGNAM/util
 rm -rf $PKG/etc/$PRGNAM/{init.d,launchd,systemd}
 mv $PKG/usr/share/$PRGNAM/skins $PKG/etc/$PRGNAM
-rm $PKG/usr/share/$PRGNAM/{LICENSE.txt,README,*.egg-info}
+rm $PKG/usr/share/$PRGNAM/{LICENSE.txt,README*,*.egg-info}
 
 # fix the conf file
 sed -e "s:WEEWX_ROOT = /tmp/SBo/package-weewx/usr/share/weewx:WEEWX_ROOT = /usr/share/weewx:" -i $PKG/usr/share/$PRGNAM/$PRGNAM.conf
@@ -102,7 +102,7 @@ mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 mv $PKG/usr/share/$PRGNAM/docs/* $PKG/usr/doc/$PRGNAM-$VERSION
 rm -rf $PKG/usr/share/$PRGNAM/docs
 cp -a \
-  LICENSE.txt PKG-INFO README \
+  LICENSE.txt PKG-INFO README* \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

@@ -4,7 +4,7 @@
 # Written by Phillip Warner <pc_warner@yahoo.com>
 # Taken over in 2011 by Alan Alberghini <414N@slacky.it>
 
-# Copyright 2016  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2020  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -73,15 +73,25 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-CFLAGS="$SLKCFLAGS -fexceptions -fvisibility=hidden -DNO_LCMS" \
-CXXFLAGS="$SLKCFLAGS -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy" \
+
+# TODO: This will only compile against libjpeg-turbo 2 but we will wait for that :D
+# patch -p1 -i ../freeimage-unbundle.patch # Unbundle libraries (Fedora)
+# rm -r Source/Lib* Source/ZLib Source/OpenEXR
+# # can't be built due to private headers
+# > Source/FreeImage/PluginG3.cpp
+# > Source/FreeImageToolkit/JPEGTransform.cpp
+patch -p1 -i $CWD/freeimage-libraw-0.20.patch # Fix build with libraw 0.20
+
 make INSTALLDIR=$PKG/usr/lib${LIBDIRSUFFIX} DESTDIR=$PKG
 make install INSTALLDIR=$PKG/usr/lib${LIBDIRSUFFIX} DESTDIR=$PKG
 
-CFLAGS="$SLKCFLAGS -fexceptions -fvisibility=hidden -DNO_LCMS" \
-CXXFLAGS="$SLKCFLAGS -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy" \
 make -f Makefile.fip INSTALLDIR=$PKG/usr/lib${LIBDIRSUFFIX} DESTDIR=$PKG
 make -f Makefile.fip install INSTALLDIR=$PKG/usr/lib${LIBDIRSUFFIX} DESTDIR=$PKG
+
+# sh gensrclist.sh
+# sh genfipsrclist.sh
+# make -f Makefile.gnu
+# make -f Makefile.fip
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

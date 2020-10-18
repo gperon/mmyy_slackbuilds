@@ -10,8 +10,7 @@
 # without any warranty.
 
 PRGNAM=pdfjam
-VERSION=${VERSION:-2.08}
-VERTAR=${VERTAR:-latest}
+VERSION=${VERSION:-3.03}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 ARCH='noarch'
@@ -26,8 +25,8 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/"$PRGNAM"_"$VERTAR".tgz
-cd $PRGNAM
+tar xvf $CWD/"$PRGNAM"-"$VERSION".tar.gz
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -45,7 +44,7 @@ mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 
 for i in man1/* ; do gzip -9c "$i" > $PKG/usr/man/"$i".gz ; done
 
-cp -a COPYING VERSION tests.zip PDFjam-README.html pdfdroplets.png \
+cp -a COPYING VERSION tests.zip README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION/
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

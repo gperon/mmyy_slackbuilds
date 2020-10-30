@@ -8,6 +8,7 @@
 # MIA. Original version had no license; I'm licensing the update under the
 # terms of the WTFPL. See http://www.wtfpl.net/txt/copying/ for details.
 
+# 20201019 bkw: update for v1.3.35.
 # 20200111 bkw: update for v1.3.34, quit using sourceforge dl link.
 # 20191130 bkw: update for v1.3.33.
 # 20181201 bkw: update for v1.3.31 (BUILD=1 again).

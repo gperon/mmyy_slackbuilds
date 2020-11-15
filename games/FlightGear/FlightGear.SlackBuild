@@ -29,6 +29,8 @@ SRCNAM=flightgear
 VERSION=${VERSION:-2020.3.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
+QT5=${QT5:-yes}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -94,6 +96,8 @@ cd build
     -DFG_DATA_DIR=/usr/share/${PRGNAM} \
     $OPT \
     -DENABLE_QT=ON \
+    -DFG_BUILD_TYPE=Release \
+    -DENABLE_COMPOSITOR=ON \
     -DCMAKE_BUILD_TYPE=Release ..
   make $NUMJOBS
   make install DESTDIR=$PKG

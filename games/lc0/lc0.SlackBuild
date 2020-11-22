@@ -2,7 +2,7 @@
 
 # Slackware build script for Lc0
 
-# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
+# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,9 +23,10 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=lc0
-VERSION=${VERSION:-0.22.0}
+VERSION=${VERSION:-0.26.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
+NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 
 # Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
@@ -37,7 +38,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-NUMJOBS=${NUMJOBS:-" -j$(expr $(nproc) + 1) "}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM

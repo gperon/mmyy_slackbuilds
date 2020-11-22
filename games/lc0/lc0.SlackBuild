@@ -78,11 +78,13 @@ find . \
 # manual install
 mkdir -p $PKG/usr/share/$PRGNAM
 cp build/release/lc0 $PKG/usr/share/$PRGNAM/
-gunzip -k -c $CWD/weights_run2_58271.pb.gz > $PKG/usr/share/$PRGNAM/weights.pb
+gunzip -k -c $CWD/384x30-t60-4619.pb.gz > $PKG/usr/share/$PRGNAM/384x30-t60-4619.pb
+gunzip -k -c $CWD/LJ2-160 > $PKG/usr/share/$PRGNAM/LJ2-160.pb
+gunzip -k -c $CWD/256x20-t40-1541.pb.gz > $PKG/usr/share/$PRGNAM/256x20-t40-1541.pb
 mkdir -p $PKG/usr/bin
 cat <<EOF >$PKG/usr/bin/$PRGNAM
 #!/bin/sh
-/usr/share/lc0/lc0 -w /usr/share/lc0/weights.pb
+/usr/share/lc0/lc0 -w /usr/share/lc0/256x20-t40-1541.pb
 EOF
 chmod 0755 $PKG/usr/bin/$PRGNAM
 

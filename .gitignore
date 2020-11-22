@@ -29,3 +29,5 @@ gimp-painter/*.diff
 *.hidden
 *.phar
 *.AppImage
+games/lc0/*.pb.gz
+games/lc0/LJ2-160

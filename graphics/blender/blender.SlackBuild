@@ -27,7 +27,7 @@
 # Thanks to Giorgio Peron <giorgio.peron@gmail.com> for some build tips
 
 PRGNAM=blender
-VERSION=${VERSION:-2.90.1}
+VERSION=${VERSION:-2.91.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -68,7 +68,7 @@ chown -R root:root .
 
 # Move the docs to our standard location first
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv GPL-license.txt GPL3-license.txt LICENSE-bfont.ttf.txt LICENSE-bmonofont-i18n.ttf.txt LICENSE-droidsans.ttf.txt copyright.txt jemalloc-license.txt ocio-license.txt Python-license.txt readme.html \
+mv copyright.txt readme.html license \
    $PKG/usr/doc/$PRGNAM-$VERSION
 
 # Now move everything else

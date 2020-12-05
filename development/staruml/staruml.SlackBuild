@@ -2,7 +2,7 @@
 
 # Slackware build script for StarUML
 
-# Copyright 2017 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=staruml
-VERSION=${VERSION:-3.0.2}
+VERSION=${VERSION:-4.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -63,26 +63,21 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 
-chmod +x $CWD/$SRCNAM-$VERSION-$CARCH.AppImage
-$CWD/$SRCNAM-$VERSION-$CARCH.AppImage --appimage-extract
+mkdir -p $PRGNAM-$VERSION
+cd $PRGNAM-$VERSION
+ar x $CWD/${SRCNAM}\_${VERSION}\_amd64.deb
+tar xf data.tar.xz
+mv opt $PKG
+mv usr $PKG
 
-mkdir -p $PKG/opt/${PRGNAM} $PKG/usr/share/applications $PKG/usr/bin/ $PKG/usr/lib$LIBDIRSUFFIX
-cp -f squashfs-root/* $PKG/opt/${PRGNAM}
-cp -Rf squashfs-root/locales $PKG/opt/${PRGNAM}
-cp -Rf squashfs-root/resources $PKG/opt/${PRGNAM}
-cp -Rf squashfs-root/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX
-cp -Rf squashfs-root/usr/share/* $PKG/usr/share
-cp -fp squashfs-root/${PRGNAM}.desktop $PKG/usr/share/applications
-sed -i 's|AppRun|/opt/staruml/staruml|g' $PKG/usr/share/applications/${PRGNAM}.desktop
-chmod -R 755 $PKG
-ln -fs /opt/${PRGNAM}/${PRGNAM} $PKG/usr/bin/${PRGNAM}
-ln -fs /usr/share/icons/hicolor/512x512/apps/${PRGNAM}.png $PKG/opt/${PRGNAM}/${PRGNAM}.png
 
 # Strip binaries and libraries.
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mv $PKG/usr/share/doc/$PRGNAM/* $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/share/doc/
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

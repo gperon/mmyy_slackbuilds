@@ -1,0 +1,84 @@
+#!/bin/sh
+# Startup script for WeeWX
+#
+# description: start and stop the weewx weather system
+#
+
+NAME=WeeWX
+WEEWX_BIN=/usr/bin/weewxd
+WEEWX_CFG=/etc/weewx/weewx.conf
+PIDFILE=/var/run/weewx.pid
+DAEMON_ARGS="--daemon --pidfile=$PIDFILE $WEEWX_CFG"
+
+# Exit if the package is not installed
+[ -x "$WEEWX_BIN" ] || exit 0
+
+# Start weewx:
+weewx_start() {
+  printf "%-10s" "Starting $NAME... "
+  if [ -x $WEEWX_BIN ]; then
+    # If there is an old PID file (no weewxd running), clean it up:
+    if [ -r $PIDFILE ]; then
+      if ! ps ax | grep weewxd 1> /dev/null 2> /dev/null ; then
+        echo "Cleaning up old $PIDFILE."
+        rm -f $PIDFILE
+      else 
+        printf "%s\n" "Service already running"
+        exit 1
+      fi
+    fi
+    $WEEWX_BIN $DAEMON_ARGS
+    printf "%s\n" "Service running"
+  fi
+}
+
+# Stop weewx:
+weewx_status() {
+  printf "%-10s" "Checking $NAME... "
+  if [ -f $PIDFILE ]; then
+    PID=`cat $PIDFILE`
+    if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+      printf "%s\n" "Process dead but pidfile exists"
+    else
+      echo "Running PID $PID"
+    fi
+  else
+    printf "%s\n" "Service not running"
+  fi
+}
+
+weewx_stop() {
+  printf "%-10s" "Stopping $NAME... "
+  if [ -f $PIDFILE ]; then
+    PID=`cat $PIDFILE`
+    kill $PID
+    printf "%s\n" "Ok"
+    rm -f $PIDFILE
+  else
+    killall weewxd > /dev/null 2>&1
+    printf "%s\n" "pidfile not found"
+  fi
+}
+  
+# Restart weewx:
+weewx_restart() {
+  weewx_stop
+  weewx_start
+}
+
+case "$1" in
+'start')
+  weewx_start
+  ;;
+'status')
+  weewx_status
+  ;;
+'stop')
+  weewx_stop
+  ;;
+'restart')
+  weewx_restart
+  ;;
+*)
+  echo "usage $0 start|status|stop|restart"
+esac

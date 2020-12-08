@@ -1,0 +1,10 @@
+gimp for painter (The GNU Image Manipulation Program)
+
+The GIMP is a powerful tool for the preparation and manipulation of
+digital images.  The GIMP provides the user with a wide variety of
+image manipulation, painting, processing, and rendering tools.  The
+GIMP's open design and extensible architecture make for a very
+powerful end product for photo and image retouching, web graphics
+design, or digital illustration.
+This package contains the patch for painter, see
+http://sourceforge.jp/projects/gimp-painter

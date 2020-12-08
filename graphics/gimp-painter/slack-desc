@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+            |-----handy-ruler------------------------------------------------------|
+gimp-painter: gimp for painter (The GNU Image Manipulation Program)
+gimp-painter:
+gimp-painter: The GIMP is a powerful tool for the preparation and manipulation of
+gimp-painter: digital images.  The GIMP provides the user with a wide variety of
+gimp-painter: image manipulation, painting, processing, and rendering tools.  The
+gimp-painter: GIMP's open design and extensible architecture make for a very
+gimp-painter: powerful end product for photo and image retouching, web graphics
+gimp-painter: design, or digital illustration.
+gimp-painter: This package contains the patch for painter, see
+gimp-painter: http://sourceforge.jp/projects/gimp-painter
+gimp-painter:

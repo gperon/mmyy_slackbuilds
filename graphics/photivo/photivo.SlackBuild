@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=photivo
-VERSION=${VERSION:-20160525}
-SRC_VERSION="5d7d1cc4ef4d"
+VERSION=${VERSION:-20180914}
+SRC_VERSION="a14d82f41dda"
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -82,7 +82,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/lensfun
-qmake CONFIG+=WithGimp photivo.pro PREFIX=/usr
+qmake-qt5 CONFIG+=WithGimp photivo.pro PREFIX=/usr
 CFLAGS="$SLKCFLAGS -fno-finite-math-only" \
 CXXFLAGS="$SLKCFLAGS -fno-finite-math-only" \
 make

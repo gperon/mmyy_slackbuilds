@@ -29,7 +29,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=nvidia-kernel
-VERSION=${VERSION:-470.63.01}
+VERSION=${VERSION:-510.47.03}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -93,6 +93,7 @@ mkdir -p $PKG/lib/modules/$KERNEL/kernel/drivers/video
 install -m 0664 kernel/nvidia.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
 install -m 0664 kernel/nvidia-modeset.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
 install -m 0664 kernel/nvidia-drm.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
+install -m 0664 kernel/nvidia-peermem.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/
 # 32-bit doesn't have nvidia-uvm
 if [ "$TARGET" = "x86_64" ]; then
     install -m 0664 kernel/nvidia-uvm.ko $PKG/lib/modules/$KERNEL/kernel/drivers/video/

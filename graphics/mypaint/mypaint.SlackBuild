@@ -5,16 +5,28 @@
 # Copyright 2013 klaatu klaatu@member.fsf.org
 # All rights reserved.
 #
-# GNU All-Permissive License
-# Copying and distribution of this file, with or without modification,
-# are permitted in any medium without royalty provided the copyright
-# notice and this notice are preserved.  This file is offered as-is,
-# without any warranty.
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=mypaint
-VERSION=${VERSION:-1.2.1}
+VERSION=${VERSION:-2.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -69,14 +81,14 @@ find -L . \
  -exec chmod 644 {} \;
 
 # Respect our $LIBDIRSUFFIX
-sed -i "s|prefix/lib/|prefix/lib$LIBDIRSUFFIX/|" SCons* brushlib/SConscript
-sed -i "s|'lib'|'lib$LIBDIRSUFFIX'|" $PRGNAM.py
-sed -i "s|lib/pkgconfig|lib$LIBDIRSUFFIX/pkgconfig|g" brushlib/SConscript
+# sed -i "s|prefix/lib/|prefix/lib$LIBDIRSUFFIX/|" SCons* brushlib/SConscript
+# sed -i "s|'lib'|'lib$LIBDIRSUFFIX'|" $PRGNAM.py
+# sed -i "s|lib/pkgconfig|lib$LIBDIRSUFFIX/pkgconfig|g" brushlib/SConscript
 
 # Use our CFLAGS
-sed -i "s|-O3|$SLKCFLAGS|g" SConstruct
+# sed -i "s|-O3|$SLKCFLAGS|g" SConstruct
 
-scons prefix="$PKG"/usr install
+# scons prefix="$PKG"/usr install
 
 # Stuff unused and broken
 rm -fR $PKG/usr/include $PKG/usr/lib$LIBDIRSUFFIX/{libmypaint.a,pkgconfig}

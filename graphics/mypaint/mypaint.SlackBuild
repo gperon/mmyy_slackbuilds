@@ -80,15 +80,13 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+#python3 setup.py build --build-base=/usr/lib$LIBDIRSUFFIX
+python3 setup.py build 
+python3 setup.py managed_install --prefix="$PKG"/usr
+
 # Respect our $LIBDIRSUFFIX
-# sed -i "s|prefix/lib/|prefix/lib$LIBDIRSUFFIX/|" SCons* brushlib/SConscript
-# sed -i "s|'lib'|'lib$LIBDIRSUFFIX'|" $PRGNAM.py
-# sed -i "s|lib/pkgconfig|lib$LIBDIRSUFFIX/pkgconfig|g" brushlib/SConscript
-
-# Use our CFLAGS
-# sed -i "s|-O3|$SLKCFLAGS|g" SConstruct
-
-# scons prefix="$PKG"/usr install
+sed -i "s|'lib'|'lib$LIBDIRSUFFIX'|" "$PKG"/usr/bin/$PRGNAM
+mv "$PKG"/usr/lib "$PKG"/usr/lib$LIBDIRSUFFIX 
 
 # Stuff unused and broken
 rm -fR $PKG/usr/include $PKG/usr/lib$LIBDIRSUFFIX/{libmypaint.a,pkgconfig}
@@ -98,8 +96,8 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-    CONTRIBUTING.md COPYING Licenses.md Changelog.md DEBUGGING.md \
-    README.md README_LINUX.md \
+    BUILDING.md CONTRIBUTING.md COPYING Licenses.md Changelog.md DEBUGGING.md \
+    README.md  \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

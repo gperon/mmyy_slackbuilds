@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/mypaint/mypaint/releases/download/v2.0.1/mypaint-2.
 MD5SUM="dc9abd2e9da8477cbad55905ed07a46a"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="numpy"
+REQUIRES="numpy3 mypaint-brushes2"
 MAINTAINER="Klaatu"
 EMAIL="klaatu@member.fsf.org"

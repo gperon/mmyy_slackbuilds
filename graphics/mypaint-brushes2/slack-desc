@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                |-----handy-ruler------------------------------------------------------|
+mypaint-brushes2: mypaint-brushes (graphic painting application)
+mypaint-brushes2:
+mypaint-brushes2: mypaint-brushes is a fast and easy open-source graphics application
+mypaint-brushes2: for digital painters. It lets you focus on the art instead of the
+mypaint-brushes2: program. You work on your canvas with minimal distractions,
+mypaint-brushes2: bringing up the interface only when you need it.
+mypaint-brushes2:
+mypaint-brushes2: homepage: http://mypaint-brushes.org/
+mypaint-brushes2:
+mypaint-brushes2:
+mypaint-brushes2:

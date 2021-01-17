@@ -23,7 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=Alchemy
-VERSION=${VERSION:-008}
+VERSION=${VERSION:-0.0.8.1}
+SRCVERSION=${SRCVERSION:-svn573}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -51,7 +52,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM
-tar xvf $CWD/Alchemy-$VERSION.tar.gz
+tar xvf $CWD/Alchemy-$SRCVERSION.tar.gz
 cd $PRGNAM
 chown -R root:root .
 find -L . \
@@ -63,8 +64,8 @@ find -L . \
 mkdir -p $PKG/usr/share/$PRGNAM
 cp -r {modules,shapes} $PKG/usr/share/$PRGNAM
 cp {Alchemy,Alchemy.jar,AlchemyOpenGL} $PKG/usr/share/$PRGNAM
-mkdir -p $PKG/usr/lib$LIBDIRSUFFIX
-cp lib/libjpen-2-2$SRCSUFFIX.so $PKG/usr/lib$LIBDIRSUFFIX/
+mkdir -p $PKG/lib$LIBDIRSUFFIX
+cp lib/libjpen-2-3-$ARCH.so $PKG/lib$LIBDIRSUFFIX/
 mkdir -p $PKG/usr/bin
 cp $CWD/files/{alchemy,alchemyOpenGL} $PKG/usr/bin
 chmod +x $PKG/usr/bin/*

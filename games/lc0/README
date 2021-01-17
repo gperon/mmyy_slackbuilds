@@ -1,0 +1,8 @@
+Lc0 is a UCI-compliant chess engine designed to play chess via neural network,
+specifically those of the LeelaChessZero project.
+
+The engine is provided with 3 networks:
+  - 30b: Recommended for multi-GPU (RTX), long analysis, or when speed isn’t a major factor
+  - 24b: Recommended for TC > 1 minute per move with an RTX card
+  - 20b: Recommended for running on non-RTX cards or TC on the order of seconds (with RTX)
+see https://lczero.org/play/networks/bestnets/

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+    |-----handy-ruler------------------------------------------------------|
+vsfm: VisualSFM (GUI application for 3D reconstruction)
+vsfm:
+vsfm: VisualSFM is a GUI application for 3D reconstruction using structure
+vsfm: from motion (SFM). The reconstruction system integrates several
+vsfm: projects: SIFT on GPU(SiftGPU), Multicore Bundle Adjustment, and 
+vsfm: Towards Linear-time Incremental Structure from Motion.
+vsfm:
+vsfm: homepage: http://ccwu.me/vsfm/
+vsfm:
+vsfm:
+vsfm:

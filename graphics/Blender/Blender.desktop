@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Icon=blender
+Type=Application
+Categories=Multimedia
+TryExec=/usr/bin/blender
+Exec=blender
+Name=Blender 2.93 Alpha
+Comment=3D Content Renderer - 2.93 Alpha

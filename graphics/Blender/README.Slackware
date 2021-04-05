@@ -4,19 +4,19 @@ time consuming but allows finer tuning of capabilities of the resulting
 package. Working through the prerequisite packages from the REQUIRES field
 of Blender.info results in the following basic build order:
 	multimedia/ffmpeg
-	audio/jack
+	audio/jack-audio-connection-kit
 	libraries/opencv
 	graphics/opencollada
 	libraries/OpenAL
 	python/python3
 	python/python-requests
 	development/valgrind
-	libraries/libwebp
 	development/numpy3
 	development/SDL2
 	graphics/opencolorio
 	graphics/openimageio
 	libraries/freealut
+    libraries/opensubdiv
 	graphics/Blender
 
 When generating a new build order, python3 should first be added to the
@@ -58,18 +58,6 @@ If resources allow, the very large cudatoolkit package is another
 possible package which may be preinstalled and be utilised by the
 opencv build process.
 
-Blender itself can also use cudatoolkit to provide GPU rendering in
-systems with NVidia GPU cards. In this case, the SlackBuild will
-enable CUDA support if a cudatoolkit installation is detected at
-build time. In the unlikely CUDA support is not wanted despite cudatoolkit
-being available at build time, set the CUDA environment variable to "no"
-when running the SlackBuild e.g.
-    CUDA=no sh ./Blender.SlackBuild
-
-NB. Blender-2.83.0 and above requires a newer cudatoolkit than available
-at SBo. If the SBo cudatoolkit is nevertheless installed for other reasons,
-please use CUDA=no when running the SlackBuild.
-
     2. the ffmpeg package could/should first be built with additional
 features by preinstalling some other packages e.g.
 REQUIRES="lame x264
@@ -80,4 +68,9 @@ libiec61883 ladspa_sdk gsm rtmpdump libva twolame celt faac dirac schroedinger"
 which are needed to be useful for any numpy-related python scripting in
 blender. It is therefore numpy3 which is the prerequisite for this build
 of blender.
+    
+    4. Optional packages: 
+       libraries/Alembic
+       libraries/openshadinglanguage
+       libraries/openvdb
 

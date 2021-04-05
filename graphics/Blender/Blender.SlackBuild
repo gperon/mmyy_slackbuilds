@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# Slackware build script for Blender
+# Slackware build script for blender
 
-# Copyright 2015-2021 Christoph Willing, Brisbane Australia
+# Copyright 2015-16 Christoph Willing Brisbane, Australia
+# Copyright 2021 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,19 +23,16 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=Blender
-VERSION=${VERSION:-2.83.8}
-BUILD=${BUILD:-3}
-TAG=${TAG:-_SBo}
-
 SRCNAM=blender
-
-BASE_VERSION=${BASE_VERSION:-$( echo $VERSION | sed -e 's/[^0-9.]*//g')}
+PKGNAM=Blender
+VERSION=${VERSION:-2.93.alpha}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
 PYTHON_VERSION=$(python3 -c "import sys; print(sys.version[:3])")
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
+    i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
        *) ARCH=$( uname -m ) ;;
   esac
@@ -45,8 +43,8 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$SRCNAM
 OUTPUT=${OUTPUT:-/tmp}
 
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
@@ -59,40 +57,27 @@ else
   LIBDIRSUFFIX=""
 fi
 
-cuda=""
-if [ -d /usr/include/cuda ]; then
-  # If cudatoolkit is installed, assume we want to use it
-  cuda="-DWITH_CYCLES_CUDA_BINARIES=ON"
-  # However disable cuda if requested by e.g. CUDA=no
-  if [ ${CUDA:-yes} != "yes" ]; then
-    cuda="-DWITH_CYCLES_CUDA_BINARIES=OFF"
-  fi
-fi
-
-embree=""
-if [ -d /usr/include/embree3 ]; then
-  # If embree is installed, assume we want to use it
-  embree="-DWITH_CYCLES_EMBREE=ON"
-  # However disable embree if requested by e.g. EMBREE=no
-  if [ ${EMBREE:-yes} != "yes" ]; then
-    embree="-DWITH_CYCLES_EMBREE=OFF"
-  fi
-fi
-
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM-$VERSION
-tar xvf $CWD/$SRCNAM-$VERSION.tar.xz
-cd $SRCNAM-$VERSION
-patch -p0 < $CWD/01_FindEmbree_so.diff
-if [ ${FORCE_FFMPEG4:-no} = "yes" ]; then
-  echo "Force use of ffmpeg4"
-  SLKCFLAGS="$SLKCFLAGS -I/usr/include/ffmpeg4 -L/usr/lib${LIBDIRSUFFIX}/ffmpeg4"
-  sed -i -e "s|\"exitcode=0\"|&,\"LD_LIBRARY_PATH\":\"/usr/lib$LIBDIRSUFFIX/ffmpeg4\"|g" doc/manpage/blender.1.py
-fi
+# rm -rf $SRCNAM-$GITVERSION
+# tar xvf $CWD/$SRCNAM-$GITVERSION.tar.gz
+# cd $SRCNAM-$GITVERSION
+# rm -rf $SRCNAM
+if [ ! -d "$SRCNAM" ]; then 
+  git clone git://git.blender.org/blender.git $SRCNAM
+  cd $SRCNAM
+else
+  cd $SRCNAM
+  git pull
+fi 
+# retrieve submodule
+git submodule update --init --recursive
+git submodule foreach git checkout master
+git submodule foreach git pull --rebase origin master
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -100,18 +85,23 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+
 mkdir -p build
-cd build
-  cmake ../ \
+  cmake ./ \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -Bbuild \
+    -GNinja \
+    -DOPTIX_ROOT_DIR="$srcdir"/include \
+    -DWITH_CYCLES_EMBREE=ON \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DWITH_CXX11=ON \
     -DWITH_INSTALL_PORTABLE:BOOL=OFF \
     -DWITH_BUILDINFO:BOOL=ON \
     -DWITH_OPENCOLLADA:BOOL=ON \
     -DWITH_OPENCOLORIO:BOOL=ON \
     -DPYTHON_VERSION=$PYTHON_VERSION \
-    -DWITH_PYTHON_INSTALL:BOOL=OFF \
+    -DWITH_PYTHON_INSTALL:BOOL=ON \
     -DWITH_PYTHON_INSTALL_NUMPY:BOOL=ON \
     -DWITH_CODEC_FFMPEG:BOOL=ON \
     -DWITH_OPENAL:BOOL=ON \
@@ -121,8 +111,7 @@ cd build
     -DWITH_CODEC_SNDFILE:BOOL=ON \
     -DWITH_FFTW3:BOOL=ON \
     -DWITH_IMAGE_OPENJPEG:BOOL=ON \
-    -DWITH_SYSTEM_EIGEN3:BOOL=OFF \
-    -DWITH_SYSTEM_GLEW:BOOL=OFF \
+    -DWITH_SYSTEM_OPENJPEG:BOOL=ON \
     -DWITH_SYSTEM_LZO:BOOL=ON \
     -DWITH_MEM_JEMALLOC:BOOL=ON \
     -DWITH_MEM_VALGRIND:BOOL=ON \
@@ -130,11 +119,19 @@ cd build
     -DWITH_SDL:BOOL=ON \
     -DWITH_SDL_DYNLOAD:BOOL=ON \
     -DCMAKE_BUILD_TYPE=Release \
-    $cuda \
-    $embree \
+    -DWITH_ALEMBIC=OFF \
+    -DWITH_SYSTEM_GLEW=OFF \
+    -DWITH_CYCLES_OPENSUBDIV=ON \
+    -DWITH_CYCLES_OSL=ON \
+    -DWITH_LLVM=ON \
+    -DWITH_IMAGE_OPENEXR=ON \
+    -DWITH_OPENSUBDIV=ON \
+    -DWITH_OPENIMAGEDENOISE=ON \
+    -DWITH_OPENVDB=OFF \
+    -DEMBREE_LIBRARY=/usr/lib${LIBDIRSUFFIX} \
 
-  make
-  make install DESTDIR=$PKG
+  ninja -C build
+  DESTDIR=$PKG ninja -C build install 
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
@@ -145,25 +142,30 @@ for bin in $BLENDERBINS ; do
   mv $PKG/usr/bin/$bin $PKG/usr/bin/$bin.bin
   cat <<EOF >$PKG/usr/bin/$bin
 #!/bin/sh
-export LD_LIBRARY_PATH=/usr/lib$LIBDIRSUFFIX/opencollada:/usr/lib$LIBDIRSUFFIX/ffmpeg4
+export PYTHONPATH=/usr/share/$SRCNAM/$VERSION/python/lib$LIBDIRSUFFIX/python$PYTHON_VERSION
+export LD_LIBRARY_PATH=/usr/lib$LIBDIRSUFFIX/opencollada
 exec $bin.bin "\$@"
 EOF
   chmod 0755 $PKG/usr/bin/$bin
 done
 
 mkdir -p $PKG/usr/man/man1
-./doc/manpage/blender.1.py build/bin/blender $PKG/usr/man/man1/blender.1
+# ./doc/manpage/blender.1.py build/bin/blender $PKG/usr/man/man1/blender.1
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv $PKG/usr/share/doc/$SRCNAM/*  $PKG/usr/doc/$PRGNAM-$VERSION/
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
+mv $PKG/usr/share/doc/$SRCNAM/*  $PKG/usr/doc/$PKGNAM-$VERSION/
 rm -rf $PKG/usr/share/doc
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/$PKGNAM.SlackBuild > $PKG/usr/doc/$PKGNAM-$VERSION/$PKGNAM.SlackBuild
+
+# Add a desktop menu entry
+mkdir -p $PKG/usr/share/applications
+cat $CWD/Blender.desktop > $PKG/usr/share/applications/Blender.desktop
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-${VERSION}-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

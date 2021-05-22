@@ -3,6 +3,7 @@
 # Slackware build script for darktable
 
 # Copyright 2011 David Spencer, Baildon, West Yorkshire, U.K.
+# Copyright 2021 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,7 +24,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=darktable
-VERSION=${VERSION:-3.4.0}
+VERSION=${VERSION:-3.4.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -79,12 +80,13 @@ cd build
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
-    -DDONT_USE_INTERNAL_LUA=Off \
-    -DUSE_LIBSECRET=On \
+    -DDONT_USE_INTERNAL_LUA=ON \
+    -DUSE_LIBSECRET=ON \
     -DBINARY_PACKAGE_BUILD=1 \
-    -DDONT_USE_INTERNAL_LUA=0 \
+    -DRAWSPEED_ENABLE_LTO=ON \
     -DCMAKE_BUILD_TYPE=Release ..
-  VERBOSE=1 make
+
+  make
   make install DESTDIR=$PKG
 cd ..
 

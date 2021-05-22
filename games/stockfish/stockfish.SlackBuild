@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=stockfish
-VERSION=${VERSION:-11}
+VERSION=${VERSION:-13}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -60,7 +60,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf Stockfish-sf_$VERSION
-tar vxf $CWD/Stockfish-$VERSION.tar.gz
+tar vxf $CWD/Stockfish-sf_$VERSION.tar.gz
 cd Stockfish-sf_$VERSION
 
 chown -R root:root .
@@ -94,7 +94,7 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 
 # Docs
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv AUTHORS Copying.txt Readme.md $PKG/usr/doc/$PRGNAM-$VERSION/
+mv AUTHORS Copying.txt README.md $PKG/usr/doc/$PRGNAM-$VERSION/
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 cd $PKG

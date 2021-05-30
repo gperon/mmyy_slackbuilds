@@ -27,7 +27,7 @@
 # see changelog.txt
 
 PRGNAM=nvidia-driver
-VERSION=${VERSION:-460.73.01}
+VERSION=${VERSION:-465.31}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -102,11 +102,7 @@ find -L . \
 
 # Compiling the various open source apps instead of using the precompiled binaries
 # Compiling nvidia-installer from source
-
 cd $TMP/nvidia-installer-$VERSION
-
-# First, we must patch for the removed sys/sysctl.h:
-  patch -p1 < $CWD/nvidia-installer-removed-sysctl-h.patch
 
 # Let's try to remove the conflicting files and GPU detection
   patch -p0 < $CWD/skip_conflict-GPU_detect.patch

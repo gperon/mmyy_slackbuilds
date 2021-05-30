@@ -5,6 +5,25 @@
 # Written by Aleksandar Samardzic <asamardzic@gmail.com>
 # Maintained by Jordan Evans <jordanevans19@gmail.com>
 # Maintained 2018-2021 by Christoph Willing <chris.willing@linux.com>
+# Copyright 2021 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=OpenSceneGraph
 VERSION=${VERSION:-3.6.5}
@@ -38,12 +57,6 @@ else
   LIBDIRSUFFIX=""
 fi
 
-# Support OpenCASCADE, if installed
-occ=""
-# Not supported until version 3.5.6
-#ls -l /var/log/packages/OpenCASCADE* 2>/dev/null 1>/dev/null
-#[ $? -eq 0 ] && occ="-DOPENCASCADE_INCLUDE_DIR=/opt/OpenCASCADE/inc -DOPENCASCADE_LIBRARY_TYPE=Shared"
-
 set -e
 
 rm -rf $PKG
@@ -63,11 +76,9 @@ mkdir -p build
 cd build
   cmake .. \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -std=c++11" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
-    $occ \
-    -DBUILD_OSG_EXAMPLES=ON \
+    -DCMAKE_BUILD_TYPE=Release
 
   make
   make install DESTDIR=$PKG

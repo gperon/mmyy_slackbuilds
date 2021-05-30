@@ -1,0 +1,3 @@
+In this project, we consider the design and implementation of new inexact
+Newton type Bundle Adjustment algorithms that exploit hardware parallelism for
+efficiently solving large scale 3D scene reconstruction problems.

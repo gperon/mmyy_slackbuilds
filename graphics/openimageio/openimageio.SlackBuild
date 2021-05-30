@@ -23,8 +23,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=openimageio
-SRCNAM=oiio-Release
-VERSION=${VERSION:-2.1.19.0}
+SRCNAM=oiio
+VERSION=${VERSION:-2.2.12.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -50,7 +50,7 @@ elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686 -D__STDC_CONSTANT_MACROS"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC -D__STDC_CONSTANT_MACROS"
+  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
   SLKCFLAGS="-O2 -D__STDC_CONSTANT_MACROS"
@@ -62,10 +62,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM-$VERSION
-tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
-cd $SRCNAM-$VERSION
-
+rm -rf $SRCNAM-Release-$VERSION
+tar xvf $CWD/$SRCNAM-Release-$VERSION.tar.gz
+cd $SRCNAM-Release-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -73,34 +72,37 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# save this for GCC 7.0
-#sed -i "s|std=c++11|std=c++11 -Wno-error=maybe-uninitialized -Wno-error=format-truncation -Wno-error=noexcept-type -faligned-new|" CMakeLists.txt
+_pyver=$(python3 -c "from sys import version_info; print(\"%d.%d\" % (version_info[0],version_info[1]))")
+cmake \
+      -Bbuild \
+      -GNinja \
+      -DUSE_PYTHON=ON \
+      -DPYTHON_VERSION=$_pyver \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DOIIO_BUILD_TOOLS=ON \
+      -DBUILD_MISSING_FMT=OFF \
+      -DUSE_EXTERNAL_PUGIXML=ON \
+      -DOpenEXR_ROOT=/usr/lib$LIBDIRSUFFIX \
+      -DOPENEXR_IMATH_LIBRARY=/usr/lib$LIBDIRSUFFIX \
+      -Dpybind11_ROOT=/usr/lib$LIBDIRSUFFIX/python$_pyver/site-packages/pybind11 \
+      -Dpybind11_DIR=/usr/lib$LIBDIRSUFFIX/cmake/pybind11 \
+      -DOPENEXR_IEX_LIBRARY=/usr/lib$LIBDIRSUFFIX \
+      -DOPENEXR_HALF_LIBRARY=/usr/lib$LIBDIRSUFFIX \
+      -DOPENEXR_ILMTHREAD_LIBRARY=/usr/lib$LIBDIRSUFFIX \
+      -DSTOP_ON_WARNING=OFF
 
-mkdir -p build
-cd build
-  cmake ../ \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -std=c++11 -fcommon" \
-    -DOPENJPEG_INCLUDE_DIR="/usr/include/openmj2-2.1" \
-    -DOPENJPEG_OPENJPEG_LIBRARY_RELEASE="/usr/lib${LIBDIRSUFFIX}/libopenmj2.so" \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DPYLIB_INCLUDE_SONAME:BOOL=TRUE \
-    -DPYLIB_LIB_PREFIX:BOOL=FALSE \
-    -DUSE_OPENJPEG:BOOL=TRUE \
-    -DOIIO_BUILD_TESTS:BOOL=FALSE \
-    -DUSE_PYTHON:BOOL=TRUE \
-    -DPYTHON_VERSION=$(python3 --version | cut -d' ' -f2) \
 
-  make
-  make install DESTDIR=$PKG
-cd ..
+ninja -C build
+DESTDIR=$PKG ninja -C build install 
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CONTRIBUTING.md CREDITS.md INSTALL.md README.md $PKG/usr/doc/$PRGNAM-$VERSION
+mv $PKG/usr/share/doc/OpenImageIO/*  $PKG/usr/doc/$PRGNAM-$VERSION
+rm -rf $PKG/usr/share/doc
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

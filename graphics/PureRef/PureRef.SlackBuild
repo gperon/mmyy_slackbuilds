@@ -23,8 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=PureRef
-VERSION=${VERSION:-1.9.2}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-1.11.1}
 TAG=${TAG:-_SBo}
 
 if [ "${ARCH:=$(uname -m)}" != "x86_64" ]; then

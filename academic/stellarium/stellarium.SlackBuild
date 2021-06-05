@@ -2,6 +2,7 @@
 
 # Slackware build script for stellarium
 # Copyright 2008 Alan Alberghini <414N@slacky.it>
+# Copyright 2021 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy.
 #
 # Based on slackbuild by Michael Bueker <m.bueker@berlin.de>
 #
@@ -23,7 +24,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=stellarium
-VERSION=${VERSION:-0.20.4}
+VERSION=${VERSION:-0.21.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

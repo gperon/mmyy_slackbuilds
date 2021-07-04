@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=vorta
+Type=Application
+Comment=BorgBackup GUI
+Exec=vorta
+Icon=vorta.png
+Terminal=false
+Categories=Application;Utility;Qt;

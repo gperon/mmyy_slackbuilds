@@ -8,12 +8,12 @@
        |-----handy-ruler------------------------------------------------------|
 wildfly: wildfly (Application Runtime)
 wildfly:
-wildfly: WildFly is a free, open source, Java EE 7 platform for
+wildfly: WildFly is a free, open source, Java and Jakarta EE 8 platform for
 wildfly: developing and deploying enterprise Java applications, Web
-wildfly: applications, and Portals, Wildfly provides the full
-wildfly: range of Java EE 7 features as well as extended enterprise services
-wildfly: including clustering, caching, and persistence.
+wildfly: applications, and Portals.
 wildfly:
 wildfly:
-wildfly: Homepage http://www.wildfly.org/
+wildfly: Homepage https://wildfly.org/
+wildfly:
+wildfly:
 wildfly:

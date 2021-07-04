@@ -1,20 +1,20 @@
 PRGNAM="nvidia-driver"
-VERSION="460.73.01"
-HOMEPAGE="http://www.nvidia.com"
+VERSION="465.31"
+HOMEPAGE="https://www.nvidia.com"
 DOWNLOAD="UNSUPPORTED"
 MD5SUM=""
-DOWNLOAD_x86_64="https://download.nvidia.com/XFree86/Linux-x86_64/460.73.01/NVIDIA-Linux-x86_64-460.73.01.run \
-                 https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-460.73.01.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-460.73.01.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-460.73.01.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-460.73.01.tar.bz2 \
-                 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-460.73.01.tar.bz2"
-MD5SUM_x86_64="1fd578976c69866089dc3acf340d0953 \
-               f44013b1a7a91e45fb270b849c7fd3d0 \
-               f218d224ffe246d5c69658fe4ece519e \
-               64313ffa5574339ed8fc59dcd2a0b244 \
-               777761acc3149729baf7a71c00c690dd \
-               a7f332a3926ff21bb28f4fe32cc8e492"
+DOWNLOAD_x86_64="https://download.nvidia.com/XFree86/Linux-x86_64/465.31/NVIDIA-Linux-x86_64-465.31.run \
+                 https://download.nvidia.com/XFree86/nvidia-installer/nvidia-installer-465.31.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-modprobe/nvidia-modprobe-465.31.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-persistenced/nvidia-persistenced-465.31.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-465.31.tar.bz2 \
+                 https://download.nvidia.com/XFree86/nvidia-xconfig/nvidia-xconfig-465.31.tar.bz2"
+MD5SUM_x86_64="4996eefa54392b0c9541d22e88abab66 \
+               20540d03d82a65e941993b7a1d602707 \
+               7fa69b5c751c3a6052422816d89f38ce \
+               18670184de8a93b1d61ad7bfea1e4fb4 \
+               2bc87da4492747a0825c670ca5eb40e0 \
+               b1a06ef7c4b8b9845cec50a5b2b6c6b2"
 REQUIRES="nvidia-kernel"
 MAINTAINER="Lenard Spencer"
 EMAIL="lenardrspencer@gmail.com"

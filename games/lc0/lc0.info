@@ -1,0 +1,16 @@
+PRGNAM="lc0"
+VERSION="0.26.3"
+HOMEPAGE="https://github.com/LeelaChessZero/lc0"
+DOWNLOAD="https://github.com/LeelaChessZero/lc0/archive/v0.26.3.tar.gz \
+          https://www.comp.nus.edu.sg/~sergio-v/t60/384x30/384x30-t60-4619.pb.gz \
+          https://storage.lczero.org/files/networks-contrib/LJ2-160 \
+          https://www.comp.nus.edu.sg/~sergio-v/t40/256x20/256x20-t40-1541.pb.gz"
+MD5SUM="7a909abd5d3b277e1cd73b26e4abdd7a \
+        db440a448d9a82f5a2325b36b7848251 \
+        e07f553f9fd02516763bc05c5b718ce0 \
+        59da4859de827d3cd75866c40920f8a0"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="ispc" 
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

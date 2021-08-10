@@ -26,8 +26,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=cudatoolkit
 FILENAME=cuda
-VERSION=${VERSION:-11.2.0}
-DRIVER=${DRIVER:-460.27.04}
+VERSION=${VERSION:-11.4.1}
+DRIVER=${DRIVER:-470.57.02}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -82,7 +82,7 @@ mv cuda_samples "${PKG}/usr/share/cuda/samples"
 mv integration nsight_compute nsight_systems EULA.txt "${PKG}/usr/share/cuda"
 mv cuda_sanitizer_api/compute-sanitizer "${PKG}/usr/share/cuda/extras/compute-sanitizer"
 rmdir cuda_sanitizer_api
-for lib in *; do
+for lib in lib* cuda*; do
   cp -r $lib/* "${PKG}/usr/share/cuda/"
 done
 

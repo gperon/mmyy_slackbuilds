@@ -46,7 +46,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=GraphicsMagick
-VERSION=${VERSION:-1.3.39}
+VERSION=${VERSION:-1.3.40}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -141,11 +141,12 @@ CXXFLAGS="$SLKCFLAGS" \
   --program-prefix= \
   --with-x \
   --with-frozenpaths=no \
-  --without-modules \
+  --with-modules \
   --enable-static=no \
   --enable-shared \
   --with-perl \
   --with-quantum-depth=16 \
+  --with-threads \
   --with-fpx=$FPXOPT \
   --build=$ARCH-slackware-linux
 
@@ -183,8 +184,7 @@ if [ "${PERL:-yes}" = "yes" ]; then
   # for its support files in the source tree instead of /usr.
   DISPLAY="" \
   LD_PRELOAD="$PKG/usr/lib$LIBDIRSUFFIX/lib$PRGNAM.so" \
-    ../rungm.sh make test
-
+    ../rungm.sh make 
   make install DESTDIR=$PKG
 
   cd -
@@ -243,6 +243,11 @@ find $PKG -name perllocal.pod \
   -o -name ".packlist" \
   -o -name "*.bs" \
   | xargs rm -f
+
+# Don't ship .la files:
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/$PRGNAM-$VERSION/modules-Q16/coders/*.la
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/$PRGNAM-$VERSION/modules-Q16/filters/*.la
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/TclMagick0.46/*.la
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a ChangeLog *.txt $PKG/usr/doc/$PRGNAM-$VERSION

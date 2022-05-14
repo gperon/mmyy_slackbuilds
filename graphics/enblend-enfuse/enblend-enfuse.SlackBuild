@@ -26,8 +26,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=enblend-enfuse
-VERSION=${VERSION:-4.3-209eafc9748b}
-SRCVER=enblend-code-b236375ad1a80df4d0b4b15b3f8ff8e15cd31913
+VERSION=${VERSION:-4.3.aa64fb9a4745}
+SRCVER=enblend-code-5fa9da6f2d98588ac30702dcf33f509a42bf1712
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -80,9 +80,6 @@ find -L . \
 
 # from mercurial repository run AutoConf AutoMake
 make --makefile=Makefile.scm
-
-# TODO fix exiv2 version BROKEN
-sed -i "s|Exiv2::Image::UniquePtr|Exiv2::Image::AutoPtr|g" configure
 
 CXXFLAGS="$SLKCFLAGS" \
 CFLAGS="$SLKCFLAGS" \

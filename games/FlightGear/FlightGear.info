@@ -1,6 +1,6 @@
 PRGNAM="FlightGear"
 VERSION="2020.3.13"
-HOMEPAGE="http://www.flightgear.org/"
+HOMEPAGE="https://www.flightgear.org/"
 DOWNLOAD="https://downloads.sourceforge.net/flightgear/flightgear-2020.3.13.tar.bz2"
 MD5SUM="8ec03231a516e1b924dde00ade833564"
 DOWNLOAD_x86_64=""

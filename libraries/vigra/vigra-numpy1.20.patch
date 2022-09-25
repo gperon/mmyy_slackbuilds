@@ -1,0 +1,22 @@
+From 23ad778502c6436fb6e40ade5e9fd9ddbbad9f35 Mon Sep 17 00:00:00 2001
+From: k-dominik <k-dominik@users.noreply.github.com>
+Date: Tue, 7 Dec 2021 20:45:58 +0100
+Subject: [PATCH] fix numpy>1.20 build
+
+---
+ vigranumpy/lib/arraytypes.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/vigranumpy/lib/arraytypes.py b/vigranumpy/lib/arraytypes.py
+index 4288ecec5..189939f04 100644
+--- a/vigranumpy/lib/arraytypes.py
++++ b/vigranumpy/lib/arraytypes.py
+@@ -290,6 +290,8 @@ def _AxisTags__reduce__(self):
+ 
+ def _constructArrayFromOrder(cls, shape, dtype, order, init):
+     axistags = VigraArray.defaultAxistags(len(shape), order)
++    if hasattr(dtype, "type"):
++        dtype = dtype.type
+     return _constructArrayFromAxistags(cls, shape, dtype, axistags, init)
+ 
+ def _constructArrayFromArray(cls, obj, dtype, order, init, axistags):

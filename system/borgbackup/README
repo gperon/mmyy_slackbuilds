@@ -9,9 +9,7 @@ targets.
 
 Borg is a fork of Attic and is maintained by "The Borg collective".
 
-FIXME:
-  Due to outdated version of llfuse here at SBo, building borgbackup
-  with mount support using llfuse will fail.
+python-setuptool-scm is added again in slackbuilds to support latest version
 
 Optional dependencies:
 - llfuse is required if you wish to mount an archive using FUSE,

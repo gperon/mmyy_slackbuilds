@@ -29,7 +29,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=scribus
-VERSION=${VERSION:-r25087}
+VERSION=${VERSION:-1.5.8}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -83,9 +83,20 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+# patch from https://github.com/scribusproject/scribus/commit/f2237b8f0b5c.patch
+patch -Np1 -i $CWD/poppler-22.02.0.patch
+patch -Np1 -i $CWD/poppler-22.02.0-fixup.patch
+patch -Np1 -i $CWD/poppler-22.03.0.patch
+patch -Np1 -i $CWD/poppler-22.04.0.patch
+
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
+  -DWANT_CPP17=ON \
+  -DWANT_HUNSPELL=ON \
+  -DWITH_BOOST=ON \
+  -DWITH_PODOFO=ON \
+  -DWANT_GRAPHICSMAGICK=ON \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
   -DWANT_CPP17=1 \
   -DLIB_SUFFIX=${LIBDIRSUFFIX}

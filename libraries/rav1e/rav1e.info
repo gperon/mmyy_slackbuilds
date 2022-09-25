@@ -1,0 +1,12 @@
+PRGNAM="rav1e"
+VERSION="0.5.1"
+HOMEPAGE="https://github.com/xiph/rav1e/"
+DOWNLOAD="https://github.com/xiph/rav1e/archive/v0.5.1.tar.gz
+          https://github.com/xiph/rav1e/releases/download/v0.5.1/Cargo.lock"
+MD5SUM="36fe6bb795a8b38dcd5f56e14a6845e2
+        b583f79e0a33abe2eb058fd8231e4a4d"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="cargo-c"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

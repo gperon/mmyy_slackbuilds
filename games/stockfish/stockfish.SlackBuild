@@ -29,7 +29,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=stockfish
-VERSION=${VERSION:-14.1}
+VERSION=${VERSION:-15}
+NN_VERSION=6877cd24400e
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -72,7 +73,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf Stockfish-sf_$VERSION
 tar vxf $CWD/Stockfish-sf_$VERSION.tar.gz
-cp $CWD/nn-13406b1dcbe0.nnue Stockfish-sf_$VERSION/src/
+cp $CWD/nn-$NN_VERSION.nnue Stockfish-sf_$VERSION/src/
 cd Stockfish-sf_$VERSION
 
 chown -R root:root .

@@ -1,3 +1,4 @@
-# install GCC 6 and link the compiler in cuda bin folder
-ln -sf usr/bin/gcc-6 usr/share/cuda/bin/gcc 
-ln -sf usr/bin/g++-6 usr/share/cuda/bin/g++
+# Define compilers for CUDA to use.
+# This allows us to use older versions of GCC if we have to.
+ln -sf usr/bin/gcc usr/share/cuda/bin/gcc 
+ln -sf usr/bin/g++ usr/share/cuda/bin/g++

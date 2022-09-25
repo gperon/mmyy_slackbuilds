@@ -1,12 +1,14 @@
 PRGNAM="gmic"
-VERSION="2.9.4"
+VERSION="3.1.5"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_2.9.4.tar.gz \
-          https://github.com/dtschump/gmic-community/archive/6e9a20ef40e1db99c9b761853ad493ee7439e1b7.zip"
-MD5SUM="e0d396ab6406c9baeb4929c1dd6a0d6a \
-        75f88fa1423f253714e84905a05f37da"
+DOWNLOAD="https://gmic.eu/files/source/gmic_3.1.5.tar.gz \
+          https://github.com/dtschump/gmic-community/archive/refs/tags/gmic-3.1.5.tar.gz \
+          https://github.com/c-koi/zart/archive/ac29dcbcaba778060053480f3e5e7692e42a5338.zip"
+MD5SUM="5b462e00b8dc47b0adf5df23a7246751 \
+        cc5841e25dde55144b09d22c0f7bdca2 \
+        9171ff72c617838e93aea71d17d7b832"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="GraphicsMagick"
 MAINTAINER="Giorgio Peron"
 EMAIL="giorgio.peron@gmail.com"

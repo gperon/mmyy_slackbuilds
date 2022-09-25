@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Copyright 2019 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Slackware build script for G'mic
+
+# Copyright 2022 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -23,9 +25,10 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gmic
-VERSION=${VERSION:-2.9.4}
-COMMUNITYVERSION=${COMMUNITYVERSION:-6e9a20ef40e1db99c9b761853ad493ee7439e1b7}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-3.1.5}
+COMMUNITYVERSION=${COMMUNITYVERSION:-3.1.5}
+ZART=${ZART:-ac29dcbcaba778060053480f3e5e7692e42a5338}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -70,12 +73,18 @@ mkdir -p $TMP $PKG
 cd $TMP
 rm -rf $PRGNAM
 rm -rf $PRGNAM-community
-rm -rf $PRGNAM-qt
+rm -rf $PRGNAM-zart
 tar xvf $CWD/$PRGNAM\_$VERSION.tar.gz --warning=no-unknown-keyword
 mv $PRGNAM-$VERSION $PRGNAM
-unzip $CWD/$PRGNAM-community-$COMMUNITYVERSION.zip || unzip $CWD/$COMMUNITYVERSION
-mv $PRGNAM-community-$COMMUNITYVERSION $PRGNAM-community
+tar xvf $CWD/$PRGNAM-$COMMUNITYVERSION.tar.gz || tar xvf $CWD/$PRGNAM-community-$PRGNAM-$COMMUNITYVERSION.tar.gz
+mv $PRGNAM-community-$PRGNAM-$COMMUNITYVERSION $PRGNAM-community
+unzip $CWD/zart-$ZART.zip || unzip $CWD/$ZART.zip
+mv zart-$ZART $PRGNAM-zart
 cd $PRGNAM
+cp $CWD/CMakeLists.txt .
+mkdir -p cmake
+cp $CWD/FindCImg.cmake $CWD/FindGMicStdlib.cmake cmake
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -85,33 +94,60 @@ find -L . \
 
 sed -i -e "s|LIB = lib|LIB = lib$LIBDIRSUFFIX|g" \
        -e "s|/share/man/|/man/|g" \
-       -e "s|/etc/bash_completion.d|/usr/share/bash-completion/completions|g" \
-       -e "s|pkg-config opencv|pkg-config opencv4|" \
-       -e "s|qmake|qmake-qt5|g" \
        src/Makefile || exit 1
-sed -i -e "s|-Ofast|-O2 -fno-fast-math --std=c++11|g" \
-    gmic-qt/gmic_qt.pro || exit 1
 
-make -C src cli lib libc WGET=/bin/true LIBS=${LDFLAGS} OPT_CFLAGS="$SLKCFLAGS "
+cmake -B build -S . \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DENABLE_DYNAMIC_LINKING=ON \
+  -DBUILD_LIB_STATIC=OFF \
+  -DENABLE_OPENCV=ON
+cmake --build build
+DESTDIR="$PKG" cmake --install build
+mv $PKG/usr/share/man $PKG/usr/
 
-cd gmic-qt
-qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on HOST=none
-make
-qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on HOST=gimp
-make
-qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=on HOST=krita
-make
+export LDFLAGS="$LDFLAGS -L../build"
+cmake -B build-qt -S ./gmic-qt \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DENABLE_DYNAMIC_LINKING=ON \
+  -DENABLE_SYSTEM_GMIC=OFF \
+  -DGMIC_PATH=../src \
+  -DGMIC_QT_HOST=none
+cmake --build build-qt
+DESTDIR="$PKG" cmake --install build-qt
 
-cd ../zart
-qmake-qt5 GMIC_PATH=../src GMIC_DYNAMIC_LINKING=off QMAKE_CXXFLAGS+=" -DOPENCV2_HEADERS"
-make
-cd ..
-make -C src install LIB=lib$LIBDIRSUFFIX DESTDIR="$PKG" USR="/usr"
+cmake -B build-gimp -S ./gmic-qt \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DENABLE_DYNAMIC_LINKING=ON \
+  -DENABLE_SYSTEM_GMIC=OFF \
+  -DGMIC_PATH=../src \
+  -DGMIC_QT_HOST=gimp
+cmake --build build-gimp
+DESTDIR="$PKG" cmake --install build-gimp
 
-rmdir $PKG/usr/share || true
+cmake -B build-krita -S ./gmic-qt \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DENABLE_DYNAMIC_LINKING=ON \
+  -DENABLE_SYSTEM_GMIC=OFF \
+  -DGMIC_PATH=../src \
+  -DGMIC_QT_HOST=krita
+cmake --build build-krita
+DESTDIR="$PKG" cmake --install build-krita
+
+cd ../$PRGNAM-zart
+qmake-qt5 GMIC_PATH=../$PRGNAM/src GMIC_DYNAMIC_LINKING=off QMAKE_CXXFLAGS+=" -DOPENCV2_HEADERS"
+make
+make install INSTALL_ROOT=$PKG
+mkdir -p $PKG/usr/share/applications
+install -Dm644 zart.desktop $PKG/usr/share/applications
+
+cd ../$PRGNAM
+rm -rf $PKG/usr/share/man || true
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a COPYING* README* $PKG/usr/doc/$PRGNAM-$VERSION

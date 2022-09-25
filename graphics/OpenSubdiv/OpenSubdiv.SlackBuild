@@ -74,6 +74,9 @@ cd $TMP
 rm -rf $PRGNAM-$SRCVER
 tar xvf $CWD/$PRGNAM-$SRCVER.tar.gz
 cd $PRGNAM-$SRCVER
+
+patch -Np1 -i "${CWD}"/cuda9.patch
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -87,6 +90,9 @@ cd build
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DNO_TBB=0 \
+    -DNO_CUDA=0 \
+    -DCUDA_HOST_COMPILER=/usr/bin/g++ \
     -DCMAKE_LIBDIR_BASE=lib${LIBDIRSUFFIX} \
     -DCMAKE_DOCDIR_BASE=doc/$PRGNAM-$VERSION \
     -DCMAKE_BUILD_TYPE=Release ..

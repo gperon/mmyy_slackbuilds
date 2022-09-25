@@ -1,0 +1,18 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+      |-----handy-ruler------------------------------------------------------|
+colmap: colmap
+colmap:
+colmap: COLMAP is a general-purpose Structure-from-Motion (SfM) and 
+colmap: Multi-View Stereo (MVS) pipeline with a graphical and command-line  
+colmap: interface. It offers a wide range of features for reconstruction of 
+colmap: ordered and unordered image collections.
+colmap:
+colmap: Homepage https://demuc.de/colmap
+colmap:
+colmap:

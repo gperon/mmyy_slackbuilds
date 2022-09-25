@@ -5,6 +5,7 @@
 # 2017 - Dhaby Xiloj <slack.dhabyx@gmail.com>
 
 # Copyright 2008-2013  Robby Workman  Northport, AL, USA
+# Copyright 2021 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,23 +25,15 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# 20220404 bkw: Modified by SlackBuilds.org, BUILD=2:
-# - strip the python interpreter and one shared lib that weren't already.
-# - remove the broken symlinks in the icons dir. upstream doesn't include
-#   PNG icons (I assume it did at one time), only an SVG one.
-# - add SlackBuild to doc dir.
-
 # Thanks to Giorgio Peron <giorgio.peron@gmail.com> for some build tips
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=blender
-VERSION=${VERSION:-2.90.1}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-3.3.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
-
-SRCVERSION=${VERSION}-linux64
 
 # We'll remove the libGL* shared libaries that are shipped with blender (and
 # instead use the ones that are shipped with Slackware's Xorg)
@@ -76,15 +69,15 @@ fi
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$SRCVERSION
-tar xvf $CWD/$PRGNAM-$SRCVERSION.tar.xz
-cd $PRGNAM-$SRCVERSION
+rm -rf $PRGNAM-$VERSION-linux-x64
+tar xvf $CWD/$PRGNAM-$VERSION-linux-x64.tar.xz
+cd $PRGNAM-$VERSION-linux-x64
 chown -R root:root .
 
 # Move the docs to our standard location first
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-mv *.txt readme.html \
+mv copyright.txt readme.html license \
    $PKG/usr/doc/$PRGNAM-$VERSION
 
 # Now move everything else
@@ -101,18 +94,9 @@ if [ "$LMTFA" != "yes" ]; then
   rm -f $PKG/opt/blender/lib/libGL*
 fi
 
-# 20220404 bkw: a couple of things aren't stripped... this
-# is noticeably faster than the template find|strip.
-find $PKG/opt/blender -type f -print0  | \
-  xargs -0 file -m /etc/file/magic/elf | \
-  grep 'ELF.*dynamic.*not stripped'    | \
-  cut -d: -f1 | xargs strip
-
-# Put symlinks to icons in the standard places.
-# 20220404 bkw: looks like upstream got rid of PNG icons and only
-# ships an SVG (which has moved).
+# Put symlinks to icons in the standard places
 mkdir -p $PKG/usr/share/icons/hicolor/scalable/apps
-  ln -s ../../../../../../opt/blender/blender.svg \
+  ln -s /opt/blender/blender.svg \
         $PKG/usr/share/icons/hicolor/scalable/apps/
 
 # Add a desktop menu entry

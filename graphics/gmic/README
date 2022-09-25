@@ -7,3 +7,6 @@ convert/manipulate/filter/visualize generic image datasets, ranging from
 thus including 2d color images.
 
 This package contains the gimp plug-in.
+
+To compile in slackware-current the official package FFTW must be
+compiled with cmake to create missing FFTW3LibraryDepends.cmake. 

@@ -3,6 +3,7 @@
 # Slackware build script for Luminance HDR
 
 # Copyright 2011 David Spencer, Baildon, West Yorkshire, U.K.
+# Copyright 2022 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -80,12 +81,8 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
-# Apply patches from gentoo
-for i in $CWD/patches/* ; do patch -p1 < $i ; done
-
-# Workround build failure with gcc-g++-4.9.3 and beyond (mangling bug?)
-# (fails to link libmvec: "undefined reference to `_ZGVbN4vv_powf'" etc)
-export CXX=clang++
+patch -p1 < $CWD/luminancehdr-openexr3.patch
+patch -p1 < $CWD/fix-headers.patch
 
 # 20220320 bkw: for some reason, the -latomic is needed on 32-bit x86.
 # it does no harm on x86_64.
@@ -103,7 +100,7 @@ cd ..
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  AUTHORS BUGS Changelog LICENSE README.md README.i18n TODO \
+  AUTHORS BUGS Changelog INSTALL.md LICENSE README.md README.i18n TODO \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

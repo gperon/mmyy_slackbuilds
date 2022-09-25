@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=qgis
-VERSION=${VERSION:-3.24.3}
+VERSION=${VERSION:-3.26.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -73,6 +73,9 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
+
+patch -p1 < $CWD/19823b76.patch # Fix infinite loop
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -86,31 +89,32 @@ else
   WITHGRASS=""
 fi
 
-sed -i '43 i IF (NOT PROJ_INCLUDE_DIR)\nFIND_PATH(PROJ_INCLUDE_DIR proj.h\n"$ENV{INCLUDE}"\n"$ENV{LIB_DIR}/include"\n)\nENDIF (NOT PROJ_INCLUDE_DIR)\n' cmake/FindProj.cmake
+# sed -i '43 i IF (NOT PROJ_INCLUDE_DIR)\nFIND_PATH(PROJ_INCLUDE_DIR proj.h\n"$ENV{INCLUDE}"\n"$ENV{LIB_DIR}/include"\n)\nENDIF (NOT PROJ_INCLUDE_DIR)\n' cmake/FindProj.cmake
 
-mkdir -p build
-cd build
-  cmake .. \
+cmake -S . -B build -G Ninja \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -DQWT_POLAR_VERSION=0x060200" \
     -DCMAKE_BUILD_TYPE="Release" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DQGIS_LIB_SUBDIR=lib${LIBDIRSUFFIX} \
     -DQGIS_LIBEXEC_SUBDIR=lib${LIBDIRSUFFIX}/qgis \
     -DQGIS_PLUGIN_SUBDIR=lib${LIBDIRSUFFIX}/qgis \
     -DWITH_QWTPOLAR=TRUE \
-    -DWITH_CUSTOM_WIDGETS=FALSE \
+    -DQWTPOLAR_LIBRARY=/usr/lib${LIBDIRSUFFIX}/libqwt.so \
+    -DQWTPOLAR_INCLUDE_DIR=/usr/include/qwt \
+    -DWITH_CUSTOM_WIDGETS=TRUE \
     -DBINDINGS_GLOBAL_INSTALL=TRUE \
     -DQWT_INCLUDE_DIR=/usr/include/qwt \
-    -DQSCINTILLA_INCLUDE_DIR=/usr/include/qt5 \
     -DENABLE_TESTS=FALSE \
     -DWITH_3D=TRUE \
+    -DWITH_SERVER=TRUE \
+    -DWITH_INTERNAL_QWTPOLAR=FALSE \
+    -DWITH_PDAL=TRUE \
     -Wno-dev \
     $WITHGRASS
-
-  make || make -j1
-  make install DESTDIR=$PKG
-cd -
+  
+cmake --build build
+DESTDIR=$PKG cmake --install build
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

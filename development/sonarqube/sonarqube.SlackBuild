@@ -24,7 +24,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=sonarqube
-VERSION=${VERSION:-5.6.1}
+VERSION=${VERSION:-8.2.0.32929}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -88,28 +88,26 @@ cd $TMP
 unzip $CWD/$PRGNAM-$VERSION.zip
 
 mkdir -p $PKG/usr/share/$PRGNAM
-mkdir -p $PKG/var/{log,run,tmp}/$PRGNAM
-mkdir -p $PKG/etc/rc.d
+mkdir -p $PKG/var/{log,run,tmp,lib}/$PRGNAM
+mkdir -p $PKG/etc/{$PRGNAM,rc.d}
 
 mv $TMP/$PRGNAM-$VERSION/* $PKG/usr/share/$PRGNAM/
 
 # expose the configuration file under /etc
-mv $PKG/usr/share/$PRGNAM/conf/sonar.properties{,.new}
-mv $PKG/usr/share/$PRGNAM/conf/wrapper.conf{,.new}
-cd $PKG/etc
-ln -sf ../usr/share/$PRGNAM/conf $PRGNAM
-
-sed -i "s_sonar.jdbc.url=jdbc:h2:_#sonar.jdbc.url=jdbc:h2:_g" $PKG/usr/share/$PRGNAM/conf/sonar.properties.new
-sed -i "s_#sonar.jdbc.url=jdbc:mysql:_sonar.jdbc.url=jdbc:mysql:_g" $PKG/usr/share/$PRGNAM/conf/sonar.properties.new
-sed -i "s_#sonar.web.context=_sonar.web.context=/sonarqube_g" $PKG/usr/share/$PRGNAM/conf/sonar.properties.new
-sed -i "s_wrapper.java.command=java_wrapper.java.command=/usr/lib${LIBDIRSUFFIX}/java/bin/java_g" $PKG/usr/share/$PRGNAM/conf/wrapper.conf.new
+sed -i "s_wrapper.java.command=java_wrapper.java.command=/usr/bin/java_g" $PKG/usr/share/$PRGNAM/conf/wrapper.conf
+mv $PKG/usr/share/$PRGNAM/conf/sonar.properties $PKG/etc/$PRGNAM/sonar.properties.new
+mv $PKG/usr/share/$PRGNAM/conf/wrapper.conf $PKG/etc/$PRGNAM/wrapper.conf.new
 
 chown -R sonar:sonar $PKG/usr/share/$PRGNAM
-chown -R sonar:sonar $PKG/var/{log,run,tmp}/$PRGNAM
+chown -R sonar:sonar $PKG/var/{log,run,tmp,lib}/$PRGNAM
 
+rm -rf $PKG/usr/share/$PRGNAM/conf
+rm -rf $PKG/usr/share/$PRGNAM/data
 rm -rf $PKG/usr/share/$PRGNAM/logs
 rm -rf $PKG/usr/share/$PRGNAM/temp
 cd $PKG/usr/share/$PRGNAM
+ln -fs ../../../etc/$PRGNAM conf
+ln -fs ../../../var/lib/$PRGNAM data
 ln -fs ../../../var/log/$PRGNAM logs
 ln -fs ../../../var/tmp/$PRGNAM temp
 
@@ -117,8 +115,12 @@ ln -fs ../../../var/tmp/$PRGNAM temp
 cd $PKG/usr/share/$PRGNAM/bin
 find . -type d -not -name ${BINDIR} -not -name "." -not -name "lib" | xargs rm -rf
 
-cat $CWD/rc.$PRGNAM > $PKG/etc/rc.d/rc.$PRGNAM.new
+cp $PKG/usr/share/$PRGNAM/bin/${BINDIR}/sonar.sh $PKG/etc/rc.d/rc.$PRGNAM.new
 sed -i "s:WRAPPER_CMD=\"./wrapper\":WRAPPER_CMD=\"/usr/share/sonarqube/bin/${BINDIR}/wrapper\":g" $PKG/etc/rc.d/rc.$PRGNAM.new
+sed -i "s:WRAPPER_CONF=\"../../conf/wrapper.conf\":WRAPPER_CONF=\"/etc/sonarqube/wrapper.conf\":g" $PKG/etc/rc.d/rc.$PRGNAM.new
+sed -i "s:SHUTDOWNER_LIB_DIR=\"../../lib\":SHUTDOWNER_LIB_DIR=\"/usr/share/sonarqube/lib\":g" $PKG/etc/rc.d/rc.$PRGNAM.new
+sed -i "s:PIDDIR=\".\":PIDDIR=\"/var/run/sonarqube\":g" $PKG/etc/rc.d/rc.$PRGNAM.new
+sed -i "s:#RUN_AS_USER=:RUN_AS_USER=sonar:g" $PKG/etc/rc.d/rc.$PRGNAM.new
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

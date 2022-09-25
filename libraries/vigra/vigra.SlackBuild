@@ -32,7 +32,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM="vigra"
 VERSION=${VERSION:-1.11.1}
-BUILD=${BUILD:-2}
+SRCVER=${SRCVER:-093d57d15c8c237adf1704d96daa6393158ce299}
+BUILD=${BUILD:-3}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -73,9 +74,16 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION-src.tar.gz
-cd $PRGNAM-$VERSION
+# tar xvf $CWD/$PRGNAM-$VERSION-src.tar.gz
+unzip $CWD/$PRGNAM-$SRCVER.zip || unzip $CWD/$SRCVER.zip
+cd $PRGNAM-$SRCVER
 chown -R root:root .
+
+patch -p1 < $CWD/vigra-openexr3.patch
+patch -p1 < $CWD/vigra-python3.10.patch
+patch -p1 < $CWD/vigra-numpy1.20.patch
+# https://github.com/ukoethe/vigra/issues/504
+patch -R -p1 < $CWD/vigra-bind-c17.patch
 
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \

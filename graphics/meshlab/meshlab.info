@@ -1,10 +1,10 @@
 PRGNAM="meshlab"
-VERSION="2021.10"
+VERSION="2022.02"
 HOMEPAGE="http://www.meshlab.net/"
-DOWNLOAD="https://github.com/cnr-isti-vclab/meshlab/archive/Meshlab-2021.10/meshlab-Meshlab-2021.10.tar.gz \
-          https://github.com/cnr-isti-vclab/vcglib/archive/2021.10/vcglib-2021.10.tar.gz"
-MD5SUM="bb1d2f373549cce1d48fb589033f6b2a \
-        12cce090b9292e3306f6ee4848e58e1e"
+DOWNLOAD="https://github.com/cnr-isti-vclab/meshlab/archive/refs/tags/MeshLab-2022.02.tar.gz \
+          https://github.com/cnr-isti-vclab/vcglib/archive/2022.02.tar.gz"
+MD5SUM="2abce8c539ad5b8ede0d22efd96b9ebe \
+        73ce1420cf65f632cf8e2add874e3bf1"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="levmar muParser mpir"

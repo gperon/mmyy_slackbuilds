@@ -1,0 +1,41 @@
+From e7e656c29083729090dd3fb3ec214a888e0b3e8d Mon Sep 17 00:00:00 2001
+From: k-dominik <k-dominik@users.noreply.github.com>
+Date: Mon, 6 Dec 2021 18:20:37 +0100
+Subject: [PATCH] fix collections.Iterable deprecation
+
+---
+ vigranumpy/lib/arraytypes.py | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/vigranumpy/lib/arraytypes.py b/vigranumpy/lib/arraytypes.py
+index 62329788c..4288ecec5 100644
+--- a/vigranumpy/lib/arraytypes.py
++++ b/vigranumpy/lib/arraytypes.py
+@@ -39,11 +39,17 @@
+ import copy
+ import numpy
+ from . import ufunc
+-import collections
+ import vigra.vigranumpycore as vigranumpycore
+ 
+ from vigra.vigranumpycore import AxisType, AxisInfo, AxisTags
+ 
++try:
++    from collections.abc import Iterable
++except ImportError:
++    # Python 2.7
++    from collections import Iterable
++
++
+ if sys.version_info[0] > 2:
+     buffer = memoryview
+     xrange = range
+@@ -1262,7 +1268,7 @@ def __getitem__(self, index):
+         try:
+             res = numpy.ndarray.__getitem__(self, index)
+         except:
+-            if not isinstance(index, collections.Iterable):
++            if not isinstance(index, Iterable):
+                 raise
+             #create temporary index without AxisInfor in order to use np.ndarray.__getitem__
+             tmpindex = [None if isinstance(x, AxisInfo) else x for x in index]

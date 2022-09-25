@@ -25,9 +25,9 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=inkscape
-VERSION=${VERSION:-1.2}
-EXTRAVER=${EXTRAVER:-2022-05-15_dc2aedaf03}
-BUILD=${BUILD:-1}
+VERSION=${VERSION:-1.2.1}
+EXTRAVER=${EXTRAVER:-2022-07-14_9c6d41e410}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -79,6 +79,9 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+
+patch -Np1 -i $CWD/inkscape-1.2.1-poppler-22.09.0.patch
 
 # strip invalid tag
 sed -i /url/d org.inkscape.Inkscape.appdata.xml.in

@@ -1,0 +1,12 @@
+PRGNAM="cargo-c"
+VERSION="0.9.6"
+HOMEPAGE="https://github.com/lu-zero/cargo-c/"
+DOWNLOAD="https://github.com/lu-zero/cargo-c/archive/refs/tags/v0.9.6.tar.gz \
+          https://github.com/lu-zero/cargo-c/releases/download/v0.9.6/Cargo.lock"
+MD5SUM="ef42fee570c601fd3512ec7a78d85cc3 \
+        2325b165b504d7cbe7338f072f8d799a"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

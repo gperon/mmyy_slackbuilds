@@ -74,24 +74,18 @@ cd $TMP
 rm -rf $PRGNAM-$COMMIT
 tar xvf $CWD/$PRGNAM-$COMMIT.tar.gz
 tar xvf $CWD/$CEF_ROOT.tar.bz2
-echo "AAAAAAA"
 cd $CEF_ROOT
   strip -v Release/*.so
-echo "BBBBBBB"
   if [ "$ARCH" = "i686" -o "$ARCH" = "i586" ]; then
-	echo "XXXXXXX"
     cmake \
       -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
       -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
       -DCMAKE_BUILD_TYPE=Release .
 
     make libcef_dll_wrapper
-	echo "YYYYYYY"
   fi
-echo "CCCCCCC"
   cd ..
 
-echo "DDDDDDD"
 cd $PRGNAM-$COMMIT
 sed -i -e '/OBS_VERSION_CANONICAL/ s=^=#=' CMakeLists.txt
 chown -R root:root .

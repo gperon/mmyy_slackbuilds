@@ -1,0 +1,16 @@
+PRGNAM="lc0"
+VERSION="0.28.2"
+HOMEPAGE="https://github.com/LeelaChessZero/lc0"
+DOWNLOAD="https://github.com/LeelaChessZero/lc0/archive/v0.28.2.tar.gz \
+          https://github.com/LeelaChessZero/lczero-common/archive/master.tar.gz \
+          http://training.lczero.org/get_network?sha=98412989c314a93aa4f2301faa0c8a93a95739ed10661f3674d7e923f269acd6 \
+          https://storage.lczero.org/files/networks-contrib/hanse-69722-vf2.gz"
+MD5SUM="9f892ce1d2ffbf51181885b2262016a8 \
+        a768451a8775b928d5518a467f6753e8 \
+        bf53af2dd12bc3409aac94e786985397 \
+        b6f00ffb77a0addd054fc466417f731e"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="ispc" 
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

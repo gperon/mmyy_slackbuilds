@@ -1,0 +1,6 @@
+OpenVDB is an Academy Award-winning open-source C++ library comprising a novel
+hierarchical data structure and a suite of tools for the efficient storage and
+manipulation of sparse volumetric data discretized on three-dimensional grids.
+
+Warning: Recompile boost from official slackware to enable numpy (numpy3
+is a dependency).

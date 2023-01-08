@@ -1,0 +1,9 @@
+cudaroot=/usr/share/cuda
+libdir=/usr/lib64
+includedir=/usr/include
+
+Name: cublas
+Description: CUDA BLAS Library
+Version: 12.0
+Libs: -L${libdir} -lcublas
+Cflags: -I${includedir}

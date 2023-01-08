@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=Solaar
-VERSION=${VERSION:-1.1.12}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-1.1.13}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -77,8 +77,9 @@ sed -i 's/#MODE="0660", GROUP="plugdev"/MODE="0660", GROUP="plugdev"/g' $PKG/lib
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  COPYRIGHT CHANGELOG.md LICENSE.txt README.md Release_Notes.md docs \
+  CHANGELOG.md COPYRIGHT LICENSE.txt README.md RELEASE.md Release_Notes.md docs \
   $PKG/usr/doc/$PRGNAM-$VERSION
+rm $PKG/usr/doc/$PRGNAM-$VERSION/docs/.gitignore
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

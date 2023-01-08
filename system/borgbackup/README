@@ -11,6 +11,15 @@ targets.
 
 Borg is a fork of Attic and is maintained by "The Borg collective".
 
+> **TODO**
+>
+> - Switch from `llfuse` to `pyfuse3` for mounting archives.
+>   `llfuse` is not maintained any more.
+> - Test dependencies for building the docs.
+>   Are there any missing? Are all required?
+
+python-setuptool-scm is added again in slackbuilds to support latest version
+
 Optional dependencies:
 
 - llfuse for mounting the archives.

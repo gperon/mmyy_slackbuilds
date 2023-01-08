@@ -35,8 +35,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=borgbackup
-VERSION=${VERSION:-1.2.4}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-1.2.6}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -72,7 +72,7 @@ cd $PRGNAM-$VERSION
 chown -R root:root .
 chmod -R a-st,u+rwX,go-w+rX .
 
-python3 setup.py install --root=$PKG
+BORG_OPENSSL_PREFIX=/usr/include/openssl python3 setup.py install --root=$PKG
 
 # 20230810 bkw: faster than the find|file|xargs template stuff.
 find $PKG/usr/lib*/python* -name '*.so' | xargs strip --strip-unneeded

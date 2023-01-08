@@ -25,8 +25,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=stellarium
-VERSION=${VERSION:-23.1}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-23.3}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -104,24 +104,33 @@ CPM_DEST["GLM"]="$CPM_CACHE_DIR/glm-subbuild/glm-populate-prefix/src/glm-$CPM_GL
 
 for dep in "${!CPM_SOURCE[@]}"
 do
-	mkdir -p "$(dirname "${CPM_DEST[$dep]}")"
-	ln -s "${CPM_SOURCE[$dep]}" "${CPM_DEST[$dep]}"
+  mkdir -p "$(dirname "${CPM_DEST[$dep]}")"
+  ln -s "${CPM_SOURCE[$dep]}" "${CPM_DEST[$dep]}"
 done
 
-# End of CPM deps management
-
-mkdir -p build
-cd build
-  cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
-    -DCMAKE_INSTALL_MANDIR=/usr/man \
-    -DCMAKE_BUILD_TYPE=Release ..
-  make
-  make install DESTDIR=$PKG
-cd -
+cmake \
+  -S . \
+  -B build \
+  -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+  -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
+  -DCMAKE_C_COMPILER=gcc \
+  -DCMAKE_CXX_STANDARD=17 \
+  -DCMAKE_C_EXTENSIONS=Yes \
+  -DCMAKE_CXX_COMPILER=g++ \
+  -DCMAKE_C_STANDARD=17 \
+  -DCMAKE_CXX_EXTENSIONS=Yes \
+  -DENABLE_QT6=1 \
+  -DENABLE_SHOWMYSKY=ON \
+  -DENABLE_TESTING=0 \
+  -DENABLE_XLSX=0 \
+  -DPREFER_SYSTEM_INDILIB=No \
+  -Wno-dev
+ cmake --build build --target all
+ DESTDIR=$PKG cmake --build build --target install
 
 # Don't ship .la files:
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la

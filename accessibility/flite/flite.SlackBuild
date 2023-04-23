@@ -124,7 +124,8 @@ CXXFLAGS="$SLKCFLAGS -Wl,-s" \
   --with-langvox=slackware \
   --build=$ARCH-slackware-linux
 
-make
+make -j1
+# make get_voices
 make install prefix=$PKG/usr INSTALLLIBDIR=$PKG/usr/lib${LIBDIRSUFFIX}
 strip $PKG/usr/lib$LIBDIRSUFFIX/*.so.*.*
 
@@ -149,25 +150,25 @@ for file in $CWD/*.flitevox; do
     EXTRA=yes
 done
 
-# build the docs. NB don't replace subshells with "cd dir" and
-# "cd -", as they don't nest.
-( cd doc
-  # build the HTML docs.
-  make $PRGNAM.html
-  ( cd html
+# # build the docs. NB don't replace subshells with "cd dir" and
+# # "cd -", as they don't nest.
+# ( cd doc
+#   # build the HTML docs.
+#   make $PRGNAM.html
+#   ( cd html
 
-    # Upstream hardlinks index.html, use a symlink instead.
-    rm -f index.html
-    ln -s ${PRGNAM}_toc.html index.html
+#     # Upstream hardlinks index.html, use a symlink instead.
+#     rm -f index.html
+#     ln -s ${PRGNAM}_toc.html index.html
 
-    # Also, we don't ship the PDF doc, so link to upstream's.
-    # Fix link to source package.
-    sed -i \
-      -e 's,HREF="flite.pdf",HREF="http://www.festvox.org/flite/doc/flite.pdf",' \
-      -e 's,\.tar\.gz,.tar.bz2,g' \
-      ${PRGNAM}_toc.html
-  )
-)
+#     # Also, we don't ship the PDF doc, so link to upstream's.
+#     # Fix link to source package.
+#     sed -i \
+#       -e 's,HREF="flite.pdf",HREF="http://www.festvox.org/flite/doc/flite.pdf",' \
+#       -e 's,\.tar\.gz,.tar.bz2,g' \
+#       ${PRGNAM}_toc.html
+#   )
+# )
 
 # 20181114 bkw: always build the GNU info docs.
 ( cd doc
@@ -177,7 +178,8 @@ done
 )
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a ACKNOWLEDGEMENTS COPYING README* doc/html doc/*.txt doc/alice \
+# cp -a ACKNOWLEDGEMENTS COPYING README* doc/html doc/*.txt doc/alice \
+cp -a ACKNOWLEDGEMENTS COPYING README* doc/*.txt doc/alice \
       $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

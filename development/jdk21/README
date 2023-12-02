@@ -1,4 +1,4 @@
-jdk20 (Java Platform Standard Edition Development Kit)
+jdk21 (Java Platform Standard Edition Development Kit)
 
 The Java Platform Standard Edition Development Kit (JDK) includes
 both the runtime environment (Java virtual machine, the Java platform
@@ -8,7 +8,7 @@ environment for building applications, applets and components that
 can be deployed with the Java Platform Standard Edition Runtime
 Environment.
 
-More details: https://www.oracle.com/java/technologies/downloads/#java20
+More details: https://www.oracle.com/java/technologies/downloads/#java21
 
 After installation you will need to log out from the system and log in
 back for environment variables get updated.

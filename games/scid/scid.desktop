@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=Scid 
-GenericName=A Free Chess Database App
-Exec=scid
+GenericName=A Free Chess Database Application
+Exec=scid %F
+MimeType=application/x-chess-pgn
 Icon=scid
 Type=Application
 Categories=Game;BoardGame;

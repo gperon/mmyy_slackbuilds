@@ -1,10 +1,18 @@
 PRGNAM="FreeCAD"
-VERSION="0.20.2"
+VERSION="1.0.1"
 HOMEPAGE="https://www.freecadweb.org/"
-DOWNLOAD="https://github.com/FreeCAD/FreeCAD/archive/0.20.2/FreeCAD-0.20.2.tar.gz"
-MD5SUM="eb80214ec61df548fdf25430ae70d503"
+DOWNLOAD="https://github.com/FreeCAD/FreeCAD/archive/refs/tags/1.0.1.tar.gz \
+https://github.com/Ondsel-Development/OndselSolver/archive/09d6175a2ba69e7016fcecc4f384946a2f84f92d.zip \
+https://codeload.github.com/FreeCAD/AddonManager/zip/ffcd0777f318f009a3523bb44ca46e9f97ce69c2 \
+https://github.com/google/googletest/releases/download/v1.17.0/googletest-1.17.0.tar.gz \
+https://github.com/microsoft/GSL/archive/refs/tags/v4.2.0.tar.gz"
+MD5SUM="8132438b0daefe08427e7c06a791541b \
+        5ea06d5722da50b510e7a048b3982896 \
+        464dc993f1dccd3386b73315bf8658ae \
+        b6f100bc2a5853a48046aa168ececf84 \
+        5f3d2f7ef9c6351503c0c8f1f9390144"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="OpenCASCADE Pivy pyside2 xerces-c"
+REQUIRES="OpenCASCADE Pivy pyside6 xerces-c med python3-matplotlib ifcopenshell python3-shapely"
 MAINTAINER="David Spencer"
 EMAIL="baildon.research@googlemail.com"

@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=FreeCAD
-VERSION=${VERSION:-0.20.2}
+VERSION=${VERSION:-0.21.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -81,29 +81,57 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-sed -i -e '/# include <Standard_TooManyUsers.hxx>/d' src/Mod/Part/App/OCCError.h
+# sed -i -e '/# include <Standard_TooManyUsers.hxx>/d' src/Mod/Part/App/OCCError.h
+patch -Np1 -i $CWD/freecad-vtk9.3.patch
 
-mkdir build
-cd build
-  cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/opt/$PRGNAM \
-    -DDOCDIR=/usr/doc/$PRGNAM-$VERSION \
-    -DOCC_INCLUDE_DIR:PATH=/usr/include/opencascade \
-    -DOCC_LIBRARY:PATH=/usr/lib${LIBDIRSUFFIX} \
-    -DRESOURCEDIR=/opt/$PRGNAM/share/data \
+# mkdir build
+# cd build
+#   cmake \
+#     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+#     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+#     -DCMAKE_INSTALL_PREFIX=/opt/$PRGNAM \
+#     -DDOCDIR=/usr/doc/$PRGNAM-$VERSION \
+#     -DOCC_INCLUDE_DIR:PATH=/usr/include/opencascade \
+#     -DOCC_LIBRARY:PATH=/usr/lib${LIBDIRSUFFIX} \
+#     -DRESOURCEDIR=/opt/$PRGNAM/share/data \
+#     -DBUILD_QT5=ON \
+#     -DBUILD_FEM=OFF \
+#     -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+#     -DFREECAD_USE_PYSIDE=ON \
+#     -DFREECAD_USE_SHIBOKEN=ON \
+#     -DOCCT_CMAKE_FALLBACK=ON \
+#     -DCMAKE_BUILD_TYPE=Release ..
+
+#   make
+#   make install DESTDIR=$PKG
+# cd ..
+
+cmake \
+    -B build \
+    -DBUILD_ENABLE_CXX_STD=C++17 \
+    -DBUILD_FLAT_MESH=ON \
     -DBUILD_QT5=ON \
-    -DBUILD_FEM=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_FLAGS="$SLKCFLAGS -ffat-lto-objects -fPIC -w" \
+    -DCMAKE_CXX_FLAGS="$SLKCFLAGS -ffat-lto-objects -fPIC -w" \
+    -DCMAKE_INSTALL_BINDIR=/usr/lib${LIBDIRSUFFIX}/freecad/bin \
+    -DCMAKE_INSTALL_DATADIR=/usr/share/freecad \
+    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share \
+    -DCMAKE_INSTALL_DOCDIR=/usr/share/freecad/doc \
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX}/freecad/lib \
+    -DCMAKE_INSTALL_PREFIX=/usr/lib${LIBDIRSUFFIX}/freecad \
+    -DFREECAD_USE_EXTERNAL_PIVY=ON \
+    -DFREECAD_USE_OCC_VARIANT='Official Version' \
+    -DFREECAD_USE_QT_FILEDIALOG=ON \
     -DPYTHON_EXECUTABLE=/usr/bin/python3 \
-    -DFREECAD_USE_PYSIDE=ON \
-    -DFREECAD_USE_SHIBOKEN=ON \
+    -DINSTALL_TO_SITEPACKAGES=ON \
+    -DMEDFILE_LIBRARIES=/usr/lib${LIBDIRSUFFIX} \
     -DOCCT_CMAKE_FALLBACK=ON \
-    -DCMAKE_BUILD_TYPE=Release ..
-
-  make
-  make install DESTDIR=$PKG
-cd ..
+    -G Ninja \
+    -S . \
+    -W no-dev
+ninja -C build
+DESTDIR="$PKG" ninja -C build install
 
 # create links in /usr/bin
 mkdir -p $PKG/usr/bin

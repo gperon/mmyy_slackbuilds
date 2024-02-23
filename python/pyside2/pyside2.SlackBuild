@@ -26,7 +26,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=pyside2
 SRCNAM=pyside-setup-opensource-src
-VERSION=${VERSION:-5.15.10}
+VERSION=${VERSION:-5.15.12}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -92,8 +92,10 @@ cd build
     -DPYTHON_EXECUTABLE=/usr/bin/python3 \
     -DBUILD_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=Release ..
-  make
-  make install DESTDIR=$PKG
+  # make
+  # make install DESTDIR=$PKG
+  cmake --build .
+  DESTDIR=$PKG cmake --install .
 cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \

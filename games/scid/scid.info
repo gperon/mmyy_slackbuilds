@@ -1,10 +1,12 @@
 PRGNAM="scid"
-VERSION="4.3"
+VERSION="5.0.2"
 HOMEPAGE="http://scid.sourceforge.net"
-DOWNLOAD="http://downloads.sourceforge.net/scid/scid-4.3.tar.bz2"
-MD5SUM="66592f91b690458d3aecb582142fc159"
+DOWNLOAD="https://github.com/benini/scid/archive/refs/tags/v5.0.2.tar.gz
+          https://sourceforge.net/projects/scid/files/Scid/Scid%20Latest/scid_extra.zip"
+MD5SUM="925921f1177ac2bcefd9f7d1bc4fd7f9 \
+        0fec5da7d52e9620526cf233d592cd8d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""
-MAINTAINER="orphaned (no maintainer)"
-EMAIL="nobody@domain.com"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

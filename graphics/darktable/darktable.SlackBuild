@@ -3,6 +3,7 @@
 # Slackware build script for darktable
 
 # Copyright 2011 David Spencer, Baildon, West Yorkshire, U.K.
+# Copyright 2023 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -28,8 +29,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=darktable
-VERSION=${VERSION:-4.2.1}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-4.6.1}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 # Slackware's lensfun isn't compatible
@@ -86,10 +87,6 @@ find -L . \
 # If you want to use llvm instead of gcc uncomment the following two lines
 #export CC=clang
 #export CXX=clang++
-
-# Patch for exiv2-0.28.1
-patch -p1 < $CWD/exiv2.patch
-
 mkdir -p build
 cd build
   cmake \
@@ -99,15 +96,16 @@ cd build
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
-    -DDONT_USE_INTERNAL_LUA=Off \
-    -DUSE_LIBSECRET=On \
+    -DUSE_LIBSECRET=ON \
     -DBINARY_PACKAGE_BUILD=1 \
     -DDONT_USE_INTERNAL_LUA=0 \
     -DLensFun_INCLUDE_DIR="/opt/$LENSFUN/include/lensfun" \
     -DLensFun_LIBRARIES="/opt/$LENSFUN/lib$LIBDIRSUFFIX" \
     -DLensFun_LIBRARY="/opt/$LENSFUN/lib$LIBDIRSUFFIX/liblensfun.so" \
+    -DRAWSPEED_ENABLE_LTO=ON \
     -DCMAKE_BUILD_TYPE=Release ..
-  VERBOSE=1 make
+
+  make
   make install DESTDIR=$PKG
 cd ..
 
@@ -120,13 +118,13 @@ for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; r
 # Fix the doc location
 mv $PKG/usr/share/doc $PKG/usr
 mv $PKG/usr/doc/$PRGNAM $PKG/usr/doc/$PRGNAM-$VERSION
+
 # Add a few missed docs
 cp -a \
   CONTRIBUTING.md LICENSE RELEASE_NOTES.md LICENSE AUTHORS \
   doc/thumbnail*.txt doc/grouping.txt doc/*.md doc/NEWS \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
-( cd $PKG/usr/doc ; ln -s $PRGNAM-$VERSION $PRGNAM )
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

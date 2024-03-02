@@ -3,14 +3,32 @@
 # Slackware build script for scid
 
 # written by Marco Pessotto <melmothx@gmail.com>
-# public domain
-
+#
+# Copyright 2023 Giorgio Peron, Belluno, Italy 
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # Modified by Robby Workman <rworkman@slackbuilds.org>
 
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=scid
-VERSION=${VERSION:-4.3}
+VERSION=${VERSION:-5.0.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -54,9 +72,9 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM
-tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
-cd $PRGNAM
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/v$VERSION.tar.gz
+cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -64,30 +82,37 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Don't force the possibly wrong tcl version.
-sed -i -e "s/tclsh8.5;/tclsh;/" configure
-
 ./configure \
   BINDIR="/usr/bin" \
-  SHAREDIR="/usr/share/scid" \
-  OPTIMIZE="$SLKCFLAGS -fno-rtti -fno-exceptions"
+  SHAREDIR="/usr/share/${PRGNAM}" \
+  SCIDFLAGS="$SLKCFLAGS"
 
-make all_scid
-make strip
-make install_scid DESTDIR=$PKG
+make
+make install DESTDIR=$PKG
 
 ## Add some stuff if it's present
+if [ -f $CWD/scid_extra.zip ] ; then
+    unzip $CWD/scid_extra.zip -d $PKG/usr/share/scid
+fi
 if [ -f $CWD/scidlet40k.zip ] ; then
     mkdir -p $PKG/usr/share/scid/books
     unzip $CWD/scidlet40k.zip -d $PKG/usr/share/scid/books
 fi
-if [ -f $CWD/ratings_2008_4.zip ] ; then
-    mkdir -p $PKG/usr/share/scid/data
-    unzip $CWD/ratings_2008_4.zip -d $PKG/usr/share/scid/data
+if [ -f $CWD/Caissabase_2022_12_24.zip ] ; then
+    mkdir -p $PKG/usr/share/scid/bases
+    unzip $CWD/Caissabase_2022_12_24.zip -d $PKG/usr/share/scid/bases
 fi
-if [ -f $CWD/photos2007.zip ] ; then
+if [ -f $CWD/KingBase2019-scid.zip ] ; then
+    mkdir -p $PKG/usr/share/scid/bases
+    unzip $CWD/KingBase2019-scid.zip -d $PKG/usr/share/scid/bases
+fi
+if [ -f $CWD/ratings202309.zip ] ; then
+    mkdir -p $PKG/usr/share/scid/data
+    unzip $CWD/ratings202309.zip -d $PKG/usr/share/scid/data
+fi
+if [ -f $CWD/player_photos.spf.zip ] ; then
     mkdir -p $PKG/usr/share/scid/photos
-    unzip $CWD/photos2007.zip -d $PKG/usr/share/scid/photos
+    unzip $CWD/player_photos.spf.zip -d $PKG/usr/share/scid/photos
 fi
 
 # Fix some permissions
@@ -96,15 +121,15 @@ find $PKG/usr/share/scid -type f -exec chmod 0644 {} \;
 
 # We're going to diverge from upstream a bit in location but not functionality
 # This will require users to be in the 'games' group for write permissions
-mkdir -p $PKG/var/games/scid
-mv $PKG/usr/share/scid/{bases,books} $PKG/var/games/scid
-chown -R root:games $PKG/var/games/scid
-find $PKG/var/games/scid -type d -exec chmod 2775 {} \;
-find $PKG/var/games/scid -type f -exec chmod 0664 {} \;
-cd $PKG/usr/share/scid
-  ln -s ../../../var/games/scid/bases .
-  ln -s ../../../var/games/scid/books .
-cd -
+# mkdir -p $PKG/var/games/scid
+# mv $PKG/usr/share/scid/{bases,books} $PKG/var/games/scid
+# chown -R root:games $PKG/var/games/scid
+# find $PKG/var/games/scid -type d -exec chmod 2775 {} \;
+# find $PKG/var/games/scid -type f -exec chmod 0664 {} \;
+# cd $PKG/usr/share/scid
+#   ln -s ../../../var/games/scid/bases .
+#   ln -s ../../../var/games/scid/books .
+# cd -
 
 # Add a desktop menu entry
 mkdir -p $PKG/usr/share/{applications,pixmaps}
@@ -124,7 +149,7 @@ cd -
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  ChangeLog CHANGES COPYING help README THANKS TODO \
+  ChangeLog COPYING README.md TODO \
     $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

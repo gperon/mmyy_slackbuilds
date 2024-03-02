@@ -1,0 +1,9 @@
+cudaroot=/usr/share/cuda
+libdir=/usr/lib64
+includedir=/usr/include
+
+Name: nppicc
+Description: NVIDIA Performance Primitives - Image Processing - Color Conversion
+Version: 12.0
+Libs: -L${libdir} -lnppicc
+Cflags: -I${includedir}

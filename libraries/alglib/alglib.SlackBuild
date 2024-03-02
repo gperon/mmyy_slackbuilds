@@ -28,8 +28,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=alglib
-VERSION=${VERSION:-2.6.0}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-3.17.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -72,11 +72,10 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-mkdir $PRGNAM-$VERSION
-cd $PRGNAM-$VERSION
-unzip $CWD/alglib-2.6.0.cpp.zip
+rm -rf cpp
+tar xzf $CWD/$PRGNAM-$VERSION.cpp.gpl.tgz
 cd cpp
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -84,37 +83,44 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# build static lib
-cd src
-gcc $SLKFLAGS -I. -c *.cpp
-ar rcs libalglib.a *.o
+# generate a simple cmake file to build the library since the release
+# doesn't provide any build system
+cat > CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 3.0)
+project(alglib VERSION ${pkgver})
+file(GLOB SRCS src/*.cpp)
+file(GLOB HEADERS src/*.h)
+add_library(alglib_static STATIC \${SRCS})
+set_target_properties(alglib_static PROPERTIES
+    OUTPUT_NAME alglib
+    PUBLIC_HEADER "\${HEADERS}"
+)
+add_library(alglib SHARED \${SRCS})
+set_target_properties(alglib PROPERTIES
+    VERSION "\${PROJECT_VERSION}"
+    SOVERSION "\${PROJECT_VERSION_MAJOR}"
+    PUBLIC_HEADER "\${HEADERS}"
+)
+include(GNUInstallDirs)
+install(TARGETS alglib alglib_static
+    LIBRARY DESTINATION "\${CMAKE_INSTALL_LIBDIR}"
+    ARCHIVE DESTINATION "\${CMAKE_INSTALL_LIBDIR}"
+    PUBLIC_HEADER DESTINATION "\${CMAKE_INSTALL_INCLUDEDIR}/libalglib"
+)
+install(FILES manual.cpp.html DESTINATION "\${CMAKE_INSTALL_DOCDIR}")
+EOF
 
-# build shared lib
-rm -f *.o
-gcc $SLKFLAGS -I. -fPIC -c *.cpp
-gcc $SLKFLAGS -shared -Wl,-soname,libalglib.so.2 -o libalglib.so.$VERSION *.o
-
-# install library
-install -D -m644 libalglib.a $PKG/usr/lib${LIBDIRSUFFIX}/libalglib.a
-install -D -m644 libalglib.so.$VERSION $PKG/usr/lib${LIBDIRSUFFIX}/libalglib.so.$VERSION
-
-# install headers
-mkdir -p $PKG/usr/include/libalglib
-install -m644 *.h $PKG/usr/include/libalglib
-
-# make a few symlinks
-cd $PKG/usr/lib${LIBDIRSUFFIX}
-ln -s libalglib.so.$VERSION libalglib.so.2
-ln -s libalglib.so.$VERSION libalglib.so
-cd $TMP/$PRGNAM-$VERSION/cpp
+mkdir -p build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION ..
+make
+make DESTDIR="${PKG}" install
+cd -
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a \
-  example manual.cpp.html \
-  $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

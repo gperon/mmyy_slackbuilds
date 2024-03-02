@@ -1,0 +1,11 @@
+--2023-01-04 13:27:39--  https://www.pureref.com/files/build.php?build=LINUX64.deb
+Resolving www.pureref.com (www.pureref.com)... 91.201.60.95
+Connecting to www.pureref.com (www.pureref.com)|91.201.60.95|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 0 [text/html]
+Saving to: ‘build.php?build=LINUX64.deb’
+
+build.php?build=LINUX64.deb       [<=>                                              ]       0  --.-KB/s               build.php?build=LINUX64.deb       [ <=>                                             ]       0  --.-KB/s    in 0s      
+
+2023-01-04 13:27:40 (0.00 B/s) - ‘build.php?build=LINUX64.deb’ saved [0/0]
+

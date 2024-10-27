@@ -2,6 +2,7 @@
 
 # Slackware Package Build Script for SmartGit
 # Copyright 2014 Miguel De Anda
+# Copyright 2023 Giorgio Peron, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,15 +25,12 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM="smartgit"
-VERSION=${VERSION:-7.0.3}
+VERSION=${VERSION:-23.1.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 ARCH=noarch
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -50,7 +48,7 @@ set -e
 rm -rf $TMP/$PRGNAM-$VERSION $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvf $CWD/$PRGNAM-generic-$FILE_VERSION.tar.gz
+tar xvf $CWD/$PRGNAM-linux-$FILE_VERSION.tar.gz
 cd $PRGNAM
 chown -R root:root .
 find -L . \
@@ -60,7 +58,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -R changelog.txt known-issues.txt readme-linux.txt smartgit.url license.html licenses $PKG/usr/doc/$PRGNAM-$VERSION
+cp -R changelog.txt readme-linux.txt smartgit.url license.html licenses $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/usr/share/$PRGNAM
@@ -68,6 +66,9 @@ cp -R lib bin $PKG/usr/share/$PRGNAM
 
 mkdir -p $PKG/usr/share/pixmaps
 cp bin/$PRGNAM-128.png $PKG/usr/share/pixmaps/$PRGNAM.png
+mkdir -p $PKG/usr/bin
+cd $PKG/usr/bin
+ln -s ../share/$PRGNAM/bin/$PRGNAM.sh $PRGNAM
 
 mkdir -p $PKG/usr/share/applications
 cp $CWD/$PRGNAM.desktop $PKG/usr/share/applications/$PRGNAM.desktop
@@ -75,10 +76,6 @@ cp $CWD/$PRGNAM.desktop $PKG/usr/share/applications/$PRGNAM.desktop
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
-
-mkdir -p $PKG/usr/bin
-cd $PKG/usr/bin
-ln -s ../share/$PRGNAM/bin/$PRGNAM.sh $PRGNAM
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

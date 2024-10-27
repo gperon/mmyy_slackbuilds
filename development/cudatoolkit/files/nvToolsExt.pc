@@ -4,6 +4,6 @@ includedir=/usr/include
 
 Name: nvToolsExt
 Description: NVIDIA Tools Extension
-Version: 10.2
+Version: 11.0
 Libs: -L${libdir} -lnvToolsExt
 Cflags: -I${includedir}

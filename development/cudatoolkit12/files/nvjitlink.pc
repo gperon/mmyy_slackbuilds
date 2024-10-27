@@ -1,0 +1,9 @@
+cudaroot=/opt/cuda/
+libdir=${cudaroot}/targets/x86_64-linux/lib
+includedir=${cudaroot}/targets/x86_64-linux/include
+
+Name: nvjitlink
+Description: NVIDIA JIT Link Library
+Version: 12.8
+Libs: -L${libdir} -lnvjitlink
+Cflags: -I${includedir}

@@ -1,0 +1,16 @@
+[Desktop Entry]
+Categories=Application;Graphics;2DGraphics;RasterGraphics;
+Comment=Editing CAD images
+Exec=env LD_PRELOAD=/usr/lib64/libfreetype.so --unset=XDG_CURRENT_DESKTOP --unset=DESKTOP_SESSION --unset=GNOME_DESKTOP_SESSION_ID vblank_mode=0 faketime '2019-12-24 08:15:42' /opt/dassault-systemes/DraftSight/Linux/DraftSight
+GenericName=DraftSight
+Icon=dassault-systemes.draftsight
+MimeType=image/vnd.dwg;image/vnd.dwt;image/vnd.dxf;application-vnd.dassault-systemes.draftsight-dwg;application-vnd.dassault-systemes.draftsight-dwt;application-vnd.dassault-systemes.draftsight-dxf
+Name=DraftSight
+NoDisplay=false
+Path=/opt/dassault-systemes/DraftSight/Linux
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

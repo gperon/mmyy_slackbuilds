@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Slackware build script for tidal-hifi.
+#
+# Copyright 2023  Giorgio Peron, Belluno, Italy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version, with the following exception:
+# the text of the GPL license may be omitted.
+#
+# This program is distributed in the hope that it will be useful, but
+# without any warranty; without even the implied warranty of
+# merchantability or fitness for a particular purpose. Compiling,
+# interpreting, executing or merely reading the text of the program
+# may result in lapses of consciousness and/or very being, up to and
+# including the end of all existence and the Universe as we know it.
+# See the GNU General Public License for more details.
+#
+# You may have received a copy of the GNU General Public License along
+# with this program (most likely, a file named COPYING).  If not, see
+# <https://www.gnu.org/licenses/>.
+
+cd $(dirname $0) ; CWD=$(pwd)
+
+PRGNAM=tidal-hifi-bin
+SRCNAM=tidal-hifi
+VERSION=${VERSION:-5.7.1}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
+
+case "$(uname -m)" in
+    i?86) VERSION=${VERSION32}; RELVER=${RELVER32}; DEBARCH="_i386" ; LIBDIRSUFFIX="" ; ARCH=i586 ;;
+  x86_64) DEBARCH="_amd64" ; LIBDIRSUFFIX="64" ; ARCH=x86_64 ;;
+       *) echo "Package for $(uname -m) architecture is not available." ; exit 1 ;;
+esac
+
+if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
+  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  exit 0
+fi
+
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+set -eu
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+tar zxvf $CWD/${SRCNAM}-${VERSION}.tar.gz 
+cd ${SRCNAM}-${VERSION}
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+# directories.
+mkdir -p $PKG/opt/${SRCNAM}
+cp -r * $PKG/opt/${SRCNAM}/
+mkdir -p $PKG/usr/{bin,doc/${PRGNAM}-$VERSION,share/applications}
+cd $PKG
+
+# application launcher.
+cat $CWD/$SRCNAM.desktop > $PKG/usr/share/applications/$SRCNAM.desktop
+ln -sf /opt/$SRCNAM/$SRCNAM $PKG/usr/bin/$SRCNAM
+
+# icons.
+install -Dm644 "$CWD/icon.png" \
+"$PKG/usr/share/pixmaps/$SRCNAM.png"
+
+# docs.
+cp $PKG/opt/$SRCNAM/LICENSE* $PKG/usr/doc/$PRGNAM-$VERSION/
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

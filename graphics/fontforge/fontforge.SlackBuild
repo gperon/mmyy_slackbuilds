@@ -2,6 +2,7 @@
 
 # Slackware build script for fontforge
 
+# Copyright 2024  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # Copyright 2006-2012,2016  Robby Workman  Tuscaloosa, Alabama, USA
 # All rights reserved.
 #
@@ -38,15 +39,12 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=fontforge
-VERSION=${VERSION:-20201107}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-20230101}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
 ENABLE_BCINT=${ENABLE_BCINT:-yes}
-FREETYPE=${FREETYPE:-2.11.1}
-GNULIB=${GNULIB:-0.1}
-UTHASH=${UTHASH:-2.3.0}
 
 if [ -x /usr/bin/sphinx-build ]; then
   DOCS=ON
@@ -101,38 +99,22 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION freetype-$FREETYPE
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-tar xvf $CWD/freetype-$FREETYPE.tar.xz
-chown -R root:root $PRGNAM-$VERSION freetype-$FREETYPE
-chmod -R u+w,go+r-w,a-s $PRGNAM-$VERSION freetype-$FREETYPE
 cd $PRGNAM-$VERSION
-tar xvf $CWD/gnulib-$GNULIB.tar.gz
-tar xvf $CWD/uthash-$UTHASH.tar.gz
-mv gnulib-"$GNULIB" gnulib
-mv uthash-"$UTHASH" uthash
-chown -R root:root gnulib uthash
-chmod -R u+w,go+r-w,a-s gnulib uthash
+
+sed -i.orig 's/\(%[^%[:space:]]*\)hs/\1s/g' fontforgeexe/searchview.c po/de.po po/ca.po po/hr.po po/it.po po/pl.po po/uk.po po/en_GB.po po/fr.po po/vi.po po/ko.po po/ja.po
 
 mkdir -p build
 cd build
-  cmake \
+  cmake -GNinja \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
-    -DMAN_INSTALL_DIR=/usr/man \
     -DENABLE_LIBSPIRO=OFF \
-    -DENABLE_LIBUNINAMESLIST=OFF \
     -DENABLE_DOCS=${DOCS:-OFF} \
     -DCMAKE_BUILD_TYPE=Release ..
-  make
-  make install DESTDIR=$PKG
+  ninja
+  DESTDIR=$PKG  ninja install
 cd ..
-
-# Let's add the cidmaps
-mkdir -p $PKG/usr/share/fontforge
-tar xvf $CWD/cidmaps.tgz -C $PKG/usr/share/fontforge || exit 1
-chmod 0644 $PKG/usr/share/fontforge/*.cidmap
-chown root:root $PKG/usr/share/fontforge/*.cidmap
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 

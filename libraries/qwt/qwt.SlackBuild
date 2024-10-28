@@ -18,8 +18,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=qwt
-VERSION=${VERSION:-6.1.6}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-6.2.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -62,7 +62,7 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
-patch -p0 < $CWD/patch-6.1.2-config.diff
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -76,21 +76,18 @@ find -L . \
 [ "${EXAMPLES:-no}" != "yes" ] &&
   sed -i '/^QWT_CONFIG.*QwtExamples/s,^,#,' qwtconfig.pri
 
-if [ -x /usr/lib$LIBDIRSUFFIX/qt4/bin/qmake ]; then
-  mkdir -p build-qt4
-  cd build-qt4
-    qmake-qt4 .. LIBDIRSUFFIX=$LIBDIRSUFFIX
-    make CFLAGS+="$SLKCFLAGS" CXXFLAGS+="$SLKCFLAGS -std=c++11 -fPIC"
-    make install INSTALL_ROOT=$PKG
-  cd ..
-fi
+sed -e '/^\s*QWT_INSTALL_PREFIX/ s|=.*|= /usr|' \
+      -e "/^QWT_INSTALL_DOCS/ s|/doc|/doc/qwt-${VERSION}|" \
+      -e '/^QWT_INSTALL_HEADERS/ s|include|include/qwt|' \
+      -e "/^QWT_INSTALL_LIBS/ s|lib|lib${LIBDIRSUFFIX}|" \
+      -e "/^QWT_INSTALL_PLUGINS/ s|plugins/designer|lib${LIBDIRSUFFIX}|" \
+      -e '/^QWT_INSTALL_FEATURES/ s|$${QWT_INSTALL_PREFIX}/features|$$[QMAKE_MKSPECS]/features|' \
+      -i qwtconfig.pri
 
-mkdir -p build
-cd build
-  qmake-qt5 .. LIBDIRSUFFIX=$LIBDIRSUFFIX
-  make CFLAGS+="$SLKCFLAGS" CXXFLAGS+="$SLKCFLAGS -std=c++11 -fPIC"
-  make install INSTALL_ROOT=$PKG
-cd ..
+qmake-qt5 qwt.pro
+make
+# make CFLAGS+="$SLKCFLAGS" CXXFLAGS+="$SLKCFLAGS"
+make install INSTALL_ROOT=$PKG
 
 # Rationalise the pkgconfig default filenames
 ( cd $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig 
@@ -101,11 +98,11 @@ cd ..
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mv $PKG/usr/doc/man $PKG/usr
-rm -f $PKG/usr/man/man3/_tmp*
-gzip -9 $PKG/usr/man/man*/*
 
 PKGDOC=$PKG/usr/doc/$PRGNAM-$VERSION
+mv $PKGDOC/man $PKG/usr
+rm -f $PKG/usr/man/man3/_tmp*
+gzip -9 $PKG/usr/man/man*/*
 mkdir -p $PKGDOC/examples
 cp -a examples/* $PKGDOC/examples/
 if [ "${EXAMPLES:-no}" = "yes" ]; then
@@ -113,8 +110,7 @@ if [ "${EXAMPLES:-no}" = "yes" ]; then
   install -s -m0755 build/examples/bin/* $PKGDOC/examples/bin
 fi
 
-mv $PKG/usr/doc/html $PKGDOC
-cp -a CHANGES* COPYING README $PKGDOC
+cp -a COPYING INSTALL README $PKGDOC
 cat $CWD/$PRGNAM.SlackBuild > $PKGDOC/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

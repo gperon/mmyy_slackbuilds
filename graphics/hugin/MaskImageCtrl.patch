@@ -1,0 +1,16 @@
+--- a/src/hugin1/hugin/MaskImageCtrl.h
++++ b/src/hugin1/hugin/MaskImageCtrl.h
+@@ -29,6 +29,12 @@
+
+ #include <base_wx/wxImageCache.h>
+ #include <wx/overlay.h>
+ 
++ #ifdef HAVE_OVERRIDE
++     #define wxOVERRIDE override
++ #else /*  !HAVE_OVERRIDE */
++     #define wxOVERRIDE
++ #endif /*  HAVE_OVERRIDE */
++
+ class MaskEditorPanel;
+ 
+ /** @brief mask editor

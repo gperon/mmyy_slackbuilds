@@ -1,12 +1,16 @@
 PRGNAM="meshlab"
-VERSION="2021.10"
-HOMEPAGE="http://www.meshlab.net/"
-DOWNLOAD="https://github.com/cnr-isti-vclab/meshlab/archive/Meshlab-2021.10/meshlab-Meshlab-2021.10.tar.gz \
-          https://github.com/cnr-isti-vclab/vcglib/archive/2021.10/vcglib-2021.10.tar.gz"
-MD5SUM="bb1d2f373549cce1d48fb589033f6b2a \
-        12cce090b9292e3306f6ee4848e58e1e"
-DOWNLOAD_x86_64=""
-MD5SUM_x86_64=""
-REQUIRES="levmar muParser mpir"
+VERSION="2023.12"
+HOMEPAGE="https://www.meshlab.net/"
+DOWNLOAD="UNSUPPORTED"
+MD5SUM=""
+DOWNLOAD_x86_64="https://github.com/cnr-isti-vclab/meshlab/archive/refs/tags/MeshLab-2023.12.tar.gz \
+          https://github.com/cnr-isti-vclab/vcglib/archive/2023.12.tar.gz \
+          https://github.com/cnr-isti-vclab/nexus/archive/refs/heads/master.zip \
+          https://github.com/cnr-isti-vclab/corto/archive/refs/heads/master.zip"
+MD5SUM_x86_64="a4ca3c1a02b939e790ee47da5791c66e \
+        971e3afe3f0385453884a254988920e1 \
+        d5aadb9b3a21362410ad4c95355c0be3 \
+        e4e94be51812f865a76f85abbe0a4067"
+REQUIRES="levmar muParser mpir CGAL5"
 MAINTAINER="David Spencer"
 EMAIL="baildon.research@googlemail.com"

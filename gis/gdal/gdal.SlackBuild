@@ -96,6 +96,10 @@ if [ ${JAVA:-no} = "no" ]; then
   WITHLIST+=" -DBUILD_JAVA_BINDINGS:BOOL=OFF"
 fi
 
+# Temporary patch to fix build with poppler 24.12
+# See https://github.com/OSGeo/gdal/commit/19ba2562b506f628e0f023774fdb52ada656f95b
+patch -Np1 < $CWD/fix_build_with_poppler_24.12.patch
+
 mkdir build
 
 ( cd build

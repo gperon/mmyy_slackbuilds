@@ -29,7 +29,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=scribus
-VERSION=${VERSION:-1.5.7}
+VERSION=${VERSION:-1.6.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -42,9 +42,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -76,6 +73,9 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
+
+#patch -Np1 -i $CWD/scribus-1.6.1-poppler-24.03.patch
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -83,15 +83,16 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# thanks archlinux!
-patch -p1 < $CWD/harfbuzz-3.0.0.patch
-
-# podofo is forcibly disabled as the new one on SBo is incompatible with 1.5.7
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
+  -DWANT_CPP17=ON \
+  -DWANT_HUNSPELL=ON \
+  -DWITH_BOOST=ON \
+  -DWITH_PODOFO=ON \
+  -DWANT_GRAPHICSMAGICK=ON \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-  -DWITH_PODOFO=off \
+  -DWANT_CPP17=1 \
   -DLIB_SUFFIX=${LIBDIRSUFFIX}
 
 make
@@ -100,9 +101,10 @@ make install DESTDIR=$PKG
 mkdir -p $PKG/usr/share/{applications,pixmaps}
 cat scribus.desktop > $PKG/usr/share/applications/scribus.desktop
 
-cd $PKG/usr/share/pixmaps
-  ln -s ../scribus/icons/scribus.png .
-cd -
+pushd resources/iconsets/artwork
+for i in 16x16 32x32 128x128 256x256 512x512 1024x1024; do
+  install -Dm0644 icon_$i.png "$PKG/usr/share/icons/hicolor/$i/apps/scribus.png"
+done
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

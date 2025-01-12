@@ -31,8 +31,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM="vigra"
-VERSION=${VERSION:-1.11.1}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-1.12.1}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -72,9 +72,11 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION-src.tar.gz
-cd $PRGNAM-$VERSION
+SRCVERSION="Version-${VERSION//./-}"
+rm -rf $PRGNAM-$SRCVERSION
+tar xvf $CWD/$PRGNAM-$SRCVERSION.tar.gz || tar xvf $CWD/$SRCVERSION.tar.gz
+cd $PRGNAM-$SRCVERSION
+
 chown -R root:root .
 
 find -L . \
@@ -95,7 +97,6 @@ cd build
   make
   make install/strip DESTDIR=$PKG
 cd ..
-
 # copy documentation
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a LICENSE.txt \

@@ -5,6 +5,6 @@ DOWNLOAD="https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.7.tar.
 MD5SUM="0529027472015810e5f0d749136ca0a3"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="openpmix openucx"
+REQUIRES="openpmix openucx hwloc"
 MAINTAINER="Emmanuel N. Millan"
 EMAIL="emmanueln@gmail.com"

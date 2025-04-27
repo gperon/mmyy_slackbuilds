@@ -71,7 +71,7 @@ fi
 
 set -eu
 
-pmi="" ; [ "${PMI:-yes}" != "no" ]  && pmi="--with-slurm --with-pmix"
+# pmi="" ; [ "${PMI:-no}" != "no" ]  && pmi="--with-slurm --with-pmix"
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -91,37 +91,38 @@ sed -i 's|WRAPPER__FCFLAGS|WRAPPER_FCFLAGS|g' configure
 sed -i 's|WRAPPER_EXTRA_FCFLAGS|WRAPPER_FCFLAGS|g' configure
 sed -i 's|"-I/usr/include",||' opal/tools/wrappers/opal_wrapper.c
 
+# fix regression in 5.0.7 https://github.com/open-mpi/ompi/issues/13103
+patch -p1 -i $CWD/fix-oshmem-pointer-cast.patch
+
+# --with-rocm=/usr \
+# --with-rocm-libdir=/usr/lib${LIBDIRSUFFIX} \
+# --enable-mca-dso=accelerator_cuda,accelerator_rocm,btl_smcuda,rcache_gpusm,rcache_rgpusm,coll_ucc,scoll_ucc \
+# --with-ucc=/usr \
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
-  --sysconfdir=/etc/$PRGNAM \
+  --sysconfdir=/etc \
   --localstatedir=/var/lib \
   --mandir=/usr/man/ \
   --enable-mpi1-compatibility \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
-  $pmi \
   --disable-static \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --build=$ARCH-slackware-linux \
-  --enable-builtin-atomics \
-  --enable-memchecker \
-  --enable-mpi-fortran=all \
-  --enable-pretty-print-stacktrace \
   --with-hwloc=external \
   --with-libevent=external \
   --with-pmix=external \
   --with-prrte=external \
   --with-valgrind \
-  --with-ucc=/usr \
   --with-ucx=/usr \
   --with-cuda=/opt/cuda \
   --with-cuda-libdir=/usr/lib${LIBDIRSUFFIX} \
-  --with-rocm=/opt/rocm \
-  --enable-mca-dso=accelerator_cuda,accelerator_rocm,btl_smcuda,rcache_gpusm,rcache_rgpusm,coll_ucc,scoll_ucc \
+  --enable-mca-dso=accelerator_cuda,btl_smcuda,rcache_gpusm,rcache_rgpusm,coll_ucc,scoll_ucc \
   --with-show-load-errors='^accelerator,rcache,coll/ucc' \
-
-make
+  --build=$ARCH-slackware-linux
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+make V=1
 make install-strip DESTDIR=$PKG
 
 find $PKG/usr/lib${LIBDIRSUFFIX} -name '*.la' -delete

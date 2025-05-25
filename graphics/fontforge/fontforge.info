@@ -1,16 +1,8 @@
 PRGNAM="fontforge"
-VERSION="20201107"
+VERSION="20230101"
 HOMEPAGE="http://fontforge.sourceforge.net"
-DOWNLOAD="https://github.com/fontforge/fontforge/archive/20201107/fontforge-20201107.tar.gz \
-          https://ponce.cc/slackware/sources/repo/cidmaps.tgz \
-          https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.11.1.tar.xz \
-          https://github.com/coreutils/gnulib/archive/v0.1/gnulib-0.1.tar.gz \
-          https://github.com/troydhanson/uthash/archive/v2.3.0/uthash-2.3.0.tar.gz"
-MD5SUM="adf8fb57cdab2ec9bf74c0ac0280d2f2 \
-        063691163e592515b31514515bb3ce8c \
-        24e79233d607ded439ef36ff1f3ab68f \
-        8f90891de739aeb229295f4a799a18f6 \
-        9a4f0a675ca179b62ebc56b2dd8b59ee"
+DOWNLOAD="https://github.com/fontforge/fontforge/archive/20230101/fontforge-20230101.tar.gz"
+MD5SUM="96bdf1cf1952a49901b281a15cf76c91"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES=""

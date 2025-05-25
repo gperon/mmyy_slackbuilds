@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=NVIDIA Visual Profiler
+GenericName=NVIDIA Visual Profiler
+Icon=/opt/cuda/libnvvp/icon.xpm
+Exec=/opt/cuda/bin/nvvp
+TryExec=/opt/cuda/bin/nvvp
+Keywords=nvvp;cuda;gpu;nsight;
+X-AppInstall-Keywords=nvvp;cuda;gpu;nsight;
+X-GNOME-Keywords=nvvp;cuda;gpu;nsight;
+Terminal=No
+Categories=Development;Profiling;ParallelComputing
+

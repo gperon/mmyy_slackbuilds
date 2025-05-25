@@ -1,0 +1,50 @@
+From 1349d8eba7603697b36cbef95c93ba1559c58c46 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Mon, 5 Aug 2024 22:48:47 +0800
+Subject: [PATCH] install missing files, skip redundant files
+
+install cityjson files, and geometry_serializer_ifc libs, not install .cpp for serializers
+---
+ cmake/CMakeLists.txt | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/CMakeLists.txt b/cmake/CMakeLists.txt
+index fe7155eff42..6239933f012 100644
+--- a/cmake/CMakeLists.txt
++++ b/cmake/CMakeLists.txt
+@@ -868,7 +868,7 @@ if(BUILD_CONVERT OR BUILD_IFCPYTHON)
+ 
+     if(WITH_OPENCASCADE)
+         foreach(schema ${SCHEMA_VERSIONS})
+-            set(GEOM_SERIALIZER_SCHEMA_LIBRARIES ${GEOM_SERIALIZER_SCHEMA_LIBRARIES} GeometrySerializers_ifc${schema})
++            set(GEOM_SERIALIZER_SCHEMA_LIBRARIES ${GEOM_SERIALIZER_SCHEMA_LIBRARIES} geometry_serializer_ifc${schema})
+ 
+             add_library(geometry_serializer_ifc${schema} STATIC ../src/ifcgeom/Serialization/schema/Serialization.cpp)
+             set_target_properties(geometry_serializer_ifc${schema} PROPERTIES COMPILE_FLAGS "-DIFC_GEOM_EXPORTS -DIfcSchema=Ifc${schema}")
+@@ -1098,6 +1098,17 @@ if(BUILD_CONVERT)
+         LIBRARY DESTINATION ${LIBDIR}
+         RUNTIME DESTINATION ${BINDIR}
+     )
++    if (CITYJSON_SUPPORT)
++        file(GLOB CITYJSON_CONVERT_H_FILES ../src/ifcconvert/cityjson/*.h)
++        install(TARGETS cityjson_converter
++            ARCHIVE DESTINATION ${LIBDIR}
++            LIBRARY DESTINATION ${LIBDIR}
++            RUNTIME DESTINATION ${BINDIR}
++        )
++        install(FILES ${CITYJSON_CONVERT_H_FILES}
++            DESTINATION ${INCLUDEDIR}/cityjson
++        )
++    endif()
+ endif(BUILD_CONVERT)
+ 
+ # IfcGeomServer
+@@ -1217,7 +1228,7 @@ if(BUILD_IFCGEOM)
+ endif(BUILD_IFCGEOM)
+ 
+ if(BUILD_CONVERT)
+-    install(TARGETS Serializers ${SERIALIZER_SCHEMA_LIBRARIES}
++    install(TARGETS Serializers ${SERIALIZER_SCHEMA_LIBRARIES} geometry_serializer  ${GEOM_SERIALIZER_SCHEMA_LIBRARIES}
+         ARCHIVE DESTINATION ${LIBDIR}
+         LIBRARY DESTINATION ${LIBDIR}
+         RUNTIME DESTINATION ${BINDIR}

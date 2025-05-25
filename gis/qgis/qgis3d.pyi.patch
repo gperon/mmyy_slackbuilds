@@ -1,5 +1,5 @@
---- ./python/CMakeLists.txt	2024-11-22 13:07:29.000000000 +0100
-+++ ./python/CMakeLists-fix.txt	2024-12-03 19:43:25.208140208 +0100
+--- ./python/CMakeLists.txt   2024-11-22 13:07:29.000000000 +0100
++++ ./python/CMakeLists-fix.txt  2024-12-03 19:43:25.208140208 +0100
 @@ -258,8 +258,8 @@
    if(SIP_BUILD_EXECUTABLE)
      install(FILES ${CMAKE_CURRENT_BINARY_DIR}/3d/build/_3d_p/_3d_p.pyi DESTINATION ${QGIS_PYTHON_DIR})
@@ -11,3 +11,4 @@
    endif()
  
    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/3d/project.py.in ${CMAKE_CURRENT_BINARY_DIR}/3d/project.py @ONLY)
+   

@@ -30,11 +30,11 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=LucasChess
-VERSION=${VERSION:-R2.15a}
+VERSION=${VERSION:-R2.17f}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
-SRCNAM=${SRCNAM:-LucasChessR2_15a_LINUX.sh}
+SRCNAM=${SRCNAM:-LucasChessR2_17f_LINUX.sh}
 ARCHIVELINE=716
 
 if [ -z "$ARCH" ]; then

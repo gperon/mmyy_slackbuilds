@@ -1,0 +1,31 @@
+From e6ceb758df8cbbd24cfe16d019a24883482fe6e3 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Mon, 5 Aug 2024 23:34:49 +0800
+Subject: [PATCH] skip install python-package, only install wrapper
+
+---
+ src/ifcwrap/CMakeLists.txt | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/src/ifcwrap/CMakeLists.txt b/src/ifcwrap/CMakeLists.txt
+index 8b7720a990c..9c33a3bdff5 100644
+--- a/src/ifcwrap/CMakeLists.txt
++++ b/src/ifcwrap/CMakeLists.txt
+@@ -111,17 +111,6 @@ IF((PYTHONINTERP_FOUND AND NOT "${PYTHON_EXECUTABLE}" STREQUAL "") OR PYTHON_MOD
+     IF("${python_package_dir}" STREQUAL "")
+         MESSAGE(WARNING "Unable to locate Python site-package directory, unable to install the Python wrapper")
+     ELSE()
+-        FILE(GLOB_RECURSE sourcefiles 
+-            "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/*"
+-        )
+-        FOREACH(file ${sourcefiles})
+-            FILE(RELATIVE_PATH relative "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/" "${file}")
+-            GET_FILENAME_COMPONENT(dir "${relative}" DIRECTORY)
+-            if(NOT IS_DIRECTORY "${file}")
+-			    INSTALL(FILES "${file}"
+-                        DESTINATION "${python_package_dir}/ifcopenshell/${dir}")
+-            endif()
+-        ENDFOREACH()
+         INSTALL(FILES "${CMAKE_BINARY_DIR}/ifcwrap/ifcopenshell_wrapper.py"
+                 DESTINATION "${python_package_dir}/ifcopenshell")
+         INSTALL(TARGETS ${SWIG_MODULE_ifcopenshell_wrapper_REAL_NAME}

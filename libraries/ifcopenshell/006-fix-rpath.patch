@@ -1,0 +1,63 @@
+From b0c80ed375f8948305b4431bcfcf873d552101d5 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Sat, 31 Aug 2024 15:39:52 +0800
+Subject: [PATCH] fix-rpath
+
+---
+ cmake/CMakeLists.txt       | 6 +++---
+ src/ifcwrap/CMakeLists.txt | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/cmake/CMakeLists.txt b/cmake/CMakeLists.txt
+index 9b93bafe762..fe7155eff42 100644
+--- a/cmake/CMakeLists.txt
++++ b/cmake/CMakeLists.txt
+@@ -489,7 +489,7 @@ if(COLLADA_SUPPORT)
+     if("${OPENCOLLADA_LIBRARY_DIR}" STREQUAL "")
+         message(STATUS "No OpenCOLLADA library directory specified")
+         find_library(OPENCOLLADA_FRAMEWORK_LIB NAMES OpenCOLLADAFramework
+-            PATHS /usr/lib64/opencollada /usr/lib/opencollada /usr/lib64 /usr/lib /usr/local/lib64 /usr/local/lib)
++            PATHS /usr/lib/opencollada /usr/lib64/opencollada /usr/lib64 /usr/lib /usr/local/lib64 /usr/local/lib)
+         get_filename_component(OPENCOLLADA_LIBRARY_DIR ${OPENCOLLADA_FRAMEWORK_LIB} PATH)
+     endif()
+ 
+@@ -1090,7 +1090,7 @@ if(BUILD_CONVERT)
+         # Only set RPATHs when building shared libraries (i.e. IfcParse and
+         # IfcGeom are dynamically linked). Not necessarily a perfect solution
+         # but probably a good indication of whether RPATHs are necessary.
+-        SET_INSTALL_RPATHS(IfcConvert "${IFCOPENSHELL_LIBRARY_DIR};${OCC_LIBRARY_DIR};${Boost_LIBRARY_DIRS};${OPENCOLLADA_LIBRARY_DIR}")
++        SET_INSTALL_RPATHS(IfcConvert "${OCC_LIBRARY_DIR};${Boost_LIBRARY_DIRS};${OPENCOLLADA_LIBRARY_DIR}")
+     endif()
+ 
+     install(TARGETS IfcConvert
+@@ -1109,7 +1109,7 @@ if(BUILD_GEOMSERVER)
+     target_link_libraries(IfcGeomServer ${IFCOPENSHELL_LIBRARIES} ${OPENCASCADE_LIBRARIES} ${Boost_LIBRARIES})
+ 
+     if((NOT WIN32) AND BUILD_SHARED_LIBS)
+-        SET_INSTALL_RPATHS(IfcGeomServer "${IFCOPENSHELL_LIBRARY_DIR};${OCC_LIBRARY_DIR};${Boost_LIBRARY_DIRS}")
++        SET_INSTALL_RPATHS(IfcGeomServer "${OCC_LIBRARY_DIR};${Boost_LIBRARY_DIRS}")
+     endif()
+ 
+     install(TARGETS IfcGeomServer
+diff --git a/src/ifcwrap/CMakeLists.txt b/src/ifcwrap/CMakeLists.txt
+index 863fefb67a8..8b7720a990c 100644
+--- a/src/ifcwrap/CMakeLists.txt
++++ b/src/ifcwrap/CMakeLists.txt
+@@ -36,7 +36,7 @@ ENDIF()
+ # NOTE PYTHONLIBS_FOUND and PYTHONINTERP_FOUND cannot seem to be trusted so
+ # we need further checks to see whether the packages were actually found or not.
+ FIND_PACKAGE(PythonLibs)
+-IF(NOT PYTHONLIBS_FOUND OR "$PYTHON_INCLUDE_DIRS}" STREQUAL "")
++IF(NOT PYTHONLIBS_FOUND OR "${PYTHON_INCLUDE_DIRS}" STREQUAL "")
+ 	MESSAGE(FATAL_ERROR "BUILD_IFCPYTHON enabled, but unable to find Python lib or header. Disable BUILD_IFCPYTHON or fix Python paths to proceed.")
+ ENDIF()
+ 
+@@ -76,7 +76,7 @@ else()
+ SWIG_LINK_LIBRARIES(ifcopenshell_wrapper ${IFCOPENSHELL_LIBRARIES} ${PYTHON_LIBRARIES} ${LIBSVGFILL})
+ endif()
+ if ((NOT WIN32) AND BUILD_SHARED_LIBS)
+-    SET_INSTALL_RPATHS(${SWIG_MODULE_ifcopenshell_wrapper_REAL_NAME} "${IFCDIRS};${OCC_LIBRARY_DIR}")
++    SET_TARGET_PROPERTIES(${SWIG_MODULE_ifcopenshell_wrapper_REAL_NAME} PROPERTIES SKIP_BUILD_RPATH ON )
+ endif()
+ 
+ # Try to find the Python interpreter to get the site-packages

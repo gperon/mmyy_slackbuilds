@@ -2,7 +2,7 @@
 
 # Slackware build script for CUDA Toolkit
 
-# Copyright 2020 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2022 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -21,6 +21,8 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# thanks to JW (ABE Shin-ichi ) <shin1.abe@nifty.com> for some fix
 
 # 2023-05-16 DW
 # Removed LIBDIRSUFFIX and made 'lib64' hard-coded as we're 64bit only
@@ -33,8 +35,8 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=cudatoolkit
 FILENAME=cuda
-VERSION=${VERSION:-10.2.89}
-DRIVER=${DRIVER:-440.33.01}
+VERSION=${VERSION:-11.6.0}
+DRIVER=${DRIVER:-510.39.01}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -68,27 +70,46 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 mkdir -p $PRGNAM-$VERSION
 
-# 20220127 bkw: it wasn't necessary to chmod +x the .run file. Plus,
-# SlackBuilds should *never* write to $CWD.
-sh $CWD/$FILENAME\_$VERSION\_$DRIVER\_linux.run --target $PRGNAM-$VERSION --noexec
+bash $CWD/$FILENAME\_$VERSION\_$DRIVER\_linux.run --target $PRGNAM-$VERSION --noexec
 
-mkdir -p $PKG/usr/share
 cd $PRGNAM-$VERSION/builds
-cp -r cuda-toolkit "$PKG/usr/share/cuda"
-cp -r cublas/include/* "$PKG/usr/share/cuda/include/"
-mkdir -p $PKG/usr/lib64
-cp -r cublas/lib64/* "$PKG/usr/lib64/"
-cp -r cuda-samples "$PKG/usr/share/cuda/samples"
+rm -r NVIDIA*.run bin
+mkdir -p ${PKG}/usr/share/cuda/extras
+mv cuda_samples $PKG/usr/share/cuda/samples
+cat EULA.txt > $PKG/usr/share/cuda/EULA.txt
+rm EULA.txt
+mv integration nsight_compute nsight_systems $PKG/usr/share/cuda
+mv cuda_sanitizer_api/compute-sanitizer $PKG/usr/share/cuda/extras/compute-sanitizer
+rmdir cuda_sanitizer_api
+for lib in *; do
+  if [[ "$lib" =~ .*"version.json".* ]]; then
+    continue
+  fi
+  cp -r $lib/* "${PKG}/usr/share/cuda/"
+done
+
+# Define compilers for CUDA to use.
+# This allows us to use older versions of GCC if we have to.
+ln -s /usr/bin/gcc "${PKG}/usr/share/cuda/bin/gcc"
+ln -s /usr/bin/g++ "${PKG}/usr/share/cuda/bin/g++"
+
+mkdir -p "${PKG}/usr/share/licenses/$PRGNAM"
+ln -s /usr/share/cuda/EULA.txt "${PKG}/usr/share/licenses/$PRGNAM/EULA.txt"
+ln -s /usr/share/cuda/README "${PKG}/usr/share/licenses/$PRGNAM/README"
 
 # Put man in the standard place
-mv $PKG/usr/share/cuda/doc/man $PKG/usr/
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+# mv $PKG/usr/share/cuda/doc/man $PKG/usr/
+# find $PKG/usr/man -type f -exec gzip -9 {} \;
+# for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 # Put doc in the standard place
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-mv $PKG/usr/share/cuda/doc/* $PKG/usr/doc/$PRGNAM-$VERSION/
-rm -rf $PKG/usr/share/cuda/doc
+cp $PKG/usr/share/cuda/EULA.txt $PKG/usr/doc/$PRGNAM-$VERSION/
+cp $PKG/usr/share/cuda/README $PKG/usr/doc/$PRGNAM-$VERSION/
+mv $PKG/usr/share/cuda/cublas_version.txt \
+  $PKG/usr/share/cuda/CUDA*.txt \
+  $PKG/usr/share/cuda/DOCS \
+  $PKG/usr/doc/$PRGNAM-$VERSION/
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Create soname links.
@@ -109,12 +130,6 @@ install -D -m 755 "${CWD}/files/cuda.csh" "${PKG}/etc/profile.d/cuda.csh"
 mkdir -p "$PKG"/usr/lib64/pkgconfig
 cp "${CWD}"/files/*.pc "${PKG}"/usr/lib64/pkgconfig
 
-# Remove included copy of java and link to system java 8
-rm -fr  "${PKG}/usr/share/cuda/jre"
-sed 's|../jre/bin/java|/usr/bin/java|g' \
-  -i "${PKG}/usr/share/cuda/libnsight/nsight.ini" \
-  -i "${PKG}/usr/share/cuda/libnvvp/nvvp.ini"
-
 # Allow newer compilers to work.
 # See https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements
 # for official requirements
@@ -133,7 +148,7 @@ rm -rf $PKG/usr/share/cuda/targets/x86_64-linux/lib
 cd $PKG/usr/share/cuda
 ln -sf ../../lib64 lib64
 
-# Register application  NVVP and NSIGHT
+# Register application NVVP and NSIGHT 
 mkdir -p $PKG/usr/share/applications
 cp $CWD/files/*.desktop $PKG/usr/share/applications
 
@@ -151,6 +166,7 @@ find $PKG/usr/include -type f | xargs chmod -c 0644
   ln -sf /usr/bin/g++-gcc-11.2.0 g++
 )
 
+# Finally remove targets folder
 rm -rf $PKG/usr/share/cuda/targets
 
 # These are already in the nvidia-driver package

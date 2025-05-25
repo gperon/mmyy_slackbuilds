@@ -1,0 +1,11 @@
+CUDA Toolkit CUDA is NVIDIA's parallel computing architecture. It
+enables dramatic increases in computing performance by harnessing the
+power of the GPU.
+Download samples with
+git clone https://github.com/NVIDIA/cuda-samples.git
+
+NOTE:
+- the binary file to download is 3,8 Gb;
+- the temporary package file will need 12 Gb;
+- the final package will be around 3,5 Gb (5 Gb when installed).
+Be sure to have enough free space before building this.

@@ -1,0 +1,159 @@
+#!/bin/bash
+
+# Slackware build script for CUDA Toolkit version 12
+
+# Copyright 2025 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# thanks to JW (ABE Shin-ichi ) <shin1.abe@nifty.com> for some fix
+
+cd $(dirname $0) ; CWD=$(pwd)
+
+PRGNAM=cudatoolkit12
+FILENAME=cuda
+VERSION=${VERSION:-12.8.1}
+DRIVER=${DRIVER:-570.124.06}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
+
+
+case "$( uname -m )" in
+  i?86) ARCH=i586 ;;
+  arm*) ARCH=arm ;;
+     *) ARCH=$( uname -m ) ;;
+esac
+
+if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
+  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  exit 0
+fi
+
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+# possible location for CUDAROOT are /usr/share/cuda or /opt/cuda 
+# (but there is manual adjustment to do, default /usr/local/cuda-X.Y)
+CUDAROOT=/opt/cuda
+
+set -e
+
+if [ "$ARCH" = "x86_64" ]; then
+  LIBDIRSUFFIX="64"
+else
+  printf "\n\n$ARCH is not supported... \n"
+  exit 1
+fi
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+mkdir -p $PRGNAM-$VERSION
+
+bash $CWD/$FILENAME\_$VERSION\_$DRIVER\_linux.run --target $PRGNAM-$VERSION --noexec
+
+cd $PRGNAM-$VERSION/builds
+rm -r NVIDIA*.run bin
+mkdir -p ${PKG}${CUDAROOT}/bin
+mv nsight_compute nsight_systems EULA.txt ${PKG}${CUDAROOT}
+mv cuda_sanitizer_api/compute-sanitizer ${PKG}${CUDAROOT}/compute-sanitizer
+mv integration/nsight-compute/* ${PKG}${CUDAROOT}/bin
+mv integration/nsight-systems/* ${PKG}${CUDAROOT}/bin
+mv integration/Sanitizer/* ${PKG}${CUDAROOT}/bin
+rmdir cuda_sanitizer_api
+rm -rf integration
+for lib in *; do
+  if [[ "$lib" =~ .*"version.json".* ]]; then
+    continue
+  fi
+  cp -r $lib/* ${PKG}${CUDAROOT}
+done
+# Delete some unnecessary files
+rm -r ${PKG}${CUDAROOT}/bin/cuda-uninstaller
+rm -r ${PKG}${CUDAROOT}/gds-tools
+
+# Remove broken links
+rm ${PKG}${CUDAROOT}/include/include
+rm ${PKG}${CUDAROOT}/lib64/lib64
+
+# Allow newer compilers to work.
+# See https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements
+# for official requirements
+sed -i "/.*unsupported GNU version.*/d" ${PKG}${CUDAROOT}/targets/x86_64-linux/include/crt/host_config.h
+sed -i "/.*unsupported clang version.*/d" ${PKG}${CUDAROOT}/targets/x86_64-linux/include/crt/host_config.h
+
+# Fix Makefile paths to CUDA
+for f in $(find ${PKG}${CUDAROOT} -name Makefile); do
+  sed -i "s|/usr/local/cuda|${CUDAROOT}|g" "$f"
+done
+
+# Patch for compatibility with glibc 2.41
+patch -p1 -d "$PKG" -i "$CWD"/fix-glibc241.patch
+
+# put include and library in standard place
+mkdir -p $PKG/usr/include
+mv ${PKG}${CUDAROOT}/targets/x86_64-linux/include/* $PKG/usr/include
+rm -rf ${PKG}${CUDAROOT}/targets/x86_64-linux/include
+mkdir -p $PKG/usr/lib$LIBDIRSUFFIX
+mv ${PKG}${CUDAROOT}/targets/x86_64-linux/lib/* $PKG/usr/lib$LIBDIRSUFFIX
+rm -rf ${PKG}${CUDAROOT}/targets/x86_64-linux/lib
+cd ${PKG}${CUDAROOT}/targets/x86_64-linux
+ln -sf ../../../../usr/lib$LIBDIRSUFFIX lib
+ln -sf ../../../../usr/include include
+cd -
+
+# Put doc in the standard place
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mv ${PKG}${CUDAROOT}/EULA.txt \
+   ${PKG}${CUDAROOT}/README \
+   ${PKG}${CUDAROOT}/LICENSE \
+   ${PKG}${CUDAROOT}/cublas_version.txt \
+   ${PKG}${CUDAROOT}/CUDA*.txt \
+   ${PKG}${CUDAROOT}/DOCS \
+   $PKG/usr/doc/$PRGNAM-$VERSION/
+mv ${PKG}${CUDAROOT}/tools $PKG/usr/doc/$PRGNAM-$VERSION/
+mv ${PKG}${CUDAROOT}/usr/share/doc/* $PKG/usr/doc/$PRGNAM-$VERSION/
+mv ${PKG}${CUDAROOT}/usr/src $PKG/usr/doc/$PRGNAM-$VERSION/
+rm -rf ${PKG}${CUDAROOT}/usr/ 
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+# Install profile and ld.so.config files
+install -Dm755 ${CWD}/files/cuda.sh ${PKG}/etc/profile.d/cuda.sh
+install -Dm755 ${CWD}/files/cuda.csh ${PKG}/etc/profile.d/cuda.csh
+install -Dm644 ${CWD}/files/cuda.conf ${PKG}/etc/ld.so.conf.d/cuda.conf
+# Install pkgconfig files
+mkdir -p $PKG/usr/lib${LIBDIRSUFFIX}/pkgconfig
+cp ${CWD}/files/*.pc ${PKG}/usr/lib${LIBDIRSUFFIX}/pkgconfig
+rm -rf ${PKG}${CUDAROOT}/pkg-config
+
+# Register application NVVP and NSIGHT 
+mkdir -p $PKG/usr/share/applications
+cp $CWD/files/*.desktop $PKG/usr/share/applications
+
+# These are already in the nvidia-driver package
+rm -f $PKG/usr/lib${LIBDIRSUFFIX}/libOpenCL.s*
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -c n -l y $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

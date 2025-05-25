@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=FreeCAD
-VERSION=${VERSION:-0.20.2}
+VERSION=${VERSION:-1.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -71,9 +71,32 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
+function tar_source () {
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+unzip -u $CWD/OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d.zip
+mv -f OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d/* $PRGNAM-$VERSION/src/3rdParty/OndselSolver/
+rm -rf OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d
+tar xvf $CWD/googletest-1.17.0.tar.gz
+mv googletest-1.17.0/* $PRGNAM-$VERSION/tests/lib/
+rm -rf googletest-1.17.0
+tar xvf $CWD/GSL-4.2.0.tar.gz
+mv GSL-4.2.0/* $PRGNAM-$VERSION/src/3rdParty/GSL/
+rm -rf GSL-4.2.0
 cd $PRGNAM-$VERSION
+}
+#
+# alternative tar archive of pull git repository
+#
+function git_source () {
+rm -rf $PRGNAM-$VERSION
+git clone --recurse-submodules https://github.com/FreeCAD/FreeCAD.git $PRGNAM-$VERSION
+cd $PRGNAM-$VERSION
+git checkout -f $VERSION
+}
+
+tar_source
+# git_source
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,47 +104,64 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-sed -i -e '/# include <Standard_TooManyUsers.hxx>/d' src/Mod/Part/App/OCCError.h
+# patch -Np1 -i $CWD/freecad-vtk9.4.patch
 
-mkdir build
-cd build
-  cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/opt/$PRGNAM \
-    -DDOCDIR=/usr/doc/$PRGNAM-$VERSION \
-    -DOCC_INCLUDE_DIR:PATH=/usr/include/opencascade \
-    -DOCC_LIBRARY:PATH=/usr/lib${LIBDIRSUFFIX} \
-    -DRESOURCEDIR=/opt/$PRGNAM/share/data \
-    -DBUILD_QT5=ON \
-    -DBUILD_FEM=OFF \
-    -DPYTHON_EXECUTABLE=/usr/bin/python3 \
-    -DFREECAD_USE_PYSIDE=ON \
-    -DFREECAD_USE_SHIBOKEN=ON \
-    -DOCCT_CMAKE_FALLBACK=ON \
-    -DCMAKE_BUILD_TYPE=Release ..
+cmake -B build -G Ninja -S . -W no-dev \
+  -DBUILD_ENABLE_CXX_STD=C++17 \
+  -DBUILD_FLAT_MESH=ON \
+  -DBUILD_DESIGNER_PLUGIN=ON \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_PREFIX_PATH=/usr \
+  -DCMAKE_INSTALL_PREFIX=/usr/share/$PRGNAM \
+  -DCMAKE_INSTALL_BINDIR=/usr/bin \
+  -DCMAKE_INSTALL_DATADIR=/usr/share/$PRGNAM \
+  -DCMAKE_INSTALL_DATAROOTDIR=/usr/share/$PRGNAM \
+  -DCMAKE_INSTALL_LOCALEDIR=/usr/share/$PRGNAM/locale \
+  -DCMAKE_INSTALL_INFODIR=/usr/doc/$PRGNAM-$VERSION/info \
+  -DCMAKE_INSTALL_DOCDIR=/usr/doc/$PRGNAM-$VERSION \
+  -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX}/$PRGNAM \
+  -DCMAKE_INSTALL_INCLUDEDIR=/usr/include \
+  -DCMAKE_INSTALL_LIBEXECDIR=/usr/bin \
+  -DCMAKE_INSTALL_LOCALSTATEDIR=/var \
+  -DCMAKE_INSTALL_MANDIR=/usr/man \
+  -DCMAKE_INSTALL_RUNSTATEDIR=/run \
+  -DINSTALL_TO_SITEPACKAGES=OFF \
+  -DFREECAD_USE_EXTERNAL_PIVY=ON \
+  -DFREECAD_USE_OCC_VARIANT='Official Version' \
+  -DFREECAD_USE_QT_FILEDIALOG=ON \
+  -DFREECAD_QT_VERSION=6 \
+  -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+  -DPYTHON_LIBRARY==/usr/lib$LIBDIRSUFFIX/python3.12/ \
+  -DPYTHON_PACKAGES_PATH=/usr/lib$LIBDIRSUFFIX/python3.12/site-packages/ \
+  -DINSTALL_TO_SITEPACKAGES=ON \
+  -DOCCT_CMAKE_FALLBACK=ON \
+  -DUSE_CUDA=ON \
+  -DMED_ENABLE_MPI=ON \
+  -DMED_HAVE_MPI=ON \
+  -DENABLE_DEVELOPER_TESTS=OFF
+ninja -C build
+DESTDIR=$PKG ninja -C build install
 
-  make
-  make install DESTDIR=$PKG
-cd ..
-
-# create links in /usr/bin
 mkdir -p $PKG/usr/bin
-ln -s /opt/FreeCAD/bin/FreeCADCmd $PKG/usr/bin/FreeCADCmd
-ln -s /opt/FreeCAD/bin/FreeCAD $PKG/usr/bin/FreeCAD
-
+mv $PKG/usr/lib/* $PKG/usr/lib$LIBDIRSUFFIX/ 
+rm -rf $PKG/usr/lib
+# Move tools in bin directory
+install -Dm755 src/Tools/{freecad-thumbnailer,fcinfo} -t "$PKG/usr/bin/"
+# Move in standar location because PREFIX_PATH is not respected
+mv $PKG/usr/share/$PRGNAM/{applications,icons,metainfo,mime,pixmaps,thumbnailers} $PKG/usr/share/
+# link to /usr/local/Mod because requested
+mkdir $PKG/usr/local
+cd $PKG/usr/local
+ln -sf ../share/$PRGNAM/Mod Mod 
+cd -
+# Add the mod path to FreeCAD call
+sed -i -e "s|Exec=FreeCAD - --single-instance %F|Exec=FreeCAD -M /usr/share/FreeCAD/Ext -M /usr/share/FreeCAD/examples --single-instance %F|g" $PKG/usr/share/applications/org.freecad.FreeCAD.desktop
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# Copy icon, desktop file and mime info
-mkdir -p $PKG/usr/share/applications $PKG/usr/share/pixmaps $PKG/usr/share/mime/packages
-cp $PKG/opt/$PRGNAM/share/pixmaps/freecad.xpm $PKG/usr/share/pixmaps/
-cp $PKG/opt/$PRGNAM/share/applications/*.desktop $PKG/usr/share/applications/
-cp $PKG/opt/$PRGNAM/share/mime/packages/*.xml $PKG/usr/share/mime/packages/
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  README.md ChangeLog.txt LICENSE \
+  CONTRIBUTING.md LICENSE PRIVACY_POLICY.md README.md SECURITY.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

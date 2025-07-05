@@ -27,7 +27,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=libpano13
 VERSION=${VERSION:-2.9.22}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -83,8 +83,10 @@ find -L . \
 mkdir -p build
 cd build
   cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS -std=gnu17" \
+    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -std=gnu17" \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DUSE_SPARSE_LEVMAR=ON \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release ..
   make

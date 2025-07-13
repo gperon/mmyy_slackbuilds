@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=pcl
-VERSION=${VERSION:-1.14.0}
+VERSION=${VERSION:-1.15.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -81,17 +81,29 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir -p build
-cd build
-  cmake \
+cmake -B build -S . \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DLIB_INSTALL_DIR=lib${LIBDIRSUFFIX} \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release ..
-  make
-  make DESTDIR=$PKG install
-cd ..
+    -DCMAKE_INSTALL_PREFIX='/usr' \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DCMAKE_CUDA_STANDARD=17 \
+    -DBUILD_apps=ON \
+    -DBUILD_apps_3d_rec_framework=ON \
+    -DBUILD_apps_cloud_composer=ON \
+    -DBUILD_apps_in_hand_scanner=ON \
+    -DBUILD_apps_modeler=ON \
+    -DBUILD_apps_point_cloud_editor=ON \
+    -DBUILD_global_tests=ON \
+    -DBUILD_outofcore=OFF \
+    -DBUILD_simulation=ON \
+    -DBUILD_surface_on_nurbs=ON -DUSE_UMFPACK=ON \
+    -DBoost_USE_DEBUG_RUNTIME=OFF \
+    -DWITH_QT='QT5' \
+    -Wno-dev
+cmake --build build
+DESTDIR="$PKG" cmake --install build
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

@@ -34,7 +34,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM="python3-scipy"
 SRCNAM="scipy"
-VERSION=${VERSION:-1.12.0}
+VERSION=${VERSION:-1.16.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -73,16 +73,16 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
 # Allow our version of numpy and pythran to work
-sed -i 's|numpy==1.22.4|numpy>=1.22.4|' pyproject.toml
-sed -i 's|numpy==1.23.2|numpy>=1.23.2|' pyproject.toml
-sed -i 's|pythran>=0.15.0,<0.16.0|pythran|' pyproject.toml
-sed -i 's|meson-python>=0.15.0,<0.16.0|meson-python>=0.15.0|' pyproject.toml
+#sed -i 's|numpy==1.22.4|numpy>=1.22.4|' pyproject.toml
+#sed -i 's|numpy==1.23.2|numpy>=1.23.2|' pyproject.toml
+#sed -i 's|pythran>=0.15.0,<0.16.0|pythran|' pyproject.toml
+#sed -i 's|meson-python>=0.15.0,<0.16.0|meson-python>=0.15.0|' pyproject.toml
 
 # needs newer meson
 PYVER=$(python3 -c 'import sys; print("%d.%d" % sys.version_info[:2])')
 export PYTHONPATH=/opt/python$PYVER/site-packages/
 
-python3 -m build --wheel --no-isolation
+python3 -m build --wheel --no-isolation --skip-dependency-check
 python3 -m installer --destdir "$PKG" dist/*.whl
 
 # Skip stripping symbols if DEBUG is YES

@@ -1,0 +1,9 @@
+cudaroot=/opt/cuda/
+libdir=${cudaroot}/targets/x86_64-linux/lib
+includedir=${cudaroot}/targets/x86_64-linux/include
+
+Name: cufile
+Description: NVIDIA GPUDirect Storage Library
+Version: 1.13
+Libs: -L${libdir} -lcufile
+Cflags: -I${includedir}

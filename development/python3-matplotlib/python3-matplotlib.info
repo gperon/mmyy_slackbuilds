@@ -1,11 +1,11 @@
 PRGNAM="python3-matplotlib"
-VERSION="3.8.4"
+VERSION="3.10.3"
 HOMEPAGE="https://matplotlib.org/"
-DOWNLOAD="https://files.pythonhosted.org/packages/38/4f/8487737a74d8be4ab5fbe6019b0fae305c1604cf7209500969b879b5f462/matplotlib-3.8.4.tar.gz \
-          https://downloads.sourceforge.net/project/freetype/freetype2/2.6.1/freetype-2.6.1.tar.gz \
+DOWNLOAD="https://github.com/matplotlib/matplotlib/archive/v3.10.3/matplotlib-3.10.3.tar.gz \
+          https://downloads.sourceforge.net/project/freetype/freetype2/2.13.1/freetype-2.13.1.tar.gz \
           http://www.qhull.org/download/qhull-2020-src-8.0.2.tgz"
-MD5SUM="d8635506f70b398b48a2cd2fdc1627cb \
-        348e667d728c597360e4a87c16556597 \
+MD5SUM="24c21757e8d83288e595f246e4b4d65c \
+        ea70022407b00debe025681f974835ad \
         295f7332269a38279478f555cc185296"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

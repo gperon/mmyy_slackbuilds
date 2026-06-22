@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|' on
+# the right side marks the last column you can put a character in.  You must make
+# exactly 11 lines for the formatting to be correct.  It's also customary to
+# leave one space after the ':'.
+
+      |-----handy-ruler------------------------------------------------------|
+Natron: Natron (Node-graph video compositing)
+Natron:
+Natron: Natron is a compositor for visual effects and motion graphics
+Natron: industry.
+Natron:
+Natron: Homepage https://natrongithub.github.io
+Natron:
+Natron:
+Natron:
+Natron:
+Natron:

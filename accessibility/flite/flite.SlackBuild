@@ -56,7 +56,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=flite
-VERSION=${VERSION:-2.2}
+VERSION=${VERSION:-2.3git}
+SRCVER=${SRCVER:-6c9f20dc915b17f5619340069889db0aa007fcdc}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -97,12 +98,18 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+# rm -rf $PRGNAM-$VERSION
+# tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+# cd $PRGNAM-$VERSION
+rm -rf $PRGNAM-$SRCVER
+unzip $CWD/$PRGNAM-$SRCVER.zip
+cd $PRGNAM-$SRCVER
 chown -R root:root .
 find -L .  -perm /111 -a \! -perm 755 -a -exec chmod 755 {} \+ -o \
         \! -perm /111 -a \! -perm 644 -a -exec chmod 644 {} \+
+
+sed '/^#VOXES.*$/d; s/+//g; s/cmu_indic_lex/&\nVOXES = cmu_us_kal16 cmu_us_slt/' config/android.lv >config/slackware.lv
+sed -i '/$(INSTALL) -m 755 $(BINDIR)\/flite_time $(DESTDIR)$(INSTALLBINDIR)/d' main/Makefile
 
 CFLAGS="$SLKCFLAGS -Wl,-s" \
 CXXFLAGS="$SLKCFLAGS -Wl,-s" \
@@ -113,9 +120,12 @@ CXXFLAGS="$SLKCFLAGS -Wl,-s" \
   --localstatedir=/var \
   --with-audio=alsa \
   --enable-shared \
+  --with-vox=cmu_us_kal16 \
+  --with-langvox=slackware \
   --build=$ARCH-slackware-linux
 
-make
+make -j1
+# make get_voices
 make install prefix=$PKG/usr INSTALLLIBDIR=$PKG/usr/lib${LIBDIRSUFFIX}
 strip $PKG/usr/lib$LIBDIRSUFFIX/*.so.*.*
 
@@ -130,7 +140,7 @@ done
 
 # the Debian package includes these 2 binaries that don't get installed
 # by 'make install'. They look useful enough, so:
-install -s -m0755 bin/t2p bin/flite_time $PKG/usr/bin
+# install -s -m0755 bin/t2p bin/flite_time $PKG/usr/bin
 
 # include any *.flitevox files the user downloaded.
 for file in $CWD/*.flitevox; do
@@ -140,25 +150,25 @@ for file in $CWD/*.flitevox; do
     EXTRA=yes
 done
 
-# build the docs. NB don't replace subshells with "cd dir" and
-# "cd -", as they don't nest.
-( cd doc
-  # build the HTML docs.
-  make $PRGNAM.html
-  ( cd html
+# # build the docs. NB don't replace subshells with "cd dir" and
+# # "cd -", as they don't nest.
+# ( cd doc
+#   # build the HTML docs.
+#   make $PRGNAM.html
+#   ( cd html
 
-    # Upstream hardlinks index.html, use a symlink instead.
-    rm -f index.html
-    ln -s ${PRGNAM}_toc.html index.html
+#     # Upstream hardlinks index.html, use a symlink instead.
+#     rm -f index.html
+#     ln -s ${PRGNAM}_toc.html index.html
 
-    # Also, we don't ship the PDF doc, so link to upstream's.
-    # Fix link to source package.
-    sed -i \
-      -e 's,HREF="flite.pdf",HREF="http://www.festvox.org/flite/doc/flite.pdf",' \
-      -e 's,\.tar\.gz,.tar.bz2,g' \
-      ${PRGNAM}_toc.html
-  )
-)
+#     # Also, we don't ship the PDF doc, so link to upstream's.
+#     # Fix link to source package.
+#     sed -i \
+#       -e 's,HREF="flite.pdf",HREF="http://www.festvox.org/flite/doc/flite.pdf",' \
+#       -e 's,\.tar\.gz,.tar.bz2,g' \
+#       ${PRGNAM}_toc.html
+#   )
+# )
 
 # 20181114 bkw: always build the GNU info docs.
 ( cd doc
@@ -168,7 +178,8 @@ done
 )
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a ACKNOWLEDGEMENTS COPYING README* doc/html doc/*.txt doc/alice \
+# cp -a ACKNOWLEDGEMENTS COPYING README* doc/html doc/*.txt doc/alice \
+cp -a ACKNOWLEDGEMENTS COPYING README* doc/*.txt doc/alice \
       $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

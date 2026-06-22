@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=med
-VERSION=${VERSION:-4.1.1}
+VERSION=${VERSION:-5.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -38,9 +38,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -69,24 +66,34 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf ${PRGNAM}-${VERSION}_SRC
+rm -rf ${PRGNAM}-${VERSION}
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd ${PRGNAM}-${VERSION}_SRC
+cd ${PRGNAM}-${VERSION}
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-  -o -perm 511 \) -exec chmod 755 {} \; -o \
+  -o -perm 511 \) -exec chmod 755 {} \+ -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
-  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
-patch -p1 < $CWD/hdf5-1.14.patch
-sed -i 's/if H5_VERS_MINOR > 10/if 0/g' src/ci/MEDfileCompatibility.c # :o
+# Various fixes borrowed from Fedora
+patch -p1 -i $CWD/hdf5-1.14.patch
+patch -p1 -i $CWD/med-swig-4.3.0.patch
+patch -p1 -i $CWD/med-py3.13.patch
+patch -p1 -i $CWD/med-gcc15.patch
 
-export CPPFLAGS+=' -DH5_USE_110_API'
+# SWIG >= 4.3 dropped the Python 2 compatibility macros used by med's .i files
+find . \( -name '*.i' -o -name '*.swg' \) -exec sed -i \
+  -e 's/PyInt_FromLong/PyLong_FromLong/g' \
+  -e 's/PyInt_AsLong/PyLong_AsLong/g' \
+  -e 's/PyString_FromString/PyUnicode_FromString/g' \
+  -e 's/PyString_AsString/PyUnicode_AsUTF8/g' {} +
 
-PYTHON_VERSION=$(python3 -c 'import sys; print("%d.%d" % sys.version_info[:2])') \
+# Install cmake files to /usr/lib${LIBDIRSUFFIX}/cmake
+sed -i "s,share/cmake,lib${LIBDIRSUFFIX}/cmake,g" CMakeLists.txt
 
-sed -i "s|_install_dir\ lib/python|_install_dir lib$LIBDIRSUFFIX/python|" python/CMakeLists.txt
+# Install python modules to /usr/lib${LIBDIRSUFFIX}/python3.x
+sed -i "s|_install_dir lib/python|_install_dir lib${LIBDIRSUFFIX}/python|" python/CMakeLists.txt
 
 mkdir -p build
 cd build
@@ -98,23 +105,27 @@ cd build
     -DMEDFILE_BUILD_PYTHON=ON \
     -DMEDFILE_BUILD_TESTS=OFF \
     -DMEDFILE_INSTALL_DOC=OFF \
-    -DLIB_SUFFIX=$LIBDIRSUFFIX \
+    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
     -GNinja ..
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING COPYING.LESSER ChangeLog INSTALL README $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+# Rebuild Python bytecode so it does not embed the $PKG path
+find $PKG -type d -name __pycache__ -exec rm -rf {} +
+python3 -m compileall -q -o 0 -o 1 -s $PKG -p / \
+  $PKG/usr/lib${LIBDIRSUFFIX}/python3*/site-packages/med
 
 # Remove unnecessary stuff
 rm -f $PKG/usr/lib${LIBDIRSUFFIX}/*.settings
+rm -f $PKG/usr/lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-rm -f $PKG/usr/lib*/*.la
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS COPYING COPYING.LESSER ChangeLog README $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

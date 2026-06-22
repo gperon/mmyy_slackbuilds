@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+           |-----handy-ruler------------------------------------------------------|
+med_openmpi: med_openmpi (Data Modelization and Exchanges)
+med_openmpi:
+med_openmpi: MED is the Data Exchange Module used by Code_Aster
+med_openmpi: and based on the HDF (hdf5) library.
+med_openmpi: This package is build with Open MPI (openmpi) support.
+med_openmpi:
+med_openmpi: Homepage: https://www.salome-platform.org/
+med_openmpi:
+med_openmpi:
+med_openmpi:
+med_openmpi:

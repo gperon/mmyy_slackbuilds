@@ -35,8 +35,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=wxGTK3
-VERSION=${VERSION:-3.0.5}
-BUILD=${BUILD:-4}
+VERSION=${VERSION:-3.3.1}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -81,12 +81,12 @@ else
 fi
 
 # Check for WebKit
-webkit="$( pkg-config --exists webkit2gtk-4.0 )"
-if [ "$?" -eq 0 ]; then
-  wk="--enable-webkit"
-else
-  wk=""
-fi
+# webkit=`pkg-config --exists webkit2gtk-4.0`
+# if [ "$?" -eq 0 ]; then
+#   wk="--enable-webkit"
+# else
+#   wk=""
+# fi
 
 # Check for static
 if [ "${STATIC:-no}" = "yes" ]; then
@@ -101,7 +101,23 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $SRCNAM-$VERSION
+rm -rf scintilla-0b90f31ced23241054e8088abb50babe9a44ae67
+rm -rf lexilla-27c20a6ae5eebf418debeac0166052ed6fb653bc
+rm -rf Catch-3a4a6a657d295d003e16bcdba45c2832e24b9dec
+rm -rf nanosvg-ea6a6aca009422bba0dbad4c80df6e6ba0c82183
+rm -rf libwebp-79223b3094aad666c94bdde3dc62b949c0ce60f8
 tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
+unzip $CWD/scintilla-0b90f31ced23241054e8088abb50babe9a44ae67.zip
+mv scintilla-0b90f31ced23241054e8088abb50babe9a44ae67/* $SRCNAM-$VERSION/src/stc/scintilla/
+unzip  $CWD/lexilla-27c20a6ae5eebf418debeac0166052ed6fb653bc.zip
+mv lexilla-27c20a6ae5eebf418debeac0166052ed6fb653bc/* $SRCNAM-$VERSION/src/stc/lexilla/
+unzip $CWD/Catch-3a4a6a657d295d003e16bcdba45c2832e24b9dec.zip
+mv Catch-3a4a6a657d295d003e16bcdba45c2832e24b9dec/* $SRCNAM-$VERSION/3rdparty/catch/
+unzip $CWD/nanosvg-ea6a6aca009422bba0dbad4c80df6e6ba0c82183.zip
+mv nanosvg-ea6a6aca009422bba0dbad4c80df6e6ba0c82183/* $SRCNAM-$VERSION/3rdparty/nanosvg/
+unzip $CWD/libwebp-79223b3094aad666c94bdde3dc62b949c0ce60f8.zip
+mv libwebp-79223b3094aad666c94bdde3dc62b949c0ce60f8/* $SRCNAM-$VERSION/3rdparty/libwebp/
+
 cd $SRCNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -109,28 +125,64 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \+ -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
-
+ 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --sysconfdir=/etc \
-  --enable-mediactrl \
-  --with-opengl \
-  --enable-graphics_ctx \
-  --with-gtk=3 \
-  --enable-unicode \
-  --enable-plugins \
-  --enable-ipv6 \
-  --enable-webview \
-  $wk \
-  $stl \
-  $st \
-  --build=$ARCH-slackware-linux
+    --prefix=/usr \
+    --libdir=/usr/lib${LIBDIRSUFFIX} \
+    --mandir=/usr/man \
+    --docdir=/usr/doc/$PRGNAM-$VERSION \
+    --localstatedir=/var \
+    --sysconfdir=/etc \
+    --disable-precomp-headers \
+    --disable-stl \
+    --enable-graphics_ctx \
+    --enable-mediactrl \
+    --enable-plugins \
+    --enable-shared \
+    --enable-webview \
+    --with-opengl \
+    --program-prefix= \
+    --program-suffix= \
+    --build=$ARCH-slackware-linux
 
 make
 make install DESTDIR=$PKG
+
+# We will switch to cmake once wxWidgets supports CMAKE_INSTALL_LIBDIR:
+#cmake -B build-gtk3 -S . \
+#    -DCMAKE_BUILD_TYPE=Release \
+#    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+#    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+#    -DCMAKE_C_FLAGS_RELEASE:STRING="$SLKCFLAGS" \
+#    -DCMAKE_CXX_FLAGS_RELEASE:STRING="$SLKCFLAGS" \
+#    -DCMAKE_INSTALL_PREFIX=/usr \
+#    -DCMAKE_INSTALL_LIBDIR=/usr/lib${LIBDIRSUFFIX} \
+#    -DCMAKE_INSTALL_SYSCONFDIR=/etc \
+#    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
+#    -DwxBUILD_MONOLITHIC=OFF \
+#    -DwxBUILD_SAMPLES=OFF \
+#    -DwxBUILD_SHARED=ON \
+#    -DwxBUILD_TESTS=OFF \
+#    -DwxBUILD_TOOLKIT=gtk3 \
+#    -DwxUSE_OPENGL=ON \
+#    -DwxUSE_REGEX=sys\
+#    -DwxUSE_ZLIB=sys \
+#    -DwxUSE_EXPAT=sys \
+#    -DwxUSE_LIBJPEG=sys \
+#    -DwxUSE_LIBPNG=sys \
+#    -DwxUSE_LIBTIFF=sys \
+#    -DwxUSE_LIBLZMA=sys \
+#    -DwxUSE_LIBMSPACK=ON \
+#    -DwxUSE_LIBSDL=ON \
+#    -DwxUSE_NANOSVG=ON \
+#    -DwxUSE_OPENGL=ON \
+#    -DwxUSE_STL=OFF \
+#    -DwxUSE_PRIVATE_FONTS=ON \
+#    -DwxUSE_GTKPRINT=ON
+#cmake --build build-gtk3
+#DESTDIR="$PKG" cmake --install build-gtk3
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

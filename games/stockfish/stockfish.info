@@ -1,11 +1,11 @@
 PRGNAM="stockfish"
-VERSION="17.1"
+VERSION="18"
 HOMEPAGE="https://stockfishchess.org/"
-DOWNLOAD="https://github.com/official-stockfish/Stockfish/archive/sf_17.1/Stockfish-sf_17.1.tar.gz \
-	https://tests.stockfishchess.org/api/nn/nn-1c0000000000.nnue \
-        https://tests.stockfishchess.org/api/nn/nn-37f18f62d772.nnue"
-MD5SUM="98104d516e58d6f5e457c364af0ab7d1 \
-        51233596245fe903587347e12287ec9e \
+DOWNLOAD="https://github.com/official-stockfish/Stockfish/archive/sf_18/Stockfish-sf_18.tar.gz \
+	  https://github.com/official-stockfish/networks/raw/master/nn-c288c895ea92.nnue \
+          https://github.com/official-stockfish/networks/raw/master/nn-37f18f62d772.nnue"
+MD5SUM="056b364c18b07915e4163deced98f575 \
+        a384d47205923be5ab657647cd548452 \
         b0a9f8479b17b1c0659db8d0c2df4695"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""

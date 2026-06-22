@@ -23,14 +23,12 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# 20230629 bkw: Modified by SlackBuilds.org, BUILD=2:
-# - install binaries stripped.
-
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=enblend-enfuse
-VERSION=${VERSION:-20191019_4c30a326b3f4}
-BUILD=${BUILD:-2}
+VERSION=${VERSION:-4.3.80b879}
+SRCVER=enblend-code-80b879499ff6e7434cadebaf31224d277408ab85
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -70,9 +68,9 @@ set -eu
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
-cd $PRGNAM-$VERSION
+rm -rf $SRCVER
+unzip $CWD/$SRCVER.zip
+cd $SRCVER
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -80,30 +78,32 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} +
 
-#sed -i '/^#include <vector>$/a #include <limits>' src/minimizer.h
+# from mercurial repository run AutoConf AutoMake
+make --makefile=Makefile.scm
 
-export MANDIR=/usr/man
-mkdir -p build
-cd build
-  cmake \
-    -DCMAKE_C_FLAGS_RELEASE="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS_RELEASE="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DBUILD_SHARED_LIBS=on \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DENABLE_OPENMP=on \
-    -DENABLE_METADATA_TRANSFER=on \
-    -Wno-dev ..
+CXXFLAGS="$SLKCFLAGS" \
+CFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --enable-openmp=yes \
+  --enable-opencl=no \
+  --mandir=/usr/man \
+  --with-exiv2 \
+  --with-openexr \
+  --infodir=/usr/info \
+  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --build=$ARCH-slackware-linux
 
-  make
-  make install/strip DESTDIR=$PKG
-cd -
+make
+make install-strip DESTDIR=$PKG
+
+rm -f $PKG/usr/info/dir
 
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog NEWS README VERSION \
+cp -a AUTHORS COPYING ChangeLog NEWS README README.txt VERSION \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

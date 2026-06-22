@@ -1,0 +1,28 @@
+From a1063ca1882cc5c82837c008612ccc526dcb2d75 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Fri, 16 Jan 2026 23:52:42 +0800
+Subject: [PATCH] fix ifcsverchok setup
+
+---
+ src/ifcsverchok/pyproject.toml | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/src/ifcsverchok/pyproject.toml b/src/ifcsverchok/pyproject.toml
+index 6952f66f068..21b90ef43ea 100644
+--- a/src/ifcsverchok/pyproject.toml
++++ b/src/ifcsverchok/pyproject.toml
+@@ -1,5 +1,14 @@
++[tool.setuptools.packages.find]
++include = ["nodes*"]
++
++[tool.setuptools.package-data]
++"*" = ["*.*"]
++
+ [tool.ruff]
+ extend = "../../pyproject.toml"
+ lint.select = [
+   "F401",  # unused imports
+ ]
++[project]
++name = "ifcsverchok"
++version = "0.0.0"

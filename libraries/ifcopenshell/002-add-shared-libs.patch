@@ -1,0 +1,59 @@
+From 3ef4a0c7ee3a0e7c350c7cbcb38f8dd28c5b8456 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Fri, 16 Jan 2026 23:28:25 +0800
+Subject: [PATCH] add shared libs
+
+make all libs shared when BUILD_SHARED_LIBS=ON
+
+fix shared lib for hdf5
+---
+ cmake/FindHDF5.cmake                            | 6 +++++-
+ src/ifcgeom/Serialization/CMakeLists.txt        | 2 +-
+ src/ifcgeom/Serialization/schema/CMakeLists.txt | 3 +--
+ 3 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/cmake/FindHDF5.cmake b/cmake/FindHDF5.cmake
+index 399b1c9f133..297c52bf05c 100644
+--- a/cmake/FindHDF5.cmake
++++ b/cmake/FindHDF5.cmake
+@@ -41,7 +41,11 @@ if(HDF5_LIBRARY_DIR)
+             set(zlib_post lib)
+             set(lib_ext lib)
+         else()
+-            set(lib_ext a)
++            if(BUILD_SHARED_LIBS)
++                set(lib_ext so)
++            else()
++                set(lib_ext a)
++            endif()
+         endif()
+ 
+         if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+diff --git a/src/ifcgeom/Serialization/CMakeLists.txt b/src/ifcgeom/Serialization/CMakeLists.txt
+index 4463cabcc92..0c491361012 100644
+--- a/src/ifcgeom/Serialization/CMakeLists.txt
++++ b/src/ifcgeom/Serialization/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ add_subdirectory(schema)
+ 
+-add_library(geometry_serializer STATIC Serialization.cpp)
++add_library(geometry_serializer Serialization.cpp)
+ file(GLOB IFCGEOM_SERIALIZATION_H_FILE *.h)
+ 
+ set_target_properties(
+diff --git a/src/ifcgeom/Serialization/schema/CMakeLists.txt b/src/ifcgeom/Serialization/schema/CMakeLists.txt
+index b6daf97cd93..9bb5a961ab4 100644
+--- a/src/ifcgeom/Serialization/schema/CMakeLists.txt
++++ b/src/ifcgeom/Serialization/schema/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ foreach(schema ${SCHEMA_VERSIONS})
+-    add_library(geometry_serializer_ifc${schema} STATIC Serialization.cpp)
++    add_library(geometry_serializer_ifc${schema} Serialization.cpp)
+     target_link_libraries(geometry_serializer_ifc${schema} ${OpenCASCADE_LIBRARIES})
+     set_target_properties(
+         geometry_serializer_ifc${schema}
+@@ -7,4 +7,3 @@ foreach(schema ${SCHEMA_VERSIONS})
+     )
+     list(APPEND geometry_serializer_libraries geometry_serializer_ifc${schema})
+ endforeach()
+-set(geometry_serializer_libraries ${geometry_serializer_libraries} PARENT_SCOPE)

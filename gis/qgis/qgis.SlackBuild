@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=qgis
-VERSION=${VERSION:-3.44.1}
+VERSION=${VERSION:-4.0.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -68,14 +68,6 @@ fi
 
 set -e
 
-# We have to disable WITH_QTWEBKIT in current
-# because it is not more available
-if [ -d "/usr/include/qt5/QtWebKit" ]; then
-   QTWEBKIT=""
-else 
-   QTWEBKIT="-DWITH_QTWEBKIT=OFF "
-fi
-
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
@@ -93,12 +85,6 @@ if pkg-config --exists OpenCL; then
   OCL="-DUSE_OPENCL=OFF " ; [ "${OPENCL:-no}" = "yes" ] && OCL="-DUSE_OPENCL=ON "
 else
   OCL="-DUSE_OPENCL=OFF "
-fi
-
-if pkg-config --exists pdal; then
-  WITHPDAL="-DWITH_PDAL=OFF "; [ "${PDAL:-yes}" = "yes" ] && WITHPDAL="-DWITH_PDAL=ON "
-else
-  WITHPDAL="-DWITH_PDAL=OFF "
 fi
 
 if pkg-config --exists draco; then
@@ -122,11 +108,9 @@ if [ $(ccache --version |head -1 |cut -f3 -d' ') == "4.5.1" ]; then
     ccache --set-config sloppiness=pch_defines,time_macros
 fi
 
-sed -i '43 i IF (NOT PROJ_INCLUDE_DIR)\nFIND_PATH(PROJ_INCLUDE_DIR proj.h\n"$ENV{INCLUDE}"\n"$ENV{LIB_DIR}/include"\n)\nENDIF (NOT PROJ_INCLUDE_DIR)\n' cmake/FindProj.cmake
+#sed -i '43 i IF (NOT PROJ_INCLUDE_DIR)\nFIND_PATH(PROJ_INCLUDE_DIR proj.h\n"$ENV{INCLUDE}"\n"$ENV{LIB_DIR}/include"\n)\nENDIF (NOT PROJ_INCLUDE_DIR)\n' cmake/FindProj.cmake
 
-mkdir -p build
-cd build
-  cmake .. \
+cmake . -B build -G Ninja \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -pthread" \
     -DCMAKE_BUILD_TYPE="Release" \
@@ -134,23 +118,25 @@ cd build
     -DQGIS_LIB_SUBDIR=lib${LIBDIRSUFFIX} \
     -DQGIS_LIBEXEC_SUBDIR=lib${LIBDIRSUFFIX}/qgis \
     -DQGIS_PLUGIN_SUBDIR=lib${LIBDIRSUFFIX}/qgis \
-    -DWITH_QWTPOLAR=TRUE \
     -DWITH_CUSTOM_WIDGETS=FALSE \
     -DBINDINGS_GLOBAL_INSTALL=TRUE \
     -DQWT_INCLUDE_DIR=/usr/include/qwt \
-    -DQSCINTILLA_INCLUDE_DIR=/usr/include/qt5 \
+    -DQGIS_QML_SUBDIR=lib${LIBDIRSUFFIX}/qt/qml \
+    -DWITH_CUSTOM_WIDGETS=TRUE \
+    -DBINDINGS_GLOBAL_INSTALL=TRUE \
+    -DWITH_PDAL=TRUE \
+    -DQSCINTILLA_INCLUDE_DIR=/usr/include/qt6 \
     -DENABLE_TESTS=FALSE \
     -DWITH_3D=TRUE \
     -Wno-dev \
+    -DWITH_INTERNAL_SPATIALINDEX=TRUE \
     $OCL \
-    $WITHPDAL \
+    -DWITH_PDAL=TRUE \
     $WITHDRACO \
     $WITHGRASS \
-    $QTWEBKIT
 
-  make
-  make install DESTDIR=$PKG
-cd -
+cmake --build build
+DESTDIR="$PKG" cmake --install build
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

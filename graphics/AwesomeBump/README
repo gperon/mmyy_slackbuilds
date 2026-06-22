@@ -1,0 +1,4 @@
+AwesomeBump is a free and open source program designed to generate normal,
+height, specular or ambient occlusion, roughness and metallic textures from
+a single image. Since the image processing is done in 99% on GPU  the
+program runs very fast and all the parameters can be changed in real time.

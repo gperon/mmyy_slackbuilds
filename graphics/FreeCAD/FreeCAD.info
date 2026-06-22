@@ -1,14 +1,18 @@
 PRGNAM="FreeCAD"
-VERSION="1.0.2"
+VERSION="1.1.0"
 HOMEPAGE="https://www.freecadweb.org/"
-DOWNLOAD="https://github.com/FreeCAD/FreeCAD/archive/1.0.2/FreeCAD-1.0.2.tar.gz \
-          https://sourceforge.net/projects/slackbuildsdirectlinks/files/FreeCAD/GSL-20240226_b39e7e4.tar.lz \
-          https://sourceforge.net/projects/slackbuildsdirectlinks/files/FreeCAD/OndselSolver-20250121_09d6175.tar.lz"
-MD5SUM="483bc63d9711d3079c155fb12d9439ab \
-        484cbd9e28b0ba842f5f2b5aabff3015 \
-        69cd7ba35074c8d2e87adcd0a320deed"
+DOWNLOAD="https://github.com/FreeCAD/FreeCAD/archive/1.1.0/FreeCAD-1.1.0.tar.gz \
+https://github.com/FreeCAD/AddonManager/archive/a8b3c78d0618134e65bb28392af51fa485b4d183.zip \
+https://github.com/Ondsel-Development/OndselSolver/archive/09d6175a2ba69e7016fcecc4f384946a2f84f92d/OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d.zip \
+https://github.com/google/googletest/releases/download/v1.17.0/googletest-1.17.0.tar.gz \
+https://github.com/microsoft/GSL/archive/v4.2.1/GSL-4.2.1.tar.gz"
+MD5SUM="38ac95344e19dd66932a239323c4a4d9 \
+        294048c421f891f549d4138864f34de2 \
+        5ea06d5722da50b510e7a048b3982896 \
+        b6f100bc2a5853a48046aa168ececf84 \
+        ae93f67a036c15d8787ab6461c35de6d"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="fmt graphviz gts OpenCASCADE Pivy pybind11-legacy pyside2 python3-matplotlib xerces-c yaml-cpp0.6"
-MAINTAINER="Christoph Willing"
-EMAIL="chris.willing@linux.com"
+REQUIRES="OpenCASCADE Pivy pyside6 xerces-c med python3-matplotlib ifcopenshell python3-shapely"
+MAINTAINER="David Spencer"
+EMAIL="baildon.research@googlemail.com"

@@ -1,0 +1,18 @@
+PRGNAM="lc0"
+VERSION="0.32.1"
+HOMEPAGE="https://github.com/LeelaChessZero/lc0"
+DOWNLOAD="https://github.com/LeelaChessZero/lc0/archive/v0.32.1/lc0-0.32.1.tar.gz \
+          https://storage.lczero.org/files/networks-contrib/t1-256x10-distilled-swa-2432500.pb.gz \
+          https://storage.lczero.org/files/networks-contrib/t3-512x15x16h-distill-swa-2767500.pb.gz \
+          https://storage.lczero.org/files/networks-contrib/BT3-768x15x24h-swa-2790000.pb.gz \
+          https://storage.lczero.org/files/networks-contrib/BT4-1024x15x32h-swa-6147500-policytune-332.pb.gz"
+MD5SUM="e4a27c7c53f9160e93f2613f6fb735a8 \
+        4345ce1b49a53493d3a0dc3344303b91 \
+        07840812cdff162de1c3986a78055295 \
+        748af2ffcfa5faa9c8f439474fe50d20 \
+        07840812cdff162de1c3986a78055295"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="ispc"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

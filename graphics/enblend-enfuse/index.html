@@ -1,0 +1,2876 @@
+
+
+<!DOCTYPE html>
+<!-- Server: sfs-forge-4 -->
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="en" class="no-js">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+    <title>
+  Enblend / Code
+    / [80b879] 
+</title>
+    
+
+<meta name="viewport" content="width=1100">
+
+
+<link rel="icon" sizes="180x180" href="https://a.fsdn.com/con/img/sandiego/logo-180x180.png" type="image/png">
+<link rel="icon" sizes="any" href="https://a.fsdn.com/con/img/sandiego/svg/originals/sf-icon-orange-no_sf.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" sizes="180x180" href="https://a.fsdn.com/con/img/sandiego/logo-180x180.png">
+<link rel="mask-icon" href="https://a.fsdn.com/con/img/sandiego/svg/originals/sf-icon-orange-no_sf.svg" color="#FF6600">
+
+    
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://a.fsdn.com/con/css/lato.css?">
+
+
+<script>
+if (!window.SF) { window.SF = {}; }
+SF.sandiego = false;
+SF.sandiego_chrome = true;
+SF.cdn = "https://a.fsdn.com/con";
+SF.fpid = 'dd498f37-0afa-4ca6-a92b-6b7fb3a5e093';
+SF.billboard_route = '/software/product/$slug/';
+</script>
+    
+        <!-- ew:head_css -->
+
+    
+        <link rel="stylesheet"
+                type="text/css"
+                href="https://a.fsdn.com/allura/nf/1735922276/_ew_/_slim/css?href=allura%2Fcss%2Fforge%2Fhilite.css%3Ballura%2Fcss%2Fforge%2Ftooltipster.css"
+                >
+    
+        <link rel="stylesheet"
+                type="text/css"
+                href="https://a.fsdn.com/allura/nf/1735922276/_ew_/allura/css/font-awesome.min.css"
+                >
+    
+        <link rel="stylesheet"
+                type="text/css"
+                href="https://a.fsdn.com/allura/nf/1735922276/_ew_/theme/sftheme/css/forge.css"
+                >
+    
+        <link rel="stylesheet"
+                type="text/css"
+                href="https://a.fsdn.com/allura/nf/1735922276/_ew_/theme/sftheme/css/sftheme/sandiego/cmp.css"
+                >
+    
+        
+<!-- /ew:head_css -->
+
+    
+    
+        <!-- ew:head_js -->
+
+    
+        <script type="text/javascript" src="https://a.fsdn.com/allura/nf/1735922276/_ew_/_slim/js?href=allura%2Fjs%2Fjquery-3.6.0.min.js%3Ballura%2Fjs%2Fjquery.cookie-1.4.1.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fcmp2.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fshared_head.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Ftypescript%2Fcompliance.js"></script>
+    
+        
+<!-- /ew:head_js -->
+
+    
+
+    
+        <style type="text/css">
+            /* make URL &amp; Project custom fields in support tickets not get hidden as much */
+.project-forge.mountpoint-site-support .view_holder .grid-4:nth-child(5),
+.project-forge.mountpoint-site-support .view_holder .grid-4:nth-child(6) {
+  overflow: visible;
+  font-size: 22px;
+  width: 340px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.project-forge.mountpoint-site-support .view_holder .grid-4:nth-child(5) label, .project-forge.mountpoint-site-support .view_holder .grid-4:nth-child(6) label {
+  font-size: 14px;
+}
+        </style>
+    
+    
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/p/enblend/code/feed.rss"/>
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="/p/enblend/code/feed.atom"/>
+    <style type="text/css">
+        #access_urls .btn-set {
+            
+            min-width: 4em;
+        }
+    </style>
+
+<style>
+form.tarball {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+form.tarball button {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    text-shadow: none;
+    color:  #fff;
+    font-weight: normal;;
+    padding: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 36px;
+}
+form.tarball button:hover {
+  border: 0 !important;
+}
+</style>
+
+    <style>.XwoOwpZhfgFVMOqwjNMKsPbCkxHDmMKBg {
+        display: none
+    }</style>
+
+    
+    
+    
+        <link rel="canonical" href="https://sourceforge.net/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/tree/" />
+    
+
+
+    
+
+
+    
+    <script>
+        window.bizx.cmp.init({
+            
+            geo: {
+                is_euro_union: 1,
+                country_code2: 'IT',
+                region: '',
+            },
+        });
+    </script>
+
+
+
+
+<script>
+    function initPiwik(){
+      var _paq = window._paq = window._paq || [];
+      _paq.push(['trackPageView', document.title, {
+            dimension1: 'enblend',
+            dimension2: 'hg'
+      }]);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.slashdotmedia.com/";
+        _paq.push(['setTrackerUrl', u+'sf.php']);
+        _paq.push(['setSiteId', 39]);
+        
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'sf.js'; s.parentNode.insertBefore(g,s);
+      })();
+    }
+    bizx.cmp.ifConsent({ purposes: ['storage', 'measurement'], vendors: 'sdm'}, initPiwik);
+</script>
+
+
+
+
+
+
+<!-- Hubspot tracking -->
+
+
+
+
+
+
+</head>
+
+<body class="
+body_class sandiego_chrome  legacy_chrome  l-allow-natural-width 
+" id="forge">
+
+    
+        <!-- ew:body_top_js -->
+
+    
+        
+<!-- /ew:body_top_js -->
+
+    
+
+
+
+
+
+<div class="off-canvas position-right" id="offCanvas" data-off-canvas>
+    <!-- Menu -->
+    <ul class="header-nav-menulist">
+        <li class="highlight search">
+            
+            
+                
+            
+            
+    <form method="get" action="/directory/" class="m-search-form">
+    
+        <input type="text" placeholder="Search for software or solutions" autocomplete="off" name="q" >
+        
+        <label>
+        <input type="submit" class="bt" value="">
+            
+
+
+<svg  data-name="search" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
+        </label>
+    </form>
+        </li>
+        
+        <li class="highlight"><a href="/auth/">Join/Login</a></li>
+        
+        <li><a href="/software/">Business Software</a></li>
+        <li><a href="/directory/">Open Source Software</a></li>
+        <li><a  href="/software/vendors/" title="For Vendors">For Vendors</a></li>
+        <li><a href="/blog/" title="Blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a id="header-nav-more" data-toggle="header-nav-more header-nav-more-content" data-toggler=".toggled">More</a></li>
+        <li>
+            <ul id="header-nav-more-content" class="toggled" data-toggler=".toggled">
+                
+    
+
+    
+    
+        <li><a href="/articles/">Articles</a></li>
+    
+    
+
+    
+ 
+                
+                <li><a href="/create">Create</a></li>
+                
+                <li><a href="https://sourceforge.net/articles/category/sourceforge-podcast/">SourceForge Podcast</a></li>
+                
+                    <li><a href="https://sourceforge.net/p/forge/documentation/Docs%20Home/">Site Documentation</a></li>
+                
+                <li><a href="/user/newsletters">Subscribe to our Newsletter</a></li>
+                <li><a href="/support">Support Request</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="off-canvas-content" data-off-canvas-content>
+
+    
+
+
+
+
+<script>
+    SF.linkout_icon = '<svg  data-name="sf-linkout-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve"><polygon class="st0" points="243.2,243.2 56.8,243.2 56.8,56.8 123,56.8 123,9 9,9 9,291 291,291 291,179.4 243.2,179 "/><polygon class="st0" points="128.5,213 155,186.5 176,165.5 206.7,196.3 235.5,132.5 248.9,102.6 290.6,9.8 291,9 290.6,9.2 197.4,51.1 169.1,63.8 103.7,93.3 137,126.5 115.9,147.5 89.5,174 "/></svg>';
+</script>
+
+
+<div class="l-header-nav  sandiego">
+
+    <section class="sandiego l-header-nav-top show-for-large">
+        <div class="row">
+            <a href="/" title="Home" class="sf-logo">
+                
+    
+    <img src="https://a.fsdn.com/con/images/sandiego/sf-logo-full.svg"  alt="SourceForge logo" class="sf-logo-full"/>
+            </a>
+            <nav class="links">
+                
+                <a href="/software/vendors/" title="For Vendors">For Vendors</a>
+                
+                
+                    <a href="/support" title="Help">Help</a>
+                    <a href="/create/" title="Create">Create</a>
+                
+
+                
+                <a href="/user/registration" title="Join" >Join</a>
+                <a href="/auth/" title="Login">Login</a>
+                
+            </nav>
+        </div>
+    </section>
+
+    <section class="sandiego l-header-nav-top hide-for-large">
+        <div class="row">
+            <a href="/" title="Home" class="sf-logo">
+                
+    
+    <img src="https://a.fsdn.com/con/images/sandiego/sf-logo-full.svg"  alt="SourceForge logo" class="sf-logo-full"/>
+            </a>
+            <div class="title-bar-right">
+                <button type="button" aria-label="Toggle Main Menu" class="menu-icon" data-toggle="offCanvas"></button>
+            </div>
+        </div>
+    </section>
+    <section class="sandiego l-header-nav-bottom">
+        <nav class="row">
+            <a href="/" title="Home" class="sf-logo">
+                
+    
+    <img src="https://a.fsdn.com/con/images/sandiego/sf-logo-full.svg"  alt="SourceForge logo" class="sf-logo-full"/>
+            </a>
+            <div class="links">
+                
+    
+        <div class="nav-dropdown">
+            <a href="/software/">Business Software</a>
+            
+        </div>
+        <div class="nav-dropdown">
+            <a href="/directory/" title="Browse">Open Source Software</a>
+            
+        </div>
+        <div class="nav-dropdown">
+            <a href="https://sourceforge.net/articles/category/sourceforge-podcast/">SourceForge Podcast</a>
+        </div>
+        <div class="nav-dropdown">
+            <a>Resources</a>
+            <ul class="nav-dropdown-menu">
+                  <li><a href="/articles/">Articles</a></li>
+                  
+                  <li><a href="/software/case-studies/">Case Studies</a></li>
+                  
+                  <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </div>
+    
+
+                <div class="dev-menu-when-stuck">
+                    Menu
+                    <ul class="dev-menu-dropdown header-nav-menulist">
+                        <li><a href="/support">Help</a></li>
+                        <li><a href="/create">Create</a></li>
+                        <li><a href="/user/registration/" title="Join" >Join</a></li>
+                        <li><a href="/auth/" title="Login">Login</a></li>
+                    </ul>
+                </div>
+                <div class="search-toggle-when-stuck">
+                    <a class="search-toggle">
+                        
+
+
+<svg  data-name="search" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="search">
+                
+                
+    
+    
+        <div class="main-nav-link">
+            
+            
+            <a href="https://auth0.com/signup?utm_source=sourceforge&amp;utm_campaign=global_mult_mult_all_ciam-dev_dg-plg_auth0_display_sourceforge_banner_3p_PLG-SFSiteSearchBanner_utm2&amp;utm_medium=cpc&amp;utm_id=aNK4z000000UIV7GAO" rel="nofollow" target="_blank" id="main-nav-badge-link" data-label="OktaJan25">
+                <img src="https://a.fsdn.com/con/assets/maxnav/sourceforge/okta300-7baad53c.png"  srcset="https://a.fsdn.com/con/assets/maxnav/sourceforge/okta600-7bacc888.png 2x"  alt="Nav" id="main-nav-image"/>
+            </a>
+        </div>
+    
+
+
+                
+                    
+                
+                
+                
+                
+    <form method="get" action="/directory/" class="m-search-form">
+    
+    <div class="typeahead__container">
+      <div class="typeahead__field">
+        <div class="typeahead__query">
+        
+        <input type="text" placeholder="Search for software or solutions" autocomplete="off" name="q" >
+        
+        </div>
+        
+        <label>
+        <input type="submit" class="bt" value="">
+            
+
+
+<svg  data-name="search" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
+        </label>
+      </div>
+    </div>
+    
+    </form>
+                
+            </div>
+        </nav>
+        
+    </section>
+    
+</div>
+    
+    
+    <div class="notification-on-project-page">
+    
+        
+    
+    
+    
+    </div>
+    
+    
+
+
+    <section id="page-body" class=" neighborhood-Projects project-enblend mountpoint-code 
+
+">
+        <div id="nav_menu_holder">
+            
+                
+                    
+    <div class="sandiego"> 
+            
+            
+            
+            
+<section class="project-masthead"> 
+    
+    
+
+    
+<div class="backdrop" style="box-sizing: content-box; padding-bottom: 24px"></div>
+
+    <div class="content">
+    
+        
+    <nav id="breadcrumbs" class="breadcrumbs rtl">
+        <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+                <meta itemprop="position" content="1"/>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="/directory/"><span itemprop="name">Browse</span></a>
+                <meta itemprop="position" content="2"/>
+            </li>
+            
+            
+                
+                
+            
+            
+                
+            
+            
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/p/enblend/"><span itemprop="name">Enblend</span></a>
+                <meta itemprop="position" content="3"/>
+                </li>
+            
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Code</span>
+                <meta itemprop="position" content="4"/>
+                </li>
+            
+        </ul>
+    </nav>
+    
+    
+    
+        
+                
+                
+<div class="overview">
+    
+
+
+<div class="project-icon  default-project-icon " >
+    
+    
+    
+
+
+<svg  data-name="default-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve"><rect class="st0" width="300" height="300"/><g><path class="st1" d="M162.5,154.8c0-28.9-10.2-42-15.6-46.9c-1.1-1-2.7-0.1-2.6,1.3c1.1,16.3-19.4,20.3-19.4,45.9h0c0,0.1,0,0.1,0,0.2c0,15.6,11.8,28.3,26.3,28.3c14.5,0,26.3-12.7,26.3-28.3c0-0.1,0-0.1,0-0.2h0c0-7.2-2.7-14.1-5.5-19.3c-0.5-1-2.1-0.6-1.9,0.3C174.9,158.1,162.5,171.8,162.5,154.8z"/><g><path class="st1" d="M131.2,215.6c-0.7,0-1.3-0.3-1.8-0.7l-67.2-67.1c-1-1-1-2.6,0-3.6l70.9-70.9c0.5-0.5,1.1-0.7,1.8-0.7h20.4c1.2,0,2,0.8,2.3,1.6c0.3,0.7,0.3,1.9-0.5,2.7l-66.7,66.7c-1.3,1.3-1.3,3.5,0,4.9l52.7,52.7c1,1,1,2.6,0,3.6L133,214.9C132.5,215.4,131.9,215.6,131.2,215.6z"/></g><g><path class="st1" d="M144.7,227.4c-1.2,0-2-0.8-2.3-1.5c-0.3-0.7-0.3-1.9,0.5-2.7l66.7-66.7c0.7-0.6,1-1.5,1-2.4s-0.4-1.8-1-2.4l-52.7-52.7c-1-1-1-2.6,0-3.6l10.2-10.2c0.5-0.5,1.1-0.7,1.8-0.7c0.7,0,1.3,0.3,1.8,0.7l67,67.1c0.5,0.5,0.7,1.1,0.7,1.8s-0.3,1.3-0.7,1.8l-70.9,70.9c-0.5,0.5-1.1,0.7-1.8,0.7H144.7z"/></g></g></svg>
+    </div>
+
+
+    
+    <div class="title "> 
+
+        <meta itemprop="name" content="Enblend"/>
+        <h1  >Enblend Code
+        </h1>
+        
+            
+            
+          
+        
+            
+            
+            <div class="as-h3 brought-by">
+                
+                Brought to you by:
+                
+                    <a href="/u/acmihal/profile/">acmihal</a>,
+                    
+                
+                    <a href="/u/brunopostle/profile/">brunopostle</a>,
+                    
+                
+                    <a href="/u/cspiel/profile/">cspiel</a>,
+                    
+                
+                    <a href="/u/dangelo/profile/">dangelo</a>,
+                    
+                
+                    <a href="/u/yuv/profile/">yuv</a>
+                    
+                
+            </div>
+            
+        
+
+        
+
+        
+    </div>
+
+
+    
+
+</div>
+
+                
+                
+    
+  
+            
+            
+        
+    </div>
+</section>
+
+        </div>
+    
+
+                
+            
+        </div>
+        <div id="top_nav" class="">
+            
+                
+<div id="top_nav_admin">
+<ul class="dropdown">
+  
+  
+    <li class="">
+        <a href="/projects/enblend/" class="tool-summary-32" >
+            Summary
+        </a>
+        
+        
+    </li>
+  
+    <li class="">
+        <a href="/projects/enblend/files/" class="tool-files-sf-32" >
+            Files
+        </a>
+        
+        
+    </li>
+  
+    <li class="">
+        <a href="/projects/enblend/reviews/" class="tool-reviews-32" >
+            Reviews
+        </a>
+        
+        
+    </li>
+  
+    <li class="">
+        <a href="/projects/enblend/support" class="tool-support-32" >
+            Support
+        </a>
+        
+        
+    </li>
+  
+    <li class="">
+        <a href="/p/enblend/mailman/" class="tool-mailman-32" >
+            Mailing Lists
+        </a>
+        
+        
+    </li>
+  
+    <li class="">
+        <a href="/p/enblend/news/" class="tool-blog-32" >
+            News
+        </a>
+        
+        
+    </li>
+  
+    <li class="">
+        <a href="/p/enblend/discussion/" class="tool-discussion-32" >
+            Discussion
+        </a>
+        
+        
+    </li>
+  
+    <li class="selected">
+        <a href="/p/enblend/_list/hg" class="tool-hg-32" >
+            Mercurial ▾
+        </a>
+        
+        
+            <ul>
+                
+                    <li class="selected"><a href="/p/enblend/code/" >Code</a></li>
+                
+                    <li class=""><a href="/p/enblend/enblend-web/" >Enblend Web</a></li>
+                
+            </ul>
+        
+    </li>
+  
+  
+</ul>
+</div>
+
+
+            
+        </div>
+        <div id="content_base">
+            
+
+    
+                
+                    
+<a id="sidebar-activate" href="#">
+    <span class="btn-label">Menu</span>
+    <span class="btn-arrow-down">▾</span>
+    <span class="btn-arrow-up">▴</span>
+</a>
+
+                        
+
+
+<div id="sidebar">
+  
+    <div class="placeholder-no-searchbox">&nbsp;</div>
+  
+    
+    
+      
+      
+        
+    
+      <ul class="sidebarmenu">
+      
+    
+  <li>
+      
+        <a class="icon" href="/p/enblend/code/commit_browser" rel="nofollow" title="Browse Commits"><i class="fa fa-list"></i>
+      
+      <span>Browse Commits</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a class="icon" href="/p/enblend/code/fork" rel="nofollow" title="Fork"><i class="fa fa-code-fork"></i>
+      
+      <span>Fork</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/merge-requests/"  rel="nofollow" >
+      
+      <span class="has_small">Merge Requests</span>
+      <small>0</small></a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/forks/"  rel="nofollow" >
+      
+      <span class="has_small">Forks</span>
+      <small>2</small></a>
+  </li>
+  
+      
+        
+    
+      </ul>
+      
+    
+    
+      <h3 class="">Branches</h3>
+    
+  
+      
+        
+    
+      <ul class="sidebarmenu">
+      
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/default/tree/"  rel="nofollow" >
+      
+      <span>default</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Devel-3_0-branch-20041117/tree/"  rel="nofollow" >
+      
+      <span>Devel-3_0-branch-20041117</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Devel-3_0-branch-20060904/tree/"  rel="nofollow" >
+      
+      <span>Devel-3_0-branch-20060904</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/acmihal_nft-20090627/tree/"  rel="nofollow" >
+      
+      <span>acmihal_nft-20090627</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/btownshend_hdr-20081027/tree/"  rel="nofollow" >
+      
+      <span>btownshend_hdr-20081027</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/cspiel_staging-20090613/tree/"  rel="nofollow" >
+      
+      <span>cspiel_staging-20090613</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/gsoc2009_deghosting/tree/"  rel="nofollow" >
+      
+      <span>gsoc2009_deghosting</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/gsoc2011_seam_line_optimizations/tree/"  rel="nofollow" >
+      
+      <span>gsoc2011_seam_line_optimizations</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/mmap_view/tree/"  rel="nofollow" >
+      
+      <span>mmap_view</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/stable-4_1/tree/"  rel="nofollow" >
+      
+      <span>stable-4_1</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ref/default/branches/"  rel="nofollow" >
+      
+      <span>More Branches</span>
+      </a>
+  </li>
+  
+      
+        
+    
+      </ul>
+      
+    
+    
+      <h3 class="">Tags</h3>
+    
+  
+      
+        
+    
+      <ul class="sidebarmenu">
+      
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Devel-3_0-merge-20070126/tree/"  rel="nofollow" >
+      
+      <span>Devel-3_0-merge-20070126</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Devel-3_0-root-20041117/tree/"  rel="nofollow" >
+      
+      <span>Devel-3_0-root-20041117</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Devel-3_0-root-20060904/tree/"  rel="nofollow" >
+      
+      <span>Devel-3_0-root-20060904</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Merge-Devel-3_0-20070126/tree/"  rel="nofollow" >
+      
+      <span>Merge-Devel-3_0-20070126</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/PreMerge-Devel-3_0-20070126/tree/"  rel="nofollow" >
+      
+      <span>PreMerge-Devel-3_0-20070126</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Release-0_9-20040306/tree/"  rel="nofollow" >
+      
+      <span>Release-0_9-20040306</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Release-1_0-20040327/tree/"  rel="nofollow" >
+      
+      <span>Release-1_0-20040327</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Release-1_01-20040403/tree/"  rel="nofollow" >
+      
+      <span>Release-1_01-20040403</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Release-1_1-20040403/tree/"  rel="nofollow" >
+      
+      <span>Release-1_1-20040403</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ci/Release-1_2-20040426/tree/"  rel="nofollow" >
+      
+      <span>Release-1_2-20040426</span>
+      </a>
+  </li>
+  
+      
+        
+    
+  <li>
+      
+        <a href="/p/enblend/code/ref/default/tags/"  rel="nofollow" >
+      
+      <span>More Tags</span>
+      </a>
+  </li>
+  
+      
+    
+    
+      </ul>
+      
+    
+    
+</div>
+
+
+
+<script>
+$('#sidebar-admin-header').on('click', function(e){
+    $("#sidebar-admin-menu").toggleClass("hidden");
+    $(this).toggleClass("expanded");
+    e.preventDefault();
+});
+</script>
+
+                    
+
+                    
+                
+                
+                    
+                
+                <div class="grid-20 pad">
+                    <h2 class="dark title">
+                        <span>
+Tree <a href="/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/" rel="nofollow">[80b879]</a> 
+  
+  
+    <span class="scm-branch-label">default</span>
+  
+  
+    <span class="scm-tag-label">tip</span>
+  
+
+
+  
+  
+    <a href="./" rel="nofollow"></a> /
+  
+
+</span>
+                        <!-- actions -->
+                        <small>
+                            
+
+<form class="tarball" action="/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/tarball" method="post">
+  <input type="hidden" name="path" value="" />
+  <button><span class="icon" title="Download Snapshot"><i class="fa fa-download"></i>&nbsp;Download Snapshot</span></button>
+  <input name="_session_id" type="hidden" value="354326f2de66d1e8c2056a613fc6388b0b37efd5273aed7fb2cf890a612ec08b1a3c1b833778ef98">
+</form>
+
+
+<a class="icon" href="/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/log/?path=" rel="nofollow" title="History"><i class="fa fa-calendar"></i>&nbsp;History</a>
+
+<a class="icon" href="/p/enblend/code/feed/" rel="nofollow" title="Feed"><i class="fa fa-rss"></i></a>
+
+                        </small>
+                        <!-- /actions -->
+                    </h2>
+                    
+                    <div>
+                        
+  
+
+                        
+  
+  
+    <div id="access_urls" class="btn-bar grid-19">
+      
+      <span>Read Only access</span>
+      <div>
+        <input id="access_url" readonly type="text"
+             class="selectText"
+             value="hg clone http://hg.code.sf.net/p/enblend/code enblend-code"/>
+      </div>
+    </div>
+    
+    <hr>
+  
+
+  <br style="clear:both"/>
+
+<table>
+
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Date</th>
+      <th>Author</th>
+      <th>Commit</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="CMakeModules" rel="nofollow" title="CMakeModules"><i class="fa fa-folder"></i>&nbsp;CMakeModules</a>
+      </td>
+      <td class="nowrap">
+    <span title="Wed Sep 25, 2024 06:44 PM UTC">
+      2024-09-25
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f271cc54a86d77c0100687b065d4c639?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="tmodes"
+         title="tmodes"
+         class="emboss  x16">
+   tmodes
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/575b5841df987d2b7ed1ae2d5066006a8616907d/" rel="nofollow">
+          [575b58]
+          CMake: Update for newer OpenEXR versions
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="contrib" rel="nofollow" title="contrib"><i class="fa fa-folder"></i>&nbsp;contrib</a>
+      </td>
+      <td class="nowrap">
+    <span title="Mon Jul 23, 2012 09:53 PM UTC">
+      2012-07-23
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/brunopostle/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/cba6e2cdeb87a24714c0f51cafbae4c2?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Bruno Postle"
+         title="Bruno Postle"
+         class="emboss  x16">
+  </a>
+          <a href="/u/brunopostle/" rel="nofollow">Bruno Postle</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/bbc433c36aed4121c56c84c4ce7c8b3aa15014ae/" rel="nofollow">
+          [bbc433]
+          Unify differently formatted versions of the gpl...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="doc" rel="nofollow" title="doc"><i class="fa fa-folder"></i>&nbsp;doc</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sun Mar 06, 2022 01:06 PM UTC">
+      2022-03-06
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f271cc54a86d77c0100687b065d4c639?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="tmodes"
+         title="tmodes"
+         class="emboss  x16">
+   tmodes
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/432bb420d65fcfbbffe1ca2ee0d36c516ac45a87/" rel="nofollow">
+          [432bb4]
+          Fixes typo in documentation
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="m4" rel="nofollow" title="m4"><i class="fa fa-folder"></i>&nbsp;m4</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sat Nov 23, 2019 03:26 PM UTC">
+      2019-11-23
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/209eafc9748bc872b42f17c714bf335aa5919a07/" rel="nofollow">
+          [209eaf]
+          Substitute &#34;ax_cxx_compile_stdcxx_17.m4&#34; for &#34;a...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="src" rel="nofollow" title="src"><i class="fa fa-folder"></i>&nbsp;src</a>
+      </td>
+      <td class="nowrap">
+    <span title="Thu Sep 26, 2024 04:14 PM UTC">
+      2024-09-26
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f791790f397120074a7ce76e80e0099f?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Lukas Wirz"
+         title="Lukas Wirz"
+         class="emboss  x16">
+   Lukas Wirz
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/" rel="nofollow">
+          [80b879]
+          Improve comments, small non-functional refactor...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="test" rel="nofollow" title="test"><i class="fa fa-folder"></i>&nbsp;test</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sun Nov 07, 2004 01:36 AM UTC">
+      2004-11-07
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/acmihal/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/d6688428d2f38d075bafe4e79c6d88b0?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Andrew Mihal"
+         title="Andrew Mihal"
+         class="emboss  x16">
+  </a>
+          <a href="/u/acmihal/" rel="nofollow">Andrew Mihal</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/cc8fe2b37dcc6bb56d8f8495e984c109a83b7989/" rel="nofollow">
+          [cc8fe2]
+          Cleanup for sourceforge migration.
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="win32" rel="nofollow" title="win32"><i class="fa fa-folder"></i>&nbsp;win32</a>
+      </td>
+      <td class="nowrap">
+    <span title="Wed Oct 14, 2009 06:54 AM UTC">
+      2009-10-14
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/e0df9739555bc30ccb1a817e58f33949?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Dr. Christoph L. Spiel"
+         title="Dr. Christoph L. Spiel"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Dr. Christoph L. Spiel</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/32f9fe0770a430faedc96311d309b0ab0ccee2f6/" rel="nofollow">
+          [32f9fe]
+          Update SLN configursation files.  Patch by Thom...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href=".hgignore" rel="nofollow" title=".hgignore"><i class="fa fa-file-o"></i>&nbsp;.hgignore</a>
+      </td>
+      <td class="nowrap">
+    <span title="Fri Aug 07, 2015 02:43 PM UTC">
+      2015-08-07
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/c1bcd2df4e3724f3bb0414d3a5e2e9302be78921/" rel="nofollow">
+          [c1bcd2]
+          Rename &#34;configure.in&#34; to &#34;configure.in&#34; in comp...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href=".hgtags" rel="nofollow" title=".hgtags"><i class="fa fa-file-o"></i>&nbsp;.hgtags</a>
+      </td>
+      <td class="nowrap">
+    <span title="Tue Apr 26, 2016 01:14 PM UTC">
+      2016-04-26
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/909e62c209bd0b37f1719bd6693a747cb1475133/" rel="nofollow">
+          [909e62]
+          Tag Release 4.1.5 of Stable Branch.
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="AUTHORS" rel="nofollow" title="AUTHORS"><i class="fa fa-file-o"></i>&nbsp;AUTHORS</a>
+      </td>
+      <td class="nowrap">
+    <span title="Fri Aug 07, 2015 02:44 PM UTC">
+      2015-08-07
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/9b23575b0e66755f5b043006e870f4c885288910/" rel="nofollow">
+          [9b2357]
+          Change copyright notice with the consent of And...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="CMakeLists.txt" rel="nofollow" title="CMakeLists.txt"><i class="fa fa-file-o"></i>&nbsp;CMakeLists.txt</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sun Feb 18, 2024 11:13 AM UTC">
+      2024-02-18
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f791790f397120074a7ce76e80e0099f?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Lukas Wirz"
+         title="Lukas Wirz"
+         class="emboss  x16">
+   Lukas Wirz
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/79266328e72845ef85d95fc48c1c4fc0f10581d8/" rel="nofollow">
+          [792663]
+          CMake: Fixes wrong bracket
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="COPYING" rel="nofollow" title="COPYING"><i class="fa fa-file-o"></i>&nbsp;COPYING</a>
+      </td>
+      <td class="nowrap">
+    <span title="Mon Jul 23, 2012 09:53 PM UTC">
+      2012-07-23
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/brunopostle/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/cba6e2cdeb87a24714c0f51cafbae4c2?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Bruno Postle"
+         title="Bruno Postle"
+         class="emboss  x16">
+  </a>
+          <a href="/u/brunopostle/" rel="nofollow">Bruno Postle</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/bbc433c36aed4121c56c84c4ce7c8b3aa15014ae/" rel="nofollow">
+          [bbc433]
+          Unify differently formatted versions of the gpl...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="ChangeLog" rel="nofollow" title="ChangeLog"><i class="fa fa-file-o"></i>&nbsp;ChangeLog</a>
+      </td>
+      <td class="nowrap">
+    <span title="Mon Oct 05, 2009 09:43 AM UTC">
+      2009-10-05
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/stativ/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/cbda30ae076c4baa64d9f8ca9ca7bfe0?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Lukas Jirkovsky"
+         title="Lukas Jirkovsky"
+         class="emboss  x16">
+  </a>
+          <a href="/u/stativ/" rel="nofollow">Lukas Jirkovsky</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/89d381db54667d8bde4d18bfb5000c38f52db6b5/" rel="nofollow">
+          [89d381]
+          merged with tip
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="ConfigureChecks.cmake" rel="nofollow" title="ConfigureChecks.cmake"><i class="fa fa-file-o"></i>&nbsp;ConfigureChecks.cmake</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sun Aug 22, 2021 01:01 PM UTC">
+      2021-08-22
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f271cc54a86d77c0100687b065d4c639?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="tmodes"
+         title="tmodes"
+         class="emboss  x16">
+   tmodes
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/0bcfaaf743e760c67a50103b587056281d590d75/" rel="nofollow">
+          [0bcfaa]
+          Removed workaround for older boost version
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="Makefile.am" rel="nofollow" title="Makefile.am"><i class="fa fa-file-o"></i>&nbsp;Makefile.am</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sun Dec 27, 2015 10:31 AM UTC">
+      2015-12-27
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/537df0eaa1f420c3e1fdcad2a6daf18027ff6c34/" rel="nofollow">
+          [537df0]
+          Change installation directory of Enfuse&#39;s user-...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="Makefile.scm" rel="nofollow" title="Makefile.scm"><i class="fa fa-file-o"></i>&nbsp;Makefile.scm</a>
+      </td>
+      <td class="nowrap">
+    <span title="Wed Jun 24, 2015 01:19 PM UTC">
+      2015-06-24
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/6b7a2d1d45def5a77f9754acf817521e994c564a/" rel="nofollow">
+          [6b7a2d]
+          Let Autoconf check for required LaTeX translato...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="NEWS" rel="nofollow" title="NEWS"><i class="fa fa-file-o"></i>&nbsp;NEWS</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sat Nov 23, 2019 12:45 PM UTC">
+      2019-11-23
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/1f882f1c83ef4b42a1bc879007989e310df80ce4/" rel="nofollow">
+          [1f882f]
+          Remove the last remaining dependencies on Boost
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="README" rel="nofollow" title="README"><i class="fa fa-file-o"></i>&nbsp;README</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sat Nov 23, 2019 12:45 PM UTC">
+      2019-11-23
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/1f882f1c83ef4b42a1bc879007989e310df80ce4/" rel="nofollow">
+          [1f882f]
+          Remove the last remaining dependencies on Boost
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="README.txt" rel="nofollow" title="README.txt"><i class="fa fa-file-o"></i>&nbsp;README.txt</a>
+      </td>
+      <td class="nowrap">
+    <span title="Thu Sep 17, 2009 05:29 AM UTC">
+      2009-09-17
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/e0df9739555bc30ccb1a817e58f33949?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Dr. Christoph L. Spiel"
+         title="Dr. Christoph L. Spiel"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Dr. Christoph L. Spiel</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/14ae41604e9e481903c34e8900b5c08b8e83bbcf/" rel="nofollow">
+          [14ae41]
+          Re-do the symlink from &#34;README&#34; to &#34;README.txt&#34;...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="TODO-3.x" rel="nofollow" title="TODO-3.x"><i class="fa fa-file-o"></i>&nbsp;TODO-3.x</a>
+      </td>
+      <td class="nowrap">
+    <span title="Mon Sep 17, 2012 07:37 AM UTC">
+      2012-09-17
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/5a0cdf752fc0a17f1a7e47f358c63a332665f366/" rel="nofollow">
+          [5a0cdf]
+          Remove libXMI - Part 1 of 4: add our own polygo...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="VERSION" rel="nofollow" title="VERSION"><i class="fa fa-file-o"></i>&nbsp;VERSION</a>
+      </td>
+      <td class="nowrap">
+    <span title="Thu Sep 26, 2024 04:14 PM UTC">
+      2024-09-26
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f791790f397120074a7ce76e80e0099f?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Lukas Wirz"
+         title="Lukas Wirz"
+         class="emboss  x16">
+   Lukas Wirz
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/" rel="nofollow">
+          [80b879]
+          Improve comments, small non-functional refactor...
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="config.h.cmake" rel="nofollow" title="config.h.cmake"><i class="fa fa-file-o"></i>&nbsp;config.h.cmake</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sun Aug 22, 2021 01:01 PM UTC">
+      2021-08-22
+    </span>
+</td>
+      <td class="nowrap">
+        
+          
+  
+    <img src="https://secure.gravatar.com/avatar/f271cc54a86d77c0100687b065d4c639?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="tmodes"
+         title="tmodes"
+         class="emboss  x16">
+   tmodes
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/0bcfaaf743e760c67a50103b587056281d590d75/" rel="nofollow">
+          [0bcfaa]
+          Removed workaround for older boost version
+        </a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="nowrap">
+        
+          
+        
+        <a class="icon" href="configure.ac" rel="nofollow" title="configure.ac"><i class="fa fa-file-o"></i>&nbsp;configure.ac</a>
+      </td>
+      <td class="nowrap">
+    <span title="Sat Nov 23, 2019 03:26 PM UTC">
+      2019-11-23
+    </span>
+</td>
+      <td class="nowrap">
+        
+          <a href="/u/cspiel/" rel="nofollow">
+  
+    <img src="https://secure.gravatar.com/avatar/7a7778bd2c3b4f00e81e0c0b37089b19?size=16&amp;r=pg&amp;d=https%3A%2F%2Fa.fsdn.com%2Fcon%2Fimages%2Fsandiego%2Ficons%2Fdefault-avatar.png"
+         alt="Chris"
+         title="Chris"
+         class="emboss  x16">
+  </a>
+          <a href="/u/cspiel/" rel="nofollow">Chris</a>
+        
+      </td>
+      <td>
+        <a href="/p/enblend/code/ci/209eafc9748bc872b42f17c714bf335aa5919a07/" rel="nofollow">
+          [209eaf]
+          Substitute &#34;ax_cxx_compile_stdcxx_17.m4&#34; for &#34;a...
+        </a>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+  <h1 id="readme">Read Me</h1>
+  <pre>Copyright (C) 2004-2009 Andrew Mihal.
+Copyright (C) 2009-2019 Christoph Spiel.
+
+This file is part of Enblend.
+
+
+* Programs
+
+This packages contains the programs Enblend and Enfuse.  The source
+code and further information about Enblend are available at:
+        http://enblend.sf.net
+
+
+** Enblend
+
+Enblend is a tool for compositing images using a Burt&amp;Adelson
+multiresolution spline.  This technique tries to make the seams
+between the input images invisible.  The basic idea is that image
+features should be blended across a transition zone proportional in
+size to the spatial frequency of the features.  For example, objects
+like trees and windowpanes have rapid changes in color.  By blending
+these features in a narrow zone, you will not be able to see the seam
+because the eye already expects to see color changes at the edge of
+these features.  Clouds and sky are the opposite.  These features have
+to be blended across a wide transition zone because any sudden change
+in color will be immediately noticeable.
+
+Enblend expects each input file to have an alpha channel.  The alpha
+channel should indicate the region of the file that has valid image
+data.  Enblend compares the alpha regions in the input files to find
+the areas where images overlap.  Alpha channels can be used to
+indicate to Enblend that certain portions of an input image should not
+contribute to the final image.
+
+Enblend does not align images for you.  Use a tool like Hugin or
+PanoTools to do this.  The files produced by these programs are
+exactly what Enblend is designed to work with.
+
+
+** Enfuse
+
+Enfuse is a tool for automatic exposure blending, contrast blending
+and much more.  It can be used to fuse an exposure bracketed step
+automatically into a nicely looking image.
+
+
+* Installation
+
+GNU Make is required to build the project, because some of the
+Makefiles contain pattern rules.
+
+
+** Hints for the migration to C++17
+
+*** Compiler
+
+Some C++ compilers already default to the C++17 Standard, others may
+have to be put into a conforming mode of operation with, for example,
+    -std=gnu++17
+or
+    -std=c++17
+in CXXFLAGS.
+
+
+*** Little CMS2
+
+Depending on the specific C++ compiler and the particular version of
+the lcms2 library it may or may not be necessary to add
+        -DCMS_NO_REGISTER_KEYWORD
+to CPPFLAGS because in C++17 `register' is a deprecated and reserved
+keyword.
+
+Library lcms2 is a mandatory prerequisite for both Enblend and Enfuse.
+
+
+*** Exiv2
+
+A sufficiently recent Exiv2 library is required because C++17 has
+abandoned std::auto_ptr&lt;&gt;, which older versions of the library heavily
+rely on; newer versions use std::unique_ptr&lt;&gt;.
+
+Library exiv2 is optional (see `--with-exiv2').
+
+
+** Tarball
+
+        ./configure YOUR-OPTIONS-IF-ANY-GO-HERE
+        make
+        make install
+
+
+** Mercurial Repository
+
+*** AutoConf/AutoMake
+
+In the root directory of the project issue:
+
+        make --makefile=Makefile.scm
+        ./configure YOUR-OPTIONS-IF-ANY-GO-HERE
+        make
+        make install
+
+The package fully supports VPATH builds.  Thus the following command
+sequence builds in a separate directory.
+
+        cd ROOT-DIRECTORY
+        make --makefile=Makefile.scm
+        mkdir BUILD-DIR
+        cd BUILD-DIR
+        ROOT-DIRECTORY/configure YOUR-OPTIONS-IF-ANY-GO-HERE
+        make
+        make install
+
+If a less verbose output of the Make-process is desired, pass
+`--enable-silent-rules' to configure(1), or `V=0' to make(1).  As out
+build uses recursion make(1) reports "Entering directory" and "Leaving
+directory" which can only be suppressed with passing option
+`--no-print-directory' to make(1).
+
+
+*** CMake
+
+The canonical way to build Enblend and Enfuse is with Autotools, this
+is, autoconf(1) and automake(1).  An alternative CMake build has been
+added since version 4.0.
+
+The CMake build strives to replicate the Autotools build.  It may or
+may not work for you.  It is currently maintained but not supported,
+meaning that it could break anywhere anytime in the future.
+
+        cmake .
+        make
+        make install
+
+Analogously to Autotools, CMake allows for VPATH builds:
+
+        mkdir BUILD-DIR
+        cd BUILD-DIR
+        cmake ROOT-DIRECTORY
+        make
+        make install
+
+
+* Specific Configuration Options
+
+Among the usual configuration options of the GNU autoconf system, the
+configure(1) script offers the following options to tailor Enblend and
+Enfuse.  Remember that configure(1) creates a file called "config.h"
+that can serve for fine-tuning the configuration.
+
+We write the default values of all configuration options in capital
+letters.
+
+
+** --enable-on-demand-dynlink=CHECK/yes/no
+
+Link Enblend and Enfuse binaries with flags that instruct the dynamic
+linker to delay loading dynamic libraries until they are actually
+needed.  This feature slightly decreases the load-time of the
+binaries.
+
+
+** --enable-partially-static-linking=NO/yes
+
+Link against static libraries if they are performance critical for
+Enblend or Enfuse.  Currently, these are the GSL libraries and
+LittleCMS2.  The performance gain is some five percent at the cost of
+only slightly larger binaries.  The configuration option may also be
+interesting if the target system should not require GSL libraries.
+
+If partial static linking is on, configure(1) looks for "libatlas.a"
+and "libcblas.a" to replace "libgslcblas.a" and use an optimized BLAS.
+
+
+** --enable-openmp=yes/NO
+   -DENABLE_OPENMP=ON/off    (CMake)
+
+Parallelize parts of Enblend and Enfuse with OpenMP.  See
+        http://www.openmp.org/
+
+If auto-detection of OpenMP misfires, set appropriate OPENMP_CXXFLAGS
+during configuration.  For example, CLang++ may need the argument-form
+of option `-fopenmp':
+        -fopenmp=libiomp5
+In addition OpenMP support libraries may live in non-standard places.
+These too can be specified in OPENMP_CXXFLAGS, because the flags will
+be used for compilation and linking.
+
+When OpenMP support has been enabled, the utilization of special
+features of the actual, underlying OpenMP implementation can be
+controlled as usual with the environment variables OMP_NUM_THREADS,
+OMP_NESTED and OMP_DYNAMIC.  See the OpenMP specification for details
+on the usage of these variables.
+
+
+** --enable-opencl=YES/no
+
+Enable parallel execution of parts of Enblend and Enfuse with OpenCL
+on machines providing the proper hardware.  See
+        http://www.khronos.org/opencl/
+As Enblend and Enfuse are written in C++ we prefer the C++-header of
+OpenCL, namely "cl.hpp".  This file does not always come
+(pre-)installed, but can be downloaded from the canonical site,
+Khronos OpenCL API Registry
+        http://www.khronos.org/registry/cl/
+
+Currently, we compile and test against OpenCL API version 1.2.  The
+header files associated with the older versions 1.0 and 1.1 are
+flawed; They do not compile with some compilers (e.g. CLang++).
+
+It is advisable to match the API versions of C-headers and the
+C++-header file.  On systems with multiple header hierarchies
+(e.g. /usr/include and /usr/local/include) particular care must be
+taken that the correct headers are used at configuration time and at
+compile time.
+
+
+** --enable-debug=yes/NO
+
+Compile without optimizations and enable all debug-checking code.  The
+default is "no", build an optimized version without debugging symbols.
+
+
+** --with-dl=CHECK/yes/no/dl/gmodule
+
+Enable user-defined exposure weight functions in Enblend.  With
+argument "check", test for POSIX-compatible dynamic-loader (dl) and if
+unsuccessful for GLib implementation (gmodule).
+
+
+** --with-exiv2=CHECK/yes/no
+
+Use Exiv2 library for meta-data transfer of the input images to the
+result.  Without this library Enblend or Enfuse will not copy any EXIF
+meta data.
+
+
+** --with-tcmalloc=CHECK/yes/no
+   -DENABLE_TCMALLOC=OFF/on    (CMake)
+
+Compile with Google's TCMalloc.  This library generally improves
+memory allocation performance.  Enblend and Enfuse prefer TCMalloc's
+functions inside OpenMP parallel regions and thereby reduce the load
+of the operating system's memory allocator.
+
+Find more information on TCMalloc at
+        http://goog-perftools.sourceforge.net/doc/tcmalloc.html
+
+
+** --with-dmalloc=yes/NO
+
+Compile with the debug-malloc library.  The library is available at
+http://www.dmalloc.com/.
+
+
+** --with-openexr=CHECK/yes/no
+
+Build with support for reading and writing OpenEXR images.  See
+http://www.openexr.com/ for the required libraries.
+
+
+* CMake Specifics
+
+** Configuration Options
+
+These options only apply to CMake.
+
+
+*** -DCPACK_BINARY_&lt;SYSTEM&gt;:BOOL=OFF/on
+
+Create a package for the specified &lt;SYSTEM&gt;, where &lt;SYSTEM&gt; is "DEB",
+"RPM", or "NSIS".
+
+
+*** -DCPACK_BINARY_&lt;SYSTEM&gt;:BOOL=ON/off
+
+Create other packages for the specified &lt;SYSTEM&gt;, where &lt;SYSTEM&gt; is
+"TBZ2", "TGZ", "STGZ", or "TZ".
+
+
+*** -DPACK_SOURCE_&lt;SYSTEM&gt;:BOOL=OFF/on
+
+Create a source package for the specified &lt;SYSTEM&gt;, where &lt;SYSTEM&gt; is
+"TBZ2", "TGZ", "TZ", or "ZIP".
+
+
+** Configuration Example
+
+Creating a RedHat package on OpenSuSE
+
+        cmake . \
+            -DDOC=ON \
+            -DENABLE_OPENMP=ON \
+            -DCPACK_BINARY_RPM:BOOL=ON
+        make package
+
+This will create a package enblend-4.0.595-Linux.rpm, which you may
+install with
+
+        sudo rpm -U enblend-4.0.595-Linux.rpm
+
+
+** Important Configured Make(1) Targets
+
+help                     List all available targets.
+
+edit_cache               If  cmake-gui(1) is installed, start the GUI
+                         to edit the "CMakeCache.txt" file.
+
+enblend                  Create an Enblend executable.
+
+enfuse                   Create an Enfuse executable.
+
+man                      Create the manual pages for Enblend and
+                         Enfuse.
+
+install                  Install everything in the proper places.
+
+package                  Create package(s) specified with the
+                         CPACK_BINARY_&lt;SYSTEM&gt;:BOOL parameter of
+                         CMake.  It is preferred to create a package
+                         and use the package manager to install it
+                         rather than using the "install" target.
+
+rebuild_cache            In a changed environment (e.g. newly
+                         installed packages) this is the way to
+                         discard cached values, so that CMake again
+                         starts searching for everything.
+
+package_source           Build a source package like autotools
+                         "make dist".
+
+
+* Extra Make(1) Variables
+
+** Compilation
+
+You can override Makefile variables the usual way.  In addition the
+build process supplies several variables, all starting with "EXTRA",
+that add their value to the "usual suspects".  These are
+
+        CPPFLAGS  --  EXTRACPPFLAGS
+        CFLAGS    --  EXTRACFLAGS
+        CXXFLAGS  --  EXTRACXXFLAGS
+        LDFLAGS   --  EXTRALDFLAGS
+
+All these "EXTRA" are intentionally unaffected by the
+Automake/Autoconf generation of the Makefiles proper.  That way
+developers can override configured settings in any make(1) run or
+quickly build the project with new combinations of flags.
+
+For example, to quickly add an additional define, use
+        make EXTRACPPFLAGS=-DDEBUG_8BIT_ONLY
+To compile for coverage analysis, say
+        make EXTRACXXFLAGS="-O0 --coverage" EXTRALDFLAGS="--coverage"
+analogously for profiling analysis
+        make EXTRACXXFLAGS=-pg EXTRALDFLAGS=-pg
+
+
+** Documentation Generation
+
+We have introduced the variable
+        DYNAMIC_TEX_PREAMBLE
+to give the maintainers and packagers better control over the
+generation of the documentation.  The contents of the variable goes
+_before_ `\documentclass' so that even the document class can be
+selected dynamically.
+
+DYNAMIC_TEX_PREAMBLE can define the argument-less macros
+`\documentclassoptions' which defines LaTeX \documentclass options
+(thingies within square brackets) and `\finishdynamicpreamble' which
+is expanded right before `\begin{document}' and thus _after_ all
+packages have been loaded.
+
+Some possibilities for `DYNAMIC_TEX_PREAMBLE' are
+        \hyperreftrue
+        \referencemanualtrue
+        \usepackage[showframe]{geometry}
+        \def\documentclassoptions{11pt,twoside}
+        \def\finishdynamicpreamble{\overfullrule=2pt\relax}
+
+
+* Documentation
+
+The distribution includes the manual pages in
+        src/enblend.1
+        src/enfuse.1
+
+After the configuration you can build documentation in PostScript,
+HTML, and possibly PDF formats.
+        make ps
+        make pdf
+        make html
+
+The default paper size for all non-HTML formats is DIN A4.  Override
+make(1) variable `PAPERSIZE' to get e.g. Letter format.  The default
+resolution is 600 dpi; override it with `PRINT_RESOLUTION'.  The
+_printed_ versions can be formatted in two different styles: the usual
+LaTeX `report' and `refman' style that borrows from old reference
+manuals.  Pass
+        DYNAMIC_TEX_PREAMBLE=\referencemanualtrue
+to make(1) when generating a non-HTML format to get the `refman'
+style.  The reference manual style does _not_ work with HTML, in other
+words, hevea(1) will barf.  By default only PDFLaTeX turns on
+HyperRef, for all other translators (in particular if PDF is
+indirectly generated) it must be enabled with
+        DYNAMIC_TEX_PREAMBLE=\hyperreftrue
+
+
+** HTML Generation
+
+The default target `html' builds the HTML documentation as monolithic
+files, which means the single HTML file "enblend.html" for Enblend and
+"enfuse.html" for Enfuse.  To build split versions with one chapter
+per file of each of them use the target `split-html', where the root
+files will be `enblend-index.html' and `enfuse-index.html' .  Install
+the broken-down version with `install-split-html'.
+
+
+** PDF Generation
+
+The canonical way to reach at PDF files i.e.
+        make pdf
+is directly, via PDFLaTeX: LaTeX -&gt; PDF.  If for some reason this path
+does not work, we provide two alternatives.
+
+
+*** Alternative 1: LaTeX -&gt; DVI -&gt; PDF
+
+Use dvipdfmx(1) to convert the final DVI files to PDF.  It is
+recommended to issue a
+        make clean
+before starting to construct the PDF files this way!  Add the
+following commands to DYNAMIC_TEX_PREAMBLE:
+    - To get correctly positioned graphics
+        \PassOptionsToPackage{dvipdfmx}{graphicx}
+    - For all the hyperref goodies (e.g. clickable cross refferences)
+        \PassOptionsToPackage{dvipdfmx}{hyperref}\hyperreftrue
+    - To get the right color associations
+        \PassOptionsToPackage{dvipdfmx}{color}
+Sometimes
+        EXTRA_LATEX_FLAGS='-shell-escape'
+may be required.  The targets are called "enblend.dvi.pdf" and
+"enfuse.dvi.pdf", rename the products if necessary.  See
+doc/Makefile.am for details.
+
+
+*** Alternative 2: LaTeX -&gt; DVI -&gt; PostScript -&gt; PDF
+
+Use GhostScript (gs(1)) in the incarnation of ps2pdf(1) to convert the
+final PostScript files to PDF.  None of the hyperref goodies makes it
+through dvips(1).  The targets are called "enblend.ps.pdf" and
+"enfuse.ps.pdf"; rename if necessary; see doc/Makefile.am for details.
+
+
+** Required Tools For Building the Documentation
+
+Note that some additional packages are required to build these
+formats:
+        convert            - ImageMagick's swiss army knife of graphics
+                             format conversion found at
+                             http://www.imagemagick.org/.
+        dvips              - Convert TeX's DVI format to PostScript.
+        gnuplot            - Render plots (.gp) in text, PNG, EPS, and PDF
+                             formats.  Check out http://www.gnuplot.info/.
+        hevea              - Convert LaTeX to HTML.  Find more information
+                             at http://hevea.inria.fr/.
+        latex, pdflatex    - Typeset the LaTeX documents in DVI or PDF.
+        makeindex          - Index generation for several typesetters.
+        dot                - Graph generation.  Part of the `GraphViz' suite.
+                             See http://www.graphviz.org/.
+        rsvg-convert       - Convert SVG to a variety of other formats, not
+                             only raster images, but also EPS.
+                             Check out http://librsvg.sourceforge.net/.
+
+The tool texloganalyser(1) is optional.  Its sole use is to beautify
+LaTeX output in non-verbose (V=0) mode.
+
+
+* Operating System Specific Instructions and Hints
+
+** GNU/Linux
+
+*** High-Performance Binaries
+
+To configure and compile high-performance versions of Enblend and
+Enfuse configure SMP boxes with
+        --enable-openmp
+and pass
+        EXTRACXXFLAGS="-march=native -O2"
+to make(1).  The resulting binaries are pretty fast, although other
+configuration options or compiler flags might improve their
+performance even more.
+
+
+*** Xmi and Xi
+
+To avoid direct linkage to the two X11 libraries Xmi and Xi add
+"--without-x" to the parameters of configure(1).
+
+
+** MacOSX
+
+*** Compiling on MacOSX
+
+On MacOSX you can build Enblend/Enfuse with Fink and with MacPorts.
+This README only describes the MacPorts way.
+
+
+**** Prerequisites
+
+- XCode: Install the XCode version for your MacOSX version.  Download it
+  from
+          http://developer.apple.com/tools/download/
+
+- MacPorts: Install MacPorts for your MacOSX version.  Download it
+  from
+          http://www.macports.org/
+
+
+**** Provide necessary dependencies
+
+From the command line:
+
+    $ sudo port install make lcms jpeg tiff libpng OpenEXR mercurial
+
+Note that Enblend/Enfuse can be build via AutoConf/AutoMake and via
+CMake.  The latter is experimental.  If you want to build via CMake,
+add "cmake" to the previous command line after "mercurial" like this:
+
+    $ sudo port install make lcms jpeg tiff libpng OpenEXR mercurial cmake
+
+
+**** Compile
+
+As MacPorts resides in /opt/local, which is not a standard
+library/binary/include path for most source packages, you need to
+specify that during the configure step.
+
+Via AutoConf/AutoMake:
+
+    cd enblend
+    make --makefile=Makefile.scm
+    mkdir build
+    cd build
+    CPPFLAGS=-I/opt/local/include LDFLAGS=-L/opt/local/lib ../configure
+    make
+    sudo make install
+
+
+Via CMake:
+
+    cd enblend
+    make --makefile=Makefile.scm
+    mkdir build
+    cd build
+    CPPFLAGS=-I/opt/local/include LDFLAGS=-L/opt/local/lib cmake ..
+    make
+    sudo make install
+
+This will install Enblend/Enfuse in /usr/local.
+
+
+**** Other compilation options
+
+Please also check the AutoConf/AutoMake and CMake variables for more
+build options.
+
+
+** Win
+
+*** General
+
+There are two different archives: one with 32-bit executables, the
+other one with 64-bit executables. Both variants are compiled with
+multi-threaded support (via OpenMP).
+
+
+*** Compiling on Windows
+
+**** Prerequisites
+
+You will need to following tools for compiling:
+
+- MS Visual C++ 2015, works also with Community Edition
+  (older compiler may work, but have not been tested)
+- CMake, at least version 2.8
+- Perl, e.g. ActiveState Perl
+
+CMake expects all sources and libraries in one folder.  So, create a
+folder, e.g., "d:\src", extract Enblend/Enfuse into this folder, and
+also put all libraries into this folder.
+
+You need the following libraries for reading and writing different
+image formats.  We state the version and the folder name of the
+libraries used as of March 2016 in square brackets.
+
+- libtiff  [libtiff-4.0.6 in tiff]
+- zlib, required by libtiff  [1.2.8 in zlib]
+- libjpeg (optional)  [jpeg-9b]
+- libpng (optional)  [libpng-1.6.21 in libpng]
+- OpenEXR and IlmBase (optional), compiled libraries are
+  expected in folder "Deploy"  [OpenEXR-2.2.0 and IlmBase-2.2.0]
+- vigra, required, should be compiled against same
+  libtifff, libjpeg, libpng and OpenEXR as used for Enblend/Enfuse
+  [1.10.0 in vigra]
+
+Enblend/Enfuse also depend on the following libraries:
+
+- Little-CMS2  [2.4 in lcm2-2.4]
+
+
+**** Compile
+
+1. Start cmake-gui or cmake-setup.
+2. Enter path to Enblend/Enfuse source in "Where is the source code".
+3. Enter path where to build the executable,
+   e.g. "d:\src\build-enblend".  In following, it will be denoted as
+   &lt;BUILDDIR&gt;.
+4. Select "Configure" when asked for a generator select the
+   appropriate generator.
+5. Activate the appropriate options.
+
+
+***** ENABLE_OPENMP=on/OFF
+
+Parallelize parts of Enblend and Enfuse with OpenMP.  See
+        http://www.openmp.org/
+
+If OpenMP support has been enabled, the utilization of special
+features of the actual, underlying OpenMP implementation can be
+controlled as usual with the environment variables OMP_NUM_THREADS,
+OMP_NESTED and OMP_DYNAMIC.  See the OpenMP specification for details
+on the usage of these variables.
+
+
+***** ENABLE_SSE2=on/OFF
+
+Creates executable which make use of the advanced features (SSE2) of
+modern processors.
+
+
+***** DOC=on/OFF
+
+Building the documentation works also on Windows.  It requires more
+tools (see above).  Some tools have several different variants for
+Windows available, but not all work with Enblend/Enfuse documentation.
+If you experience errors try another variant or version.
+
+
+**** Compile (cont.)
+
+ 6. Select "Configure".  Maybe you need start the configuration step
+    several times until all dependencies are resolved.
+ 7. Select "Generate".
+ 8. Close CMake.
+ 9. Open solution file &lt;BUILDDIR&gt;\enblend.sln.
+10. Select "Release" in Solution Configuration pull-down menu, and
+    then choose Build &gt; Build Solution.  This step takes some time.
+11. Select project "INSTALL" in Solution Explorer, and then choose
+    Build &gt; Project Only &gt; Build Only INSTALL.
+12. Close Visual C++ 2008 Express Edition
+13. Find the generated executables in &lt;BUILDDIR&gt;\INSTALLDIR\FILES.
+
+
+* License
+
+Enblend is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+Enblend is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Enblend; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+
+Local Variables:
+mode: outline
+End:
+</pre>
+
+
+                    </div>
+                    
+                    
+                </div>
+            
+
+
+
+        </div>
+    </section>
+      
+
+    <footer class="sandiego">
+    <div class="as-row">
+        <div class="footer-wrapper">
+            <nav aria-label="Site Links" role="navigation">
+                <section>
+                    <div class="as-h2">SourceForge</div>
+                    <ul>
+                    
+                        <li><a href="/create/" title="Create a Project">Create a Project</a></li>
+                    
+                        <li><a href="/directory/" title="Open Source Software Directory">Open Source Software</a></li>
+                        <li><a href="/software/" title="Business Software Directory">Business Software</a></li>
+                        
+                            
+                            <li><a href="/top" title="Top Open Source Projects">Top Downloaded Projects</a></li>
+                        
+
+                    </ul>
+                </section>
+            </nav>
+            <nav aria-label="Company Links" role="navigation">
+                <section>
+                    <div class="as-h2">Company</div>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/about/leadership" title="Open Source Software Directory">Team</a></li>
+                        <li class="h-card">
+                            <address>
+                                <span class="p-name p-org">SourceForge Headquarters</span><br>
+                                <span class="p-street-address">225 Broadway Suite 1600</span><br>
+                                <span class="p-locality">San Diego, CA <span class="p-postal-code">92101</span></span><br>
+                                <span class="p-tel">+1 (858) 422-6466</span><br>
+                            </address>
+                        </li>
+                        <li id="social">
+                            
+<span></span>
+<a href="https://twitter.com/sourceforge" class="twitter" rel="nofollow" target="_blank" title="SourceForge on X">
+
+
+<svg  class="vertical-icon-fix" data-name="twitter" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></a>
+<a href="https://fosstodon.org/@sourceforge" rel="me nofollow" target="_blank" title="SourceForge on Mastodon">
+
+
+<svg  class="vertical-icon-fix" data-name="mastodon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg></a>
+<a href="https://www.facebook.com/sourceforgenet/" class="facebook" rel="nofollow" target="_blank" title="SourceForge on Facebook">
+
+
+<svg  data-name="facebook" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></a>
+<a href="https://www.linkedin.com/company/sourceforge.net" class="linkedin" rel="nofollow" target="_blank" title="SourceForge on LinkedIn">
+
+
+<svg  data-name="linkedin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></a>
+
+<span></span>
+                        </li>
+                    </ul>
+                </section>
+            </nav>
+             <nav aria-label="Resources Links" role="navigation">
+                <section>
+                    <div class="as-h2">Resources</div>
+                    <ul>
+                        
+                            <li><a href="/support" title="Support Section">Support</a></li>
+                            <li><a href="/p/forge/documentation/Docs%20Home/" title="Site Documentation">Site Documentation</a></li>
+                        
+                        <li><a href="https://fosstodon.org/@sourceforgestatus" title="Site Status" rel="me nofollow">Site Status</a></li>
+                        <li><a href="/reviews" title="Reviews" rel="me nofollow">SourceForge Reviews</a></li>
+
+                    </ul>
+                </section>
+            </nav>
+            <section class="footer-logo">
+                <a href="/" title="Home" class="sf-logo">
+                    
+    
+    <img src="https://a.fsdn.com/con/images/sandiego/sf-logo-full.svg"  alt="SourceForge logo" class="sf-logo-full"/>
+                </a>
+            </section>
+        </div>
+    </div>
+    <section class="l-nav-bottom">
+        <nav class="row">
+            
+                
+            
+        
+    <div class="columns small-12 large-6 copyright-notice">
+        &copy; 2025 Slashdot Media. All Rights Reserved.
+    </div>
+    <div class="columns large-6 links links-right">
+        
+
+    
+    
+
+    
+    <a href="https://slashdotmedia.com/terms-of-use" target="_blank" title="Terms" rel="nofollow">Terms</a>
+    <a href="https://slashdotmedia.com/privacy-statement/" target="_blank" title="Privacy" rel="nofollow">Privacy</a>
+    
+
+    
+    
+    
+        
+        <a href="#" title="Privacy Choices" id="privacy-choices" class="btn-privay-choices">Privacy Choices</a>
+    
+
+    
+
+    
+        <a href="https://slashdotmedia.com/contact/" target="_blank" title="Advertise" rel="nofollow">Advertise</a>
+    
+    </div>
+        </nav>
+    </section>
+
+    </footer>
+    
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div id="messages">
+    
+</div>
+
+
+    <!-- ew:body_js -->
+
+
+    <script type="text/javascript" src="https://a.fsdn.com/allura/nf/1735922276/_ew_/_slim/js?href=allura%2Fjs%2Fjquery.notify.js%3Ballura%2Fjs%2Fjquery.tooltipster.js%3Ballura%2Fjs%2Fallura-base.js%3Ballura%2Fjs%2Fchecklist.js%3Ballura%2Fjs%2Fadmin_modal.js%3Bjs%2Fjquery.lightbox_me.js%3Ballura%2Fjs%2Fmemorable.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fshared.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fsticky.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fsandiego%2Fchrome.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fsandiego%2Futilities.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.core.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.util.mediaQuery.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.util.keyboard.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.util.box.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.util.nest.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.dropdownMenu.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.offcanvas.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.toggler.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fsandiego%2Fproject.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Fjquery.typeahead.min.js"></script>
+
+    
+<!-- /ew:body_js -->
+
+
+
+    <!-- ew:body_js_tail -->
+
+
+    <script type="text/javascript" src="https://a.fsdn.com/allura/nf/1735922276/_ew_/_slim/js?href=theme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.util.triggers.min.js%3Btheme%2Fsftheme%2Fjs%2Fsftheme%2Fvendor%2Ffoundation6%2Fplugins%2Ffoundation.reveal.min.js"></script>
+
+    
+<!-- /ew:body_js_tail -->
+
+
+
+<script type="text/javascript">(function() {
+  $('#access_urls .btn').click(function(evt){
+    evt.preventDefault();
+    var parent = $(this).parents('.btn-bar');
+    var checkout_cmd = $(this).attr('data-url');
+    $(parent).find('input').val(checkout_cmd);
+    $(parent).find('span').text($(this).attr('title')+' access');
+    $(this).parent().children('.btn').removeClass('active');
+    $(this).addClass('active');
+    if (checkout_cmd.indexOf(' http://') !== -1 || checkout_cmd.indexOf(' https://') !== -1 ) {
+      $('#http-2fa-msg').show();
+    } else {
+      $('#http-2fa-msg').hide();
+    }
+  });
+  $('#access_urls .btn').first().click();
+
+  
+  var repo_status = document.getElementById('repo_status');
+  // The repo_status div will only be present if repo.status != 'ready'
+  if (repo_status) {
+    $('.spinner').show()
+    var delay = 500;
+    function check_status() {
+        $.get('/p/enblend/code/status', function(data) {
+            if (data.status === 'ready') {
+                $('.spinner').hide()
+                $('#repo_status h2').html('Repo status: ready. <a href="." rel="nofollow">Click here to refresh this page.</a>');
+            }
+            else {
+                $('#repo_status h2 span').html(data.status);
+                if (delay < 60000){
+                    delay = delay * 2;
+                }
+                window.setTimeout(check_status, delay);
+            }
+        });
+    }
+    var status_checker = window.setTimeout(check_status, delay);
+    
+  }
+}());
+</script>
+
+
+    
+
+
+    
+    
+    <script>
+        $(document).foundation();
+    </script>
+    
+
+
+
+
+
+
+
+
+    
+
+<!-- CCM Tag -->
+<script>
+    (function () {
+        bizx.cmp.ifConsent({ purposes: 'all', vendors: 'bombora'}, function () {
+            /*global _ml:true, window */
+            _ml = window._ml || {};
+            _ml.eid = '771';
+            _ml.fp = 'dd498f37-0afa-4ca6-a92b-6b7fb3a5e093';  
+            var s = document.getElementsByTagName('script')[0], cd = new Date(), mltag = document.createElement('script');
+            mltag.type = 'text/javascript';
+            mltag.async = true;
+            mltag.defer = true;
+            mltag.src = '//ml314.com/tag.aspx?' + cd.getDate() + cd.getMonth() + cd.getFullYear();
+            s.parentNode.insertBefore(mltag, s);
+        });
+    })();
+</script>
+<!-- End CCM Tag -->
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".tooltip, .m-tooltip").each(function(){
+            let $el = $(this);
+            $el.tooltipster({
+                animation: 'fade',
+                delay: 200,
+                theme: 'tooltipster-light',
+                trigger: 'hover',
+                position: $el.data('position') || 'right',
+                iconCloning: false,
+                maxWidth: 300,
+                contentAsHTML: true,
+                interactive: true
+            }).focus(function () {
+                $(this).tooltipster('show');
+            }).blur(function () {
+                $(this).tooltipster('hide');
+            });
+        });
+    });
+</script>
+
+    
+
+
+
+<script type="text/javascript">
+    bizx.cmp.ifConsent({ purposes: ['storage', 'measurement'], vendors: 'google-analytics'}, function () {
+        /* jshint ignore:start */
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        /* jshint ignore:end */
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ window.dataLayer.push(arguments); }
+        window.gtag = window.gtag || gtag;
+        bizx.cmp.embedScript("https://www.googletagmanager.com/gtag/js");
+        gtag('js', new Date());
+        gtag('set', {
+            'page_location': 'https://sourceforge.net/p/enblend/code/ci/80b879499ff6e7434cadebaf31224d277408ab85/tree/',
+        });
+    });
+</script>
+<script>
+        function gam(id){
+            bizx.cmp.ifConsent({ purposes: 'all', vendors: 'google-ads'}, function () {
+                bizx.cmp.embedScript(`https://pagead2.googlesyndication.com/pagead/js/pcd.js?${id}`,
+                    true,  // async
+                    'head', // location
+                    null, // callback
+                    false, // defer
+                    {id: `google-pcd-tag-${id}`, 'data-audience-pixel': 'dc_iu=/41014381/DFPAudiencePixel;dc_seg=' + id});
+            });
+        }
+
+        
+            gam("8901705213");gam("8901712041");</script>
+
+<script type="text/javascript">
+    /*global ga, gtag */
+
+    
+        
+        bizx.cmp.ifConsent({ purposes: ['storage', 'measurement'], vendors: 'google-analytics'}, function () {
+            gtag('config', 'G-1H226E4E4L', {
+                
+                send_page_view: false,
+                'SF_Page_Type': '', 
+                user_properties: {
+                    'SF_Logged_in': 'Logged Out', 
+                },
+                'devicePixelRatio': SF.devicePixelRatio, 
+            });
+            gtag('event', 'page_view', { send_to: 'G-1H226E4E4L' });
+        });
+    
+    
+    
+        
+</script>
+
+</body>
+</html>

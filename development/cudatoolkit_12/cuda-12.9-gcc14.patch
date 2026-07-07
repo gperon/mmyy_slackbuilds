@@ -1,0 +1,24 @@
+--- a/targets/x86_64-linux/include/cuda_fp4.hpp	2026-07-05 20:08:31.447571434 +0200
++++ b/targets/x86_64-linux/include/cuda_fp4.hpp	2026-07-06 18:37:09.585317420 +0200
+@@ -104,7 +104,7 @@
+ 
+ __CUDA_HOSTDEVICE_FP4_DECL__ __nv_fp4_storage_t
+ __nv_cvt_double_to_fp4(const double x,
+-                       const __nv_fp4_interpretation_t fp4_interpretation,
++                       const __nv_fp4_interpretation_t /*fp4_interpretation*/,
+                        const enum cudaRoundMode rounding) {
+     unsigned char res;
+     unsigned long long int xbits;
+@@ -329,10 +329,10 @@
+ 
+ __CUDA_HOSTDEVICE_FP4_DECL__ __half2_raw
+ __nv_cvt_fp4x2_to_halfraw2(const __nv_fp4x2_storage_t x,
+-                           const __nv_fp4_interpretation_t fp4_interpretation);
++                           const __nv_fp4_interpretation_t /*fp4_interpretation*/);
+ __CUDA_HOSTDEVICE_FP4_DECL__ __half_raw
+ __nv_cvt_fp4_to_halfraw(const __nv_fp4_storage_t x,
+-                        const __nv_fp4_interpretation_t fp4_interpretation) {
++                        const __nv_fp4_interpretation_t /*fp4_interpretation*/) {
+     __half_raw res;
+     res.x = 0U;
+ #if (__CUDA_FP8_INTERNAL_CAN_RELY_ON_PTX_FOR_SHORTTYPESCVT__)

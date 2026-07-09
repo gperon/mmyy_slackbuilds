@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+        |-----handy-ruler------------------------------------------------------|
+cudnn_12: cudnn_12 (Deep Neural Network library)
+cudnn_12:
+cudnn_12: NVIDIA CUDA Deep Neural Network library (cuDNN) is a
+cudnn_12: GPU-accelerated library of primitives for deep neural networks.
+cudnn_12: cuDNN provides highly tuned implementations for standard routines,
+cudnn_12: such as forward and backward convolution, attention, matmul,
+cudnn_12: pooling, and normalization.  
+cudnn_12:
+cudnn_12: Homepage: https://developer.nvidia.com/cuDNN
+cudnn_12:
+cudnn_12:

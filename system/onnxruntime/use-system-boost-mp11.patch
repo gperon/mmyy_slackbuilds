@@ -1,0 +1,13 @@
+diff --git a/cmake/external/onnxruntime_external_deps.cmake b/cmake/external/onnxruntime_external_deps.cmake
+index be0abc980bd..5efb46bea7e 100644
+--- a/cmake/external/onnxruntime_external_deps.cmake
++++ b/cmake/external/onnxruntime_external_deps.cmake
+@@ -281,7 +281,7 @@ onnxruntime_fetchcontent_declare(
+ onnxruntime_fetchcontent_makeavailable(date)
+ 
+ if(NOT TARGET Boost::mp11)
+-  if(onnxruntime_USE_VCPKG)
++  if(TRUE)
+      find_package(Boost REQUIRED)
+      message(STATUS "Aliasing Boost::headers to Boost::mp11")
+      add_library(Boost::mp11 ALIAS Boost::headers)

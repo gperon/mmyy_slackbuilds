@@ -1,0 +1,237 @@
+#!/bin/bash
+
+# Slackware build script for onnxruntime
+
+# Copyright 2026 Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy 
+
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+cd $(dirname $0) ; CWD=$(pwd)
+
+PRGNAM=onnxruntime
+VERSION=${VERSION:-1.27.0}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
+
+case "$( uname -m )" in
+  i?86) ARCH=i686 ;;
+  arm*) ARCH=arm ;;
+     *) ARCH=$( uname -m ) ;;
+esac
+
+if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
+  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  exit 0
+fi
+
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i586" ]; then
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+  LIBDIRSUFFIX=""
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+elif [ "$ARCH" = "aarch64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+  LIBDIRSUFFIX="64"
+else
+  SLKCFLAGS="-O2"
+  LIBDIRSUFFIX=""
+fi
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+mkdir -p external
+cd external
+for f in abseil-cpp-20250814.0 tensorboard-373eb09e4c5d2b3cc2493f0949dc4be6b6a45e81 re2-2024-07-02 flatbuffers-23.5.26 cutlass-4.4.2 onnx-1.21.0; do
+    tar xvf $CWD/$f.tar.gz
+done
+cd -
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
+
+#
+# Here some fix from Arch taken as they are...
+#
+# Nuke -Werror flags
+find cmake/ -type f -name "*.cmake" -exec sed -i 's/-Werror//g' {} +
+find "external/abseil-cpp-20250814.0" -type f \( -name "*.cmake" -o -name "CMakeLists.txt" \) -exec sed -i 's/-Werror//g' {} +
+
+patch -Np1 -i "$CWD/$PRGNAM-system-dnnl.patch"
+# force CMAKE version on DNNL compilation
+sed -i 's/CMAKE_ARGS -DDNNL_BUILD_TESTS=OFF/CMAKE_ARGS -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DDNNL_BUILD_TESTS=OFF/g' cmake/external/dnnl.cmake
+
+patch -Np1 -i "$CWD/$PRGNAM-install-orttraining-files.patch"
+patch -Np1 -i "$CWD/$PRGNAM-system-flatbuffers.patch"
+
+# Fix build with abseil 20250814; see https://github.com/microsoft/onnxruntime/issues/25815
+sed -i '/^absl::low_level_hash$/d' cmake/external/abseil-cpp.cmake
+
+# Fix thrust and cub API usage
+patch -p1 -i "$CWD/fix-thrust-api.patch"
+
+# Use mp11 from system boost
+patch -p1 -i "$CWD/use-system-boost-mp11.patch"
+
+# Work around the CUDA 13.3 cudafe++ regression that mis-parses CCCL's
+# global-qualified partial specializations. Backported from upstream commit
+# 40b76e7ba36 ("Fix Linux CUDA 13.3 build (abseil + CCCL parse errors)").
+patch -p1 -i "$CWD/$PRGNAM-cuda13-cccl-header-fix.patch"
+
+# Remove pkg_resources use
+patch -p1 -i "$CWD/$PRGNAM-remove-pkg_resources.patch"
+
+# Fix CUDA training-op build against the new SoftMaxComputeHelper signature
+# (cudaStream_t instead of onnxruntime::Stream*); see upstream commit
+# 879f65911a8 which updated softmax.cc but not the orttraining loss kernels.
+patch -p1 -i "$CWD/$PRGNAM-cuda-softmax-stream.patch"
+
+# Drop the distributed ShardedMoE CUDA op. v1.27.0's MoE refactor removed
+# contrib_ops/cuda/moe/ft_moe/moe_kernel.h (kernels moved to
+# contrib_ops/cuda/llm/moe_gemm/) but left sharded_moe.{h,cc} #including it,
+# breaking the build whenever NCCL is enabled. See upstream issue.
+patch -p1 -i "$CWD/$PRGNAM-drop-sharded-moe.patch"
+
+# Fix abseil member alias template parse/instantiation errors with the
+# CUDA 13.3 host front-end and recent GCC. Hoists IfRRef<...>::AddPtr<...>
+# to a top-level IfRRefAddPtr<...> alias template. Backported from upstream
+# commit 40b76e7ba36; see https://github.com/abseil/abseil-cpp/issues/2075
+cd "external/abseil-cpp-20250814.0"
+patch -p1 -i "$CWD/$PRGNAM-abseil-cuda13-member-template.patch"
+cd -
+
+# onnxruntime consumes the cutlass source tree (include + examples + tools)
+# directly via FetchContent, so the binary cutlass-headers package cannot
+# satisfy it; we provide the pinned cutlass source instead. The PATCH_COMMAND
+# onnxruntime would normally run is skipped when FETCHCONTENT_SOURCE_DIR is
+# set, so apply onnxruntime's cutlass 4.4.2 patch here.
+cd "external/cutlass-4.4.2"
+patch -p1 -i "$CWD/$PRGNAM-cutlass-4.4.2.patch"
+cd -
+
+# Build onnx from the pinned source (cmake/deps.txt v${_onnx_ver}) instead of
+# the system onnx package. onnx ships no generated onnx.pb.h; that ABI is
+# realized at build time against the current protobuf/abseil, so a system
+# onnx rebuilt against a newer toolchain than onnxruntime's bundled abseil
+# produces undefined-symbol link failures. Vendoring keeps the ABI matched.
+# As with cutlass, FETCHCONTENT_SOURCE_DIR makes onnxruntime skip its
+# PATCH_COMMAND, so apply onnxruntime's onnx patch here.
+cd "external/onnx-1.21.0"
+patch -p1 -i "$TMP/$PRGNAM-$VERSION/cmake/patches/onnx/onnx.patch"
+cd -
+
+patch -p1 -i "$CWD/onnxruntime-cuda12.9-nvcc68-69.patch"
+
+#VALID_SM="75-real;80-real;86-real;87-real;88-real;89-real;90-real;100-real;103-real;110-real;120-real;121-real;121-virtual"
+#-DCMAKE_CUDA_ARCHITECTURES="$VALID_SM" \
+export CC=/opt/gcc14-14.3.0/bin/gcc
+export CXX=/opt/gcc14-14.3.0/bin/g++
+export CUDAHOSTCXX=/opt/gcc14-14.3.0/bin/g++
+#export CMAKE_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+# Silence template parsing errors
+SLKCFLAGS+=" -Wno-template-body -Wno-error=unused-variable -Wno-error=unused-result -Wno-error=maybe-uninitialized -Wno-error=unused-parameter" 
+SLKCFLAGS+=" -I/opt/cuda-12.9/targets/x86_64-linux/include"
+# Fix gcc 16 with absl 20260526
+export CUDAFLAGS+=" -Xcompiler -Wno-error=template-body --diag-suppress=68 -Wno-error=unused-parameter"
+# arch that works for me :)
+CUDA_ARCHITECTURES="61;75" 
+# For LTO everything needs to be compiled with the gcc version of CUDA
+#export CXX="$NVCC_CCBIN"
+#export CC="${NVCC_CCBIN/g++/gcc}"
+#echo "Build onnxruntime with CUDA without optimization"
+echo "Build onnxruntime with CUDA with AVX optimizations"
+echo 'string(APPEND CMAKE_C_FLAGS " -march=haswell")' >> cmake/adjust_global_compile_flags.cmake
+echo 'string(APPEND CMAKE_CXX_FLAGS " -march=haswell")' >> cmake/adjust_global_compile_flags.cmake
+# -DCMAKE_CUDA_ARCHITECTURES="75-real;80-real;86-real;87-real;88-real;89-real;90-real;100-real;103-real;110-real;120-real;121-real;121-virtual" 
+# -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+# -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+cmake -S cmake -B build -Wno-dev -G Ninja \
+ -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+ -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+ -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+ -DCMAKE_INSTALL_PREFIX=/usr \
+ -DCMAKE_INSTALL_LIBDIR=lib${LIBDIRSUFFIX} \
+ -DCMAKE_CUDA_STANDARD_REQUIRED=ON \
+ -DCMAKE_CXX_STANDARD_REQUIRED=ON \
+ -DCMAKE_CUDA_COMPILER=/opt/cuda-12.9/bin/nvcc \
+ -DCMAKE_C_COMPILER=/opt/gcc14-14.3.0/bin/gcc \
+ -DCMAKE_CXX_COMPILER=/opt/gcc14-14.3.0/bin/g++ \
+ -DCMAKE_CUDA_HOST_COMPILER=/opt/gcc14-14.3.0/bin/g++ \
+ -DCMAKE_CUDA_FLAGS_INIT="--compiler-bindir=/opt/gcc14-14.3.0/bin" \
+ -Donnxruntime_NVCC_THREADS=2 \
+ -Donnxruntime_USE_DNNL=ON \
+ -Donnxruntime_USE_CUDA=ON \
+ -Donnxruntime_USE_NCCL=ON \
+ -Donnxruntime_CUDA_HOME=/opt/cuda-12.9 \
+ -Donnxruntime_CUDNN_HOME=/usr \
+ -Donnxruntime_ENABLE_PYTHON=ON \
+ -Donnxruntime_BUILD_SHARED_LIB=ON \
+ -Donnxruntime_BUILD_UNIT_TESTS=OFF \
+ -DBUILD_TESTING=OFF \
+ -Donnxruntime_ENABLE_TRAINING=ON \
+ -Donnxruntime_ENABLE_LAZY_TENSOR=OFF \
+ -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
+ -DFETCHCONTENT_TRY_FIND_PACKAGE_MODE=ALWAYS \
+ -DFETCHCONTENT_SOURCE_DIR_ABSEIL_CPP="external/abseil-cpp-20250814.0" \
+ -DFETCHCONTENT_SOURCE_DIR_TENSORBOARD="external/tensorboard-373eb09e4c5d2b3cc2493f0949dc4be6b6a45e81" \
+ -DFETCHCONTENT_SOURCE_DIR_RE2="external/re2-2024-07-02" \
+ -DFETCHCONTENT_SOURCE_DIR_FLATBUFFERS="external/flatbuffers-23.5.26" \
+ -DFETCHCONTENT_SOURCE_DIR_CUTLASS="external/cutlass-4.4.2" \
+ -DFETCHCONTENT_SOURCE_DIR_ONNX="external/onnx-1.21.0" \
+ -DONNX_CUSTOM_PROTOC_EXECUTABLE=/usr/bin/protoc \
+ -DCMAKE_CXX_STANDARD=20 \
+ -Donnxruntime_USE_FULL_PROTOBUF=OFF \
+ -DCMAKE_CUDA_ARCHITECTURES=$CUDA_ARCHITECTURES \
+ -DCMAKE_CUDA_FLAGS="-Xcompiler -Wno-template-body"
+
+cmake --build build
+DESTDIR="${PKG}" cmake --install build
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+mv *.md LICENSE CODEOWNERS VERSION_NUMBER docs \
+   $PKG/usr/doc/$PRGNAM-$VERSION
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+#cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -c n -l y $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

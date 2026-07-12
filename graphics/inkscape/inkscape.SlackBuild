@@ -70,14 +70,25 @@ cd $TMP
 rm -rf ${PRGNAM}-${VERSION}_${EXTRAVER}
 tar xvf $CWD/${PRGNAM}-${VERSION}.tar.?z*
 cd ${PRGNAM}-${VERSION}_${EXTRAVER}
+
+# Fix build with poppler 26.05
+# https://gitlab.com/inkscape/inkscape/-/merge_requests/7919
+patch -Np1 -i "$CWD/fix_build_with_poppler_26.05.patch"
+
+# Fix build with poppler 26.06
+# https://gitlab.com/inkscape/inkscape/-/work_items/6210#note_3438034571
+patch -Np1 -i "$CWD/fix_build_with_poppler_26.06.patch"
+
+# Fix build with poppler 26.07
+# https://gitlab.com/inkscape/inkscape/-/commit/fc52525f8d8d7d3e772c5bfa1bdfe9b33c7f9709
+patch -Np1 -i "$CWD/fix_build_with_poppler_26.07.patch"
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-
-for i in $CWD/patches/* ; do patch -p1 < $i ; done
 
 # https://bugs.launchpad.net/inkscape/+bug/314381
 # a couple of files have executable bits set,

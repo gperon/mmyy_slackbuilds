@@ -27,12 +27,12 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gcc14
 SRCNAM=gcc
-VERSION=${VERSION:-14.2.0}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-14.3.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
-INSTALL_PATH=${INSTALL_PATH:-/opt/$PRGNAM-$VERSION}
+INSTALL_PATH=${INSTALL_PATH:-/opt/$PRGNAM}
 
 if [ -z "$ARCH" ]; then
   case "$(uname -m)" in
@@ -96,14 +96,9 @@ echo "Building $PRGNAM with languages: ${LANGS}"
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-echo -n "Cleaning work space ... "
 rm -rf $SRCNAM-$VERSION
-echo
-echo -n "Unpacking source tarball ... "
 tar xf $CWD/$SRCNAM-$VERSION.tar.xz
-echo
 cd $SRCNAM-$VERSION
-echo -n "Sanitizing source code - could take a while ... "
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -140,6 +135,7 @@ echo
      --enable-threads=posix \
      --enable-checking=release \
      --enable-objc-gc \
+     --disable-libsanitizer \
      --with-system-zlib \
      --enable-libstdcxx-dual-abi \
      --with-default-libstdcxx-abi=new \
@@ -166,55 +162,56 @@ echo
   # Start the build:
 
   # Include all debugging info (for now):
-  make $NUMJOBS bootstrap || exit 1
+  make bootstrap || exit 1
 
 # Only build gnatlib if ada has been requested
 if [[ "$LANGS" == *"ada"* ]]; then
   ( cd gcc
-    make $NUMJOBS gnatlib GNATLIBCFLAGS="$SLKCFLAGS" || exit 1
+    make gnatlib GNATLIBCFLAGS="$SLKCFLAGS" || exit 1
     # This wants a shared -ladd2line?
     #make gnatlib-shared || exit 1
 
     CFLAGS="$SLKCFLAGS" \
     CXXFLAGS="$SLKCFLAGS" \
-    make $NUMJOBS gnattools || exit 1
+    make gnattools || exit 1
   ) || exit 1
   make info || exit 1
 fi
 
   # Set GCCCHECK=something to run the tests
   if [ ! -z $GCCCHECK ]; then
-    make $NUMJOBS check || exit 1
+    make check || exit 1
   fi
 
   make install DESTDIR=$PKG || exit 1
+  echo "make install DESTDIR=$PKG || exit 1"
 
   # Move gdb pretty printers to the correct place
-  mkdir -p $PKG/$INSTALL_PATH/share/gdb/auto-load/usr/lib$LIBDIRSUFFIX
-  mv $PKG/$INSTALL_PATH/lib$LIBDIRSUFFIX/*-gdb.py \
-    $PKG/$INSTALL_PATH/share/gdb/auto-load/usr/lib$LIBDIRSUFFIX/
+  mkdir -p $PKG$INSTALL_PATH/share/gdb/auto-load/usr/lib$LIBDIRSUFFIX
+  mv $PKG$INSTALL_PATH/lib$LIBDIRSUFFIX/*-gdb.py \
+    $PKG$INSTALL_PATH/share/gdb/auto-load/usr/lib$LIBDIRSUFFIX/
 
   # Be sure the "specs" file is installed.
   if [ ! -r $PKG/usr/lib${LIBDIRSUFFIX}/gcc/${TARGET}/${VERSION}/specs ]; then
-    cat stage1-gcc/specs > $PKG/$INSTALL_PATH/lib${LIBDIRSUFFIX}/gcc/${TARGET}/${VERSION}/specs
+    cat stage1-gcc/specs > $PKG$INSTALL_PATH/lib${LIBDIRSUFFIX}/gcc/${TARGET}/${VERSION}/specs
   fi
 
   # Make our 64bit gcc look for 32bit gcc binaries in ./32 subdirectory:
   if [ "$ARCH" = "x86_64" ]; then
     sed -i 's#;.\(:../lib !m64 m32;\)$#;32\1#' \
-      $PKG/$INSTALL_PATH/lib${LIBDIRSUFFIX}/gcc/${TARGET}/${VERSION}/specs
+      $PKG$INSTALL_PATH/lib${LIBDIRSUFFIX}/gcc/${TARGET}/${VERSION}/specs
   fi
 
   # make ada.install-common DESTDIR=$PKG1 || exit 1
   # make install-gnatlib DESTDIR=$PKG1 || exit 1
   make -i install-info DESTDIR=$PKG || exit 1
 
-  chmod 755 $PKG/$INSTALL_PATH/lib${LIBDIRSUFFIX}/libgcc_s.so.1
+  chmod 755 $PKG$INSTALL_PATH/lib${LIBDIRSUFFIX}/libgcc_s.so.1
 
   # Fix stuff up:
-  ( cd $PKG/$INSTALL_PATH/info ; rm dir ; gzip -9 * )
+  ( cd $PKG$INSTALL_PATH/info ; rm dir ; gzip -9 * )
 
-  ( cd $PKG/$INSTALL_PATH/bin
+  ( cd $PKG$INSTALL_PATH/bin
     mv g++ g++-gcc-$VERSION
     mv gcc gcc-$VERSION
     mv gcc-ar gcc-ar-$VERSION
@@ -264,11 +261,11 @@ fi
     cat $file | sed -e 's%-L/gcc-[[:graph:]]* % %g' > $TMP/tmp-la-file
     cat $TMP/tmp-la-file > $file
   done
-  rm $TMP/tmp-la-file
+  rm -f $TMP/tmp-la-file
 )
 
 # Don't ship .la files in /{,usr/}lib${LIBDIRSUFFIX}:
-rm -f $PKG/{,$INSTALL_PATH/}lib${LIBDIRSUFFIX}/*.la
+rm -f $PKG{,$INSTALL_PATH}/lib${LIBDIRSUFFIX}/*.la
 
 # Strip bloated binaries and libraries:
 ( cd $PKG
@@ -280,8 +277,8 @@ rm -f $PKG/{,$INSTALL_PATH/}lib${LIBDIRSUFFIX}/*.la
   find . | xargs file | grep "shared object" | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null ||true
 )
 
-rm -f $PKG/$INSTALL_PATH/info/dir
-gzip -9 $PKG/$INSTALL_PATH/info/*.info*
+rm -f $PKG$INSTALL_PATH/info/dir
+#gzip -9 $PKG$INSTALL_PATH/info/*.info*
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \

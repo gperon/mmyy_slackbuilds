@@ -1,0 +1,46 @@
+From 131886eba87876964eca589fa3ab4502be27a2ae Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Fri, 16 Jan 2026 23:26:09 +0800
+Subject: [PATCH] skip install python wrapper
+
+---
+ cmake/CMakeLists.txt       | 5 +++++
+ src/ifcwrap/CMakeLists.txt | 2 ++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/cmake/CMakeLists.txt b/cmake/CMakeLists.txt
+index 9e88026ac75..0e73e4d6c6c 100644
+--- a/cmake/CMakeLists.txt
++++ b/cmake/CMakeLists.txt
+@@ -122,6 +122,11 @@ set(PYTHON_MODULE_INSTALL_DIR
+     CACHE PATH
+     "Directory to install IfcPython package to. By default package is installed in found Python's site-packages."
+ )
++set(INSTALL_PYTHON_WRAPPERS
++    OFF
++    CACHE BOOL
++    "Install IfcPython wrapper modules."
++)
+ 
+ # Make sure CMake modules in this project are found first
+ list(PREPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
+diff --git a/src/ifcwrap/CMakeLists.txt b/src/ifcwrap/CMakeLists.txt
+index 47420d98174..792cbd72f17 100644
+--- a/src/ifcwrap/CMakeLists.txt
++++ b/src/ifcwrap/CMakeLists.txt
+@@ -183,6 +183,7 @@ if(Python_Interpreter_FOUND OR PYTHON_MODULE_INSTALL_DIR)
+     if("${python_package_dir}" STREQUAL "")
+         message(WARNING "Unable to locate Python site-package directory, unable to install the Python wrapper")
+     else()
++        if (INSTALL_PYTHON_WRAPPER)
+         message(STATUS "Python wrapper will be installed to '${python_package_dir}'.")
+         file(GLOB_RECURSE sourcefiles "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/*")
+         foreach(file ${sourcefiles})
+@@ -192,6 +193,7 @@ if(Python_Interpreter_FOUND OR PYTHON_MODULE_INSTALL_DIR)
+                 install(FILES "${file}" DESTINATION "${python_package_dir}/ifcopenshell/${dir}")
+             endif()
+         endforeach()
++        endif()
+         install(
+             FILES "${CMAKE_BINARY_DIR}/ifcwrap/ifcopenshell_wrapper.py"
+             DESTINATION "${python_package_dir}/ifcopenshell"

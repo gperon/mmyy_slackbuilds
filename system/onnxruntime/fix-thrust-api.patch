@@ -1,0 +1,91 @@
+diff --git a/orttraining/orttraining/training_ops/cuda/reduction/all_impl.cu b/orttraining/orttraining/training_ops/cuda/reduction/all_impl.cu
+index 638c7d66373..4a312f0043b 100644
+--- a/orttraining/orttraining/training_ops/cuda/reduction/all_impl.cu
++++ b/orttraining/orttraining/training_ops/cuda/reduction/all_impl.cu
+@@ -1,6 +1,11 @@
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+ // Licensed under the MIT License.
+
++#if defined(__CUDACC__)
++// Needed for CUDA_VERSION check below
++#include <cuda.h>
++#endif
++
+ #include "orttraining/training_ops/cuda/reduction/all_impl.h"
+
+ #include <thrust/logical.h>
+@@ -23,7 +28,11 @@ __global__ void assign_false(bool* ptr) {
+
+ template <>
+ void LaunchAllKernel(cudaStream_t stream, const bool* data, const int size, bool* output) {
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 12090
++  if (thrust::all_of(thrust::cuda::par.on(stream), data, data + size, ::cuda::std::identity{})) {
++#else
+   if (thrust::all_of(thrust::cuda::par.on(stream), data, data + size, thrust::identity<bool>())) {
++#endif
+     assign_true<<<1, 1, 0, stream>>>(output);
+   } else {
+     assign_false<<<1, 1, 0, stream>>>(output);
+diff --git a/orttraining/orttraining/training_ops/cuda/tensor/gather_grad_impl.cu b/orttraining/orttraining/training_ops/cuda/tensor/gather_grad_impl.cu
+index acbbe0d94d9..08e1788f357 100644
+--- a/orttraining/orttraining/training_ops/cuda/tensor/gather_grad_impl.cu
++++ b/orttraining/orttraining/training_ops/cuda/tensor/gather_grad_impl.cu
+@@ -4,14 +4,24 @@
+ #pragma warning(disable : 4244)
+ #endif
+
++#if defined(__CUDACC__)
++// Needed for CUDA_VERSION check below
++#include <cuda.h>
++#endif
++
+ #include "orttraining/training_ops/cuda/tensor/gather_grad_impl.h"
+
+ #include <cub/device/device_radix_sort.cuh>
+ #include <cub/device/device_reduce.cuh>
+ #include <cub/device/device_run_length_encode.cuh>
+ #include <cub/device/device_scan.cuh>
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 12090
++#include <thrust/iterator/counting_iterator.h>
++#include <thrust/iterator/discard_iterator.h>
++#else
+ #include <cub/iterator/counting_input_iterator.cuh>
+ #include <cub/iterator/discard_output_iterator.cuh>
++#endif
+
+ #include "core/providers/cuda/cu_inc/common.cuh"
+ #include "core/providers/cuda/shared_inc/accumulation_type.h"
+@@ -60,7 +70,11 @@ void GetSortedIndices(
+   auto dY_indices = allocator.GetScratchBuffer<TIndex>(num_gathered_indices);
+   CopyKernel<<<CeilDiv(num_gathered_indices, GridDim::maxThreadsPerBlock),
+                GridDim::maxThreadsPerBlock, 0, stream>>>(
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 12090
++      dY_indices.get(), thrust::counting_iterator<TIndex>{0}, num_gathered_indices);
++#else
+       dY_indices.get(), cub::CountingInputIterator<TIndex>{0}, num_gathered_indices);
++#endif
+
+   auto dX_indices_sorted = allocator.GetScratchBuffer<TIndex>(num_gathered_indices);
+   auto dY_indices_sorted = allocator.GetScratchBuffer<TIndex>(num_gathered_indices);
+@@ -447,13 +461,21 @@ void Impl(
+     size_t temp_storage_size_bytes = 0;
+     CUDA_CALL_THROW(cub::DeviceRunLengthEncode::Encode(
+         nullptr, temp_storage_size_bytes,
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 12090
++        dX_indices_sorted.get(), thrust::discard_iterator<TIndex>{}, segment_counts.get(),
++#else
+         dX_indices_sorted.get(), cub::DiscardOutputIterator<TIndex>{}, segment_counts.get(),
++#endif
+         num_segments.get(), num_gathered_indices, stream));
+
+     auto temp_storage = allocator.GetScratchBuffer<void>(temp_storage_size_bytes);
+     CUDA_CALL_THROW(cub::DeviceRunLengthEncode::Encode(
+         temp_storage.get(), temp_storage_size_bytes,
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 12090
++        dX_indices_sorted.get(), thrust::discard_iterator<TIndex>{}, segment_counts.get(),
++#else
+         dX_indices_sorted.get(), cub::DiscardOutputIterator<TIndex>{}, segment_counts.get(),
++#endif
+         num_segments.get(), num_gathered_indices, stream));
+
+     // CPU/GPU sync!

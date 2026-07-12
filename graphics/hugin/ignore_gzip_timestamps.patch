@@ -1,0 +1,13 @@
+diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
+index b62cb22..a4d8c0a 100755
+--- a/doc/CMakeLists.txt
++++ b/doc/CMakeLists.txt
+@@ -25,7 +25,7 @@ MACRO(do_pod podfile manfile section)
+       ADD_CUSTOM_COMMAND(
+         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${outfile}.gz"
+         COMMAND ${POD2MAN} --section="${section}" --release="Version: ${HUGIN_PACKAGE_VERSION}" --center=HUGIN  "${CMAKE_SOURCE_DIR}/doc/${podfile}"  "${CMAKE_CURRENT_BINARY_DIR}/${outfile}"
+-	COMMAND ${GZIP} "-f" "${CMAKE_CURRENT_BINARY_DIR}/${outfile}"
++	COMMAND ${GZIP} "-fn" "${CMAKE_CURRENT_BINARY_DIR}/${outfile}"
+         DEPENDS "${CMAKE_SOURCE_DIR}/doc/${podfile}"
+ 	VERBATIM
+       )

@@ -1,0 +1,5 @@
+Qt6 extra packages.
+This is not a standard Slackbuilds script, so use with care.
+The software is retrived from GIT repository.
+This package version must be in sync with Slackware official 
+package qt6.

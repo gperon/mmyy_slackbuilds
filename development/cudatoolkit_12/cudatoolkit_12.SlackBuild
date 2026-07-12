@@ -29,9 +29,9 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=cudatoolkit_12
 FILENAME=cuda
-VERSION=${VERSION:-12.9.1}
+VERSION=${VERSION:-12.9.2}
 DRIVER=${DRIVER:-575.57.08}
-BUILD=${BUILD:-4}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -108,12 +108,17 @@ done
 
 # Add a symlink lib->lib64 as some libraries might expect that (FS#76951)
 ( cd "${PKG}"/opt/"${CPREFIX}" && ln -sr lib64 lib)
+# patch the math_functions.sh for glibc 2.42
+( cd "${PKG}"/opt/"${CPREFIX}" && patch -p1 < $CWD/cuda-12.9-glibc-2.42.patch )
+#( cd "${PKG}"/opt/"${CPREFIX}" && patch -p1 < $CWD/cuda-12.9-gcc14.patch )
 
 # Define compilers for CUDA to use.
 # This allows use of different versions of GCC if necessary
 # (although still locked to compilers available when running this SlackBuild)
-ln -s "$(readlink -f /usr/bin/gcc)" "${PKG}"/opt/"${CPREFIX}"/bin/gcc
-ln -s "$(readlink -f /usr/bin/g++)" "${PKG}"/opt/"${CPREFIX}"/bin/g++
+#ln -s "$(readlink -f /usr/bin/gcc)" "${PKG}"/opt/"${CPREFIX}"/bin/gcc
+#ln -s "$(readlink -f /usr/bin/g++)" "${PKG}"/opt/"${CPREFIX}"/bin/g++
+ln -s "$(readlink -f /opt/gcc14-14.3.0/bin/gcc)" "${PKG}"/opt/"${CPREFIX}"/bin/gcc
+ln -s "$(readlink -f /opt/gcc14-14.3.0/bin/g++)" "${PKG}"/opt/"${CPREFIX}"/bin/g++
 
 # Ensure shared objects are executable
 find $PKG -print0 | xargs -0 file | grep -e "shared object" | grep ELF \
@@ -123,12 +128,10 @@ find $PKG -print0 | xargs -0 file | grep -e "shared object" | grep ELF \
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-
 rm "${PKG}/opt/${CPREFIX}"/targets/x86_64-linux/include/include
 rm "${PKG}/opt/${CPREFIX}"/targets/x86_64-linux/lib/lib64
 rm -rf "${PKG}/opt/${CPREFIX}"/gds-tools
 rm -rf "${PKG}/opt/${CPREFIX}"/gds/usr
-
 
 # Allow newer compilers to work. This is not officially supported - if users want to try, let them try.
 # See https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements
@@ -190,7 +193,6 @@ sed \
   # > $pkg_config_path/nvjitlink-"${SHORT_VERSION}".pc
   rm -rf $PKG/opt/$CPREFIX/pkg-config
 echo
-
 
 # Register application NVVP and NSIGHT (if enabled)
 mkdir -p $PKG/usr/share/applications

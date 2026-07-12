@@ -1,0 +1,16 @@
+PRGNAM="ifcopenshell"
+VERSION="0.8.5_alpha2601161257"
+HOMEPAGE="https://ifcopenshell.org"
+DOWNLOAD="https://github.com/IfcOpenShell/IfcOpenShell/archive/bonsai-0.8.5-alpha2601161257/IfcOpenShell-bonsai-0.8.5-alpha2601161257.tar.gz \
+          https://github.com/svgpp/svgpp/archive/v1.3.1/svgpp-1.3.1.tar.gz \
+          https://github.com/IfcOpenShell/ifc-to-cityjson/archive/a9488c8d8fd1c32eb23118596819ab54225cdfb4/ifc-to-cityjson-a9488c8d8fd1c32eb23118596819ab54225cdfb4.zip \
+          https://github.com/prochitecture/bpypolyskel/archive/v1.1.3/bpypolyskel-1.1.3.tar.gz"
+MD5SUM="3d4aee6f3c9be077dc11efe4a4eb6743 \
+        f220cc86754ed85ffd336411a6476d95 \
+        983c270b46053172480ce63f6825e0e1 \
+        2dca5e72f9a4f94b8182afd33194f6b9"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="hdf5 OpenCASCADE CGAL5"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

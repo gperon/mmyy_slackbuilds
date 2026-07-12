@@ -30,9 +30,8 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=meshlab
-SRCNAM=Meshlab
-VCGLIB=vcglib
-VERSION=${VERSION:-2021.10}
+SRCNAM=MeshLab
+VERSION=${VERSION:-2025.07}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -58,10 +57,8 @@ if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 else
   LIBDIRSUFFIX=""
@@ -73,30 +70,46 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 
-FILENAME=$PRGNAM-$SRCNAM-$VERSION
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$SRCNAM-$VERSION.tar.gz --transform="s#$SRCNAM-$VERSION/#$VERSION/#"
+cd $PRGNAM-$VERSION/src
+tar xvf $CWD/vcglib-$VERSION.tar.gz --transform="s#vcglib-$VERSION/#vcglib/#"
+cd -
+#
+# lot of downloaded libraries
+#
+#mkdir $PRGNAM-$VERSION/{build,src/external/downloads}
+#cd $PRGNAM-$VERSION/src/external/downloads 
+#tar xvf $CWD/nexus-2025.05.tar.gz
+#cd -
+#cd $PRGNAM-$VERSION/src/external/downloads/nexus-2025.05/src
+#tar xvf $CWD/corto-$VERSION.tar.gz --transform="s#corto-$VERSION/#corto/#"
+#cd -
 
-rm -rf $FILENAME
-tar xvf $CWD/$FILENAME.tar.gz
-cd $FILENAME/src
-tar xvf $CWD/$VCGLIB-$VERSION.tar.gz --transform="s#$VCGLIB-$VERSION/#$VCGLIB/#"
-cd ..
-chown -R root:root .
-find -L . \
+chown -R root:root $PRGNAM-$VERSION
+find -L $PRGNAM-$VERSION \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
-  -o -perm 511 \) -exec chmod 755 {} \+ -o \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
-  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir -p build
+cd $PRGNAM-$VERSION
+patch -p1 < $CWD/lib3mf.patch
 cmake \
   -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-  -DALLOW_SYSTEM_QHULL=OFF \
+  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
   -DCMAKE_INSTALL_PREFIX=/usr \
+  -DMESHLAB_LIB_INSTALL_DIR=/usr/lib$LIBDIRSUFFIX/$PRGNAM \
+  -DMESHLAB_PLUGIN_INSTALL_DIR=/usr/lib$LIBDIRSUFFIX/$PRGNAM/plugins \
+  -DCMAKE_BUILD_TYPE=Release \
   -G Ninja \
   -B ./build \
   -S ./src
-# shellcheck disable=SC2046 # allow MAKEFLAGS to split when passing multiple flags.
+
+sed -i -e 's/exec_program/execute_process/' src/external/downloads/libE57Format-3.1.1/cmake/Tags.cmake
+# Fix gcc:13 build
+sed -i '1 i\#include <cstdint>' .src/external/downloads/{nexus-2025-05/src/corto/include/corto/tunstall.h,libE57Format-2.3.0/include/E57Format.h}
 DESTDIR=$PKG "${NINJA:=ninja}" $(grep -oP -- '-+[A-z]+ ?[0-9]*'<<<"${MAKEFLAGS:--j1}") -C "./build" install
 
 # fix plugin folder
@@ -119,11 +132,6 @@ if [ -d $PKG/usr/man ]; then
   for i in $(find . -type l) ; do ln -s $(readlink $i).gz $i.gz ; rm $i ; done
   ) 
 fi
-
-# fix version in desktop entry
-#sed -i "s#Version=.*#Version=$VERSION#" $PKG/usr/share/applications/$PRGNAM.desktop
-# 20220227 bkw: wrong. Version in a .desktop file is the version of the
-# desktop file specification (usually 1.0), not the version of the application.
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \

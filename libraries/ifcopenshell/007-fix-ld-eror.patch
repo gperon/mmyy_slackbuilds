@@ -1,0 +1,19 @@
+From b1f338eb552a15cb2182ff0c57d2b7575d35237b Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Sat, 17 Jan 2026 12:48:39 +0800
+Subject: [PATCH] fix ld error
+
+---
+ src/ifcgeom/Serialization/schema/CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/ifcgeom/Serialization/schema/CMakeLists.txt b/src/ifcgeom/Serialization/schema/CMakeLists.txt
+index 9bb5a961ab4..8fe32b3bc46 100644
+--- a/src/ifcgeom/Serialization/schema/CMakeLists.txt
++++ b/src/ifcgeom/Serialization/schema/CMakeLists.txt
+@@ -7,3 +7,5 @@ foreach(schema ${SCHEMA_VERSIONS})
+     )
+     list(APPEND geometry_serializer_libraries geometry_serializer_ifc${schema})
+ endforeach()
++
++set(geometry_serializer_libraries ${geometry_serializer_libraries} PARENT_SCOPE)

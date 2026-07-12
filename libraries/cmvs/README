@@ -1,0 +1,3 @@
+This software (CMVS) takes the output of a structure-from-motion (SfM)
+software as input, then decomposes the input images into a set of image
+clusters of managable size. 

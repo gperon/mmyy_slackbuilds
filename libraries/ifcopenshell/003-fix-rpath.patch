@@ -1,0 +1,37 @@
+From 6829c88606b0b558d7023dbc63acd1c490d49a27 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Fri, 16 Jan 2026 23:30:36 +0800
+Subject: [PATCH] fix rpath
+
+fix insecure rpath for python wrapper
+---
+ cmake/FindOpenCOLLADA.cmake | 2 +-
+ src/ifcwrap/CMakeLists.txt  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/FindOpenCOLLADA.cmake b/cmake/FindOpenCOLLADA.cmake
+index f261f51e7df..a72c736be10 100644
+--- a/cmake/FindOpenCOLLADA.cmake
++++ b/cmake/FindOpenCOLLADA.cmake
+@@ -43,7 +43,7 @@ if(NOT OpenCOLLADA_DIR)
+         find_library(
+             OPENCOLLADA_FRAMEWORK_LIB
+             NAMES OpenCOLLADAFramework
+-            PATHS /usr/lib64/opencollada /usr/lib/opencollada /usr/lib64 /usr/lib /usr/local/lib64 /usr/local/lib
++            PATHS /usr/lib/opencollada /usr/lib64/opencollada /usr/lib64 /usr/lib /usr/local/lib64 /usr/local/lib
+         )
+         get_filename_component(OPENCOLLADA_LIBRARY_DIR ${OPENCOLLADA_FRAMEWORK_LIB} PATH)
+     endif()
+diff --git a/src/ifcwrap/CMakeLists.txt b/src/ifcwrap/CMakeLists.txt
+index 792cbd72f17..9b6aef619f2 100644
+--- a/src/ifcwrap/CMakeLists.txt
++++ b/src/ifcwrap/CMakeLists.txt
+@@ -141,7 +141,7 @@ else()
+ endif()
+ target_link_libraries(ifcopenshell_wrapper PRIVATE ${CGAL_LIBRARIES})
+ if((NOT WIN32) AND BUILD_SHARED_LIBS)
+-    SET_INSTALL_RPATHS(ifcopenshell_wrapper "${IFCDIRS};${OCC_LIBRARY_DIR}")
++    SET_INSTALL_RPATHS(ifcopenshell_wrapper "${OCC_LIBRARY_DIR}")
+ endif()
+ 
+ # Try to find the Python interpreter to get the site-packages

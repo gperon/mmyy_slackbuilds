@@ -8,11 +8,9 @@ slackbuild is based on basic and some optional settings that require
 the dependencies (and related nested deps) reported in the REQUIRES
 field of qgis.info.
 
-Versions greater than 3.44.15 require Python >= 3.11 so this is the
-lastest version of QGIS compatible with Slackware 15.0.
-
-Warning: this slackbuild cannot be used on Slackware -current: cmake
-breaks the build with fatal errors due the lack of QScintilla (not more
-available in -current) and the drop of qtkeychain based on Qt5.
+This slackbuild targets Slackware -current: QGIS 4.x is built against
+Qt6 and requires Python >= 3.11, so it cannot be used on Slackware 15.0
+(the last QGIS version for 15.0 is 3.44.15). QScintilla is no longer
+shipped by -current and must be built with Qt6 from SlackBuilds.
 
 For further information see the README.Slackware file.

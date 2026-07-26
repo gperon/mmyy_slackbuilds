@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=qgis
-VERSION=${VERSION:-3.44.15}
+VERSION=${VERSION:-4.2.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -69,21 +69,6 @@ SLKCFLAGS+=" -DNDEBUG"
 
 set -e
 
-if [ $(/usr/bin/cmake --version |head -1 |cut -f3 -d' ') == "3.21.4" ]; then
-    echo "export PATH for cmake-opt"
-    export PATH="/opt/cmake-opt/bin/:$PATH"
-else
-    echo "******************** WARNING ********************"
-    echo "*                                               *"
-    echo "*       This slackbuild works only on           *"
-    echo "*      Slackware 15.0 Stable and cannot         *"
-    echo "* be used on -current because the build fails   *"
-    echo "*         The script will be stopped.           *"
-    echo "*                                               *"
-    echo "*************************************************"
-    exit 1;
-fi
-
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
@@ -98,12 +83,6 @@ if pkg-config --exists OpenCL; then
   OCL="-DUSE_OPENCL=OFF " ; [ "${OPENCL:-no}" = "yes" ] && OCL="-DUSE_OPENCL=ON "
 else
   OCL="-DUSE_OPENCL=OFF "
-fi
-
-if pkg-config --exists pdal; then
-  WITHPDAL="-DWITH_PDAL=OFF "; [ "${PDAL:-yes}" = "yes" ] && WITHPDAL="-DWITH_PDAL=ON "
-else
-  WITHPDAL="-DWITH_PDAL=OFF "
 fi
 
 if pkg-config --exists draco; then
@@ -123,11 +102,7 @@ if [ $(ccache --version |head -1 |cut -f3 -d' ') == "4.5.1" ]; then
     ccache --set-config sloppiness=pch_defines,time_macros
 fi
 
-sed -i '43 i IF (NOT PROJ_INCLUDE_DIR)\nFIND_PATH(PROJ_INCLUDE_DIR proj.h\n"$ENV{INCLUDE}"\n"$ENV{LIB_DIR}/include"\n)\nENDIF (NOT PROJ_INCLUDE_DIR)\n' cmake/FindProj.cmake
-
-mkdir -p build
-cd build
-  /opt/cmake-opt/bin/cmake .. \
+cmake . -B build -G Ninja \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS -pthread" \
     -DCMAKE_BUILD_TYPE="Release" \
@@ -135,23 +110,26 @@ cd build
     -DQGIS_LIB_SUBDIR=lib${LIBDIRSUFFIX} \
     -DQGIS_LIBEXEC_SUBDIR=lib${LIBDIRSUFFIX}/qgis \
     -DQGIS_PLUGIN_SUBDIR=lib${LIBDIRSUFFIX}/qgis \
-    -DWITH_QWTPOLAR=TRUE \
     -DWITH_CUSTOM_WIDGETS=FALSE \
     -DBINDINGS_GLOBAL_INSTALL=TRUE \
     -DQWT_INCLUDE_DIR=/usr/include/qwt \
-    -DQSCINTILLA_INCLUDE_DIR=/usr/include/qt5 \
+    -DQGIS_QML_SUBDIR=lib${LIBDIRSUFFIX}/qt/qml \
+    -DWITH_CUSTOM_WIDGETS=TRUE \
+    -DBINDINGS_GLOBAL_INSTALL=TRUE \
+    -DWITH_PDAL=TRUE \
+    -DQSCINTILLA_INCLUDE_DIR=/usr/include/qt6 \
     -DENABLE_TESTS=FALSE \
     -DWITH_3D=TRUE \
     -Wno-dev \
+    -DWITH_INTERNAL_SPATIALINDEX=TRUE \
     $OCL \
-    $WITHPDAL \
+    -DWITH_PDAL=TRUE \
     $WITHDRACO \
     $WITHGRASS \
-    ..
+    
 
-  make VERBOSE=1
-  make install/strip DESTDIR=$PKG
-cd -
+cmake --build build
+DESTDIR="$PKG" cmake --install build
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

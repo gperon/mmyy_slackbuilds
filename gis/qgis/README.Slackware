@@ -19,7 +19,7 @@ The slackbuilds of these are available in this repository. The packages
 gdal, proj, and geos are not reported in REQUIRES field of qgis.info
 because should be installed as dependencies of others.
 Other dependencies must be already installed in your system with a
-full installation of Slackware (for example, Qt5, QScintilla, qca, 
+full installation of Slackware (for example, Qt6, qca,
 Python 3, qtkeychain, eccetera).
 
 Optional dependencies that are enabled as strictly required in this

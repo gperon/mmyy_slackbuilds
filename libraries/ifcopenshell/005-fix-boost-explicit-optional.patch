@@ -1,0 +1,33 @@
+From f68094688ce7106597a656f8bc31295bc074decd Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Thu, 23 Jul 2026 23:31:01 +0800
+Subject: [PATCH] Support explicit Boost.Optional construction
+
+Add a double overload for profile points so brace initialization remains valid now that current Boost releases make optional value construction explicit.
+
+Generated with the assistance of an AI coding tool.
+---
+ src/ifcgeom/profile_helper.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/ifcgeom/profile_helper.h b/src/ifcgeom/profile_helper.h
+index 849b43631df..3ddf71eac03 100644
+--- a/src/ifcgeom/profile_helper.h
++++ b/src/ifcgeom/profile_helper.h
+@@ -13,6 +13,9 @@ namespace ifcopenshell {
+ 			profile_point(const std::array<double, 2>& p, const boost::optional<double>& r = boost::none)
+ 				: xy(p), radius(r) {
+ 			}
++			profile_point(const std::array<double, 2>& p, double r)
++				: xy(p), radius(r) {
++			}
+ 		};
+ 
+ 		struct profile_point_with_edges {
+@@ -38,4 +41,4 @@ namespace ifcopenshell {
+ 
+ }
+ 
+-#endif
+\ No newline at end of file
++#endif

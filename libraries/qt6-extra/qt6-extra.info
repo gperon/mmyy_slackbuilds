@@ -1,0 +1,60 @@
+PRGNAM="qt6-extra"
+VERSION="6.11.1"
+HOMEPAGE="https://www.qt.io"
+DOWNLOAD="https://github.com/qt/qtlanguageserver/archive/v6.11.1/qtlanguageserver-6.11.1.tar.gz \
+          https://github.com/qt/qtshadertools/archive/v6.11.1/qtshadertools-6.11.1.tar.gz \
+          https://github.com/qt/qtsvg/archive/v6.11.1/qtsvg-6.11.1.tar.gz \
+          https://github.com/qt/qtdeclarative/archive/v6.11.1/qtdeclarative-6.11.1.tar.gz \
+          https://github.com/qt/qt3d/archive/v6.11.1/qt3d-6.11.1.tar.gz \
+          https://github.com/qt/qtcharts/archive/v6.11.1/qtcharts-6.11.1.tar.gz \
+          https://github.com/qt/qtconnectivity/archive/v6.11.1/qtconnectivity-6.11.1.tar.gz \
+          https://github.com/qt/qtdatavis3d/archive/v6.11.1/qtdatavis3d-6.11.1.tar.gz \
+          https://github.com/qt/qtquicktimeline/archive/v6.11.1/qtquicktimeline-6.11.1.tar.gz \
+          https://github.com/qt/qtquick3d/archive/v6.11.1/qtquick3d-6.11.1.tar.gz \
+          https://github.com/qt/qtgraphs/archive/v6.11.1/qtgraphs-6.11.1.tar.gz \
+          https://github.com/qt/qtwebsockets/archive/v6.11.1/qtwebsockets-6.11.1.tar.gz \
+          https://github.com/qt/qthttpserver/archive/v6.11.1/qthttpserver-6.11.1.tar.gz \
+          https://github.com/qt/qtserialport/archive/v6.11.1/qtserialport-6.11.1.tar.gz \
+          https://github.com/qt/qtpositioning/archive/v6.11.1/qtpositioning-6.11.1.tar.gz \
+          https://github.com/qt/qtlocation/archive/v6.11.1/qtlocation-6.11.1.tar.gz \
+          https://github.com/qt/qtmultimedia/archive/v6.11.1/qtmultimedia-6.11.1.tar.gz \
+          https://github.com/qt/qtnetworkauth/archive/v6.11.1/qtnetworkauth-6.11.1.tar.gz \
+          https://github.com/qt/qtremoteobjects/archive/v6.11.1/qtremoteobjects-6.11.1.tar.gz \
+          https://github.com/qt/qtscxml/archive/v6.11.1/qtscxml-6.11.1.tar.gz \
+          https://github.com/qt/qtsensors/archive/v6.11.1/qtsensors-6.11.1.tar.gz \
+          https://github.com/qt/qtserialbus/archive/v6.11.1/qtserialbus-6.11.1.tar.gz \
+          https://github.com/qt/qtspeech/archive/v6.11.1/qtspeech-6.11.1.tar.gz \
+          https://github.com/qt/qtwebchannel/archive/v6.11.1/qtwebchannel-6.11.1.tar.gz \
+          https://github.com/qt/qttools/archive/v6.11.1/qttools-6.11.1.tar.gz \
+          https://github.com/qt/qtwebengine/archive/v6.11.1/qtwebengine-6.11.1.tar.gz"
+MD5SUM="a1ab0a9d58660932f2d2d5a8993e2917 \
+        2f59cc11186445bd8aa485a8263af19f \
+        b577c8e452fcb297b0939263fe14a2e4 \
+        85a82978d7af5a0bbc24b9e0427f573d \
+        756a56bde4c9ac2e637a22af38d98215 \
+        66f9577b53fc2b6f91af075bb981275a \
+        791136f8e58d925be2f6b1eb5679826f \
+        47934c65173b44875f3df06cbf47d59c \
+        db22d93a3a0cbb29011caddf32b4f696 \
+        27ee636db9650f808ca1dbd1dd281b90 \
+        487562680ee93ffe95dbd71284e0e8c6 \
+        9365855106b6e95c1304f56732ba36f3 \
+        6bc2052dccae1514d3f76bc593983309 \
+        bac2813e47936aae818c2e15fd11b656 \
+        c3a7c3261ce5ad55becd18d57b0ae12f \
+        e43839a3e72a4428d9bd2d18925cfd09 \
+        fd2307d96fd5fb900ef94aebd40ca002 \
+        a144f2c386e2db3fa38d572552a668e6 \
+        78550020516a400982f5a400c9e5f3fc \
+        8a242218f73ceb611283cc37df872bac \
+        02f93cb7529719e32de919d33614d0d5 \
+        a93722177db6da277350f557f2667abf \
+        cf6d503306029345c5e103a28f4e82ab \
+        63c19e68fcb716733555b91aab1bfbd8 \
+        75a4ba2c0900e1e50f868d7253071dc0 \
+        d7fdcaa123647b95ca4637e227294756"
+DOWNLOAD_x86_64="UNSUPPORTED"
+MD5SUM_x86_64=""
+REQUIRES="assimp openxr"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

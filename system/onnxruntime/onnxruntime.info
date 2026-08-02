@@ -1,0 +1,22 @@
+PRGNAM="onnxruntime"
+VERSION="1.27.0"
+HOMEPAGE="https://onnxruntime.ai"
+DOWNLOAD="https://github.com/microsoft/onnxruntime/archive/v1.27.0/onnxruntime-1.27.0.tar.gz \
+          https://github.com/onnx/onnx/archive/v1.21.0/onnx-1.21.0.tar.gz \
+          https://github.com/abseil/abseil-cpp/archive/20250814.0/abseil-cpp-20250814.0.tar.gz \
+          https://github.com/tensorflow/tensorboard/archive/373eb09e4c5d2b3cc2493f0949dc4be6b6a45e81/tensorboard-373eb09e4c5d2b3cc2493f0949dc4be6b6a45e81.tar.gz \
+          https://github.com/google/re2/archive/2024-07-02/re2-2024-07-02.tar.gz \
+          https://github.com/google/flatbuffers/archive/v23.5.26/flatbuffers-23.5.26.tar.gz \
+          https://github.com/NVIDIA/cutlass/archive/v4.4.2/cutlass-4.4.2.tar.gz"
+MD5SUM="466d8e3d7c6e3e2a4ccb3073ac2dacad \
+        3245d818990ff65d5417c5cece19845b \
+        016feacd6a6b3b9a47ab844e61f4f7bd \
+        381a7bb3bcdb952e23327fe813919031 \
+        73c94c78678bd2d641beaf8d5a3fd352 \
+        2ef00eaaa86ab5e9ad5eafe09c2e7b60 \
+        0b7fb63d7d2ddd8c26ac29d261c5566c"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="cudatoolkit_12 nccl"
+MAINTAINER="Giorgio Peron"
+EMAIL="giorgio.peron@gmail.com"

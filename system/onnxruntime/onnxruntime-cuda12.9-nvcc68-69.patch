@@ -1,0 +1,29 @@
+diff --git a/cmake/onnxruntime_providers_cuda.cmake b/cmake/onnxruntime_providers_cuda.cmake
+index 8f7b0d1..xxxxxxxx 100644
+--- a/cmake/onnxruntime_providers_cuda.cmake
++++ b/cmake/onnxruntime_providers_cuda.cmake
+@@ -285,6 +290,8 @@
+     # suppress warnings like this:
+     #   cutlass-src\include\cute/arch/mma_sm120.hpp(3128): error #177-D: variable "tidA" was declared but never
+     #     referenced
+-    target_compile_options(${target} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=177>")
++    target_compile_options(${target} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=68>")
++    target_compile_options(${target} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=69>")
++    target_compile_options(${target} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=177>")
+     # suppress cudafe "variable was set but never used" (#550-D) from flatbuffers/adapter headers
+     target_compile_options(${target} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:SHELL:-Xcudafe --diag_suppress=550>")
+diff --git a/cmake/onnxruntime_providers_cuda_plugin.cmake b/cmake/onnxruntime_providers_cuda_plugin.cmake
+index 5d8a3d9..yyyyyyyy 100644
+--- a/cmake/onnxruntime_providers_cuda_plugin.cmake
++++ b/cmake/onnxruntime_providers_cuda_plugin.cmake
+@@ -212,8 +219,10 @@
+ if (CMAKE_CUDA_COMPILER_VERSION VERSION_GREATER_EQUAL 12.8)
+     list(APPEND _cuda_plugin_shared_compile_options
+             "$<$<COMPILE_LANGUAGE:CUDA>:--static-global-template-stub=false>"
++            "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=68>"
++            "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=69>"
+             "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=221>"
+             "$<$<COMPILE_LANGUAGE:CUDA>:--diag-suppress=2908>"
+     )
+ 
+     if (MSVC)

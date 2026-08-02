@@ -29,16 +29,12 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=darktable
-VERSION=${VERSION:-5.0.1}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-5.6.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
-# Slackware's lensfun isn't compatible
-LENSFUN=${LENSFUN:-lensfun03}
 
 if [ -z "$ARCH" ]; then
-    # SSE2 instructions are *required* at runtime. That's a proper subset of i686,
-    # but hopefully forcing i686 in the package name will alert users of older cpus.
   case "$( uname -m )" in
     i?86) ARCH=i686 ;;
     arm*) ARCH=arm ;;
@@ -81,34 +77,26 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# If you want to use llvm instead of gcc uncomment the following two lines
-#export CC=clang
-#export CXX=clang++
-
-# gcc-15 compatibility; cf. 9d7ab0e, c2be549, 44884e3
-patch -p0 < $CWD/gcc-15.patch
-
-# llvm-21 compatibility; cf. https://github.com/darktable-org/darktable/pull/19038
-patch -p1 < $CWD/clang-21.patch
-
-mkdir -p build
-cd build
-  cmake \
-    -DCMAKE_INSTALL_RPATH=/opt/$LENSFUN/lib$LIBDIRSUFFIX \
-    -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON \
+cmake -B build -S . \
     -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib$LIBDIRSUFFIX \
     -DCMAKE_INSTALL_MANDIR=/usr/man \
-    -DDONT_USE_INTERNAL_LUA=Off \
-    -DUSE_LIBSECRET=On \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF \
+    -DENABLE_LTO=OFF \
     -DBINARY_PACKAGE_BUILD=1 \
-    -DBUILD_CURVE_TOOLS=ON \
-    -DBUILD_NOISE_TOOLS=ON \
-    -DCMAKE_BUILD_TYPE=Release ..
-  make
-  make install DESTDIR=$PKG
-cd ..
+    -DUSE_AI=On \
+    -DUSE_COLORD=On \
+    -DUSE_LIBSECRET=On \
+    -DUSE_LUA=On \
+    -DBUILD_CURVE_TOOLS=On \
+    -DBUILD_NOISE_TOOLS=On \
+    -DBUILD_USERMANUAL=Off
+    
+make -C build
+make -C build install DESTDIR=$PKG
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -116,10 +104,8 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 find $PKG/usr/man -type f -exec gzip -9 {} \;
 for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
 
-# Fix the doc location
 mv $PKG/usr/share/doc $PKG/usr
 mv $PKG/usr/doc/$PRGNAM $PKG/usr/doc/$PRGNAM-$VERSION
-# Add a few missed docs
 cp -a \
   CONTRIBUTING.md LICENSE RELEASE_NOTES.md LICENSE AUTHORS \
   doc/thumbnail*.txt doc/grouping.txt doc/*.md doc/NEWS \

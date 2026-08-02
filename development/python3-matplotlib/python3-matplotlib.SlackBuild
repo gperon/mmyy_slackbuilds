@@ -37,12 +37,11 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=python3-matplotlib
 SRCNAM=matplotlib
-VERSION=${VERSION:-3.8.4}
+VERSION=${VERSION:-3.10.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
-TARBALL_VERSION=${TARBALL_VERSION:-3.8.4} # Tarball may have wrong versioning
 ENABLE_TESTS=${ENABLE_TESTS:-N}
 
 if [ -z "$ARCH" ]; then
@@ -70,11 +69,11 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $SRCNAM-$TARBALL_VERSION
+rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-$VERSION.tar.gz
-cd $SRCNAM-$TARBALL_VERSION
+cd $SRCNAM-$VERSION
 mkdir -p build
-tar -C build -xvf $CWD/freetype-2.6.1.tar.gz
+tar -C build -xvf $CWD/freetype-2.13.1.tar.gz
 tar -C build -xvf $CWD/qhull-2020-src-8.0.2.tgz
 chown -R root:root .
 find -L . \
@@ -83,15 +82,15 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-ENABLE_TESTS=$(echo "$ENABLE_TESTS"|cut -b 1|tr a-z A-Z)
+#ENABLE_TESTS=$(echo "$ENABLE_TESTS"|cut -b 1|tr a-z A-Z)
 # Use mplsetup.cfg to decide about the optional tests
 #
-cat mplsetup.cfg.template > mplsetup.cfg
-if [ "$ENABLE_TESTS" = "Y" ]
-then
- cat mplsetup.cfg.template > mplsetup.cfg
- sed -i "s|#tests = False|tests = True|" mplsetup.cfg
-fi
+#cat mplsetup.cfg.template > mplsetup.cfg
+#if [ "$ENABLE_TESTS" = "Y" ]
+#then
+# cat mplsetup.cfg.template > mplsetup.cfg
+# sed -i "s|#tests = False|tests = True|" mplsetup.cfg
+#fi
 
 # We need the newer versions of setuptools and setuptools-scm as
 # provided by the python3-setuptools-opt and python3-setuptools-scm-opt
@@ -103,11 +102,10 @@ export PYTHONPATH=/opt/python$PYVER/site-packages
 # It looks like one needs to use a pyproject.toml file with an increased maximal
 # version of numpy to build on current with python-numpy
 #
-# Quoting pyproject.toml:
-#      The <2.3 upper bound is for matching the numpy deprecation policy,
-#      it should not be loosened.
-# ...so probably not a functionality issue
-sed -i 's|2.0.0rc1,<2.3|2.0.0rc1,<2.5|' pyproject.toml
+#
+#sed -i 's|2.0.0rc1|1.24.4|' pyproject.toml
+# Allow to use new meson-python
+sed -i 's|,<0.17.0||' pyproject.toml
 
 python3 -m build --wheel --no-isolation # > ${CWD}/SETUP.OUTPUT 2>&1
 python3 -m installer --destdir "$PKG" dist/*.whl # > ${CWD}/INSTALL.OUTPUT 2>&1
@@ -116,8 +114,8 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a INSTALL.rst README.md SECURITY.md PKG-INFO CITATION.bib \
-      CODE_OF_CONDUCT.md CITATION.bib CITATION.cff $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a INSTALL.rst README.md SECURITY.md CITATION.bib \
+      CODE_OF_CONDUCT.md CITATION.cff $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

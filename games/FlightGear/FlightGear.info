@@ -1,10 +1,10 @@
 PRGNAM="FlightGear"
-VERSION="2024.1.1"
+VERSION="2024.1.6"
 HOMEPAGE="https://www.flightgear.org/"
-DOWNLOAD="https://gitlab.com/flightgear/flightgear/-/archive/v2024.1.1/flightgear-v2024.1.1.tar.gz \
-          https://download.flightgear.org/release-2024.1/FlightGear-2024.1.1-data.txz"
-MD5SUM="d5184746bbe5d83465080415a6b048de \
-        e5f45fbf0a62ea3bba273f5f69e7253d"
+DOWNLOAD="https://gitlab.com/flightgear/flightgear/-/archive/2024.1.6/flightgear-2024.1.6.tar.bz2 \
+          https://mirrors.ibiblio.org/flightgear/ftp/release-2024.1/FlightGear-2024.1.6-data.txz"
+MD5SUM="ef6c5e105fc497fd622114b5e3520930 \
+        e24a67b24964dd43338ff7c43e6ea60f"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
 REQUIRES="SimGear"

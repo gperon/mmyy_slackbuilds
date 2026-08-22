@@ -51,19 +51,14 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
 elif [ "$ARCH" = "armv7hl" ]; then
-  SLKCFLAGS="-O2 -march=armv7-a -mfpu=vfpv3-d16"
   LIBDIRSUFFIX=""
 else
-  SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
 fi
 
@@ -94,6 +89,7 @@ make install DESTDIR=$PKG INSTALL_ROOT=$PKG
 
 cd ../Python
 mv pyproject{-qt6,}.toml
+export LD_LIBRARY_PATH="$PKG/usr/lib${LIBDIRSUFFIX}:$(pwd)/../src:$LD_LIBRARY_PATH"
 sip-build \
     --no-make \
     --qsci-features-dir ../src/features \
@@ -109,11 +105,14 @@ cd ../..
 find $PKG | xargs file | grep -e "executable" -e "shared object" \
   | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
 
+chmod +x $PKG/usr/lib${LIBDIRSUFFIX}/python3.12/site-packages/PyQt6/Qsci.abi3.so
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
   LICENSE NEWS doc/README.doc \
   doc/html doc/Scintilla \
   $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

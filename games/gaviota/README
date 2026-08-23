@@ -1,0 +1,3 @@
+Gaviota (Spanish word for Seagull) is a chess engine.
+this package includes the tablebase toold and probe and the
+new rating software Ordo

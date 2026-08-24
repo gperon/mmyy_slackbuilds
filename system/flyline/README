@@ -1,0 +1,13 @@
+A Bash plugin to replace readline for a modern line editing experience.
+
+to acticate flyline, in your .bashrc (or in your current Bash session):
+
+	enable -f /path/to/libflyline.so flyline
+	
+After installing, run 
+
+	flyline run-tutorial
+
+and if you don't like the mouse capturing: 
+
+	flyline mouse --mode disabled

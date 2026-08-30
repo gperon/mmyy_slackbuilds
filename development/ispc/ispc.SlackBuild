@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=ispc
-VERSION=${VERSION:-1.26.0}
+VERSION=${VERSION:-1.31.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -93,25 +93,23 @@ else
    export LD_LIBRARY_PATH="/opt/llvm-opt/lib$LIBDIRSUFFIX:$LD_LIBRARY_PATH"
 fi
 
-patch -p1 < $CWD/07e63aeea2687b799acca932670f0ad12591097e.patch
+cmake -B build -S . \
+  -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
+  -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+  -DCMAKE_BUILD_TYPE=Release  \
+  -DCMAKE_INSTALL_PREFIX=/usr \
+  -DISPC_INCLUDE_EXAMPLES=OFF \
+  -DISPC_OPAQUE_PTR_MODE=OFF  \
+  -DISPC_STATIC_LINK=OFF \
+  -DXE_ENABLED=ON \
+  -DXE_DEPS_DIR=/usr \
+  -Wno-author
 
-mkdir -p build
-cd build
-  cmake \
-    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DLIB_SUFFIX=${LIBDIRSUFFIX} \
-    -DMAN_INSTALL_DIR=/usr/man \
-    -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-    -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-    -DARM_ENABLED=OFF \
-    -DISPC_STATIC_LINK=OFF \
-    -DISPCRT_BUILD_STATIC=OFF \
-    -DCMAKE_BUILD_TYPE=Release ..
-  make -j1
-  make install/strip DESTDIR=$PKG
-cd ..
+cmake --build build --verbose
+DESTDIR="$PKG" cmake --install build 
+install -Dm644 contrib/ispc.vim -t $PKG/usr/share/vim/vimfiles/syntax
+mkdir -p $PKG/usr/share/vim/vimfiles/ftdetect
+echo "au BufRead,BufNewFile *.isph,*.ispc set filetype=ispc" > $PKG/usr/share/vim/vimfiles/ftdetect/ispc.vim
 
 rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
@@ -120,7 +118,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a \
-  CONTRIBUTING.md LICENSE.txt    README.md      SECURITY.md     \
+  CLAUDE.md CONTRIBUTING.md LICENSE.txt README.md SECURITY.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

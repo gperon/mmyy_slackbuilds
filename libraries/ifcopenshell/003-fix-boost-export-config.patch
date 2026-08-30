@@ -1,0 +1,24 @@
+From ba313e55ea96ce280a02c99a8e249c5d475311d2 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Thu, 23 Jul 2026 23:30:20 +0800
+Subject: [PATCH] Drop Boost.System from exported config
+
+Boost.System is header-only and no longer provides a component package in current Boost releases, so downstream consumers must not request it explicitly.
+
+Generated with the assistance of an AI coding tool.
+---
+ cmake/IfcOpenShellConfig.cmake.in | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/cmake/IfcOpenShellConfig.cmake.in b/cmake/IfcOpenShellConfig.cmake.in
+index 741e4fa2336..f99dd7693ea 100644
+--- a/cmake/IfcOpenShellConfig.cmake.in
++++ b/cmake/IfcOpenShellConfig.cmake.in
+@@ -28,7 +28,6 @@ if(NOT "${IFCOPENSHELL_BOOST_USE_MULTITHREADED}" STREQUAL "")
+     set(Boost_USE_MULTITHREADED ${IFCOPENSHELL_BOOST_USE_MULTITHREADED})
+ endif()
+ set(Boost_COMPONENTS
+-    system
+     program_options
+     regex
+     thread

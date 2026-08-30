@@ -1,0 +1,8 @@
+MED (Modelisation et Echanges de Donnees) is the Data Exchange Module
+used by Code_Aster and based on the HDF library.
+
+MED/HDF can read and save data in a format which is portable between
+machines of different architectures. 
+
+This package is build with Open MPI support and cannot be installed
+together with med package.

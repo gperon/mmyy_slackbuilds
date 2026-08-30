@@ -1,0 +1,73 @@
+diff --git a/cmake/external/dnnl.cmake b/cmake/external/dnnl.cmake
+index 9eb5fed7a1a..2be4ada34a5 100644
+--- a/cmake/external/dnnl.cmake
++++ b/cmake/external/dnnl.cmake
+@@ -36,6 +36,14 @@ elseif(onnxruntime_USE_DNNL AND onnxruntime_DNNL_AARCH64_RUNTIME STREQUAL "acl"
+ endif()
+ 
+ if (onnxruntime_USE_DNNL)
++# https://oneapi-src.github.io/oneDNN/dev_guide_transition_to_dnnl.html
++find_package(dnnl CONFIG)
++if (TARGET DNNL::dnnl)
++  message(STATUS "DNNL version: ${dnnl_VERSION}")
++  add_library(project_dnnl INTERFACE)
++  add_library(dnnl INTERFACE)
++  target_link_libraries(dnnl INTERFACE DNNL::dnnl)
++else ()
+   set(DNNL_SOURCE ${CMAKE_CURRENT_BINARY_DIR}/dnnl/src/dnnl/src)
+   set(DNNL_INSTALL ${CMAKE_CURRENT_BINARY_DIR}/dnnl/install)
+   set(DNNL_LIB_DIR ${DNNL_INSTALL}/${CMAKE_INSTALL_LIBDIR})
+@@ -65,3 +73,4 @@ if (onnxruntime_USE_DNNL)
+   )
+   link_directories(${DNNL_LIB_DIR})
+ endif()
++endif()
+diff --git a/cmake/onnxruntime_python.cmake b/cmake/onnxruntime_python.cmake
+index 39985b23da3..35d96a9244a 100644
+--- a/cmake/onnxruntime_python.cmake
++++ b/cmake/onnxruntime_python.cmake
+@@ -959,13 +959,26 @@ if (onnxruntime_ENABLE_TRAINING)
+ endif()
+ 
+ if (onnxruntime_USE_DNNL)
++  # Always stage the DNNL execution-provider libraries into the wheel.
+   add_custom_command(
+     TARGET onnxruntime_pybind11_state POST_BUILD
+     COMMAND ${CMAKE_COMMAND} -E copy
+-        ${DNNL_DLL_PATH} $<TARGET_FILE:onnxruntime_providers_dnnl>
++        $<TARGET_FILE:onnxruntime_providers_dnnl>
+         $<TARGET_FILE:onnxruntime_providers_shared>
+         $<TARGET_FILE_DIR:${build_output_target}>/onnxruntime/capi/
+   )
++  # The bundled oneDNN runtime (${DNNL_DLL_PATH}, libdnnl.so.2) only exists for
++  # the vendored build. When oneDNN is taken from the system via
++  # find_package(dnnl) it is unset and provided by the system package, so skip
++  # copying it then.
++  if (NOT TARGET DNNL::dnnl)
++    add_custom_command(
++      TARGET onnxruntime_pybind11_state POST_BUILD
++      COMMAND ${CMAKE_COMMAND} -E copy
++          ${DNNL_DLL_PATH}
++          $<TARGET_FILE_DIR:${build_output_target}>/onnxruntime/capi/
++    )
++  endif()
+ endif()
+ 
+ if (onnxruntime_USE_VITISAI)
+diff --git a/cmake/onnxruntime_unittests.cmake b/cmake/onnxruntime_unittests.cmake
+index 7f361aa6392..f7a6ce41854 100644
+--- a/cmake/onnxruntime_unittests.cmake
++++ b/cmake/onnxruntime_unittests.cmake
+@@ -1237,10 +1237,12 @@ if (NOT onnxruntime_ENABLE_TRAINING_TORCH_INTEROP)
+       target_compile_definitions(onnxruntime_test_all PUBLIC -DDNNL_GPU_RUNTIME=OCL)
+     endif()
+     list(APPEND onnx_test_libs dnnl)
++    if (NOT TARGET DNNL::dnnl)
+     add_custom_command(
+       TARGET ${test_data_target} POST_BUILD
+       COMMAND ${CMAKE_COMMAND} -E copy ${DNNL_DLL_PATH} $<TARGET_FILE_DIR:${test_data_target}>
+       )
++    endif()
+   endif()
+   if(WIN32)
+     set(wide_get_opt_src_dir ${TEST_SRC_DIR}/win_getopt/wide)

@@ -6,4 +6,4 @@ convert/manipulate/filter/visualize generic image datasets, ranging from
 1d scalar signals to 3d+t sequences of multi-spectral volumetric images,
 thus including 2d color images.
 
-This package contains the gimp plug-in.
+This package contains the gimp and krita plug-in and zart application.

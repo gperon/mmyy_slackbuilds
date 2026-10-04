@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Materialize
+GenericName=3D Material Tool
+Comment=Image to Material Tool
+Version=1.0
+Type=Application
+Terminal=false
+Icon=materialize-bin
+Exec=materialize-bin
+Categories=Graphics
+StartupWMClass=Materialize.exe

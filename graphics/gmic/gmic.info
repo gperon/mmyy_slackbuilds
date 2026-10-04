@@ -1,10 +1,16 @@
 PRGNAM="gmic"
-VERSION="4.0.4"
+VERSION="4.0.5"
 HOMEPAGE="https://gmic.eu"
-DOWNLOAD="https://gmic.eu/files/source/gmic_4.0.4.tar.gz"
-MD5SUM="38b27d8f391683d0dcaa29d5d061b651"
+DOWNLOAD="https://gmic.eu/files/source/gmic_4.0.5.tar.gz \
+          https://github.com/GreycLab/gmic-community/archive/gmic-3.4.3/gmic-community-gmic-3.4.3.tar.gz \
+          https://github.com/GreycLab/zart/archive/2c43c4c71c834a379d212a51f037c05f3d0f0a83/zart-2c43c4c71c834a379d212a51f037c05f3d0f0a83.zip \
+          https://github.com/vanyossi/gmic/archive/v3.7.4.1/gmic-3.7.4.1.tar.gz"
+MD5SUM="fb86407f07054f3b279832e644fe8567 \
+        cc916ad543fab3bcd840173f98f46cb7 \
+        997b6227c374b12ff7c1799b776ea03a \
+        7d8074838f9ee785947f513e7677a4e4"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="GraphicsMagick"
 MAINTAINER="Giorgio Peron"
 EMAIL="giorgio.peron@gmail.com"

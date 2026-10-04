@@ -34,7 +34,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=hugin
-VERSION=${VERSION:-2024.0.1}
+VERSION=${VERSION:-2025.0.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -78,6 +78,7 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
 cd $PRGNAM-$VERSION
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -85,27 +86,25 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
-sed -e 's|copy_option::overwrite_if_exists|copy_options::overwrite_existing|' \
-  -i src/hugin_base/hugin_utils/filesystem.h || exit 1
-sed -i 's,filesystem system,filesystem,' CMakeLists.txt
+patch -Np1 -i "$CWD/ignore_gzip_timestamps.patch"
 
-mkdir -p build
-cd build
-cmake \
+cmake -B build -S . \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
-  -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
-  -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_BUILD_TYPE=Release ..
+  -DENABLE_LAPACK=yes \
+  -DBUILD_HSI=ON \
+  -DUSE_GDKBACKEND_X11=ON \
+  -DBUILD_WITH_EPOXY=ON \
+  -DCMAKE_BUILD_TYPE=Release
 
-make install/strip DESTDIR=$PKG
-cd ..
+make -C build
+make -C build DESTDIR=$PKG install
 
 mv $PKG/usr/share/man $PKG/usr
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-install -m0644 -oroot -groot AUTHORS COPYING.txt Changes.txt README TODO \
+cp -a AUTHORS COPYING.txt Changes.txt README TODO \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

@@ -1,0 +1,69 @@
+From 0f9398eca788c3c14b148a5ef3d6cb63b6d9cd90 Mon Sep 17 00:00:00 2001
+From: sukanka <su975853527@gmail.com>
+Date: Thu, 23 Jul 2026 23:29:56 +0800
+Subject: [PATCH] Skip installing Python source modules
+
+Keep installing the generated wrapper while allowing package builds to avoid duplicating the pure Python sources installed from wheels.
+
+Generated with the assistance of an AI coding tool.
+---
+ cmake/CMakeLists.txt       |  5 +++++
+ src/ifcwrap/CMakeLists.txt | 29 ++++++++++++++++++-----------
+ 2 files changed, 23 insertions(+), 11 deletions(-)
+
+diff --git a/cmake/CMakeLists.txt b/cmake/CMakeLists.txt
+index 9a3807d8373..e8a3211f64a 100644
+--- a/cmake/CMakeLists.txt
++++ b/cmake/CMakeLists.txt
+@@ -123,6 +123,11 @@ set(PYTHON_MODULE_INSTALL_DIR
+     CACHE PATH
+     "Directory to install IfcPython package to. By default package is installed in found Python's site-packages."
+ )
++set(INSTALL_PYTHON_WRAPPERS
++    OFF
++    CACHE BOOL
++    "Install IfcPython source modules."
++)
+ 
+ # Make sure CMake modules in this project are found first
+ list(PREPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
+diff --git a/src/ifcwrap/CMakeLists.txt b/src/ifcwrap/CMakeLists.txt
+index 290ba032e3e..7fdc67fce52 100644
+--- a/src/ifcwrap/CMakeLists.txt
++++ b/src/ifcwrap/CMakeLists.txt
+@@ -252,17 +252,24 @@ if(Python_Interpreter_FOUND OR PYTHON_MODULE_INSTALL_DIR)
+     if("${python_package_dir}" STREQUAL "")
+         message(WARNING "Unable to locate Python site-package directory, unable to install the Python wrapper")
+     else()
+-        message(STATUS "Python wrapper will be installed to '${python_package_dir}'.")
+-        file(GLOB_RECURSE sourcefiles "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/*")
+-        # Exclude compiled extensions - they're part of dev environment and shouldn't leak into installation.
+-        list(FILTER sourcefiles EXCLUDE REGEX "\\.(so|pyd|dylib)$")
+-        foreach(file ${sourcefiles})
+-            file(RELATIVE_PATH relative "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/" "${file}")
+-            get_filename_component(dir "${relative}" DIRECTORY)
+-            if(NOT IS_DIRECTORY "${file}")
+-                install(FILES "${file}" DESTINATION "${python_package_dir}/ifcopenshell/${dir}")
+-            endif()
+-        endforeach()
++        if(INSTALL_PYTHON_WRAPPERS)
++            message(STATUS "Python source modules will be installed to '${python_package_dir}'.")
++            file(GLOB_RECURSE sourcefiles "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/*")
++            # Exclude compiled extensions - they're part of dev environment and shouldn't leak into installation.
++            list(FILTER sourcefiles EXCLUDE REGEX "\\.(so|pyd|dylib)$")
++            foreach(file ${sourcefiles})
++                file(
++                    RELATIVE_PATH
++                    relative
++                    "${CMAKE_CURRENT_SOURCE_DIR}/../ifcopenshell-python/ifcopenshell/"
++                    "${file}"
++                )
++                get_filename_component(dir "${relative}" DIRECTORY)
++                if(NOT IS_DIRECTORY "${file}")
++                    install(FILES "${file}" DESTINATION "${python_package_dir}/ifcopenshell/${dir}")
++                endif()
++            endforeach()
++        endif()
+         install(
+             FILES "${CMAKE_CURRENT_BINARY_DIR}/ifcopenshell_wrapper.py"
+             DESTINATION "${python_package_dir}/ifcopenshell"

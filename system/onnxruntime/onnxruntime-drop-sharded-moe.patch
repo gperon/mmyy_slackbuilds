@@ -1,0 +1,44 @@
+diff --git a/cmake/onnxruntime_providers_cuda.cmake b/cmake/onnxruntime_providers_cuda.cmake
+index 2c574f298f5..8f30d890b66 100644
+--- a/cmake/onnxruntime_providers_cuda.cmake
++++ b/cmake/onnxruntime_providers_cuda.cmake
+@@ -102,6 +102,15 @@
+         "${ONNXRUNTIME_ROOT}/contrib_ops/cuda/collective/distributed_squeeze.cc"
+       )
+     endif()
++    # v1.27.0's MoE refactor deleted contrib_ops/cuda/moe/ft_moe/moe_kernel.h
++    # (the kernels moved to contrib_ops/cuda/llm/moe_gemm/) but left the
++    # distributed ShardedMoE op still #including the old header, so it fails to
++    # compile whenever NCCL is enabled. Upstream never updated it (still broken
++    # on main), so drop the op until it is ported to the new MoE GEMM API.
++    list(REMOVE_ITEM onnxruntime_cuda_contrib_ops_cc_srcs
++      "${ONNXRUNTIME_ROOT}/contrib_ops/cuda/collective/sharded_moe.h"
++      "${ONNXRUNTIME_ROOT}/contrib_ops/cuda/collective/sharded_moe.cc"
++    )
+     # add using ONNXRUNTIME_ROOT so they show up under the 'contrib_ops' folder in Visual Studio
+     list(APPEND onnxruntime_providers_cuda_src ${onnxruntime_cuda_contrib_ops_cc_srcs} ${onnxruntime_cuda_contrib_ops_cu_srcs})
+   elseif(onnxruntime_DISABLE_CONTRIB_OPS AND NOT onnxruntime_CUDA_MINIMAL)
+diff --git a/onnxruntime/contrib_ops/cuda/cuda_contrib_kernels.cc b/onnxruntime/contrib_ops/cuda/cuda_contrib_kernels.cc
+index da7ef35d250..e4b3112cd0c 100644
+--- a/onnxruntime/contrib_ops/cuda/cuda_contrib_kernels.cc
++++ b/onnxruntime/contrib_ops/cuda/cuda_contrib_kernels.cc
+@@ -250,9 +250,6 @@ class CUDA_MS_OP_CLASS_NAME(1, AllReduce);
+ class CUDA_MS_OP_CLASS_NAME(1, AllGather);
+ class CUDA_MS_OP_CLASS_NAME(1, AllToAll);
+ 
+-class CUDA_MS_OP_TYPED_CLASS_NAME(1, float, ShardedMoE);
+-class CUDA_MS_OP_TYPED_CLASS_NAME(1, MLFloat16, ShardedMoE);
+-
+ class CUDA_MS_OP_TYPED_CLASS_NAME(1, float, DistributedMatMul);
+ class CUDA_MS_OP_TYPED_CLASS_NAME(1, MLFloat16, DistributedMatMul);
+ 
+@@ -516,9 +513,6 @@ Status RegisterCudaContribKernels(KernelRegistry& kernel_registry) {
+       BuildKernelCreateInfo<CUDA_MS_OP_CLASS_NAME(1, AllGather)>,
+       BuildKernelCreateInfo<CUDA_MS_OP_CLASS_NAME(1, AllToAll)>,
+ 
+-      BuildKernelCreateInfo<CUDA_MS_OP_TYPED_CLASS_NAME(1, float, ShardedMoE)>,
+-      BuildKernelCreateInfo<CUDA_MS_OP_TYPED_CLASS_NAME(1, MLFloat16, ShardedMoE)>,
+-
+       BuildKernelCreateInfo<CUDA_MS_OP_TYPED_CLASS_NAME(1, float, DistributedMatMul)>,
+       BuildKernelCreateInfo<CUDA_MS_OP_TYPED_CLASS_NAME(1, MLFloat16, DistributedMatMul)>,
+ 

@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+            |-----handy-ruler------------------------------------------------------|
+hdf5_openmpi: hdf5_openmpi (hdf5_openmpi software libraries and utilities)
+hdf5_openmpi:
+hdf5_openmpi: Hierarchical Data Format 5 defines a file format and and provides a
+hdf5_openmpi: software library for storing arbitrary multidimensional datasets of
+hdf5_openmpi: various types. hdf5_openmpi provides also c++ and fortran interfaces.
+hdf5_openmpi: It is released under a BSD-ish license.
+hdf5_openmpi: This package is build with Open MPI (openmpi) support.
+hdf5_openmpi:
+hdf5_openmpi: Homepage: https://www.hdfgroup.org/
+hdf5_openmpi:
+hdf5_openmpi:

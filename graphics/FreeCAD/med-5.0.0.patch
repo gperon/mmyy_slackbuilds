@@ -1,0 +1,17 @@
+--- a/src/3rdParty/salomesmesh/src/SMESH/MED_V2_2_Wrapper.cpp
++++ b/src/3rdParty/salomesmesh/src/SMESH/MED_V2_2_Wrapper.cpp
+@@ -22,13 +22,14 @@ //
+ 
+ #include "MED_V2_2_Wrapper.hxx"
+ #include "MED_Algorithm.hxx"
+ #include "MED_Utilities.hxx"
+ 
+ #include <med.h>
+ #include <med_err.h>
++#include <medfile.h> 
+
+ #ifdef _DEBUG_
+ static int MYDEBUG = 0;
+ // #else
+ // static int MYDEBUG = 0;
+ #endif

@@ -1,0 +1,9 @@
+DraftSight is a proprietary freeware 2D CAD product for engineers,
+architects, designers, draftspeople, students and educators.
+It was developed by Dassault Systemes and lets users create, edit
+and view DWG and DXF files.
+
+DraftSight is not more available as free in Linux box since 
+version 2020.
+
+Runtime dependency to libfaketime to avoid the licence expiration.

@@ -4,7 +4,6 @@
 
 # Copyright 2008 Aleksandar Samardzic <asamardzic@gmail.com>
 # Copyright 2010-2011 Niels Horn, Rio de Janeiro, RJ, Brazil
-# Copyright 2026 Christoph Willing	Sydney, Austrlaia
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,6 +23,8 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Revision date: 2021/05/19
+
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=Pivy
@@ -41,9 +42,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -82,15 +80,30 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-mkdir build
-cd build
-  cmake \
+# Coin >= 4.0.3 includes <memory> in SbByteBuffer.h; give SWIG's -includeall
+# an empty stub like the other standard headers in fake_headers/
+touch fake_headers/memory
+
+# SWIG >= 4.3 dropped the Python 2 compatibility macros used by pivy's .i files
+find . \( -name '*.i' -o -name '*.swg' \) -exec sed -i \
+  -e 's/PyInt_FromLong/PyLong_FromLong/g' \
+  -e 's/PyInt_AsLong/PyLong_AsLong/g' \
+  -e 's/PyInt_Check/PyLong_Check/g' \
+  -e 's/PyString_FromString/PyUnicode_FromString/g' \
+  -e 's/PyString_AsString/PyUnicode_AsUTF8/g' \
+  -e 's/PyString_Check/PyUnicode_Check/g' {} +
+
+cmake \
+    -B build \
+    -DCMAKE_C_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release ..
-  make
-  make install DESTDIR=$PKG
-cd ..
+    -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DPIVY_USE_QT6=ON \
+    -DCMAKE_BUILD_TYPE=None
+cmake --build build 
+DESTDIR=$PKG cmake --install build
 
 find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

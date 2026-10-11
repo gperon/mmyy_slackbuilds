@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=FreeCAD
-VERSION=${VERSION:-1.1.4}
+VERSION=${VERSION:-26.3rc1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -74,17 +74,27 @@ cd $TMP
 function tar_source () {
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-unzip -u $CWD/AddonManager-a8b3c78d0618134e65bb28392af51fa485b4d183.zip
-mv -f AddonManager-a8b3c78d0618134e65bb28392af51fa485b4d183/* $PRGNAM-$VERSION/src/Mod/AddonManager/
-unzip -u $CWD/OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d.zip
-mv -f OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d/* $PRGNAM-$VERSION/src/3rdParty/OndselSolver/
-rm -rf OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d
-tar xvf $CWD/googletest-1.17.0.tar.gz
-mv googletest-1.17.0/* $PRGNAM-$VERSION/tests/lib/
+unzip -u $CWD/AddonManager-745c1b1ebc8bc684439210c5fa237d2c6287153b.zip
+mv -f AddonManager-745c1b1ebc8bc684439210c5fa237d2c6287153b/* $PRGNAM-$VERSION/src/Mod/AddonManager/
+rm -rf AddonManager-745c1b1ebc8bc684439210c5fa237d2c6287153b
+unzip -u $CWD/OndselSolver-4be80eef02a3486cda0d78f3ccbb308d207a9639.zip
+mv -f OndselSolver-4be80eef02a3486cda0d78f3ccbb308d207a9639/* $PRGNAM-$VERSION/src/3rdParty/OndselSolver/
+rm -rf OndselSolver-4be80eef02a3486cda0d78f3ccbb308d207a9639
+#tar xvf $CWD/googletest-1.17.0.tar.gz
+#mv googletest-1.17.0/* $PRGNAM-$VERSION/tests/lib/
 rm -rf googletest-1.17.0
-tar xvf $CWD/GSL-4.2.1.tar.gz
-mv GSL-4.2.1/* $PRGNAM-$VERSION/src/3rdParty/GSL/
-rm -rf GSL-4.2.1
+#tar xvf $CWD/GSL-4.2.1.tar.gz
+#mv GSL-4.2.1/* $PRGNAM-$VERSION/src/3rdParty/GSL/
+#rm -rf GSL-4.2.1
+unzip $CWD/GSL-543d0dd3fe966ddf20e884b44e5fdbf12cb43784.zip
+mv GSL-543d0dd3fe966ddf20e884b44e5fdbf12cb43784/* $PRGNAM-$VERSION/src/3rdParty/GSL/
+rm -rf GSL-543d0dd3fe966ddf20e884b44e5fdbf12cb43784
+unzip $CWD/pivy-515f038d32f163a976acd8a8cd9e8d26e1d0b884.zip
+mv pivy-515f038d32f163a976acd8a8cd9e8d26e1d0b884/* $PRGNAM-$VERSION/src/3rdParty/pivy/
+rm -rf pivy-515f038d32f163a976acd8a8cd9e8d26e1d0b884
+unzip $CWD/coin-50e37f04e7027661ea2318d0425b7836ac819568.zip
+mv coin-50e37f04e7027661ea2318d0425b7836ac819568/* $PRGNAM-$VERSION/src/3rdParty/coin/
+rm -rf coin-50e37f04e7027661ea2318d0425b7836ac819568
 cd $PRGNAM-$VERSION
 }
 #

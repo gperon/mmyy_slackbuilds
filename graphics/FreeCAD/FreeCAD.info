@@ -1,18 +1,22 @@
 PRGNAM="FreeCAD"
-VERSION="1.1.4"
+VERSION="26.3rc1"
 HOMEPAGE="https://www.freecadweb.org/"
-DOWNLOAD="https://github.com/FreeCAD/FreeCAD/archive/1.1.4/FreeCAD-1.1.4.tar.gz \
-          https://github.com/FreeCAD/AddonManager/archive/a8b3c78d0618134e65bb28392af51fa485b4d183/AddonManager-a8b3c78d0618134e65bb28392af51fa485b4d183.zip \
-          https://github.com/Ondsel-Development/OndselSolver/archive/09d6175a2ba69e7016fcecc4f384946a2f84f92d/OndselSolver-09d6175a2ba69e7016fcecc4f384946a2f84f92d.zip \
+DOWNLOAD="https://github.com/FreeCAD/FreeCAD/archive/26.3rc1/FreeCAD-26.3rc1.tar.gz \
+          https://github.com/FreeCAD/AddonManager/archive/745c1b1ebc8bc684439210c5fa237d2c6287153b/AddonManager-745c1b1ebc8bc684439210c5fa237d2c6287153b.zip \
+          https://github.com/FreeCAD/OndselSolver/archive/4be80eef02a3486cda0d78f3ccbb308d207a9639/OndselSolver-4be80eef02a3486cda0d78f3ccbb308d207a9639.zip \
           https://github.com/google/googletest/releases/download/v1.17.0/googletest-1.17.0.tar.gz \
-          https://github.com/microsoft/GSL/archive/v4.2.1/GSL-4.2.1.tar.gz"
-MD5SUM="2e47dc51e227ced4ac8c27454a1db652 \
-        294048c421f891f549d4138864f34de2 \
-        5ea06d5722da50b510e7a048b3982896 \
-        b6f100bc2a5853a48046aa168ececf84 \
-        ae93f67a036c15d8787ab6461c35de6d"
+          https://github.com/microsoft/GSL/archive/543d0dd3fe966ddf20e884b44e5fdbf12cb43784/GSL-543d0dd3fe966ddf20e884b44e5fdbf12cb43784.zip \
+          https://github.com/FreeCAD/coin/archive/50e37f04e7027661ea2318d0425b7836ac819568/coin-50e37f04e7027661ea2318d0425b7836ac819568.zip \
+          https://github.com/FreeCAD/pivy/archive/515f038d32f163a976acd8a8cd9e8d26e1d0b884/pivy-515f038d32f163a976acd8a8cd9e8d26e1d0b884.zip"
+MD5SUM="b268eb1c7ddcdf4d0fb1a8bc43c1c29a \
+  928b838e49592abb8c8fdf5c4c0297d6 \
+  f66a01cacb91ac0526cadba88863173f \
+  b6f100bc2a5853a48046aa168ececf84 \
+  11ad5e080faabc49fea62212ce98c11e \
+  99faf26346f21141025f63cdc34e2b1b \
+  b4e963b4f2f0f4d82747fdedff681cd8"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES="OpenCASCADE Pivy pyside6 xerces-c med python3-matplotlib ifcopenshell python3-shapely"
+REQUIRES="OpenCASCADE Pivy pyside6 xerces-c med python3-matplotlib ifcopenshell python3-shapely python-lark python3-defusedxml"
 MAINTAINER="David Spencer"
 EMAIL="baildon.research@googlemail.com"

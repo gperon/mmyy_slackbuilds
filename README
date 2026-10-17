@@ -1,3 +1,157 @@
+Giorgio Peron's SlackBuild Projects hacking
+slackbuilds repository for slackware-current
+giorgio.peron@gmail.com
+
+
+###########################################################################
+                   Before use, please note that 
+  THIS SOFTWARE IS PROVIDED BY THE AUTHOR `AS IS'' AND ANY EXPRESS OR IMPLIED
+  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+###########################################################################
+
+Please, also note that many of my scripts are designed to install unstable
+development versions of the software packages, and may require
+corrections at any time when a source code is significantly modified
+by its developers.
+Prior to opt for my scripts, I would suggest to check: 
+* the official Slackware packages http://www.slackware.com/changelog/
+* SlackBuild.org http://slackbuilds.org 
+* Eric Hameleers' (AlienBOB) http://www.slackware.com/~alien/slackbuilds/ , 
+* PhantomX/slackbuilds http://phantomx.github.io/slackbuilds/
+* Slackers/slackbuilds https://github.com/conraid/SlackBuilds
+* Papitux/SlackStuff https://github.com/Papitux/SlackStuff
+
+
+for the more stable and perhaps better tested versions.
+My SlackBuild scripts are complementary to those.
+
+All my scripts are tested to be working on my own Slackware 
+configuration, based on: 
+* the Slackware-current for the x86_64 architecture 
+* Eric Hameleers' (AlienBOB) 'multilib'&'ktown_testing' (for the Frameworks 5)
+* Ponce/SBo-git (current) https://github.com/Ponce/slackbuilds
+* and the revised versions of SlackBuilds from the mentioned above
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| Packages not included by Slackbuilds                    |
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PACKAGE                   VERSION              DESCRIPTION
+------------------------- -------------------- -----------------------------------------------
+waybar                    0.14.0               waybar (bar for wlroots based compositors)
+syzygy                    20151228git          Syzygy (chess tablebase generator)
+AwesomeBump               5.1.1                AwesomeBump (texture map generator)
+Meshroom                  2025.1.0             Meshroom (3D Reconstruction Software)
+colmap                    4.0.2                colmap (General-purpose Structure-from-Motion)
+draftsight                2019SP3              draftsight (2D CAD program)
+hdrmerge                  0.5.0git             hdrmerge
+materialize-bin           1.78                 materialize-bin (Texture map generator)
+vsfm                      0.5.26               VisualSFM (GUI application for 3D reconstruction)
+QScintilla                2.14.1               QScintilla (Qt port of the Scintilla C++ editor control)
+clapack                   3.2.1                clapack (f2c'ed version of LAPACK)
+cmvs                      git20191214          cmvs (Clustering Views for Multi-view Stereo)
+graclus                   1.2                  graclus (graph clustering software)
+gtksourceview3            3.24.11              gtksourceview3 (a GTK+ framework for source code editing)
+hdf5_openmpi              1.14.6               hdf5_openmpi (hdf5_openmpi software libraries and utilities)
+ifcopenshell              0.9.0                ifcopenshell (The open source IFC toolkit and geometry engine)
+level-zero                1.32.0               level-zero (oneAPI Level-Zero)
+libxisf                   0.2.13               libxisf (Library to load and write XISF format from PixInsight)
+med_openmpi               5.0.0                med_openmpi (Data Modelization and Exchanges)
+openshadinglanguage       1.11.14.1            Open Shading Language
+openxr                    1.1.43               openxr (open standard for virtual reality)
+partio                    1.14.0               partio
+pba                       1.0.5                pba (Multicore Bundle Adjustment)
+qt6-extra                 6.11.2               qt6-extra (QT6 extra packages)
+siftgpu                   4.0.0                SiftGPU (GPU SIFT implementation)
+Natron                    2.5.0                Natron (Node-graph video compositing)
+losslesscut-bin           3.65.0               losslesscut-bin (Lossless video editor)
+tidal-hifi-bin            7.0.1                tidal-hifi-bin (digital music client)
+superproductivity         18.9.1               superproductivity (Tasks Time tracking Focus tools)
+typst                     0.15.1               typst (A markup-based typesetting system for the sciences)
+typstwriter               0.3.git20260320      typstwriter (GUI frontend/writer using Typst)
+pyside6                   6.11.2               pyside6 (Python bindings for Qt6)
+python-lark               1.3.1                python-lark (python parser)
+python2-six               1.16.0               python2-six (Python 2 and 3 compatibility utilities)
+python3-setuptools-scm    6.3.2                python3-setuptools-scm (manage versions by scm tags)
+qt_themes                 0.4.0                qt_themes (themes for Qt in Python)
+shiboken6                 6.11.2               shiboken6 (PySide6 bindings generator plugin)
+rubygem-webrick           1.9.2                rubygem-webrick (HTTP server toolkit)
+flyline                   1.8.0                flyline (A Bash plugin for modern command line editing)
+gitlab                    18.0.1               Gitlab (git repository management)
+onnxruntime               1.29.0               onnxruntime (machine-learning accelerator)
+openpmix                  5.0.8                openpmix (an open source PMIX implementation)
+openucx                   1.20.1               openucx (Unified Communication X)
+qt-sudo                   20240524_242342e     qt-sudo (qt sudo interface)
+spacenavd                 1.3.1                spacenavd (Free user-space driver for 6-dof space-mice)
+spnavcfg                  1.3                  spnavcfg (daemon interactive configuration program)
+vorta                     0.11.5               vorta (a desktop client for BorgBackup)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| Packages modified compare to ponce current              |
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+gis/gdal
+gis/qgis
+graphics/FreeCAD
+graphics/PureRef
+graphics/blender
+graphics/darktable
+graphics/enblend-enfuse
+graphics/gmic
+graphics/hugin
+graphics/lilypond
+graphics/luminance-hdr
+graphics/meshlab
+libraries/PyOpenGL
+libraries/SimGear
+libraries/alglib
+libraries/assimp
+libraries/med
+libraries/nlopt
+libraries/openimagedenoise
+libraries/podofo
+libraries/wxGTK3
+office/calibre-bin
+office/taskjuggler
+office/texmaker
+python/fasteners
+python/llfuse
+python/msgpack-python
+python/python3-fs
+python/python3-peewee
+python/python3-xlib
+python/tzlocal
+system/Solaar
+system/borgbackup
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+original README from Ponce SBo-git follows:
+---------------------------------------------
+
+SBo-git - slackbuilds repository for slackware-current
+- - -
+
+this is an unofficial fork of master branch from slackbuilds.org's
+git repository (http://slackbuilds.org/cgit/slackbuilds/).
+
+here I put my unofficial mods to their slackbuilds to run on
+slackware-current with sbopkg (http://www.sbopkg.org).
+
+Check https://github.com/Ponce/slackbuilds/wiki for additional informations.
+
+See https://github.com/Ponce/slackbuilds/wiki/configuring-the-current-repository-with-sbopkg
+for instructions on how to use this repository with sbopkg.
+
+original README from slackbuilds.org follows:
+---------------------------------------------
 
 See https://slackbuilds.org/howto/ for instructions on 
 how to use the contents of this directory.
@@ -7,6 +161,6 @@ Access is also available via:
  https://git.slackbuilds.org/slackbuilds/
  ftp://slackbuilds.org/
  git://git.slackbuilds.org/slackbuilds.git
- https://gitlab.com/SlackBuilds.org/slackbuilds
+ https://gitlab.com/SlackBuilds.org/slackbuilds.git
  https://github.com/SlackBuildsOrg/slackbuilds
  https://codeberg.org/SlackBuildsOrg/slackbuilds

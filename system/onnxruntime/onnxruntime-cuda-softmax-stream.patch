@@ -1,0 +1,64 @@
+Fix CUDA training-op build against changed core helper stream signatures.
+
+The CUDA Plugin EP core implementation (upstream commit 879f65911a8) changed
+several core CUDA provider helpers to take a raw cudaStream_t instead of an
+onnxruntime::Stream*, and updated the non-training call sites accordingly, but
+left the orttraining kernels passing ctx->GetComputeStream() (a Stream*):
+
+  * SoftMaxComputeHelper now takes SoftmaxComputeStreamT (cudaStream_t);
+    softmax.cc passes Stream(ctx). Match that in the loss kernels.
+  * GatherNDBase::PrepareCompute now takes (void* alloc_stream,
+    cudaStream_t cuda_stream, ...); gather_nd.cc passes
+    (GetComputeStream(ctx), Stream(ctx), ...). Match that in gather_nd_grad.
+
+Without this the CUDA build fails to compile the orttraining loss and
+gather_nd_grad kernels.
+
+diff --git a/orttraining/orttraining/training_ops/cuda/loss/softmax_cross_entropy_loss_impl.cc b/orttraining/orttraining/training_ops/cuda/loss/softmax_cross_entropy_loss_impl.cc
+index 6b9f557e119..b3501e62b5a 100644
+--- a/orttraining/orttraining/training_ops/cuda/loss/softmax_cross_entropy_loss_impl.cc
++++ b/orttraining/orttraining/training_ops/cuda/loss/softmax_cross_entropy_loss_impl.cc
+@@ -110,7 +110,7 @@ Status SoftmaxCrossEntropyLoss<T, TLabel, TOut>::ComputeInternal(OpKernelContext
+   }
+ 
+   // Calculate logsoftmax
+-  auto status = SoftMaxComputeHelper<T, TOut, true>(ctx->GetComputeStream(), logit_data, logit_reshape, log_prob_data, 1);
++  auto status = SoftMaxComputeHelper<T, TOut, true>(Stream(ctx), logit_data, logit_reshape, log_prob_data, 1);
+   ORT_RETURN_IF_ERROR(status);
+ 
+   const T* weight_data = nullptr;
+diff --git a/orttraining/orttraining/training_ops/cuda/loss/softmaxcrossentropy_impl.cc b/orttraining/orttraining/training_ops/cuda/loss/softmaxcrossentropy_impl.cc
+index 4f4cbb7444a..f6254e0c119 100644
+--- a/orttraining/orttraining/training_ops/cuda/loss/softmaxcrossentropy_impl.cc
++++ b/orttraining/orttraining/training_ops/cuda/loss/softmaxcrossentropy_impl.cc
+@@ -49,7 +49,7 @@ Status SoftmaxCrossEntropy<T>::ComputeInternal(OpKernelContext* ctx) const {
+   T* log_prob_data = log_prob->template MutableData<T>();
+ 
+   // calculate logsoftmax
+-  auto status = SoftMaxComputeHelper<T, T, true>(ctx->GetComputeStream(),
++  auto status = SoftMaxComputeHelper<T, T, true>(Stream(ctx),
+                                                  logit_data,
+                                                  logit_reshape,
+                                                  log_prob_data,
+@@ -151,7 +151,7 @@ Status SparseSoftmaxCrossEntropy<T, Tin>::ComputeInternal(OpKernelContext* ctx)
+   T* log_prob_data = log_prob->template MutableData<T>();
+ 
+   // calculate logsoftmax
+-  auto status = SoftMaxComputeHelper<T, T, true>(ctx->GetComputeStream(),
++  auto status = SoftMaxComputeHelper<T, T, true>(Stream(ctx),
+                                                  logit_data,
+                                                  logit_reshape,
+                                                  log_prob_data,
+diff --git a/orttraining/orttraining/training_ops/cuda/tensor/gather_nd_grad.cc b/orttraining/orttraining/training_ops/cuda/tensor/gather_nd_grad.cc
+index a64abd2a866..24a71fa1a2d 100644
+--- a/orttraining/orttraining/training_ops/cuda/tensor/gather_nd_grad.cc
++++ b/orttraining/orttraining/training_ops/cuda/tensor/gather_nd_grad.cc
+@@ -76,7 +76,7 @@ Status GatherNDGrad<TIndex>::ComputeInternal(OpKernelContext* context) const {
+   int64_t num_slices;
+   int64_t slice_size;
+   IAllocatorUniquePtr<int64_t> input_slice_offsets_buffer;
+-  ORT_RETURN_IF_ERROR(PrepareCompute<TIndex>(context->GetComputeStream(),
++  ORT_RETURN_IF_ERROR(PrepareCompute<TIndex>(GetComputeStream(context), Stream(context),
+                                              batch_dims_, input_shape, indices_shape, indices_tensor,
+                                              num_slices, slice_size, input_slice_offsets_buffer));
+ 

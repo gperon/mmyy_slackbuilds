@@ -1,10 +1,12 @@
 PRGNAM="ispc"
-VERSION="1.26.0"
+VERSION="1.31.0"
 HOMEPAGE="https://github.com/ispc/ispc/"
-DOWNLOAD="UNSUPPORTED"
-MD5SUM=""
-DOWNLOAD_x86_64="https://github.com/ispc/ispc/archive/v1.26.0/ispc-1.26.0.tar.gz"
-MD5SUM_x86_64="bd9c9a3ebb06c2ae30faf7d4e06c9b8c"
-REQUIRES="tbb llvm-opt"
+DOWNLOAD="https://github.com/ispc/ispc/archive/v1.31.0/ispc-1.31.0.tar.gz \
+          https://github.com/google/googletest/archive/v1.18.0/googletest-1.18.0.tar.gz"
+MD5SUM="8efbff1169098f4ffa6dc6559f848085 \
+        ae87634285dbe148a7abc6d19c4c05bd"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="tbb level-zero"
 MAINTAINER="Lockywolf"
 EMAIL="for_sbo.master@lockywolf.net"

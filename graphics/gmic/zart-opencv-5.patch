@@ -1,0 +1,19 @@
+--- a/zart.pro
++++ b/zart.pro
+@@ -34,11 +34,14 @@
+ #
+ # OpenCV
+ #
++packagesExist(opencv5) { # e.g. Slackware current :)
++   PKGCONFIG += opencv5
++}
+ packagesExist(opencv4) { # e.g. Ubuntu 20.04
+    PKGCONFIG += opencv4
+ }
+ packagesExist(opencv) {
+    PKGCONFIG += opencv
+ }
+-!packagesExist(opencv):!packagesExist(opencv4) {
++!packagesExist(opencv):!packagesExist(opencv4):!packagesExist(opencv5) {
+   error(Cannot find OpenCV)
+ }

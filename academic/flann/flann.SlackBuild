@@ -28,7 +28,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=flann
-VERSION=${VERSION:-1.9.1}
+VERSION=${VERSION:-1.9.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -83,6 +83,7 @@ find -L . \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
 sed -i "s|setup\.py install|setup.py install --root=$PKG --optimize=1|" src/python/CMakeLists.txt
+sed -i -e 's|@LZ4_STATIC_LDFLAGS@ ||' -e '/^Requires:/a Requires.private: liblz4' cmake/flann.pc.in
 
 touch src/cpp/empty.cpp
 sed -i -e 's/flann_cpp SHARED \"\"/flann_cpp SHARED \"empty\.cpp\"/g' src/cpp/CMakeLists.txt
@@ -97,6 +98,7 @@ cd build
     -DLIB_SUFFIX=${LIBDIRSUFFIX} \
     -DBUILD_MATLAB_BINDINGS=OFF \
     -DBUILD_PYTHON_BINDINGS=ON \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DPYTHON_EXECUTABLE=/usr/bin/python3 \
     -DBUILD_TESTS=OFF \
     -DBUILD_EXAMPLES=OFF \

@@ -46,12 +46,18 @@ configuration, based on:
 PACKAGE                   VERSION              DESCRIPTION
 ------------------------- -------------------- -----------------------------------------------
 waybar                    0.14.0               waybar (bar for wlroots based compositors)
+cudnn_12                  9.26.0.51            cudnn_12 (Deep Neural Network library)
+nvm                       0.40.5               nvm (Node Version Manager)
+gaviota                   1.0                  gaviota (chess engine)
+lc0                       0.32.1               lc0 (chess engine)
+polyglot                  1.4                  polyglot (UCI adapter)
+scid                      5.2.202603           scid (A free chess database app)
 syzygy                    20151228git          Syzygy (chess tablebase generator)
 AwesomeBump               5.1.1                AwesomeBump (texture map generator)
 Meshroom                  2025.1.0             Meshroom (3D Reconstruction Software)
 colmap                    4.0.2                colmap (General-purpose Structure-from-Motion)
 draftsight                2019SP3              draftsight (2D CAD program)
-hdrmerge                  0.5.0git             hdrmerge
+hdrmerge                  0.5.0                hdrmerge (raw photo merger)
 materialize-bin           1.78                 materialize-bin (Texture map generator)
 vsfm                      0.5.26               VisualSFM (GUI application for 3D reconstruction)
 QScintilla                2.14.1               QScintilla (Qt port of the Scintilla C++ editor control)
@@ -64,11 +70,10 @@ ifcopenshell              0.9.0                ifcopenshell (The open source IFC
 level-zero                1.32.0               level-zero (oneAPI Level-Zero)
 libxisf                   0.2.13               libxisf (Library to load and write XISF format from PixInsight)
 med_openmpi               5.0.0                med_openmpi (Data Modelization and Exchanges)
-openshadinglanguage       1.11.14.1            Open Shading Language
 openxr                    1.1.43               openxr (open standard for virtual reality)
 partio                    1.14.0               partio
 pba                       1.0.5                pba (Multicore Bundle Adjustment)
-qt6-extra                 6.11.2               qt6-extra (QT6 extra packages)
+qt6-extra                 6.11.3               qt6-extra (QT6 extra packages)
 siftgpu                   4.0.0                SiftGPU (GPU SIFT implementation)
 Natron                    2.5.0                Natron (Node-graph video compositing)
 losslesscut-bin           3.65.0               losslesscut-bin (Lossless video editor)
@@ -76,14 +81,14 @@ tidal-hifi-bin            7.0.1                tidal-hifi-bin (digital music cli
 superproductivity         18.9.1               superproductivity (Tasks Time tracking Focus tools)
 typst                     0.15.1               typst (A markup-based typesetting system for the sciences)
 typstwriter               0.3.git20260320      typstwriter (GUI frontend/writer using Typst)
-pyside6                   6.11.2               pyside6 (Python bindings for Qt6)
+pyside6                   6.11.3               pyside6 (Python bindings for Qt6)
 python-lark               1.3.1                python-lark (python parser)
 python2-six               1.16.0               python2-six (Python 2 and 3 compatibility utilities)
 python3-setuptools-scm    6.3.2                python3-setuptools-scm (manage versions by scm tags)
 qt_themes                 0.4.0                qt_themes (themes for Qt in Python)
-shiboken6                 6.11.2               shiboken6 (PySide6 bindings generator plugin)
+shiboken6                 6.11.3               shiboken6 (PySide6 bindings generator plugin)
 rubygem-webrick           1.9.2                rubygem-webrick (HTTP server toolkit)
-flyline                   1.8.0                flyline (A Bash plugin for modern command line editing)
+flyline                   1.9.0                flyline (A Bash plugin for modern command line editing)
 gitlab                    18.0.1               Gitlab (git repository management)
 onnxruntime               1.29.0               onnxruntime (machine-learning accelerator)
 openpmix                  5.0.8                openpmix (an open source PMIX implementation)
@@ -98,9 +103,27 @@ vorta                     0.11.5               vorta (a desktop client for BorgB
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 | Packages modified compare to ponce current              |
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+academic/flann
+academic/scilab
+academic/siril
+accessibility/flite
+audio/rosegarden
+desktop/claude-desktop
+development/Pivy
+development/claude-code
+development/cudatoolkit_12
+development/forgejo
+development/ispc
+development/nccl
+development/netbeans
+development/python3-matplotlib
+development/sonarqube
+development/sublime_text
+games/FlightGear
 gis/gdal
 gis/qgis
 graphics/FreeCAD
+graphics/OpenShadingLanguage
 graphics/PureRef
 graphics/blender
 graphics/darktable
@@ -110,14 +133,18 @@ graphics/hugin
 graphics/lilypond
 graphics/luminance-hdr
 graphics/meshlab
+graphics/openimageio
 libraries/PyOpenGL
 libraries/SimGear
 libraries/alglib
 libraries/assimp
+libraries/libheif
+libraries/libpano13
 libraries/med
 libraries/nlopt
 libraries/openimagedenoise
 libraries/podofo
+libraries/vigra
 libraries/wxGTK3
 office/calibre-bin
 office/taskjuggler

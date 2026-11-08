@@ -3,7 +3,14 @@
 PIDDIR="/var/run/sonarqube"
 RUNAS="sonar"
 SCRIPT="/sbin/sonar.sh"
-export SONAR_JAVA_PATH="/usr/lib64/java/bin/java"
+# SonarQube needs Java >= 21: keep SONAR_JAVA_PATH if set, otherwise use
+# OpenJDK21 (/usr/lib64/java) or the newest zulu-openjdk
+if [ -z "${SONAR_JAVA_PATH}" ]; then
+  for j in /usr/lib64/java/bin/java $(ls -d /usr/lib64/zulu-openjdk*/bin/java 2>/dev/null | sort -rV); do
+    [ -x "$j" ] && { SONAR_JAVA_PATH="$j"; break; }
+  done
+fi
+export SONAR_JAVA_PATH
 
 case "$1" in
 

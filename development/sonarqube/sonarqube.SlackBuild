@@ -1,7 +1,7 @@
 #!/bin/bash
 # Slackware build script for sonarqube
 
-# Copyright 2023  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
+# Copyright 2025  Giorgio Peron <giorgio.peron@gmail.com>, Belluno, Italy
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,10 +24,11 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=sonarqube
-VERSION=${VERSION:-10.3.0.82913}
+VERSION=${VERSION:-26.11.0.134175}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
+BINDIR=linux-x86-64
 
 bailout() {
   printf "\nThis requires a \"sonar\" user and group.\n"
@@ -97,6 +98,13 @@ ln -fs ../../../var/tmp/$PRGNAM temp
 # remove the executables for the others platforms
 cd $PKG/usr/share/$PRGNAM/bin
 find . -type d -not -name "linux-x86-64" -not -name "." -not -name "lib" | xargs rm -rf
+# elasticsearch native libs for the others platforms
+cd $PKG/usr/share/$PRGNAM/elasticsearch/lib/platform
+find . -mindepth 1 -maxdepth 1 -type d -not -name "linux-x64" | xargs rm -rf
+# aarch64-only native launcher: sonarqube runs ServerLauncher from the jars
+if file $PKG/usr/share/$PRGNAM/elasticsearch/lib/tools/server-launcher/server-launcher 2>/dev/null | grep -q aarch64 ; then
+  rm -f $PKG/usr/share/$PRGNAM/elasticsearch/lib/tools/server-launcher/server-launcher
+fi
 
 chown -R sonar:sonar $PKG/usr/share/$PRGNAM
 chown -R sonar:sonar $PKG/var/{log,run,tmp,lib}/$PRGNAM

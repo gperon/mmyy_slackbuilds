@@ -34,8 +34,10 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=hugin
-VERSION=${VERSION:-2023.0.0}
-BUILD=${BUILD:-3}
+VERSION=${VERSION:-2026.0rc1}
+# The release-candidate tarball unpacks to the final version directory.
+SRCVER=${SRCVER:-2026.0.0}
+BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -75,11 +77,9 @@ set -eu
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
+rm -rf $PRGNAM-$SRCVER
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
-cd $PRGNAM-$VERSION
-
-zcat $CWD/boost-1.85.0-patch | patch -p0
+cd $PRGNAM-$SRCVER
 
 chown -R root:root .
 find -L . \
@@ -88,21 +88,28 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
-mkdir -p build
-cd build
-cmake \
-  -DwxWidgets_CONFIG_EXECUTABLE=/usr/lib$LIBDIRSUFFIX/wx/config/gtk3-unicode-3.0 \
-  -DwxWidgets_wxrc_EXECUTABLE=/usr/bin/wxrc-3.0 \
+patch -Np1 -i "$CWD/ignore_gzip_timestamps.patch"
+
+# A system flann (>= 1.9.2) calls LZ4 from its public headers but lists
+# liblz4 only in Requires.private, so cpfind fails to link. Add it.
+sed -i 's/^  pkg_check_modules(FLANN flann)$/&\n  if(FLANN_FOUND)\n    list(APPEND FLANN_LIBRARIES lz4)\n  endif()/' \
+  CMakeModules/FindFLANN.cmake
+
+cmake -B build -S . \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
-  -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
-  -DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
-  -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_BUILD_TYPE=Release ..
+  -DENABLE_LAPACK=yes \
+  -DBUILD_HSI=ON \
+  -DUSE_GDKBACKEND_X11=OFF \
+  -DBUILD_WITH_EPOXY=ON \
+  -DCMAKE_BUILD_TYPE=Release
 
-make install/strip DESTDIR=$PKG
-cd ..
+make -C build
+make -C build DESTDIR=$PKG install
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mv $PKG/usr/share/man $PKG/usr
 

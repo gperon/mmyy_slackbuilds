@@ -9,7 +9,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=forgejo
-VERSION=${VERSION:-15.0.2}
+VERSION=${VERSION:-15.0.11}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -47,7 +47,7 @@ check_go_version() {
   fi
 
   GO_VERSION="$(echo "$GO_FULL_VERSION" | awk '{print $3}' | sed 's/^go//')"
-  MIN_GO_VERSION="1.24"
+  MIN_GO_VERSION="1.26"
 
   if [ "$(printf '%s\n%s\n' "$MIN_GO_VERSION" "$GO_VERSION" | sort -V | head -n1)" != "$MIN_GO_VERSION" ]; then
     echo "Forgejo requires Go >= $MIN_GO_VERSION. Found: $GO_VERSION"

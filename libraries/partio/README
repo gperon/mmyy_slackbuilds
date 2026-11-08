@@ -1,0 +1,4 @@
+Partio is an open source C++ library for reading, writing and manipulating 
+a variety of standard particle formats (GEO, BGEO, PTC, PDB, PDA).
+
+Partio has a Python API and a collection of simple command-line tools.

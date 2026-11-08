@@ -1,0 +1,14 @@
+Meshroom is a free, open-source 3D Reconstruction Software
+based on the AliceVision framework.
+
+NOTE:
+- the binary file to download is 13 Gb;
+- the temporary package file will need 23 Gb;
+- the final package will be around 13 Gb (23 Gb when installed).
+Be sure to have enough free space before building this.
+
+To fully utilize Meshroom, a NVIDIA CUDA-enabled GPU is
+recommended. The binaries are built with CUDA-12 and are
+compatible with compute capability >= 5.0. Without a
+supported NVIDIA GPU, only "Draft Meshing" can be used
+for 3D reconstruction.

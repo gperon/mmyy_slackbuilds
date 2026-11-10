@@ -1,0 +1,236 @@
+#!/bin/bash
+
+# Slackware build script for friction
+
+# Copyright 2026 Giorgio Peron <giorgio.peron@gmail.com> Belluno, Italy
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+cd $(dirname $0) ; CWD=$(pwd)
+
+PRGNAM=friction
+VERSION=${VERSION:-1.0.0}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-tgz}
+
+# Friction still uses the FFmpeg 4.x API (removed in FFmpeg 7) and needs
+# a Qt5 build of QScintilla: both are built privately here, like upstream
+# does for its own Linux binaries.
+FFMPEGVER=${FFMPEGVER:-4.4.8}
+QSCIVER=${QSCIVER:-2.14.1}
+
+# OpenGL integration: GLX by default (works with the NVIDIA binary
+# driver, like upstream's "GLX" Linux binary). Set EGL=yes to build the
+# EGL variant (upstream default, for Mesa drivers and native Wayland).
+EGL=${EGL:-no}
+
+if [ -z "$ARCH" ]; then
+  case "$( uname -m )" in
+    i?86) ARCH=i586 ;;
+    arm*) ARCH=arm ;;
+       *) ARCH=$( uname -m ) ;;
+  esac
+fi
+
+if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
+  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  exit 0
+fi
+
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" != "x86_64" ]; then
+  echo "$ARCH is not supported."
+  exit 1
+fi
+
+SLKCFLAGS="-O2 -fPIC"
+LIBDIRSUFFIX="64"
+
+PRIVLIB=/usr/lib$LIBDIRSUFFIX/$PRGNAM
+STAGE=$TMP/$PRGNAM-$VERSION/stage
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.xz --no-same-owner
+cd $PRGNAM-$VERSION
+tar xvf $CWD/ffmpeg-$FFMPEGVER.tar.xz --no-same-owner
+tar xvf $CWD/QScintilla_src-$QSCIVER.tar.gz --no-same-owner
+find . ! -type l    -a \( \
+  \(     -perm /111 -a ! -perm 755 -a -exec chmod -f 755 {} + \) -o \
+  \(   ! -perm /111 -a ! -perm 644 -a -exec chmod -f 644 {} + \) \)
+
+# The bundled icon theme ships 30-46px icons, but its index.theme does
+# not list them: Qt then reports "Requested icon size N is not available"
+# when larger fonts are used. Add the missing directories.
+( cd src/app/icons/hicolor
+  for s in 30 34 36 38 40 42 44 46; do
+    [ -d ${s}x${s} ] || continue
+    grep -q "^\[${s}x${s}/" index.theme && continue
+    for d in ${s}x${s}/*/ ; do
+      d=${d%/}
+      sed -i "s|^Directories=|Directories=$d,|" index.theme
+      printf '\n[%s]\nContext=Actions\nSize=%s\nType=Fixed\n' "$d" "$s" >> index.theme
+    done
+  done
+)
+
+if [ "$EGL" = "yes" ]; then
+  USE_EGL=ON
+else
+  USE_EGL=OFF
+fi
+
+# Private FFmpeg 4.4, same feature set as upstream's SDK.
+# libx264 is used only if x264 is installed.
+X264=""
+if pkg-config --exists x264 ; then
+  X264="--enable-libx264 --enable-encoder=libx264,libx264rgb"
+fi
+( cd ffmpeg-$FFMPEGVER
+  # TIFF alpha fix from upstream's SDK
+  patch -p0 < ../src/scripts/patches/ffmpeg-tiff-assocalpha.diff
+  CFLAGS="$SLKCFLAGS -Wno-incompatible-pointer-types" \
+  ./configure \
+    --prefix=/usr \
+    --libdir=$PRIVLIB \
+    --shlibdir=$PRIVLIB \
+    --incdir=/usr/include/$PRGNAM \
+    --extra-version=friction \
+    --extra-ldflags="-Wl,-rpath,$PRIVLIB" \
+    --enable-shared \
+    --disable-static \
+    --disable-programs \
+    --disable-doc \
+    --disable-debug \
+    --disable-stripping \
+    --disable-network \
+    --disable-protocols \
+    --disable-devices \
+    --disable-hwaccels \
+    --disable-openssl \
+    --disable-gnutls \
+    --disable-sdl2 \
+    --disable-xlib \
+    --disable-libxcb \
+    --disable-libv4l2 \
+    --disable-alsa \
+    --disable-avisynth \
+    --disable-libass \
+    --disable-libbluray \
+    --disable-libbs2b \
+    --disable-libcaca \
+    --disable-libopencore-amrnb \
+    --disable-libopencore-amrwb \
+    --disable-libspeex \
+    --disable-libvidstab \
+    --disable-libvo-amrwbenc \
+    --disable-libtheora \
+    --disable-libxvid \
+    --disable-demuxers \
+    --disable-muxers \
+    --disable-decoders \
+    --disable-encoders \
+    --enable-gpl \
+    --enable-version3 \
+    --enable-avresample \
+    --enable-protocol=file \
+    --enable-libopus \
+    --enable-libx265 \
+    --enable-libvpx \
+    --enable-libaom \
+    --enable-libmp3lame \
+    --enable-libvorbis \
+    $X264 \
+    --enable-demuxer=aac,avi,flac,gif,image2,matroska,mov,mp3,mp4,ogg,wav,webm \
+    --enable-muxer=aac,flac,gif,image2,matroska,mov,mp3,mp4,ogg,wav,webm \
+    --enable-decoder=libaom_av1,gif,h264,hevc,mjpeg,mpeg4,png,prores,prores_ks,rawvideo,tiff,vp8,vp9 \
+    --enable-decoder=aac,flac,mp3,opus,vorbis \
+    --enable-decoder=pcm_f32le,pcm_s16le,pcm_s24le \
+    --enable-encoder=libaom_av1,gif,libx265,mjpeg,png,mpeg4,prores,prores_ks,rawvideo,tiff,libvpx_vp8,libvpx_vp9 \
+    --enable-encoder=aac,flac,libmp3lame,libopus,libvorbis \
+    --enable-encoder=pcm_f32le,pcm_s16le,pcm_s24le
+  make
+  make install DESTDIR=$STAGE
+)
+# Point the staged pkg-config files to the staging directory
+sed -i "s|=/usr|=$STAGE/usr|" $STAGE$PRIVLIB/pkgconfig/*.pc
+
+# Private static QScintilla for Qt5, without printing support (as upstream)
+( cd QScintilla_src-$QSCIVER/src
+  sed -i 's#!ios:QT += printsupport##' qscintilla.pro
+  sed -i 's#!ios:HEADERS += ./Qsci/qsciprinter.h##' qscintilla.pro
+  sed -i 's#!ios:SOURCES += qsciprinter.cpp##' qscintilla.pro
+  qmake-qt5 qscintilla.pro CONFIG+=staticlib CONFIG+=release \
+    QMAKE_CXXFLAGS_RELEASE="$SLKCFLAGS"
+  make
+)
+
+export PKG_CONFIG_PATH="$STAGE$PRIVLIB/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+
+mkdir -p build
+cd build
+  cmake -G Ninja \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_C_FLAGS_RELEASE="$SLKCFLAGS -DNDEBUG" \
+    -DCMAKE_CXX_FLAGS_RELEASE="$SLKCFLAGS -DNDEBUG" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib$LIBDIRSUFFIX \
+    -DCMAKE_INSTALL_RPATH=$PRIVLIB \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DQT_VERSION_MAJOR=5 \
+    -DSKIA_USE_EGL=$USE_EGL \
+    -DFRICTION_OFFICIAL_RELEASE=ON \
+    -DINSTALL_DOCS=OFF \
+    -DQSCINTILLA_LIBRARIES_DIRS=$TMP/$PRGNAM-$VERSION/QScintilla_src-$QSCIVER/src \
+    -DQSCINTILLA_INCLUDE_DIRS=$TMP/$PRGNAM-$VERSION/QScintilla_src-$QSCIVER/src \
+    ..
+  ninja ${MAKEFLAGS:+$(echo "$MAKEFLAGS" | grep -o -- '-j *[0-9]*')}
+  DESTDIR=$PKG ninja install
+cd ..
+
+# Ship only the private FFmpeg runtime libraries
+mkdir -p $PKG$PRIVLIB
+cp -a $STAGE$PRIVLIB/*.so.* $PKG$PRIVLIB/
+chmod 755 $PKG/usr/lib$LIBDIRSUFFIX/libskia-friction.so.*
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+PKGDOC=$PKG/usr/doc/$PRGNAM-$VERSION
+mkdir -p $PKGDOC
+cp -a CHANGES.md CONTRIBUTING.md LICENSE.md README.md $PKGDOC
+cp -a ffmpeg-$FFMPEGVER/COPYING.GPLv3 $PKGDOC/COPYING.ffmpeg
+cp -a QScintilla_src-$QSCIVER/LICENSE $PKGDOC/LICENSE.QScintilla
+cat $CWD/$PRGNAM.SlackBuild > $PKGDOC/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

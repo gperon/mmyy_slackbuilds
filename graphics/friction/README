@@ -1,0 +1,22 @@
+Friction is a powerful and versatile motion graphics application that
+allows you to create vector and raster animations for web and video.
+It is based on enve and uses Skia for rendering.
+
+Friction still uses the FFmpeg 4.x API, which is not compatible with
+the FFmpeg shipped with Slackware, and needs a Qt5 build of QScintilla.
+As upstream does for its own Linux binaries, this SlackBuild builds a
+private FFmpeg 4.4 (shared libraries in /usr/lib64/friction) and a
+static QScintilla for Qt5. The bundled Skia and gperftools are built
+from the Friction source tarball. They do not conflict with the system
+ffmpeg or QScintilla packages.
+
+The bundled FFmpeg enables H.264 export (libx264) only if x264 is
+installed at build time (optional dependency).
+
+Building requires clang (part of the llvm package).
+
+By default Friction is built with GLX OpenGL integration, which works
+with the NVIDIA binary driver (EGL gives a black canvas there). For the
+EGL variant (upstream default, for Mesa drivers), build with:
+
+  EGL=yes ./friction.SlackBuild

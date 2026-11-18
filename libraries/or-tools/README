@@ -1,0 +1,16 @@
+OR-Tools is Google's open source software suite for combinatorial
+optimization: linear and mixed-integer programming, constraint
+programming (CP-SAT), vehicle routing, scheduling, graph algorithms
+and bin packing.
+
+This SlackBuild builds the C++ library against the system abseil-cpp,
+protobuf, re2 and eigen, without downloading anything at build time.
+The bundled solvers (CP-SAT, GLOP, PDLP, BOP, ...) are always included.
+The COIN-OR (Cbc/Clp), HiGHS and SCIP backends are disabled because they
+are not available as packages. Python, Java and .NET bindings are not
+built.
+
+GLPK support (academic/glpk) is enabled automatically when glpk is
+installed; to disable it:
+
+  GLPK=no ./or-tools.SlackBuild

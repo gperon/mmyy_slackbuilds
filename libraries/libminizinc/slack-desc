@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+           |-----handy-ruler------------------------------------------------------|
+libminizinc: libminizinc (MiniZinc constraint modelling language compiler)
+libminizinc:
+libminizinc: MiniZinc is a free and open-source constraint modelling language.
+libminizinc: It can model constraint satisfaction and optimization problems in
+libminizinc: a high-level, solver-independent way, and compiles them to
+libminizinc: FlatZinc for a wide range of solvers (Gecode, OR-Tools, HiGHS...).
+libminizinc:
+libminizinc: This package provides the minizinc compiler/driver, the MiniZinc
+libminizinc: standard library and the libmzn library.
+libminizinc:
+libminizinc: Homepage: https://www.minizinc.org/

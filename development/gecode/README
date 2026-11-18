@@ -1,14 +1,11 @@
 Gecode is a toolkit for developing constraint-based systems and
-applications. Gecode provides a constraint solver with 
+applications. Gecode provides a constraint solver with
 state-of-the-art performance while being modular and extensible.
 
-The script supports two switches:
+It includes a FlatZinc interpreter (fzn-gecode) to use it as a
+solver for MiniZinc (libminizinc). Gist, the graphical search tree
+inspector, is built when Qt6 is installed (it is in Slackware).
 
-DODOCS = yes (default: no) to build the html docs (123 Mb)
-DOEXAMPLES = yes (default: no) to build the examples
-
-Note: the second option is disabled explicitly in the build
-because installs example binaries in /usr/bin that may conflict
-with other packages. If you decide to enable it, it's up to you
-to check the contents of the resulting package for possibly
-overlaps with your installation.
+The examples are not built, because they would install many binaries
+with generic names in /usr/bin; their sources are copied to the
+documentation directory.

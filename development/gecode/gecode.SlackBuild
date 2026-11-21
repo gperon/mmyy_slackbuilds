@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gecode
-VERSION=${VERSION:-4.4.0}
+VERSION=${VERSION:-6.6.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -64,16 +64,14 @@ else
   LIBDIRSUFFIX=""
 fi
 
-if [ "${DOEXAMPLES:-no}" = "yes" ]; then EXAMPLES="en"; else EXAMPLES="dis"; fi
-
 set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf $PRGNAM-release-$VERSION
+tar xvf $CWD/$PRGNAM-release-$VERSION.tar.gz
+cd $PRGNAM-release-$VERSION
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,37 +79,32 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Use our CFLAGS
-sed -i -e "s|-O3|$SLKCFLAGS|" -e "s|-O2|$SLKCFLAGS|" configure
-
-# We need to specify --disable-examples or lot of binaries with
-# names conflicting with other packages go in /usr/bin  --ponce
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-./configure \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --sysconfdir=/etc \
-  --localstatedir=/var \
-  --mandir=/usr/man \
-  --docdir=/usr/doc/$PRGNAM-$VERSION \
-  --${EXAMPLES}able-examples \
-  --build=$ARCH-slackware-linux
-
-make
-make install DESTDIR=$PKG
-[ "${DODOCS:-no}" = "yes" ] && make installdoc DESTDIR=$PKG
+# Gist (the graphical search tree tool) is built if Qt6 is found.
+# The examples are not built: they would install many binaries with
+# generic names in /usr/bin. Their sources are copied to the docs.
+mkdir -p build
+cd build
+  cmake \
+    -DCMAKE_C_FLAGS_RELEASE="$SLKCFLAGS -DNDEBUG" \
+    -DCMAKE_CXX_FLAGS_RELEASE="$SLKCFLAGS -DNDEBUG" \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib${LIBDIRSUFFIX} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DGECODE_ENABLE_EXAMPLES=OFF \
+    -Wno-dev \
+    ..
+  make
+  make install DESTDIR=$PKG
+cd ..
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+rm -rf $PKG/usr/share/licenses
+find $PKG/usr/include -type d -empty -delete
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/examples
-if [ "$DODOCS" = "yes" ]; then
-  mv $PKG/usr/share/doc/$PRGNAM/html $PKG/usr/doc/$PRGNAM-$VERSION/
-  chmod 0644 $PKG/usr/doc/$PRGNAM-$VERSION/html/*
-  rm -fr $PKG/usr/share/doc
-fi
-cp -a LICENSE $PKG/usr/doc/$PRGNAM-$VERSION
+install -m 0644 LICENSE README.md $PKG/usr/doc/$PRGNAM-$VERSION
 cp examples/*.cpp $PKG/usr/doc/$PRGNAM-$VERSION/examples
 chmod 0644 $PKG/usr/doc/$PRGNAM-$VERSION/examples/*
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild

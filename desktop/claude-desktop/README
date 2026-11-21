@@ -3,3 +3,11 @@ Claude Desktop on Linux
 The desktop app on Linux gives you the same Chat, Cowork, and Claude
 Code experience as macOS and Windows: parallel sessions, visual diff
 review, an integrated terminal and editor, and live app preview.
+
+NOTE: On Slackware this package has been tested to work only in a
+Plasma Wayland graphical session started with startkwayland. It is
+not known to work in an X11 session started with startx or
+startplasma-x11. In those sessions the app may fail to reach the
+KDE Wallet keyring, so the sign-in is not saved. If you see this,
+try launching it with:
+  claude-desktop --password-store=gnome-libsecret

@@ -1,0 +1,2 @@
+PolyGlot is a "UCI adapter".  It connects a UCI chess engine to an
+xboard interface such as WinBoard.

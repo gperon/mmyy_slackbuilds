@@ -1,0 +1,4 @@
+VisualSFM is a GUI application for 3D reconstruction using structure from
+motion (SFM). The reconstruction system integrates several projects: SIFT
+on GPU(SiftGPU), Multicore Bundle Adjustment, and Towards
+Linear-time Incremental Structure from Motion.

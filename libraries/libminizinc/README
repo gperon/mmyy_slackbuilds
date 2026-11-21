@@ -1,0 +1,18 @@
+MiniZinc is a free and open-source constraint modelling language. It
+can model constraint satisfaction and optimization problems in a
+high-level, solver-independent way, and compiles them to FlatZinc for
+a wide range of solvers.
+
+This package provides the minizinc compiler/driver (command line, the
+MiniZinc IDE is not included), the MiniZinc standard library and the
+libmzn library.
+
+The Gecode backend is built in (gecode is required). Other solvers
+that install a MiniZinc solver configuration in /usr/share/minizinc
+are found automatically, e.g. libraries/or-tools (cp-sat). The HiGHS
+and CPLEX backends are loaded at runtime if those libraries are
+installed. The COIN-OR CBC backend is not built.
+
+The tree-sitter, tree-feller and mimalloc sources that upstream
+downloads at build time are included in the .info file and built
+statically into libmzn.

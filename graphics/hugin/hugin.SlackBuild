@@ -37,7 +37,9 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=hugin
-VERSION=${VERSION:-2024.0.1}
+VERSION=${VERSION:-2026.0rc1}
+# The release-candidate tarball unpacks to the final version directory.
+SRCVER=${SRCVER:-2026.0.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -78,14 +80,9 @@ set -eu
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
+rm -rf $PRGNAM-$SRCVER
 tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
-cd $PRGNAM-$VERSION
-
-# necessary for 2024.0.0, newer versions shouldn't need it
-# vigra is else not found since it changed the version numbering
-# in the include file
-sh $CWD/create-new-cmake-for-vigra
+cd $PRGNAM-$SRCVER
 
 chown -R root:root .
 find -L . \
@@ -94,38 +91,28 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \+
 
-# following block only necessary for hugin 2024.0.0 with wxGTK 3.0
-# another solution would be to build against wxWidgets 3.2 and fix
-# the build errors that occur there
-# patch incompabililties with wxGTK 3.0, hugin 2024.0.0 expects 3.1
-# wxOVERRIDE is introduced in wxGTK 3.1, but gcc knows the keyword override natively
-# else compilation will abort at 62 %
-find src/hugin1 -type f -exec sed -i 's/\bwxOVERRIDE\b/override/g' {} +
-# under wxGTK 3.0 wxBusyInfoFlags is not available, and wxBusyInfo just takes 
-# the text string. wxImageList::GetSize() is also not available without parameters
-# GetSize and wxSize for Thumbnails are available instead.
-# 1. wxBusyInfoFlags().Icon(...).Label(...) -> direkt den String an wxBusyInfo übergeben (Zeile 541 & 1037)
-sed -i 's/wxBusyInfoFlags()\.Icon(MainFrame::Get()->GetIcon())\.Label(\(.*\));/\1;/g' src/hugin1/hugin/BrowseDialog.cpp
-# 2. m_thumbnails.GetSize() -> wxSize(256, 256) (Standard-Thumbnailgröße in BrowseDialog)
-sed -i 's/m_thumbnails\.GetSize()/wxSize(256, 256)/g' src/hugin1/hugin/BrowseDialog.cpp
+patch -Np1 -i "$CWD/ignore_gzip_timestamps.patch"
 
+# A system flann (>= 1.9.2) calls LZ4 from its public headers but lists
+# liblz4 only in Requires.private, so cpfind fails to link. Add it.
+sed -i 's/^  pkg_check_modules(FLANN flann)$/&\n  if(FLANN_FOUND)\n    list(APPEND FLANN_LIBRARIES lz4)\n  endif()/' \
+  CMakeModules/FindFLANN.cmake
 
-mkdir -p build
-cd build
-cmake \
-  -DwxWidgets_CONFIG_EXECUTABLE=/usr/lib$LIBDIRSUFFIX/wx/config/gtk3-unicode-3.0 \
-  -DwxWidgets_wxrc_EXECUTABLE=/usr/bin/wxrc-3.0 \
+cmake -B build -S . \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
-  -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
-  -DCMAKE_CXX_STANDARD=14 \
-  -DCMAKE_EXE_LINKER_FLAGS="-lpthread" \
-  -DLIB_SUFFIX="$LIBDIRSUFFIX" \
   -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_BUILD_TYPE=Release ..
+  -DENABLE_LAPACK=yes \
+  -DBUILD_HSI=ON \
+  -DUSE_GDKBACKEND_X11=OFF \
+  -DBUILD_WITH_EPOXY=ON \
+  -DCMAKE_BUILD_TYPE=Release
 
-make install/strip DESTDIR=$PKG
-cd ..
+make -C build
+make -C build DESTDIR=$PKG install
+
+find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mv $PKG/usr/share/man $PKG/usr
 

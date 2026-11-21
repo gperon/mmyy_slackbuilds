@@ -30,7 +30,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=scribus
-VERSION=${VERSION:-1.6.5}
+VERSION=${VERSION:-1.6.7}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -77,6 +77,11 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
+
+#patch -Np1 -i "$CWD/fix_build_with_poppler_26.05.patch"
+#patch -Np1 --binary -i $CWD/2b9405a00a96a09e0183190ddc9f83d44963d4e0.patch # Fix build with poppler 26.06
+#patch -Np1 --binary -i $CWD/scribus-1.6.6-poppler-26.07.patch
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -84,19 +89,17 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-if [ -e /usr/include/podofo/podofo.h ]; then
-  PODOFO=on
-else
-  PODOFO=off
-fi
-
 mkdir build
 cd build
 cmake \
   -DCMAKE_C_FLAGS="$SLKCFLAGS" \
   -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-  -DWITH_PODOFO=$PODOFO \
+  -DCMAKE_SKIP_RPATH=On \
+  -DWANT_CPP20=On \
+  -DWANT_HUNSPELL=On \
+  -DWITH_PODOFO=On \
+  -DWANT_GRAPHICSMAGICK=On \
   -DLIB_SUFFIX=$LIBDIRSUFFIX \
   ..
 make
